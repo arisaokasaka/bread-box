@@ -1968,7 +1968,9 @@ var UserPage_1 = __importDefault(__webpack_require__(/*! ./components/user/UserP
 var Home_1 = __importDefault(__webpack_require__(/*! ./components/Home */ "./resources/ts/components/Home.tsx"));
 
 var App = function App() {
-  return react_1["default"].createElement(react_router_dom_1.BrowserRouter, null, react_1["default"].createElement("div", null, react_1["default"].createElement(Navbar_1["default"], null), react_1["default"].createElement(react_router_dom_1.Switch, null, react_1["default"].createElement(react_router_dom_1.Route, {
+  return react_1["default"].createElement(react_router_dom_1.BrowserRouter, null, react_1["default"].createElement("div", null, react_1["default"].createElement(Navbar_1["default"], null), react_1["default"].createElement("div", {
+    id: "global-container"
+  }, react_1["default"].createElement(react_router_dom_1.Switch, null, react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/",
     exact: true,
     component: Top_1["default"]
@@ -2008,7 +2010,7 @@ var App = function App() {
   }), react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/user",
     component: UserPage_1["default"]
-  }))));
+  })))));
 };
 
 if (document.getElementById('app')) {
@@ -2521,14 +2523,13 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 
 function Top() {
   return react_1["default"].createElement("div", {
-    className: "top__container"
+    className: "top"
   }, react_1["default"].createElement("div", {
-    className: "top__container__hero"
-  }, react_1["default"].createElement("h1", null, "\u304A\u6C17\u306B\u5165\u308A\u306E\u30D1\u30F3\u5C4B\u3055\u3093\u3092"), react_1["default"].createElement("h1", null, "\u898B\u3064\u3051\u308B\u3001\u3064\u306A\u304C\u308B"), react_1["default"].createElement("img", {
-    src: "",
-    alt: ""
-  }), react_1["default"].createElement("div", {
-    className: "top__container__hero__search"
+    className: "top__hero"
+  }, react_1["default"].createElement("div", {
+    className: "top__hero__content"
+  }, react_1["default"].createElement("h1", null, "\u304A\u6C17\u306B\u5165\u308A\u306E\u30D1\u30F3\u5C4B\u3055\u3093\u3092", react_1["default"].createElement("br", null), "\u898B\u3064\u3051\u308B\u3001\u3064\u306A\u304C\u308B"), react_1["default"].createElement("div", {
+    className: "top__hero__content__search"
   }, react_1["default"].createElement("ul", null, react_1["default"].createElement("li", null, react_1["default"].createElement("input", {
     type: "text",
     placeholder: "\u30A8\u30EA\u30A2\uFF1A\u4E2D\u592E\u533A\u3001\u535A\u591A\u533A"
@@ -2541,7 +2542,33 @@ function Top() {
   }))), react_1["default"].createElement("input", {
     type: "submit",
     value: "\u691C\u7D22"
-  }))));
+  })))), react_1["default"].createElement("main", {
+    className: "top__content"
+  }, react_1["default"].createElement("section", {
+    className: "top__content__section"
+  }, react_1["default"].createElement("h2", null, "\u30A8\u30EA\u30A2\u304B\u3089\u63A2\u3059"), react_1["default"].createElement("ul", null, react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
+    href: ""
+  })))), react_1["default"].createElement("section", {
+    className: "top__content__section"
+  }, react_1["default"].createElement("h2", null, "\u30D1\u30F3\u306E\u7A2E\u985E\u304B\u3089\u63A2\u3059"), react_1["default"].createElement("ul", null, react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
+    href: ""
+  })))), react_1["default"].createElement("section", {
+    className: "top__content__section"
+  }, react_1["default"].createElement("h2", null, "\u55B6\u696D\u65E5\u30FB\u55B6\u696D\u6642\u9593\u304B\u3089\u63A2\u3059"), react_1["default"].createElement("ul", null, react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
+    href: ""
+  })))), react_1["default"].createElement("section", {
+    className: "top__content__section"
+  }, react_1["default"].createElement("h2", null, "\u30D4\u30C3\u30AF\u30A2\u30C3\u30D7")), react_1["default"].createElement("section", {
+    className: "top__content__section"
+  }, react_1["default"].createElement("h2", null, "\u30A2\u30AF\u30BB\u30B9\u6570\u30E9\u30F3\u30AD\u30F3\u30B0"))), react_1["default"].createElement("footer", {
+    className: "top__footer"
+  }, react_1["default"].createElement("ul", null, react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
+    href: ""
+  }, "\u4E8B\u696D\u4E3B\u306E\u65B9\u306F\u3053\u3061\u3089")), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
+    href: ""
+  }, "\u4F1A\u793E\u6982\u8981")), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
+    href: ""
+  }, "\u304A\u554F\u5408\u305B")))));
 }
 
 exports.default = Top;

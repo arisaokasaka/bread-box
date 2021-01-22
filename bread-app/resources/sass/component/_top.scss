@@ -1,0 +1,67 @@
+.top {
+    &__hero {
+        background-image: url(../../image/croissant.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        &__content {
+            @include content-width;
+            padding: $mp-xs 0;
+
+            h1 {
+                font-size: 1.5rem;
+                color: $white;
+            }
+
+            &__search {
+                display: flex;
+                flex-direction: column;
+                background-color: transparent;
+
+                ul {
+                    display: flex;
+                    flex-direction: column;
+
+                    li {
+                        margin: 2px 0;
+                    }
+                }
+
+                input[type="submit"] {
+                    background-color: $brown;
+                    color: $white;
+                }
+            }
+        }
+    }
+
+    &__content {
+        @include content-width;
+        margin-bottom: $mp-sm;
+
+        &__section {
+            margin-top: $mp-sm;
+
+            h2 {
+                font-size: 1.2rem;
+                color: $font-color-brown;
+            }
+        }
+    }
+
+    &__footer {
+        background-color: $lightBrown;
+        padding: $mp-xs 0;
+        ul {
+            @include content-width;
+
+            li {
+                margin-bottom: 5px;
+
+                a {
+                    color: $font-color-brown;
+                }
+            }
+        }
+    }
+}

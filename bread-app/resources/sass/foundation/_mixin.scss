@@ -1,0 +1,57 @@
+//breakpoints
+@mixin bp-sm {
+    @media screen and (max-width: 640px) {
+        @content;
+    }
+}
+
+@mixin bp-md {
+    @media screen and (max-width: 798px) {
+        @content;
+    }
+}
+
+@mixin bp-lg {
+    @media screen and (max-width: 1024px) {
+        @content;
+    }
+}
+
+@mixin bp-xl {
+    @media screen and (max-width: 1280px) {
+        @content;
+    }
+}
+
+@mixin bp-2xl {
+    @media screen and (max-width: 1536px) {
+        @content;
+    }
+}
+
+//content-width
+@mixin content-width {
+    margin: 0 auto;
+
+    @include bp-sm() {
+        width: 95%;
+    }
+
+    @include bp-md() {
+        width: 85%;
+    }
+
+    @include bp-lg() {
+        width: 80%;
+        max-width: 1000px;
+    }
+
+    @include bp-xl() {
+        width: 80%;
+        max-width: 1000px;
+    }
+
+    @include bp-2xl() {
+        max-width: 1000px;
+    }
+}
