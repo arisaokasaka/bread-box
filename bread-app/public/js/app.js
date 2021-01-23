@@ -2048,6 +2048,165 @@ exports.default = Home;
 
 /***/ }),
 
+/***/ "./resources/ts/components/common/Bread_kinds.ts":
+/*!*******************************************************!*\
+  !*** ./resources/ts/components/common/Bread_kinds.ts ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var Bread_kinds =
+/** @class */
+function () {
+  function Bread_kinds() {
+    this.bread_kinds = ["食パン", "菓子パン", "惣菜パン", "フランスパン", "サンドイッチ", "その他"];
+  }
+
+  return Bread_kinds;
+}();
+
+var bread_kinds = new Bread_kinds();
+exports.default = bread_kinds;
+
+/***/ }),
+
+/***/ "./resources/ts/components/common/Days.ts":
+/*!************************************************!*\
+  !*** ./resources/ts/components/common/Days.ts ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var Days =
+/** @class */
+function () {
+  function Days() {
+    this.days = ["今日", "明日", "詳しく指定"];
+  }
+
+  return Days;
+}();
+
+var days = new Days();
+exports.default = days;
+
+/***/ }),
+
+/***/ "./resources/ts/components/common/Districts.ts":
+/*!*****************************************************!*\
+  !*** ./resources/ts/components/common/Districts.ts ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var Districts =
+/** @class */
+function () {
+  function Districts() {
+    this.districts = ["中央区", "博多区", "西区", "東区", "南区", "城南区", "早良区"];
+  }
+
+  return Districts;
+}();
+
+var districts = new Districts();
+exports.default = districts;
+
+/***/ }),
+
+/***/ "./resources/ts/components/common/Store_pickup.tsx":
+/*!*********************************************************!*\
+  !*** ./resources/ts/components/common/Store_pickup.tsx ***!
+  \*********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var Store_pickup = function Store_pickup(_a) {
+  var Pickup = _a.Pickup;
+  return react_1["default"].createElement("div", {
+    className: "c-store-pickup"
+  }, react_1["default"].createElement("h2", null, "\u30D4\u30C3\u30AF\u30A2\u30C3\u30D7"), react_1["default"].createElement("ul", null, react_1["default"].createElement("li", {
+    className: "c-store-pickup__el"
+  }, react_1["default"].createElement("img", {
+    src: Pickup.img
+  }), react_1["default"].createElement("p", null, Pickup.name))));
+};
+
+exports.default = Store_pickup;
+
+/***/ }),
+
+/***/ "./resources/ts/components/common/top/top_section.tsx":
+/*!************************************************************!*\
+  !*** ./resources/ts/components/common/top/top_section.tsx ***!
+  \************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var Top_section = function Top_section(_a) {
+  var sectionClass = _a.sectionClass,
+      sectionTitle = _a.sectionTitle,
+      sectionContent = _a.sectionContent;
+  return react_1["default"].createElement("div", {
+    className: sectionClass
+  }, react_1["default"].createElement("h2", null, sectionTitle), react_1["default"].createElement("ul", null, sectionContent.map(function (el) {
+    return react_1["default"].createElement("li", null, react_1["default"].createElement("input", {
+      type: "text",
+      value: el
+    }));
+  })));
+};
+
+exports.default = Top_section;
+
+/***/ }),
+
 /***/ "./resources/ts/components/layout/Navbar.tsx":
 /*!***************************************************!*\
   !*** ./resources/ts/components/layout/Navbar.tsx ***!
@@ -2521,6 +2680,18 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var Districts_1 = __importDefault(__webpack_require__(/*! ../common/Districts */ "./resources/ts/components/common/Districts.ts"));
+
+var Bread_kinds_1 = __importDefault(__webpack_require__(/*! ../common/Bread_kinds */ "./resources/ts/components/common/Bread_kinds.ts"));
+
+var Days_1 = __importDefault(__webpack_require__(/*! ../common/Days */ "./resources/ts/components/common/Days.ts"));
+
+var top_section_1 = __importDefault(__webpack_require__(/*! ../common/top/top_section */ "./resources/ts/components/common/top/top_section.tsx"));
+
+var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../common/Store_pickup */ "./resources/ts/components/common/Store_pickup.tsx"));
+
+var img_bakery1 = __webpack_require__(/*! ../../../image/bakery2.jpg */ "./resources/image/bakery2.jpg");
+
 function Top() {
   return react_1["default"].createElement("div", {
     className: "top"
@@ -2530,35 +2701,32 @@ function Top() {
     className: "top__hero__content"
   }, react_1["default"].createElement("h1", null, "\u304A\u6C17\u306B\u5165\u308A\u306E\u30D1\u30F3\u5C4B\u3055\u3093\u3092", react_1["default"].createElement("br", null), "\u898B\u3064\u3051\u308B\u3001\u3064\u306A\u304C\u308B"), react_1["default"].createElement("div", {
     className: "top__hero__content__search"
-  }, react_1["default"].createElement("ul", null, react_1["default"].createElement("li", null, react_1["default"].createElement("input", {
+  }, react_1["default"].createElement("input", {
     type: "text",
-    placeholder: "\u30A8\u30EA\u30A2\uFF1A\u4E2D\u592E\u533A\u3001\u535A\u591A\u533A"
-  })), react_1["default"].createElement("li", null, react_1["default"].createElement("input", {
-    type: "text",
-    placeholder: "\u30D1\u30F3\u306E\u7A2E\u985E"
-  })), react_1["default"].createElement("li", null, react_1["default"].createElement("input", {
-    type: "text",
-    placeholder: "\u55B6\u696D\u65E5\u30FB\u6642\u9593"
-  }))), react_1["default"].createElement("input", {
+    placeholder: "\u30AD\u30FC\u30EF\u30FC\u30C9\u304B\u3089\u63A2\u3059"
+  }), react_1["default"].createElement("input", {
     type: "submit",
     value: "\u691C\u7D22"
   })))), react_1["default"].createElement("main", {
     className: "top__content"
-  }, react_1["default"].createElement("section", {
-    className: "top__content__section"
-  }, react_1["default"].createElement("h2", null, "\u30A8\u30EA\u30A2\u304B\u3089\u63A2\u3059"), react_1["default"].createElement("ul", null, react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
-    href: ""
-  })))), react_1["default"].createElement("section", {
-    className: "top__content__section"
-  }, react_1["default"].createElement("h2", null, "\u30D1\u30F3\u306E\u7A2E\u985E\u304B\u3089\u63A2\u3059"), react_1["default"].createElement("ul", null, react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
-    href: ""
-  })))), react_1["default"].createElement("section", {
-    className: "top__content__section"
-  }, react_1["default"].createElement("h2", null, "\u55B6\u696D\u65E5\u30FB\u55B6\u696D\u6642\u9593\u304B\u3089\u63A2\u3059"), react_1["default"].createElement("ul", null, react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
-    href: ""
-  })))), react_1["default"].createElement("section", {
-    className: "top__content__section"
-  }, react_1["default"].createElement("h2", null, "\u30D4\u30C3\u30AF\u30A2\u30C3\u30D7")), react_1["default"].createElement("section", {
+  }, react_1["default"].createElement(top_section_1["default"], {
+    sectionClass: "top__content__section--area",
+    sectionTitle: "\u30A8\u30EA\u30A2\u304B\u3089\u63A2\u3059",
+    sectionContent: Districts_1["default"].districts
+  }), react_1["default"].createElement(top_section_1["default"], {
+    sectionClass: "top__content__section--bread",
+    sectionTitle: "\u30D1\u30F3\u306E\u7A2E\u985E\u304B\u3089\u63A2\u3059",
+    sectionContent: Bread_kinds_1["default"].bread_kinds
+  }), react_1["default"].createElement(top_section_1["default"], {
+    sectionClass: "top__content__section--time",
+    sectionTitle: "\u55B6\u696D\u65E5\u304B\u3089\u63A2\u3059",
+    sectionContent: Days_1["default"].days
+  }), react_1["default"].createElement(Store_pickup_1["default"], {
+    Pickup: {
+      'img': img_bakery1,
+      'name': "ありパン"
+    }
+  }), react_1["default"].createElement("section", {
     className: "top__content__section"
   }, react_1["default"].createElement("h2", null, "\u30A2\u30AF\u30BB\u30B9\u6570\u30E9\u30F3\u30AD\u30F3\u30B0"))), react_1["default"].createElement("footer", {
     className: "top__footer"
@@ -2566,9 +2734,7 @@ function Top() {
     href: ""
   }, "\u4E8B\u696D\u4E3B\u306E\u65B9\u306F\u3053\u3061\u3089")), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
     href: ""
-  }, "\u4F1A\u793E\u6982\u8981")), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
-    href: ""
-  }, "\u304A\u554F\u5408\u305B")))));
+  }, "\u4F1A\u793E\u6982\u8981")))));
 }
 
 exports.default = Top;
@@ -2591,6 +2757,21 @@ Object.defineProperty(exports, "__esModule", ({
 function UserPage() {}
 
 exports.default = UserPage;
+
+/***/ }),
+
+/***/ "./resources/image/bakery2.jpg":
+/*!*************************************!*\
+  !*** ./resources/image/bakery2.jpg ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/bakery2.jpg?e45eff18ab1c38d5268263931c0c4b19");
 
 /***/ }),
 

@@ -6,7 +6,7 @@
 
         &__content {
             @include content-width;
-            padding: $mp-xs 0;
+            padding: $mp-sm 0;
 
             h1 {
                 font-size: 1.5rem;
@@ -14,22 +14,25 @@
             }
 
             &__search {
-                display: flex;
-                flex-direction: column;
-                background-color: transparent;
+                width: 100%;
+                height: 2.3rem;
+                margin-top: 15px;
+                border-radius: 5px;
+                background-color: $white;
+                border: 1px solid $white;
+                overflow: hidden;
 
-                ul {
-                    display: flex;
-                    flex-direction: column;
-
-                    li {
-                        margin: 2px 0;
-                    }
+                input[type="text"] {
+                    width: 75%;
+                    height: 100%;
                 }
 
                 input[type="submit"] {
+                    width: 25%;
+                    height: 100%;
                     background-color: $brown;
                     color: $white;
+                    border-radius: 5px;
                 }
             }
         }
@@ -39,12 +42,50 @@
         @include content-width;
         margin-bottom: $mp-sm;
 
-        &__section {
-            margin-top: $mp-sm;
+        h2 {
+            font-size: 1.2rem;
+            color: $font-color-brown;
+            margin-top: $mp-xs;
+        }
 
-            h2 {
-                font-size: 1.2rem;
-                color: $font-color-brown;
+        &__section {
+            &--area,
+            &--bread,
+            &--time {
+                ul {
+                    display: flex;
+                    align-content: flex-start;
+                    flex-wrap: wrap;
+                    margin-top: 5px;
+
+                    li {
+                        display: inline-block;
+                        border: 1.8px solid $brown;
+                        border-radius: 4px;
+                        margin: 3px 2px;
+                        height: 2.5rem;
+                        width: 7.5rem;
+
+                        input {
+                            display: block;
+                            height: 100%;
+                            width: 100%;
+                            color: $brown;
+                            padding: 0 10px;
+                            line-height: 2.2rem;
+                            background-color: transparent;
+                            text-align: center;
+                        }
+
+                        &:hover {
+                            background-color: $brown;
+
+                            input {
+                                color: $white;
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -52,11 +93,15 @@
     &__footer {
         background-color: $lightBrown;
         padding: $mp-xs 0;
+
         ul {
             @include content-width;
+            display: flex;
+            flex-direction: column;
 
             li {
                 margin-bottom: 5px;
+                margin: 0 auto;
 
                 a {
                     color: $font-color-brown;

@@ -92,6 +92,10 @@ input {
   border: none;
 }
 
+a {
+  text-decoration: none;
+}
+
 .top__hero {
   background-image: url(/images/croissant.jpg?d285ba1c470395ec7f04064426490bfd);
   background-repeat: no-repeat;
@@ -100,37 +104,19 @@ input {
 
 .top__hero__content {
   margin: 0 auto;
-  padding: 20px 0;
+  width: 90%;
+  padding: 40px 0;
 }
 
-@media screen and (max-width: 640px) {
-  .top__hero__content {
-    width: 95%;
-  }
-}
-
-@media screen and (max-width: 798px) {
+@media screen and (min-width: 480px) {
   .top__hero__content {
     width: 85%;
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (min-width: 600px) {
   .top__hero__content {
     width: 80%;
-    max-width: 1000px;
-  }
-}
-
-@media screen and (max-width: 1280px) {
-  .top__hero__content {
-    width: 80%;
-    max-width: 1000px;
-  }
-}
-
-@media screen and (max-width: 1536px) {
-  .top__hero__content {
     max-width: 1000px;
   }
 }
@@ -141,69 +127,86 @@ input {
 }
 
 .top__hero__content__search {
-  display: flex;
-  flex-direction: column;
-  background-color: transparent;
+  width: 100%;
+  height: 2.3rem;
+  margin-top: 15px;
+  border-radius: 5px;
+  background-color: #f8fafc;
+  border: 1px solid #f8fafc;
+  overflow: hidden;
 }
 
-.top__hero__content__search ul {
-  display: flex;
-  flex-direction: column;
-}
-
-.top__hero__content__search ul li {
-  margin: 2px 0;
+.top__hero__content__search input[type="text"] {
+  width: 75%;
+  height: 100%;
 }
 
 .top__hero__content__search input[type="submit"] {
+  width: 25%;
+  height: 100%;
   background-color: #c4872c;
   color: #f8fafc;
+  border-radius: 5px;
 }
 
 .top__content {
   margin: 0 auto;
+  width: 90%;
   margin-bottom: 40px;
 }
 
-@media screen and (max-width: 640px) {
-  .top__content {
-    width: 95%;
-  }
-}
-
-@media screen and (max-width: 798px) {
+@media screen and (min-width: 480px) {
   .top__content {
     width: 85%;
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (min-width: 600px) {
   .top__content {
     width: 80%;
     max-width: 1000px;
   }
 }
 
-@media screen and (max-width: 1280px) {
-  .top__content {
-    width: 80%;
-    max-width: 1000px;
-  }
-}
-
-@media screen and (max-width: 1536px) {
-  .top__content {
-    max-width: 1000px;
-  }
-}
-
-.top__content__section {
-  margin-top: 40px;
-}
-
-.top__content__section h2 {
+.top__content h2 {
   font-size: 1.2rem;
   color: #67491b;
+  margin-top: 20px;
+}
+
+.top__content__section--area ul, .top__content__section--bread ul, .top__content__section--time ul {
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  margin-top: 5px;
+}
+
+.top__content__section--area ul li, .top__content__section--bread ul li, .top__content__section--time ul li {
+  display: inline-block;
+  border: 1.8px solid #c4872c;
+  border-radius: 4px;
+  margin: 3px 2px;
+  height: 2.5rem;
+  width: 7.5rem;
+}
+
+.top__content__section--area ul li input, .top__content__section--bread ul li input, .top__content__section--time ul li input {
+  display: block;
+  height: 100%;
+  width: 100%;
+  color: #c4872c;
+  padding: 0 10px;
+  line-height: 2.2rem;
+  background-color: transparent;
+  text-align: center;
+}
+
+.top__content__section--area ul li:hover, .top__content__section--bread ul li:hover, .top__content__section--time ul li:hover {
+  background-color: #c4872c;
+}
+
+.top__content__section--area ul li:hover input, .top__content__section--bread ul li:hover input, .top__content__section--time ul li:hover input {
+  color: #f8fafc;
 }
 
 .top__footer {
@@ -213,42 +216,27 @@ input {
 
 .top__footer ul {
   margin: 0 auto;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
 }
 
-@media screen and (max-width: 640px) {
-  .top__footer ul {
-    width: 95%;
-  }
-}
-
-@media screen and (max-width: 798px) {
+@media screen and (min-width: 480px) {
   .top__footer ul {
     width: 85%;
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (min-width: 600px) {
   .top__footer ul {
     width: 80%;
-    max-width: 1000px;
-  }
-}
-
-@media screen and (max-width: 1280px) {
-  .top__footer ul {
-    width: 80%;
-    max-width: 1000px;
-  }
-}
-
-@media screen and (max-width: 1536px) {
-  .top__footer ul {
     max-width: 1000px;
   }
 }
 
 .top__footer ul li {
   margin-bottom: 5px;
+  margin: 0 auto;
 }
 
 .top__footer ul li a {
