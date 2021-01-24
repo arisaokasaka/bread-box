@@ -1,0 +1,36 @@
+html {
+    font-family: "Noto Sans JP", sans-serif;
+}
+
+ul {
+    padding: 0;
+
+    li {
+        list-style: none;
+    }
+}
+
+input {
+    border: none;
+    outline: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1 {
+    font-size: 1.5rem;
+
+    @include bp-960up {
+        font-size: 2.3rem;
+    }
+}
+
+h2 {
+    font-size: 1.2rem;
+
+    @include bp-960up {
+        font-size: 1.5rem;
+    }
+}

@@ -26,21 +26,23 @@ const App: React.FC = () => {
         <Router>
             <div>
                 <NavBar />
-                <Switch>
-                    <Route path="/" exact component={Top} />
-                    <Route path="/home" component={Home} />
-                    <Route path="/search" component={Search} />
-                    <Route path="/login_store" component={Login_store} />
-                    <Route path="/login_user" component={Login_user} />
-                    <Route path="/password_store" component={PasswordReset_store} />
-                    <Route path="/password_user" component={PasswordReset_user} />
-                    <Route path="/register_store" component={Register_store} />
-                    <Route path="/register_user" component={Register_user} />
-                    <Route path="/review" component={Review} />
-                    <Route path="/store_edit" component={StoreEdit} />
-                    <Route path="/store" component={StorePage} />
-                    <Route path="/user" component={UserPage} />
-                </Switch>
+                <div id="global-container">
+                    <Switch>
+                        <Route path="/" exact component={Top} />
+                        <Route path="/home" component={Home} />
+                        <Route path="/search" component={Search} />
+                        <Route path="/login_store" component={Login_store} />
+                        <Route path="/login_user" component={Login_user} />
+                        <Route path="/password_store" component={PasswordReset_store} />
+                        <Route path="/password_user" component={PasswordReset_user} />
+                        <Route path="/register_store" component={Register_store} />
+                        <Route path="/register_user" component={Register_user} />
+                        <Route path="/review" component={Review} />
+                        <Route path="/store_edit" component={StoreEdit} />
+                        <Route path="/store" component={StorePage} />
+                        <Route path="/user" component={UserPage} />
+                    </Switch>
+                </div>
             </div>
         </Router>
     )

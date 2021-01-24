@@ -1,24 +1,67 @@
 import React from 'react';
-import NavBar from '../layout/Navbar';
+import districts from '../common/Districts';
+import bread_kinds from '../common/Bread_kinds';
+import days from '../common/Days';
+import Top_section from '../common/top/top_section';
+import Store_pickup from '../common/Store_pickup';
+
+let img_bakery1 = require('../../../image/bakery2.jpg');
+
 
 function Top() {
+
     return (
-    <div className="top__container">
-        <div className="top__container__hero">
-            <h1>お気に入りのパン屋さんを</h1>
-            <h1>見つける、つながる</h1>
-            <img src="" alt="" />
-            <div className="top__container__hero__search">
-                <ul>
-                    <li><input type="text" placeholder="エリア：中央区、博多区" /></li>
-                    <li><input type="text" placeholder="パンの種類" /></li>
-                    <li><input type="text" placeholder="営業日・時間" /></li>
-                </ul>
-                <input type="submit" value="検索" />
+    <div className="top">
+        <div className="top__hero">
+            <div className="top__hero__content">
+                <h1>お気に入りのパン屋さんを<br></br>見つける、つながる</h1>
+                <div className="top__hero__content__search">
+                    <input type="text" placeholder="キーワードから探す" />
+                    <input type="submit" value="検索" />
+                </div>
             </div>
         </div>
+        <main className="top__content">
+            <Top_section 
+            sectionClass="top__content__section--area"
+            sectionTitle="エリアから探す"
+            sectionContent={districts.districts}
+            />
+            <Top_section 
+            sectionClass="top__content__section--bread"
+            sectionTitle="パンの種類から探す"
+            sectionContent={bread_kinds.bread_kinds}
+            />
+            <Top_section 
+            sectionClass="top__content__section--time"
+            sectionTitle="営業日から探す"
+            sectionContent={days.days}
+            />
+            <Store_pickup 
+            Pickup={{
+                'img': img_bakery1,
+                'name': "ありパン"
+            }}
+            />
+            <section className="top__content__section">
+                <h2>アクセス数ランキング</h2>
+                <ul>
+                    <li className="c-store-pickup__el">
+                        <img src={img_bakery1}></img>
+                        <p>ありありパン</p>
+                    </li>
+                </ul>
+            </section>
+        </main>
+        <footer className="top__footer">
+            <ul>
+                <li><a href="">事業主の方はこちら</a></li>
+                <li><a href="">会社概要</a></li>
+            </ul>
+        </footer>
     </div>
     );
+    
 }
 
 export default Top;

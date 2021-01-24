@@ -1,0 +1,141 @@
+.top {
+    &__hero {
+        background-image: url(../../image/croissant.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 50% 65%;
+
+        &__content {
+            @include content-width;
+            padding: $mp-sm 0;
+
+            h1 {
+                color: $white;
+
+                @include bp-960up {
+                    margin-top: 15px;
+                }
+            }
+
+            &__search {
+                width: 100%;
+                height: 2.3rem;
+                margin-top: 15px;
+                border-radius: 5px;
+                background-color: $white;
+                border: 1px solid $white;
+                overflow: hidden;
+
+                input[type="text"] {
+                    width: 75%;
+                    height: 100%;
+                    padding: 0 5px;
+                }
+
+                input[type="submit"] {
+                    width: 25%;
+                    height: 100%;
+                    background-color: $brown;
+                    color: $white;
+                    border-radius: 5px;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: $darkBrown;
+                    }
+                }
+            }
+        }
+    }
+
+    &__content {
+        @include content-width;
+        margin-bottom: $mp-sm;
+
+        h2 {
+            color: $font-color-brown;
+            margin-top: $mp-xs;
+
+            @include bp-960up {
+                margin-top: $mp-sm;
+            }
+        }
+
+        &__section {
+            &--area,
+            &--bread,
+            &--time {
+                ul {
+                    display: flex;
+                    align-content: flex-start;
+                    flex-wrap: wrap;
+                    margin-top: 5px;
+
+                    li {
+                        display: inline-block;
+                        border: 1.8px solid $brown;
+                        border-radius: 4px;
+                        margin: 3px 2px;
+                        height: 2.5rem;
+                        width: 7.5rem;
+
+                        @include bp-600up {
+                            margin: 3px 5px;
+                        }
+
+                        input {
+                            display: block;
+                            height: 100%;
+                            width: 100%;
+                            color: $brown;
+                            padding: 0 10px;
+                            line-height: 2.2rem;
+                            background-color: transparent;
+                            text-align: center;
+                            cursor: pointer;
+                        }
+
+                        &:hover {
+                            background-color: $brown;
+
+                            input {
+                                color: $white;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &__footer {
+        background-color: $lightBrown;
+        padding: $mp-xs 0;
+
+        ul {
+            @include content-width;
+            display: flex;
+            flex-direction: column;
+
+            @include bp-600up {
+                flex-direction: unset;
+                justify-content: center;
+            }
+
+            li {
+                margin-bottom: 5px;
+                margin: 0 auto;
+
+                @include bp-600up {
+                    margin: 0;
+                    padding: 0 1rem;
+                }
+
+                a {
+                    color: $font-color-brown;
+                    font-size: 0.8rem;
+                }
+            }
+        }
+    }
+}

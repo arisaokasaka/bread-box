@@ -1,0 +1,45 @@
+//breakpoints
+@mixin bp-480up {
+    @media screen and (min-width: 480px) {
+        @content;
+    }
+}
+
+@mixin bp-600up {
+    @media screen and (min-width: 600px) {
+        @content;
+    }
+}
+
+@mixin bp-960up {
+    @media screen and (min-width: 960px) {
+        @content;
+    }
+}
+
+@mixin bp-1280up {
+    @media screen and (min-width: 1280px) {
+        @content;
+    }
+}
+
+@mixin bp-2x {
+    @media (min-resolution: 192dpi), (-webkit-min-device-pixel-ratio: 2) {
+        @content;
+    }
+}
+
+//content-width
+@mixin content-width {
+    margin: 0 auto;
+    width: 90%;
+
+    @include bp-480up() {
+        width: 85%;
+    }
+
+    @include bp-600up() {
+        width: 80%;
+        max-width: 1000px;
+    }
+}

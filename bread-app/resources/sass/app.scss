@@ -1,8 +1,15 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap");
+
+// Reset CSS
+@import "./foundation/reset";
 
 // Variables
-@import 'variables';
+@import "./foundation/variables";
+@import "./foundation/mixin";
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+// Foundation
+@import "./foundation/base";
+
+//component
+@import "./component/top";
