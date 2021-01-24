@@ -21,7 +21,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/user',function (Request $request) {
 	
     $users = App\Models\User::all();
-	
 	return response()->json(['users' => $users]);
 
 });
+
+Route::post('/store_all', 'Api\StoreController@search_store');

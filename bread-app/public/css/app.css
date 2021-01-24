@@ -175,6 +175,7 @@ h2 {
   background-color: #c4872c;
   color: #f8fafc;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .top__hero__content__search input[type="submit"]:hover {
@@ -242,6 +243,7 @@ h2 {
   line-height: 2.2rem;
   background-color: transparent;
   text-align: center;
+  cursor: pointer;
 }
 
 .top__content__section--area ul li:hover, .top__content__section--bread ul li:hover, .top__content__section--time ul li:hover {
@@ -298,5 +300,6 @@ h2 {
 
 .top__footer ul li a {
   color: #67491b;
+  font-size: 0.8rem;
 }
 

@@ -38,6 +38,7 @@
                     background-color: $brown;
                     color: $white;
                     border-radius: 5px;
+                    cursor: pointer;
 
                     &:hover {
                         background-color: $darkBrown;
@@ -91,6 +92,7 @@
                             line-height: 2.2rem;
                             background-color: transparent;
                             text-align: center;
+                            cursor: pointer;
                         }
 
                         &:hover {
@@ -131,6 +133,7 @@
 
                 a {
                     color: $font-color-brown;
+                    font-size: 0.8rem;
                 }
             }
         }

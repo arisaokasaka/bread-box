@@ -2610,6 +2610,36 @@ function Search() {
     });
   };
 
+  var _b = react_1.useState([]),
+      stores = _b[0],
+      setStores = _b[1];
+
+  react_1.useEffect(function () {
+    getStores();
+  }, []);
+
+  var getStores = function getStores() {
+    return __awaiter(_this, void 0, void 0, function () {
+      var response;
+      return __generator(this, function (_a) {
+        switch (_a.label) {
+          case 0:
+            return [4
+            /*yield*/
+            , axios_1["default"].post('/api/store_all')];
+
+          case 1:
+            response = _a.sent();
+            console.log(response);
+            setStores(response.data);
+            return [2
+            /*return*/
+            ];
+        }
+      });
+    });
+  };
+
   return react_1["default"].createElement("div", null, react_1["default"].createElement("h1", null, "Search\u30DA\u30FC\u30B8"), react_1["default"].createElement("ul", null, users.map(function (user) {
     return react_1["default"].createElement("li", {
       key: user.id
@@ -2728,7 +2758,11 @@ function Top() {
     }
   }), react_1["default"].createElement("section", {
     className: "top__content__section"
-  }, react_1["default"].createElement("h2", null, "\u30A2\u30AF\u30BB\u30B9\u6570\u30E9\u30F3\u30AD\u30F3\u30B0"))), react_1["default"].createElement("footer", {
+  }, react_1["default"].createElement("h2", null, "\u30A2\u30AF\u30BB\u30B9\u6570\u30E9\u30F3\u30AD\u30F3\u30B0"), react_1["default"].createElement("ul", null, react_1["default"].createElement("li", {
+    className: "c-store-pickup__el"
+  }, react_1["default"].createElement("img", {
+    src: img_bakery1
+  }), react_1["default"].createElement("p", null, "\u3042\u308A\u3042\u308A\u30D1\u30F3"))))), react_1["default"].createElement("footer", {
     className: "top__footer"
   }, react_1["default"].createElement("ul", null, react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
     href: ""

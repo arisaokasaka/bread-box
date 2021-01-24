@@ -13,7 +13,7 @@ const Top_section: React.FC<Props> = ({sectionClass, sectionTitle, sectionConten
             {sectionContent.map(
                 (el)=>{
                     return (<li><input type="text" value={el}/></li>);
-                    })}
+                })}
         </ul>
     </div>
 );

@@ -45,6 +45,12 @@ function Top() {
             />
             <section className="top__content__section">
                 <h2>アクセス数ランキング</h2>
+                <ul>
+                    <li className="c-store-pickup__el">
+                        <img src={img_bakery1}></img>
+                        <p>ありありパン</p>
+                    </li>
+                </ul>
             </section>
         </main>
         <footer className="top__footer">
