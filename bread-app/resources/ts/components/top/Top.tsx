@@ -11,29 +11,29 @@ let img_bakery1 = require('../../../image/bakery2.jpg');
 function Top() {
 
     return (
-    <div className="top">
-        <div className="top__hero">
-            <div className="top__hero__content">
+    <div className="p-top">
+        <div className="p-top__hero">
+            <div className="p-top__hero__content">
                 <h1>お気に入りのパン屋さんを<br></br>見つける、つながる</h1>
-                <div className="top__hero__content__search">
+                <div className="c-bar-search">
                     <input type="text" placeholder="キーワードから探す" />
                     <input type="submit" value="検索" />
                 </div>
             </div>
         </div>
-        <main className="top__content">
+        <main className="p-top__content">
             <Top_section 
-            sectionClass="top__content__section--area"
+            sectionClass="p-top__content__section--area"
             sectionTitle="エリアから探す"
             sectionContent={districts.districts}
             />
             <Top_section 
-            sectionClass="top__content__section--bread"
+            sectionClass="p-top__content__section--bread"
             sectionTitle="パンの種類から探す"
             sectionContent={bread_kinds.bread_kinds}
             />
             <Top_section 
-            sectionClass="top__content__section--time"
+            sectionClass="p-top__content__section--time"
             sectionTitle="営業日から探す"
             sectionContent={days.days}
             />
@@ -43,7 +43,7 @@ function Top() {
                 'name': "ありパン"
             }}
             />
-            <section className="top__content__section">
+            <section className="p-top__content__section">
                 <h2>アクセス数ランキング</h2>
                 <ul>
                     <li className="c-store-pickup__el">
@@ -53,7 +53,7 @@ function Top() {
                 </ul>
             </section>
         </main>
-        <footer className="top__footer">
+        <footer className="p-top__footer">
             <ul>
                 <li><a href="">事業主の方はこちら</a></li>
                 <li><a href="">会社概要</a></li>

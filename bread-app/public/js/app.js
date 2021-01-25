@@ -2367,13 +2367,33 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 function NavBar() {
-  return react_1["default"].createElement("nav", null, react_1["default"].createElement("ul", {
-    className: "nav"
+  return react_1["default"].createElement("div", {
+    className: "l-navbar"
+  }, react_1["default"].createElement("div", {
+    className: "l-navbar__brand-logo"
   }, react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/home"
-  }, react_1["default"].createElement("li", null, "Home")), react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/search"
-  }, react_1["default"].createElement("li", null, "Search"))));
+    to: "/"
+  }, react_1["default"].createElement("a", null, "\u30D1\u30F3BOX"))), react_1["default"].createElement("div", {
+    className: "l-navbar__content"
+  }, react_1["default"].createElement("div", {
+    className: "c-bar-search"
+  }, react_1["default"].createElement("input", {
+    type: "text",
+    placeholder: "\u30AD\u30FC\u30EF\u30FC\u30C9\u304B\u3089\u63A2\u3059"
+  }), react_1["default"].createElement("input", {
+    type: "submit",
+    value: "\u691C\u7D22"
+  })), react_1["default"].createElement("nav", {
+    className: "l-navbar__content__nav"
+  }, react_1["default"].createElement("ul", null, react_1["default"].createElement(react_router_dom_1.Link, {
+    to: ""
+  }, react_1["default"].createElement("li", null, react_1["default"].createElement("a", null, "\u4F1A\u54E1\u767B\u9332"))), react_1["default"].createElement(react_router_dom_1.Link, {
+    to: ""
+  }, react_1["default"].createElement("li", null, react_1["default"].createElement("a", null, "\u30ED\u30B0\u30A4\u30F3"))), react_1["default"].createElement(react_router_dom_1.Link, {
+    to: ""
+  }, react_1["default"].createElement("li", null, react_1["default"].createElement("a", null, "\u30B2\u30B9\u30C8")))))), react_1["default"].createElement("button", {
+    className: "c-btn-menu-mobile"
+  }, react_1["default"].createElement("a", null, react_1["default"].createElement("span", null), react_1["default"].createElement("span", null), react_1["default"].createElement("span", null))));
 }
 
 exports.default = NavBar;
@@ -2717,7 +2737,7 @@ var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../common/Store_pic
 
 var Store_sumup_1 = __importDefault(__webpack_require__(/*! ../common/Store_sumup */ "./resources/ts/components/common/Store_sumup.tsx"));
 
-var img_bakery1 = __webpack_require__(/*! ../../../image/bakery2.jpg */ "./resources/image/bakery2.jpg");
+var img_bakery1 = __webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../../image/bakery2.jpg'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 function Search() {
   var _this = this;
@@ -2873,17 +2893,17 @@ var top_section_1 = __importDefault(__webpack_require__(/*! ../common/top/top_se
 
 var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../common/Store_pickup */ "./resources/ts/components/common/Store_pickup.tsx"));
 
-var img_bakery1 = __webpack_require__(/*! ../../../image/bakery2.jpg */ "./resources/image/bakery2.jpg");
+var img_bakery1 = __webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../../image/bakery2.jpg'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 function Top() {
   return react_1["default"].createElement("div", {
-    className: "top"
+    className: "p-top"
   }, react_1["default"].createElement("div", {
-    className: "top__hero"
+    className: "p-top__hero"
   }, react_1["default"].createElement("div", {
-    className: "top__hero__content"
+    className: "p-top__hero__content"
   }, react_1["default"].createElement("h1", null, "\u304A\u6C17\u306B\u5165\u308A\u306E\u30D1\u30F3\u5C4B\u3055\u3093\u3092", react_1["default"].createElement("br", null), "\u898B\u3064\u3051\u308B\u3001\u3064\u306A\u304C\u308B"), react_1["default"].createElement("div", {
-    className: "top__hero__content__search"
+    className: "c-bar-search"
   }, react_1["default"].createElement("input", {
     type: "text",
     placeholder: "\u30AD\u30FC\u30EF\u30FC\u30C9\u304B\u3089\u63A2\u3059"
@@ -2891,17 +2911,17 @@ function Top() {
     type: "submit",
     value: "\u691C\u7D22"
   })))), react_1["default"].createElement("main", {
-    className: "top__content"
+    className: "p-top__content"
   }, react_1["default"].createElement(top_section_1["default"], {
-    sectionClass: "top__content__section--area",
+    sectionClass: "p-top__content__section--area",
     sectionTitle: "\u30A8\u30EA\u30A2\u304B\u3089\u63A2\u3059",
     sectionContent: Districts_1["default"].districts
   }), react_1["default"].createElement(top_section_1["default"], {
-    sectionClass: "top__content__section--bread",
+    sectionClass: "p-top__content__section--bread",
     sectionTitle: "\u30D1\u30F3\u306E\u7A2E\u985E\u304B\u3089\u63A2\u3059",
     sectionContent: Bread_kinds_1["default"].bread_kinds
   }), react_1["default"].createElement(top_section_1["default"], {
-    sectionClass: "top__content__section--time",
+    sectionClass: "p-top__content__section--time",
     sectionTitle: "\u55B6\u696D\u65E5\u304B\u3089\u63A2\u3059",
     sectionContent: Days_1["default"].days
   }), react_1["default"].createElement(Store_pickup_1["default"], {
@@ -2910,13 +2930,13 @@ function Top() {
       'name': "ありパン"
     }
   }), react_1["default"].createElement("section", {
-    className: "top__content__section"
+    className: "p-top__content__section"
   }, react_1["default"].createElement("h2", null, "\u30A2\u30AF\u30BB\u30B9\u6570\u30E9\u30F3\u30AD\u30F3\u30B0"), react_1["default"].createElement("ul", null, react_1["default"].createElement("li", {
     className: "c-store-pickup__el"
   }, react_1["default"].createElement("img", {
     src: img_bakery1
   }), react_1["default"].createElement("p", null, "\u3042\u308A\u3042\u308A\u30D1\u30F3"))))), react_1["default"].createElement("footer", {
-    className: "top__footer"
+    className: "p-top__footer"
   }, react_1["default"].createElement("ul", null, react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
     href: ""
   }, "\u4E8B\u696D\u4E3B\u306E\u65B9\u306F\u3053\u3061\u3089")), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
@@ -2944,21 +2964,6 @@ Object.defineProperty(exports, "__esModule", ({
 function UserPage() {}
 
 exports.default = UserPage;
-
-/***/ }),
-
-/***/ "./resources/image/bakery2.jpg":
-/*!*************************************!*\
-  !*** ./resources/image/bakery2.jpg ***!
-  \*************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/bakery2.jpg?e45eff18ab1c38d5268263931c0c4b19");
 
 /***/ }),
 
@@ -4221,12 +4226,9 @@ var index = react__WEBPACK_IMPORTED_MODULE_0__.createContext || createReactConte
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
   \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
+throw new Error("Module build failed (from ./node_modules/mini-css-extract-plugin/dist/loader.js):\nModuleBuildError: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):\nSassError: Invalid CSS after \"//component\": expected 1 selector or at-rule, was \"<<<<<<< HEAD\"\n        on line 12 of C:\\Users\\panna\\Documents\\bread-box\\bread-app\\resources\\sass\\app.scss\n>> @import \"./foundation/base\";\r\n   ----------------------------^\n\n    at processResult (C:\\Users\\panna\\Documents\\bread-box\\bread-app\\node_modules\\webpack\\lib\\NormalModule.js:597:19)\n    at C:\\Users\\panna\\Documents\\bread-box\\bread-app\\node_modules\\webpack\\lib\\NormalModule.js:691:5\n    at C:\\Users\\panna\\Documents\\bread-box\\bread-app\\node_modules\\loader-runner\\lib\\LoaderRunner.js:399:11\n    at C:\\Users\\panna\\Documents\\bread-box\\bread-app\\node_modules\\loader-runner\\lib\\LoaderRunner.js:251:18\n    at context.callback (C:\\Users\\panna\\Documents\\bread-box\\bread-app\\node_modules\\loader-runner\\lib\\LoaderRunner.js:124:13)\n    at Object.callback (C:\\Users\\panna\\Documents\\bread-box\\bread-app\\node_modules\\sass-loader\\dist\\index.js:73:7)\n    at Object.done [as callback] (C:\\Users\\panna\\Documents\\bread-box\\bread-app\\node_modules\\neo-async\\async.js:8069:18)\n    at options.error (C:\\Users\\panna\\Documents\\bread-box\\bread-app\\node_modules\\node-sass\\lib\\index.js:294:32)");
 
 /***/ }),
 
@@ -35615,12 +35617,6 @@ function valueEqual(a, b) {
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = __webpack_modules__;
-/******/ 	
-/******/ 	// the startup function
-/******/ 	// It's empty as some runtime module handles the default behavior
-/******/ 	__webpack_require__.x = x => {}
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
@@ -35674,98 +35670,11 @@ function valueEqual(a, b) {
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/jsonp chunk loading */
-/******/ 	(() => {
-/******/ 		// no baseURI
-/******/ 		
-/******/ 		// object to store loaded and loading chunks
-/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
-/******/ 		// Promise = chunk loading, 0 = chunk loaded
-/******/ 		var installedChunks = {
-/******/ 			"/js/app": 0
-/******/ 		};
-/******/ 		
-/******/ 		var deferredModules = [
-/******/ 			["./resources/ts/app.tsx"],
-/******/ 			["./resources/sass/app.scss"]
-/******/ 		];
-/******/ 		// no chunk on demand loading
-/******/ 		
-/******/ 		// no prefetching
-/******/ 		
-/******/ 		// no preloaded
-/******/ 		
-/******/ 		// no HMR
-/******/ 		
-/******/ 		// no HMR manifest
-/******/ 		
-/******/ 		var checkDeferredModules = x => {};
-/******/ 		
-/******/ 		// install a JSONP callback for chunk loading
-/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
-/******/ 			var [chunkIds, moreModules, runtime, executeModules] = data;
-/******/ 			// add "moreModules" to the modules object,
-/******/ 			// then flag all "chunkIds" as loaded and fire callback
-/******/ 			var moduleId, chunkId, i = 0, resolves = [];
-/******/ 			for(;i < chunkIds.length; i++) {
-/******/ 				chunkId = chunkIds[i];
-/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
-/******/ 					resolves.push(installedChunks[chunkId][0]);
-/******/ 				}
-/******/ 				installedChunks[chunkId] = 0;
-/******/ 			}
-/******/ 			for(moduleId in moreModules) {
-/******/ 				if(__webpack_require__.o(moreModules, moduleId)) {
-/******/ 					__webpack_require__.m[moduleId] = moreModules[moduleId];
-/******/ 				}
-/******/ 			}
-/******/ 			if(runtime) runtime(__webpack_require__);
-/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
-/******/ 			while(resolves.length) {
-/******/ 				resolves.shift()();
-/******/ 			}
-/******/ 		
-/******/ 			// add entry modules from loaded chunk to deferred list
-/******/ 			if(executeModules) deferredModules.push.apply(deferredModules, executeModules);
-/******/ 		
-/******/ 			// run deferred modules when all chunks ready
-/******/ 			return checkDeferredModules();
-/******/ 		}
-/******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunk"] = self["webpackChunk"] || [];
-/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
-/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
-/******/ 		
-/******/ 		function checkDeferredModulesImpl() {
-/******/ 			var result;
-/******/ 			for(var i = 0; i < deferredModules.length; i++) {
-/******/ 				var deferredModule = deferredModules[i];
-/******/ 				var fulfilled = true;
-/******/ 				for(var j = 1; j < deferredModule.length; j++) {
-/******/ 					var depId = deferredModule[j];
-/******/ 					if(installedChunks[depId] !== 0) fulfilled = false;
-/******/ 				}
-/******/ 				if(fulfilled) {
-/******/ 					deferredModules.splice(i--, 1);
-/******/ 					result = __webpack_require__(__webpack_require__.s = deferredModule[0]);
-/******/ 				}
-/******/ 			}
-/******/ 			if(deferredModules.length === 0) {
-/******/ 				__webpack_require__.x();
-/******/ 				__webpack_require__.x = x => {};
-/******/ 			}
-/******/ 			return result;
-/******/ 		}
-/******/ 		var startup = __webpack_require__.x;
-/******/ 		__webpack_require__.x = () => {
-/******/ 			// reset startup function so it can be called again when more startup code is added
-/******/ 			__webpack_require__.x = startup || (x => {});
-/******/ 			return (checkDeferredModules = checkDeferredModulesImpl)();
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /************************************************************************/
-/******/ 	// run startup
-/******/ 	return __webpack_require__.x();
+/******/ 	// startup
+/******/ 	// Load entry module
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	__webpack_require__("./resources/ts/app.tsx");
+/******/ 	__webpack_require__("./resources/sass/app.scss");
 /******/ })()
 ;
