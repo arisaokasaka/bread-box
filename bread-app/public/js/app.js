@@ -2168,6 +2168,142 @@ exports.default = Store_pickup;
 
 /***/ }),
 
+/***/ "./resources/ts/components/common/Store_sumup.tsx":
+/*!********************************************************!*\
+  !*** ./resources/ts/components/common/Store_sumup.tsx ***!
+  \********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var Btn_bookmark_1 = __importDefault(__webpack_require__(/*! ./buttons/Btn_bookmark */ "./resources/ts/components/common/buttons/Btn_bookmark.tsx"));
+
+var Btn_favorite_1 = __importDefault(__webpack_require__(/*! ./buttons/Btn_favorite */ "./resources/ts/components/common/buttons/Btn_favorite.tsx"));
+
+var Store_sumup = function Store_sumup(_a) {
+  var store_name = _a.store_name,
+      store_access = _a.store_access,
+      store_detail = _a.store_detail;
+  return react_1["default"].createElement("div", {
+    className: "c-store-sum"
+  }, react_1["default"].createElement("div", {
+    className: "c-store-sum__images"
+  }, react_1["default"].createElement("div", {
+    className: "c-store-sum__images__main"
+  }, react_1["default"].createElement("img", {
+    src: "",
+    alt: ""
+  })), react_1["default"].createElement("div", {
+    className: "c-store-sum__images__sub"
+  }, react_1["default"].createElement("img", {
+    src: "",
+    alt: ""
+  }), react_1["default"].createElement("img", {
+    src: "",
+    alt: ""
+  }), react_1["default"].createElement("img", {
+    src: "",
+    alt: ""
+  }))), react_1["default"].createElement("div", {
+    className: "c-store-sum__text"
+  }, react_1["default"].createElement("div", {
+    className: "c-store-sum__text__buttons"
+  }, react_1["default"].createElement(Btn_favorite_1["default"], null), react_1["default"].createElement(Btn_bookmark_1["default"], {
+    buttonId: "c-btn-favorite",
+    buttonClass: "c-btn-interested",
+    buttonText: "\u884C\u3063\u3066\u307F\u305F\u3044"
+  })), react_1["default"].createElement("div", {
+    className: "c-store-sum__text__title"
+  }, react_1["default"].createElement("h2", null, store_name)), react_1["default"].createElement("p", null, store_access), react_1["default"].createElement("p", null, store_detail), react_1["default"].createElement("div", {
+    className: "c-store-sum__text__schedule"
+  }), react_1["default"].createElement("div", {
+    className: "c-store-sum__text__score"
+  })));
+};
+
+exports.default = Store_sumup;
+
+/***/ }),
+
+/***/ "./resources/ts/components/common/buttons/Btn_bookmark.tsx":
+/*!*****************************************************************!*\
+  !*** ./resources/ts/components/common/buttons/Btn_bookmark.tsx ***!
+  \*****************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var Btn_bookmark = function Btn_bookmark(_a) {
+  var buttonClass = _a.buttonClass,
+      buttonId = _a.buttonId,
+      buttonText = _a.buttonText;
+  return react_1["default"].createElement("button", {
+    id: buttonId,
+    className: buttonClass
+  }, react_1["default"].createElement("input", null, buttonText));
+};
+
+exports.default = Btn_bookmark;
+
+/***/ }),
+
+/***/ "./resources/ts/components/common/buttons/Btn_favorite.tsx":
+/*!*****************************************************************!*\
+  !*** ./resources/ts/components/common/buttons/Btn_favorite.tsx ***!
+  \*****************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+function Btn_favorite() {
+  return react_1["default"].createElement("button", {
+    className: "c-btn-favorite"
+  }, react_1["default"].createElement("input", null, "\u304A\u6C17\u306B\u5165\u308A"));
+}
+
+exports.default = Btn_favorite;
+
+/***/ }),
+
 /***/ "./resources/ts/components/common/top/top_section.tsx":
 /*!************************************************************!*\
   !*** ./resources/ts/components/common/top/top_section.tsx ***!
@@ -2577,6 +2713,12 @@ var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/reac
 
 var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
+var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../common/Store_pickup */ "./resources/ts/components/common/Store_pickup.tsx"));
+
+var Store_sumup_1 = __importDefault(__webpack_require__(/*! ../common/Store_sumup */ "./resources/ts/components/common/Store_sumup.tsx"));
+
+var img_bakery1 = __webpack_require__(/*! ../../../image/bakery2.jpg */ "./resources/image/bakery2.jpg");
+
 function Search() {
   var _this = this;
 
@@ -2640,11 +2782,22 @@ function Search() {
     });
   };
 
-  return react_1["default"].createElement("div", null, react_1["default"].createElement("h1", null, "Search\u30DA\u30FC\u30B8"), react_1["default"].createElement("ul", null, users.map(function (user) {
-    return react_1["default"].createElement("li", {
-      key: user.id
-    }, user.name);
-  })));
+  return react_1["default"].createElement("div", {
+    className: "p-search"
+  }, react_1["default"].createElement("div", {
+    className: "top__hero__content__search"
+  }, react_1["default"].createElement("input", {
+    type: "text",
+    placeholder: "\u30AD\u30FC\u30EF\u30FC\u30C9\u304B\u3089\u63A2\u3059"
+  }), react_1["default"].createElement("input", {
+    type: "submit",
+    value: "\u691C\u7D22"
+  })), react_1["default"].createElement(Store_pickup_1["default"], {
+    Pickup: {
+      'img': img_bakery1,
+      'name': "ありパン"
+    }
+  }), react_1["default"].createElement(Store_sumup_1["default"], null));
 }
 
 exports.default = Search;
