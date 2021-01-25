@@ -2231,13 +2231,33 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 function NavBar() {
-  return react_1["default"].createElement("nav", null, react_1["default"].createElement("ul", {
-    className: "nav"
+  return react_1["default"].createElement("div", {
+    className: "l-navbar"
+  }, react_1["default"].createElement("div", {
+    className: "l-navbar__brand-logo"
   }, react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/home"
-  }, react_1["default"].createElement("li", null, "Home")), react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/search"
-  }, react_1["default"].createElement("li", null, "Search"))));
+    to: "/"
+  }, react_1["default"].createElement("a", null, "\u30D1\u30F3BOX"))), react_1["default"].createElement("div", {
+    className: "l-navbar__content"
+  }, react_1["default"].createElement("div", {
+    className: "c-bar-search"
+  }, react_1["default"].createElement("input", {
+    type: "text",
+    placeholder: "\u30AD\u30FC\u30EF\u30FC\u30C9\u304B\u3089\u63A2\u3059"
+  }), react_1["default"].createElement("input", {
+    type: "submit",
+    value: "\u691C\u7D22"
+  })), react_1["default"].createElement("nav", {
+    className: "l-navbar__content__nav"
+  }, react_1["default"].createElement("ul", null, react_1["default"].createElement(react_router_dom_1.Link, {
+    to: ""
+  }, react_1["default"].createElement("li", null, react_1["default"].createElement("a", null, "\u4F1A\u54E1\u767B\u9332"))), react_1["default"].createElement(react_router_dom_1.Link, {
+    to: ""
+  }, react_1["default"].createElement("li", null, react_1["default"].createElement("a", null, "\u30ED\u30B0\u30A4\u30F3"))), react_1["default"].createElement(react_router_dom_1.Link, {
+    to: ""
+  }, react_1["default"].createElement("li", null, react_1["default"].createElement("a", null, "\u30B2\u30B9\u30C8")))))), react_1["default"].createElement("button", {
+    className: "c-btn-menu-mobile"
+  }, react_1["default"].createElement("a", null, react_1["default"].createElement("span", null), react_1["default"].createElement("span", null), react_1["default"].createElement("span", null))));
 }
 
 exports.default = NavBar;
@@ -2720,17 +2740,17 @@ var top_section_1 = __importDefault(__webpack_require__(/*! ../common/top/top_se
 
 var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../common/Store_pickup */ "./resources/ts/components/common/Store_pickup.tsx"));
 
-var img_bakery1 = __webpack_require__(/*! ../../../image/bakery2.jpg */ "./resources/image/bakery2.jpg");
+var img_bakery1 = __webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../../image/bakery2.jpg'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 function Top() {
   return react_1["default"].createElement("div", {
-    className: "top"
+    className: "p-top"
   }, react_1["default"].createElement("div", {
-    className: "top__hero"
+    className: "p-top__hero"
   }, react_1["default"].createElement("div", {
-    className: "top__hero__content"
+    className: "p-top__hero__content"
   }, react_1["default"].createElement("h1", null, "\u304A\u6C17\u306B\u5165\u308A\u306E\u30D1\u30F3\u5C4B\u3055\u3093\u3092", react_1["default"].createElement("br", null), "\u898B\u3064\u3051\u308B\u3001\u3064\u306A\u304C\u308B"), react_1["default"].createElement("div", {
-    className: "top__hero__content__search"
+    className: "c-bar-search"
   }, react_1["default"].createElement("input", {
     type: "text",
     placeholder: "\u30AD\u30FC\u30EF\u30FC\u30C9\u304B\u3089\u63A2\u3059"
@@ -2738,17 +2758,17 @@ function Top() {
     type: "submit",
     value: "\u691C\u7D22"
   })))), react_1["default"].createElement("main", {
-    className: "top__content"
+    className: "p-top__content"
   }, react_1["default"].createElement(top_section_1["default"], {
-    sectionClass: "top__content__section--area",
+    sectionClass: "p-top__content__section--area",
     sectionTitle: "\u30A8\u30EA\u30A2\u304B\u3089\u63A2\u3059",
     sectionContent: Districts_1["default"].districts
   }), react_1["default"].createElement(top_section_1["default"], {
-    sectionClass: "top__content__section--bread",
+    sectionClass: "p-top__content__section--bread",
     sectionTitle: "\u30D1\u30F3\u306E\u7A2E\u985E\u304B\u3089\u63A2\u3059",
     sectionContent: Bread_kinds_1["default"].bread_kinds
   }), react_1["default"].createElement(top_section_1["default"], {
-    sectionClass: "top__content__section--time",
+    sectionClass: "p-top__content__section--time",
     sectionTitle: "\u55B6\u696D\u65E5\u304B\u3089\u63A2\u3059",
     sectionContent: Days_1["default"].days
   }), react_1["default"].createElement(Store_pickup_1["default"], {
@@ -2757,13 +2777,13 @@ function Top() {
       'name': "ありパン"
     }
   }), react_1["default"].createElement("section", {
-    className: "top__content__section"
+    className: "p-top__content__section"
   }, react_1["default"].createElement("h2", null, "\u30A2\u30AF\u30BB\u30B9\u6570\u30E9\u30F3\u30AD\u30F3\u30B0"), react_1["default"].createElement("ul", null, react_1["default"].createElement("li", {
     className: "c-store-pickup__el"
   }, react_1["default"].createElement("img", {
     src: img_bakery1
   }), react_1["default"].createElement("p", null, "\u3042\u308A\u3042\u308A\u30D1\u30F3"))))), react_1["default"].createElement("footer", {
-    className: "top__footer"
+    className: "p-top__footer"
   }, react_1["default"].createElement("ul", null, react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
     href: ""
   }, "\u4E8B\u696D\u4E3B\u306E\u65B9\u306F\u3053\u3061\u3089")), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
@@ -2791,21 +2811,6 @@ Object.defineProperty(exports, "__esModule", ({
 function UserPage() {}
 
 exports.default = UserPage;
-
-/***/ }),
-
-/***/ "./resources/image/bakery2.jpg":
-/*!*************************************!*\
-  !*** ./resources/image/bakery2.jpg ***!
-  \*************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/bakery2.jpg?e45eff18ab1c38d5268263931c0c4b19");
 
 /***/ }),
 

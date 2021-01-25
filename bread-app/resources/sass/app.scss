@@ -12,4 +12,11 @@
 @import "./foundation/base";
 
 //component
-@import "./component/top";
+@import "./component/search_bar";
+@import "./component/button";
+
+//layout
+@import "./layout/navbar";
+
+//page
+@import "./page/top";

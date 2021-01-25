@@ -1,6 +1,6 @@
-.top {
+.p-top {
     &__hero {
-        background-image: url(../../image/croissant.jpg);
+        background-image: url(../../images/croissant.jpg);
         background-repeat: no-repeat;
         background-size: cover;
         background-position: 50% 65%;
@@ -14,35 +14,6 @@
 
                 @include bp-960up {
                     margin-top: 15px;
-                }
-            }
-
-            &__search {
-                width: 100%;
-                height: 2.3rem;
-                margin-top: 15px;
-                border-radius: 5px;
-                background-color: $white;
-                border: 1px solid $white;
-                overflow: hidden;
-
-                input[type="text"] {
-                    width: 75%;
-                    height: 100%;
-                    padding: 0 5px;
-                }
-
-                input[type="submit"] {
-                    width: 25%;
-                    height: 100%;
-                    background-color: $brown;
-                    color: $white;
-                    border-radius: 5px;
-                    cursor: pointer;
-
-                    &:hover {
-                        background-color: $darkBrown;
-                    }
                 }
             }
         }
