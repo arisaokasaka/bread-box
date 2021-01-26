@@ -5,6 +5,9 @@ import ReactDOM from 'react-dom';
 //Router
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+//i18n
+// import './18n';
+
 //Components
 import NavBar from './components/layout/Navbar';
 import Login_store from './components/login/Login_store';

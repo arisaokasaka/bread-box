@@ -1,0 +1,29 @@
+.c-store-sum {
+    display: flex;
+
+    &__images {
+        width: 200px;
+        &__main {
+            width: 180px;
+        }
+
+        &__sub {
+            width: 60px;
+        }
+    }
+
+    &__text {
+        width: 400px;
+        // &__button {
+        // }
+
+        // &__title {
+        // }
+
+        // &__schedule {
+        // }
+
+        // &__score {
+        // }
+    }
+}

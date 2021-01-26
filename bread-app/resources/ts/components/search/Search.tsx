@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import Store_pickup from '../common/Store_pickup';
-import Store_sumup from '../common/Store_sumup';
+import Store_summary from '../common/Store_summary';
 
 let img_bakery1 = require('../../../image/bakery2.jpg');
 
@@ -44,12 +44,19 @@ function Search() {
                     'name': "ありパン"
                 }}
             />
-            {/* <div className="p-search__result">
-                <ul>
-                    {users.map(user => (<li key={user.id}>{user.name}</li>))}
-                </ul>
-            </div> */}
-            <Store_sumup />
+            <div className="p-search__list">
+                <div className = "p-search__list__order">
+                    <a>おすすめ順</a>
+                    <a>評価順</a>
+                    <a>口コミ数順</a>
+                    <a>アクセス数順</a>
+                </div>
+                <Store_summary
+                    store_name = "ありさぱん"
+                    store_access = "薬院駅から徒歩3分"
+                    store_detail = "おいしいアンパンおいしいアンパンおいしいアンパンおいしいアンパンおいしいアンパンおいしいアンパンおいしいアンパン"
+                />
+            </div>
         </div>
     );
 }

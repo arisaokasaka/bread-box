@@ -1,5 +1,4 @@
 import React from 'react';
-import Week from '../common/Week';
 
 type WeekProps = {
     WeekClass? : string;
@@ -8,10 +7,10 @@ type WeekProps = {
 
 const Schedule: React.FC<WeekProps> = ({WeekDay}) => (
     <div className="c-week">
-        {WeekDay.map(
+        {/* {WeekDay.map(
             (el)=>{
             return(<span>{el}</span>);
-            })}
+            })} */}
     </div>
 )
 

@@ -1,0 +1,8 @@
+.p-search {
+    @include content-width;
+
+    &__list {
+        background-color: $lightBrown;
+        padding: $mp-sm;
+    }
+}

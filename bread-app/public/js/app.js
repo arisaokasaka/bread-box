@@ -1936,7 +1936,9 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 var react_dom_1 = __importDefault(__webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js")); //Router
 
 
-var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js"); //Components
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js"); //i18n
+// import './18n';
+//Components
 
 
 var Navbar_1 = __importDefault(__webpack_require__(/*! ./components/layout/Navbar */ "./resources/ts/components/layout/Navbar.tsx"));
@@ -2132,6 +2134,80 @@ exports.default = districts;
 
 /***/ }),
 
+/***/ "./resources/ts/components/common/Schedule.tsx":
+/*!*****************************************************!*\
+  !*** ./resources/ts/components/common/Schedule.tsx ***!
+  \*****************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var Schedule = function Schedule(_a) {
+  var WeekDay = _a.WeekDay;
+  return react_1["default"].createElement("div", {
+    className: "c-week"
+  });
+};
+
+exports.default = Schedule;
+
+/***/ }),
+
+/***/ "./resources/ts/components/common/Score.tsx":
+/*!**************************************************!*\
+  !*** ./resources/ts/components/common/Score.tsx ***!
+  \**************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var Score = function Score(_a) {
+  var score_total = _a.score_total,
+      score_rate = _a.score_rate;
+  return react_1["default"].createElement("div", {
+    className: "c-score"
+  }, react_1["default"].createElement("h2", null, score_total), react_1["default"].createElement("div", {
+    className: "c-score__stars",
+    style: {
+      width: score_rate
+    }
+  }, react_1["default"].createElement("span", null, react_1["default"].createElement("a", null, "\u2606\u2606\u2606\u2606\u2606"))));
+};
+
+exports.default = Score; //css memo
+// p{
+//     background-clip: text;
+//     -webkit-background-clip: text;
+// }
+
+/***/ }),
+
 /***/ "./resources/ts/components/common/Store_pickup.tsx":
 /*!*********************************************************!*\
   !*** ./resources/ts/components/common/Store_pickup.tsx ***!
@@ -2168,10 +2244,10 @@ exports.default = Store_pickup;
 
 /***/ }),
 
-/***/ "./resources/ts/components/common/Store_sumup.tsx":
-/*!********************************************************!*\
-  !*** ./resources/ts/components/common/Store_sumup.tsx ***!
-  \********************************************************/
+/***/ "./resources/ts/components/common/Store_summary.tsx":
+/*!**********************************************************!*\
+  !*** ./resources/ts/components/common/Store_summary.tsx ***!
+  \**********************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -2189,11 +2265,15 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var Btn_bookmark_1 = __importDefault(__webpack_require__(/*! ./buttons/Btn_bookmark */ "./resources/ts/components/common/buttons/Btn_bookmark.tsx"));
-
 var Btn_favorite_1 = __importDefault(__webpack_require__(/*! ./buttons/Btn_favorite */ "./resources/ts/components/common/buttons/Btn_favorite.tsx"));
 
-var Store_sumup = function Store_sumup(_a) {
+var Btn_interested_1 = __importDefault(__webpack_require__(/*! ./buttons/Btn_interested */ "./resources/ts/components/common/buttons/Btn_interested.tsx"));
+
+var Schedule_1 = __importDefault(__webpack_require__(/*! ./Schedule */ "./resources/ts/components/common/Schedule.tsx"));
+
+var Score_1 = __importDefault(__webpack_require__(/*! ./Score */ "./resources/ts/components/common/Score.tsx"));
+
+var Store_summary = function Store_summary(_a) {
   var store_name = _a.store_name,
       store_access = _a.store_access,
       store_detail = _a.store_detail;
@@ -2221,55 +2301,19 @@ var Store_sumup = function Store_sumup(_a) {
     className: "c-store-sum__text"
   }, react_1["default"].createElement("div", {
     className: "c-store-sum__text__buttons"
-  }, react_1["default"].createElement(Btn_favorite_1["default"], null), react_1["default"].createElement(Btn_bookmark_1["default"], {
-    buttonId: "c-btn-favorite",
-    buttonClass: "c-btn-interested",
-    buttonText: "\u884C\u3063\u3066\u307F\u305F\u3044"
-  })), react_1["default"].createElement("div", {
+  }, react_1["default"].createElement(Btn_favorite_1["default"], null), react_1["default"].createElement(Btn_interested_1["default"], null)), react_1["default"].createElement("div", {
     className: "c-store-sum__text__title"
   }, react_1["default"].createElement("h2", null, store_name)), react_1["default"].createElement("p", null, store_access), react_1["default"].createElement("p", null, store_detail), react_1["default"].createElement("div", {
     className: "c-store-sum__text__schedule"
-  }), react_1["default"].createElement("div", {
+  }, react_1["default"].createElement(Schedule_1["default"], null)), react_1["default"].createElement("div", {
     className: "c-store-sum__text__score"
-  })));
+  }, react_1["default"].createElement(Score_1["default"], {
+    score_rate: '4.2',
+    score_total: '4.2'
+  }))));
 };
 
-exports.default = Store_sumup;
-
-/***/ }),
-
-/***/ "./resources/ts/components/common/buttons/Btn_bookmark.tsx":
-/*!*****************************************************************!*\
-  !*** ./resources/ts/components/common/buttons/Btn_bookmark.tsx ***!
-  \*****************************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var Btn_bookmark = function Btn_bookmark(_a) {
-  var buttonClass = _a.buttonClass,
-      buttonId = _a.buttonId,
-      buttonText = _a.buttonText;
-  return react_1["default"].createElement("button", {
-    id: buttonId,
-    className: buttonClass
-  }, react_1["default"].createElement("input", null, buttonText));
-};
-
-exports.default = Btn_bookmark;
+exports.default = Store_summary;
 
 /***/ }),
 
@@ -2297,10 +2341,41 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 function Btn_favorite() {
   return react_1["default"].createElement("button", {
     className: "c-btn-favorite"
-  }, react_1["default"].createElement("input", null, "\u304A\u6C17\u306B\u5165\u308A"));
+  }, "\u304A\u6C17\u306B\u5165\u308A");
 }
 
 exports.default = Btn_favorite;
+
+/***/ }),
+
+/***/ "./resources/ts/components/common/buttons/Btn_interested.tsx":
+/*!*******************************************************************!*\
+  !*** ./resources/ts/components/common/buttons/Btn_interested.tsx ***!
+  \*******************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+function Btn_interested() {
+  return react_1["default"].createElement("button", {
+    className: "c-btn-interested"
+  }, "\u884C\u3063\u3066\u307F\u305F\u3044");
+}
+
+exports.default = Btn_interested;
 
 /***/ }),
 
@@ -2735,7 +2810,7 @@ var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/a
 
 var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../common/Store_pickup */ "./resources/ts/components/common/Store_pickup.tsx"));
 
-var Store_sumup_1 = __importDefault(__webpack_require__(/*! ../common/Store_sumup */ "./resources/ts/components/common/Store_sumup.tsx"));
+var Store_summary_1 = __importDefault(__webpack_require__(/*! ../common/Store_summary */ "./resources/ts/components/common/Store_summary.tsx"));
 
 var img_bakery1 = __webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../../image/bakery2.jpg'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
@@ -2817,7 +2892,15 @@ function Search() {
       'img': img_bakery1,
       'name': "ありパン"
     }
-  }), react_1["default"].createElement(Store_sumup_1["default"], null));
+  }), react_1["default"].createElement("div", {
+    className: "p-search__list"
+  }, react_1["default"].createElement("div", {
+    className: "p-search__list__order"
+  }, react_1["default"].createElement("a", null, "\u304A\u3059\u3059\u3081\u9806"), react_1["default"].createElement("a", null, "\u8A55\u4FA1\u9806"), react_1["default"].createElement("a", null, "\u53E3\u30B3\u30DF\u6570\u9806"), react_1["default"].createElement("a", null, "\u30A2\u30AF\u30BB\u30B9\u6570\u9806")), react_1["default"].createElement(Store_summary_1["default"], {
+    store_name: "\u3042\u308A\u3055\u3071\u3093",
+    store_access: "\u85AC\u9662\u99C5\u304B\u3089\u5F92\u6B693\u5206",
+    store_detail: "\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3"
+  })));
 }
 
 exports.default = Search;
@@ -4226,9 +4309,12 @@ var index = react__WEBPACK_IMPORTED_MODULE_0__.createContext || createReactConte
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
   \*********************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-throw new Error("Module build failed (from ./node_modules/mini-css-extract-plugin/dist/loader.js):\nModuleBuildError: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):\nSassError: Invalid CSS after \"//component\": expected 1 selector or at-rule, was \"<<<<<<< HEAD\"\n        on line 12 of C:\\Users\\panna\\Documents\\bread-box\\bread-app\\resources\\sass\\app.scss\n>> @import \"./foundation/base\";\r\n   ----------------------------^\n\n    at processResult (C:\\Users\\panna\\Documents\\bread-box\\bread-app\\node_modules\\webpack\\lib\\NormalModule.js:597:19)\n    at C:\\Users\\panna\\Documents\\bread-box\\bread-app\\node_modules\\webpack\\lib\\NormalModule.js:691:5\n    at C:\\Users\\panna\\Documents\\bread-box\\bread-app\\node_modules\\loader-runner\\lib\\LoaderRunner.js:399:11\n    at C:\\Users\\panna\\Documents\\bread-box\\bread-app\\node_modules\\loader-runner\\lib\\LoaderRunner.js:251:18\n    at context.callback (C:\\Users\\panna\\Documents\\bread-box\\bread-app\\node_modules\\loader-runner\\lib\\LoaderRunner.js:124:13)\n    at Object.callback (C:\\Users\\panna\\Documents\\bread-box\\bread-app\\node_modules\\sass-loader\\dist\\index.js:73:7)\n    at Object.done [as callback] (C:\\Users\\panna\\Documents\\bread-box\\bread-app\\node_modules\\neo-async\\async.js:8069:18)\n    at options.error (C:\\Users\\panna\\Documents\\bread-box\\bread-app\\node_modules\\node-sass\\lib\\index.js:294:32)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
 
 /***/ }),
 
@@ -35617,6 +35703,12 @@ function valueEqual(a, b) {
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
+/******/ 	// the startup function
+/******/ 	// It's empty as some runtime module handles the default behavior
+/******/ 	__webpack_require__.x = x => {}
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
@@ -35670,11 +35762,98 @@ function valueEqual(a, b) {
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	(() => {
+/******/ 		// no baseURI
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// Promise = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"/js/app": 0
+/******/ 		};
+/******/ 		
+/******/ 		var deferredModules = [
+/******/ 			["./resources/ts/app.tsx"],
+/******/ 			["./resources/sass/app.scss"]
+/******/ 		];
+/******/ 		// no chunk on demand loading
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 		
+/******/ 		var checkDeferredModules = x => {};
+/******/ 		
+/******/ 		// install a JSONP callback for chunk loading
+/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
+/******/ 			var [chunkIds, moreModules, runtime, executeModules] = data;
+/******/ 			// add "moreModules" to the modules object,
+/******/ 			// then flag all "chunkIds" as loaded and fire callback
+/******/ 			var moduleId, chunkId, i = 0, resolves = [];
+/******/ 			for(;i < chunkIds.length; i++) {
+/******/ 				chunkId = chunkIds[i];
+/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 					resolves.push(installedChunks[chunkId][0]);
+/******/ 				}
+/******/ 				installedChunks[chunkId] = 0;
+/******/ 			}
+/******/ 			for(moduleId in moreModules) {
+/******/ 				if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 					__webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/ 				}
+/******/ 			}
+/******/ 			if(runtime) runtime(__webpack_require__);
+/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
+/******/ 			while(resolves.length) {
+/******/ 				resolves.shift()();
+/******/ 			}
+/******/ 		
+/******/ 			// add entry modules from loaded chunk to deferred list
+/******/ 			if(executeModules) deferredModules.push.apply(deferredModules, executeModules);
+/******/ 		
+/******/ 			// run deferred modules when all chunks ready
+/******/ 			return checkDeferredModules();
+/******/ 		}
+/******/ 		
+/******/ 		var chunkLoadingGlobal = self["webpackChunk"] = self["webpackChunk"] || [];
+/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 		
+/******/ 		function checkDeferredModulesImpl() {
+/******/ 			var result;
+/******/ 			for(var i = 0; i < deferredModules.length; i++) {
+/******/ 				var deferredModule = deferredModules[i];
+/******/ 				var fulfilled = true;
+/******/ 				for(var j = 1; j < deferredModule.length; j++) {
+/******/ 					var depId = deferredModule[j];
+/******/ 					if(installedChunks[depId] !== 0) fulfilled = false;
+/******/ 				}
+/******/ 				if(fulfilled) {
+/******/ 					deferredModules.splice(i--, 1);
+/******/ 					result = __webpack_require__(__webpack_require__.s = deferredModule[0]);
+/******/ 				}
+/******/ 			}
+/******/ 			if(deferredModules.length === 0) {
+/******/ 				__webpack_require__.x();
+/******/ 				__webpack_require__.x = x => {};
+/******/ 			}
+/******/ 			return result;
+/******/ 		}
+/******/ 		var startup = __webpack_require__.x;
+/******/ 		__webpack_require__.x = () => {
+/******/ 			// reset startup function so it can be called again when more startup code is added
+/******/ 			__webpack_require__.x = startup || (x => {});
+/******/ 			return (checkDeferredModules = checkDeferredModulesImpl)();
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /************************************************************************/
-/******/ 	// startup
-/******/ 	// Load entry module
-/******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	__webpack_require__("./resources/ts/app.tsx");
-/******/ 	__webpack_require__("./resources/sass/app.scss");
+/******/ 	// run startup
+/******/ 	return __webpack_require__.x();
 /******/ })()
 ;
