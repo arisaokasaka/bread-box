@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import icon_search from "../../../image/search-icon.jpg";
+import Searchbar from '../atoms/Searchbar'
 
 function NavBar() {
     return (
@@ -9,10 +9,7 @@ function NavBar() {
                 <Link to="/">パンBOX</Link>
             </div>
             <div className="l-navbar__content">
-                <div className="c-bar-search">
-                        <input type="text" placeholder="キーワードから探す" />
-                        <input type="submit" value="検索" />
-                </div>
+                <Searchbar />
                 <nav className="l-navbar__content__nav">
                     <ul>
                         <Link to="">
