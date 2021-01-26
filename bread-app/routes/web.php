@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/{any}', function () {
     return view('app');
 });
 
@@ -24,4 +24,4 @@ Route::get('/', function () {
 Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/search/{keyword}', 'SearchController@index')->name('search');
+// Route::get('/search/{keyword}', 'SearchController@index')->name('search');
