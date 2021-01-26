@@ -32,6 +32,7 @@
 .a-btn-favorite {
     @include btn-rounded($color: $pink, $background-color: $white);
     margin-right: 0.5rem;
+    cursor: pointer;
 
     & > a {
         font-weight: bolder;
@@ -52,6 +53,7 @@
 .a-btn-interested {
     @include btn-rounded($color: $green, $background-color: $white);
     margin-right: 0.5rem;
+    cursor: pointer;
 
     & > a {
         font-weight: bolder;

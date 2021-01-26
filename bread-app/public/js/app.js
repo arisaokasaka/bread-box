@@ -2038,10 +2038,14 @@ Object.defineProperty(exports, "__esModule", ({
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var Schedule = function Schedule(_a) {
-  var WeekDay = _a.WeekDay;
+  var Week = _a.Week;
   return react_1["default"].createElement("div", {
-    className: "c-week"
-  });
+    className: "a-week"
+  }, Week.map(function (el) {
+    return react_1["default"].createElement("span", {
+      className: el["class"]
+    }, react_1["default"].createElement("a", null, el.text));
+  }));
 };
 
 exports.default = Schedule;
@@ -2271,6 +2275,8 @@ var Btn_favorite_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/Bt
 
 var Btn_interested_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/Btn_interested */ "./resources/ts/components/atoms/buttons/Btn_interested.tsx"));
 
+var Week_1 = __importDefault(__webpack_require__(/*! ../../info/Week */ "./resources/ts/info/Week.ts"));
+
 var Schedule_1 = __importDefault(__webpack_require__(/*! ../atoms/Schedule */ "./resources/ts/components/atoms/Schedule.tsx"));
 
 var Score_1 = __importDefault(__webpack_require__(/*! ../atoms/Score */ "./resources/ts/components/atoms/Score.tsx"));
@@ -2282,14 +2288,14 @@ var Store_summary = function Store_summary(_a) {
   return react_1["default"].createElement("div", {
     className: "m-store-summary"
   }, react_1["default"].createElement("div", {
-    className: "m-store-summary__images"
+    className: "m-store-summary__images--pc"
   }, react_1["default"].createElement("div", {
-    className: "m-store-summary__images__main"
+    className: "m-store-summary__images--pc__main"
   }, react_1["default"].createElement("img", {
     src: "",
     alt: ""
   })), react_1["default"].createElement("div", {
-    className: "m-store-summary__images__sub"
+    className: "m-store-summary__images--pc__sub"
   }, react_1["default"].createElement("img", {
     src: "",
     alt: ""
@@ -2305,11 +2311,33 @@ var Store_summary = function Store_summary(_a) {
     className: "m-store-summary__content__buttons"
   }, react_1["default"].createElement(Btn_favorite_1["default"], null), react_1["default"].createElement(Btn_interested_1["default"], null)), react_1["default"].createElement("div", {
     className: "m-store-summary__content__name"
-  }, react_1["default"].createElement("h2", null, store_name)), react_1["default"].createElement("p", {
+  }, react_1["default"].createElement("h2", {
+    className: "hover-colorChange"
+  }, store_name)), react_1["default"].createElement("p", {
     className: "m-store-summary__content__access"
-  }, store_access), react_1["default"].createElement("p", {
+  }, store_access), react_1["default"].createElement("div", {
+    className: "m-store-summary__images--mobile"
+  }, react_1["default"].createElement("div", {
+    className: "m-store-summary__images--mobile__main"
+  }, react_1["default"].createElement("img", {
+    src: "",
+    alt: ""
+  })), react_1["default"].createElement("div", {
+    className: "m-store-summary__images--mobile__sub"
+  }, react_1["default"].createElement("img", {
+    src: "",
+    alt: ""
+  }), react_1["default"].createElement("img", {
+    src: "",
+    alt: ""
+  }), react_1["default"].createElement("img", {
+    src: "",
+    alt: ""
+  }))), react_1["default"].createElement("p", {
     className: "m-store-summary__content__detail"
-  }, store_detail), react_1["default"].createElement(Schedule_1["default"], null), react_1["default"].createElement(Score_1["default"], {
+  }, store_detail), react_1["default"].createElement(Schedule_1["default"], {
+    Week: Week_1["default"].week
+  }), react_1["default"].createElement(Score_1["default"], {
     score_total: '4.2',
     score_rate: '50%'
   })));
@@ -2762,7 +2790,7 @@ function Search() {
   return react_1["default"].createElement("div", {
     className: "p-search"
   }, react_1["default"].createElement("div", {
-    className: "top__hero__content__search"
+    className: "c-bar-search"
   }, react_1["default"].createElement("input", {
     type: "text",
     placeholder: "\u30AD\u30FC\u30EF\u30FC\u30C9\u304B\u3089\u63A2\u3059"
@@ -2777,8 +2805,18 @@ function Search() {
   }), react_1["default"].createElement("div", {
     className: "p-search__list"
   }, react_1["default"].createElement("div", {
-    className: "p-search__list__order"
-  }, react_1["default"].createElement("a", null, "\u304A\u3059\u3059\u3081\u9806"), react_1["default"].createElement("a", null, "\u8A55\u4FA1\u9806"), react_1["default"].createElement("a", null, "\u53E3\u30B3\u30DF\u6570\u9806"), react_1["default"].createElement("a", null, "\u30A2\u30AF\u30BB\u30B9\u6570\u9806")), react_1["default"].createElement(Store_summary_1["default"], {
+    className: "p-search__list__order--pc"
+  }, react_1["default"].createElement("a", null, "\u304A\u3059\u3059\u3081\u9806"), react_1["default"].createElement("a", null, "\u8A55\u4FA1\u9806"), react_1["default"].createElement("a", null, "\u53E3\u30B3\u30DF\u6570\u9806"), react_1["default"].createElement("a", null, "\u30A2\u30AF\u30BB\u30B9\u6570\u9806")), react_1["default"].createElement("div", {
+    className: "p-search__list__order--mobile"
+  }, react_1["default"].createElement("select", null, react_1["default"].createElement("option", {
+    value: ""
+  }, "\u304A\u3059\u3059\u3081\u9806"), react_1["default"].createElement("option", {
+    value: ""
+  }, "\u8A55\u4FA1\u9806"), react_1["default"].createElement("option", {
+    value: ""
+  }, "\u53E3\u30B3\u30DF\u6570\u9806"), react_1["default"].createElement("option", {
+    value: ""
+  }, "\u30A2\u30AF\u30BB\u30B9\u6570\u9806"))), react_1["default"].createElement(Store_summary_1["default"], {
     store_name: "\u3042\u308A\u3055\u3071\u3093",
     store_access: "\u85AC\u9662\u99C5\u304B\u3089\u5F92\u6B693\u5206",
     store_detail: "\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3"
@@ -3055,6 +3093,55 @@ function () {
 
 var districts = new Districts();
 exports.default = districts;
+
+/***/ }),
+
+/***/ "./resources/ts/info/Week.ts":
+/*!***********************************!*\
+  !*** ./resources/ts/info/Week.ts ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var Week =
+/** @class */
+function () {
+  function Week() {
+    this.week = [{
+      text: "月",
+      "class": "i-monday"
+    }, {
+      text: "火",
+      "class": "i-tuesday"
+    }, {
+      text: "水",
+      "class": "i-wednesday"
+    }, {
+      text: "木",
+      "class": "i-thursday"
+    }, {
+      text: "金",
+      "class": "i-friday"
+    }, {
+      text: "土",
+      "class": "i-saturday"
+    }, {
+      text: "日",
+      "class": "i-sunday"
+    }];
+  }
+
+  return Week;
+}();
+
+var week = new Week();
+exports.default = week;
 
 /***/ }),
 

@@ -34,7 +34,7 @@ function Search() {
 
     return (
         <div className="p-search">
-            <div className="top__hero__content__search">
+            <div className="c-bar-search">
                     <input type="text" placeholder="キーワードから探す" />
                     <input type="submit" value="検索" />
             </div>
@@ -45,11 +45,19 @@ function Search() {
                 }}
             />
             <div className="p-search__list">
-                <div className = "p-search__list__order">
+                <div className = "p-search__list__order--pc">
                     <a>おすすめ順</a>
                     <a>評価順</a>
                     <a>口コミ数順</a>
                     <a>アクセス数順</a>
+                </div>
+                <div className = "p-search__list__order--mobile">
+                    <select>
+                        <option value="">おすすめ順</option>
+                        <option value="">評価順</option>
+                        <option value="">口コミ数順</option>
+                        <option value="">アクセス数順</option>
+                    </select>
                 </div>
                 <Store_summary
                     store_name = "ありさぱん"

@@ -12,36 +12,44 @@ type store = {
 }
 
 const Store_summary: React.FC<store> = ({store_name, store_access, store_detail}) => (
-    <div className ="c-store-sum">
-        <div className ="c-store-sum__images">
-            <div className ="c-store-sum__images__main">
+    <div className ="m-store-summary">
+        <div className ="m-store-summary__images--pc">
+            <div className ="m-store-summary__images--pc__main">
                 <img src="" alt=""/>
             </div>
-            <div className ="c-store-sum__images__sub">
+            <div className ="m-store-summary__images--pc__sub">
                 <img src="" alt=""/>
                 <img src="" alt=""/>
                 <img src="" alt=""/>
             </div>
         </div>
-        <div className ="c-store-sum__text">
-            <div className ="c-store-sum__text__buttons">
+        <div className ="m-store-summary__content">
+            <div className ="m-store-summary__content__buttons">
                 <Btn_favorite />
                 <Btn_interested />
             </div>
-            <div className ="c-store-sum__text__title">
-                <h2>{store_name}</h2>
+            <div className ="m-store-summary__content__name">
+                <h2 className ="hover-colorChange">{store_name}</h2>
             </div>
-            <p>{store_access}</p>
-            <p>{store_detail}</p>
-            <div className="c-store-sum__text__schedule">
-                <Schedule />
+            <p className ="m-store-summary__content__access">{store_access}</p>
+            <div className ="m-store-summary__images--mobile">
+                <div className ="m-store-summary__images--mobile__main">
+                    <img src="" alt=""/>
+                </div>
+                <div className ="m-store-summary__images--mobile__sub">
+                    <img src="" alt=""/>
+                    <img src="" alt=""/>
+                    <img src="" alt=""/>
+                </div>
             </div>
-            <div className="c-store-sum__text__score">
-                <Score
-                   score_total = '4.2'
-                   score_rate = '80%'
-                />
-            </div>
+            <p className ="m-store-summary__content__detail">{store_detail}</p>
+            <Schedule
+                Week = {Week.week}
+            />
+            <Score
+                score_total = '4.2'
+                score_rate = '50%'
+            />
         </div>
     </div>
 );
