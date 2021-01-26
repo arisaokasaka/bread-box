@@ -12,11 +12,15 @@
 @import "./foundation/base";
 
 //component
-@import "./component/search_bar";
-@import "./component/button";
+@import "./atoms/button";
+
+//molecules
+@import "./molecules/search_bar";
+@import "./molecules/store-summary";
 
 //layout
 @import "./layout/navbar";
 
 //page
 @import "./page/top";
+@import "./page/search";

@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import Store_pickup from '../common/Store_pickup';
-import Store_summary from '../common/Store_summary';
+import Store_pickup from '../../molecules/Store_pickup';
+import Store_summary from '../../molecules/Store_summary';
 
-let img_bakery1 = require('../../../image/bakery2.jpg');
+// let img_bakery1 = require('../../../image/bakery2.jpg');
 
 
 function Search() {
@@ -40,7 +40,7 @@ function Search() {
             </div>
             <Store_pickup 
                 Pickup={{
-                    'img': img_bakery1,
+                    'img': 1,
                     'name': "ありパン"
                 }}
             />

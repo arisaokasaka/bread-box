@@ -1,5 +1,6 @@
 .c-store-sum {
     display: flex;
+    background-color: $white;
 
     &__images {
         width: 200px;
@@ -14,16 +15,5 @@
 
     &__text {
         width: 400px;
-        // &__button {
-        // }
-
-        // &__title {
-        // }
-
-        // &__schedule {
-        // }
-
-        // &__score {
-        // }
     }
 }

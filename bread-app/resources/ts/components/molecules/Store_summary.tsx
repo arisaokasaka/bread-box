@@ -1,9 +1,9 @@
 import React from 'react';
-import Btn_favorite from './buttons/Btn_favorite';
-import Btn_interested from './buttons/Btn_interested';
-import Week from './Week';
-import Schedule from './Schedule';
-import Score from './Score';
+import Btn_favorite from '../atoms/buttons/Btn_favorite';
+import Btn_interested from '../atoms/buttons/Btn_interested';
+import Week from '../../info/Week';
+import Schedule from '../atoms/Schedule';
+import Score from '../atoms/Score';
 
 type store = {
     store_name?: string;

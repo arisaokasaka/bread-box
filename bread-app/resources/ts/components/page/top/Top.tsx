@@ -1,14 +1,20 @@
-import React from 'react';
-import districts from '../common/Districts';
-import bread_kinds from '../common/Bread_kinds';
-import days from '../common/Days';
-import Top_section from '../common/top/top_section';
-import Store_pickup from '../common/Store_pickup';
+import React,{useState} from 'react';
+import districts from '../../../info/Districts';
+import bread_kinds from '../../../info/Bread_kinds';
+import days from '../../../info/Days';
+import Top_section from '../../molecules/top/top_section';
+import Store_pickup from '../../molecules/Store_pickup';
+import { Link } from 'react-router-dom';
 
-let img_bakery1 = require('../../../image/bakery2.jpg');
 
+// let img_bakery1 = require('../../../image/bakery2.jpg');
 
 function Top() {
+    const [keyword, Setkeyword] = useState('');
+    
+    const onChangeKeyword = e => {
+        Setkeyword(e.target.value);
+    }
 
     return (
     <div className="p-top">
@@ -16,8 +22,13 @@ function Top() {
             <div className="p-top__hero__content">
                 <h1>お気に入りのパン屋さんを<br></br>見つける、つながる</h1>
                 <div className="c-bar-search">
-                    <input type="text" placeholder="キーワードから探す" />
-                    <input type="submit" value="検索" />
+                    <input type="text" placeholder="キーワードから探す"
+                     value={keyword}
+                     onChange = {onChangeKeyword}
+                    />
+                    <Link to={"/search/" + keyword }>検索</Link>
+                    {/* <a href={"/search/" + keyword }>sdf</a> */}
+                    {/* <button>search</button> */}
                 </div>
             </div>
         </div>
@@ -39,7 +50,7 @@ function Top() {
             />
             <Store_pickup 
             Pickup={{
-                'img': img_bakery1,
+                'img': 12,
                 'name': "ありパン"
             }}
             />
@@ -47,7 +58,7 @@ function Top() {
                 <h2>アクセス数ランキング</h2>
                 <ul>
                     <li className="c-store-pickup__el">
-                        <img src={img_bakery1}></img>
+                        {/* <img src={img_bakery1}></img> */}
                         <p>ありありパン</p>
                     </li>
                 </ul>

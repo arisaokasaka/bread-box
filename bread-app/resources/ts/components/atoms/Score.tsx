@@ -9,7 +9,7 @@ const Score: React.FC<ScoreProps> = ({score_total,score_rate}) => (
     <div className ="c-score">
         <h2>{score_total}</h2>
         <div className="c-score__stars" style={{width: score_rate}}>
-            <span><a>☆☆☆☆☆</a></span>
+            <span><h3>☆☆☆☆☆</h3></span>
         </div>
     </div>
 );

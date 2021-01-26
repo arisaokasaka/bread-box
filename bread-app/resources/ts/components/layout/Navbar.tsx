@@ -1,13 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import icon_search from "../../../../public/images/bakery2.jpg";
-import icon_search from "../../../image/search-icon.jpg";
+// import icon_search from "../../../image/search-icon.jpg";
 
 function NavBar() {
     return (
         <div className="l-navbar">
             <div className="l-navbar__brand-logo">
-                <Link to="/"><a>パンBOX</a></Link>
+                <Link to="/">パンBOX</Link>
             </div>
             <div className="l-navbar__content">
                 <div className="c-bar-search">
@@ -17,23 +16,23 @@ function NavBar() {
                 <nav className="l-navbar__content__nav">
                     <ul>
                         <Link to="">
-                            <li><a>会員登録</a></li>
+                            <li>会員登録</li>
                         </Link>
                         <Link to="">
-                            <li><a>ログイン</a></li>
+                            <li>ログイン</li>
                         </Link>
                         <Link to="">
-                            <li><a>ゲスト</a></li>
+                            <li>ゲスト</li>
                         </Link>
                     </ul>
                 </nav>
             </div>
             <button className="c-btn-menu-mobile">
-                <a>
+                <div>
+                    {/* <span>{icon_search}</span> */}
                     <span></span>
                     <span></span>
-                    <span></span>
-                </a>
+                </div>
             </button>
         </div>
     )
