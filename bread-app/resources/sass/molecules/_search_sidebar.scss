@@ -13,6 +13,7 @@
             border-radius: $base-radius;
 
             &__btn {
+                display: inline-block;
                 width: 100%;
                 padding: 5px 0;
                 margin-bottom: $mp-xxs;
@@ -21,6 +22,7 @@
                 font-size: 0.9rem;
                 border-radius: 25px;
                 border: none;
+                text-align: center;
                 cursor: pointer;
 
                 &:hover {

@@ -389,6 +389,7 @@ h2 {
     border-radius: 5px;
   }
   .p-search__container .m-search-sidebar__btn {
+    display: inline-block;
     width: 100%;
     padding: 5px 0;
     margin-bottom: 10px;
@@ -397,6 +398,7 @@ h2 {
     font-size: 0.9rem;
     border-radius: 25px;
     border: none;
+    text-align: center;
     cursor: pointer;
   }
   .p-search__container .m-search-sidebar__btn:hover {
