@@ -39,8 +39,12 @@
     }
 
     @include bp-600up() {
-        width: 80%;
+        width: 85%;
         max-width: 1000px;
+    }
+
+    @include bp-960up {
+        width: 80%;
     }
 }
 
@@ -53,7 +57,7 @@
     border: 2px solid $color;
     border-radius: 50%;
     font-size: 1rem;
-    padding: 0;
+    padding: auto;
 
     @include bp-600up() {
         width: auto;
