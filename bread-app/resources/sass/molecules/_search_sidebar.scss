@@ -1,16 +1,48 @@
-.m-search-sidebar {
-    display: none;
+//PC検索画面のサイドバー
+.p-search__container {
+    .m-search-sidebar {
+        display: none;
 
-    @include bp-600up {
-        display: block;
-        background-color: $lightBrown;
-        flex-basis: 20%;
-        margin-right: $mp-xxs;
-        margin-top: $mp-xs;
+        @include bp-600up {
+            display: block;
+            background-color: $lightBrown;
+            flex-basis: 24%;
+            margin-right: $mp-xxs;
+            margin-top: $mp-xs;
+            padding: $mp-xxs;
+            border-radius: $base-radius;
+
+            &__btn {
+                width: 100%;
+                padding: 5px 0;
+                margin-bottom: $mp-xxs;
+                background-color: $darkBrown;
+                color: $white;
+                font-size: 0.9rem;
+                border-radius: 25px;
+                border: none;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: $darkestBrown;
+                }
+            }
+        }
+
+        @include bp-960up {
+            flex-basis: 20%;
+        }
+    }
+}
+
+//モバイル検索ページ
+.p-search-input-mobile {
+    .m-search-sidebar {
+        margin: 0;
         padding: $mp-xxs;
-        border-radius: $base-radius;
 
         &__btn {
+            display: inline-block;
             width: 100%;
             padding: 5px 0;
             margin-bottom: $mp-xxs;
@@ -19,6 +51,7 @@
             font-size: 0.9rem;
             border-radius: 25px;
             border: none;
+            text-align: center;
             cursor: pointer;
 
             &:hover {

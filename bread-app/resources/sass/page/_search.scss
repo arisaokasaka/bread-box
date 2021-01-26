@@ -2,42 +2,52 @@
     @include content-width;
     padding-top: $header-height;
 
-    &__list {
-        background-color: $lightBrown;
-        border-radius: 5px;
-        padding: $mp-xs;
+    &__container {
+        display: flex;
 
-        &__order--mobile {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 0.5rem;
-
+        &__content {
             @include bp-600up {
-                display: none;
+                flex-basis: 75%;
             }
 
-            & > select {
-                color: $font-color-brown;
-                border-color: $font-color-brown;
-                border-radius: 5px;
-                font-size: 0.8rem;
-                outline: none;
-            }
-        }
+            &__list {
+                background-color: $lightBrown;
+                border-radius: $base-radius;
+                padding: $mp-xs;
 
-        &__order--pc {
-            display: none;
+                &__order--mobile {
+                    display: flex;
+                    justify-content: flex-end;
+                    margin-bottom: 0.5rem;
 
-            @include bp-600up {
-                display: flex;
-                justify-content: flex-end;
-            }
+                    @include bp-600up {
+                        display: none;
+                    }
 
-            & > a {
-                color: $brown;
-                margin: 0 0 0.5rem 1rem;
-                font-size: 0.8rem;
-                cursor: pointer;
+                    & > select {
+                        color: $font-color-brown;
+                        border-color: $font-color-brown;
+                        border-radius: $base-radius;
+                        font-size: 0.8rem;
+                        outline: none;
+                    }
+                }
+
+                &__order--pc {
+                    display: none;
+
+                    @include bp-600up {
+                        display: flex;
+                        justify-content: flex-end;
+                    }
+
+                    & > a {
+                        color: $brown;
+                        margin: 0 0 0.5rem 1rem;
+                        font-size: 0.8rem;
+                        cursor: pointer;
+                    }
+                }
             }
         }
     }

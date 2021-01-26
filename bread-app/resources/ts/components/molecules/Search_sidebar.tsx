@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom';
 import districts from '../../info/Districts';
 import bread_kinds from '../../info/Bread_kinds';
 import days from '../../info/Days';
@@ -28,7 +28,7 @@ export default function Search_sidebar() {
             sectionTitle="営業時間から探す"
             sectionContent={hours.hours}
             />
-            <button className="m-search-sidebar__btn">絞り込む</button>
+            <Link to='/search' className="m-search-sidebar__btn">絞り込む</Link>
         </div>
     )
 }

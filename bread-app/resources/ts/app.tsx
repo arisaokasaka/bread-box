@@ -18,6 +18,7 @@ import Register_store from './components/page/register/Register_store';
 import Register_user from './components/page/register/Register_user';
 import Review from './components/page/review/Review';
 import Search from './components/page/search/Search';
+import Search_input_mobile from './components/page/search/Search_input_mobile';
 import StoreEdit from './components/page/store/StoreEdit';
 import StorePage from './components/page/store/StorePage';
 import Top from './components/page/top/Top';
@@ -32,6 +33,7 @@ const App: React.FC = () => {
                     <Switch>
                         <Route path="/" exact component={Top} />
                         <Route path="/search" component={Search} />
+                        <Route path="/search_mobile" component={Search_input_mobile} />
                         <Route path="/login_store" component={Login_store} />
                         <Route path="/login_user" component={Login_user} />
                         <Route path="/password_store" component={PasswordReset_store} />

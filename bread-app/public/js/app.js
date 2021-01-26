@@ -1959,6 +1959,8 @@ var Review_1 = __importDefault(__webpack_require__(/*! ./components/page/review/
 
 var Search_1 = __importDefault(__webpack_require__(/*! ./components/page/search/Search */ "./resources/ts/components/page/search/Search.tsx"));
 
+var Search_input_mobile_1 = __importDefault(__webpack_require__(/*! ./components/page/search/Search_input_mobile */ "./resources/ts/components/page/search/Search_input_mobile.tsx"));
+
 var StoreEdit_1 = __importDefault(__webpack_require__(/*! ./components/page/store/StoreEdit */ "./resources/ts/components/page/store/StoreEdit.tsx"));
 
 var StorePage_1 = __importDefault(__webpack_require__(/*! ./components/page/store/StorePage */ "./resources/ts/components/page/store/StorePage.tsx"));
@@ -1977,6 +1979,9 @@ var App = function App() {
   }), react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/search",
     component: Search_1["default"]
+  }), react_1["default"].createElement(react_router_dom_1.Route, {
+    path: "/search_mobile",
+    component: Search_input_mobile_1["default"]
   }), react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/login_store",
     component: Login_store_1["default"]
@@ -2094,6 +2099,120 @@ exports.default = Score;
 
 /***/ }),
 
+/***/ "./resources/ts/components/atoms/Search_sidebar_item.tsx":
+/*!***************************************************************!*\
+  !*** ./resources/ts/components/atoms/Search_sidebar_item.tsx ***!
+  \***************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var Search_sidebar_item = function Search_sidebar_item(_a) {
+  var sectionTitle = _a.sectionTitle,
+      sectionContent = _a.sectionContent;
+  return react_1["default"].createElement("div", {
+    className: "a-search-sidebar-item"
+  }, react_1["default"].createElement("label", null, sectionTitle), react_1["default"].createElement("ul", null, sectionContent.map(function (el) {
+    return react_1["default"].createElement("li", null, react_1["default"].createElement("input", {
+      type: "checkbox",
+      value: el
+    }), react_1["default"].createElement("a", null, el));
+  })));
+};
+
+exports.default = Search_sidebar_item;
+
+/***/ }),
+
+/***/ "./resources/ts/components/atoms/Searchbar.tsx":
+/*!*****************************************************!*\
+  !*** ./resources/ts/components/atoms/Searchbar.tsx ***!
+  \*****************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+function Searchbar() {
+  var _a = react_1.useState(''),
+      keyword = _a[0],
+      Setkeyword = _a[1];
+
+  var onChangeKeyword = function onChangeKeyword(e) {
+    Setkeyword(e.target.value);
+  };
+
+  return react_1["default"].createElement("div", {
+    className: "a-bar-search"
+  }, react_1["default"].createElement("input", {
+    type: "text",
+    placeholder: "\u30AD\u30FC\u30EF\u30FC\u30C9\u304B\u3089\u63A2\u3059",
+    value: keyword,
+    onChange: onChangeKeyword
+  }), react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/search/" + keyword
+  }, react_1["default"].createElement("span", null, "\u691C\u7D22")));
+}
+
+exports.default = Searchbar;
+
+/***/ }),
+
 /***/ "./resources/ts/components/atoms/buttons/Btn_favorite.tsx":
 /*!****************************************************************!*\
   !*** ./resources/ts/components/atoms/buttons/Btn_favorite.tsx ***!
@@ -2177,8 +2296,9 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js"); // import icon_search from "../../../image/search-icon.jpg";
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
+var Searchbar_1 = __importDefault(__webpack_require__(/*! ../atoms/Searchbar */ "./resources/ts/components/atoms/Searchbar.tsx"));
 
 function NavBar() {
   return react_1["default"].createElement("div", {
@@ -2189,15 +2309,7 @@ function NavBar() {
     to: "/"
   }, "\u30D1\u30F3BOX")), react_1["default"].createElement("div", {
     className: "l-navbar__content"
-  }, react_1["default"].createElement("div", {
-    className: "c-bar-search"
-  }, react_1["default"].createElement("input", {
-    type: "text",
-    placeholder: "\u30AD\u30FC\u30EF\u30FC\u30C9\u304B\u3089\u63A2\u3059"
-  }), react_1["default"].createElement("input", {
-    type: "submit",
-    value: "\u691C\u7D22"
-  })), react_1["default"].createElement("nav", {
+  }, react_1["default"].createElement(Searchbar_1["default"], null), react_1["default"].createElement("nav", {
     className: "l-navbar__content__nav"
   }, react_1["default"].createElement("ul", null, react_1["default"].createElement(react_router_dom_1.Link, {
     to: ""
@@ -2211,6 +2323,66 @@ function NavBar() {
 }
 
 exports.default = NavBar;
+
+/***/ }),
+
+/***/ "./resources/ts/components/molecules/Search_sidebar.tsx":
+/*!**************************************************************!*\
+  !*** ./resources/ts/components/molecules/Search_sidebar.tsx ***!
+  \**************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var Districts_1 = __importDefault(__webpack_require__(/*! ../../info/Districts */ "./resources/ts/info/Districts.ts"));
+
+var Bread_kinds_1 = __importDefault(__webpack_require__(/*! ../../info/Bread_kinds */ "./resources/ts/info/Bread_kinds.ts"));
+
+var Days_1 = __importDefault(__webpack_require__(/*! ../../info/Days */ "./resources/ts/info/Days.ts"));
+
+var Hours_1 = __importDefault(__webpack_require__(/*! ../../info/Hours */ "./resources/ts/info/Hours.ts"));
+
+var Searchbar_1 = __importDefault(__webpack_require__(/*! ../atoms/Searchbar */ "./resources/ts/components/atoms/Searchbar.tsx"));
+
+var Search_sidebar_item_1 = __importDefault(__webpack_require__(/*! ../atoms/Search_sidebar_item */ "./resources/ts/components/atoms/Search_sidebar_item.tsx"));
+
+function Search_sidebar() {
+  return react_1["default"].createElement("div", {
+    className: "m-search-sidebar"
+  }, react_1["default"].createElement(Searchbar_1["default"], null), react_1["default"].createElement(Search_sidebar_item_1["default"], {
+    sectionTitle: "\u30A8\u30EA\u30A2\u304B\u3089\u63A2\u3059",
+    sectionContent: Districts_1["default"].districts
+  }), react_1["default"].createElement(Search_sidebar_item_1["default"], {
+    sectionTitle: "\u30D1\u30F3\u306E\u7A2E\u985E\u304B\u3089\u63A2\u3059",
+    sectionContent: Bread_kinds_1["default"].bread_kinds
+  }), react_1["default"].createElement(Search_sidebar_item_1["default"], {
+    sectionTitle: "\u55B6\u696D\u65E5\u304B\u3089\u63A2\u3059",
+    sectionContent: Days_1["default"].days
+  }), react_1["default"].createElement(Search_sidebar_item_1["default"], {
+    sectionTitle: "\u55B6\u696D\u6642\u9593\u304B\u3089\u63A2\u3059",
+    sectionContent: Hours_1["default"].hours
+  }), react_1["default"].createElement(react_router_dom_1.Link, {
+    to: '/search',
+    className: "m-search-sidebar__btn"
+  }, "\u7D5E\u308A\u8FBC\u3080"));
+}
+
+exports.default = Search_sidebar;
 
 /***/ }),
 
@@ -2238,12 +2410,14 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 var Store_pickup = function Store_pickup(_a) {
   var Pickup = _a.Pickup;
   return react_1["default"].createElement("div", {
-    className: "c-store-pickup"
-  }, react_1["default"].createElement("h2", null, "\u30D4\u30C3\u30AF\u30A2\u30C3\u30D7"), react_1["default"].createElement("ul", null, react_1["default"].createElement("li", {
-    className: "c-store-pickup__el"
+    className: "m-store-pickup"
+  }, react_1["default"].createElement("h2", null, "\u30D4\u30C3\u30AF\u30A2\u30C3\u30D7"), react_1["default"].createElement("div", {
+    className: "m-store-pickup__list"
+  }, react_1["default"].createElement("ul", null, react_1["default"].createElement("li", {
+    className: "m-store-pickup__list__item"
   }, react_1["default"].createElement("img", {
     src: Pickup.img
-  }), react_1["default"].createElement("p", null, Pickup.name))));
+  }), react_1["default"].createElement("p", null, Pickup.name)))));
 };
 
 exports.default = Store_pickup;
@@ -2369,12 +2543,9 @@ Object.defineProperty(exports, "__esModule", ({
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var Top_section = function Top_section(_a) {
-  var sectionClass = _a.sectionClass,
-      sectionTitle = _a.sectionTitle,
+  var sectionTitle = _a.sectionTitle,
       sectionContent = _a.sectionContent;
-  return react_1["default"].createElement("div", {
-    className: sectionClass
-  }, react_1["default"].createElement("h2", null, sectionTitle), react_1["default"].createElement("ul", null, sectionContent.map(function (el) {
+  return react_1["default"].createElement("div", null, react_1["default"].createElement("h2", null, sectionTitle), react_1["default"].createElement("ul", null, sectionContent.map(function (el) {
     return react_1["default"].createElement("li", null, react_1["default"].createElement("input", {
       type: "text",
       value: el
@@ -2717,12 +2888,15 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
 var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+
+var Search_sidebar_1 = __importDefault(__webpack_require__(/*! ../../molecules/Search_sidebar */ "./resources/ts/components/molecules/Search_sidebar.tsx"));
 
 var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../../molecules/Store_pickup */ "./resources/ts/components/molecules/Store_pickup.tsx"));
 
-var Store_summary_1 = __importDefault(__webpack_require__(/*! ../../molecules/Store_summary */ "./resources/ts/components/molecules/Store_summary.tsx")); // let img_bakery1 = require('../../../image/bakery2.jpg');
-
+var Store_summary_1 = __importDefault(__webpack_require__(/*! ../../molecules/Store_summary */ "./resources/ts/components/molecules/Store_summary.tsx"));
 
 function Search() {
   var _this = this;
@@ -2790,24 +2964,24 @@ function Search() {
   return react_1["default"].createElement("div", {
     className: "p-search"
   }, react_1["default"].createElement("div", {
-    className: "c-bar-search"
-  }, react_1["default"].createElement("input", {
-    type: "text",
-    placeholder: "\u30AD\u30FC\u30EF\u30FC\u30C9\u304B\u3089\u63A2\u3059"
-  }), react_1["default"].createElement("input", {
-    type: "submit",
-    value: "\u691C\u7D22"
-  })), react_1["default"].createElement(Store_pickup_1["default"], {
+    className: "a-btn-modificate"
+  }, react_1["default"].createElement(react_router_dom_1.Link, {
+    to: '/search_mobile'
+  }, react_1["default"].createElement("span", null, "\u6761\u4EF6\u5909\u66F4"))), react_1["default"].createElement("div", {
+    className: "p-search__container"
+  }, react_1["default"].createElement(Search_sidebar_1["default"], null), react_1["default"].createElement("div", {
+    className: "p-search__container__content"
+  }, react_1["default"].createElement(Store_pickup_1["default"], {
     Pickup: {
       'img': 1,
       'name': "ありパン"
     }
   }), react_1["default"].createElement("div", {
-    className: "p-search__list"
+    className: "p-search__container__content__list"
   }, react_1["default"].createElement("div", {
-    className: "p-search__list__order--pc"
+    className: "p-search__container__content__list__order--pc"
   }, react_1["default"].createElement("a", null, "\u304A\u3059\u3059\u3081\u9806"), react_1["default"].createElement("a", null, "\u8A55\u4FA1\u9806"), react_1["default"].createElement("a", null, "\u53E3\u30B3\u30DF\u6570\u9806"), react_1["default"].createElement("a", null, "\u30A2\u30AF\u30BB\u30B9\u6570\u9806")), react_1["default"].createElement("div", {
-    className: "p-search__list__order--mobile"
+    className: "p-search__container__content__list__order--mobile"
   }, react_1["default"].createElement("select", null, react_1["default"].createElement("option", {
     value: ""
   }, "\u304A\u3059\u3059\u3081\u9806"), react_1["default"].createElement("option", {
@@ -2820,10 +2994,48 @@ function Search() {
     store_name: "\u3042\u308A\u3055\u3071\u3093",
     store_access: "\u85AC\u9662\u99C5\u304B\u3089\u5F92\u6B693\u5206",
     store_detail: "\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3"
-  })));
+  })))));
 }
 
 exports.default = Search;
+
+/***/ }),
+
+/***/ "./resources/ts/components/page/search/Search_input_mobile.tsx":
+/*!*********************************************************************!*\
+  !*** ./resources/ts/components/page/search/Search_input_mobile.tsx ***!
+  \*********************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var Search_sidebar_1 = __importDefault(__webpack_require__(/*! ../../molecules/Search_sidebar */ "./resources/ts/components/molecules/Search_sidebar.tsx"));
+
+function Search_input_mobile() {
+  return react_1["default"].createElement("div", {
+    className: "p-search-input-mobile"
+  }, react_1["default"].createElement(react_router_dom_1.Link, {
+    to: '/search',
+    className: "p-search-input-mobile__back"
+  }, "\u691C\u7D22\u753B\u9762\u306B\u623B\u308B"), react_1["default"].createElement(Search_sidebar_1["default"], null));
+}
+
+exports.default = Search_input_mobile;
 
 /***/ }),
 
@@ -2874,40 +3086,6 @@ exports.default = StorePage;
 "use strict";
 
 
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  Object.defineProperty(o, k2, {
-    enumerable: true,
-    get: function get() {
-      return m[k];
-    }
-  });
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
-
-  __setModuleDefault(result, mod);
-
-  return result;
-};
-
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -2918,9 +3096,7 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var Districts_1 = __importDefault(__webpack_require__(/*! ../../../info/Districts */ "./resources/ts/info/Districts.ts"));
 
@@ -2928,47 +3104,29 @@ var Bread_kinds_1 = __importDefault(__webpack_require__(/*! ../../../info/Bread_
 
 var Days_1 = __importDefault(__webpack_require__(/*! ../../../info/Days */ "./resources/ts/info/Days.ts"));
 
+var Searchbar_1 = __importDefault(__webpack_require__(/*! ../../atoms/Searchbar */ "./resources/ts/components/atoms/Searchbar.tsx"));
+
 var top_section_1 = __importDefault(__webpack_require__(/*! ../../molecules/top/top_section */ "./resources/ts/components/molecules/top/top_section.tsx"));
 
 var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../../molecules/Store_pickup */ "./resources/ts/components/molecules/Store_pickup.tsx")); // let img_bakery1 = require('../../../image/bakery2.jpg');
 
 
 function Top() {
-  var _a = react_1.useState(''),
-      keyword = _a[0],
-      Setkeyword = _a[1];
-
-  var onChangeKeyword = function onChangeKeyword(e) {
-    Setkeyword(e.target.value);
-  };
-
   return react_1["default"].createElement("div", {
     className: "p-top"
   }, react_1["default"].createElement("div", {
     className: "p-top__hero"
   }, react_1["default"].createElement("div", {
     className: "p-top__hero__content"
-  }, react_1["default"].createElement("h1", null, "\u304A\u6C17\u306B\u5165\u308A\u306E\u30D1\u30F3\u5C4B\u3055\u3093\u3092", react_1["default"].createElement("br", null), "\u898B\u3064\u3051\u308B\u3001\u3064\u306A\u304C\u308B"), react_1["default"].createElement("div", {
-    className: "c-bar-search"
-  }, react_1["default"].createElement("input", {
-    type: "text",
-    placeholder: "\u30AD\u30FC\u30EF\u30FC\u30C9\u304B\u3089\u63A2\u3059",
-    value: keyword,
-    onChange: onChangeKeyword
-  }), react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/search/" + keyword
-  }, "\u691C\u7D22")))), react_1["default"].createElement("main", {
+  }, react_1["default"].createElement("h1", null, "\u304A\u6C17\u306B\u5165\u308A\u306E\u30D1\u30F3\u5C4B\u3055\u3093\u3092", react_1["default"].createElement("br", null), "\u898B\u3064\u3051\u308B\u3001\u3064\u306A\u304C\u308B"), react_1["default"].createElement(Searchbar_1["default"], null))), react_1["default"].createElement("main", {
     className: "p-top__content"
   }, react_1["default"].createElement(top_section_1["default"], {
-    sectionClass: "p-top__content__section--area",
     sectionTitle: "\u30A8\u30EA\u30A2\u304B\u3089\u63A2\u3059",
     sectionContent: Districts_1["default"].districts
   }), react_1["default"].createElement(top_section_1["default"], {
-    sectionClass: "p-top__content__section--bread",
     sectionTitle: "\u30D1\u30F3\u306E\u7A2E\u985E\u304B\u3089\u63A2\u3059",
     sectionContent: Bread_kinds_1["default"].bread_kinds
   }), react_1["default"].createElement(top_section_1["default"], {
-    sectionClass: "p-top__content__section--time",
     sectionTitle: "\u55B6\u696D\u65E5\u304B\u3089\u63A2\u3059",
     sectionContent: Days_1["default"].days
   }), react_1["default"].createElement(Store_pickup_1["default"], {
@@ -3057,7 +3215,7 @@ var Days =
 /** @class */
 function () {
   function Days() {
-    this.days = ["今日", "明日", "詳しく指定"];
+    this.days = ["今日", "明日"];
   }
 
   return Days;
@@ -3093,6 +3251,34 @@ function () {
 
 var districts = new Districts();
 exports.default = districts;
+
+/***/ }),
+
+/***/ "./resources/ts/info/Hours.ts":
+/*!************************************!*\
+  !*** ./resources/ts/info/Hours.ts ***!
+  \************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var Hours =
+/** @class */
+function () {
+  function Hours() {
+    this.hours = ["現在営業中", "朝9時までにオープン", "19時以降も営業"];
+  }
+
+  return Hours;
+}();
+
+var hours = new Hours();
+exports.default = hours;
 
 /***/ }),
 

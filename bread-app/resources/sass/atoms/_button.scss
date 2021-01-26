@@ -73,3 +73,37 @@
         }
     }
 }
+
+.a-btn-modificate {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: $mp-xxs;
+
+    a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $darkBrown;
+        width: 130px;
+        height: 2rem;
+        border-radius: 20px;
+
+        @include bp-480up {
+            width: 200px;
+        }
+
+        &:hover {
+            background-color: $darkestBrown;
+        }
+
+        span {
+            color: $white;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+        }
+    }
+
+    @include bp-600up {
+        display: none;
+    }
+}
