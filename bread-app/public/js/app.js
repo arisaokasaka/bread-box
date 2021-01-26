@@ -2073,20 +2073,20 @@ var Score = function Score(_a) {
   var score_total = _a.score_total,
       score_rate = _a.score_rate;
   return react_1["default"].createElement("div", {
-    className: "c-score"
+    className: "a-score"
   }, react_1["default"].createElement("h2", null, score_total), react_1["default"].createElement("div", {
-    className: "c-score__stars",
+    className: "a-score__stars"
+  }, react_1["default"].createElement("div", {
+    className: "a-score__stars__content",
     style: {
       width: score_rate
     }
-  }, react_1["default"].createElement("span", null, react_1["default"].createElement("h3", null, "\u2606\u2606\u2606\u2606\u2606"))));
+  }, react_1["default"].createElement("span", null, "\u2605\u2605\u2605\u2605\u2605")), react_1["default"].createElement("span", {
+    className: "a-score__stars__frame"
+  }, "\u2606\u2606\u2606\u2606\u2606")));
 };
 
-exports.default = Score; //css memo
-// p{
-//     background-clip: text;
-//     -webkit-background-clip: text;
-// }
+exports.default = Score;
 
 /***/ }),
 
@@ -2280,16 +2280,16 @@ var Store_summary = function Store_summary(_a) {
       store_access = _a.store_access,
       store_detail = _a.store_detail;
   return react_1["default"].createElement("div", {
-    className: "c-store-sum"
+    className: "m-store-summary"
   }, react_1["default"].createElement("div", {
-    className: "c-store-sum__images"
+    className: "m-store-summary__images"
   }, react_1["default"].createElement("div", {
-    className: "c-store-sum__images__main"
+    className: "m-store-summary__images__main"
   }, react_1["default"].createElement("img", {
     src: "",
     alt: ""
   })), react_1["default"].createElement("div", {
-    className: "c-store-sum__images__sub"
+    className: "m-store-summary__images__sub"
   }, react_1["default"].createElement("img", {
     src: "",
     alt: ""
@@ -2300,19 +2300,19 @@ var Store_summary = function Store_summary(_a) {
     src: "",
     alt: ""
   }))), react_1["default"].createElement("div", {
-    className: "c-store-sum__text"
+    className: "m-store-summary__content"
   }, react_1["default"].createElement("div", {
-    className: "c-store-sum__text__buttons"
+    className: "m-store-summary__content__buttons"
   }, react_1["default"].createElement(Btn_favorite_1["default"], null), react_1["default"].createElement(Btn_interested_1["default"], null)), react_1["default"].createElement("div", {
-    className: "c-store-sum__text__title"
-  }, react_1["default"].createElement("h2", null, store_name)), react_1["default"].createElement("p", null, store_access), react_1["default"].createElement("p", null, store_detail), react_1["default"].createElement("div", {
-    className: "c-store-sum__text__schedule"
-  }, react_1["default"].createElement(Schedule_1["default"], null)), react_1["default"].createElement("div", {
-    className: "c-store-sum__text__score"
-  }, react_1["default"].createElement(Score_1["default"], {
+    className: "m-store-summary__content__name"
+  }, react_1["default"].createElement("h2", null, store_name)), react_1["default"].createElement("p", {
+    className: "m-store-summary__content__access"
+  }, store_access), react_1["default"].createElement("p", {
+    className: "m-store-summary__content__detail"
+  }, store_detail), react_1["default"].createElement(Schedule_1["default"], null), react_1["default"].createElement(Score_1["default"], {
     score_total: '4.2',
-    score_rate: '80%'
-  }))));
+    score_rate: '50%'
+  })));
 };
 
 exports.default = Store_summary;

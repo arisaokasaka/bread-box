@@ -11,8 +11,9 @@
 // Foundation
 @import "./foundation/base";
 
-//component
+//atoms
 @import "./atoms/button";
+@import "./atoms/store-summary/score";
 
 //molecules
 @import "./molecules/search_bar";
