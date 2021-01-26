@@ -29,11 +29,13 @@
 }
 
 //お気に入りボタン
-.c-btn-favorite {
+.a-btn-favorite {
     @include btn-rounded($color: $pink, $background-color: $white);
     margin-right: 0.5rem;
 
     & > a {
+        font-weight: bolder;
+
         &:nth-child(2) {
             display: none;
 
@@ -47,7 +49,7 @@
 }
 
 //行ってみたいボタン
-.c-btn-interested {
+.a-btn-interested {
     @include btn-rounded($color: $green, $background-color: $white);
     margin-right: 0.5rem;
 

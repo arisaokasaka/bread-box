@@ -38,8 +38,8 @@ const Store_summary: React.FC<store> = ({store_name, store_access, store_detail}
             </div>
             <div className="c-store-sum__text__score">
                 <Score
-                   score_rate = '4.2'
                    score_total = '4.2'
+                   score_rate = '80%'
                 />
             </div>
         </div>

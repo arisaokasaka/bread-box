@@ -152,7 +152,7 @@ h2 {
   }
 }
 
-.c-btn-favorite {
+.a-btn-favorite {
   height: 2rem;
   width: 2rem;
   color: #e45e5e;
@@ -165,7 +165,7 @@ h2 {
 }
 
 @media screen and (min-width: 600px) {
-  .c-btn-favorite {
+  .a-btn-favorite {
     width: auto;
     height: auto;
     border-radius: 20px;
@@ -173,19 +173,23 @@ h2 {
   }
 }
 
-.c-btn-favorite > a:nth-child(2) {
+.a-btn-favorite > a {
+  font-weight: bolder;
+}
+
+.a-btn-favorite > a:nth-child(2) {
   display: none;
 }
 
 @media screen and (min-width: 600px) {
-  .c-btn-favorite > a:nth-child(2) {
+  .a-btn-favorite > a:nth-child(2) {
     display: inline;
     margin-left: 2px;
     font-size: 0.9rem;
   }
 }
 
-.c-btn-interested {
+.a-btn-interested {
   height: 2rem;
   width: 2rem;
   color: #108b10;
@@ -198,7 +202,7 @@ h2 {
 }
 
 @media screen and (min-width: 600px) {
-  .c-btn-interested {
+  .a-btn-interested {
     width: auto;
     height: auto;
     border-radius: 20px;
@@ -206,20 +210,20 @@ h2 {
   }
 }
 
-.c-btn-interested > a {
+.a-btn-interested > a {
   font-weight: bolder;
 }
 
-.c-btn-interested > a:nth-child(1) {
+.a-btn-interested > a:nth-child(1) {
   display: inline-block;
 }
 
-.c-btn-interested > a:nth-child(2) {
+.a-btn-interested > a:nth-child(2) {
   display: none;
 }
 
 @media screen and (min-width: 600px) {
-  .c-btn-interested > a:nth-child(2) {
+  .a-btn-interested > a:nth-child(2) {
     display: inline;
     margin-left: 2px;
     font-size: 0.9rem;

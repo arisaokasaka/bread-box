@@ -2113,7 +2113,7 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 
 function Btn_favorite() {
   return react_1["default"].createElement("button", {
-    className: "c-btn-favorite"
+    className: "a-btn-favorite"
   }, react_1["default"].createElement("a", null, "\u2665"), react_1["default"].createElement("a", null, "\u304A\u6C17\u306B\u5165\u308A"));
 }
 
@@ -2144,7 +2144,7 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 
 function Btn_interested() {
   return react_1["default"].createElement("button", {
-    className: "c-btn-interested"
+    className: "a-btn-interested"
   }, react_1["default"].createElement("a", null, "\u2605"), react_1["default"].createElement("a", null, "\u884C\u3063\u3066\u307F\u305F\u3044"));
 }
 
@@ -2310,8 +2310,8 @@ var Store_summary = function Store_summary(_a) {
   }, react_1["default"].createElement(Schedule_1["default"], null)), react_1["default"].createElement("div", {
     className: "c-store-sum__text__score"
   }, react_1["default"].createElement(Score_1["default"], {
-    score_rate: '4.2',
-    score_total: '4.2'
+    score_total: '4.2',
+    score_rate: '80%'
   }))));
 };
 
