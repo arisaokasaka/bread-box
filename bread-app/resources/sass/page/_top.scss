@@ -33,47 +33,41 @@
             }
         }
 
-        &__section {
-            &--area,
-            &--bread,
-            &--time {
-                ul {
-                    display: flex;
-                    align-content: flex-start;
-                    flex-wrap: wrap;
-                    margin-top: 5px;
+        ul {
+            display: flex;
+            align-content: flex-start;
+            flex-wrap: wrap;
+            margin-top: 5px;
 
-                    li {
-                        display: inline-block;
-                        border: 1.8px solid $brown;
-                        border-radius: 4px;
-                        margin: 3px 2px;
-                        height: 2.5rem;
-                        width: 7.5rem;
+            li {
+                display: inline-block;
+                border: 1.8px solid $brown;
+                border-radius: 4px;
+                margin: 3px 2px;
+                height: 2.5rem;
+                width: 7.5rem;
 
-                        @include bp-600up {
-                            margin: 3px 5px;
-                        }
+                @include bp-600up {
+                    margin: 3px 5px;
+                }
 
-                        input {
-                            display: block;
-                            height: 100%;
-                            width: 100%;
-                            color: $brown;
-                            padding: 0 10px;
-                            line-height: 2.2rem;
-                            background-color: transparent;
-                            text-align: center;
-                            cursor: pointer;
-                        }
+                input {
+                    display: block;
+                    height: 100%;
+                    width: 100%;
+                    color: $brown;
+                    padding: 0 10px;
+                    line-height: 2.2rem;
+                    background-color: transparent;
+                    text-align: center;
+                    cursor: pointer;
+                }
 
-                        &:hover {
-                            background-color: $brown;
+                &:hover {
+                    background-color: $brown;
 
-                            input {
-                                color: $white;
-                            }
-                        }
+                    input {
+                        color: $white;
                     }
                 }
             }
