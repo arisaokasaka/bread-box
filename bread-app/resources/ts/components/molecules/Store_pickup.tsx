@@ -5,14 +5,16 @@ type storePickup = {
 }
 
 const Store_pickup: React.FC<storePickup> = ({Pickup}) => (
-    <div className="c-store-pickup">
+    <div className="m-store-pickup">
         <h2>ピックアップ</h2>
-        <ul>
-            <li className="c-store-pickup__el">
-                <img src={Pickup.img}></img>
-                <p>{Pickup.name}</p>
-            </li>
-        </ul>
+        <div className="m-store-pickup__list">
+            <ul>
+                <li className="m-store-pickup__list__item">
+                    <img src={Pickup.img}></img>
+                    <p>{Pickup.name}</p>
+                </li>
+            </ul>
+        </div>
     </div>
 );
 
