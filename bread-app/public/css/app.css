@@ -275,6 +275,7 @@ h2 {
 }
 
 .p-top__hero {
+  padding-top: 64px;
   background-image: url(/images/croissant.jpg?d285ba1c470395ec7f04064426490bfd);
   background-repeat: no-repeat;
   background-size: cover;

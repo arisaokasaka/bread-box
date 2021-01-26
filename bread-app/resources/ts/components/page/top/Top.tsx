@@ -1,10 +1,10 @@
 import React,{useState} from 'react';
+import { Link } from 'react-router-dom';
 import districts from '../../../info/Districts';
 import bread_kinds from '../../../info/Bread_kinds';
 import days from '../../../info/Days';
 import Top_section from '../../molecules/top/top_section';
 import Store_pickup from '../../molecules/Store_pickup';
-import { Link } from 'react-router-dom';
 
 
 // let img_bakery1 = require('../../../image/bakery2.jpg');

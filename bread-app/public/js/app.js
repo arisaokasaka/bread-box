@@ -2882,6 +2882,8 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
 var Districts_1 = __importDefault(__webpack_require__(/*! ../../../info/Districts */ "./resources/ts/info/Districts.ts"));
 
 var Bread_kinds_1 = __importDefault(__webpack_require__(/*! ../../../info/Bread_kinds */ "./resources/ts/info/Bread_kinds.ts"));
@@ -2890,9 +2892,7 @@ var Days_1 = __importDefault(__webpack_require__(/*! ../../../info/Days */ "./re
 
 var top_section_1 = __importDefault(__webpack_require__(/*! ../../molecules/top/top_section */ "./resources/ts/components/molecules/top/top_section.tsx"));
 
-var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../../molecules/Store_pickup */ "./resources/ts/components/molecules/Store_pickup.tsx"));
-
-var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js"); // let img_bakery1 = require('../../../image/bakery2.jpg');
+var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../../molecules/Store_pickup */ "./resources/ts/components/molecules/Store_pickup.tsx")); // let img_bakery1 = require('../../../image/bakery2.jpg');
 
 
 function Top() {

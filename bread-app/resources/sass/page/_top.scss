@@ -1,5 +1,6 @@
 .p-top {
     &__hero {
+        padding-top: $header-height;
         background-image: url(../../images/croissant.jpg);
         background-repeat: no-repeat;
         background-size: cover;
