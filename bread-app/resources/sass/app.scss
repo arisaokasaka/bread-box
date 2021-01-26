@@ -15,9 +15,12 @@
 @import "./atoms/button";
 @import "./atoms/store-summary/score";
 @import "./atoms//store-summary/schedule";
+@import "./atoms/search_sidebar_item";
 
 //molecules
+@import "./molecules/search_sidebar";
 @import "./molecules/search_bar";
+@import "./molecules/store-pickup";
 @import "./molecules/store-summary";
 
 //layout
