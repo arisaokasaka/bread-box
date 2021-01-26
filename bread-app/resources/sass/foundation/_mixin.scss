@@ -39,7 +39,30 @@
     }
 
     @include bp-600up() {
-        width: 80%;
+        width: 85%;
         max-width: 1000px;
+    }
+
+    @include bp-960up {
+        width: 80%;
+    }
+}
+
+//btn
+@mixin btn-rounded($color, $background-color) {
+    height: 2rem;
+    width: 2rem;
+    color: $color;
+    background-color: $background-color;
+    border: 2px solid $color;
+    border-radius: 50%;
+    font-size: 1rem;
+    padding: auto;
+
+    @include bp-600up() {
+        width: auto;
+        height: auto;
+        border-radius: 20px;
+        padding: 2px 10px;
     }
 }

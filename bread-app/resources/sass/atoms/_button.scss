@@ -1,0 +1,109 @@
+//モバイルメニュー
+.c-btn-menu-mobile {
+    background-color: transparent;
+    margin-right: 2rem;
+    height: 50px;
+    width: 50px;
+    border: none;
+    padding: 8px;
+
+    & > a {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+        justify-content: space-around;
+
+        & > span {
+            display: inline-block;
+            background-color: $white;
+            height: 2px;
+            width: 100%;
+            border-radius: 5px;
+        }
+    }
+
+    @include bp-960up {
+        display: none;
+    }
+}
+
+//お気に入りボタン
+.a-btn-favorite {
+    @include btn-rounded($color: $pink, $background-color: $white);
+    margin-right: 0.5rem;
+    cursor: pointer;
+
+    & > a {
+        font-weight: bolder;
+
+        &:nth-child(2) {
+            display: none;
+
+            @include bp-600up {
+                display: inline;
+                margin-left: 2px;
+                font-size: 0.9rem;
+            }
+        }
+    }
+}
+
+//行ってみたいボタン
+.a-btn-interested {
+    @include btn-rounded($color: $green, $background-color: $white);
+    margin-right: 0.5rem;
+    cursor: pointer;
+
+    & > a {
+        font-weight: bolder;
+
+        &:nth-child(1) {
+            display: inline-block;
+        }
+
+        &:nth-child(2) {
+            display: none;
+
+            @include bp-600up {
+                display: inline;
+                margin-left: 2px;
+                font-size: 0.9rem;
+            }
+        }
+    }
+}
+
+.a-btn-modificate {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: $mp-xxs;
+
+    a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $darkBrown;
+        width: 130px;
+        height: 2rem;
+        border-radius: 20px;
+
+        @include bp-480up {
+            width: 200px;
+        }
+
+        &:hover {
+            background-color: $darkestBrown;
+        }
+
+        span {
+            color: $white;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+        }
+    }
+
+    @include bp-600up {
+        display: none;
+    }
+}

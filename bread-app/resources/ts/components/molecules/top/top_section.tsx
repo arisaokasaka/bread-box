@@ -2,12 +2,11 @@ import React from 'react';
 
 type Props = {
     sectionTitle?: string;
-    sectionClass?: string;
     sectionContent? :any;
 }
 
-const Top_section: React.FC<Props> = ({sectionClass, sectionTitle, sectionContent}) => (
-    <div className={sectionClass}>
+const Top_section: React.FC<Props> = ({sectionTitle, sectionContent}) => (
+    <div>
         <h2>{sectionTitle}</h2>
         <ul>
             {sectionContent.map(

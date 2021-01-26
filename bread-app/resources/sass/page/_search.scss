@@ -1,0 +1,54 @@
+.p-search {
+    @include content-width;
+    padding-top: $header-height;
+
+    &__container {
+        display: flex;
+
+        &__content {
+            @include bp-600up {
+                flex-basis: 75%;
+            }
+
+            &__list {
+                background-color: $lightBrown;
+                border-radius: $base-radius;
+                padding: $mp-xs;
+
+                &__order--mobile {
+                    display: flex;
+                    justify-content: flex-end;
+                    margin-bottom: 0.5rem;
+
+                    @include bp-600up {
+                        display: none;
+                    }
+
+                    & > select {
+                        color: $font-color-brown;
+                        border-color: $font-color-brown;
+                        border-radius: $base-radius;
+                        font-size: 0.8rem;
+                        outline: none;
+                    }
+                }
+
+                &__order--pc {
+                    display: none;
+
+                    @include bp-600up {
+                        display: flex;
+                        justify-content: flex-end;
+                    }
+
+                    & > a {
+                        color: $brown;
+                        margin: 0 0 0.5rem 1rem;
+                        font-size: 0.8rem;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}

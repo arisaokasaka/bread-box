@@ -1,0 +1,61 @@
+.m-store-summary {
+    display: flex;
+    background-color: $white;
+    padding: $mp-xxs;
+    border-radius: 5px;
+    margin-bottom: $mp-xs;
+    cursor: pointer;
+
+    &:hover {
+        h2.hover-colorChange {
+            color: $brown;
+        }
+    }
+
+    &__images--pc {
+        display: none;
+
+        @include bp-960up {
+            display: block;
+            width: 25%;
+        }
+
+        &__main {
+            width: 180px;
+        }
+
+        &__sub {
+            width: 60px;
+        }
+    }
+
+    &__images--mobile {
+        &__main {
+            width: 100%;
+        }
+    }
+
+    &__content {
+        width: 100%;
+        margin-left: $mp-xs;
+
+        @include bp-960up {
+            width: 70%;
+        }
+
+        &__buttons {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        &__access {
+            font-size: 0.7rem;
+        }
+
+        &__detail {
+            color: $brown;
+            font-size: 0.8rem;
+            margin-top: 8px;
+        }
+    }
+}

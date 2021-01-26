@@ -5,21 +5,24 @@ import ReactDOM from 'react-dom';
 //Router
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+//i18n
+// import './18n';
+
 //Components
 import NavBar from './components/layout/Navbar';
-import Login_store from './components/login/Login_store';
-import Login_user from './components/login/Login_user';
-import PasswordReset_store from './components/passwordReset/PasswordReset_store';
-import PasswordReset_user from './components/passwordReset/PasswordReset_user';
-import Register_store from './components/register/Register_store';
-import Register_user from './components/register/Register_user';
-import Review from './components/review/Review';
-import Search from './components/search/Search';
-import StoreEdit from './components/store/StoreEdit';
-import StorePage from './components/store/StorePage';
-import Top from './components/top/Top';
-import UserPage from './components/user/UserPage';
-import Home from './components/Home';
+import Login_store from './components/page/login/Login_store';
+import Login_user from './components/page/login/Login_user';
+import PasswordReset_store from './components/page/passwordReset/PasswordReset_store';
+import PasswordReset_user from './components/page/passwordReset/PasswordReset_user';
+import Register_store from './components/page/register/Register_store';
+import Register_user from './components/page/register/Register_user';
+import Review from './components/page/review/Review';
+import Search from './components/page/search/Search';
+import Search_input_mobile from './components/page/search/Search_input_mobile';
+import StoreEdit from './components/page/store/StoreEdit';
+import StorePage from './components/page/store/StorePage';
+import Top from './components/page/top/Top';
+import UserPage from './components/page/user/UserPage';
  
 const App: React.FC = () => {
     return (
@@ -29,8 +32,8 @@ const App: React.FC = () => {
                 <div id="global-container">
                     <Switch>
                         <Route path="/" exact component={Top} />
-                        <Route path="/home" component={Home} />
                         <Route path="/search" component={Search} />
+                        <Route path="/search_mobile" component={Search_input_mobile} />
                         <Route path="/login_store" component={Login_store} />
                         <Route path="/login_user" component={Login_user} />
                         <Route path="/password_store" component={PasswordReset_store} />

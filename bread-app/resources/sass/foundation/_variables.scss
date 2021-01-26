@@ -22,11 +22,21 @@
 $lightBrown: #fcebd2;
 $brown: #c47d2c;
 $darkBrown: #7c4920;
+$darkestBrown: rgb(73, 48, 32);
 $white: #f8fafc;
 $font-color-brown: #67491b;
+$pink: rgb(228, 94, 94);
+$green: rgb(16, 139, 16);
 
 //margin & padding
+$mp-xxs: 10px;
 $mp-xs: 20px;
 $mp-sm: 40px;
 $mp-md: 80px;
 $mp-lg: 120px;
+
+//height
+$header-height: 64px;
+
+//border-radious
+$base-radius: 5px;
