@@ -2,6 +2,10 @@
     width: 120px;
     display: flex;
 
+    & > h2 {
+        color: $black;
+    }
+
     &__stars {
         position: relative;
         width: 80px;

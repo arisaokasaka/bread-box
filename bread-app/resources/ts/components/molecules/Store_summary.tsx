@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Btn_favorite from '../atoms/buttons/Btn_favorite';
 import Btn_interested from '../atoms/buttons/Btn_interested';
 import Week from '../../info/Week';
@@ -12,7 +13,7 @@ type store = {
 }
 
 const Store_summary: React.FC<store> = ({store_name, store_access, store_detail}) => (
-    <div className ="m-store-summary">
+    <Link to = "/store" className ="m-store-summary">
         <div className ="m-store-summary__images--pc">
             <div className ="m-store-summary__images--pc__main">
                 <img src="" alt=""/>
@@ -51,7 +52,7 @@ const Store_summary: React.FC<store> = ({store_name, store_access, store_detail}
                 score_rate = '50%'
             />
         </div>
-    </div>
+    </Link>
 );
 
 export default Store_summary;
