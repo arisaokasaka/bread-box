@@ -1,36 +1,83 @@
 import React, { useState } from 'react'
+import MenuCard from './MenuCard';
+import StoreSpirit from './StoreSpirit';
+
+let testData = [
+    {
+        bread_name: 'くりーむ',
+        bread_kind: '菓子パン',
+        bread_price: 120,
+        bread_detail: '北海道の生クリーム！！！使ってるんだ！！！！！',
+        advantage: '',
+        spirit: '',
+    }
+];
+
 
 export default function Store_contents() {
     const [table, setTable] = useState('menu');
+    
+    const SectionMenu = {
+        class: "m-store-contents__tab--menu",
+        table: "menu",
+        value: "メニュー",
+        function: handleMenu,
+    }
+    
+    const SectionStamp = {
+        class: "m-store-contents__tab--stamp",
+        table: "stamp",
+        value: "スタンプカード",
+        function: handleStamp,
+    }
+    
+    const SectionSpirit = {
+        class: "m-store-contents__tab--spirit",
+        table: "spirit",
+        value: "お店のこだわり・思い",
+        function: handleSpirit,
+    }
 
     function handleMenu(){
         setTable('menu');
     }
 
     function handleStamp(){
-        setTable('table');
+        setTable('stamp');
     }
 
     function handleSpirit(){
         setTable('spirit')
     }
 
-    const CurrentTable = (table) =>{
-        if(table === "menu"){
-            return (<h2>menu</h2>);
-        }else if(table === "stamp"){
-            return (<h2>stamp</h2>);
-        }else if(table === "spirit"){
-            return(<h2>spirit</h2>);
+    const StoreTab = (section) => {
+        let className = section.class;
+        if(table === section.table){
+            className += ' selected';
+        }
+        return <input type="text" value = {section.value} className={className} onClick = {section.function}/>
+    }
+
+    const CurrentTable = (table) => {
+        switch(table){
+        case 'menu':
+            return <MenuCard Menu = {testData}/>
+            break;
+        case 'stamp':
+            return <h2>stamp</h2>
+            break;
+        case 'spirit':
+            return <StoreSpirit Spirit = {testData}/>
+            break;
         }
     }
 
     return (
         <div className = "m-store-contents">
             <div className = "m-store-contents__tab">
-                <input type="text" value = "メニュー" onClick = {handleMenu}/>
-                <input type="text" value = "スタンプカード" onClick = {handleStamp}/>
-                <input type="text" value = "お店のこだわり・思い" onClick = {handleSpirit}/>
+                {StoreTab(SectionMenu)}
+                {StoreTab(SectionStamp)}
+                {StoreTab(SectionSpirit)}
             </div>
             <div className = "m-store-contents__container">
                 <div className = "m-store-contents__container__table">
@@ -39,4 +86,5 @@ export default function Store_contents() {
             </div>
         </div>
     );
+ 
 }
