@@ -1,30 +1,33 @@
 .a-score {
     width: 120px;
-    display: flex;
 
-    & > h2 {
-        color: $black;
-    }
+    &__container {
+        display: flex;
 
-    &__stars {
-        position: relative;
-        width: 80px;
-        margin: 0.1rem 0 0 0.2rem;
-
-        @include bp-960up {
-            margin-top: 0.3rem;
+        & > h2 {
+            color: $black;
         }
 
-        &__content {
-            color: $brown;
-            overflow: hidden;
-        }
+        &__stars {
+            position: relative;
+            width: 80px;
+            margin: 0.1rem 0 0 0.2rem;
 
-        &__frame {
-            position: absolute;
-            top: 0;
-            left: 0;
-            color: $brown;
+            @include bp-960up {
+                margin-top: 0.3rem;
+            }
+
+            &__content {
+                color: $brown;
+                overflow: hidden;
+            }
+
+            &__frame {
+                position: absolute;
+                top: 0;
+                left: 0;
+                color: $brown;
+            }
         }
     }
 }

@@ -12,6 +12,10 @@ type store = {
     store_detail?: string;
 }
 
+let testStar = [
+    {star: 2.2}
+]
+
 const Store_summary: React.FC<store> = ({store_name, store_access, store_detail}) => (
     <Link to = "/store" className ="m-store-summary">
         <div className ="m-store-summary__images--pc">
@@ -48,8 +52,7 @@ const Store_summary: React.FC<store> = ({store_name, store_access, store_detail}
                 Week = {Week.week}
             />
             <Score
-                score_total = '4.2'
-                score_rate = '50%'
+                ScoreStar = {testStar}
             />
         </div>
     </Link>
