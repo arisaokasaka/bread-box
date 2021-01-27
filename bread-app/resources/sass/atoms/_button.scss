@@ -111,17 +111,17 @@
 
 //ホームページへのボタン
 .a-btn-homepage {
-    display: inline-block;
-    width: 10rem;
-    height: 25px;
-    font-size: 0.8rem;
-    background-color: $darkBrown;
-    text-align: center;
-    vertical-align: center;
-    border-radius: 2px;
-
     a {
+        display: inline-block;
+        width: 10rem;
+        height: 25px;
         line-height: 25px;
+        font-size: 0.7rem;
+        background-color: $darkBrown;
+        text-align: center;
+        vertical-align: center;
+        border-radius: 2px;
+        font-weight: bolder;
         color: $white;
     }
 }
