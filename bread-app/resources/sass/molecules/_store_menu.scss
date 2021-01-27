@@ -1,0 +1,27 @@
+.m-menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    &__card {
+        flex-basis: 48%;
+        background-color: $white;
+        border-radius: $sm-radius;
+        padding: 5px;
+        margin-top: 5px;
+
+        @include bp-600up {
+            flex-basis: 32%;
+        }
+
+        h4 {
+            font-size: 0.9rem;
+            font-weight: 450;
+        }
+
+        p {
+            font-size: 0.7rem;
+            color: $font-color-brown;
+        }
+    }
+}
