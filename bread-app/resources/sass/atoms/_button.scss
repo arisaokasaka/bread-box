@@ -109,19 +109,27 @@
     }
 }
 
-//ホームページへのボタン
-.a-btn-homepage {
-    a {
-        display: inline-block;
-        width: 10rem;
-        height: 25px;
-        line-height: 25px;
-        font-size: 0.7rem;
-        background-color: $darkBrown;
-        text-align: center;
-        vertical-align: center;
-        border-radius: 2px;
-        font-weight: bolder;
-        color: $white;
+//ホームページへのボタンとSNSへのボタン
+.a-btn-modal-sns,
+.a-btn-homepage > a {
+    display: inline-block;
+    width: 8.5rem;
+    height: 25px;
+    line-height: 25px;
+    font-size: 0.7rem;
+    background-color: $darkBrown;
+    text-align: center;
+    vertical-align: center;
+    border-radius: 2px;
+    font-weight: 450;
+    color: $white;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $darkestBrown;
     }
+}
+
+.a-btn-modal-sns {
+    border: none;
 }

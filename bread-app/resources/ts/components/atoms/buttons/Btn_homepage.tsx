@@ -9,7 +9,7 @@ type StoreInfoProps = ({
 const Btn_homepage: React.FC<StoreInfoProps> = ({StoreInfo}) =>(
     <div className = "a-btn-homepage">
         {StoreInfo.map((el)=>(
-        el.url && <a href={el.url}><FontAwesomeIcon icon={faPaperPlane}/>&nbsp;ホームページを見る</a>
+        el.url && <a href={el.url}><FontAwesomeIcon icon={faPaperPlane}/>&nbsp;&nbsp;ホームページ</a>
         ))}
     </div>
 )
