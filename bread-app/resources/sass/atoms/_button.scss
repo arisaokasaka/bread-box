@@ -74,6 +74,7 @@
     }
 }
 
+//条件変更ボタン
 .a-btn-modificate {
     display: flex;
     justify-content: flex-end;
@@ -105,5 +106,22 @@
 
     @include bp-600up {
         display: none;
+    }
+}
+
+//ホームページへのボタン
+.a-btn-homepage {
+    display: inline-block;
+    width: 10rem;
+    height: 25px;
+    font-size: 0.8rem;
+    background-color: $darkBrown;
+    text-align: center;
+    vertical-align: center;
+    border-radius: 2px;
+
+    a {
+        line-height: 25px;
+        color: $white;
     }
 }
