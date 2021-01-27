@@ -1,0 +1,45 @@
+.ReactModal__Content {
+    .m-modal-sns {
+        &__btn--close {
+            display: flex;
+            justify-content: flex-end;
+
+            & > button {
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+            }
+        }
+
+        &__links {
+            &__item {
+                display: block;
+                width: 200px;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                color: $white;
+                border-radius: 2px;
+                margin: 8px 0;
+                font-size: 0.9rem;
+                font-weight: 350;
+
+                &.instagram {
+                    background-color: $color-instagram;
+                }
+
+                &.facebook {
+                    background-color: $color-facebook;
+                }
+
+                &.twitter {
+                    background-color: $color-twitter;
+                }
+
+                &.other {
+                    background-color: $color-other;
+                }
+            }
+        }
+    }
+}
