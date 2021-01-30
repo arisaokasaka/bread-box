@@ -1,0 +1,17 @@
+.p-store {
+    padding-top: $header-height;
+
+    &__container {
+        @include content-width;
+
+        &__content {
+            margin-top: $mp-xxs;
+
+            @include bp-600up {
+                display: grid;
+                grid-template-columns: 1fr 160px;
+                grid-gap: 5px;
+            }
+        }
+    }
+}
