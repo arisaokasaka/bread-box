@@ -18,10 +18,16 @@
 @import "./atoms/search_sidebar_item";
 
 //molecules
+@import "./molecules/modal-sns";
 @import "./molecules/search_sidebar";
 @import "./molecules/search_bar";
+@import "./molecules/store_menu";
+@import "./molecules/store_spirit";
+@import "./molecules/store_contents";
 @import "./molecules/store-pickup";
 @import "./molecules/store-summary";
+@import "./molecules/store_basicInfo";
+@import "./molecules/store_subInfo";
 
 //layout
 @import "./layout/navbar";
@@ -29,4 +35,5 @@
 //page
 @import "./page/top";
 @import "./page/search";
-@import "./page//search-input_mobile";
+@import "./page/search-input_mobile";
+@import "./page/store";
