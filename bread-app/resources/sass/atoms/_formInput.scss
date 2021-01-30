@@ -1,0 +1,40 @@
+.a-form-input {
+    position: relative;
+    margin: 0 auto;
+    font-size: 0.8rem;
+    width: 100%;
+
+    & > label {
+        display: block;
+    }
+
+    & > a {
+        position: absolute;
+        top: 2.3px;
+        left: -1.5rem;
+        font-size: 0.6rem;
+        height: 1rem;
+        line-height: 1rem;
+        color: $brown;
+        font-weight: bolder;
+    }
+
+    & > input {
+        border-radius: $sm-radius;
+        height: 1.8rem;
+        margin-bottom: 10px;
+        padding: 0 5px;
+        border: 0.5px solid $font-color-brown;
+        width: 100%;
+
+        &[type="submit"] {
+            background-color: $darkBrown;
+            color: $white;
+            letter-spacing: 2px;
+
+            &:hover {
+                background-color: $darkestBrown;
+            }
+        }
+    }
+}
