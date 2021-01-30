@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Btn_favorite from '../atoms/buttons/Btn_favorite';
-import Btn_interested from '../atoms/buttons/Btn_interested';
-import Week from '../../info/Week';
-import Schedule from '../atoms/Schedule';
-import Score from '../atoms/Score';
+import Btn_favorite from '../../atoms/buttons/Btn_favorite';
+import Btn_interested from '../../atoms/buttons/Btn_interested';
+import Week from '../../../info/Week';
+import Schedule from '../../atoms/Schedule';
+import Score from '../../atoms/Score';
 
 type store = {
     store_name?: string;
@@ -39,12 +39,12 @@ const Store_summary: React.FC<store> = ({store_name, store_access, store_detail}
             <p className ="m-store-summary__content__access">{store_access}</p>
             <div className ="m-store-summary__images--mobile">
                 <div className ="m-store-summary__images--mobile__main">
-                    <img src="" alt=""/>
+                    <img src="" alt="パンのメイン画像"/>
                 </div>
                 <div className ="m-store-summary__images--mobile__sub">
-                    <img src="" alt=""/>
-                    <img src="" alt=""/>
-                    <img src="" alt=""/>
+                    <img src="" alt="パンのサブ画像"/>
+                    <img src="" alt="パンのサブ画像"/>
+                    <img src="" alt="パンのサブ画像"/>
                 </div>
             </div>
             <p className ="m-store-summary__content__detail">{store_detail}</p>

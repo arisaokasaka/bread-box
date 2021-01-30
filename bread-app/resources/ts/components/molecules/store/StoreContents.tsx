@@ -6,7 +6,7 @@ type InfoProps = ({
     StoreInfo? : any;
 })
 
-const Store_contents: React.FC<InfoProps> = ({StoreInfo}) => {
+const StoreContents: React.FC<InfoProps> = ({StoreInfo}) => {
 
     const [table, setTable] = useState('menu');
     
@@ -82,4 +82,4 @@ const Store_contents: React.FC<InfoProps> = ({StoreInfo}) => {
 }
 
 
-export default Store_contents;
+export default StoreContents;

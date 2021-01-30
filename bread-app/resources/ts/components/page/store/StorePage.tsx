@@ -1,7 +1,7 @@
 import React from 'react'
-import Store_basicInfo from '../../molecules/Store_basicInfo';
-import Store_subInfo from '../../molecules/Store_subinfo';
-import Store_contents from '../../molecules/Store_contents';
+import StoreBasicInfo from '../../molecules/store/StoreBasicInfo';
+import StoreSubInfo from '../../molecules/store/StoreSubinfo';
+import StoreContents from '../../molecules/store/StoreContents';
 
 export default function StorePage() {
     //テスト
@@ -66,14 +66,14 @@ export default function StorePage() {
                 <div className = "p-store__container__img"></div>
                     <div className = "p-store__container__content">
                         <div className = "p-store__container__content__main">
-                            <Store_basicInfo
+                            <StoreBasicInfo
                                 StoreInfo = {testStoreInfo}
                             />
-                            <Store_contents
+                            <StoreContents
                                 StoreInfo = {testInfo}
                             />
                         </div> 
-                        <Store_subInfo
+                        <StoreSubInfo
                             StoreInfo = {testStoreInfo} 
                         />
                     </div>

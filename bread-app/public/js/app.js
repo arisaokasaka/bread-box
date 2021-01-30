@@ -15726,10 +15726,48 @@ exports.default = NavBar;
 
 /***/ }),
 
-/***/ "./resources/ts/components/molecules/Search_sidebar.tsx":
-/*!**************************************************************!*\
-  !*** ./resources/ts/components/molecules/Search_sidebar.tsx ***!
-  \**************************************************************/
+/***/ "./resources/ts/components/molecules/Store_pickup.tsx":
+/*!************************************************************!*\
+  !*** ./resources/ts/components/molecules/Store_pickup.tsx ***!
+  \************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var Store_pickup = function Store_pickup(_a) {
+  var Pickup = _a.Pickup;
+  return react_1["default"].createElement("div", {
+    className: "m-store-pickup"
+  }, react_1["default"].createElement("h2", null, "\u30D4\u30C3\u30AF\u30A2\u30C3\u30D7"), react_1["default"].createElement("div", {
+    className: "m-store-pickup__list"
+  }, react_1["default"].createElement("ul", null, react_1["default"].createElement("li", {
+    className: "m-store-pickup__list__item"
+  }, react_1["default"].createElement("img", {
+    src: Pickup.img
+  }), react_1["default"].createElement("p", null, Pickup.name)))));
+};
+
+exports.default = Store_pickup;
+
+/***/ }),
+
+/***/ "./resources/ts/components/molecules/search/Search_sidebar.tsx":
+/*!*********************************************************************!*\
+  !*** ./resources/ts/components/molecules/search/Search_sidebar.tsx ***!
+  \*********************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -15749,17 +15787,17 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
-var Districts_1 = __importDefault(__webpack_require__(/*! ../../info/Districts */ "./resources/ts/info/Districts.ts"));
+var Districts_1 = __importDefault(__webpack_require__(/*! ../../../info/Districts */ "./resources/ts/info/Districts.ts"));
 
-var Bread_kinds_1 = __importDefault(__webpack_require__(/*! ../../info/Bread_kinds */ "./resources/ts/info/Bread_kinds.ts"));
+var Bread_kinds_1 = __importDefault(__webpack_require__(/*! ../../../info/Bread_kinds */ "./resources/ts/info/Bread_kinds.ts"));
 
-var Days_1 = __importDefault(__webpack_require__(/*! ../../info/Days */ "./resources/ts/info/Days.ts"));
+var Days_1 = __importDefault(__webpack_require__(/*! ../../../info/Days */ "./resources/ts/info/Days.ts"));
 
-var Hours_1 = __importDefault(__webpack_require__(/*! ../../info/Hours */ "./resources/ts/info/Hours.ts"));
+var Hours_1 = __importDefault(__webpack_require__(/*! ../../../info/Hours */ "./resources/ts/info/Hours.ts"));
 
-var Searchbar_1 = __importDefault(__webpack_require__(/*! ../atoms/Searchbar */ "./resources/ts/components/atoms/Searchbar.tsx"));
+var Searchbar_1 = __importDefault(__webpack_require__(/*! ../../atoms/Searchbar */ "./resources/ts/components/atoms/Searchbar.tsx"));
 
-var Search_sidebar_item_1 = __importDefault(__webpack_require__(/*! ../atoms/Search_sidebar_item */ "./resources/ts/components/atoms/Search_sidebar_item.tsx"));
+var Search_sidebar_item_1 = __importDefault(__webpack_require__(/*! ../../atoms/Search_sidebar_item */ "./resources/ts/components/atoms/Search_sidebar_item.tsx"));
 
 function Search_sidebar() {
   return react_1["default"].createElement("div", {
@@ -15786,10 +15824,10 @@ exports.default = Search_sidebar;
 
 /***/ }),
 
-/***/ "./resources/ts/components/molecules/StoreMenu.tsx":
-/*!*********************************************************!*\
-  !*** ./resources/ts/components/molecules/StoreMenu.tsx ***!
-  \*********************************************************/
+/***/ "./resources/ts/components/molecules/store/StoreBasicInfo.tsx":
+/*!********************************************************************!*\
+  !*** ./resources/ts/components/molecules/store/StoreBasicInfo.tsx ***!
+  \********************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -15807,106 +15845,13 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var StoreMenu = function StoreMenu(_a) {
-  var Menu = _a.Menu;
-  return react_1["default"].createElement("div", {
-    className: "m-menu"
-  }, Menu.map(function (el) {
-    return el.menu_type === 1 && react_1["default"].createElement("div", {
-      className: "m-menu__card"
-    }, react_1["default"].createElement("img", {
-      src: "",
-      alt: "\u30E1\u30CB\u30E5\u30FC\u753B\u50CF"
-    }), react_1["default"].createElement("h4", null, el.bread_name), react_1["default"].createElement("p", {
-      className: "m-menu__card__price"
-    }, el.bread_price, "\u5186"), react_1["default"].createElement("p", {
-      className: "m-menu__card__detail"
-    }, el.bread_detail));
-  }));
-};
+var Btn_favorite_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/Btn_favorite */ "./resources/ts/components/atoms/buttons/Btn_favorite.tsx"));
 
-exports.default = StoreMenu;
+var Btn_interested_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/Btn_interested */ "./resources/ts/components/atoms/buttons/Btn_interested.tsx"));
 
-/***/ }),
+var StoreSubinfo_1 = __importDefault(__webpack_require__(/*! ./StoreSubinfo */ "./resources/ts/components/molecules/store/StoreSubinfo.tsx"));
 
-/***/ "./resources/ts/components/molecules/StoreSpirit.tsx":
-/*!***********************************************************!*\
-  !*** ./resources/ts/components/molecules/StoreSpirit.tsx ***!
-  \***********************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var StoreSpirit = function StoreSpirit(_a) {
-  var Spirit = _a.Spirit;
-  return react_1["default"].createElement("div", {
-    className: "m-spirit"
-  }, Spirit.map(function (el) {
-    return el.menu_type === 2 && react_1["default"].createElement("div", {
-      className: "m-spirit__container"
-    }, react_1["default"].createElement("div", {
-      className: "m-spirit__container__section"
-    }, react_1["default"].createElement("h2", null, "\u3053\u3060\u308F\u308A"), react_1["default"].createElement("div", {
-      className: "m-spirit__container__section__content"
-    }, react_1["default"].createElement("img", {
-      src: "",
-      alt: "\u3053\u3060\u308F\u308A\u306E\u5199\u771F"
-    }), react_1["default"].createElement("p", null, el.advantage))), react_1["default"].createElement("div", {
-      className: "m-spirit__container__section"
-    }, react_1["default"].createElement("h2", null, "\u601D\u3044"), react_1["default"].createElement("div", {
-      className: "m-spirit__container__section__content"
-    }, react_1["default"].createElement("img", {
-      src: "",
-      alt: "\u601D\u3044\u304C\u4F1D\u308F\u308B\u5199\u771F"
-    }), react_1["default"].createElement("p", null, el.spirit))));
-  }));
-};
-
-exports.default = StoreSpirit;
-
-/***/ }),
-
-/***/ "./resources/ts/components/molecules/Store_basicInfo.tsx":
-/*!***************************************************************!*\
-  !*** ./resources/ts/components/molecules/Store_basicInfo.tsx ***!
-  \***************************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var Btn_favorite_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/Btn_favorite */ "./resources/ts/components/atoms/buttons/Btn_favorite.tsx"));
-
-var Btn_interested_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/Btn_interested */ "./resources/ts/components/atoms/buttons/Btn_interested.tsx"));
-
-var Store_subinfo_1 = __importDefault(__webpack_require__(/*! ./Store_subinfo */ "./resources/ts/components/molecules/Store_subinfo.tsx"));
-
-var Store_basicInfo = function Store_basicInfo(_a) {
+var StoreBasicInfo = function StoreBasicInfo(_a) {
   var StoreInfo = _a.StoreInfo;
   return react_1["default"].createElement("div", {
     className: "m-store-basicInfo"
@@ -15920,19 +15865,19 @@ var Store_basicInfo = function Store_basicInfo(_a) {
     }, el.address), react_1["default"].createElement("p", {
       className: "m-store-basicInfo__message"
     }, el.message));
-  }), react_1["default"].createElement(Store_subinfo_1["default"], {
+  }), react_1["default"].createElement(StoreSubinfo_1["default"], {
     StoreInfo: StoreInfo
   }));
 };
 
-exports.default = Store_basicInfo;
+exports.default = StoreBasicInfo;
 
 /***/ }),
 
-/***/ "./resources/ts/components/molecules/Store_contents.tsx":
-/*!**************************************************************!*\
-  !*** ./resources/ts/components/molecules/Store_contents.tsx ***!
-  \**************************************************************/
+/***/ "./resources/ts/components/molecules/store/StoreContents.tsx":
+/*!*******************************************************************!*\
+  !*** ./resources/ts/components/molecules/store/StoreContents.tsx ***!
+  \*******************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -15984,11 +15929,11 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var StoreMenu_1 = __importDefault(__webpack_require__(/*! ./StoreMenu */ "./resources/ts/components/molecules/StoreMenu.tsx"));
+var StoreMenu_1 = __importDefault(__webpack_require__(/*! ./StoreMenu */ "./resources/ts/components/molecules/store/StoreMenu.tsx"));
 
-var StoreSpirit_1 = __importDefault(__webpack_require__(/*! ./StoreSpirit */ "./resources/ts/components/molecules/StoreSpirit.tsx"));
+var StoreSpirit_1 = __importDefault(__webpack_require__(/*! ./StoreSpirit */ "./resources/ts/components/molecules/store/StoreSpirit.tsx"));
 
-var Store_contents = function Store_contents(_a) {
+var StoreContents = function StoreContents(_a) {
   var StoreInfo = _a.StoreInfo;
 
   var _b = react_1.useState('menu'),
@@ -16072,14 +16017,14 @@ var Store_contents = function Store_contents(_a) {
   }, CurrentTable(table))));
 };
 
-exports.default = Store_contents;
+exports.default = StoreContents;
 
 /***/ }),
 
-/***/ "./resources/ts/components/molecules/Store_pickup.tsx":
-/*!************************************************************!*\
-  !*** ./resources/ts/components/molecules/Store_pickup.tsx ***!
-  \************************************************************/
+/***/ "./resources/ts/components/molecules/store/StoreMenu.tsx":
+/*!***************************************************************!*\
+  !*** ./resources/ts/components/molecules/store/StoreMenu.tsx ***!
+  \***************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -16097,27 +16042,32 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var Store_pickup = function Store_pickup(_a) {
-  var Pickup = _a.Pickup;
+var StoreMenu = function StoreMenu(_a) {
+  var Menu = _a.Menu;
   return react_1["default"].createElement("div", {
-    className: "m-store-pickup"
-  }, react_1["default"].createElement("h2", null, "\u30D4\u30C3\u30AF\u30A2\u30C3\u30D7"), react_1["default"].createElement("div", {
-    className: "m-store-pickup__list"
-  }, react_1["default"].createElement("ul", null, react_1["default"].createElement("li", {
-    className: "m-store-pickup__list__item"
-  }, react_1["default"].createElement("img", {
-    src: Pickup.img
-  }), react_1["default"].createElement("p", null, Pickup.name)))));
+    className: "m-menu"
+  }, Menu.map(function (el) {
+    return el.menu_type === 1 && react_1["default"].createElement("div", {
+      className: "m-menu__card"
+    }, react_1["default"].createElement("img", {
+      src: "",
+      alt: "\u30E1\u30CB\u30E5\u30FC\u753B\u50CF"
+    }), react_1["default"].createElement("h4", null, el.bread_name), react_1["default"].createElement("p", {
+      className: "m-menu__card__price"
+    }, el.bread_price, "\u5186"), react_1["default"].createElement("p", {
+      className: "m-menu__card__detail"
+    }, el.bread_detail));
+  }));
 };
 
-exports.default = Store_pickup;
+exports.default = StoreMenu;
 
 /***/ }),
 
-/***/ "./resources/ts/components/molecules/Store_subinfo.tsx":
-/*!*************************************************************!*\
-  !*** ./resources/ts/components/molecules/Store_subinfo.tsx ***!
-  \*************************************************************/
+/***/ "./resources/ts/components/molecules/store/StoreSpirit.tsx":
+/*!*****************************************************************!*\
+  !*** ./resources/ts/components/molecules/store/StoreSpirit.tsx ***!
+  \*****************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -16135,15 +16085,65 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var Score_1 = __importDefault(__webpack_require__(/*! ../atoms/Score */ "./resources/ts/components/atoms/Score.tsx"));
+var StoreSpirit = function StoreSpirit(_a) {
+  var Spirit = _a.Spirit;
+  return react_1["default"].createElement("div", {
+    className: "m-spirit"
+  }, Spirit.map(function (el) {
+    return el.menu_type === 2 && react_1["default"].createElement("div", {
+      className: "m-spirit__container"
+    }, react_1["default"].createElement("div", {
+      className: "m-spirit__container__section"
+    }, react_1["default"].createElement("h2", null, "\u3053\u3060\u308F\u308A"), react_1["default"].createElement("div", {
+      className: "m-spirit__container__section__content"
+    }, react_1["default"].createElement("img", {
+      src: "",
+      alt: "\u3053\u3060\u308F\u308A\u306E\u5199\u771F"
+    }), react_1["default"].createElement("p", null, el.advantage))), react_1["default"].createElement("div", {
+      className: "m-spirit__container__section"
+    }, react_1["default"].createElement("h2", null, "\u601D\u3044"), react_1["default"].createElement("div", {
+      className: "m-spirit__container__section__content"
+    }, react_1["default"].createElement("img", {
+      src: "",
+      alt: "\u601D\u3044\u304C\u4F1D\u308F\u308B\u5199\u771F"
+    }), react_1["default"].createElement("p", null, el.spirit))));
+  }));
+};
 
-var Week_1 = __importDefault(__webpack_require__(/*! ../../info/Week */ "./resources/ts/info/Week.ts"));
+exports.default = StoreSpirit;
 
-var Schedule_1 = __importDefault(__webpack_require__(/*! ../atoms/Schedule */ "./resources/ts/components/atoms/Schedule.tsx"));
+/***/ }),
 
-var Btn_homepage_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/Btn_homepage */ "./resources/ts/components/atoms/buttons/Btn_homepage.tsx"));
+/***/ "./resources/ts/components/molecules/store/StoreSubinfo.tsx":
+/*!******************************************************************!*\
+  !*** ./resources/ts/components/molecules/store/StoreSubinfo.tsx ***!
+  \******************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
-var Modal_sns_1 = __importDefault(__webpack_require__(/*! ../atoms/modal/Modal_sns */ "./resources/ts/components/atoms/modal/Modal_sns.tsx"));
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var Score_1 = __importDefault(__webpack_require__(/*! ../../atoms/Score */ "./resources/ts/components/atoms/Score.tsx"));
+
+var Week_1 = __importDefault(__webpack_require__(/*! ../../../info/Week */ "./resources/ts/info/Week.ts"));
+
+var Schedule_1 = __importDefault(__webpack_require__(/*! ../../atoms/Schedule */ "./resources/ts/components/atoms/Schedule.tsx"));
+
+var Btn_homepage_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/Btn_homepage */ "./resources/ts/components/atoms/buttons/Btn_homepage.tsx"));
+
+var Modal_sns_1 = __importDefault(__webpack_require__(/*! ../../atoms/modal/Modal_sns */ "./resources/ts/components/atoms/modal/Modal_sns.tsx"));
 
 var testStoreInfo = [{
   star: 2.5,
@@ -16156,7 +16156,7 @@ var testStoreInfo = [{
   }
 }];
 
-var Store_subInfo = function Store_subInfo(_a) {
+var StoreSubInfo = function StoreSubInfo(_a) {
   var StoreInfo = _a.StoreInfo;
   return react_1["default"].createElement("div", {
     className: "m-store-subInfo"
@@ -16182,14 +16182,14 @@ var Store_subInfo = function Store_subInfo(_a) {
   }));
 };
 
-exports.default = Store_subInfo;
+exports.default = StoreSubInfo;
 
 /***/ }),
 
-/***/ "./resources/ts/components/molecules/Store_summary.tsx":
-/*!*************************************************************!*\
-  !*** ./resources/ts/components/molecules/Store_summary.tsx ***!
-  \*************************************************************/
+/***/ "./resources/ts/components/molecules/store/StoreSummary.tsx":
+/*!******************************************************************!*\
+  !*** ./resources/ts/components/molecules/store/StoreSummary.tsx ***!
+  \******************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -16209,15 +16209,15 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
-var Btn_favorite_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/Btn_favorite */ "./resources/ts/components/atoms/buttons/Btn_favorite.tsx"));
+var Btn_favorite_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/Btn_favorite */ "./resources/ts/components/atoms/buttons/Btn_favorite.tsx"));
 
-var Btn_interested_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/Btn_interested */ "./resources/ts/components/atoms/buttons/Btn_interested.tsx"));
+var Btn_interested_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/Btn_interested */ "./resources/ts/components/atoms/buttons/Btn_interested.tsx"));
 
-var Week_1 = __importDefault(__webpack_require__(/*! ../../info/Week */ "./resources/ts/info/Week.ts"));
+var Week_1 = __importDefault(__webpack_require__(/*! ../../../info/Week */ "./resources/ts/info/Week.ts"));
 
-var Schedule_1 = __importDefault(__webpack_require__(/*! ../atoms/Schedule */ "./resources/ts/components/atoms/Schedule.tsx"));
+var Schedule_1 = __importDefault(__webpack_require__(/*! ../../atoms/Schedule */ "./resources/ts/components/atoms/Schedule.tsx"));
 
-var Score_1 = __importDefault(__webpack_require__(/*! ../atoms/Score */ "./resources/ts/components/atoms/Score.tsx"));
+var Score_1 = __importDefault(__webpack_require__(/*! ../../atoms/Score */ "./resources/ts/components/atoms/Score.tsx"));
 
 var testStar = [{
   star: 2.2
@@ -16264,18 +16264,18 @@ var Store_summary = function Store_summary(_a) {
     className: "m-store-summary__images--mobile__main"
   }, react_1["default"].createElement("img", {
     src: "",
-    alt: ""
+    alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
   })), react_1["default"].createElement("div", {
     className: "m-store-summary__images--mobile__sub"
   }, react_1["default"].createElement("img", {
     src: "",
-    alt: ""
+    alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
   }), react_1["default"].createElement("img", {
     src: "",
-    alt: ""
+    alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
   }), react_1["default"].createElement("img", {
     src: "",
-    alt: ""
+    alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
   }))), react_1["default"].createElement("p", {
     className: "m-store-summary__content__detail"
   }, store_detail), react_1["default"].createElement(Schedule_1["default"], {
@@ -16664,11 +16664,11 @@ var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome
 
 var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
 
-var Search_sidebar_1 = __importDefault(__webpack_require__(/*! ../../molecules/Search_sidebar */ "./resources/ts/components/molecules/Search_sidebar.tsx"));
+var Search_sidebar_1 = __importDefault(__webpack_require__(/*! ../../molecules/search/Search_sidebar */ "./resources/ts/components/molecules/search/Search_sidebar.tsx"));
 
 var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../../molecules/Store_pickup */ "./resources/ts/components/molecules/Store_pickup.tsx"));
 
-var Store_summary_1 = __importDefault(__webpack_require__(/*! ../../molecules/Store_summary */ "./resources/ts/components/molecules/Store_summary.tsx"));
+var StoreSummary_1 = __importDefault(__webpack_require__(/*! ../../molecules/store/StoreSummary */ "./resources/ts/components/molecules/store/StoreSummary.tsx"));
 
 function Search() {
   var _this = this;
@@ -16764,7 +16764,7 @@ function Search() {
     value: ""
   }, "\u53E3\u30B3\u30DF\u6570\u9806"), react_1["default"].createElement("option", {
     value: ""
-  }, "\u30A2\u30AF\u30BB\u30B9\u6570\u9806"))), react_1["default"].createElement(Store_summary_1["default"], {
+  }, "\u30A2\u30AF\u30BB\u30B9\u6570\u9806"))), react_1["default"].createElement(StoreSummary_1["default"], {
     store_name: "\u3042\u308A\u3055\u3071\u3093",
     store_access: "\u85AC\u9662\u99C5\u304B\u3089\u5F92\u6B693\u5206",
     store_detail: "\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3"
@@ -16798,7 +16798,7 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
-var Search_sidebar_1 = __importDefault(__webpack_require__(/*! ../../molecules/Search_sidebar */ "./resources/ts/components/molecules/Search_sidebar.tsx"));
+var Search_sidebar_1 = __importDefault(__webpack_require__(/*! ../../molecules/search/Search_sidebar */ "./resources/ts/components/molecules/search/Search_sidebar.tsx"));
 
 function Search_input_mobile() {
   return react_1["default"].createElement("div", {
@@ -16853,11 +16853,11 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var Store_basicInfo_1 = __importDefault(__webpack_require__(/*! ../../molecules/Store_basicInfo */ "./resources/ts/components/molecules/Store_basicInfo.tsx"));
+var StoreBasicInfo_1 = __importDefault(__webpack_require__(/*! ../../molecules/store/StoreBasicInfo */ "./resources/ts/components/molecules/store/StoreBasicInfo.tsx"));
 
-var Store_subinfo_1 = __importDefault(__webpack_require__(/*! ../../molecules/Store_subinfo */ "./resources/ts/components/molecules/Store_subinfo.tsx"));
+var StoreSubinfo_1 = __importDefault(__webpack_require__(/*! ../../molecules/store/StoreSubinfo */ "./resources/ts/components/molecules/store/StoreSubinfo.tsx"));
 
-var Store_contents_1 = __importDefault(__webpack_require__(/*! ../../molecules/Store_contents */ "./resources/ts/components/molecules/Store_contents.tsx"));
+var StoreContents_1 = __importDefault(__webpack_require__(/*! ../../molecules/store/StoreContents */ "./resources/ts/components/molecules/store/StoreContents.tsx"));
 
 function StorePage() {
   //テスト
@@ -16923,11 +16923,11 @@ function StorePage() {
     className: "p-store__container__content"
   }, react_1["default"].createElement("div", {
     className: "p-store__container__content__main"
-  }, react_1["default"].createElement(Store_basicInfo_1["default"], {
+  }, react_1["default"].createElement(StoreBasicInfo_1["default"], {
     StoreInfo: testStoreInfo
-  }), react_1["default"].createElement(Store_contents_1["default"], {
+  }), react_1["default"].createElement(StoreContents_1["default"], {
     StoreInfo: testInfo
-  })), react_1["default"].createElement(Store_subinfo_1["default"], {
+  })), react_1["default"].createElement(StoreSubinfo_1["default"], {
     StoreInfo: testStoreInfo
   }))));
 }

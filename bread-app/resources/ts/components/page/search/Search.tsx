@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faEdit} from "@fortawesome/free-solid-svg-icons";
-import Search_sidebar from '../../molecules/Search_sidebar';
+import Search_sidebar from '../../molecules/search/Search_sidebar';
 import Store_pickup from '../../molecules/Store_pickup';
-import Store_summary from '../../molecules/Store_summary';
+import StoreSummary from '../../molecules/store/StoreSummary';
 
 
 function Search() {
@@ -62,7 +62,7 @@ function Search() {
                                 <option value="">アクセス数順</option>
                             </select>
                         </div>
-                        <Store_summary
+                        <StoreSummary
                             store_name = "ありさぱん"
                             store_access = "薬院駅から徒歩3分"
                             store_detail = "おいしいアンパンおいしいアンパンおいしいアンパンおいしいアンパンおいしいアンパンおいしいアンパンおいしいアンパン"

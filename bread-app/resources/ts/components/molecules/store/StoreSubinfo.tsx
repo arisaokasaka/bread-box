@@ -1,10 +1,10 @@
 import React from 'react'
-import Score from '../atoms/Score';
-import Week from '../../info/Week';
-import Schedule from '../atoms/Schedule';
-import Btn_homepage from '../atoms/buttons/Btn_homepage';
+import Score from '../../atoms/Score';
+import Week from '../../../info/Week';
+import Schedule from '../../atoms/Schedule';
+import Btn_homepage from '../../atoms/buttons/Btn_homepage';
 
-import ModalSNS from '../atoms/modal/Modal_sns';
+import ModalSNS from '../../atoms/modal/Modal_sns';
 
 type StoreInfoProps = ({
     StoreInfo? : any;
@@ -23,7 +23,7 @@ let testStoreInfo = [
     }    
 ]
 
-const Store_subInfo: React.FC<StoreInfoProps> = ({StoreInfo}) => (
+const StoreSubInfo: React.FC<StoreInfoProps> = ({StoreInfo}) => (
     <div className = "m-store-subInfo">
         {StoreInfo.map((el)=>{
             el.url = 1;
@@ -54,4 +54,4 @@ const Store_subInfo: React.FC<StoreInfoProps> = ({StoreInfo}) => (
     </div>
 );
 
-export default Store_subInfo;
+export default StoreSubInfo;

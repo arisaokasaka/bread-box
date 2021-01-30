@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import districts from '../../info/Districts';
-import bread_kinds from '../../info/Bread_kinds';
-import days from '../../info/Days';
-import hours from '../../info/Hours';
-import Searchbar from '../atoms/Searchbar';
-import Search_sidebar_item from '../atoms/Search_sidebar_item';
+import districts from '../../../info/Districts';
+import bread_kinds from '../../../info/Bread_kinds';
+import days from '../../../info/Days';
+import hours from '../../../info/Hours';
+import Searchbar from '../../atoms/Searchbar';
+import Search_sidebar_item from '../../atoms/Search_sidebar_item';
 
 
 export default function Search_sidebar() {
