@@ -1,20 +1,13 @@
 import React, { useState } from 'react'
-import MenuCard from './MenuCard';
+import StoreMenu from './StoreMenu';
 import StoreSpirit from './StoreSpirit';
 
-let testData = [
-    {
-        bread_name: 'くりーむ',
-        bread_kind: '菓子パン',
-        bread_price: 120,
-        bread_detail: '北海道の生クリーム！！！使ってるんだ！！！！！',
-        advantage: '',
-        spirit: '',
-    }
-];
+type InfoProps = ({
+    StoreInfo? : any;
+})
 
+const Store_contents: React.FC<InfoProps> = ({StoreInfo}) => {
 
-export default function Store_contents() {
     const [table, setTable] = useState('menu');
     
     const SectionMenu = {
@@ -34,7 +27,7 @@ export default function Store_contents() {
     const SectionSpirit = {
         class: "m-store-contents__tab--spirit",
         table: "spirit",
-        value: "お店のこだわり・思い",
+        value: "こだわり・思い",
         function: handleSpirit,
     }
 
@@ -61,13 +54,13 @@ export default function Store_contents() {
     const CurrentTable = (table) => {
         switch(table){
         case 'menu':
-            return <MenuCard Menu = {testData}/>
+            return <StoreMenu Menu = {StoreInfo}/>
             break;
         case 'stamp':
             return <h2>stamp</h2>
             break;
         case 'spirit':
-            return <StoreSpirit Spirit = {testData}/>
+            return <StoreSpirit Spirit = {StoreInfo}/>
             break;
         }
     }
@@ -86,5 +79,7 @@ export default function Store_contents() {
             </div>
         </div>
     );
- 
 }
+
+
+export default Store_contents;
