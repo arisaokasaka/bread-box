@@ -7,20 +7,19 @@ type SpiritProps = (
 const StoreSpirit: React.FC<SpiritProps> = ({Spirit}) => (
     <div className = "m-spirit">
         {Spirit.map((el)=>(
+            el.menu_type === 2 &&
             <div className = "m-spirit__container">
-                <div className = "m-spirit__container__advantage">
+                <div className = "m-spirit__container__section">
                     <h2>こだわり</h2>
-                    {el.advantage === '' && <p>まだ記載されていません。</p>}
-                    <div className = "m-spirit__container__advantage__content">
-                        <img></img>
+                    <div className = "m-spirit__container__section__content">
+                        <img src="" alt="こだわりの写真"/>
                         <p>{el.advantage}</p>
                     </div>
                 </div>
-                <div className = "m-spirit__container__spirit">
+                <div className = "m-spirit__container__section">
                     <h2>思い</h2>
-                    {el.spirit === '' && <p>まだ記載されていません。</p>}
-                    <div className = "m-spirit__container__spirit__content">
-                        <img></img>
+                    <div className = "m-spirit__container__section__content">
+                        <img src="" alt="思いが伝わる写真"/>
                         <p>{el.spirit}</p>
                     </div>
                 </div>
