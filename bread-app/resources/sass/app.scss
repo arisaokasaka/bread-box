@@ -16,6 +16,7 @@
 @import "./atoms/store_summary/score";
 @import "./atoms//store_summary/schedule";
 @import "./atoms/search_sidebar_item";
+@import "./atoms/formInput";
 
 //molecules
 @import "./molecules/modal-sns";
@@ -33,6 +34,7 @@
 @import "./layout/navbar";
 
 //page
+@import "./page/register_store";
 @import "./page/top";
 @import "./page/search";
 @import "./page/search-input_mobile";
