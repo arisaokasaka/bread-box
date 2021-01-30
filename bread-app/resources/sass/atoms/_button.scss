@@ -74,6 +74,7 @@
     }
 }
 
+//条件変更ボタン
 .a-btn-modificate {
     display: flex;
     justify-content: flex-end;
@@ -104,6 +105,49 @@
     }
 
     @include bp-600up {
+        display: none;
+    }
+}
+
+//ホームページへのボタンとSNSへのボタン
+.a-btn-modal-sns,
+.a-btn-homepage > a {
+    display: inline-block;
+    width: 8.5rem;
+    height: 25px;
+    line-height: 25px;
+    font-size: 0.7rem;
+    background-color: $darkBrown;
+    text-align: center;
+    vertical-align: center;
+    border-radius: 2px;
+    font-weight: 450;
+    color: $white;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $darkestBrown;
+    }
+}
+
+.a-btn-modal-sns {
+    border: none;
+}
+
+//モバイルヘッダーのメニューアイコン
+.a-btn-search_icon,
+.a-btn-mypage {
+    a {
+        display: inline-block;
+        color: white;
+        width: $header-height;
+        height: $header-height;
+        line-height: $header-height;
+        text-align: center;
+        font-size: 1.2rem;
+    }
+
+    @include bp-960up {
         display: none;
     }
 }

@@ -1,0 +1,19 @@
+.m-store-basicInfo {
+    &__btn {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    &__name {
+        font-size: 2rem;
+    }
+
+    &__address {
+        font-size: 0.8rem;
+    }
+
+    &__message {
+        font-size: 1rem;
+        color: $font-color-brown;
+    }
+}

@@ -1,0 +1,21 @@
+.m-menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-gap: 8px;
+
+    &__card {
+        background-color: $white;
+        border-radius: $sm-radius;
+        padding: 5px;
+
+        h4 {
+            font-size: 0.9rem;
+            font-weight: 450;
+        }
+
+        p {
+            font-size: 0.7rem;
+            color: $font-color-brown;
+        }
+    }
+}

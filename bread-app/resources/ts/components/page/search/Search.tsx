@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
-import Search_sidebar from '../../molecules/Search_sidebar';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faEdit} from "@fortawesome/free-solid-svg-icons";
+import Search_sidebar from '../../molecules/search/Search_sidebar';
 import Store_pickup from '../../molecules/Store_pickup';
-import Store_summary from '../../molecules/Store_summary';
+import StoreSummary from '../../molecules/store/StoreSummary';
 
 
 function Search() {
@@ -35,7 +36,7 @@ function Search() {
     return (
         <div className="p-search">
             <div className="a-btn-modificate">
-                <Link to='/search_mobile'><span>条件変更</span></Link>
+                <Link to='/search_mobile'><span><FontAwesomeIcon icon={faEdit}/>&nbsp;条件変更</span></Link>
             </div>
             <div className = "p-search__container">
                 <Search_sidebar />
@@ -61,7 +62,7 @@ function Search() {
                                 <option value="">アクセス数順</option>
                             </select>
                         </div>
-                        <Store_summary
+                        <StoreSummary
                             store_name = "ありさぱん"
                             store_access = "薬院駅から徒歩3分"
                             store_detail = "おいしいアンパンおいしいアンパンおいしいアンパンおいしいアンパンおいしいアンパンおいしいアンパンおいしいアンパン"

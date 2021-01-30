@@ -48,8 +48,13 @@
             justify-content: flex-end;
         }
 
+        &__name {
+            color: $black;
+        }
+
         &__access {
             font-size: 0.7rem;
+            color: $black;
         }
 
         &__detail {

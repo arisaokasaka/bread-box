@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import Search_sidebar from '../../molecules/Search_sidebar';
+import Search_sidebar from '../../molecules/search/Search_sidebar';
 
 export default function Search_input_mobile() {
     return (

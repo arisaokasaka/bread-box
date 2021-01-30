@@ -1,0 +1,18 @@
+.m-spirit {
+    &__container {
+        background-color: $white;
+        padding: $mp-xxs;
+
+        &__section {
+            margin: $mp-xxs 0;
+
+            p {
+                color: $font-color-brown;
+            }
+
+            &__content {
+                display: flex;
+            }
+        }
+    }
+}

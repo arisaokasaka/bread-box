@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Searchbar from '../atoms/Searchbar'
+import BtnSearch_icon from '../atoms/buttons/BtnSearch_icon';
+import BtnMypage from '../atoms/buttons/BtnMypage';
 
 function NavBar() {
     return (
@@ -24,13 +26,10 @@ function NavBar() {
                     </ul>
                 </nav>
             </div>
-            <button className="c-btn-menu-mobile">
-                <div>
-                    {/* <span>{icon_search}</span> */}
-                    <span></span>
-                    <span></span>
-                </div>
-            </button>
+            <nav className="l-navbar__mobile">
+                <BtnSearch_icon/>
+                <BtnMypage/>
+            </nav>
         </div>
     )
 }
