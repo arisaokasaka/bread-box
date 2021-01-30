@@ -1,18 +1,12 @@
 .m-menu {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-gap: 8px;
 
     &__card {
-        flex-basis: 48%;
         background-color: $white;
         border-radius: $sm-radius;
         padding: 5px;
-        margin-top: 5px;
-
-        @include bp-600up {
-            flex-basis: 32%;
-        }
 
         h4 {
             font-size: 0.9rem;
