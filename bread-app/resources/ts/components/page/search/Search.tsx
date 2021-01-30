@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faEdit} from "@fortawesome/free-solid-svg-icons";
 import Search_sidebar from '../../molecules/Search_sidebar';
 import Store_pickup from '../../molecules/Store_pickup';
 import Store_summary from '../../molecules/Store_summary';
@@ -35,7 +36,7 @@ function Search() {
     return (
         <div className="p-search">
             <div className="a-btn-modificate">
-                <Link to='/search_mobile'><span>条件変更</span></Link>
+                <Link to='/search_mobile'><span><FontAwesomeIcon icon={faEdit}/>&nbsp;条件変更</span></Link>
             </div>
             <div className = "p-search__container">
                 <Search_sidebar />
