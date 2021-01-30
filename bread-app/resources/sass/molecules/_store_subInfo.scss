@@ -1,0 +1,82 @@
+.m-store-subInfo {
+    max-width: 12rem;
+
+    @include bp-600up {
+        height: 300px;
+    }
+
+    &__container {
+        &__item {
+            margin-bottom: 0.5rem;
+            label {
+                display: inline-block;
+                color: $font-color-brown;
+                font-weight: bolder;
+                font-size: 0.8rem;
+                margin-bottom: 0.2rem;
+            }
+
+            p {
+                color: $font-color-brown;
+                font-size: 0.8rem;
+            }
+
+            &__btns {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                height: 30px;
+
+                a {
+                    margin-right: 0.5rem;
+                }
+
+                @include bp-600up {
+                    flex-direction: column;
+                    a {
+                        margin-right: auto;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//PC用表示設定
+.m-store-subInfo {
+    display: none;
+
+    @include bp-600up {
+        display: block;
+        border: 1px solid $brown;
+        border-radius: $base-radius;
+        margin-left: $mp-xxs;
+        padding: $mp-xxs;
+
+        &__container {
+            &__item {
+                &__btns {
+                    display: flex;
+                    flex-direction: column;
+                    height: 30px;
+
+                    a {
+                        margin-right: auto;
+                        margin-bottom: 2px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//モバイル用表示設定
+.m-store-basicInfo {
+    .m-store-subInfo {
+        display: block;
+
+        @include bp-600up {
+            display: none;
+        }
+    }
+}
