@@ -1,0 +1,93 @@
+.p-register-store {
+    background-color: white;
+
+    &__container {
+        width: 30%;
+        min-width: 280px;
+        max-width: 450px;
+        margin: $mp-lg auto;
+        padding: $mp-xs;
+        border-radius: $sm-radius;
+        color: $font-color-brown;
+        box-shadow: 0px 0pt 10px;
+
+        @include bp-1280up {
+            padding: $mp-sm $mp-md;
+        }
+
+        &__form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin: 0 auto;
+
+            & > h2 {
+                text-align: center;
+            }
+
+            & > label {
+                margin-top: 10px;
+                font-size: 0.9rem;
+                font-weight: 550;
+            }
+
+            & > input {
+                border-radius: $sm-radius;
+                height: 1.8rem;
+                padding: 0 5px;
+                border: 0.5px solid $font-color-brown;
+                width: 100%;
+
+                &[type="submit"] {
+                    background-color: $darkBrown;
+                    color: $white;
+                    letter-spacing: 2px;
+                    margin-top: 10px;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: $darkestBrown;
+                    }
+                }
+            }
+
+            & > p {
+                color: $color-error;
+                font-size: 0.7rem;
+            }
+
+            & > span {
+                font-size: 0.7rem;
+            }
+
+            &__week {
+                display: flex;
+                flex-wrap: wrap;
+
+                &__day {
+                    display: flex;
+                    height: 2rem;
+                    margin-right: 1rem;
+
+                    & > input {
+                        width: 1rem;
+                        height: 1rem;
+                        line-height: 2rem;
+                    }
+                }
+            }
+        }
+
+        &__links {
+            width: 100%;
+            margin: 0 auto;
+            margin-top: $mp-sm;
+            a {
+                display: block;
+                color: $font-color-brown;
+                font-size: 0.8rem;
+                margin: 3px 0;
+            }
+        }
+    }
+}
