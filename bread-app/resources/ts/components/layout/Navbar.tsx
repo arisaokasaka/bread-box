@@ -14,10 +14,10 @@ function NavBar() {
                 <Searchbar />
                 <nav className="l-navbar__content__nav">
                     <ul>
-                        <Link to="">
+                        <Link to="/register_user">
                             <li>会員登録</li>
                         </Link>
-                        <Link to="">
+                        <Link to="/login_user">
                             <li>ログイン</li>
                         </Link>
                         <Link to="">
