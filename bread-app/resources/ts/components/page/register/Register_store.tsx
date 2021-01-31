@@ -133,7 +133,7 @@ export default function Register_store() {
                 </form>
 
                 <div className = "p-register-store__container__links">
-                    <Link to="/store_login">ログインはこちら</Link>
+                    <Link to="/login_user">ログインはこちら</Link>
                     <Link to="/">トップページへ戻る</Link>
                 </div>
             </div>

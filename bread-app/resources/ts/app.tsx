@@ -10,8 +10,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 //Components
 import NavBar from './components/layout/Navbar';
-import Login_store from './components/page/login/Login_store';
-import Login_user from './components/page/login/Login_user';
+import LoginStore from './components/page/login/LoginStore';
+import LoginUser from './components/page/login/LoginUser';
 import PasswordReset_store from './components/page/passwordReset/PasswordReset_store';
 import PasswordReset_user from './components/page/passwordReset/PasswordReset_user';
 import Register_store from './components/page/register/Register_store';
@@ -34,8 +34,8 @@ const App: React.FC = () => {
                         <Route path="/" exact component={Top} />
                         <Route path="/search" component={Search} />
                         <Route path="/search_mobile" component={Search_input_mobile} />
-                        <Route path="/login_store" component={Login_store} />
-                        <Route path="/login_user" component={Login_user} />
+                        <Route path="/login_store" component={LoginStore} />
+                        <Route path="/login_user" component={LoginUser} />
                         <Route path="/password_store" component={PasswordReset_store} />
                         <Route path="/password_user" component={PasswordReset_user} />
                         <Route path="/register_store" component={Register_store} />
