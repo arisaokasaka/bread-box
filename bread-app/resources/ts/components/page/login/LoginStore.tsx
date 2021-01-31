@@ -3,7 +3,7 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 
-export default function login_store() {
+export default function LoginStore() {
     const { register, handleSubmit, errors, getValues } = useForm();
     const [emailError, SetEmailError] = useState(false);
   
@@ -41,7 +41,7 @@ export default function login_store() {
                 </form>
 
                 <div className = "p-login-store__container__links">
-                    <Link to="/store_register">新規登録はこちら</Link>
+                    <Link to="/register_store">新規登録はこちら</Link>
                     <Link to="/password_store">パスワードを忘れた方はこちら</Link>
                 </div>
             </div>
