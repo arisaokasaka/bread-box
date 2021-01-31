@@ -71,36 +71,36 @@ export default function Register_store() {
                 <form className="p-register-store__container__form" onSubmit={handleSubmit(onSubmit)}>
                     <h2>新規店舗登録</h2>
 
-                    <label htmlFor="store_name">店舗名</label>
+                    <label htmlFor="store_name" className="a-label-required">店舗名</label>
                     <input type="text" id="store_name" name="name" ref={ register({required: true})} />
                     {errors.name && <p>店舗名は必須です。</p>}
 
-                    <label htmlFor="store_email">メールアドレス</label>
+                    <label htmlFor="store_email" className="a-label-required">メールアドレス</label>
                     <input type="email" name="email" id="store_email" ref={register({required: true})}/>
                     {errors.email && <p>メールアドレスは必須です。</p>}
                     {emailErrorMessage(emailError)}
 
-                    <label htmlFor="store_address">住所</label>
+                    <label htmlFor="store_address" className="a-label-required">住所</label>
                     <input type="text" name="address" id="store_addr
                     ess" ref={register({required: true})}/>
                     {errors.address && <p>住所は必須です。</p>}
 
-                    <label htmlFor="store_tel">電話番号(半角)</label>
+                    <label htmlFor="store_tel" className="a-label-required">電話番号(半角)</label>
                     <input type="text" name="tel" id="store_tel" ref={register({required: true, pattern: /[0-9]{10,11}/})}/>
                     {errors.tel && errors.tel.type === "required" && (<p>電話番号は必須です。</p>)}
                     {errors.tel && errors.tel.type === "pattern" && (<p>10~11文字の半角数字で指定してください。</p>)}
                     
-                    <label htmlFor="store_password">パスワード</label>
+                    <label htmlFor="store_password" className="a-label-required">パスワード</label>
                     <input type="password" name="password" id="store_password" ref={register({required: true, pattern: /[a-zA-Z0-9]{8,16}/})}/>
                     {errors.password && errors.password.type === "required" && (<p>パスワードは必須です。</p>)}
                     {errors.password && errors.password.type === "pattern" && (<p>8~16文字の半角英数字で指定してください。</p>)}
 
-                    <label htmlFor="store_password-check">パスワード(確認用)</label>
+                    <label htmlFor="store_password-check" className="a-label-required">パスワード(確認用)</label>
                     <input type="password" name="password_check" id="store_password-check" ref={register({required: true})}/>
                     {errors.password_check && errors.password_check.type === "required" && (<p>パスワード(確認用)は必須です。</p>)}
                     {PasswordErrorMessage(getValues('password'),getValues('password_check'))}
                     
-                    <label htmlFor="business_day">営業日</label>
+                    <label htmlFor="business_day" className="a-label-required">営業日</label>
                     <span>営業している曜日を全てチェックしてください。</span>
                     <div className = "p-register-store__container__form__week">
                         <div className = "p-register-store__container__form__week__day">

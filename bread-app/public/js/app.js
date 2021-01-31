@@ -16543,7 +16543,8 @@ function Register_store() {
     className: "p-register-store__container__form",
     onSubmit: handleSubmit(onSubmit)
   }, react_1["default"].createElement("h2", null, "\u65B0\u898F\u5E97\u8217\u767B\u9332"), react_1["default"].createElement("label", {
-    htmlFor: "store_name"
+    htmlFor: "store_name",
+    className: "a-label-required"
   }, "\u5E97\u8217\u540D"), react_1["default"].createElement("input", {
     type: "text",
     id: "store_name",
@@ -16552,7 +16553,8 @@ function Register_store() {
       required: true
     })
   }), errors.name && react_1["default"].createElement("p", null, "\u5E97\u8217\u540D\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
-    htmlFor: "store_email"
+    htmlFor: "store_email",
+    className: "a-label-required"
   }, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9"), react_1["default"].createElement("input", {
     type: "email",
     name: "email",
@@ -16561,7 +16563,8 @@ function Register_store() {
       required: true
     })
   }), errors.email && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F\u5FC5\u9808\u3067\u3059\u3002"), emailErrorMessage(emailError), react_1["default"].createElement("label", {
-    htmlFor: "store_address"
+    htmlFor: "store_address",
+    className: "a-label-required"
   }, "\u4F4F\u6240"), react_1["default"].createElement("input", {
     type: "text",
     name: "address",
@@ -16570,7 +16573,8 @@ function Register_store() {
       required: true
     })
   }), errors.address && react_1["default"].createElement("p", null, "\u4F4F\u6240\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
-    htmlFor: "store_tel"
+    htmlFor: "store_tel",
+    className: "a-label-required"
   }, "\u96FB\u8A71\u756A\u53F7(\u534A\u89D2)"), react_1["default"].createElement("input", {
     type: "text",
     name: "tel",
@@ -16580,7 +16584,8 @@ function Register_store() {
       pattern: /[0-9]{10,11}/
     })
   }), errors.tel && errors.tel.type === "required" && react_1["default"].createElement("p", null, "\u96FB\u8A71\u756A\u53F7\u306F\u5FC5\u9808\u3067\u3059\u3002"), errors.tel && errors.tel.type === "pattern" && react_1["default"].createElement("p", null, "10~11\u6587\u5B57\u306E\u534A\u89D2\u6570\u5B57\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("label", {
-    htmlFor: "store_password"
+    htmlFor: "store_password",
+    className: "a-label-required"
   }, "\u30D1\u30B9\u30EF\u30FC\u30C9"), react_1["default"].createElement("input", {
     type: "password",
     name: "password",
@@ -16590,7 +16595,8 @@ function Register_store() {
       pattern: /[a-zA-Z0-9]{8,16}/
     })
   }), errors.password && errors.password.type === "required" && react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u306F\u5FC5\u9808\u3067\u3059\u3002"), errors.password && errors.password.type === "pattern" && react_1["default"].createElement("p", null, "8~16\u6587\u5B57\u306E\u534A\u89D2\u82F1\u6570\u5B57\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("label", {
-    htmlFor: "store_password-check"
+    htmlFor: "store_password-check",
+    className: "a-label-required"
   }, "\u30D1\u30B9\u30EF\u30FC\u30C9(\u78BA\u8A8D\u7528)"), react_1["default"].createElement("input", {
     type: "password",
     name: "password_check",
@@ -16599,7 +16605,8 @@ function Register_store() {
       required: true
     })
   }), errors.password_check && errors.password_check.type === "required" && react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9(\u78BA\u8A8D\u7528)\u306F\u5FC5\u9808\u3067\u3059\u3002"), PasswordErrorMessage(getValues('password'), getValues('password_check')), react_1["default"].createElement("label", {
-    htmlFor: "business_day"
+    htmlFor: "business_day",
+    className: "a-label-required"
   }, "\u55B6\u696D\u65E5"), react_1["default"].createElement("span", null, "\u55B6\u696D\u3057\u3066\u3044\u308B\u66DC\u65E5\u3092\u5168\u3066\u30C1\u30A7\u30C3\u30AF\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("div", {
     className: "p-register-store__container__form__week"
   }, react_1["default"].createElement("div", {
@@ -16688,18 +16695,142 @@ exports.default = Register_store;
 /*!*****************************************************************!*\
   !*** ./resources/ts/components/page/register/Register_user.tsx ***!
   \*****************************************************************/
-/***/ ((__unused_webpack_module, exports) => {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-function Register_store() {}
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-exports.default = Register_store;
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
+
+function emailErrorMessage(emailError) {
+  if (emailError) {
+    return react_1["default"].createElement("p", null, "\u65E2\u306B\u767B\u9332\u3055\u308C\u3066\u3044\u308B\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u3067\u3059\u3002");
+  } else {
+    return null;
+  }
+}
+
+;
+
+function PasswordErrorMessage(original, check) {
+  if (original === check) {
+    return null;
+  } else {
+    return react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u304C\u4E00\u81F4\u3057\u3066\u3044\u307E\u305B\u3093\u3002");
+  }
+}
+
+;
+
+function Register_user() {
+  var _a = react_hook_form_1.useForm(),
+      register = _a.register,
+      handleSubmit = _a.handleSubmit,
+      errors = _a.errors,
+      getValues = _a.getValues; // const [emailError, SetEmailError] = useState(false);
+
+
+  var onSubmit = function onSubmit() {
+    console.log();
+  }; // const onSubmit = (data) => {
+  //     SetEmailError(false);
+  //     console.log(data);
+  //     axios.post('/api/create_store', data)
+  //     .then(res => {
+  //         console.log(res);
+  //     })
+  //     .catch(errors => {
+  //         console.log(errors.response.data.errors);
+  //         console.log(errors.response.status);
+  //         if(errors.response.status === 422){
+  //             SetEmailError(true);
+  //         }
+  //     });
+  // }
+
+
+  return react_1["default"].createElement("div", {
+    className: "p-register-user"
+  }, react_1["default"].createElement("div", {
+    className: "p-register-user__container"
+  }, react_1["default"].createElement("form", {
+    className: "p-register-user__container__form",
+    onSubmit: handleSubmit(onSubmit)
+  }, react_1["default"].createElement("h2", null, "\u65B0\u898F\u30E6\u30FC\u30B6\u30FC\u767B\u9332"), react_1["default"].createElement("label", {
+    htmlFor: "user_name",
+    className: "a-label-required"
+  }, "\u30E6\u30FC\u30B6\u30FC\u540D"), react_1["default"].createElement("input", {
+    type: "text",
+    id: "user_name",
+    name: "name",
+    ref: register({
+      required: true
+    })
+  }), errors.name && react_1["default"].createElement("p", null, "\u30E6\u30FC\u30B6\u30FC\u540D\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
+    htmlFor: "user_email",
+    className: "a-label-required"
+  }, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9"), react_1["default"].createElement("input", {
+    type: "email",
+    name: "email",
+    id: "user_email",
+    ref: register({
+      required: true
+    })
+  }), errors.email && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
+    htmlFor: "user_address"
+  }, "\u4F4F\u6240"), react_1["default"].createElement("input", {
+    type: "text",
+    name: "address",
+    id: "user_address",
+    ref: register
+  }), react_1["default"].createElement("label", {
+    htmlFor: "user_password",
+    className: "a-label-required"
+  }, "\u30D1\u30B9\u30EF\u30FC\u30C9"), react_1["default"].createElement("input", {
+    type: "password",
+    name: "password",
+    id: "user_password",
+    ref: register({
+      required: true,
+      pattern: /[a-zA-Z0-9]{8,16}/
+    })
+  }), errors.password && errors.password.type === "required" && react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u306F\u5FC5\u9808\u3067\u3059\u3002"), errors.password && errors.password.type === "pattern" && react_1["default"].createElement("p", null, "8~16\u6587\u5B57\u306E\u534A\u89D2\u82F1\u6570\u5B57\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("label", {
+    htmlFor: "user_password-check",
+    className: "a-label-required"
+  }, "\u30D1\u30B9\u30EF\u30FC\u30C9(\u78BA\u8A8D\u7528)"), react_1["default"].createElement("input", {
+    type: "password",
+    name: "password_check",
+    id: "user_password-check",
+    ref: register({
+      required: true
+    })
+  }), errors.password_check && errors.password_check.type === "required" && react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9(\u78BA\u8A8D\u7528)\u306F\u5FC5\u9808\u3067\u3059\u3002"), PasswordErrorMessage(getValues('password'), getValues('password_check')), react_1["default"].createElement("input", {
+    type: "submit",
+    value: "\u767B\u9332\u3059\u308B"
+  })), react_1["default"].createElement("div", {
+    className: "p-register-user__container__links"
+  }, react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/user_login"
+  }, "\u30ED\u30B0\u30A4\u30F3\u306F\u3053\u3061\u3089"), react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/"
+  }, "\u30C8\u30C3\u30D7\u30DA\u30FC\u30B8\u3078\u623B\u308B"))));
+}
+
+exports.default = Register_user;
 
 /***/ }),
 
