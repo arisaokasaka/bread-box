@@ -15076,9 +15076,9 @@ var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_mod
 
 var Navbar_1 = __importDefault(__webpack_require__(/*! ./components/layout/Navbar */ "./resources/ts/components/layout/Navbar.tsx"));
 
-var Login_store_1 = __importDefault(__webpack_require__(/*! ./components/page/login/Login_store */ "./resources/ts/components/page/login/Login_store.tsx"));
+var LoginStore_1 = __importDefault(__webpack_require__(/*! ./components/page/login/LoginStore */ "./resources/ts/components/page/login/LoginStore.tsx"));
 
-var Login_user_1 = __importDefault(__webpack_require__(/*! ./components/page/login/Login_user */ "./resources/ts/components/page/login/Login_user.tsx"));
+var LoginUser_1 = __importDefault(__webpack_require__(/*! ./components/page/login/LoginUser */ "./resources/ts/components/page/login/LoginUser.tsx"));
 
 var PasswordReset_store_1 = __importDefault(__webpack_require__(/*! ./components/page/passwordReset/PasswordReset_store */ "./resources/ts/components/page/passwordReset/PasswordReset_store.tsx"));
 
@@ -15117,10 +15117,10 @@ var App = function App() {
     component: Search_input_mobile_1["default"]
   }), react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/login_store",
-    component: Login_store_1["default"]
+    component: LoginStore_1["default"]
   }), react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/login_user",
-    component: Login_user_1["default"]
+    component: LoginUser_1["default"]
   }), react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/password_store",
     component: PasswordReset_store_1["default"]
@@ -16325,10 +16325,10 @@ exports.default = Top_section;
 
 /***/ }),
 
-/***/ "./resources/ts/components/page/login/Login_store.tsx":
-/*!************************************************************!*\
-  !*** ./resources/ts/components/page/login/Login_store.tsx ***!
-  \************************************************************/
+/***/ "./resources/ts/components/page/login/LoginStore.tsx":
+/*!***********************************************************!*\
+  !*** ./resources/ts/components/page/login/LoginStore.tsx ***!
+  \***********************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -16378,7 +16378,7 @@ var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_mod
 
 var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
 
-function login_store() {
+function LoginStore() {
   var _a = react_hook_form_1.useForm(),
       register = _a.register,
       handleSubmit = _a.handleSubmit,
@@ -16436,32 +16436,136 @@ function login_store() {
   })), react_1["default"].createElement("div", {
     className: "p-login-store__container__links"
   }, react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/store_register"
+    to: "/register_store"
   }, "\u65B0\u898F\u767B\u9332\u306F\u3053\u3061\u3089"), react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/password_store"
   }, "\u30D1\u30B9\u30EF\u30FC\u30C9\u3092\u5FD8\u308C\u305F\u65B9\u306F\u3053\u3061\u3089"))));
 }
 
-exports.default = login_store;
+exports.default = LoginStore;
 
 /***/ }),
 
-/***/ "./resources/ts/components/page/login/Login_user.tsx":
-/*!***********************************************************!*\
-  !*** ./resources/ts/components/page/login/Login_user.tsx ***!
-  \***********************************************************/
-/***/ ((__unused_webpack_module, exports) => {
+/***/ "./resources/ts/components/page/login/LoginUser.tsx":
+/*!**********************************************************!*\
+  !*** ./resources/ts/components/page/login/LoginUser.tsx ***!
+  \**********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-function Login_user() {}
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-exports.default = Login_user;
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
+
+function LoginUser() {
+  var _a = react_hook_form_1.useForm(),
+      register = _a.register,
+      handleSubmit = _a.handleSubmit,
+      errors = _a.errors,
+      getValues = _a.getValues;
+
+  var _b = react_1.useState(false),
+      emailError = _b[0],
+      SetEmailError = _b[1];
+
+  var onSubmit = function onSubmit(data) {//     SetEmailError(false);
+    //     console.log(data);
+    //     axios.post('/api/create_user', data)
+    //     .then(res => {
+    //         console.log(res);
+    //     })
+    //     .catch(errors => {
+    //         console.log(errors.response.data.errors);
+    //         console.log(errors.response.status);
+    //         if(errors.response.status === 422){
+    //             SetEmailError(true);
+    //         }
+    //     });
+  };
+
+  return react_1["default"].createElement("div", {
+    className: "p-login-user"
+  }, react_1["default"].createElement("div", {
+    className: "p-login-user__container"
+  }, react_1["default"].createElement("form", {
+    className: "p-login-user__container__form",
+    onSubmit: handleSubmit(onSubmit)
+  }, react_1["default"].createElement("h2", null, "\u30ED\u30B0\u30A4\u30F3"), react_1["default"].createElement("label", {
+    htmlFor: "user_email"
+  }, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9"), react_1["default"].createElement("input", {
+    type: "email",
+    name: "email",
+    id: "user_email",
+    ref: register({
+      required: true
+    })
+  }), errors.email && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
+    htmlFor: "user_password"
+  }, "\u30D1\u30B9\u30EF\u30FC\u30C9"), react_1["default"].createElement("input", {
+    type: "password",
+    name: "password",
+    id: "user_password",
+    ref: register({
+      required: true,
+      pattern: /[a-zA-Z0-9]{8,16}/
+    })
+  }), react_1["default"].createElement("input", {
+    type: "submit",
+    value: "\u30ED\u30B0\u30A4\u30F3\u3059\u308B"
+  })), react_1["default"].createElement("div", {
+    className: "p-login-user__container__links"
+  }, react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/register_user"
+  }, "\u65B0\u898F\u767B\u9332\u306F\u3053\u3061\u3089"), react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/password_user"
+  }, "\u30D1\u30B9\u30EF\u30FC\u30C9\u3092\u5FD8\u308C\u305F\u65B9\u306F\u3053\u3061\u3089"), react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/login_store"
+  }, "\u4E8B\u696D\u4E3B\u306E\u65B9\u306F\u3053\u3061\u3089"))));
+}
+
+exports.default = LoginUser;
 
 /***/ }),
 
@@ -16783,7 +16887,7 @@ function Register_store() {
   })), react_1["default"].createElement("div", {
     className: "p-register-store__container__links"
   }, react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/store_login"
+    to: "/login_user"
   }, "\u30ED\u30B0\u30A4\u30F3\u306F\u3053\u3061\u3089"), react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/"
   }, "\u30C8\u30C3\u30D7\u30DA\u30FC\u30B8\u3078\u623B\u308B"))));
@@ -16926,7 +17030,7 @@ function Register_user() {
   })), react_1["default"].createElement("div", {
     className: "p-register-user__container__links"
   }, react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/user_login"
+    to: "/login_user"
   }, "\u30ED\u30B0\u30A4\u30F3\u306F\u3053\u3061\u3089"), react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/"
   }, "\u30C8\u30C3\u30D7\u30DA\u30FC\u30B8\u3078\u623B\u308B"))));
