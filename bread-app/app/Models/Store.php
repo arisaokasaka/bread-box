@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Store extends Model
 {
@@ -28,4 +29,13 @@ class Store extends Model
         ->get();
     }
 
+    public function create_store($store_info){
+        $this->uuid = Str::uuid();
+        $this->name = $store_info['name'];
+        $this->email = $store_info['email'];
+        $this->password = $store_info['password'];
+        $this->address = $store_info['address'];
+        $this->business_day = json_encode(['123' => 123]);
+        $this->save();
+    }
 }

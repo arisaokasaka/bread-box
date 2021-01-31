@@ -26,3 +26,4 @@ Route::post('/user',function (Request $request) {
 });
 
 Route::post('/store_all', 'Api\StoreController@search_store');
+Route::post('/create_store', 'Api\StoreController@create_store');
