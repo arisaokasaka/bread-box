@@ -1,0 +1,14 @@
+label {
+    &.a-label-required {
+        &::before {
+            content: "必須";
+            position: absolute;
+            top: 3px;
+            left: -2rem;
+            background-color: $darkestBrown;
+            color: white;
+            font-size: 0.6rem;
+            padding: 1px 3px;
+        }
+    }
+}
