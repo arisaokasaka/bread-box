@@ -934,6 +934,103 @@ h2 {
   display: flex;
 }
 
+.p-register-store {
+  background-color: white;
+}
+
+.p-register-store__container {
+  width: 30%;
+  min-width: 280px;
+  max-width: 450px;
+  margin: 120px auto;
+  padding: 20px;
+  border-radius: 2px;
+  color: #67491b;
+  box-shadow: 0px 0pt 10px;
+}
+
+@media screen and (min-width: 1280px) {
+  .p-register-store__container {
+    padding: 40px 80px;
+  }
+}
+
+.p-register-store__container__form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.p-register-store__container__form > h2 {
+  text-align: center;
+}
+
+.p-register-store__container__form > label {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  font-weight: 550;
+}
+
+.p-register-store__container__form > input {
+  border-radius: 2px;
+  height: 1.8rem;
+  padding: 0 5px;
+  border: 0.5px solid #67491b;
+  width: 100%;
+}
+
+.p-register-store__container__form > input[type="submit"] {
+  background-color: #7c4920;
+  color: #f8fafc;
+  letter-spacing: 2px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.p-register-store__container__form > input[type="submit"]:hover {
+  background-color: #493020;
+}
+
+.p-register-store__container__form > p {
+  color: #c92222;
+  font-size: 0.7rem;
+}
+
+.p-register-store__container__form > span {
+  font-size: 0.7rem;
+}
+
+.p-register-store__container__form__week {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.p-register-store__container__form__week__day {
+  display: flex;
+  height: 2rem;
+  margin-right: 1rem;
+}
+
+.p-register-store__container__form__week__day > input {
+  width: 1rem;
+  height: 1rem;
+  line-height: 2rem;
+}
+
+.p-register-store__container__links {
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+
+.p-register-store__container__links a {
+  display: block;
+  color: #67491b;
+  font-size: 0.8rem;
+  margin: 3px 0;
+}
+
 .p-top__hero {
   padding-top: 64px;
   background-image: url(/images/croissant.jpg?d285ba1c470395ec7f04064426490bfd);

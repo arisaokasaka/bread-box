@@ -20,8 +20,33 @@ function PasswordErrorMessage(original, check){
 };
 
 export default function Register_store() {
-    const { register, handleSubmit, errors, setValue, getValues } = useForm();
+    const { register, handleSubmit, errors, getValues } = useForm();
     const [emailError, SetEmailError] = useState(false);
+    const [businessDay, SetBusinessDay] = useState({
+        monday: false,
+        tuesday: false,
+        wednesday: false,
+        thursday: false,
+        friday: false,
+        saturday: false,
+        sunday: false,
+    })
+
+    // function business_day(day){
+    //     if(day.checked){
+    //     switch(day){
+    //         case 'monday':
+    //             SetBusinessDay({...businessDay, monday: true});
+    //             break;
+    //         case 'tuesday':
+    //             SetBusinessDay({...businessDay, tuesday: true});
+    //             break;
+    //         case 'wednensday':
+    //             SetBusinessDay({...businessDay, wednesday: true});
+    //             break;
+    //         }
+    //     }
+    // }
   
     const onSubmit = (data) => {
         SetEmailError(false);
@@ -105,7 +130,6 @@ export default function Register_store() {
                     <textarea name="business_memo" ref={register}/>
 
                     <input type="submit" value="登録する"/>
-
                 </form>
 
                 <div className = "p-register-store__container__links">
