@@ -9,18 +9,18 @@ export default function LoginUser() {
   
     const onSubmit = (data) => {
     //     SetEmailError(false);
-    //     console.log(data);
-    //     axios.post('/api/create_user', data)
-    //     .then(res => {
-    //         console.log(res);
-    //     })
-    //     .catch(errors => {
-    //         console.log(errors.response.data.errors);
-    //         console.log(errors.response.status);
-    //         if(errors.response.status === 422){
-    //             SetEmailError(true);
-    //         }
-    //     });
+        console.log(data);
+        axios.post('/login', data)
+        .then(res => {
+            console.log(res);
+        })
+        .catch(errors => {
+            console.log(errors.response.data.errors);
+            console.log(errors.response.status);
+            if(errors.response.status === 422){
+                SetEmailError(true);
+            }
+        });
     }
 
     return (

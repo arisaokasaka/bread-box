@@ -20,9 +20,10 @@ function PasswordErrorMessage(original, check){
 };
 
 export default function Register_store() {
-    const { register, handleSubmit, errors, getValues } = useForm();
+    const { register, handleSubmit, errors, getValues, setValue } = useForm();
     const [emailError, SetEmailError] = useState(false);
-    const [businessDay, SetBusinessDay] = useState({
+
+    const business_day = {
         monday: false,
         tuesday: false,
         wednesday: false,
@@ -30,23 +31,47 @@ export default function Register_store() {
         friday: false,
         saturday: false,
         sunday: false,
-    })
+    }
 
-    // function business_day(day){
-    //     if(day.checked){
-    //     switch(day){
-    //         case 'monday':
-    //             SetBusinessDay({...businessDay, monday: true});
-    //             break;
-    //         case 'tuesday':
-    //             SetBusinessDay({...businessDay, tuesday: true});
-    //             break;
-    //         case 'wednensday':
-    //             SetBusinessDay({...businessDay, wednesday: true});
-    //             break;
-    //         }
-    //     }
-    // }
+    function handleBusinessDay(day){
+        switch(day){
+        case 'monday':
+            if(day === true){
+                business_day.monday = false;
+                } else {business_day.monday = true;}
+            break;
+        case 'tuesday':
+            if(day === true){
+                business_day.tuesday = false;
+                } else {business_day.tuesday = true;}
+            break;
+        case 'wednensday':
+            if(day === true){
+                business_day.wednesday = false;
+                } else {business_day.wednesday = true;}
+            break;
+        case 'thursday':
+            if(day === true){
+                business_day.thursday = false;
+                } else {business_day.thursday = true;}
+            break;
+        case 'friday':
+            if(day === true){
+                business_day.friday = false;
+                } else {business_day.friday = true;}
+            break;
+        case 'saturday':
+            if(day === true){
+                business_day.saturday = false;
+                } else {business_day.saturday = true;}
+            break;
+        case 'sunday':
+            if(day === true){
+                business_day.sunday = false;
+                } else {business_day.sunday = true;}
+            break;
+        }
+    }
   
     const onSubmit = (data) => {
         SetEmailError(false);
@@ -101,35 +126,36 @@ export default function Register_store() {
                     {PasswordErrorMessage(getValues('password'),getValues('password_check'))}
                     
                     <label htmlFor="business_day" className="a-label-required">営業日</label>
+                    <input type="hidden" name="business_day" ref={register} />
                     <span>営業している曜日を全てチェックしてください。</span>
                     <div className = "p-register-store__container__form__week">
                         <div className = "p-register-store__container__form__week__day">
-                            <input type="checkbox" id="monday" name="monday" ref={register}/><label htmlFor="monday">月曜日</label>
+                            <input type="checkbox" id="monday" name="monday" onClick={()=>handleBusinessDay('monday')}/><label htmlFor="monday">月曜日</label>
                         </div>
                         <div className = "p-register-store__container__form__week__day">
-                            <input type="checkbox" id="tuesday" name="tuesday" ref={register}/><label htmlFor="tuesday">火曜日</label>
+                            <input type="checkbox" id="tuesday" name="tuesday" onClick={()=>handleBusinessDay('tuesday')}/><label htmlFor="tuesday">火曜日</label>
                         </div>
                         <div className = "p-register-store__container__form__week__day">
-                            <input type="checkbox" id="wednesday" name="wednesday" ref={register}/><label htmlFor="wednesday">水曜日</label>
+                            <input type="checkbox" id="wednesday" name="wednesday" onClick={()=>handleBusinessDay('wednesday')}/><label htmlFor="wednesday">水曜日</label>
                         </div>
                         <div className = "p-register-store__container__form__week__day">
-                            <input type="checkbox" id="thursday" name="thursday" ref={register}/><label htmlFor="thursday">木曜日</label>
+                            <input type="checkbox" id="thursday" name="thursday" onClick={()=>handleBusinessDay('thursday')}/><label htmlFor="thursday">木曜日</label>
                         </div>
                         <div className = "p-register-store__container__form__week__day">
-                            <input type="checkbox" id="friday" name="friday" ref={register}/><label htmlFor="friday">金曜日</label>
+                            <input type="checkbox" id="friday" name="friday" onClick={()=>handleBusinessDay('friday')}/><label htmlFor="friday">金曜日</label>
                         </div>
                         <div className = "p-register-store__container__form__week__day">
-                            <input type="checkbox" id="saturday" name="saturday" ref={register}/><label htmlFor="saturday">土曜日</label>
+                            <input type="checkbox" id="saturday" name="saturday" onClick={()=>handleBusinessDay('saturday')}/><label htmlFor="saturday">土曜日</label>
                         </div>
                         <div className = "p-register-store__container__form__week__day">
-                            <input type="checkbox" id="sunday" name="sunday" ref={register}/><label htmlFor="sunday">日曜日</label>
+                            <input type="checkbox" id="sunday" name="sunday" onClick={()=>handleBusinessDay('sunday')}/><label htmlFor="sunday">日曜日</label>
                         </div>
                     </div>
                     <label>営業日・営業時間備考</label>
                     <span>【記載例】<br></br>定休日：第3水曜日<br></br>営業時間：月～水 9時～19時 / 木～土 8時～13時</span>
                     <textarea name="business_memo" ref={register}/>
 
-                    <input type="submit" value="登録する"/>
+                    <input type="submit" value="登録する" onClick={()=>setValue("business_day", business_day)}/>
                 </form>
 
                 <div className = "p-register-store__container__links">

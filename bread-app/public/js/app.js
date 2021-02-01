@@ -17067,11 +17067,19 @@ var __importStar = this && this.__importStar || function (mod) {
   return result;
 };
 
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
@@ -17088,19 +17096,19 @@ function LoginUser() {
       emailError = _b[0],
       SetEmailError = _b[1];
 
-  var onSubmit = function onSubmit(data) {//     SetEmailError(false);
-    //     console.log(data);
-    //     axios.post('/api/create_user', data)
-    //     .then(res => {
-    //         console.log(res);
-    //     })
-    //     .catch(errors => {
-    //         console.log(errors.response.data.errors);
-    //         console.log(errors.response.status);
-    //         if(errors.response.status === 422){
-    //             SetEmailError(true);
-    //         }
-    //     });
+  var onSubmit = function onSubmit(data) {
+    //     SetEmailError(false);
+    console.log(data);
+    axios_1["default"].post('/login', data).then(function (res) {
+      console.log(res);
+    })["catch"](function (errors) {
+      console.log(errors.response.data.errors);
+      console.log(errors.response.status);
+
+      if (errors.response.status === 422) {
+        SetEmailError(true);
+      }
+    });
   };
 
   return react_1["default"].createElement("div", {
@@ -17455,13 +17463,14 @@ function Register_store() {
       register = _a.register,
       handleSubmit = _a.handleSubmit,
       errors = _a.errors,
-      getValues = _a.getValues;
+      getValues = _a.getValues,
+      setValue = _a.setValue;
 
   var _b = react_1.useState(false),
       emailError = _b[0],
       SetEmailError = _b[1];
 
-  var _c = react_1.useState({
+  var business_day = {
     monday: false,
     tuesday: false,
     wednesday: false,
@@ -17469,24 +17478,74 @@ function Register_store() {
     friday: false,
     saturday: false,
     sunday: false
-  }),
-      businessDay = _c[0],
-      SetBusinessDay = _c[1]; // function business_day(day){
-  //     if(day.checked){
-  //     switch(day){
-  //         case 'monday':
-  //             SetBusinessDay({...businessDay, monday: true});
-  //             break;
-  //         case 'tuesday':
-  //             SetBusinessDay({...businessDay, tuesday: true});
-  //             break;
-  //         case 'wednensday':
-  //             SetBusinessDay({...businessDay, wednesday: true});
-  //             break;
-  //         }
-  //     }
-  // }
+  };
 
+  function handleBusinessDay(day) {
+    switch (day) {
+      case 'monday':
+        if (day === true) {
+          business_day.monday = false;
+        } else {
+          business_day.monday = true;
+        }
+
+        break;
+
+      case 'tuesday':
+        if (day === true) {
+          business_day.tuesday = false;
+        } else {
+          business_day.tuesday = true;
+        }
+
+        break;
+
+      case 'wednensday':
+        if (day === true) {
+          business_day.wednesday = false;
+        } else {
+          business_day.wednesday = true;
+        }
+
+        break;
+
+      case 'thursday':
+        if (day === true) {
+          business_day.thursday = false;
+        } else {
+          business_day.thursday = true;
+        }
+
+        break;
+
+      case 'friday':
+        if (day === true) {
+          business_day.friday = false;
+        } else {
+          business_day.friday = true;
+        }
+
+        break;
+
+      case 'saturday':
+        if (day === true) {
+          business_day.saturday = false;
+        } else {
+          business_day.saturday = true;
+        }
+
+        break;
+
+      case 'sunday':
+        if (day === true) {
+          business_day.sunday = false;
+        } else {
+          business_day.sunday = true;
+        }
+
+        break;
+    }
+  }
 
   var onSubmit = function onSubmit(data) {
     SetEmailError(false);
@@ -17575,7 +17634,11 @@ function Register_store() {
   }), errors.password_check && errors.password_check.type === "required" && react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9(\u78BA\u8A8D\u7528)\u306F\u5FC5\u9808\u3067\u3059\u3002"), PasswordErrorMessage(getValues('password'), getValues('password_check')), react_1["default"].createElement("label", {
     htmlFor: "business_day",
     className: "a-label-required"
-  }, "\u55B6\u696D\u65E5"), react_1["default"].createElement("span", null, "\u55B6\u696D\u3057\u3066\u3044\u308B\u66DC\u65E5\u3092\u5168\u3066\u30C1\u30A7\u30C3\u30AF\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("div", {
+  }, "\u55B6\u696D\u65E5"), react_1["default"].createElement("input", {
+    type: "hidden",
+    name: "business_day",
+    ref: register
+  }), react_1["default"].createElement("span", null, "\u55B6\u696D\u3057\u3066\u3044\u308B\u66DC\u65E5\u3092\u5168\u3066\u30C1\u30A7\u30C3\u30AF\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("div", {
     className: "p-register-store__container__form__week"
   }, react_1["default"].createElement("div", {
     className: "p-register-store__container__form__week__day"
@@ -17583,7 +17646,9 @@ function Register_store() {
     type: "checkbox",
     id: "monday",
     name: "monday",
-    ref: register
+    onClick: function onClick() {
+      return handleBusinessDay('monday');
+    }
   }), react_1["default"].createElement("label", {
     htmlFor: "monday"
   }, "\u6708\u66DC\u65E5")), react_1["default"].createElement("div", {
@@ -17592,7 +17657,9 @@ function Register_store() {
     type: "checkbox",
     id: "tuesday",
     name: "tuesday",
-    ref: register
+    onClick: function onClick() {
+      return handleBusinessDay('tuesday');
+    }
   }), react_1["default"].createElement("label", {
     htmlFor: "tuesday"
   }, "\u706B\u66DC\u65E5")), react_1["default"].createElement("div", {
@@ -17601,7 +17668,9 @@ function Register_store() {
     type: "checkbox",
     id: "wednesday",
     name: "wednesday",
-    ref: register
+    onClick: function onClick() {
+      return handleBusinessDay('wednesday');
+    }
   }), react_1["default"].createElement("label", {
     htmlFor: "wednesday"
   }, "\u6C34\u66DC\u65E5")), react_1["default"].createElement("div", {
@@ -17610,7 +17679,9 @@ function Register_store() {
     type: "checkbox",
     id: "thursday",
     name: "thursday",
-    ref: register
+    onClick: function onClick() {
+      return handleBusinessDay('thursday');
+    }
   }), react_1["default"].createElement("label", {
     htmlFor: "thursday"
   }, "\u6728\u66DC\u65E5")), react_1["default"].createElement("div", {
@@ -17619,7 +17690,9 @@ function Register_store() {
     type: "checkbox",
     id: "friday",
     name: "friday",
-    ref: register
+    onClick: function onClick() {
+      return handleBusinessDay('friday');
+    }
   }), react_1["default"].createElement("label", {
     htmlFor: "friday"
   }, "\u91D1\u66DC\u65E5")), react_1["default"].createElement("div", {
@@ -17628,7 +17701,9 @@ function Register_store() {
     type: "checkbox",
     id: "saturday",
     name: "saturday",
-    ref: register
+    onClick: function onClick() {
+      return handleBusinessDay('saturday');
+    }
   }), react_1["default"].createElement("label", {
     htmlFor: "saturday"
   }, "\u571F\u66DC\u65E5")), react_1["default"].createElement("div", {
@@ -17637,7 +17712,9 @@ function Register_store() {
     type: "checkbox",
     id: "sunday",
     name: "sunday",
-    ref: register
+    onClick: function onClick() {
+      return handleBusinessDay('sunday');
+    }
   }), react_1["default"].createElement("label", {
     htmlFor: "sunday"
   }, "\u65E5\u66DC\u65E5"))), react_1["default"].createElement("label", null, "\u55B6\u696D\u65E5\u30FB\u55B6\u696D\u6642\u9593\u5099\u8003"), react_1["default"].createElement("span", null, "\u3010\u8A18\u8F09\u4F8B\u3011", react_1["default"].createElement("br", null), "\u5B9A\u4F11\u65E5\uFF1A\u7B2C3\u6C34\u66DC\u65E5", react_1["default"].createElement("br", null), "\u55B6\u696D\u6642\u9593\uFF1A\u6708\uFF5E\u6C34 9\u6642\uFF5E19\u6642 / \u6728\uFF5E\u571F 8\u6642\uFF5E13\u6642"), react_1["default"].createElement("textarea", {
@@ -17645,7 +17722,10 @@ function Register_store() {
     ref: register
   }), react_1["default"].createElement("input", {
     type: "submit",
-    value: "\u767B\u9332\u3059\u308B"
+    value: "\u767B\u9332\u3059\u308B",
+    onClick: function onClick() {
+      return setValue("business_day", business_day);
+    }
   })), react_1["default"].createElement("div", {
     className: "p-register-store__container__links"
   }, react_1["default"].createElement(react_router_dom_1.Link, {
@@ -17751,13 +17831,16 @@ function Register_user() {
       emailError = _b[0],
       SetEmailError = _b[1];
 
+  var history = new react_router_dom_1.useHistory();
+
   var onSubmit = function onSubmit(data) {
     SetEmailError(false);
     console.log(data);
     axios_1["default"].post('/api/create_user', data).then(function (res) {
       console.log(res);
+      history.push("/search");
     })["catch"](function (errors) {
-      console.log(errors.response.data.errors);
+      console.log(errors);
 
       if (errors.response.status === 422) {
         SetEmailError(true);
