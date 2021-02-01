@@ -59,7 +59,7 @@
     font-size: 1rem;
     padding: auto;
 
-    @include bp-600up() {
+    @include bp-960up() {
         width: auto;
         height: auto;
         border-radius: 20px;

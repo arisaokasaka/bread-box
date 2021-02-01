@@ -26,9 +26,12 @@
 @import "./molecules/store/store_spirit";
 @import "./molecules/store/store_contents";
 @import "./molecules/store-pickup";
-@import "./molecules/store/store-summary";
+@import "./molecules/store/storeList";
 @import "./molecules/store/store_basicInfo";
 @import "./molecules/store/store_subInfo";
+@import "./molecules/userTable_favorite";
+@import "./molecules/userTable";
+@import "./molecules/userProf";
 
 //layout
 @import "./layout/navbar";
@@ -39,3 +42,4 @@
 @import "./page/search";
 @import "./page/search-input_mobile";
 @import "./page/store";
+@import "./page/user";

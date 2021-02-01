@@ -1,0 +1,18 @@
+.m-user-prof {
+    border: 1px solid $brown;
+    border-radius: $sm-radius;
+    margin-bottom: $mp-xs;
+
+    @include bp-960up {
+        margin: 0;
+    }
+
+    &__container {
+        margin: $mp-xxs;
+
+        &__btn {
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+}

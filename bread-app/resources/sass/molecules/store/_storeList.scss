@@ -1,0 +1,75 @@
+.m-store-list {
+    display: flex;
+    flex-direction: column;
+
+    &__item {
+        width: 100%;
+        background-color: $white;
+        padding: $mp-xxs;
+        border-radius: 5px;
+        margin-bottom: $mp-xs;
+        cursor: pointer;
+
+        @include bp-960up {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+        }
+
+        &:hover {
+            h2.hover-colorChange {
+                color: $brown;
+            }
+        }
+
+        &--pc {
+            display: none;
+
+            @include bp-960up {
+                display: block;
+
+                &__main {
+                    width: 180px;
+                }
+
+                &__sub {
+                    width: 60px;
+                }
+            }
+        }
+
+        &--mobile {
+            &__main {
+                width: 100%;
+            }
+
+            @include bp-960up {
+                display: none;
+            }
+        }
+
+        &__container {
+            width: 100%;
+
+            &__buttons {
+                width: 100%;
+                display: flex;
+                justify-content: flex-end;
+            }
+
+            &__name {
+                color: $black;
+            }
+
+            &__access {
+                font-size: 0.7rem;
+                color: $black;
+            }
+
+            &__explanation {
+                color: $brown;
+                font-size: 0.8rem;
+                margin-top: 8px;
+            }
+        }
+    }
+}

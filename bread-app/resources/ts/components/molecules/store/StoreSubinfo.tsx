@@ -31,7 +31,7 @@ const StoreSubInfo: React.FC<StoreInfoProps> = ({StoreInfo}) => (
             <div className = "m-store-subInfo__container">
                 <div className = "m-store-subInfo__container__item">
                     <Score
-                        ScoreStar = {testStoreInfo}
+                        ScoreStar = {el.star}
                     />
                 </div>
                 <div className = "m-store-subInfo__container__item">
