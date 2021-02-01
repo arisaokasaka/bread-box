@@ -1,0 +1,8 @@
+.m-userTable-favorite {
+    display: flex;
+    flex-direction: column;
+
+    & > .m-store-summary {
+        display: grid;
+    }
+}
