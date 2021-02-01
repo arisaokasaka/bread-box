@@ -15102,6 +15102,8 @@ var Top_1 = __importDefault(__webpack_require__(/*! ./components/page/top/Top */
 
 var UserPage_1 = __importDefault(__webpack_require__(/*! ./components/page/user/UserPage */ "./resources/ts/components/page/user/UserPage.tsx"));
 
+var UserEdit_1 = __importDefault(__webpack_require__(/*! ./components/page/user/UserEdit */ "./resources/ts/components/page/user/UserEdit.tsx"));
+
 var App = function App() {
   return react_1["default"].createElement(react_router_dom_1.BrowserRouter, null, react_1["default"].createElement("div", null, react_1["default"].createElement(Navbar_1["default"], null), react_1["default"].createElement("div", {
     id: "global-container"
@@ -15145,6 +15147,9 @@ var App = function App() {
   }), react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/user",
     component: UserPage_1["default"]
+  }), react_1["default"].createElement(react_router_dom_1.Route, {
+    path: "/user_edit",
+    component: UserEdit_1["default"]
   })))));
 };
 
@@ -15215,20 +15220,18 @@ var Score = function Score(_a) {
   var ScoreStar = _a.ScoreStar;
   return react_1["default"].createElement("div", {
     className: "a-score"
-  }, ScoreStar.map(function (el) {
-    return react_1["default"].createElement("div", {
-      className: "a-score__container"
-    }, react_1["default"].createElement("h2", null, el.star), react_1["default"].createElement("div", {
-      className: "a-score__container__stars"
-    }, react_1["default"].createElement("div", {
-      className: "a-score__container__stars__content",
-      style: {
-        width: el.star * 20 + "%"
-      }
-    }, react_1["default"].createElement("span", null, "\u2605\u2605\u2605\u2605\u2605")), react_1["default"].createElement("span", {
-      className: "a-score__container__stars__frame"
-    }, "\u2606\u2606\u2606\u2606\u2606")));
-  }));
+  }, react_1["default"].createElement("div", {
+    className: "a-score__container"
+  }, react_1["default"].createElement("h2", null, ScoreStar), react_1["default"].createElement("div", {
+    className: "a-score__container__stars"
+  }, react_1["default"].createElement("div", {
+    className: "a-score__container__stars__content",
+    style: {
+      width: ScoreStar * 20 + "%"
+    }
+  }, react_1["default"].createElement("span", null, "\u2605\u2605\u2605\u2605\u2605")), react_1["default"].createElement("span", {
+    className: "a-score__container__stars__frame"
+  }, "\u2606\u2606\u2606\u2606\u2606"))));
 };
 
 exports.default = Score;
@@ -15349,6 +15352,46 @@ exports.default = Searchbar;
 
 /***/ }),
 
+/***/ "./resources/ts/components/atoms/buttons/BtnEditUser.tsx":
+/*!***************************************************************!*\
+  !*** ./resources/ts/components/atoms/buttons/BtnEditUser.tsx ***!
+  \***************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+function BtnEditUser() {
+  return react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/user_edit",
+    className: "a-btn-edit-user"
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faUserEdit
+  }), "\xA0\xA0\u7DE8\u96C6");
+}
+
+exports.default = BtnEditUser;
+
+/***/ }),
+
 /***/ "./resources/ts/components/atoms/buttons/BtnMypage.tsx":
 /*!*************************************************************!*\
   !*** ./resources/ts/components/atoms/buttons/BtnMypage.tsx ***!
@@ -15380,7 +15423,7 @@ function BtnSearch_icon() {
   return react_1["default"].createElement("div", {
     className: "a-btn-mypage"
   }, react_1["default"].createElement(react_router_dom_1.Link, {
-    to: ""
+    to: "/user"
   }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
     icon: free_solid_svg_icons_1.faUserCircle
   })));
@@ -16021,6 +16064,108 @@ exports.default = StoreContents;
 
 /***/ }),
 
+/***/ "./resources/ts/components/molecules/store/StoreList.tsx":
+/*!***************************************************************!*\
+  !*** ./resources/ts/components/molecules/store/StoreList.tsx ***!
+  \***************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var Btn_favorite_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/Btn_favorite */ "./resources/ts/components/atoms/buttons/Btn_favorite.tsx"));
+
+var Btn_interested_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/Btn_interested */ "./resources/ts/components/atoms/buttons/Btn_interested.tsx"));
+
+var Week_1 = __importDefault(__webpack_require__(/*! ../../../info/Week */ "./resources/ts/info/Week.ts"));
+
+var Schedule_1 = __importDefault(__webpack_require__(/*! ../../atoms/Schedule */ "./resources/ts/components/atoms/Schedule.tsx"));
+
+var Score_1 = __importDefault(__webpack_require__(/*! ../../atoms/Score */ "./resources/ts/components/atoms/Score.tsx"));
+
+var StoreList = function StoreList(_a) {
+  var StoreInfo = _a.StoreInfo;
+  return react_1["default"].createElement("div", {
+    className: "m-store-list"
+  }, StoreInfo.map(function (el) {
+    return react_1["default"].createElement(react_router_dom_1.Link, {
+      to: "/store",
+      className: "m-store-list__item",
+      key: el.uuid
+    }, react_1["default"].createElement("div", {
+      className: "m-store-list__item--pc"
+    }, react_1["default"].createElement("div", {
+      className: "m-store-list__item__images--pc__main"
+    }, react_1["default"].createElement("img", {
+      src: "",
+      alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
+    })), react_1["default"].createElement("div", {
+      className: "m-store-list__item__images--pc__sub"
+    }, react_1["default"].createElement("img", {
+      src: "",
+      alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
+    }), react_1["default"].createElement("img", {
+      src: "",
+      alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
+    }), react_1["default"].createElement("img", {
+      src: "",
+      alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
+    }))), react_1["default"].createElement("div", {
+      className: "m-store-list__item__container"
+    }, react_1["default"].createElement("div", {
+      className: "m-store-list__item__container__buttons"
+    }, react_1["default"].createElement(Btn_favorite_1["default"], null), react_1["default"].createElement(Btn_interested_1["default"], null)), react_1["default"].createElement("div", {
+      className: "m-store-list__item__container__name"
+    }, react_1["default"].createElement("h2", {
+      className: "hover-colorChange"
+    }, el.name)), react_1["default"].createElement("p", {
+      className: "m-store-list__item__container__access"
+    }, el.access), react_1["default"].createElement("div", {
+      className: "m-store-list__item--mobile"
+    }, react_1["default"].createElement("div", {
+      className: "m-store-list__item--mobile__main"
+    }, react_1["default"].createElement("img", {
+      src: "",
+      alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
+    })), react_1["default"].createElement("div", {
+      className: "m-store-list__item--mobile__sub"
+    }, react_1["default"].createElement("img", {
+      src: "",
+      alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
+    }), react_1["default"].createElement("img", {
+      src: "",
+      alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
+    }), react_1["default"].createElement("img", {
+      src: "",
+      alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
+    }))), react_1["default"].createElement("p", {
+      className: "m-store-list__item__container__explanation"
+    }, el.detail), react_1["default"].createElement(Schedule_1["default"], {
+      Week: Week_1["default"].week
+    }), react_1["default"].createElement(Score_1["default"], {
+      ScoreStar: el.star
+    })));
+  }));
+};
+
+exports.default = StoreList;
+
+/***/ }),
+
 /***/ "./resources/ts/components/molecules/store/StoreMenu.tsx":
 /*!***************************************************************!*\
   !*** ./resources/ts/components/molecules/store/StoreMenu.tsx ***!
@@ -16167,7 +16312,7 @@ var StoreSubInfo = function StoreSubInfo(_a) {
     }, react_1["default"].createElement("div", {
       className: "m-store-subInfo__container__item"
     }, react_1["default"].createElement(Score_1["default"], {
-      ScoreStar: testStoreInfo
+      ScoreStar: el.star
     })), react_1["default"].createElement("div", {
       className: "m-store-subInfo__container__item"
     }, react_1["default"].createElement(Schedule_1["default"], {
@@ -16183,109 +16328,6 @@ var StoreSubInfo = function StoreSubInfo(_a) {
 };
 
 exports.default = StoreSubInfo;
-
-/***/ }),
-
-/***/ "./resources/ts/components/molecules/store/StoreSummary.tsx":
-/*!******************************************************************!*\
-  !*** ./resources/ts/components/molecules/store/StoreSummary.tsx ***!
-  \******************************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-
-var Btn_favorite_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/Btn_favorite */ "./resources/ts/components/atoms/buttons/Btn_favorite.tsx"));
-
-var Btn_interested_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/Btn_interested */ "./resources/ts/components/atoms/buttons/Btn_interested.tsx"));
-
-var Week_1 = __importDefault(__webpack_require__(/*! ../../../info/Week */ "./resources/ts/info/Week.ts"));
-
-var Schedule_1 = __importDefault(__webpack_require__(/*! ../../atoms/Schedule */ "./resources/ts/components/atoms/Schedule.tsx"));
-
-var Score_1 = __importDefault(__webpack_require__(/*! ../../atoms/Score */ "./resources/ts/components/atoms/Score.tsx"));
-
-var testStar = [{
-  star: 2.2
-}];
-
-var Store_summary = function Store_summary(_a) {
-  var store_name = _a.store_name,
-      store_access = _a.store_access,
-      store_detail = _a.store_detail;
-  return react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/store",
-    className: "m-store-summary"
-  }, react_1["default"].createElement("div", {
-    className: "m-store-summary__images--pc"
-  }, react_1["default"].createElement("div", {
-    className: "m-store-summary__images--pc__main"
-  }, react_1["default"].createElement("img", {
-    src: "",
-    alt: ""
-  })), react_1["default"].createElement("div", {
-    className: "m-store-summary__images--pc__sub"
-  }, react_1["default"].createElement("img", {
-    src: "",
-    alt: ""
-  }), react_1["default"].createElement("img", {
-    src: "",
-    alt: ""
-  }), react_1["default"].createElement("img", {
-    src: "",
-    alt: ""
-  }))), react_1["default"].createElement("div", {
-    className: "m-store-summary__content"
-  }, react_1["default"].createElement("div", {
-    className: "m-store-summary__content__buttons"
-  }, react_1["default"].createElement(Btn_favorite_1["default"], null), react_1["default"].createElement(Btn_interested_1["default"], null)), react_1["default"].createElement("div", {
-    className: "m-store-summary__content__name"
-  }, react_1["default"].createElement("h2", {
-    className: "hover-colorChange"
-  }, store_name)), react_1["default"].createElement("p", {
-    className: "m-store-summary__content__access"
-  }, store_access), react_1["default"].createElement("div", {
-    className: "m-store-summary__images--mobile"
-  }, react_1["default"].createElement("div", {
-    className: "m-store-summary__images--mobile__main"
-  }, react_1["default"].createElement("img", {
-    src: "",
-    alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
-  })), react_1["default"].createElement("div", {
-    className: "m-store-summary__images--mobile__sub"
-  }, react_1["default"].createElement("img", {
-    src: "",
-    alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
-  }), react_1["default"].createElement("img", {
-    src: "",
-    alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
-  }), react_1["default"].createElement("img", {
-    src: "",
-    alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
-  }))), react_1["default"].createElement("p", {
-    className: "m-store-summary__content__detail"
-  }, store_detail), react_1["default"].createElement(Schedule_1["default"], {
-    Week: Week_1["default"].week
-  }), react_1["default"].createElement(Score_1["default"], {
-    ScoreStar: testStar
-  })));
-};
-
-exports.default = Store_summary;
 
 /***/ }),
 
@@ -16322,6 +16364,341 @@ var Top_section = function Top_section(_a) {
 };
 
 exports.default = Top_section;
+
+/***/ }),
+
+/***/ "./resources/ts/components/molecules/user/UserProf.tsx":
+/*!*************************************************************!*\
+  !*** ./resources/ts/components/molecules/user/UserProf.tsx ***!
+  \*************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var BtnEditUser_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/BtnEditUser */ "./resources/ts/components/atoms/buttons/BtnEditUser.tsx"));
+
+var UserProf = function UserProf(_a) {
+  var UserInfo = _a.UserInfo;
+  return react_1["default"].createElement("div", {
+    className: "m-user-prof"
+  }, UserInfo.map(function (el) {
+    return react_1["default"].createElement("div", {
+      className: "m-user-prof__container",
+      key: el.uuid
+    }, react_1["default"].createElement("div", {
+      className: "m-user-prof__container__btn"
+    }, react_1["default"].createElement(BtnEditUser_1["default"], null)), react_1["default"].createElement("img", {
+      src: "",
+      alt: "\u30D7\u30ED\u30D5\u30A3\u30FC\u30EB\u753B\u50CF"
+    }), react_1["default"].createElement("div", null, react_1["default"].createElement("h3", null, el.name), react_1["default"].createElement("p", null, el.password), react_1["default"].createElement("p", null, "\u3044"), react_1["default"].createElement("p", null, "\u3046")));
+  }));
+};
+
+exports.default = UserProf;
+
+/***/ }),
+
+/***/ "./resources/ts/components/molecules/user/UserTable.tsx":
+/*!**************************************************************!*\
+  !*** ./resources/ts/components/molecules/user/UserTable.tsx ***!
+  \**************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var UserTable_favorite_1 = __importDefault(__webpack_require__(/*! ./UserTable_favorite */ "./resources/ts/components/molecules/user/UserTable_favorite.tsx"));
+
+var UserTable_interested_1 = __importDefault(__webpack_require__(/*! ./UserTable_interested */ "./resources/ts/components/molecules/user/UserTable_interested.tsx"));
+
+var testInfoFavorite = [{
+  name: 'sarasapan',
+  address: 'dsdsdsdsdsdsd',
+  business_day: 'sasa',
+  busines_memo: '定休日！！！',
+  message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  },
+  star: 3.3
+}, {
+  name: 'さらさ',
+  address: 'dsdsdsdsdsdsd',
+  business_day: 'sasa',
+  busines_memo: '定休日！！！',
+  message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  },
+  star: 5.0
+}, {
+  name: 'ぱんな',
+  address: 'dsdsdsdsdsdsd',
+  business_day: 'sasa',
+  busines_memo: '定休日！！！',
+  message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  },
+  star: 4.0
+}];
+var testInfoInterested = [{
+  name: 'りりり',
+  address: 'dsdsdsdsdsdsd',
+  business_day: 'sasa',
+  busines_memo: '定休日！！！',
+  message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  },
+  star: 3.3
+}, {
+  name: 'ぱんちゃん',
+  address: 'dsdsdsdsdsdsd',
+  business_day: 'sasa',
+  busines_memo: '定休日！！！',
+  message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  },
+  star: 4.0
+}];
+
+var UserTable = function UserTable(_a) {
+  var UserInfo = _a.UserInfo;
+
+  var _b = react_1.useState('favorite'),
+      Table = _b[0],
+      setTable = _b[1];
+
+  var TabFavorite = {
+    "class": "m-store-contents__tab--favorite",
+    table: "favorite",
+    value: "お気に入り",
+    "function": handleFavorite
+  };
+  var TabInterested = {
+    "class": "m-store-contents__tab--interested",
+    table: "interested",
+    value: "行ってみたい",
+    "function": handleInterested
+  };
+  var TabReviewed = {
+    "class": "m-store-contents__tab--reviewed",
+    table: "reviewed",
+    value: "レビュー",
+    "function": handleReview
+  };
+  var TabStamp = {
+    "class": "m-store-contents__tab--stamp",
+    table: "stamp",
+    value: "スタンプ",
+    "function": handleStamp
+  };
+
+  function handleFavorite() {
+    setTable('favorite');
+  }
+
+  function handleInterested() {
+    setTable('interested');
+  }
+
+  function handleStamp() {
+    setTable('stamp');
+  }
+
+  function handleReview() {
+    setTable('reviewed');
+  }
+
+  var Tab = function Tab(tab) {
+    var className = tab["class"];
+
+    if (Table === tab.table) {
+      className += ' selected';
+    }
+
+    return react_1["default"].createElement("input", {
+      type: "text",
+      value: tab.value,
+      className: className,
+      onClick: tab["function"]
+    });
+  };
+
+  var CurrentTable = function CurrentTable(table) {
+    switch (table) {
+      case 'favorite':
+        return react_1["default"].createElement(UserTable_favorite_1["default"], {
+          StoreInfo: testInfoFavorite
+        });
+        break;
+
+      case 'interested':
+        return react_1["default"].createElement(UserTable_interested_1["default"], {
+          StoreInfo: testInfoInterested
+        });
+        break;
+
+      case 'stamp':
+        return react_1["default"].createElement("h2", null, "stamp");
+        break;
+
+      case 'reviewed':
+        return react_1["default"].createElement("h2", null, "review");
+        break;
+    }
+  };
+
+  return react_1["default"].createElement("div", {
+    className: "m-user-table"
+  }, react_1["default"].createElement("div", {
+    className: "m-user-table__tab"
+  }, Tab(TabFavorite), Tab(TabInterested), Tab(TabStamp), Tab(TabReviewed)), react_1["default"].createElement("div", {
+    className: "m-user-table__container"
+  }, react_1["default"].createElement("div", {
+    className: "m-user-table__container__content"
+  }, CurrentTable(Table))));
+};
+
+exports.default = UserTable;
+
+/***/ }),
+
+/***/ "./resources/ts/components/molecules/user/UserTable_favorite.tsx":
+/*!***********************************************************************!*\
+  !*** ./resources/ts/components/molecules/user/UserTable_favorite.tsx ***!
+  \***********************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var StoreList_1 = __importDefault(__webpack_require__(/*! ../store/StoreList */ "./resources/ts/components/molecules/store/StoreList.tsx"));
+
+var UserTable_favorite = function UserTable_favorite(_a) {
+  var StoreInfo = _a.StoreInfo;
+  return react_1["default"].createElement("div", {
+    className: "m-userTable-favorite"
+  }, react_1["default"].createElement(StoreList_1["default"], {
+    StoreInfo: StoreInfo
+  }));
+};
+
+exports.default = UserTable_favorite;
+
+/***/ }),
+
+/***/ "./resources/ts/components/molecules/user/UserTable_interested.tsx":
+/*!*************************************************************************!*\
+  !*** ./resources/ts/components/molecules/user/UserTable_interested.tsx ***!
+  \*************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var StoreList_1 = __importDefault(__webpack_require__(/*! ../store/StoreList */ "./resources/ts/components/molecules/store/StoreList.tsx"));
+
+var UserTable_interested = function UserTable_interested(_a) {
+  var StoreInfo = _a.StoreInfo;
+  return react_1["default"].createElement("div", {
+    className: "m-userTable-interested"
+  }, react_1["default"].createElement(StoreList_1["default"], {
+    StoreInfo: StoreInfo
+  }));
+};
+
+exports.default = UserTable_interested;
 
 /***/ }),
 
@@ -17453,7 +17830,29 @@ var Search_sidebar_1 = __importDefault(__webpack_require__(/*! ../../molecules/s
 
 var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../../molecules/Store_pickup */ "./resources/ts/components/molecules/Store_pickup.tsx"));
 
-var StoreSummary_1 = __importDefault(__webpack_require__(/*! ../../molecules/store/StoreSummary */ "./resources/ts/components/molecules/store/StoreSummary.tsx"));
+var StoreList_1 = __importDefault(__webpack_require__(/*! ../../molecules/store/StoreList */ "./resources/ts/components/molecules/store/StoreList.tsx"));
+
+var testInfo = [{
+  name: 'sarasapan',
+  address: 'dsdsdsdsdsdsd',
+  business_day: 'sasa',
+  busines_memo: '定休日！！！',
+  message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  }
+}, {
+  name: 'sarasapan',
+  address: 'dsdsdsdsdsdsd',
+  business_day: 'sasa',
+  busines_memo: '定休日！！！',
+  message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  }
+}];
 
 function Search() {
   var _this = this;
@@ -17549,10 +17948,8 @@ function Search() {
     value: ""
   }, "\u53E3\u30B3\u30DF\u6570\u9806"), react_1["default"].createElement("option", {
     value: ""
-  }, "\u30A2\u30AF\u30BB\u30B9\u6570\u9806"))), react_1["default"].createElement(StoreSummary_1["default"], {
-    store_name: "\u3042\u308A\u3055\u3071\u3093",
-    store_access: "\u85AC\u9662\u99C5\u304B\u3089\u5F92\u6B693\u5206",
-    store_detail: "\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3\u304A\u3044\u3057\u3044\u30A2\u30F3\u30D1\u30F3"
+  }, "\u30A2\u30AF\u30BB\u30B9\u6570\u9806"))), react_1["default"].createElement(StoreList_1["default"], {
+    StoreInfo: testInfo
   })))));
 }
 
@@ -17795,20 +18192,82 @@ exports.default = Top;
 
 /***/ }),
 
-/***/ "./resources/ts/components/page/user/UserPage.tsx":
+/***/ "./resources/ts/components/page/user/UserEdit.tsx":
 /*!********************************************************!*\
-  !*** ./resources/ts/components/page/user/UserPage.tsx ***!
+  !*** ./resources/ts/components/page/user/UserEdit.tsx ***!
   \********************************************************/
-/***/ ((__unused_webpack_module, exports) => {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-function UserPage() {}
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+function UserEdit() {
+  return react_1["default"].createElement("div", null);
+}
+
+exports.default = UserEdit;
+
+/***/ }),
+
+/***/ "./resources/ts/components/page/user/UserPage.tsx":
+/*!********************************************************!*\
+  !*** ./resources/ts/components/page/user/UserPage.tsx ***!
+  \********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var UserTable_1 = __importDefault(__webpack_require__(/*! ../../molecules/user/UserTable */ "./resources/ts/components/molecules/user/UserTable.tsx"));
+
+var UserProf_1 = __importDefault(__webpack_require__(/*! ../../molecules/user/UserProf */ "./resources/ts/components/molecules/user/UserProf.tsx"));
+
+var testInfo = [{
+  uuid: '234567890-',
+  name: 'ありんこ',
+  email: 'email@email',
+  password: 'ariari',
+  address: '呉服町駅',
+  favorite: {},
+  interested: {}
+}];
+
+var UserPage = function UserPage(_a) {
+  var UserInfo = _a.UserInfo;
+  return react_1["default"].createElement("div", {
+    className: "p-user"
+  }, react_1["default"].createElement("div", {
+    className: "p-user__container"
+  }, react_1["default"].createElement(UserTable_1["default"], {
+    UserInfo: testInfo
+  }), react_1["default"].createElement(UserProf_1["default"], {
+    UserInfo: testInfo
+  })));
+};
 
 exports.default = UserPage;
 

@@ -23,6 +23,7 @@ import StoreEdit from './components/page/store/StoreEdit';
 import StorePage from './components/page/store/StorePage';
 import Top from './components/page/top/Top';
 import UserPage from './components/page/user/UserPage';
+import UserEdit from './components/page/user/UserEdit';
  
 const App: React.FC = () => {
     return (
@@ -44,6 +45,7 @@ const App: React.FC = () => {
                         <Route path="/store_edit" component={StoreEdit} />
                         <Route path="/store" component={StorePage} />
                         <Route path="/user" component={UserPage} />
+                        <Route path="/user_edit" component={UserEdit} />
                     </Switch>
                 </div>
             </div>
