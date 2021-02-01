@@ -5,7 +5,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faEdit} from "@fortawesome/free-solid-svg-icons";
 import Search_sidebar from '../../molecules/search/Search_sidebar';
 import Store_pickup from '../../molecules/Store_pickup';
-import StoreSummary from '../../molecules/store/StoreSummary';
+import StoreList from '../../molecules/store/StoreList';
+
+const testInfo = [
+    {
+        name: 'sarasapan',
+        address: 'dsdsdsdsdsdsd',
+        business_day: 'sasa',
+        busines_memo: '定休日！！！',
+        message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
+        sns: {twitter: 'twitter', instagram: 'sssss'}
+    },
+    {
+        name: 'sarasapan',
+        address: 'dsdsdsdsdsdsd',
+        business_day: 'sasa',
+        busines_memo: '定休日！！！',
+        message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
+        sns: {twitter: 'twitter', instagram: 'sssss'}
+    }
+]
 
 
 function Search() {
@@ -62,10 +81,8 @@ function Search() {
                                 <option value="">アクセス数順</option>
                             </select>
                         </div>
-                        <StoreSummary
-                            store_name = "ありさぱん"
-                            store_access = "薬院駅から徒歩3分"
-                            store_detail = "おいしいアンパンおいしいアンパンおいしいアンパンおいしいアンパンおいしいアンパンおいしいアンパンおいしいアンパン"
+                        <StoreList
+                            StoreInfo = {testInfo}
                         />
                     </div>
                 </div>

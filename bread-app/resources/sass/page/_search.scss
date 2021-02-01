@@ -3,7 +3,9 @@
     padding-top: $header-height;
 
     &__container {
-        display: flex;
+        @include bp-600up {
+            display: flex;
+        }
 
         &__content {
             @include bp-600up {
