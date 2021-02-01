@@ -40,7 +40,7 @@
         &:nth-child(2) {
             display: none;
 
-            @include bp-600up {
+            @include bp-960up {
                 display: inline;
                 margin-left: 2px;
                 font-size: 0.9rem;
@@ -65,7 +65,7 @@
         &:nth-child(2) {
             display: none;
 
-            @include bp-600up {
+            @include bp-960up {
                 display: inline;
                 margin-left: 2px;
                 font-size: 0.9rem;

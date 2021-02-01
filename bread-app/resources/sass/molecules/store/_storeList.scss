@@ -49,11 +49,6 @@
 
         &__container {
             width: 100%;
-            margin-left: $mp-xs;
-
-            @include bp-960up {
-                margin: 0;
-            }
 
             &__buttons {
                 width: 100%;

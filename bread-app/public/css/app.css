@@ -165,7 +165,7 @@ h2 {
   cursor: pointer;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 960px) {
   .a-btn-favorite {
     width: auto;
     height: auto;
@@ -182,7 +182,7 @@ h2 {
   display: none;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 960px) {
   .a-btn-favorite > a:nth-child(2) {
     display: inline;
     margin-left: 2px;
@@ -203,7 +203,7 @@ h2 {
   cursor: pointer;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 960px) {
   .a-btn-interested {
     width: auto;
     height: auto;
@@ -224,7 +224,7 @@ h2 {
   display: none;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 960px) {
   .a-btn-interested > a:nth-child(2) {
     display: inline;
     margin-left: 2px;
@@ -791,13 +791,6 @@ label.a-label-required::before {
 
 .m-store-list__item__container {
   width: 100%;
-  margin-left: 20px;
-}
-
-@media screen and (min-width: 960px) {
-  .m-store-list__item__container {
-    margin: 0;
-  }
 }
 
 .m-store-list__item__container__buttons {
