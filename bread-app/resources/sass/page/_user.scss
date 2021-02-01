@@ -2,6 +2,7 @@
     &__container {
         @include content-width;
         margin-top: $mp-md;
+        margin-bottom: $mp-md;
         display: flex;
         flex-direction: column-reverse;
 

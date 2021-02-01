@@ -1558,6 +1558,7 @@ label.a-label-required::before {
   margin: 0 auto;
   width: 90%;
   margin-top: 80px;
+  margin-bottom: 80px;
   display: flex;
   flex-direction: column-reverse;
 }
