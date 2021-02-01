@@ -1157,23 +1157,23 @@ label.a-label-required::before {
 .p-login-user__container,
 .p-password-reset-store__container,
 .p-password-reset-user__container {
-  width: 30%;
+  width: 50%;
   min-width: 280px;
   max-width: 450px;
   margin: 120px auto;
-  padding: 20px;
+  padding: 40px;
   border-radius: 2px;
   color: #67491b;
-  box-shadow: 0px 0pt 10px;
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 600px) {
   .p-register-store__container,
   .p-register-user__container,
   .p-login-store__container,
   .p-login-user__container,
   .p-password-reset-store__container,
   .p-password-reset-user__container {
+    box-shadow: 0px 0pt 10px;
     padding: 40px 80px;
   }
 }
