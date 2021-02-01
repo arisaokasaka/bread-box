@@ -15498,7 +15498,7 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 function Btn_favorite() {
   return react_1["default"].createElement("button", {
     className: "a-btn-favorite"
-  }, react_1["default"].createElement("a", null, "\u2665"), react_1["default"].createElement("a", null, "\u304A\u6C17\u306B\u5165\u308A"));
+  }, react_1["default"].createElement("span", null, "\u2665"), react_1["default"].createElement("span", null, "\u304A\u6C17\u306B\u5165\u308A"));
 }
 
 exports.default = Btn_favorite;
@@ -15571,7 +15571,7 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 function Btn_interested() {
   return react_1["default"].createElement("button", {
     className: "a-btn-interested"
-  }, react_1["default"].createElement("a", null, "\u2605"), react_1["default"].createElement("a", null, "\u884C\u3063\u3066\u307F\u305F\u3044"));
+  }, react_1["default"].createElement("span", null, "\u2605"), react_1["default"].createElement("span", null, "\u884C\u3063\u3066\u307F\u305F\u3044"));
 }
 
 exports.default = Btn_interested;

@@ -174,16 +174,16 @@ h2 {
   }
 }
 
-.a-btn-favorite > a {
+.a-btn-favorite > span {
   font-weight: bolder;
 }
 
-.a-btn-favorite > a:nth-child(2) {
+.a-btn-favorite > span:nth-child(2) {
   display: none;
 }
 
 @media screen and (min-width: 960px) {
-  .a-btn-favorite > a:nth-child(2) {
+  .a-btn-favorite > span:nth-child(2) {
     display: inline;
     margin-left: 2px;
     font-size: 0.9rem;
@@ -212,20 +212,20 @@ h2 {
   }
 }
 
-.a-btn-interested > a {
+.a-btn-interested > span {
   font-weight: bolder;
 }
 
-.a-btn-interested > a:nth-child(1) {
+.a-btn-interested > span:nth-child(1) {
   display: inline-block;
 }
 
-.a-btn-interested > a:nth-child(2) {
+.a-btn-interested > span:nth-child(2) {
   display: none;
 }
 
 @media screen and (min-width: 960px) {
-  .a-btn-interested > a:nth-child(2) {
+  .a-btn-interested > span:nth-child(2) {
     display: inline;
     margin-left: 2px;
     font-size: 0.9rem;
