@@ -15579,6 +15579,160 @@ exports.default = Btn_interested;
 
 /***/ }),
 
+/***/ "./resources/ts/components/atoms/modal/Modal_review.tsx":
+/*!**************************************************************!*\
+  !*** ./resources/ts/components/atoms/modal/Modal_review.tsx ***!
+  \**************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_modal_1 = __importDefault(__webpack_require__(/*! react-modal */ "./node_modules/react-modal/lib/index.js"));
+
+var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
+
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
+var ModalCreateReview = function ModalCreateReview(_a) {
+  var StoreInfo = _a.StoreInfo;
+  var customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)'
+    }
+  };
+
+  var _b = react_hook_form_1.useForm(),
+      register = _b.register,
+      handleSubmit = _b.handleSubmit,
+      errors = _b.errors,
+      getValues = _b.getValues;
+
+  var onSubmit = function onSubmit() {
+    console.log();
+  };
+
+  var _c = react_1.useState(false),
+      modalIsOpen = _c[0],
+      setIsOpen = _c[1];
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  return react_1["default"].createElement("div", {
+    className: "m-modal-review"
+  }, react_1["default"].createElement("div", null, react_1["default"].createElement("button", {
+    onClick: openModal,
+    className: "a-btn-modal-review"
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faPen
+  }), "\xA0\xA0\u30EC\u30D3\u30E5\u30FC\u3092\u66F8\u304F"), react_1["default"].createElement(react_modal_1["default"], {
+    isOpen: modalIsOpen,
+    onRequestClose: closeModal,
+    style: customStyles
+  }, react_1["default"].createElement("div", {
+    className: "m-modal-review__btn--close"
+  }, react_1["default"].createElement("button", {
+    onClick: closeModal
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faTimes
+  }))), react_1["default"].createElement("form", {
+    className: "m-modal-review__form",
+    onSubmit: handleSubmit(onSubmit)
+  }, react_1["default"].createElement("label", {
+    htmlFor: "star",
+    className: "a-label-required"
+  }, "5\u6BB5\u968E\u3067\u8A55\u4FA1\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("p", null, "5\u304C\u6700\u3082\u9AD8\u3044\u8A55\u4FA1\u3068\u306A\u308A\u307E\u3059\u3002"), react_1["default"].createElement("select", {
+    name: "star",
+    id: "star",
+    ref: register({
+      required: true
+    })
+  }, react_1["default"].createElement("option", {
+    value: "5"
+  }, "5"), react_1["default"].createElement("option", {
+    value: "4"
+  }, "4"), react_1["default"].createElement("option", {
+    value: "3"
+  }, "3"), react_1["default"].createElement("option", {
+    value: "2"
+  }, "2"), react_1["default"].createElement("option", {
+    value: "1"
+  }, "1")), errors.name && react_1["default"].createElement("p", null, "\u8A55\u4FA1\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
+    htmlFor: "comment",
+    className: "a-label-required"
+  }, "\u30B3\u30E1\u30F3\u30C8"), react_1["default"].createElement("textarea", {
+    name: "comment",
+    id: "comment",
+    ref: register
+  }), react_1["default"].createElement("input", {
+    type: "submit",
+    value: "\u6295\u7A3F\u3059\u308B"
+  })))));
+};
+
+exports.default = ModalCreateReview;
+
+/***/ }),
+
 /***/ "./resources/ts/components/atoms/modal/Modal_sns.tsx":
 /*!***********************************************************!*\
   !*** ./resources/ts/components/atoms/modal/Modal_sns.tsx ***!
@@ -15767,6 +15921,52 @@ function NavBar() {
 }
 
 exports.default = NavBar;
+
+/***/ }),
+
+/***/ "./resources/ts/components/molecules/ReviewList.tsx":
+/*!**********************************************************!*\
+  !*** ./resources/ts/components/molecules/ReviewList.tsx ***!
+  \**********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var Score_1 = __importDefault(__webpack_require__(/*! ../atoms/Score */ "./resources/ts/components/atoms/Score.tsx"));
+
+var ReviewList = function ReviewList(_a) {
+  var ReviewInfo = _a.ReviewInfo;
+  return react_1["default"].createElement("div", {
+    className: "m-review-list"
+  }, ReviewInfo.map(function (el) {
+    return react_1["default"].createElement("div", {
+      className: "m-review-list__item",
+      key: el.uuid
+    }, react_1["default"].createElement("img", {
+      src: "",
+      alt: "\u6295\u7A3F\u8005\u306E\u30A2\u30A4\u30B3\u30F3"
+    }), react_1["default"].createElement("div", {
+      className: "m-review-list__item__content"
+    }, react_1["default"].createElement(Score_1["default"], {
+      ScoreStar: el.star
+    }), react_1["default"].createElement("p", null, el.comment)));
+  }));
+};
+
+exports.default = ReviewList;
 
 /***/ }),
 
@@ -17606,16 +17806,69 @@ exports.default = Register_user;
 /*!********************************************************!*\
   !*** ./resources/ts/components/page/review/Review.tsx ***!
   \********************************************************/
-/***/ ((__unused_webpack_module, exports) => {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-function Review() {}
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var StoreBasicInfo_1 = __importDefault(__webpack_require__(/*! ../../molecules/store/StoreBasicInfo */ "./resources/ts/components/molecules/store/StoreBasicInfo.tsx"));
+
+var ReviewList_1 = __importDefault(__webpack_require__(/*! ../../molecules/ReviewList */ "./resources/ts/components/molecules/ReviewList.tsx"));
+
+var Modal_review_1 = __importDefault(__webpack_require__(/*! ../../atoms/modal/Modal_review */ "./resources/ts/components/atoms/modal/Modal_review.tsx"));
+
+var testReviewInfo = [{
+  uuid: '2222',
+  star: 4.4,
+  comment: 'すっごくおいしかった！！！',
+  reply: ''
+}];
+var testStoreInfo = [{
+  name: 'sarasapan',
+  address: 'dsdsdsdsdsdsd',
+  business_day: 'sasa',
+  busines_memo: '定休日！！！',
+  message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  },
+  star: 3.3
+}];
+
+var Review = function Review(_a) {
+  var ReviewInfo = _a.ReviewInfo,
+      StoreInfo = _a.StoreInfo;
+  ReviewInfo = testReviewInfo;
+  StoreInfo = testStoreInfo;
+  return react_1["default"].createElement("div", {
+    className: "p-review"
+  }, react_1["default"].createElement("div", {
+    className: "p-review__container"
+  }, react_1["default"].createElement("div", {
+    className: "p-review__container__info"
+  }, react_1["default"].createElement(StoreBasicInfo_1["default"], {
+    StoreInfo: StoreInfo
+  })), react_1["default"].createElement(Modal_review_1["default"], {
+    StoreInfo: StoreInfo
+  }), react_1["default"].createElement("div", {
+    className: "p-review__container__table"
+  }, react_1["default"].createElement(ReviewList_1["default"], {
+    ReviewInfo: ReviewInfo
+  }))));
+};
 
 exports.default = Review;
 

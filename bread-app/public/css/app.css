@@ -331,6 +331,25 @@ h2 {
   background-color: #493020;
 }
 
+.a-btn-modal-review {
+  display: inline-block;
+  width: 8.5rem;
+  height: 25px;
+  line-height: 25px;
+  font-size: 0.7rem;
+  background-color: #7c4920;
+  text-align: center;
+  border: none;
+  border-radius: 2px;
+  font-weight: 450;
+  color: #f8fafc;
+  cursor: pointer;
+}
+
+.a-btn-modal-review:hover {
+  background-color: #493020;
+}
+
 .a-score {
   width: 120px;
 }
@@ -487,6 +506,61 @@ label.a-label-required::before {
 
 .ReactModal__Content .m-modal-sns__links__item.other {
   background-color: #adadad;
+}
+
+.ReactModal__Content .m-modal-review__btn--close {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ReactModal__Content .m-modal-review__btn--close > button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.ReactModal__Content .m-modal-review__form {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+}
+
+.ReactModal__Content .m-modal-review__form > label {
+  margin-top: 10px;
+  font-weight: 450;
+}
+
+.ReactModal__Content .m-modal-review__form > p {
+  font-size: 0.7rem;
+  color: #67491b;
+}
+
+.ReactModal__Content .m-modal-review__form > input {
+  border-radius: 2px;
+  margin-top: 2px;
+}
+
+.ReactModal__Content .m-modal-review__form > input[type="submit"] {
+  margin-top: 10px;
+  color: #f8fafc;
+  background-color: #7c4920;
+  font-weight: 450;
+  letter-spacing: 2px;
+}
+
+.ReactModal__Content .m-modal-review__form > input[type="submit"]:hover {
+  background-color: #493020;
+}
+
+.ReactModal__Content .m-modal-review__form > textarea {
+  border-radius: 2px;
+  height: 100px;
+}
+
+@media screen and (min-width: 600px) {
+  .ReactModal__Content .m-modal-review__form > textarea {
+    width: 15rem;
+  }
 }
 
 .p-search__container .m-search-sidebar {
@@ -912,6 +986,10 @@ label.a-label-required::before {
   }
 }
 
+.p-review .m-store-subInfo {
+  display: none;
+}
+
 .m-userTable-favorite {
   display: flex;
   flex-direction: column;
@@ -996,6 +1074,11 @@ label.a-label-required::before {
 .m-user-prof__container__btn {
   display: flex;
   justify-content: flex-end;
+}
+
+.m-review-list__item {
+  background-color: white;
+  padding: 10px;
 }
 
 .l-navbar {
@@ -1589,5 +1672,39 @@ label.a-label-required::before {
     -moz-column-gap: 10px;
          column-gap: 10px;
   }
+}
+
+.p-review {
+  padding: 80px 0;
+}
+
+.p-review__container {
+  margin: 0 auto;
+  width: 90%;
+}
+
+@media screen and (min-width: 480px) {
+  .p-review__container {
+    width: 85%;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .p-review__container {
+    width: 85%;
+    max-width: 1000px;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .p-review__container {
+    width: 80%;
+  }
+}
+
+.p-review__container__table {
+  background-color: #fcebd2;
+  padding: 20px;
+  margin-top: 20px;
 }
 

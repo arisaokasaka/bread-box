@@ -1,0 +1,13 @@
+.p-review {
+    padding: $mp-md 0;
+
+    &__container {
+        @include content-width;
+
+        &__table {
+            background-color: $lightBrown;
+            padding: $mp-xs;
+            margin-top: $mp-xs;
+        }
+    }
+}

@@ -80,3 +80,10 @@
         }
     }
 }
+
+//レビューページでは表示させない
+.p-review {
+    .m-store-subInfo {
+        display: none;
+    }
+}
