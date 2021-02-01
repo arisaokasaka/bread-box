@@ -1708,3 +1708,22 @@ label.a-label-required::before {
   margin-top: 20px;
 }
 
+.p-review__container > aside {
+  display: none;
+}
+
+@media screen and (min-width: 600px) {
+  .p-review__container {
+    display: grid;
+    grid-template-columns: 1fr 25%;
+    -moz-column-gap: 10px;
+         column-gap: 10px;
+  }
+  .p-review__container > aside {
+    display: block;
+    background-color: #fcebd2;
+    border-radius: 2px;
+    padding: 10px;
+  }
+}
+

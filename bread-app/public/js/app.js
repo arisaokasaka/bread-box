@@ -17829,6 +17829,8 @@ var ReviewList_1 = __importDefault(__webpack_require__(/*! ../../molecules/Revie
 
 var Modal_review_1 = __importDefault(__webpack_require__(/*! ../../atoms/modal/Modal_review */ "./resources/ts/components/atoms/modal/Modal_review.tsx"));
 
+var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../../molecules/Store_pickup */ "./resources/ts/components/molecules/Store_pickup.tsx"));
+
 var testReviewInfo = [{
   uuid: '2222',
   star: 4.4,
@@ -17857,7 +17859,7 @@ var Review = function Review(_a) {
     className: "p-review"
   }, react_1["default"].createElement("div", {
     className: "p-review__container"
-  }, react_1["default"].createElement("div", {
+  }, react_1["default"].createElement("main", null, react_1["default"].createElement("div", {
     className: "p-review__container__info"
   }, react_1["default"].createElement(StoreBasicInfo_1["default"], {
     StoreInfo: StoreInfo
@@ -17867,6 +17869,8 @@ var Review = function Review(_a) {
     className: "p-review__container__table"
   }, react_1["default"].createElement(ReviewList_1["default"], {
     ReviewInfo: ReviewInfo
+  }))), react_1["default"].createElement("aside", null, react_1["default"].createElement(Store_pickup_1["default"], {
+    Pickup: StoreInfo
   }))));
 };
 

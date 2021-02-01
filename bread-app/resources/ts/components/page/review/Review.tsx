@@ -2,6 +2,7 @@ import React from 'react';
 import StoreBasicInfo from '../../molecules/store/StoreBasicInfo';
 import ReviewList from '../../molecules/ReviewList';
 import ModalCreateReview from '../../atoms/modal/Modal_review';
+import Store_Pickup from '../../molecules/Store_pickup';
 
 type ReviewProps = ({
     ReviewInfo: Array<any>;
@@ -33,19 +34,26 @@ const Review : React.FC<ReviewProps> = ({ReviewInfo, StoreInfo}) => {
     return(
         <div className = "p-review">
             <div className = "p-review__container">
-                <div className = "p-review__container__info">
-                    <StoreBasicInfo
+                <main>
+                    <div className = "p-review__container__info">
+                        <StoreBasicInfo
+                            StoreInfo = {StoreInfo}
+                        />
+                    </div>
+                    <ModalCreateReview
                         StoreInfo = {StoreInfo}
                     />
-                </div>
-                <ModalCreateReview
-                    StoreInfo = {StoreInfo}
-                />
-                <div className = "p-review__container__table">
-                    <ReviewList
-                        ReviewInfo = {ReviewInfo}
+                    <div className = "p-review__container__table">
+                        <ReviewList
+                            ReviewInfo = {ReviewInfo}
+                        />
+                    </div>
+                </main>
+                <aside>
+                    <Store_Pickup
+                        Pickup = {StoreInfo}
                     />
-                </div>
+                </aside>
             </div>
         </div>
     );
