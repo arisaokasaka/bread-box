@@ -21,27 +21,22 @@ function PasswordErrorMessage(original, check){
 
 export default function Register_user() {
     const { register, handleSubmit, errors, getValues } = useForm();
-    // const [emailError, SetEmailError] = useState(false);
+    const [emailError, SetEmailError] = useState(false);
   
-    const onSubmit = () => {
-        console.log();
+    const onSubmit = (data) => {
+        SetEmailError(false);
+        console.log(data);
+        axios.post('/api/create_user', data)
+        .then(res => {
+            console.log(res);
+        })
+        .catch(errors => {
+            console.log(errors.response.data.errors);
+            if(errors.response.status === 422){
+                SetEmailError(true);
+            }
+        });
     }
-
-    // const onSubmit = (data) => {
-    //     SetEmailError(false);
-    //     console.log(data);
-    //     axios.post('/api/create_store', data)
-    //     .then(res => {
-    //         console.log(res);
-    //     })
-    //     .catch(errors => {
-    //         console.log(errors.response.data.errors);
-    //         console.log(errors.response.status);
-    //         if(errors.response.status === 422){
-    //             SetEmailError(true);
-    //         }
-    //     });
-    // }
 
     return (
         <div className = "p-register-user">
@@ -57,6 +52,7 @@ export default function Register_user() {
                     <label htmlFor="user_email" className="a-label-required">メールアドレス</label>
                     <input type="email" name="email" id="user_email" ref={register({required: true})}/>
                     {errors.email && <p>メールアドレスは必須です。</p>}
+                    {emailErrorMessage(emailError)}
                     
                     <label htmlFor="user_address">住所</label>
                     <input type="text" name="address" id="user_address" ref={register}/>

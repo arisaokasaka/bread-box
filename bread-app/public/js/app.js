@@ -17668,6 +17668,40 @@ exports.default = Register_store;
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -17678,7 +17712,9 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
@@ -17709,27 +17745,25 @@ function Register_user() {
       register = _a.register,
       handleSubmit = _a.handleSubmit,
       errors = _a.errors,
-      getValues = _a.getValues; // const [emailError, SetEmailError] = useState(false);
+      getValues = _a.getValues;
 
+  var _b = react_1.useState(false),
+      emailError = _b[0],
+      SetEmailError = _b[1];
 
-  var onSubmit = function onSubmit() {
-    console.log();
-  }; // const onSubmit = (data) => {
-  //     SetEmailError(false);
-  //     console.log(data);
-  //     axios.post('/api/create_store', data)
-  //     .then(res => {
-  //         console.log(res);
-  //     })
-  //     .catch(errors => {
-  //         console.log(errors.response.data.errors);
-  //         console.log(errors.response.status);
-  //         if(errors.response.status === 422){
-  //             SetEmailError(true);
-  //         }
-  //     });
-  // }
+  var onSubmit = function onSubmit(data) {
+    SetEmailError(false);
+    console.log(data);
+    axios_1["default"].post('/api/create_user', data).then(function (res) {
+      console.log(res);
+    })["catch"](function (errors) {
+      console.log(errors.response.data.errors);
 
+      if (errors.response.status === 422) {
+        SetEmailError(true);
+      }
+    });
+  };
 
   return react_1["default"].createElement("div", {
     className: "p-register-user"
@@ -17758,7 +17792,7 @@ function Register_user() {
     ref: register({
       required: true
     })
-  }), errors.email && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
+  }), errors.email && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F\u5FC5\u9808\u3067\u3059\u3002"), emailErrorMessage(emailError), react_1["default"].createElement("label", {
     htmlFor: "user_address"
   }, "\u4F4F\u6240"), react_1["default"].createElement("input", {
     type: "text",
