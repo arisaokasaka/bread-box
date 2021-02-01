@@ -1,0 +1,30 @@
+.p-review {
+    padding: $mp-md 0;
+
+    &__container {
+        @include content-width;
+
+        &__table {
+            background-color: $lightBrown;
+            padding: $mp-xs;
+            margin-top: $mp-xs;
+        }
+
+        & > aside {
+            display: none;
+        }
+
+        @include bp-600up {
+            display: grid;
+            grid-template-columns: 1fr 25%;
+            column-gap: $mp-xxs;
+
+            & > aside {
+                display: block;
+                background-color: $lightBrown;
+                border-radius: $sm-radius;
+                padding: $mp-xxs;
+            }
+        }
+    }
+}

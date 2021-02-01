@@ -20,6 +20,7 @@
 
 //molecules
 @import "./molecules/modal-sns";
+@import "./molecules/modal_review";
 @import "./molecules/search_sidebar";
 @import "./molecules/search_bar";
 @import "./molecules/store/store_menu";
@@ -32,6 +33,7 @@
 @import "./molecules/userTable_favorite";
 @import "./molecules/userTable";
 @import "./molecules/userProf";
+@import "./molecules/reviewList";
 
 //layout
 @import "./layout/navbar";
@@ -43,3 +45,4 @@
 @import "./page/search-input_mobile";
 @import "./page/store";
 @import "./page/user";
+@import "./page/review";

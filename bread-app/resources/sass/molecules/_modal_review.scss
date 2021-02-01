@@ -1,0 +1,56 @@
+.ReactModal__Content {
+    .m-modal-review {
+        &__btn--close {
+            display: flex;
+            justify-content: flex-end;
+
+            & > button {
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+            }
+        }
+
+        &__form {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.9rem;
+
+            & > label {
+                margin-top: $mp-xxs;
+                font-weight: 450;
+            }
+
+            & > p {
+                font-size: 0.7rem;
+                color: $font-color-brown;
+            }
+
+            & > input {
+                border-radius: $sm-radius;
+                margin-top: 2px;
+
+                &[type="submit"] {
+                    margin-top: $mp-xxs;
+                    color: $white;
+                    background-color: $darkBrown;
+                    font-weight: 450;
+                    letter-spacing: 2px;
+
+                    &:hover {
+                        background-color: $darkestBrown;
+                    }
+                }
+            }
+
+            & > textarea {
+                border-radius: $sm-radius;
+                height: 100px;
+
+                @include bp-600up {
+                    width: 15rem;
+                }
+            }
+        }
+    }
+}

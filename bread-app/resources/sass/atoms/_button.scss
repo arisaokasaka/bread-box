@@ -170,3 +170,23 @@
         background-color: $darkestBrown;
     }
 }
+
+//レビューモーダルのボタン
+.a-btn-modal-review {
+    display: inline-block;
+    width: 8.5rem;
+    height: 25px;
+    line-height: 25px;
+    font-size: 0.7rem;
+    background-color: $darkBrown;
+    text-align: center;
+    border: none;
+    border-radius: 2px;
+    font-weight: 450;
+    color: $white;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $darkestBrown;
+    }
+}
