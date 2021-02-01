@@ -15186,8 +15186,9 @@ var Schedule = function Schedule(_a) {
     className: "a-schedule"
   }, Week.map(function (el) {
     return react_1["default"].createElement("span", {
-      className: el["class"]
-    }, react_1["default"].createElement("a", null, el.text));
+      className: el["class"],
+      key: el["class"]
+    }, react_1["default"].createElement("span", null, el.text));
   }));
 };
 

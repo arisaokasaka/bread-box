@@ -377,7 +377,7 @@ h2 {
   margin-right: 0.2rem;
 }
 
-.a-schedule > span > a {
+.a-schedule > span > span {
   position: absolute;
   top: 50%;
   left: 50%;
