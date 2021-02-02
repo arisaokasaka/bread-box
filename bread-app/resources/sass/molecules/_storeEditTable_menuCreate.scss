@@ -46,6 +46,11 @@
                     width: 100%;
                     max-width: 10rem;
                 }
+
+                & > p {
+                    color: $color-error;
+                    font-size: 0.8rem;
+                }
             }
 
             &__btn {
