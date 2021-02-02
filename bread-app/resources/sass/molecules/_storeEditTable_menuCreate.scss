@@ -1,0 +1,68 @@
+.m-storeEdit-menu-create {
+    background-color: $white;
+    padding: $mp-xxs $mp-sm;
+    border-radius: $sm-radius;
+
+    &__container {
+        &__form {
+            font-size: 0.9rem;
+
+            &__item {
+                display: grid;
+                margin-top: $mp-xxs;
+
+                @include bp-960up {
+                    grid-template-columns: 10rem 1fr;
+                }
+
+                & input,
+                & textarea,
+                & select {
+                    border: 0.1px solid $font-color-brown;
+                    border-radius: $sm-radius;
+                }
+
+                & label {
+                    position: relative;
+                    font-weight: 450;
+                }
+
+                & input {
+                    width: 100%;
+                    max-width: 20rem;
+
+                    &[type="number"] {
+                        max-width: 4rem;
+                        margin-right: 2px;
+                    }
+
+                    &[type="file"] {
+                        border: none;
+                        font-size: 0.7rem;
+                    }
+                }
+
+                & select {
+                    width: 100%;
+                    max-width: 10rem;
+                }
+            }
+
+            &__btn {
+                display: flex;
+                justify-content: flex-end;
+                margin-top: $mp-xxs;
+
+                & > input[type="submit"] {
+                    @include btn-always-rounded(
+                        $color: $white,
+                        $border-color: transparent,
+                        $background-color: $darkBrown,
+                        $hover-color: $white,
+                        $hover-background-color: $darkestBrown
+                    );
+                }
+            }
+        }
+    }
+}
