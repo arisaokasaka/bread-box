@@ -2103,3 +2103,93 @@ label.a-label-required::before {
   margin-bottom: 3px;
 }
 
+.p-userEdit {
+  padding-top: 80px;
+}
+
+.p-userEdit__container {
+  margin: 0 auto;
+  width: 90%;
+  margin: 0 auto;
+  color: #67491b;
+}
+
+@media screen and (min-width: 480px) {
+  .p-userEdit__container {
+    width: 85%;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .p-userEdit__container {
+    width: 85%;
+    max-width: 1000px;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .p-userEdit__container {
+    width: 80%;
+  }
+}
+
+.p-userEdit__container__form {
+  display: grid;
+  width: 50%;
+  margin: 0 auto;
+  min-width: 230px;
+  max-width: 450px;
+}
+
+@media screen and (min-width: 600px) {
+  .p-userEdit__container__form {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+.p-userEdit__container__form > h2 {
+  text-align: center;
+}
+
+.p-userEdit__container__form > label {
+  position: relative;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  font-weight: 550;
+}
+
+.p-userEdit__container__form > input {
+  border-radius: 2px;
+  height: 1.8rem;
+  padding: 0 5px;
+  border: 0.5px solid #67491b;
+  width: 100%;
+}
+
+.p-userEdit__container__form > input[type="submit"] {
+  background-color: #7c4920;
+  color: #f8fafc;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  margin-top: 40px;
+  cursor: pointer;
+}
+
+.p-userEdit__container__form > input[type="submit"]:hover {
+  background-color: #493020;
+}
+
+.p-userEdit__container__form__links {
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.p-userEdit__container__form__links a {
+  display: block;
+  color: #67491b;
+  font-size: 0.8rem;
+  margin: 3px 0;
+}
+

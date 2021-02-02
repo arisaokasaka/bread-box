@@ -1,0 +1,66 @@
+.p-userEdit {
+    padding-top: $mp-md;
+
+    &__container {
+        @include content-width;
+        margin: 0 auto;
+        color: $font-color-brown;
+
+        &__form {
+            display: grid;
+            width: 50%;
+            margin: 0 auto;
+            min-width: 230px;
+            max-width: 450px;
+
+            @include bp-600up {
+                width: 80%;
+                margin: 0 auto;
+            }
+
+            & > h2 {
+                text-align: center;
+            }
+
+            & > label {
+                position: relative;
+                margin-top: 10px;
+                font-size: 0.9rem;
+                font-weight: 550;
+            }
+
+            & > input {
+                border-radius: $sm-radius;
+                height: 1.8rem;
+                padding: 0 5px;
+                border: 0.5px solid $font-color-brown;
+                width: 100%;
+
+                &[type="submit"] {
+                    background-color: $darkBrown;
+                    color: $white;
+                    font-size: 0.9rem;
+                    letter-spacing: 2px;
+                    margin-top: $mp-sm;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: $darkestBrown;
+                    }
+                }
+            }
+
+            &__links {
+                width: 100%;
+                margin: 0 auto;
+                margin-top: $mp-xs;
+                a {
+                    display: block;
+                    color: $font-color-brown;
+                    font-size: 0.8rem;
+                    margin: 3px 0;
+                }
+            }
+        }
+    }
+}
