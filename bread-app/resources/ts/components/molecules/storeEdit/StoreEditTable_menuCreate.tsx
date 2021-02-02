@@ -26,7 +26,7 @@ export default function StoreEditTable_menuCreate() {
                         <select name="bread_kind" id="bread_kind" ref={register({required: true})}>
                             {bread_kinds.bread_kinds.map((el)=>{
                                 return(
-                                    <option value={el}>{el}</option>
+                                    <option value={el.name} key = {el.id}>{el.name}</option>
                                 );
                             })}
                         </select>
