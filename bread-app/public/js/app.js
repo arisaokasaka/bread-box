@@ -15268,8 +15268,9 @@ var Search_sidebar_item = function Search_sidebar_item(_a) {
   }, react_1["default"].createElement("label", null, sectionTitle), react_1["default"].createElement("ul", null, sectionContent.map(function (el) {
     return react_1["default"].createElement("li", null, react_1["default"].createElement("input", {
       type: "checkbox",
-      value: el
-    }), react_1["default"].createElement("a", null, el));
+      value: el.name,
+      key: el.id
+    }), react_1["default"].createElement("a", null, el.name));
   })));
 };
 
@@ -19521,7 +19522,16 @@ var Hours =
 /** @class */
 function () {
   function Hours() {
-    this.hours = ["現在営業中", "朝9時までにオープン", "19時以降も営業"];
+    this.hours = [{
+      name: "現在営業中",
+      id: "hours_1"
+    }, {
+      name: "朝9時までにオープン",
+      id: "hours_2"
+    }, {
+      name: "19時以降も営業",
+      id: "hours_3"
+    }];
   }
 
   return Hours;
