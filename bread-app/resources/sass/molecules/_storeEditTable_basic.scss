@@ -1,0 +1,83 @@
+.m-storeEdit-basic {
+    background-color: $white;
+    padding: $mp-xs $mp-xs;
+
+    @include bp-600up {
+        padding: $mp-xs $mp-md;
+    }
+
+    &__container {
+        &__form {
+            font-size: 0.8rem;
+            width: 80%;
+            margin: 0 auto;
+            & > label {
+                position: relative;
+                display: block;
+                font-weight: 450;
+                margin-top: $mp-xs;
+                font-size: 1rem;
+            }
+
+            & > span {
+                font-size: 0.7rem;
+                line-height: 0.7rem;
+                color: $font-color-brown;
+            }
+
+            & > p {
+                color: $color-error;
+            }
+
+            & input,
+            & textarea {
+                width: 100%;
+                border: 0.1px solid $font-color-brown;
+                border-radius: $sm-radius;
+            }
+
+            & input {
+                max-width: 15rem;
+            }
+
+            &__sns {
+                &__item {
+                    display: grid;
+                    grid-template-columns: 5rem 1fr;
+                    margin-bottom: 2px;
+                }
+            }
+
+            &__btn {
+                display: flex;
+                margin-top: $mp-xs;
+                justify-content: center;
+
+                @include bp-480up {
+                    justify-content: flex-end;
+                }
+
+                & > input {
+                    @include btn-always-rounded(
+                        $color: $white,
+                        $background-color: $darkBrown,
+                        $hover-color: $white,
+                        $hover-background-color: $darkestBrown,
+                        $border-color: transparent
+                    );
+                }
+            }
+
+            &__links {
+                margin: $mp-xs 0;
+                display: flex;
+                justify-content: flex-end;
+
+                a {
+                    font-size: 0.8rem;
+                    color: $brown;
+                }
+            }
+        }
+    }
+}
