@@ -12,7 +12,7 @@ const StoreEditTable_menuList: React.FC<MenuProps> = ({MenuInfo}) => {
                 MenuInfo.map((el)=>{
                     return(
                         el.menu_type === 1 &&
-                        <div className = "m-storeEdit-menu-list__item">
+                        <div className = "m-storeEdit-menu-list__item" key = {el.id}>
                             <div className = "m-storeEdit-menu-list__item__btn">
                                 <button>編集する</button>
                                 <button>削除する</button>
