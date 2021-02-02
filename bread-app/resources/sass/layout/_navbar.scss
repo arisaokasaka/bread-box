@@ -59,5 +59,9 @@
 
     &__mobile {
         display: flex;
+
+        @include bp-960up {
+            display: none;
+        }
     }
 }
