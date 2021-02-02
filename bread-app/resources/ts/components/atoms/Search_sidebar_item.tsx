@@ -11,7 +11,7 @@ const Search_sidebar_item : React.FC<Props> = ({sectionTitle, sectionContent}) =
         <ul>
             {sectionContent.map(
                 (el)=>{
-                    return (<li><input type="checkbox" value={el}/><a>{el}</a></li>);
+                    return (<li><input type="checkbox" value={el.name} key={el.id}/><a>{el.name}</a></li>);
                 })}
         </ul>
     </div>
