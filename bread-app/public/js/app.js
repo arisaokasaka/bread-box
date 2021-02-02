@@ -17228,7 +17228,8 @@ var Top_section = function Top_section(_a) {
   return react_1["default"].createElement("div", null, react_1["default"].createElement("h2", null, sectionTitle), react_1["default"].createElement("ul", null, sectionContent.map(function (el) {
     return react_1["default"].createElement("li", null, react_1["default"].createElement("input", {
       type: "text",
-      value: el
+      key: el.id,
+      value: el.name
     }));
   })));
 };
@@ -19237,9 +19238,86 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-function UserEdit() {
-  return react_1["default"].createElement("div", null);
-}
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
+
+var BtnBack_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/BtnBack */ "./resources/ts/components/atoms/buttons/BtnBack.tsx"));
+
+var testUserInfo = [{
+  id: 123456,
+  uuid: 123456,
+  name: 'ariari',
+  email: 'ariari@so',
+  address: '765432'
+}];
+
+var UserEdit = function UserEdit(_a) {
+  var UserInfo = _a.UserInfo;
+  UserInfo = testUserInfo;
+
+  var _b = react_hook_form_1.useForm(),
+      register = _b.register,
+      handleSubmit = _b.handleSubmit,
+      errors = _b.errors,
+      getValues = _b.getValues;
+
+  var onSubmit = function onSubmit(data) {
+    console.log(data);
+  };
+
+  return react_1["default"].createElement("div", {
+    className: "p-userEdit"
+  }, UserInfo.map(function (el) {
+    return react_1["default"].createElement("div", {
+      className: "p-userEdit__container"
+    }, react_1["default"].createElement("form", {
+      className: "p-userEdit__container__form",
+      onSubmit: handleSubmit(onSubmit)
+    }, react_1["default"].createElement("div", {
+      className: "p-userEdit__container__btn"
+    }, react_1["default"].createElement(BtnBack_1["default"], {
+      URL: "/user"
+    })), react_1["default"].createElement("h2", null, "\u30E6\u30FC\u30B6\u30FC\u60C5\u5831\u7DE8\u96C6"), react_1["default"].createElement("label", {
+      htmlFor: "user_name",
+      className: "a-label-required"
+    }, "\u30E6\u30FC\u30B6\u30FC\u540D"), react_1["default"].createElement("input", {
+      type: "text",
+      id: "user_name",
+      name: "name",
+      value: el.name,
+      ref: register({
+        required: true
+      })
+    }), errors.name && react_1["default"].createElement("p", null, "\u30E6\u30FC\u30B6\u30FC\u540D\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
+      htmlFor: "user_email",
+      className: "a-label-required"
+    }, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9"), react_1["default"].createElement("input", {
+      type: "email",
+      name: "email",
+      id: "user_email",
+      value: el.email,
+      ref: register({
+        required: true
+      })
+    }), errors.email && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
+      htmlFor: "user_address"
+    }, "\u4F4F\u6240"), react_1["default"].createElement("input", {
+      type: "text",
+      name: "address",
+      id: "user_address",
+      value: el.address,
+      ref: register
+    }), react_1["default"].createElement("input", {
+      type: "submit",
+      value: "\u66F4\u65B0\u3059\u308B"
+    }), react_1["default"].createElement("div", {
+      className: "p-userEdit__container__form__links"
+    }, react_1["default"].createElement(react_router_dom_1.Link, {
+      to: "/password_user"
+    }, "\u30D1\u30B9\u30EF\u30FC\u30C9\u3092\u518D\u8A2D\u5B9A\u3059\u308B\u5834\u5408"))));
+  }));
+};
 
 exports.default = UserEdit;
 
@@ -19360,7 +19438,13 @@ var Days =
 /** @class */
 function () {
   function Days() {
-    this.days = ["今日", "明日"];
+    this.days = [{
+      name: "今日",
+      id: "day_1"
+    }, {
+      name: "明日",
+      id: "day_2"
+    }];
   }
 
   return Days;
@@ -19388,7 +19472,28 @@ var Districts =
 /** @class */
 function () {
   function Districts() {
-    this.districts = ["中央区", "博多区", "西区", "東区", "南区", "城南区", "早良区"];
+    this.districts = [{
+      name: "中央区",
+      id: "districts_1"
+    }, {
+      name: "博多区",
+      id: "districts_2"
+    }, {
+      name: "西区",
+      id: "districts_3"
+    }, {
+      name: "東区",
+      id: "districts_4"
+    }, {
+      name: "南区",
+      id: "districts_5"
+    }, {
+      name: "城南区",
+      id: "districts_6"
+    }, {
+      name: "早良区",
+      id: "districts_7"
+    }];
   }
 
   return Districts;
