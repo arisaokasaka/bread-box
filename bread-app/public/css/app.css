@@ -1486,6 +1486,12 @@ label.a-label-required::before {
   display: flex;
 }
 
+@media screen and (min-width: 960px) {
+  .l-navbar__mobile {
+    display: none;
+  }
+}
+
 .p-register-store,
 .p-register-user,
 .p-login-store,

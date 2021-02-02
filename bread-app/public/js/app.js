@@ -17228,7 +17228,8 @@ var Top_section = function Top_section(_a) {
   return react_1["default"].createElement("div", null, react_1["default"].createElement("h2", null, sectionTitle), react_1["default"].createElement("ul", null, sectionContent.map(function (el) {
     return react_1["default"].createElement("li", null, react_1["default"].createElement("input", {
       type: "text",
-      value: el
+      key: el.id,
+      value: el.name
     }));
   })));
 };
@@ -19437,7 +19438,13 @@ var Days =
 /** @class */
 function () {
   function Days() {
-    this.days = ["今日", "明日"];
+    this.days = [{
+      name: "今日",
+      id: "day_1"
+    }, {
+      name: "明日",
+      id: "day_2"
+    }];
   }
 
   return Days;
@@ -19465,7 +19472,28 @@ var Districts =
 /** @class */
 function () {
   function Districts() {
-    this.districts = ["中央区", "博多区", "西区", "東区", "南区", "城南区", "早良区"];
+    this.districts = [{
+      name: "中央区",
+      id: "districts_1"
+    }, {
+      name: "博多区",
+      id: "districts_2"
+    }, {
+      name: "西区",
+      id: "districts_3"
+    }, {
+      name: "東区",
+      id: "districts_4"
+    }, {
+      name: "南区",
+      id: "districts_5"
+    }, {
+      name: "城南区",
+      id: "districts_6"
+    }, {
+      name: "早良区",
+      id: "districts_7"
+    }];
   }
 
   return Districts;
