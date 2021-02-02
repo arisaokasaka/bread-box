@@ -1,0 +1,14 @@
+.p-store-edit {
+    padding: $mp-md 0;
+
+    &__container {
+        @include content-width;
+
+        &__btn {
+            margin-bottom: 3px;
+        }
+
+        &__table {
+        }
+    }
+}
