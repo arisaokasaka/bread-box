@@ -18143,6 +18143,8 @@ function Register_store() {
       emailError = _b[0],
       SetEmailError = _b[1];
 
+  var history = new react_router_dom_1.useHistory();
+
   var _c = react_1.useState({
     monday: false,
     tuesday: false,
@@ -18175,6 +18177,7 @@ function Register_store() {
     console.log(data);
     axios_1["default"].post('/api/create_store', data).then(function (res) {
       console.log(res);
+      history.push('/store');
     })["catch"](function (errors) {
       console.log(errors.response.data.errors);
       console.log(errors.response.status);
@@ -18433,11 +18436,14 @@ function Register_user() {
       emailError = _b[0],
       SetEmailError = _b[1];
 
+  var history = new react_router_dom_1.useHistory();
+
   var onSubmit = function onSubmit(data) {
     SetEmailError(false);
     console.log(data);
     axios_1["default"].post('/api/create_user', data).then(function (res) {
       console.log(res);
+      history.push("/search");
     })["catch"](function (errors) {
       console.log(errors.response.data.errors);
 
