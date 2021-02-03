@@ -500,12 +500,25 @@ h2 {
 label.a-label-required::before {
   content: "必須";
   position: absolute;
-  top: 3px;
+  top: 3.5px;
   left: -2rem;
   background-color: #493020;
   color: white;
   font-size: 0.6rem;
   padding: 1px 3px;
+}
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
 }
 
 .ReactModal__Content .m-modal-sns__btn--close {
@@ -1666,16 +1679,26 @@ label.a-label-required::before {
   margin-top: 40px;
 }
 
-.p-register-store__container__links a,
-.p-register-user__container__links a,
-.p-login-store__container__links a,
-.p-login-user__container__links a,
-.p-password-reset-store__container__links a,
-.p-password-reset-user__container__links a {
+.p-register-store__container__links > span,
+.p-register-user__container__links > span,
+.p-login-store__container__links > span,
+.p-login-user__container__links > span,
+.p-password-reset-store__container__links > span,
+.p-password-reset-user__container__links > span {
   display: block;
   color: #67491b;
   font-size: 0.8rem;
   margin: 3px 0;
+}
+
+.p-register-store__container__links > span > a,
+.p-register-user__container__links > span > a,
+.p-login-store__container__links > span > a,
+.p-login-user__container__links > span > a,
+.p-password-reset-store__container__links > span > a,
+.p-password-reset-user__container__links > span > a {
+  color: #67491b;
+  font-weight: 800;
 }
 
 .p-top__hero {
@@ -1766,7 +1789,7 @@ label.a-label-required::before {
 
 .p-top__content ul li {
   display: inline-block;
-  border: 1.8px solid #c47d2c;
+  border: 2.2px solid #c47d2c;
   border-radius: 4px;
   margin: 3px 2px;
   height: 2.5rem;
@@ -1788,6 +1811,8 @@ label.a-label-required::before {
   line-height: 2.2rem;
   background-color: transparent;
   text-align: center;
+  font-weight: 520;
+  font-size: 0.8rem;
   cursor: pointer;
 }
 
@@ -1800,58 +1825,45 @@ label.a-label-required::before {
 }
 
 .p-top__footer {
+  display: flex;
   background-color: #fcebd2;
   padding: 20px 0;
 }
 
-.p-top__footer ul {
+.p-top__footer a {
   margin: 0 auto;
   width: 90%;
-  display: flex;
-  flex-direction: column;
+  color: #67491b;
+  font-size: 0.8rem;
 }
 
 @media screen and (min-width: 480px) {
-  .p-top__footer ul {
+  .p-top__footer a {
     width: 85%;
   }
 }
 
 @media screen and (min-width: 600px) {
-  .p-top__footer ul {
+  .p-top__footer a {
     width: 85%;
     max-width: 1000px;
   }
 }
 
 @media screen and (min-width: 960px) {
-  .p-top__footer ul {
+  .p-top__footer a {
     width: 80%;
   }
 }
 
 @media screen and (min-width: 600px) {
-  .p-top__footer ul {
-    flex-direction: unset;
-    justify-content: center;
+  .p-top__footer a {
+    text-align: center;
   }
 }
 
-.p-top__footer ul li {
-  margin-bottom: 5px;
-  margin: 0 auto;
-}
-
-@media screen and (min-width: 600px) {
-  .p-top__footer ul li {
-    margin: 0;
-    padding: 0 1rem;
-  }
-}
-
-.p-top__footer ul li a {
-  color: #67491b;
-  font-size: 0.8rem;
+.p-top__footer a:hover {
+  font-weight: 600;
 }
 
 .p-search {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 
 function emailErrorMessage(emailError){
@@ -22,13 +22,15 @@ function PasswordErrorMessage(original, check){
 export default function Register_user() {
     const { register, handleSubmit, errors, getValues } = useForm();
     const [emailError, SetEmailError] = useState(false);
-  
+    const history = new useHistory();
+
     const onSubmit = (data) => {
         SetEmailError(false);
         console.log(data);
         axios.post('/api/create_user', data)
         .then(res => {
             console.log(res);
+            history.push("/search");
         })
         .catch(errors => {
             console.log(errors.response.data.errors);
@@ -71,8 +73,8 @@ export default function Register_user() {
                 </form>
 
                 <div className = "p-register-user__container__links">
-                    <Link to="/login_user">ログインはこちら</Link>
-                    <Link to="/">トップページへ戻る</Link>
+                    <span>ログインは<Link to="/login_user">こちら</Link></span>
+                    <span>トップページは<Link to="/">こちら</Link></span>
                 </div>
             </div>
         </div>

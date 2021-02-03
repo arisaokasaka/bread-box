@@ -49,9 +49,8 @@ export default function LoginUser() {
                 </form>
 
                 <div className = "p-login-user__container__links">
-                    <Link to="/register_user">新規登録はこちら</Link>
-                    <Link to="/password_user">パスワードを忘れた方はこちら</Link>
-                    <Link to="/login_store">事業主の方はこちら</Link>
+                    <span>新規登録は<Link to="/register_user">こちら</Link></span>
+                    <span>パスワードを忘れた方は<Link to="/password_user">こちら</Link></span>
                 </div>
             </div>
         </div>

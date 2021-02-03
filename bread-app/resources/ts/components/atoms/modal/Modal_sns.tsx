@@ -42,6 +42,7 @@ const ModalSNS: React.FC<StoreInfoProps> = ({StoreInfo}) =>{
                     isOpen={modalIsOpen}
                     onRequestClose={closeModal}
                     style={customStyles}
+                    ariaHideApp={false}
                     >
                     <div className = "m-modal-sns__btn--close">
                         <button onClick={closeModal}><FontAwesomeIcon icon={faTimes}/></button>

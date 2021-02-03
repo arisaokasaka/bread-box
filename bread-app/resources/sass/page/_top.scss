@@ -41,7 +41,7 @@
 
             li {
                 display: inline-block;
-                border: 1.8px solid $brown;
+                border: 2.2px solid $brown;
                 border-radius: 4px;
                 margin: 3px 2px;
                 height: 2.5rem;
@@ -60,6 +60,8 @@
                     line-height: 2.2rem;
                     background-color: transparent;
                     text-align: center;
+                    font-weight: 520;
+                    font-size: 0.8rem;
                     cursor: pointer;
                 }
 
@@ -75,32 +77,21 @@
     }
 
     &__footer {
+        display: flex;
         background-color: $lightBrown;
         padding: $mp-xs 0;
 
-        ul {
+        a {
             @include content-width;
-            display: flex;
-            flex-direction: column;
+            color: $font-color-brown;
+            font-size: 0.8rem;
 
             @include bp-600up {
-                flex-direction: unset;
-                justify-content: center;
+                text-align: center;
             }
 
-            li {
-                margin-bottom: 5px;
-                margin: 0 auto;
-
-                @include bp-600up {
-                    margin: 0;
-                    padding: 0 1rem;
-                }
-
-                a {
-                    color: $font-color-brown;
-                    font-size: 0.8rem;
-                }
+            &:hover {
+                font-weight: 600;
             }
         }
     }

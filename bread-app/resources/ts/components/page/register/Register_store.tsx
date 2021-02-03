@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 
 function emailErrorMessage(emailError){
@@ -22,6 +22,7 @@ function PasswordErrorMessage(original, check){
 export default function Register_store() {
     const { register, handleSubmit, errors, getValues } = useForm();
     const [emailError, SetEmailError] = useState(false);
+    const history = new useHistory();
     const [businessDay, SetBusinessDay] = useState({
         monday: false,
         tuesday: false,
@@ -54,6 +55,7 @@ export default function Register_store() {
         axios.post('/api/create_store', data)
         .then(res => {
             console.log(res);
+            history.push('/store');
         })
         .catch(errors => {
             console.log(errors.response.data.errors);
@@ -133,8 +135,8 @@ export default function Register_store() {
                 </form>
 
                 <div className = "p-register-store__container__links">
-                    <Link to="/login_store">ログインはこちら</Link>
-                    <Link to="/">トップページへ戻る</Link>
+                    <span>ログインは<Link to="/login_store">こちら</Link></span>
+                    <span>トップページは<Link to="/">こちら</Link></span>
                 </div>
             </div>
         </div>
