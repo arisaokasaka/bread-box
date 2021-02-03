@@ -30,7 +30,6 @@ export default function Register_user() {
         axios.post('/api/create_user', data)
         .then(res => {
             console.log(res);
-            history.push("/search");
         })
         .catch(errors => {
             console.log(errors);

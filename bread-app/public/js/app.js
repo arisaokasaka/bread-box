@@ -17838,7 +17838,6 @@ function Register_user() {
     console.log(data);
     axios_1["default"].post('/api/create_user', data).then(function (res) {
       console.log(res);
-      history.push("/search");
     })["catch"](function (errors) {
       console.log(errors);
 
