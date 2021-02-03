@@ -15767,7 +15767,8 @@ var ModalCreateReview = function ModalCreateReview(_a) {
   }), "\xA0\xA0\u30EC\u30D3\u30E5\u30FC\u3092\u66F8\u304F"), react_1["default"].createElement(react_modal_1["default"], {
     isOpen: modalIsOpen,
     onRequestClose: closeModal,
-    style: customStyles
+    style: customStyles,
+    ariaHideApp: false
   }, react_1["default"].createElement("div", {
     className: "m-modal-review__btn--close"
   }, react_1["default"].createElement("button", {
@@ -15912,7 +15913,8 @@ var ModalSNS = function ModalSNS(_a) {
     }), "\xA0\xA0\uFF33\uFF2E\uFF33"), react_1["default"].createElement(react_modal_1["default"], {
       isOpen: modalIsOpen,
       onRequestClose: closeModal,
-      style: customStyles
+      style: customStyles,
+      ariaHideApp: false
     }, react_1["default"].createElement("div", {
       className: "m-modal-sns__btn--close"
     }, react_1["default"].createElement("button", {
