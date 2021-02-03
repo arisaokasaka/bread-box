@@ -3,13 +3,12 @@ import { Link } from 'react-router-dom';
 import Searchbar from '../atoms/Searchbar'
 import BtnSearch_icon from '../atoms/buttons/BtnSearch_icon';
 import BtnMypage from '../atoms/buttons/BtnMypage';
+import Logo from '../atoms/Logo';
 
 function NavBar() {
     return (
         <div className="l-navbar">
-            <div className="l-navbar__brand-logo">
-                <Link to="/">パンBOX</Link>
-            </div>
+            <Logo/>
             <div className="l-navbar__content">
                 <Searchbar />
                 <nav className="l-navbar__content__nav">
