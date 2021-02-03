@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import {Link, useHistory} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 
 function emailErrorMessage(emailError){
@@ -22,7 +22,6 @@ function PasswordErrorMessage(original, check){
 export default function Register_user() {
     const { register, handleSubmit, errors, getValues } = useForm();
     const [emailError, SetEmailError] = useState(false);
-    const history = new useHistory();
 
     const onSubmit = (data) => {
         SetEmailError(false);

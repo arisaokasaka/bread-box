@@ -17831,8 +17831,6 @@ function Register_user() {
       emailError = _b[0],
       SetEmailError = _b[1];
 
-  var history = new react_router_dom_1.useHistory();
-
   var onSubmit = function onSubmit(data) {
     SetEmailError(false);
     console.log(data);
