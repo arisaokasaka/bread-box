@@ -1666,16 +1666,26 @@ label.a-label-required::before {
   margin-top: 40px;
 }
 
-.p-register-store__container__links a,
-.p-register-user__container__links a,
-.p-login-store__container__links a,
-.p-login-user__container__links a,
-.p-password-reset-store__container__links a,
-.p-password-reset-user__container__links a {
+.p-register-store__container__links > span,
+.p-register-user__container__links > span,
+.p-login-store__container__links > span,
+.p-login-user__container__links > span,
+.p-password-reset-store__container__links > span,
+.p-password-reset-user__container__links > span {
   display: block;
   color: #67491b;
   font-size: 0.8rem;
   margin: 3px 0;
+}
+
+.p-register-store__container__links > span > a,
+.p-register-user__container__links > span > a,
+.p-login-store__container__links > span > a,
+.p-login-user__container__links > span > a,
+.p-password-reset-store__container__links > span > a,
+.p-password-reset-user__container__links > span > a {
+  color: #67491b;
+  font-weight: 800;
 }
 
 .p-top__hero {

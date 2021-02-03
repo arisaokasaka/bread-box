@@ -41,8 +41,8 @@ export default function LoginStore() {
                 </form>
 
                 <div className = "p-login-store__container__links">
-                    <Link to="/register_store">新規登録はこちら</Link>
-                    <Link to="/password_store">パスワードを忘れた方はこちら</Link>
+                    <span>新規登録は<Link to="/register_store">こちら</Link></span>
+                    <span>パスワードを忘れた方は<Link to="/password_store">こちら</Link></span>
                 </div>
             </div>
         </div>

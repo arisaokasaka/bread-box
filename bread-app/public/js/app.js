@@ -17720,11 +17720,11 @@ function LoginStore() {
     value: "\u30ED\u30B0\u30A4\u30F3\u3059\u308B"
   })), react_1["default"].createElement("div", {
     className: "p-login-store__container__links"
-  }, react_1["default"].createElement(react_router_dom_1.Link, {
+  }, react_1["default"].createElement("span", null, "\u65B0\u898F\u767B\u9332\u306F", react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/register_store"
-  }, "\u65B0\u898F\u767B\u9332\u306F\u3053\u3061\u3089"), react_1["default"].createElement(react_router_dom_1.Link, {
+  }, "\u3053\u3061\u3089")), react_1["default"].createElement("span", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u3092\u5FD8\u308C\u305F\u65B9\u306F", react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/password_store"
-  }, "\u30D1\u30B9\u30EF\u30FC\u30C9\u3092\u5FD8\u308C\u305F\u65B9\u306F\u3053\u3061\u3089"))));
+  }, "\u3053\u3061\u3089")))));
 }
 
 exports.default = LoginStore;
@@ -17816,11 +17816,11 @@ function LoginUser() {
     value: "\u30ED\u30B0\u30A4\u30F3\u3059\u308B"
   })), react_1["default"].createElement("div", {
     className: "p-login-user__container__links"
-  }, react_1["default"].createElement(react_router_dom_1.Link, {
+  }, react_1["default"].createElement("span", null, "\u65B0\u898F\u767B\u9332\u306F", react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/register_user"
-  }, "\u65B0\u898F\u767B\u9332\u306F\u3053\u3061\u3089"), react_1["default"].createElement(react_router_dom_1.Link, {
+  }, "\u3053\u3061\u3089")), react_1["default"].createElement("span", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u3092\u5FD8\u308C\u305F\u65B9\u306F", react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/password_user"
-  }, "\u30D1\u30B9\u30EF\u30FC\u30C9\u3092\u5FD8\u308C\u305F\u65B9\u306F\u3053\u3061\u3089"))));
+  }, "\u3053\u3061\u3089")))));
 }
 
 exports.default = LoginUser;
@@ -18328,11 +18328,11 @@ function Register_store() {
     value: "\u767B\u9332\u3059\u308B"
   })), react_1["default"].createElement("div", {
     className: "p-register-store__container__links"
-  }, react_1["default"].createElement(react_router_dom_1.Link, {
+  }, react_1["default"].createElement("span", null, "\u30ED\u30B0\u30A4\u30F3\u306F", react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/login_store"
-  }, "\u30ED\u30B0\u30A4\u30F3\u306F\u3053\u3061\u3089"), react_1["default"].createElement(react_router_dom_1.Link, {
+  }, "\u3053\u3061\u3089")), react_1["default"].createElement("span", null, "\u30C8\u30C3\u30D7\u30DA\u30FC\u30B8\u306F", react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/"
-  }, "\u30C8\u30C3\u30D7\u30DA\u30FC\u30B8\u3078\u623B\u308B"))));
+  }, "\u3053\u3061\u3089")))));
 }
 
 exports.default = Register_store;
@@ -18505,11 +18505,11 @@ function Register_user() {
     value: "\u767B\u9332\u3059\u308B"
   })), react_1["default"].createElement("div", {
     className: "p-register-user__container__links"
-  }, react_1["default"].createElement(react_router_dom_1.Link, {
+  }, react_1["default"].createElement("span", null, "\u30ED\u30B0\u30A4\u30F3\u306F", react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/login_user"
-  }, "\u30ED\u30B0\u30A4\u30F3\u306F\u3053\u3061\u3089"), react_1["default"].createElement(react_router_dom_1.Link, {
+  }, "\u3053\u3061\u3089")), react_1["default"].createElement("span", null, "\u30C8\u30C3\u30D7\u30DA\u30FC\u30B8\u306F", react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/"
-  }, "\u30C8\u30C3\u30D7\u30DA\u30FC\u30B8\u3078\u623B\u308B"))));
+  }, "\u3053\u3061\u3089")))));
 }
 
 exports.default = Register_user;

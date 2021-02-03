@@ -71,8 +71,8 @@ export default function Register_user() {
                 </form>
 
                 <div className = "p-register-user__container__links">
-                    <Link to="/login_user">ログインはこちら</Link>
-                    <Link to="/">トップページへ戻る</Link>
+                    <span>ログインは<Link to="/login_user">こちら</Link></span>
+                    <span>トップページは<Link to="/">こちら</Link></span>
                 </div>
             </div>
         </div>
