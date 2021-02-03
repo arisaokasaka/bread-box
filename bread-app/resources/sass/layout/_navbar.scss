@@ -9,21 +9,6 @@
     height: $header-height;
     z-index: 900;
 
-    &__brand-logo {
-        height: 100%;
-        margin-left: 2rem;
-
-        & > a {
-            display: inline-block;
-            width: 100%;
-            height: 100%;
-            line-height: $header-height;
-            color: $white;
-            font-size: 1rem;
-            font-weight: bold;
-        }
-    }
-
     &__content {
         display: none;
 
@@ -59,5 +44,9 @@
 
     &__mobile {
         display: flex;
+
+        @include bp-960up {
+            display: none;
+        }
     }
 }

@@ -12,6 +12,7 @@
 @import "./foundation/base";
 
 //atoms
+@import "./atoms/logo";
 @import "./atoms/button";
 @import "./atoms/store_summary/score";
 @import "./atoms//store_summary/schedule";
@@ -19,6 +20,7 @@
 @import "./atoms/labelRequired";
 
 //molecules
+@import "./molecules/reactModal";
 @import "./molecules/modal-sns";
 @import "./molecules/modal_review";
 @import "./molecules/search_sidebar";
@@ -34,6 +36,11 @@
 @import "./molecules/userTable";
 @import "./molecules/userProf";
 @import "./molecules/reviewList";
+@import "./molecules/storeEditTable_menuCreate";
+@import "./molecules/storeEditTable_menuList";
+@import "./molecules/storeEditTable_spirit";
+@import "./molecules/storeEditTable_basic";
+@import "./molecules/storeEditTable";
 
 //layout
 @import "./layout/navbar";
@@ -46,3 +53,5 @@
 @import "./page/store";
 @import "./page/user";
 @import "./page/review";
+@import "./page/storeEdit";
+@import "./page/userEdit";

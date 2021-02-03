@@ -1,0 +1,45 @@
+.m-storeEdit-menu-list {
+    margin-top: $mp-xs;
+
+    &__item {
+        background-color: $white;
+        border-radius: $sm-radius;
+        margin-bottom: $mp-xxs;
+        padding: $mp-xxs $mp-xs;
+
+        @include bp-600up {
+            padding: $mp-xxs $mp-sm;
+        }
+
+        &__btn {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        &__content {
+            display: grid;
+
+            @include bp-600up {
+                grid-template-columns: 100px 1fr;
+                column-gap: $mp-xxs;
+            }
+
+            &__text {
+                & > a {
+                    margin-left: 0.5rem;
+                    color: $white;
+                    background-color: $brown;
+                    font-size: 0.7rem;
+                    border-radius: $sm-radius;
+                    padding: 2px 0.5rem;
+                }
+
+                & > p,
+                & > span {
+                    color: $font-color-brown;
+                    font-size: 0.8rem;
+                }
+            }
+        }
+    }
+}

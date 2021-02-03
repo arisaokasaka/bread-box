@@ -11,7 +11,7 @@ const Top_section: React.FC<Props> = ({sectionTitle, sectionContent}) => (
         <ul>
             {sectionContent.map(
                 (el)=>{
-                    return (<li><input type="text" value={el}/></li>);
+                    return (<li><input type="text" key={el.id} value={el.name}/></li>);
                 })}
         </ul>
     </div>

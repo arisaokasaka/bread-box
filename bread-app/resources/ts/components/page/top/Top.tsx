@@ -48,10 +48,7 @@ function Top() {
                 </section>
             </main>
             <footer className="p-top__footer">
-                <ul>
-                    <li><a href="">事業主の方はこちら</a></li>
-                    <li><a href="">会社概要</a></li>
-                </ul>
+                <Link to="/register_store">事業主の方はこちら</Link>
             </footer>
         </div>
     );
