@@ -75,32 +75,17 @@
     }
 
     &__footer {
+        display: flex;
         background-color: $lightBrown;
         padding: $mp-xs 0;
 
-        ul {
+        a {
             @include content-width;
-            display: flex;
-            flex-direction: column;
+            color: $font-color-brown;
+            font-size: 0.8rem;
 
             @include bp-600up {
-                flex-direction: unset;
-                justify-content: center;
-            }
-
-            li {
-                margin-bottom: 5px;
-                margin: 0 auto;
-
-                @include bp-600up {
-                    margin: 0;
-                    padding: 0 1rem;
-                }
-
-                a {
-                    color: $font-color-brown;
-                    font-size: 0.8rem;
-                }
+                text-align: center;
             }
         }
     }

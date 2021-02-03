@@ -19174,6 +19174,8 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
 var Districts_1 = __importDefault(__webpack_require__(/*! ../../../info/Districts */ "./resources/ts/info/Districts.ts"));
 
 var Bread_kinds_1 = __importDefault(__webpack_require__(/*! ../../../info/Bread_kinds */ "./resources/ts/info/Bread_kinds.ts"));
@@ -19216,11 +19218,9 @@ function Top() {
     className: "c-store-pickup__el"
   }, react_1["default"].createElement("p", null, "\u3042\u308A\u3042\u308A\u30D1\u30F3"))))), react_1["default"].createElement("footer", {
     className: "p-top__footer"
-  }, react_1["default"].createElement("ul", null, react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
-    href: ""
-  }, "\u4E8B\u696D\u4E3B\u306E\u65B9\u306F\u3053\u3061\u3089")), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
-    href: ""
-  }, "\u4F1A\u793E\u6982\u8981")))));
+  }, react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/register_store"
+  }, "\u4E8B\u696D\u4E3B\u306E\u65B9\u306F\u3053\u3061\u3089")));
 }
 
 exports.default = Top;
