@@ -121,6 +121,28 @@ h2 {
   }
 }
 
+.a-logo {
+  display: flex;
+  height: 100%;
+  margin-left: 2rem;
+  align-items: center;
+}
+
+.a-logo > img {
+  height: 1.5rem;
+  width: 1.5rem;
+  margin-right: 0.3rem;
+}
+
+.a-logo > a {
+  width: 100%;
+  height: 100%;
+  line-height: 64px;
+  color: #f8fafc;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
 .c-btn-menu-mobile {
   background-color: transparent;
   margin-right: 2rem;
@@ -1435,21 +1457,6 @@ label.a-label-required::before {
   background-color: #c47d2c;
   height: 64px;
   z-index: 900;
-}
-
-.l-navbar__brand-logo {
-  height: 100%;
-  margin-left: 2rem;
-}
-
-.l-navbar__brand-logo > a {
-  display: inline-block;
-  width: 100%;
-  height: 100%;
-  line-height: 64px;
-  color: #f8fafc;
-  font-size: 1rem;
-  font-weight: bold;
 }
 
 .l-navbar__content {
