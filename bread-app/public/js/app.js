@@ -17820,9 +17820,7 @@ function LoginUser() {
     to: "/register_user"
   }, "\u65B0\u898F\u767B\u9332\u306F\u3053\u3061\u3089"), react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/password_user"
-  }, "\u30D1\u30B9\u30EF\u30FC\u30C9\u3092\u5FD8\u308C\u305F\u65B9\u306F\u3053\u3061\u3089"), react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/login_store"
-  }, "\u4E8B\u696D\u4E3B\u306E\u65B9\u306F\u3053\u3061\u3089"))));
+  }, "\u30D1\u30B9\u30EF\u30FC\u30C9\u3092\u5FD8\u308C\u305F\u65B9\u306F\u3053\u3061\u3089"))));
 }
 
 exports.default = LoginUser;
