@@ -500,7 +500,7 @@ h2 {
 label.a-label-required::before {
   content: "必須";
   position: absolute;
-  top: 3px;
+  top: 3.5px;
   left: -2rem;
   background-color: #493020;
   color: white;
