@@ -3,24 +3,30 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 
+    
 export default function LoginUser() {
     const { register, handleSubmit, errors, getValues } = useForm();
-    const [emailError, SetEmailError] = useState(false);
-  
+    // axios.defaults.headers.common['X-CSRF-TOKEN'] = 
+    //     document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+    // axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+    // // $.ajaxSetup({
+    // //     headers: {
+    // //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    // //     }
+    // //     });
+    // let csrf:any;
+    // csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
     const onSubmit = (data) => {
-    //     SetEmailError(false);
-    //     console.log(data);
-    //     axios.post('/api/create_user', data)
-    //     .then(res => {
-    //         console.log(res);
-    //     })
-    //     .catch(errors => {
-    //         console.log(errors.response.data.errors);
-    //         console.log(errors.response.status);
-    //         if(errors.response.status === 422){
-    //             SetEmailError(true);
-    //         }
-    //     });
+        // console.log(data);
+        // console.log(axios.defaults);
+        // axios.post('/api/login', data)
+        // .then(res => {
+        //     console.log(res);
+        // })
+        // .catch(errors => {
+        //     console.log(errors.response);
+        //     console.log(errors.response.status);
+        // });
     }
 
     return (
@@ -28,6 +34,8 @@ export default function LoginUser() {
             <div className = "p-login-user__container">
                 
                 <form className="p-login-user__container__form" onSubmit={handleSubmit(onSubmit)}>
+                    {/* <input type="hidden" name="_token" value={csrf}/>
+                    {csrf} */}
                     <h2>ログイン</h2>
 
                     <label htmlFor="user_email">メールアドレス</label>

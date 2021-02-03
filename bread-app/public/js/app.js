@@ -15159,6 +15159,44 @@ if (document.getElementById('app')) {
 
 /***/ }),
 
+/***/ "./resources/ts/components/atoms/Logo.tsx":
+/*!************************************************!*\
+  !*** ./resources/ts/components/atoms/Logo.tsx ***!
+  \************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+function Logo() {
+  return react_1["default"].createElement("div", {
+    className: "a-logo"
+  }, react_1["default"].createElement("img", {
+    src: "/images/logo.png",
+    alt: "\u30ED\u30B4"
+  }), react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/"
+  }, "\u30D1\u30F3BOX"));
+}
+
+exports.default = Logo;
+
+/***/ }),
+
 /***/ "./resources/ts/components/atoms/Schedule.tsx":
 /*!****************************************************!*\
   !*** ./resources/ts/components/atoms/Schedule.tsx ***!
@@ -15940,14 +15978,12 @@ var BtnSearch_icon_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/
 
 var BtnMypage_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnMypage */ "./resources/ts/components/atoms/buttons/BtnMypage.tsx"));
 
+var Logo_1 = __importDefault(__webpack_require__(/*! ../atoms/Logo */ "./resources/ts/components/atoms/Logo.tsx"));
+
 function NavBar() {
   return react_1["default"].createElement("div", {
     className: "l-navbar"
-  }, react_1["default"].createElement("div", {
-    className: "l-navbar__brand-logo"
-  }, react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/"
-  }, "\u30D1\u30F3BOX")), react_1["default"].createElement("div", {
+  }, react_1["default"].createElement(Logo_1["default"], null), react_1["default"].createElement("div", {
     className: "l-navbar__content"
   }, react_1["default"].createElement(Searchbar_1["default"], null), react_1["default"].createElement("nav", {
     className: "l-navbar__content__nav"
@@ -17704,45 +17740,17 @@ exports.default = LoginStore;
 "use strict";
 
 
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  Object.defineProperty(o, k2, {
-    enumerable: true,
-    get: function get() {
-      return m[k];
-    }
-  });
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
-
-  __setModuleDefault(result, mod);
-
-  return result;
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
 };
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
@@ -17753,25 +17761,28 @@ function LoginUser() {
       register = _a.register,
       handleSubmit = _a.handleSubmit,
       errors = _a.errors,
-      getValues = _a.getValues;
+      getValues = _a.getValues; // axios.defaults.headers.common['X-CSRF-TOKEN'] = 
+  //     document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+  // axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+  // // $.ajaxSetup({
+  // //     headers: {
+  // //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  // //     }
+  // //     });
+  // let csrf:any;
+  // csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
-  var _b = react_1.useState(false),
-      emailError = _b[0],
-      SetEmailError = _b[1];
 
-  var onSubmit = function onSubmit(data) {//     SetEmailError(false);
-    //     console.log(data);
-    //     axios.post('/api/create_user', data)
-    //     .then(res => {
-    //         console.log(res);
-    //     })
-    //     .catch(errors => {
-    //         console.log(errors.response.data.errors);
-    //         console.log(errors.response.status);
-    //         if(errors.response.status === 422){
-    //             SetEmailError(true);
-    //         }
-    //     });
+  var onSubmit = function onSubmit(data) {// console.log(data);
+    // console.log(axios.defaults);
+    // axios.post('/api/login', data)
+    // .then(res => {
+    //     console.log(res);
+    // })
+    // .catch(errors => {
+    //     console.log(errors.response);
+    //     console.log(errors.response.status);
+    // });
   };
 
   return react_1["default"].createElement("div", {
