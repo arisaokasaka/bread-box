@@ -87,6 +87,10 @@
             @include bp-600up {
                 text-align: center;
             }
+
+            &:hover {
+                font-weight: 600;
+            }
         }
     }
 }

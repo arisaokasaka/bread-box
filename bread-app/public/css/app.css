@@ -1847,6 +1847,10 @@ label.a-label-required::before {
   }
 }
 
+.p-top__footer a:hover {
+  font-weight: 600;
+}
+
 .p-search {
   margin: 0 auto;
   width: 90%;
