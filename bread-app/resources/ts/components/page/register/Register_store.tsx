@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import {Link, useHistory} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
+import week from '../../../info/Week';
 
 function emailErrorMessage(emailError){
     if(emailError){
@@ -21,58 +22,42 @@ function PasswordErrorMessage(original, check){
 
 export default function Register_store() {
     const { register, handleSubmit, errors, getValues, setValue } = useForm();
-    const [emailError, SetEmailError] = useState(false);
     const history = new useHistory();
-    const business_day = {
-        monday: false,
-        tuesday: false,
-        wednesday: false,
-        thursday: false,
-        friday: false,
-        saturday: false,
-        sunday: false,
+    const [emailError, SetEmailError] = useState(false);
+    
+    const handleClick = (targetClass) => {
+        let classInfo = document.getElementsByClassName(targetClass);
+        let classInfoArray = Array.from(classInfo);
+        classInfoArray.forEach(el => {
+            if(el.className.includes('active')) {
+                el.classList.remove('active') 
+            } else {
+                el.className += ' active';
+            }
+        });
     }
 
-    function handleBusinessDay(day){
-        switch(day){
-        case 'monday':
-            if(day === true){
-                business_day.monday = false;
-                } else {business_day.monday = true;}
-            break;
-        case 'tuesday':
-            if(day === true){
-                business_day.tuesday = false;
-                } else {business_day.tuesday = true;}
-            break;
-        case 'wednensday':
-            if(day === true){
-                business_day.wednesday = false;
-                } else {business_day.wednesday = true;}
-            break;
-        case 'thursday':
-            if(day === true){
-                business_day.thursday = false;
-                } else {business_day.thursday = true;}
-            break;
-        case 'friday':
-            if(day === true){
-                business_day.friday = false;
-                } else {business_day.friday = true;}
-            break;
-        case 'saturday':
-            if(day === true){
-                business_day.saturday = false;
-                } else {business_day.saturday = true;}
-            break;
-        case 'sunday':
-            if(day === true){
-                business_day.sunday = false;
-                } else {business_day.sunday = true;}
-            break;
-        }
+    const WeekItem = (day) => {
+        let HoursClassName = 'p-register-store__container__form__week__day__hours ' + day.class;
+        let BtnClassName = 'p-register-store__container__form__week__day__heading__btn ' + day.class;
+
+        return(
+            <div className = "p-register-store__container__form__week__day" key={day.id}>
+                <div className = "p-register-store__container__form__week__heading">
+                    <label htmlFor={day.id}>{day.name}</label>
+                    <div className = {BtnClassName} onClick={()=>handleClick(day.class)}>
+                        <span></span>
+                    </div>
+                </div>
+                <div className = {HoursClassName}>
+                    <input type="time" name={day.id+"_open"}/>
+                    <span>&nbsp;～&nbsp;</span>
+                    <input type="time" name={day.id+"_close"}/>
+                </div>
+            </div>
+        );
     }
-  
+
     const onSubmit = (data) => {
         SetEmailError(false);
         console.log(data);
@@ -94,7 +79,7 @@ export default function Register_store() {
         <div className = "p-register-store">
             <div className = "p-register-store__container">
                 
-                <form className="p-register-store__container__form" onSubmit={handleSubmit(onSubmit)}>
+                <form className="p-register-store__container__form" name="form_storeRegister" onSubmit={handleSubmit(onSubmit)}>
                     <h2>新規店舗登録</h2>
 
                     <label htmlFor="store_name" className="a-label-required">店舗名</label>
@@ -107,8 +92,7 @@ export default function Register_store() {
                     {emailErrorMessage(emailError)}
 
                     <label htmlFor="store_address" className="a-label-required">住所</label>
-                    <input type="text" name="address" id="store_addr
-                    ess" ref={register({required: true})}/>
+                    <input type="text" name="address" id="store_address" ref={register({required: true})}/>
                     {errors.address && <p>住所は必須です。</p>}
 
                     <label htmlFor="store_tel" className="a-label-required">電話番号(半角)</label>
@@ -126,37 +110,18 @@ export default function Register_store() {
                     {errors.password_check && errors.password_check.type === "required" && (<p>パスワード(確認用)は必須です。</p>)}
                     {PasswordErrorMessage(getValues('password'),getValues('password_check'))}
                     
-                    <label htmlFor="business_day" className="a-label-required">営業日</label>
+                    <label htmlFor="business_day" className="a-label-required">営業日・営業時間</label>
                     <input type="hidden" name="business_day" ref={register} />
                     <span>営業している曜日を全てチェックしてください。</span>
                     <div className = "p-register-store__container__form__week">
-                        <div className = "p-register-store__container__form__week__day">
-                            <input type="checkbox" id="monday" name="monday" onClick={()=>handleBusinessDay('monday')}/><label htmlFor="monday">月曜日</label>
-                        </div>
-                        <div className = "p-register-store__container__form__week__day">
-                            <input type="checkbox" id="tuesday" name="tuesday" onClick={()=>handleBusinessDay('tuesday')}/><label htmlFor="tuesday">火曜日</label>
-                        </div>
-                        <div className = "p-register-store__container__form__week__day">
-                            <input type="checkbox" id="wednesday" name="wednesday" onClick={()=>handleBusinessDay('wednesday')}/><label htmlFor="wednesday">水曜日</label>
-                        </div>
-                        <div className = "p-register-store__container__form__week__day">
-                            <input type="checkbox" id="thursday" name="thursday" onClick={()=>handleBusinessDay('thursday')}/><label htmlFor="thursday">木曜日</label>
-                        </div>
-                        <div className = "p-register-store__container__form__week__day">
-                            <input type="checkbox" id="friday" name="friday" onClick={()=>handleBusinessDay('friday')}/><label htmlFor="friday">金曜日</label>
-                        </div>
-                        <div className = "p-register-store__container__form__week__day">
-                            <input type="checkbox" id="saturday" name="saturday" onClick={()=>handleBusinessDay('saturday')}/><label htmlFor="saturday">土曜日</label>
-                        </div>
-                        <div className = "p-register-store__container__form__week__day">
-                            <input type="checkbox" id="sunday" name="sunday" onClick={()=>handleBusinessDay('sunday')}/><label htmlFor="sunday">日曜日</label>
-                        </div>
+                        {week.week.map((day)=> WeekItem(day))}
                     </div>
-                    <label>営業日・営業時間備考</label>
-                    <span>【記載例】<br></br>定休日：第3水曜日<br></br>営業時間：月～水 9時～19時 / 木～土 8時～13時</span>
+
+                    <label>営業日に関するひとこと</label>
+                    <span>【例1】定休日：第3水曜日<br></br>【例2】祝日、お盆、年末年始はお休みです。</span>
                     <textarea name="business_memo" ref={register}/>
 
-                    <input type="submit" value="登録する" onClick={()=>setValue("business_day", business_day)}/>
+                    <input type="submit" value="登録する"/>
                 </form>
 
                 <div className = "p-register-store__container__links">
