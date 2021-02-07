@@ -19,22 +19,24 @@
             letter-spacing: 1px;
 
             &__nav {
-                ul {
-                    display: flex;
+                &--loggedout {
+                    ul {
+                        display: flex;
 
-                    li {
-                        height: 44px;
-                        width: 100px;
-                        margin-left: 1rem;
-                        line-height: 40px;
-                        text-align: center;
-                        font-size: 0.8rem;
-                        color: $white;
-                        border: 2px solid $white;
-                        border-radius: 5px;
+                        li {
+                            height: 40px;
+                            width: 100px;
+                            margin-left: 1rem;
+                            line-height: 36px;
+                            text-align: center;
+                            font-size: 0.8rem;
+                            color: $white;
+                            border: 2px solid $white;
+                            border-radius: 5px;
 
-                        &:hover {
-                            background-color: $darkBrown;
+                            &:hover {
+                                background-color: $darkBrown;
+                            }
                         }
                     }
                 }
