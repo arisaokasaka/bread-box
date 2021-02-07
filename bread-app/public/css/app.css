@@ -1513,7 +1513,7 @@ label.a-label-required::before {
 }
 
 .p-register-store {
-  background-color: white;
+  background-color: #faf8f5;
 }
 
 .p-register-store__container {
@@ -1551,18 +1551,34 @@ label.a-label-required::before {
   margin: 0 auto;
 }
 
-.p-register-store__container__form > h2 {
-  text-align: center;
+.p-register-store__container__form__item {
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  height: 4rem;
+  border-bottom: 0.3px solid #c7c7c7;
+  box-sizing: border-box;
 }
 
-.p-register-store__container__form > label {
+.p-register-store__container__form__item > label {
+  display: inline;
   position: relative;
-  margin-top: 10px;
-  font-size: 0.9rem;
-  font-weight: 550;
+  line-height: 4rem;
+  height: 4rem;
+  font-size: 0.8rem;
+  font-weight: 450;
+  padding-left: 1rem;
+  background-color: rgba(252, 222, 184, 0.3);
 }
 
-.p-register-store__container__form > input {
+.p-register-store__container__form__item__input {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 4rem;
+  padding-left: 1.5rem;
+}
+
+.p-register-store__container__form__item__input input {
   border-radius: 2px;
   height: 1.8rem;
   padding: 0 5px;
@@ -1570,7 +1586,7 @@ label.a-label-required::before {
   width: 100%;
 }
 
-.p-register-store__container__form > input[type="submit"] {
+.p-register-store__container__form__item__input input[type="submit"] {
   background-color: #7c4920;
   color: #f8fafc;
   font-size: 0.9rem;
@@ -1579,16 +1595,16 @@ label.a-label-required::before {
   cursor: pointer;
 }
 
-.p-register-store__container__form > input[type="submit"]:hover {
+.p-register-store__container__form__item__input input[type="submit"]:hover {
   background-color: #493020;
 }
 
-.p-register-store__container__form > p {
+.p-register-store__container__form__item p {
   color: #c92222;
   font-size: 0.7rem;
 }
 
-.p-register-store__container__form > span {
+.p-register-store__container__form__item span {
   color: #9aa0a6;
   font-size: 0.7rem;
 }

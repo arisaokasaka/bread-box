@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,14 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/{any}', function () {
+    Log::info('any');
+    Log::info(Auth::check());
+    Log::info(Auth::user());
     return view('app');
 })->where('any','.*');
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// Route::get('/search/{keyword}', 'SearchController@index')->name('search');
