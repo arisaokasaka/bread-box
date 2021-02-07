@@ -53,6 +53,7 @@ const LoginUser = () =>  {
             .then(res => {
                 console.log(res);
                 setUser(res.data.user);
+                history.push("/search")
             })
             .catch(err => {
                 console.log(err);
@@ -126,31 +127,30 @@ const LoginUser = () =>  {
     
     // ログインフォーム
        let csrf:any = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
-// let testa= React.createContext('user');
+    // let testa= React.createContext('user');
     let form = 
-        (<form onSubmit={login}>
-            <label onClick = {()=>console.log(user)}>email</label>
+        (<form className="p-login-user__container__form" onSubmit={login}>
+            <label onClick = {()=>console.log(user)}>メールアドレス</label>
             <input type='hidden' name='_token' value={csrf} />
             <input
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
             />
-            <label  onClick = {()=>logout()}>password</label>
+            <label  onClick = {()=>logout()}>パスワード</label>
             <input
                 type="password"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
             />
-            <button type="submit">Login</button>
+            <input type="submit" value="ログイン"/>
         </form>);
 
     return (
         <div className = "p-login-user">
-            {form}
-            {/* {bootstrap} */}
             
-            <div className = "p-login-user__container">               
+            <div className = "p-login-user__container">
+                {form}
                 {/* <form className="p-login-user__container__form" onSubmit={handleSubmit(onSubmit)}>
                     <input type="hidden" name="_token" value={csrf} ref={register}/>
                     <h2>ログイン</h2>

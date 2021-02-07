@@ -15505,6 +15505,88 @@ exports.default = BtnEditUser;
 
 /***/ }),
 
+/***/ "./resources/ts/components/atoms/buttons/BtnLogin_icon.tsx":
+/*!*****************************************************************!*\
+  !*** ./resources/ts/components/atoms/buttons/BtnLogin_icon.tsx ***!
+  \*****************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
+function BtnLogin_icon() {
+  return react_1["default"].createElement("div", {
+    className: "a-btn-logIn"
+  }, react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/login_user"
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faSignInAlt
+  })));
+}
+
+exports.default = BtnLogin_icon;
+
+/***/ }),
+
+/***/ "./resources/ts/components/atoms/buttons/BtnLogout_icon.tsx":
+/*!******************************************************************!*\
+  !*** ./resources/ts/components/atoms/buttons/BtnLogout_icon.tsx ***!
+  \******************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
+function BtnLogout_icon() {
+  return react_1["default"].createElement("div", {
+    className: "a-btn-logout"
+  }, react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/"
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faSignOutAlt
+  })));
+}
+
+exports.default = BtnLogout_icon;
+
+/***/ }),
+
 /***/ "./resources/ts/components/atoms/buttons/BtnMypage.tsx":
 /*!*************************************************************!*\
   !*** ./resources/ts/components/atoms/buttons/BtnMypage.tsx ***!
@@ -15992,6 +16074,40 @@ exports.default = ModalSNS;
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -16002,7 +16118,7 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
@@ -16012,24 +16128,47 @@ var BtnSearch_icon_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/
 
 var BtnMypage_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnMypage */ "./resources/ts/components/atoms/buttons/BtnMypage.tsx"));
 
+var BtnLogin_icon_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnLogin_icon */ "./resources/ts/components/atoms/buttons/BtnLogin_icon.tsx"));
+
+var BtnLogout_icon_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnLogout_icon */ "./resources/ts/components/atoms/buttons/BtnLogout_icon.tsx"));
+
 var Logo_1 = __importDefault(__webpack_require__(/*! ../atoms/Logo */ "./resources/ts/components/atoms/Logo.tsx"));
 
 function NavBar() {
+  var _a = react_1.useState(''),
+      user = _a[0],
+      SetUser = _a[1];
+
+  var navPC;
+  var navMobile;
+
+  if (user) {
+    navPC = react_1["default"].createElement("nav", {
+      className: "l-navbar__content__nav--loggedin"
+    }, react_1["default"].createElement("ul", null, react_1["default"].createElement(BtnMypage_1["default"], null)));
+    navMobile = react_1["default"].createElement("nav", {
+      className: "l-navbar__mobile"
+    }, react_1["default"].createElement(BtnSearch_icon_1["default"], null), react_1["default"].createElement(BtnLogout_icon_1["default"], null), react_1["default"].createElement(BtnMypage_1["default"], null));
+  } else {
+    navPC = react_1["default"].createElement("nav", {
+      className: "l-navbar__content__nav--loggedout"
+    }, react_1["default"].createElement("ul", null, react_1["default"].createElement(react_router_dom_1.Link, {
+      to: "/register_user"
+    }, react_1["default"].createElement("li", null, "\u4F1A\u54E1\u767B\u9332")), react_1["default"].createElement(react_router_dom_1.Link, {
+      to: "/login_user"
+    }, react_1["default"].createElement("li", null, "\u30ED\u30B0\u30A4\u30F3"))));
+    navMobile = react_1["default"].createElement("nav", {
+      className: "l-navbar__mobile"
+    }, react_1["default"].createElement(BtnSearch_icon_1["default"], null), react_1["default"].createElement(BtnLogin_icon_1["default"], null));
+  }
+
   return react_1["default"].createElement("div", {
     className: "l-navbar"
   }, react_1["default"].createElement(Logo_1["default"], null), react_1["default"].createElement("div", {
     className: "l-navbar__content"
-  }, react_1["default"].createElement(Searchbar_1["default"], null), react_1["default"].createElement("nav", {
+  }, react_1["default"].createElement(Searchbar_1["default"], null), react_1["default"].createElement("div", {
     className: "l-navbar__content__nav"
-  }, react_1["default"].createElement("ul", null, react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/register_user"
-  }, react_1["default"].createElement("li", null, "\u4F1A\u54E1\u767B\u9332")), react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/login_user"
-  }, react_1["default"].createElement("li", null, "\u30ED\u30B0\u30A4\u30F3")), react_1["default"].createElement(react_router_dom_1.Link, {
-    to: ""
-  }, react_1["default"].createElement("li", null, "\u30B2\u30B9\u30C8"))))), react_1["default"].createElement("nav", {
-    className: "l-navbar__mobile"
-  }, react_1["default"].createElement(BtnSearch_icon_1["default"], null), react_1["default"].createElement(BtnMypage_1["default"], null)));
+  }, navPC)), navMobile);
 }
 
 exports.default = NavBar;
@@ -16837,11 +16976,17 @@ var StoreSubinfo_1 = __importDefault(__webpack_require__(/*! ./StoreSubinfo */ "
 
 var StoreBasicInfo = function StoreBasicInfo(_a) {
   var StoreInfo = _a.StoreInfo;
+  var buttons;
+
+  if (true) {
+    buttons = react_1["default"].createElement("div", {
+      className: "m-store-basicInfo__btn"
+    }, react_1["default"].createElement(Btn_favorite_1["default"], null), react_1["default"].createElement(Btn_interested_1["default"], null));
+  } else {}
+
   return react_1["default"].createElement("div", {
     className: "m-store-basicInfo"
-  }, react_1["default"].createElement("div", {
-    className: "m-store-basicInfo__btn"
-  }, react_1["default"].createElement(Btn_favorite_1["default"], null), react_1["default"].createElement(Btn_interested_1["default"], null)), StoreInfo.map(function (el) {
+  }, buttons, StoreInfo.map(function (el) {
     return react_1["default"].createElement("div", null, react_1["default"].createElement("h2", {
       className: "m-store-basicInfo__name"
     }, el.name), react_1["default"].createElement("p", {
@@ -18031,6 +18176,7 @@ var LoginUser = function LoginUser() {
           }).then(function (res) {
             console.log(res);
             setUser(res.data.user);
+            history.push("/search");
           })["catch"](function (err) {
             console.log(err);
             console.log('[login]fail_post');
@@ -18099,12 +18245,13 @@ var LoginUser = function LoginUser() {
   var csrf = (_a = document.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('content'); // let testa= React.createContext('user');
 
   var form = react_1["default"].createElement("form", {
+    className: "p-login-user__container__form",
     onSubmit: login
   }, react_1["default"].createElement("label", {
     onClick: function onClick() {
       return console.log(user);
     }
-  }, "email"), react_1["default"].createElement("input", {
+  }, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9"), react_1["default"].createElement("input", {
     type: 'hidden',
     name: '_token',
     value: csrf
@@ -18118,20 +18265,21 @@ var LoginUser = function LoginUser() {
     onClick: function onClick() {
       return logout();
     }
-  }, "password"), react_1["default"].createElement("input", {
+  }, "\u30D1\u30B9\u30EF\u30FC\u30C9"), react_1["default"].createElement("input", {
     type: "password",
     value: password,
     onChange: function onChange(e) {
       return setPassword(e.target.value);
     }
-  }), react_1["default"].createElement("button", {
-    type: "submit"
-  }, "Login"));
+  }), react_1["default"].createElement("input", {
+    type: "submit",
+    value: "\u30ED\u30B0\u30A4\u30F3"
+  }));
   return react_1["default"].createElement("div", {
     className: "p-login-user"
-  }, form, react_1["default"].createElement("div", {
-    className: "p-login-user__container"
   }, react_1["default"].createElement("div", {
+    className: "p-login-user__container"
+  }, form, react_1["default"].createElement("div", {
     className: "p-login-user__container__links"
   }, react_1["default"].createElement("span", null, "\u65B0\u898F\u767B\u9332\u306F", react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/register_user"
