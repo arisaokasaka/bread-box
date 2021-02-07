@@ -136,7 +136,9 @@
 
 //モバイルヘッダーのメニューアイコン
 .a-btn-search_icon,
-.a-btn-mypage {
+.a-btn-mypage,
+.a-btn-logIn,
+.a-btn-logout {
     a {
         display: inline-block;
         color: white;
@@ -149,6 +151,17 @@
 
     @include bp-960up {
         display: none;
+    }
+}
+
+.l-navbar__content__nav--loggedin {
+    .a-btn-mypage {
+        @include bp-960up {
+            display: block;
+            a {
+                font-size: 1.6rem;
+            }
+        }
     }
 }
 
