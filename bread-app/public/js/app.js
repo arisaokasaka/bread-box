@@ -15054,6 +15054,40 @@ module.exports = {
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -15064,12 +15098,20 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 })); //React
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var react_dom_1 = __importDefault(__webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js")); //Router
 
 
-var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js"); //i18n
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js"); //ContextProvider
+// import UserAuthContextProvider from './UserAuthContext';
+
+
+var UserAuthReducer_1 = __webpack_require__(/*! ./reducers/UserAuthReducer */ "./resources/ts/reducers/UserAuthReducer.ts");
+
+var UserAuthContext_1 = __webpack_require__(/*! ./contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts"); //bootstrap(axios)
+// import bootstrap from './bootstrap';
+//i18n
 // import './18n';
 //Components
 
@@ -15104,8 +15146,49 @@ var UserPage_1 = __importDefault(__webpack_require__(/*! ./components/page/user/
 
 var UserEdit_1 = __importDefault(__webpack_require__(/*! ./components/page/user/UserEdit */ "./resources/ts/components/page/user/UserEdit.tsx"));
 
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+
+window.axios = axios_1["default"];
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.withCredentials = true;
+var token = document.head.querySelector('meta[name="csrf-token"]');
+
+if (token) {
+  console.log(token);
+  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+} else {
+  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+}
+
+var test = axios_1["default"].create({
+  baseURL: 'http://localhost:8000',
+  withCredentials: true
+});
+console.log(axios_1["default"].defaults.headers);
+test.get("/api/user", {
+  withCredentials: true
+}).then(function (response) {
+  console.log(response);
+})["catch"](function (err) {
+  console.log('err');
+  console.log(err);
+});
+
 var App = function App() {
-  return react_1["default"].createElement(react_router_dom_1.BrowserRouter, null, react_1["default"].createElement("div", null, react_1["default"].createElement(Navbar_1["default"], null), react_1["default"].createElement("div", {
+  var _a = react_1.useReducer(UserAuthReducer_1.UserAuthReducer, UserAuthReducer_1.initialState),
+      state = _a[0],
+      dispatch = _a[1];
+
+  return react_1["default"].createElement(UserAuthContext_1.UserAuthContext.Provider, {
+    value: {
+      state: state,
+      dispatch: dispatch
+    }
+  }, react_1["default"].createElement(react_router_dom_1.BrowserRouter, null, react_1["default"].createElement("div", {
+    onClick: function onClick() {
+      return console.log(state);
+    }
+  }, react_1["default"].createElement(Navbar_1["default"], null), react_1["default"].createElement("div", {
     id: "global-container"
   }, react_1["default"].createElement(react_router_dom_1.Switch, null, react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/",
@@ -15150,7 +15233,7 @@ var App = function App() {
   }), react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/user_edit",
     component: UserEdit_1["default"]
-  })))));
+  }))))));
 };
 
 if (document.getElementById('app')) {
@@ -15473,6 +15556,88 @@ exports.default = BtnEditUser;
 
 /***/ }),
 
+/***/ "./resources/ts/components/atoms/buttons/BtnLogin_icon.tsx":
+/*!*****************************************************************!*\
+  !*** ./resources/ts/components/atoms/buttons/BtnLogin_icon.tsx ***!
+  \*****************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
+function BtnLogin_icon() {
+  return react_1["default"].createElement("div", {
+    className: "a-btn-logIn"
+  }, react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/login_user"
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faSignInAlt
+  })));
+}
+
+exports.default = BtnLogin_icon;
+
+/***/ }),
+
+/***/ "./resources/ts/components/atoms/buttons/BtnLogout_icon.tsx":
+/*!******************************************************************!*\
+  !*** ./resources/ts/components/atoms/buttons/BtnLogout_icon.tsx ***!
+  \******************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
+function BtnLogout_icon() {
+  return react_1["default"].createElement("div", {
+    className: "a-btn-logout"
+  }, react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/"
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faSignOutAlt
+  })));
+}
+
+exports.default = BtnLogout_icon;
+
+/***/ }),
+
 /***/ "./resources/ts/components/atoms/buttons/BtnMypage.tsx":
 /*!*************************************************************!*\
   !*** ./resources/ts/components/atoms/buttons/BtnMypage.tsx ***!
@@ -15564,22 +15729,74 @@ exports.default = BtnSearch_icon;
 "use strict";
 
 
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
 };
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
+var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
 function Btn_favorite() {
-  return react_1["default"].createElement("button", {
-    className: "a-btn-favorite"
-  }, react_1["default"].createElement("span", null, "\u2665"), react_1["default"].createElement("span", null, "\u304A\u6C17\u306B\u5165\u308A"));
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
+  var BtnFavorite;
+
+  if (state.uuid) {
+    BtnFavorite = react_1["default"].createElement("button", {
+      className: "a-btn-favorite"
+    }, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+      icon: free_solid_svg_icons_1.faHeart
+    })), react_1["default"].createElement("span", null, "\u304A\u6C17\u306B\u5165\u308A"));
+  } else {
+    BtnFavorite = react_1["default"].createElement(react_router_dom_1.Link, {
+      to: "/login_user",
+      className: "a-btn-favorite"
+    }, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+      icon: free_solid_svg_icons_1.faHeart
+    })), react_1["default"].createElement("span", null, "\u304A\u6C17\u306B\u5165\u308A"));
+  }
+
+  return react_1["default"].createElement("div", null, BtnFavorite);
 }
 
 exports.default = Btn_favorite;
@@ -15637,22 +15854,74 @@ exports.default = Btn_homepage;
 "use strict";
 
 
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
 };
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
+var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
 function Btn_interested() {
-  return react_1["default"].createElement("button", {
-    className: "a-btn-interested"
-  }, react_1["default"].createElement("span", null, "\u2605"), react_1["default"].createElement("span", null, "\u884C\u3063\u3066\u307F\u305F\u3044"));
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
+  var BtnInterested;
+
+  if (state.uuid) {
+    BtnInterested = react_1["default"].createElement("button", {
+      className: "a-btn-interested"
+    }, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+      icon: free_solid_svg_icons_1.faFlag
+    })), react_1["default"].createElement("span", null, "\u884C\u3063\u3066\u307F\u305F\u3044"));
+  } else {
+    BtnInterested = react_1["default"].createElement(react_router_dom_1.Link, {
+      to: "/login_user",
+      className: "a-btn-interested"
+    }, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+      icon: free_solid_svg_icons_1.faFlag
+    })), react_1["default"].createElement("span", null, "\u884C\u3063\u3066\u307F\u305F\u3044"));
+  }
+
+  return react_1["default"].createElement("div", null, BtnInterested);
 }
 
 exports.default = Btn_interested;
@@ -15960,6 +16229,40 @@ exports.default = ModalSNS;
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -15970,7 +16273,7 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
@@ -15980,24 +16283,46 @@ var BtnSearch_icon_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/
 
 var BtnMypage_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnMypage */ "./resources/ts/components/atoms/buttons/BtnMypage.tsx"));
 
+var BtnLogin_icon_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnLogin_icon */ "./resources/ts/components/atoms/buttons/BtnLogin_icon.tsx"));
+
+var BtnLogout_icon_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnLogout_icon */ "./resources/ts/components/atoms/buttons/BtnLogout_icon.tsx"));
+
 var Logo_1 = __importDefault(__webpack_require__(/*! ../atoms/Logo */ "./resources/ts/components/atoms/Logo.tsx"));
 
+var UserAuthContext_1 = __webpack_require__(/*! ../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
+
 function NavBar() {
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
+  var navPC;
+  var navMobile;
+
+  if (state.uuid) {
+    navPC = react_1["default"].createElement("nav", {
+      className: "l-navbar__content__nav--loggedin"
+    }, react_1["default"].createElement("ul", null, react_1["default"].createElement(BtnMypage_1["default"], null)));
+    navMobile = react_1["default"].createElement("nav", {
+      className: "l-navbar__mobile"
+    }, react_1["default"].createElement(BtnSearch_icon_1["default"], null), react_1["default"].createElement(BtnLogout_icon_1["default"], null), react_1["default"].createElement(BtnMypage_1["default"], null));
+  } else {
+    navPC = react_1["default"].createElement("nav", {
+      className: "l-navbar__content__nav--loggedout"
+    }, react_1["default"].createElement("ul", null, react_1["default"].createElement(react_router_dom_1.Link, {
+      to: "/register_user"
+    }, react_1["default"].createElement("li", null, "\u4F1A\u54E1\u767B\u9332")), react_1["default"].createElement(react_router_dom_1.Link, {
+      to: "/login_user"
+    }, react_1["default"].createElement("li", null, "\u30ED\u30B0\u30A4\u30F3"))));
+    navMobile = react_1["default"].createElement("nav", {
+      className: "l-navbar__mobile"
+    }, react_1["default"].createElement(BtnSearch_icon_1["default"], null), react_1["default"].createElement(BtnLogin_icon_1["default"], null));
+  }
+
   return react_1["default"].createElement("div", {
     className: "l-navbar"
   }, react_1["default"].createElement(Logo_1["default"], null), react_1["default"].createElement("div", {
     className: "l-navbar__content"
-  }, react_1["default"].createElement(Searchbar_1["default"], null), react_1["default"].createElement("nav", {
+  }, react_1["default"].createElement(Searchbar_1["default"], null), react_1["default"].createElement("div", {
     className: "l-navbar__content__nav"
-  }, react_1["default"].createElement("ul", null, react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/register_user"
-  }, react_1["default"].createElement("li", null, "\u4F1A\u54E1\u767B\u9332")), react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/login_user"
-  }, react_1["default"].createElement("li", null, "\u30ED\u30B0\u30A4\u30F3")), react_1["default"].createElement(react_router_dom_1.Link, {
-    to: ""
-  }, react_1["default"].createElement("li", null, "\u30B2\u30B9\u30C8"))))), react_1["default"].createElement("nav", {
-    className: "l-navbar__mobile"
-  }, react_1["default"].createElement(BtnSearch_icon_1["default"], null), react_1["default"].createElement(BtnMypage_1["default"], null)));
+  }, navPC)), navMobile);
 }
 
 exports.default = NavBar;
@@ -17011,63 +17336,59 @@ var StoreList = function StoreList(_a) {
   return react_1["default"].createElement("div", {
     className: "m-store-list"
   }, StoreInfo.map(function (el) {
-    return react_1["default"].createElement(react_router_dom_1.Link, {
-      to: "/store",
+    return react_1["default"].createElement("div", {
       className: "m-store-list__item",
       key: el.uuid
     }, react_1["default"].createElement("div", {
       className: "m-store-list__item--pc"
     }, react_1["default"].createElement("div", {
-      className: "m-store-list__item__images--pc__main"
+      className: "m-store-list__item--pc__images__main"
     }, react_1["default"].createElement("img", {
-      src: "",
+      src: "/images/bakery2.jpg",
       alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
     })), react_1["default"].createElement("div", {
-      className: "m-store-list__item__images--pc__sub"
+      className: "m-store-list__item--pc__images__sub"
     }, react_1["default"].createElement("img", {
-      src: "",
+      src: "/images/bread1.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
     }), react_1["default"].createElement("img", {
-      src: "",
+      src: "/images/bread1.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
     }), react_1["default"].createElement("img", {
-      src: "",
+      src: "/images/bread1.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
     }))), react_1["default"].createElement("div", {
       className: "m-store-list__item__container"
     }, react_1["default"].createElement("div", {
       className: "m-store-list__item__container__buttons"
-    }, react_1["default"].createElement(Btn_favorite_1["default"], null), react_1["default"].createElement(Btn_interested_1["default"], null)), react_1["default"].createElement("div", {
+    }, react_1["default"].createElement(Btn_favorite_1["default"], null), react_1["default"].createElement(Btn_interested_1["default"], null)), react_1["default"].createElement(react_router_dom_1.Link, {
+      to: "/store"
+    }, react_1["default"].createElement("div", {
       className: "m-store-list__item__container__name"
     }, react_1["default"].createElement("h2", {
       className: "hover-colorChange"
     }, el.name)), react_1["default"].createElement("p", {
       className: "m-store-list__item__container__access"
-    }, el.access), react_1["default"].createElement("div", {
+    }, el.address), react_1["default"].createElement("div", {
       className: "m-store-list__item--mobile"
     }, react_1["default"].createElement("div", {
-      className: "m-store-list__item--mobile__main"
+      className: "m-store-list__item--mobile__images"
     }, react_1["default"].createElement("img", {
-      src: "",
+      src: "/images/bread1.jpg",
       alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
-    })), react_1["default"].createElement("div", {
-      className: "m-store-list__item--mobile__sub"
-    }, react_1["default"].createElement("img", {
-      src: "",
+    }), react_1["default"].createElement("img", {
+      src: "/images/bread1.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
     }), react_1["default"].createElement("img", {
-      src: "",
-      alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
-    }), react_1["default"].createElement("img", {
-      src: "",
+      src: "/images/bread1.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
     }))), react_1["default"].createElement("p", {
       className: "m-store-list__item__container__explanation"
-    }, el.detail), react_1["default"].createElement(Schedule_1["default"], {
+    }, el.message), react_1["default"].createElement(Schedule_1["default"], {
       Week: Week_1["default"].week
     }), react_1["default"].createElement(Score_1["default"], {
       ScoreStar: el.star
-    })));
+    }))));
   }));
 };
 
@@ -17742,6 +18063,183 @@ exports.default = LoginStore;
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+
+var __generator = this && this.__generator || function (thisArg, body) {
+  var _ = {
+    label: 0,
+    sent: function sent() {
+      if (t[0] & 1) throw t[1];
+      return t[1];
+    },
+    trys: [],
+    ops: []
+  },
+      f,
+      y,
+      t,
+      g;
+  return g = {
+    next: verb(0),
+    "throw": verb(1),
+    "return": verb(2)
+  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
+    return this;
+  }), g;
+
+  function verb(n) {
+    return function (v) {
+      return step([n, v]);
+    };
+  }
+
+  function step(op) {
+    if (f) throw new TypeError("Generator is already executing.");
+
+    while (_) {
+      try {
+        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+        if (y = 0, t) op = [op[0] & 2, t.value];
+
+        switch (op[0]) {
+          case 0:
+          case 1:
+            t = op;
+            break;
+
+          case 4:
+            _.label++;
+            return {
+              value: op[1],
+              done: false
+            };
+
+          case 5:
+            _.label++;
+            y = op[1];
+            op = [0];
+            continue;
+
+          case 7:
+            op = _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+
+          default:
+            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+              _ = 0;
+              continue;
+            }
+
+            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+              _.label = op[1];
+              break;
+            }
+
+            if (op[0] === 6 && _.label < t[1]) {
+              _.label = t[1];
+              t = op;
+              break;
+            }
+
+            if (t && _.label < t[2]) {
+              _.label = t[2];
+
+              _.ops.push(op);
+
+              break;
+            }
+
+            if (t[2]) _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+        }
+
+        op = body.call(thisArg, _);
+      } catch (e) {
+        op = [6, e];
+        y = 0;
+      } finally {
+        f = t = 0;
+      }
+    }
+
+    if (op[0] & 5) throw op[1];
+    return {
+      value: op[0] ? op[1] : void 0,
+      done: true
+    };
+  }
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -17752,78 +18250,197 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
 
-function LoginUser() {
-  var _a = react_hook_form_1.useForm(),
-      register = _a.register,
-      handleSubmit = _a.handleSubmit,
-      errors = _a.errors,
-      getValues = _a.getValues; // axios.defaults.headers.common['X-CSRF-TOKEN'] = 
-  //     document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
-  // axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-  // // $.ajaxSetup({
-  // //     headers: {
-  // //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  // //     }
-  // //     });
+var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts"); // declare global {
+//     interface Window {
+//         axios: AxiosStatic;
+//     }
+//     interface Element {
+//         content: string;
+//     }
+// }
+
+
+var LoginUser = function LoginUser() {
+  var _a;
+
+  react_1.useEffect(function () {
+    console.log('effect');
+    getUser();
+  }, []);
+  var dispatch = react_1.useContext(UserAuthContext_1.UserAuthContext).dispatch;
+
+  var _b = react_1.useState(""),
+      email = _b[0],
+      setEmail = _b[1];
+
+  var _c = react_1.useState(""),
+      password = _c[0],
+      setPassword = _c[1];
+
+  var _d = react_1.useState(""),
+      user = _d[0],
+      setUser = _d[1];
+
+  var _e = react_hook_form_1.useForm(),
+      register = _e.register,
+      handleSubmit = _e.handleSubmit,
+      errors = _e.errors,
+      getValues = _e.getValues;
+
+  var history = new react_router_dom_1.useHistory(); //認証ユーザー取得
+
+  var getUser = function getUser() {
+    axios_1["default"].get("/api/user").then(function (res) {
+      console.log('[getUser]ログイン済み');
+      console.log(res.data);
+      dispatch({
+        type: 'setId',
+        payload: res.data.uuid
+      });
+    })["catch"](function (err) {
+      console.log('[getUser]ログインしてません');
+    });
+  }; // ログイン
+
+
+  var login = function login(e) {
+    return __awaiter(void 0, void 0, void 0, function () {
+      var _a;
+
+      return __generator(this, function (_b) {
+        e.preventDefault();
+        axios_1["default"].defaults.withCredentials = true;
+        axios_1["default"].defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+        axios_1["default"].defaults.headers.common['X-CSRF-TOKEN'] = (_a = document.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('content');
+        axios_1["default"].get("/sanctum/csrf-cookie").then(function (response) {
+          axios_1["default"].post("/api/login", {
+            email: email,
+            password: password
+          }).then(function (res) {
+            console.log(res);
+            setUser(res.data.user);
+            history.push("/search");
+          })["catch"](function (err) {
+            console.log(err);
+            console.log('[login]fail_post');
+          });
+          console.log(123);
+          console.log(response);
+        })["catch"](function (err) {
+          console.log(err);
+          console.log('fail_get');
+        });
+        return [2
+        /*return*/
+        ];
+      });
+    });
+  }; // ログアウト
+
+
+  var logout = function logout() {
+    axios_1["default"].get("/api/logout").then(function (res) {
+      console.log(res);
+      dispatch({
+        type: 'setOutId'
+      });
+    })["catch"](function (err) {
+      console.log(err);
+    });
+  }; // // ユーザ情報
+  // let userInfo = null;
+  // //認証済みの場合、ログアウトボタンとユーザ情報を表示
+  // if (user) {
+  //     form = <button onClick={logout}>Logout</button>;
+  //     userInfo = (
+  //         <div>
+  //             <h2>User</h2>
+  //             <div>name: {user.name}</div>
+  //             <div>email: {user.email}</div>
+  //         </div>
+  //     );
+  // }
+  // axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+  // axios.defaults.withCredentials = true;
+  // axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+  // window.axios = axios;
+  // window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+  // window.axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
   // let csrf:any;
   // csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+  // const onSubmit = (data) => {
+  //     console.log(data);
+  //     console.log(axios.defaults.headers);
+  //     let abc = new FormData();
+  //     abc.append('_token', csrf)
+  //     abc.append('email', 'pan@pan.com')
+  //     abc.append('password', '12121212')
+  //     axios.post('api/login', abc)
+  //     .then(res => {
+  //         alert(123);
+  //         console.log(res);
+  //     })
+  //     .catch(errors => {
+  //         console.log(errors.response);
+  //         console.log(errors.response.status);
+  //     });
+  // }
+  // ログインフォーム
 
 
-  var onSubmit = function onSubmit(data) {// console.log(data);
-    // console.log(axios.defaults);
-    // axios.post('/api/login', data)
-    // .then(res => {
-    //     console.log(res);
-    // })
-    // .catch(errors => {
-    //     console.log(errors.response);
-    //     console.log(errors.response.status);
-    // });
-  };
+  var csrf = (_a = document.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('content'); // let testa= React.createContext('user');
 
+  var form = react_1["default"].createElement("form", {
+    className: "p-login-user__container__form",
+    onSubmit: login
+  }, react_1["default"].createElement("label", {
+    onClick: function onClick() {
+      return console.log(user);
+    }
+  }, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9"), react_1["default"].createElement("input", {
+    type: 'hidden',
+    name: '_token',
+    value: csrf
+  }), react_1["default"].createElement("input", {
+    type: "email",
+    value: email,
+    onChange: function onChange(e) {
+      return setEmail(e.target.value);
+    }
+  }), react_1["default"].createElement("label", {
+    onClick: function onClick() {
+      return logout();
+    }
+  }, "\u30D1\u30B9\u30EF\u30FC\u30C9"), react_1["default"].createElement("input", {
+    type: "password",
+    value: password,
+    onChange: function onChange(e) {
+      return setPassword(e.target.value);
+    }
+  }), react_1["default"].createElement("input", {
+    type: "submit",
+    value: "\u30ED\u30B0\u30A4\u30F3"
+  }));
   return react_1["default"].createElement("div", {
     className: "p-login-user"
   }, react_1["default"].createElement("div", {
     className: "p-login-user__container"
-  }, react_1["default"].createElement("form", {
-    className: "p-login-user__container__form",
-    onSubmit: handleSubmit(onSubmit)
-  }, react_1["default"].createElement("h2", null, "\u30ED\u30B0\u30A4\u30F3"), react_1["default"].createElement("label", {
-    htmlFor: "user_email"
-  }, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9"), react_1["default"].createElement("input", {
-    type: "email",
-    name: "email",
-    id: "user_email",
-    ref: register({
-      required: true
-    })
-  }), errors.email && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
-    htmlFor: "user_password"
-  }, "\u30D1\u30B9\u30EF\u30FC\u30C9"), react_1["default"].createElement("input", {
-    type: "password",
-    name: "password",
-    id: "user_password",
-    ref: register({
-      required: true,
-      pattern: /[a-zA-Z0-9]{8,16}/
-    })
-  }), react_1["default"].createElement("input", {
-    type: "submit",
-    value: "\u30ED\u30B0\u30A4\u30F3\u3059\u308B"
-  })), react_1["default"].createElement("div", {
+  }, form, react_1["default"].createElement("div", {
     className: "p-login-user__container__links"
   }, react_1["default"].createElement("span", null, "\u65B0\u898F\u767B\u9332\u306F", react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/register_user"
   }, "\u3053\u3061\u3089")), react_1["default"].createElement("span", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u3092\u5FD8\u308C\u305F\u65B9\u306F", react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/password_user"
   }, "\u3053\u3061\u3089")))));
-}
+};
 
 exports.default = LoginUser;
 
@@ -18060,6 +18677,22 @@ exports.default = PasswordReset_user;
 "use strict";
 
 
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
 var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
   if (k2 === undefined) k2 = k;
   Object.defineProperty(o, k2, {
@@ -18106,11 +18739,11 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
-
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
+
+var Week_1 = __importDefault(__webpack_require__(/*! ../../../info/Week */ "./resources/ts/info/Week.ts"));
 
 function emailErrorMessage(emailError) {
   if (emailError) {
@@ -18137,98 +18770,160 @@ function Register_store() {
       register = _a.register,
       handleSubmit = _a.handleSubmit,
       errors = _a.errors,
-      getValues = _a.getValues;
+      getValues = _a.getValues,
+      setValue = _a.setValue;
+
+  var history = new react_router_dom_1.useHistory();
 
   var _b = react_1.useState(false),
       emailError = _b[0],
       SetEmailError = _b[1];
 
-  var history = new react_router_dom_1.useHistory();
-
   var _c = react_1.useState({
-    monday: false,
-    tuesday: false,
-    wednesday: false,
-    thursday: false,
-    friday: false,
-    saturday: false,
-    sunday: false
+    monday_open: null,
+    monday_close: null,
+    tuesday_open: null,
+    tuesday_close: null,
+    wednesday_open: null,
+    wednesday_close: null,
+    thursday_open: null,
+    thursday_close: null,
+    friday_open: null,
+    friday_close: null,
+    saturday_open: null,
+    saturday_close: null,
+    sunday_open: null,
+    sunday_close: null
   }),
-      businessDay = _c[0],
-      SetBusinessDay = _c[1]; // function business_day(day){
-  //     if(day.checked){
-  //     switch(day){
-  //         case 'monday':
-  //             SetBusinessDay({...businessDay, monday: true});
-  //             break;
-  //         case 'tuesday':
-  //             SetBusinessDay({...businessDay, tuesday: true});
-  //             break;
-  //         case 'wednensday':
-  //             SetBusinessDay({...businessDay, wednesday: true});
-  //             break;
-  //         }
-  //     }
-  // }
+      businessHours = _c[0],
+      SetBusinessHours = _c[1];
 
+  var checkBusinessDay = function checkBusinessDay(day) {
+    var checkInfo = document.getElementsByClassName(day["class"] + ' active');
+    var checkInfoArray = Array.from(checkInfo);
+    checkInfoArray.forEach;
+  };
+
+  var handleClick = function handleClick(targetClass) {
+    var classInfo = document.getElementsByClassName(targetClass);
+    var classInfoArray = Array.from(classInfo);
+    classInfoArray.forEach(function (el) {
+      if (el.className.includes('active')) {
+        el.classList.remove('active');
+      } else {
+        el.className += ' active';
+      }
+    });
+  };
+
+  var WeekItem = function WeekItem(day) {
+    var HoursClassName = 'p-register-store__container__form__week__day__hours ' + day["class"];
+    var BtnClassName = 'p-register-store__container__form__week__day__heading__btn ' + day["class"];
+    return react_1["default"].createElement("div", {
+      className: "p-register-store__container__form__week__day",
+      key: day.id
+    }, react_1["default"].createElement("div", {
+      className: "p-register-store__container__form__week__heading"
+    }, react_1["default"].createElement("label", {
+      htmlFor: day.id
+    }, day.name), react_1["default"].createElement("div", {
+      className: BtnClassName,
+      onClick: function onClick() {
+        return handleClick(day["class"]);
+      }
+    }, react_1["default"].createElement("span", null))), react_1["default"].createElement("div", {
+      className: HoursClassName
+    }, react_1["default"].createElement("input", {
+      type: "time",
+      name: day.id + "_open",
+      onChange: function onChange(el) {
+        var _a;
+
+        return SetBusinessHours(__assign(__assign({}, businessHours), (_a = {}, _a[el.target.name] = el.target.value, _a)));
+      }
+    }), react_1["default"].createElement("span", null, "\xA0\uFF5E\xA0"), react_1["default"].createElement("input", {
+      type: "time",
+      name: day.id + "_close",
+      onChange: function onChange(el) {
+        var _a;
+
+        return SetBusinessHours(__assign(__assign({}, businessHours), (_a = {}, _a[el.target.name] = el.target.value, _a)));
+      }
+    })));
+  };
 
   var onSubmit = function onSubmit(data) {
     SetEmailError(false);
-    console.log(data);
-    axios_1["default"].post('/api/create_store', data).then(function (res) {
-      console.log(res);
-      history.push('/store');
-    })["catch"](function (errors) {
-      console.log(errors.response.data.errors);
-      console.log(errors.response.status);
-
-      if (errors.response.status === 422) {
-        SetEmailError(true);
-      }
-    });
+    data['business_day'] = JSON.stringify(businessHours);
+    console.log(data); // monday : ['23:23', '23:23']
+    // axios.post('/api/create_store', data)
+    // .then(res => {
+    //     console.log(res);
+    //     history.push('/store');
+    // })
+    // .catch(errors => {
+    //     console.log(errors.response.data.errors);
+    //     console.log(errors.response.status);
+    //     if(errors.response.status === 422){
+    //         SetEmailError(true);
+    //     }
+    // });
   };
 
   return react_1["default"].createElement("div", {
     className: "p-register-store"
   }, react_1["default"].createElement("div", {
     className: "p-register-store__container"
-  }, react_1["default"].createElement("form", {
+  }, react_1["default"].createElement("h2", null, "\u65B0\u898F\u5E97\u8217\u767B\u9332"), react_1["default"].createElement("form", {
     className: "p-register-store__container__form",
+    name: "form_storeRegister",
     onSubmit: handleSubmit(onSubmit)
-  }, react_1["default"].createElement("h2", null, "\u65B0\u898F\u5E97\u8217\u767B\u9332"), react_1["default"].createElement("label", {
-    htmlFor: "store_name",
-    className: "a-label-required"
-  }, "\u5E97\u8217\u540D"), react_1["default"].createElement("input", {
+  }, react_1["default"].createElement("div", {
+    className: "p-register-store__container__form__item"
+  }, react_1["default"].createElement("label", {
+    htmlFor: "store_name"
+  }, "\u5E97\u8217\u540D"), react_1["default"].createElement("div", {
+    className: "p-register-store__container__form__item__input"
+  }, react_1["default"].createElement("input", {
     type: "text",
     id: "store_name",
     name: "name",
     ref: register({
       required: true
     })
-  }), errors.name && react_1["default"].createElement("p", null, "\u5E97\u8217\u540D\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
-    htmlFor: "store_email",
-    className: "a-label-required"
-  }, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9"), react_1["default"].createElement("input", {
+  }), errors.name && react_1["default"].createElement("p", null, "\u5E97\u8217\u540D\u306F\u5FC5\u9808\u3067\u3059\u3002"))), react_1["default"].createElement("div", {
+    className: "p-register-store__container__form__item"
+  }, react_1["default"].createElement("label", {
+    htmlFor: "store_email"
+  }, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9"), react_1["default"].createElement("div", {
+    className: "p-register-store__container__form__item__input"
+  }, react_1["default"].createElement("input", {
     type: "email",
     name: "email",
     id: "store_email",
     ref: register({
       required: true
     })
-  }), errors.email && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F\u5FC5\u9808\u3067\u3059\u3002"), emailErrorMessage(emailError), react_1["default"].createElement("label", {
-    htmlFor: "store_address",
-    className: "a-label-required"
-  }, "\u4F4F\u6240"), react_1["default"].createElement("input", {
+  }), errors.email && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F\u5FC5\u9808\u3067\u3059\u3002"), emailErrorMessage(emailError))), react_1["default"].createElement("div", {
+    className: "p-register-store__container__form__item"
+  }, react_1["default"].createElement("label", {
+    htmlFor: "store_address"
+  }, "\u4F4F\u6240"), react_1["default"].createElement("div", {
+    className: "p-register-store__container__form__item__input"
+  }, react_1["default"].createElement("input", {
     type: "text",
     name: "address",
-    id: "store_addr\r\n                    ess",
+    id: "store_address",
     ref: register({
       required: true
     })
-  }), errors.address && react_1["default"].createElement("p", null, "\u4F4F\u6240\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
-    htmlFor: "store_tel",
-    className: "a-label-required"
-  }, "\u96FB\u8A71\u756A\u53F7(\u534A\u89D2)"), react_1["default"].createElement("input", {
+  }), errors.address && react_1["default"].createElement("p", null, "\u4F4F\u6240\u306F\u5FC5\u9808\u3067\u3059\u3002"))), react_1["default"].createElement("div", {
+    className: "p-register-store__container__form__item"
+  }, react_1["default"].createElement("label", {
+    htmlFor: "store_tel"
+  }, "\u96FB\u8A71\u756A\u53F7"), react_1["default"].createElement("div", {
+    className: "p-register-store__container__form__item__input"
+  }, react_1["default"].createElement("span", null, "\u534A\u89D2\u30FB\u30CF\u30A4\u30D5\u30F3\u306A\u3057\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("input", {
     type: "text",
     name: "tel",
     id: "store_tel",
@@ -18236,10 +18931,13 @@ function Register_store() {
       required: true,
       pattern: /[0-9]{10,11}/
     })
-  }), errors.tel && errors.tel.type === "required" && react_1["default"].createElement("p", null, "\u96FB\u8A71\u756A\u53F7\u306F\u5FC5\u9808\u3067\u3059\u3002"), errors.tel && errors.tel.type === "pattern" && react_1["default"].createElement("p", null, "10~11\u6587\u5B57\u306E\u534A\u89D2\u6570\u5B57\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("label", {
-    htmlFor: "store_password",
-    className: "a-label-required"
-  }, "\u30D1\u30B9\u30EF\u30FC\u30C9"), react_1["default"].createElement("input", {
+  }), errors.tel && errors.tel.type === "required" && react_1["default"].createElement("p", null, "\u96FB\u8A71\u756A\u53F7\u306F\u5FC5\u9808\u3067\u3059\u3002"), errors.tel && errors.tel.type === "pattern" && react_1["default"].createElement("p", null, "10~11\u6587\u5B57\u306E\u534A\u89D2\u6570\u5B57\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
+    className: "p-register-store__container__form__item"
+  }, react_1["default"].createElement("label", {
+    htmlFor: "store_password"
+  }, "\u30D1\u30B9\u30EF\u30FC\u30C9"), react_1["default"].createElement("div", {
+    className: "p-register-store__container__form__item__input"
+  }, react_1["default"].createElement("input", {
     type: "password",
     name: "password",
     id: "store_password",
@@ -18247,88 +18945,41 @@ function Register_store() {
       required: true,
       pattern: /[a-zA-Z0-9]{8,16}/
     })
-  }), errors.password && errors.password.type === "required" && react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u306F\u5FC5\u9808\u3067\u3059\u3002"), errors.password && errors.password.type === "pattern" && react_1["default"].createElement("p", null, "8~16\u6587\u5B57\u306E\u534A\u89D2\u82F1\u6570\u5B57\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("label", {
-    htmlFor: "store_password-check",
-    className: "a-label-required"
-  }, "\u30D1\u30B9\u30EF\u30FC\u30C9(\u78BA\u8A8D\u7528)"), react_1["default"].createElement("input", {
+  }), errors.password && errors.password.type === "required" && react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u306F\u5FC5\u9808\u3067\u3059\u3002"), errors.password && errors.password.type === "pattern" && react_1["default"].createElement("p", null, "8~16\u6587\u5B57\u306E\u534A\u89D2\u82F1\u6570\u5B57\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
+    className: "p-register-store__container__form__item"
+  }, react_1["default"].createElement("label", {
+    htmlFor: "store_password-check"
+  }, "\u30D1\u30B9\u30EF\u30FC\u30C9(\u78BA\u8A8D\u7528)"), react_1["default"].createElement("div", {
+    className: "p-register-store__container__form__item__input"
+  }, react_1["default"].createElement("input", {
     type: "password",
     name: "password_check",
     id: "store_password-check",
     ref: register({
       required: true
     })
-  }), errors.password_check && errors.password_check.type === "required" && react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9(\u78BA\u8A8D\u7528)\u306F\u5FC5\u9808\u3067\u3059\u3002"), PasswordErrorMessage(getValues('password'), getValues('password_check')), react_1["default"].createElement("label", {
-    htmlFor: "business_day",
-    className: "a-label-required"
-  }, "\u55B6\u696D\u65E5"), react_1["default"].createElement("span", null, "\u55B6\u696D\u3057\u3066\u3044\u308B\u66DC\u65E5\u3092\u5168\u3066\u30C1\u30A7\u30C3\u30AF\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("div", {
+  }), errors.password_check && errors.password_check.type === "required" && react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9(\u78BA\u8A8D\u7528)\u306F\u5FC5\u9808\u3067\u3059\u3002"), PasswordErrorMessage(getValues('password'), getValues('password_check')))), react_1["default"].createElement("div", {
+    className: "p-register-store__container__form__item"
+  }, react_1["default"].createElement("label", {
+    htmlFor: "business_day"
+  }, "\u55B6\u696D\u65E5\u30FB\u55B6\u696D\u6642\u9593"), react_1["default"].createElement("div", {
+    className: "p-register-store__container__form__item__input"
+  }, react_1["default"].createElement("input", {
+    type: "hidden",
+    name: "business_day",
+    ref: register
+  }), react_1["default"].createElement("span", null, "\u55B6\u696D\u3057\u3066\u3044\u308B\u66DC\u65E5\u3092\u30C1\u30A7\u30C3\u30AF\u306E\u3046\u3048\u3001\u55B6\u696D\u6642\u9593\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("div", {
     className: "p-register-store__container__form__week"
-  }, react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__week__day"
-  }, react_1["default"].createElement("input", {
-    type: "checkbox",
-    id: "monday",
-    name: "monday",
-    ref: register
-  }), react_1["default"].createElement("label", {
-    htmlFor: "monday"
-  }, "\u6708\u66DC\u65E5")), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__week__day"
-  }, react_1["default"].createElement("input", {
-    type: "checkbox",
-    id: "tuesday",
-    name: "tuesday",
-    ref: register
-  }), react_1["default"].createElement("label", {
-    htmlFor: "tuesday"
-  }, "\u706B\u66DC\u65E5")), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__week__day"
-  }, react_1["default"].createElement("input", {
-    type: "checkbox",
-    id: "wednesday",
-    name: "wednesday",
-    ref: register
-  }), react_1["default"].createElement("label", {
-    htmlFor: "wednesday"
-  }, "\u6C34\u66DC\u65E5")), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__week__day"
-  }, react_1["default"].createElement("input", {
-    type: "checkbox",
-    id: "thursday",
-    name: "thursday",
-    ref: register
-  }), react_1["default"].createElement("label", {
-    htmlFor: "thursday"
-  }, "\u6728\u66DC\u65E5")), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__week__day"
-  }, react_1["default"].createElement("input", {
-    type: "checkbox",
-    id: "friday",
-    name: "friday",
-    ref: register
-  }), react_1["default"].createElement("label", {
-    htmlFor: "friday"
-  }, "\u91D1\u66DC\u65E5")), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__week__day"
-  }, react_1["default"].createElement("input", {
-    type: "checkbox",
-    id: "saturday",
-    name: "saturday",
-    ref: register
-  }), react_1["default"].createElement("label", {
-    htmlFor: "saturday"
-  }, "\u571F\u66DC\u65E5")), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__week__day"
-  }, react_1["default"].createElement("input", {
-    type: "checkbox",
-    id: "sunday",
-    name: "sunday",
-    ref: register
-  }), react_1["default"].createElement("label", {
-    htmlFor: "sunday"
-  }, "\u65E5\u66DC\u65E5"))), react_1["default"].createElement("label", null, "\u55B6\u696D\u65E5\u30FB\u55B6\u696D\u6642\u9593\u5099\u8003"), react_1["default"].createElement("span", null, "\u3010\u8A18\u8F09\u4F8B\u3011", react_1["default"].createElement("br", null), "\u5B9A\u4F11\u65E5\uFF1A\u7B2C3\u6C34\u66DC\u65E5", react_1["default"].createElement("br", null), "\u55B6\u696D\u6642\u9593\uFF1A\u6708\uFF5E\u6C34 9\u6642\uFF5E19\u6642 / \u6728\uFF5E\u571F 8\u6642\uFF5E13\u6642"), react_1["default"].createElement("textarea", {
+  }, Week_1["default"].week.map(function (day) {
+    return WeekItem(day);
+  })))), react_1["default"].createElement("div", {
+    className: "p-register-store__container__form__item"
+  }, react_1["default"].createElement("label", null, "\u55B6\u696D\u65E5\u306B\u95A2\u3059\u308B\u3072\u3068\u3053\u3068"), react_1["default"].createElement("div", {
+    className: "p-register-store__container__form__item__input"
+  }, react_1["default"].createElement("span", null, "\u3010\u4F8B1\u3011\u5B9A\u4F11\u65E5\uFF1A\u7B2C3\u6C34\u66DC\u65E5", react_1["default"].createElement("br", null), "\u3010\u4F8B2\u3011\u795D\u65E5\u3001\u304A\u76C6\u3001\u5E74\u672B\u5E74\u59CB\u306F\u304A\u4F11\u307F\u3067\u3059\u3002"), react_1["default"].createElement("textarea", {
     name: "business_memo",
     ref: register
-  }), react_1["default"].createElement("input", {
+  }))), react_1["default"].createElement("input", {
     type: "submit",
     value: "\u767B\u9332\u3059\u308B"
   })), react_1["default"].createElement("div", {
@@ -18445,7 +19096,7 @@ function Register_user() {
       console.log(res);
       history.push("/search");
     })["catch"](function (errors) {
-      console.log(errors.response.data.errors);
+      console.log(errors);
 
       if (errors.response.status === 422) {
         SetEmailError(true);
@@ -18814,17 +19465,19 @@ var StoreList_1 = __importDefault(__webpack_require__(/*! ../../molecules/store/
 
 var testInfo = [{
   name: 'sarasapan',
-  address: 'dsdsdsdsdsdsd',
+  address: '福岡市中央区白金',
+  star: 2,
   business_day: 'sasa',
   busines_memo: '定休日！！！',
-  message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
+  message: 'ニューヨーク・ブロードウェイに佇むレンガ造りのデザイナーズプレイラウンジをオマージュ。 ホテルっぽいの敷居の高さを排除し、日常の中にあるオシャレで少しだけ贅沢な時間をすごしたいときの場所。カフェやワークスペースとして、デートや少しの休息などにご利用ください。毎日26時まで営業しておりますので、夜カフェとしてのご利用もおすすめです。',
   sns: {
     twitter: 'twitter',
     instagram: 'sssss'
   }
 }, {
   name: 'sarasapan',
-  address: 'dsdsdsdsdsdsd',
+  address: '福岡市中央区薬院',
+  star: 3.4,
   business_day: 'sasa',
   busines_memo: '定休日！！！',
   message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
@@ -18853,10 +19506,11 @@ function Search() {
           case 0:
             return [4
             /*yield*/
-            , axios_1["default"].post('/api/user')];
+            , axios_1["default"].get('/api/user')];
 
           case 1:
             response = _a.sent();
+            console.log(123);
             console.log(response);
             setUsers(response.data.users);
             return [2
@@ -19393,6 +20047,26 @@ exports.default = UserPage;
 
 /***/ }),
 
+/***/ "./resources/ts/contexts/UserAuthContext.ts":
+/*!**************************************************!*\
+  !*** ./resources/ts/contexts/UserAuthContext.ts ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.UserAuthContext = void 0;
+
+var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+exports.UserAuthContext = react_1.createContext({});
+
+/***/ }),
+
 /***/ "./resources/ts/info/Bread_kinds.ts":
 /*!******************************************!*\
   !*** ./resources/ts/info/Bread_kinds.ts ***!
@@ -19577,24 +20251,39 @@ var Week =
 function () {
   function Week() {
     this.week = [{
+      id: "monday",
+      name: "月曜日",
       text: "月",
-      "class": "i-monday"
+      "class": "i-monday",
+      "boolean": false
     }, {
+      id: "tuesday",
+      name: "火曜日",
       text: "火",
       "class": "i-tuesday"
     }, {
+      id: "wednesday",
+      name: "水曜日",
       text: "水",
       "class": "i-wednesday"
     }, {
+      id: "thursday",
+      name: "木曜日",
       text: "木",
       "class": "i-thursday"
     }, {
+      id: "friday",
+      name: "金曜日",
       text: "金",
       "class": "i-friday"
     }, {
+      id: "saturday",
+      name: "土曜日",
       text: "土",
       "class": "i-saturday"
     }, {
+      id: "sunday",
+      name: "日曜日",
       text: "日",
       "class": "i-sunday"
     }];
@@ -19605,6 +20294,62 @@ function () {
 
 var week = new Week();
 exports.default = week;
+
+/***/ }),
+
+/***/ "./resources/ts/reducers/UserAuthReducer.ts":
+/*!**************************************************!*\
+  !*** ./resources/ts/reducers/UserAuthReducer.ts ***!
+  \**************************************************/
+/***/ (function(__unused_webpack_module, exports) {
+
+"use strict";
+
+
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.initialState = exports.UserAuthReducer = void 0;
+
+var UserAuthReducer = function UserAuthReducer(state, action) {
+  switch (action.type) {
+    case 'setId':
+      return __assign(__assign({}, state), {
+        uuid: action.payload
+      });
+
+    case 'setOutId':
+      return __assign(__assign({}, state), {
+        uuid: null
+      });
+
+    default:
+      return {
+        state: state
+      };
+  }
+};
+
+exports.UserAuthReducer = UserAuthReducer;
+exports.initialState = {
+  uuid: null
+};
 
 /***/ }),
 

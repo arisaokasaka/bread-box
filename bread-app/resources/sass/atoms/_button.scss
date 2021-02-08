@@ -37,13 +37,16 @@
     & > span {
         font-weight: bolder;
 
+        @include bp-960up {
+            font-size: 0.8rem;
+        }
+
         &:nth-child(2) {
             display: none;
 
             @include bp-960up {
                 display: inline;
                 margin-left: 2px;
-                font-size: 0.9rem;
             }
         }
     }
@@ -68,7 +71,6 @@
             @include bp-960up {
                 display: inline;
                 margin-left: 2px;
-                font-size: 0.9rem;
             }
         }
     }
@@ -136,7 +138,9 @@
 
 //モバイルヘッダーのメニューアイコン
 .a-btn-search_icon,
-.a-btn-mypage {
+.a-btn-mypage,
+.a-btn-logIn,
+.a-btn-logout {
     a {
         display: inline-block;
         color: white;
@@ -149,6 +153,17 @@
 
     @include bp-960up {
         display: none;
+    }
+}
+
+.l-navbar__content__nav--loggedin {
+    .a-btn-mypage {
+        @include bp-960up {
+            display: block;
+            a {
+                font-size: 1.6rem;
+            }
+        }
     }
 }
 

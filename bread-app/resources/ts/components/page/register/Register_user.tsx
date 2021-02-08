@@ -33,7 +33,7 @@ export default function Register_user() {
             history.push("/search");
         })
         .catch(errors => {
-            console.log(errors.response.data.errors);
+            console.log(errors);
             if(errors.response.status === 422){
                 SetEmailError(true);
             }

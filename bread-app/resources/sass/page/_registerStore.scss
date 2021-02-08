@@ -1,0 +1,166 @@
+.p-register-store {
+    background-color: $lightestBrown;
+
+    &__container {
+        @include content-width;
+        margin-top: $mp-sm;
+        padding: $mp-sm;
+        border-radius: $sm-radius;
+        color: $font-color-brown;
+
+        &__form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin: 0 auto;
+
+            &__item {
+                display: grid;
+                grid-template-columns: 10rem 1fr;
+                height: 4rem;
+                border-bottom: 0.3px solid $lightGray;
+                box-sizing: border-box;
+
+                & > label {
+                    display: inline;
+                    position: relative;
+                    line-height: 4rem;
+                    height: 4rem;
+                    font-size: 0.8rem;
+                    font-weight: 450;
+                    padding-left: 1rem;
+                    background-color: rgba(252, 222, 184, 0.3);
+                }
+
+                &__input {
+                    display: flex;
+                    align-items: center;
+                    flex-direction: column;
+                    height: 4rem;
+                    padding-left: 1.5rem;
+
+                    & input {
+                        border-radius: $sm-radius;
+                        height: 1.8rem;
+                        padding: 0 5px;
+                        border: 0.5px solid $lightGray;
+                        width: 100%;
+
+                        &[type="submit"] {
+                            background-color: $darkBrown;
+                            color: $white;
+                            font-size: 0.9rem;
+                            letter-spacing: 2px;
+                            margin-top: 10px;
+                            cursor: pointer;
+
+                            &:hover {
+                                background-color: $darkestBrown;
+                            }
+                        }
+                    }
+                }
+
+                & p {
+                    color: $color-error;
+                    font-size: 0.7rem;
+                }
+
+                & span {
+                    color: $textGray;
+                    font-size: 0.7rem;
+                }
+            }
+
+            &__week {
+                display: grid;
+
+                &__day {
+                    display: grid;
+                    font-size: 0.8rem;
+                    margin: 0.5rem 0;
+
+                    @include bp-600up {
+                        grid-template-columns: 6rem 1fr;
+                    }
+
+                    &__heading {
+                        & > label {
+                            vertical-align: middle;
+                        }
+
+                        &__btn {
+                            vertical-align: middle;
+                            position: relative;
+                            display: inline-block;
+                            border-radius: 10px;
+                            width: 28px;
+                            height: 12px;
+                            background-color: $lightGray;
+                            margin-left: 1rem;
+
+                            & > span {
+                                position: absolute;
+                                display: block;
+                                top: -3px;
+                                left: 0;
+                                height: 16px;
+                                width: 16px;
+                                border-radius: 50%;
+                                background-color: $white;
+                                box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.4);
+                                // box-shadow: 0px 1px 2px 2px $shadowGray;
+                                transition: transform 0.2s ease;
+                                cursor: pointer;
+                            }
+
+                            &.active {
+                                background-color: $brown;
+
+                                & > span {
+                                    transform: translateX(0.9rem);
+                                }
+                            }
+                        }
+                    }
+
+                    &__hours {
+                        display: none;
+
+                        &.active {
+                            display: block;
+                            margin-top: 3px;
+
+                            @include bp-600up {
+                                margin: 0;
+                            }
+
+                            & > input {
+                                border: 0.5px solid $lightGray;
+                                padding: 1px 2px;
+                                border-radius: $sm-radius;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &__links {
+            width: 100%;
+            margin: 0 auto;
+            margin-top: $mp-sm;
+            & > span {
+                display: block;
+                color: $font-color-brown;
+                font-size: 0.8rem;
+                margin: 3px 0;
+
+                & > a {
+                    color: $font-color-brown;
+                    font-weight: 800;
+                }
+            }
+        }
+    }
+}
