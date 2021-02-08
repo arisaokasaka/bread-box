@@ -15,7 +15,7 @@ const StoreSubInfo: React.FC<StoreInfoProps> = ({StoreInfo}) => (
         {StoreInfo.map((el)=>{
             el.url = 1;
             return(
-            <div className = "m-store-subInfo__container">
+            <div className = "m-store-subInfo__container" key={"subInfo_"+el.id}>
                 <div className = "m-store-subInfo__container__item">
                     <Score
                         ScoreStar = {el.star}

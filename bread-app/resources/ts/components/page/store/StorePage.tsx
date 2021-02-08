@@ -19,6 +19,7 @@ export default function StorePage() {
 
     let testInfo = [
         {
+            id: 1,
             bread_name: 'くりーむ',
             bread_kind: '菓子パン',
             bread_price: 120,
@@ -27,6 +28,7 @@ export default function StorePage() {
             spirit: '',
             menu_type: 1,
         },{
+            id: 2,
             bread_name: 'くりーむ',
             bread_kind: 'クロワッサン',
             bread_price: 120,
@@ -35,6 +37,7 @@ export default function StorePage() {
             spirit: '',
             menu_type: 1,
         },{
+            id: 4,
             bread_name: 'くりーむ',
             bread_kind: 'クロワッサン',
             bread_price: 120,
@@ -43,6 +46,7 @@ export default function StorePage() {
             spirit: '系列店「馬場FLAT」から毎日届く国産小麦100%の自家製パンは、ランチでもディナーでもおかわり自由ですので、ディップやオリジナリティあふれるお料理とともにお召しあがりください。パンのみの販売もしております。',
             menu_type: 2,
         },{
+            id: 5,
             bread_name: 'くりーむ',
             bread_kind: '食パン',
             bread_price: 120,
@@ -51,6 +55,7 @@ export default function StorePage() {
             spirit: '',
             menu_type: 1,
         },{
+            id: 6,
             bread_name: 'くりーむ',
             bread_kind: '菓子パン',
             bread_price: 120,

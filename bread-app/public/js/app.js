@@ -15834,7 +15834,8 @@ var Btn_homepage = function Btn_homepage(_a) {
     className: "a-btn-homepage"
   }, StoreInfo.map(function (el) {
     return el.url && react_1["default"].createElement("a", {
-      href: el.url
+      href: el.url,
+      key: el.url
     }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
       icon: free_solid_svg_icons_1.faPaperPlane
     }), "\xA0\xA0\u30DB\u30FC\u30E0\u30DA\u30FC\u30B8");
@@ -16174,7 +16175,9 @@ var ModalSNS = function ModalSNS(_a) {
   return react_1["default"].createElement("div", {
     className: "m-modal-sns"
   }, StoreInfo.map(function (el) {
-    return el.sns && react_1["default"].createElement("div", null, react_1["default"].createElement("button", {
+    return el.sns && react_1["default"].createElement("div", {
+      key: "sns_" + el.id
+    }, react_1["default"].createElement("button", {
       onClick: openModal,
       className: "a-btn-modal-sns"
     }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
@@ -17140,7 +17143,9 @@ var StoreBasicInfo = function StoreBasicInfo(_a) {
   }, react_1["default"].createElement("div", {
     className: "m-store-basicInfo__btn"
   }, react_1["default"].createElement(Btn_favorite_1["default"], null), react_1["default"].createElement(Btn_interested_1["default"], null)), StoreInfo.map(function (el) {
-    return react_1["default"].createElement("div", null, react_1["default"].createElement("h2", {
+    return react_1["default"].createElement("div", {
+      key: "basicInfo_" + el.id
+    }, react_1["default"].createElement("h2", {
       className: "m-store-basicInfo__name"
     }, el.name), react_1["default"].createElement("p", {
       className: "m-store-basicInfo__address"
@@ -17428,7 +17433,8 @@ var StoreMenu = function StoreMenu(_a) {
     className: "m-menu"
   }, Menu.map(function (el) {
     return el.menu_type === 1 && react_1["default"].createElement("div", {
-      className: "m-menu__card"
+      className: "m-menu__card",
+      key: "menu_" + el.id
     }, react_1["default"].createElement("img", {
       src: "/images/croissant.jpg",
       alt: "\u30E1\u30CB\u30E5\u30FC\u753B\u50CF"
@@ -17473,7 +17479,8 @@ var StoreSpirit = function StoreSpirit(_a) {
     className: "m-spirit"
   }, Spirit.map(function (el) {
     return el.menu_type === 2 && react_1["default"].createElement("div", {
-      className: "m-spirit__container"
+      className: "m-spirit__container",
+      key: "spirit_" + el.id
     }, react_1["default"].createElement("div", {
       className: "m-spirit__container__section"
     }, react_1["default"].createElement("h2", null, "\u304A\u5E97\u306E\u3053\u3060\u308F\u308A"), react_1["default"].createElement("div", {
@@ -17534,7 +17541,8 @@ var StoreSubInfo = function StoreSubInfo(_a) {
   }, StoreInfo.map(function (el) {
     el.url = 1;
     return react_1["default"].createElement("div", {
-      className: "m-store-subInfo__container"
+      className: "m-store-subInfo__container",
+      key: "subInfo_" + el.id
     }, react_1["default"].createElement("div", {
       className: "m-store-subInfo__container__item"
     }, react_1["default"].createElement(Score_1["default"], {
@@ -19663,6 +19671,7 @@ function StorePage() {
     }
   }];
   var testInfo = [{
+    id: 1,
     bread_name: 'くりーむ',
     bread_kind: '菓子パン',
     bread_price: 120,
@@ -19671,6 +19680,7 @@ function StorePage() {
     spirit: '',
     menu_type: 1
   }, {
+    id: 2,
     bread_name: 'くりーむ',
     bread_kind: 'クロワッサン',
     bread_price: 120,
@@ -19679,6 +19689,7 @@ function StorePage() {
     spirit: '',
     menu_type: 1
   }, {
+    id: 4,
     bread_name: 'くりーむ',
     bread_kind: 'クロワッサン',
     bread_price: 120,
@@ -19687,6 +19698,7 @@ function StorePage() {
     spirit: '系列店「馬場FLAT」から毎日届く国産小麦100%の自家製パンは、ランチでもディナーでもおかわり自由ですので、ディップやオリジナリティあふれるお料理とともにお召しあがりください。パンのみの販売もしております。',
     menu_type: 2
   }, {
+    id: 5,
     bread_name: 'くりーむ',
     bread_kind: '食パン',
     bread_price: 120,
@@ -19695,6 +19707,7 @@ function StorePage() {
     spirit: '',
     menu_type: 1
   }, {
+    id: 6,
     bread_name: 'くりーむ',
     bread_kind: '菓子パン',
     bread_price: 120,

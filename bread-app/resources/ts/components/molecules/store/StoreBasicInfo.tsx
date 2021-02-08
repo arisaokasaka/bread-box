@@ -17,7 +17,7 @@ const StoreBasicInfo: React.FC<StoreInfoProps> = ({StoreInfo}) => {
             </div>
             {StoreInfo.map((el)=>{
                 return(
-                <div>
+                <div key={"basicInfo_"+el.id}>
                     <h2 className = "m-store-basicInfo__name">{el.name}</h2>
                     <p className = "m-store-basicInfo__address">{el.address}</p>
                     <p className = "m-store-basicInfo__message">{el.message}</p>

@@ -34,7 +34,7 @@ const ModalSNS: React.FC<StoreInfoProps> = ({StoreInfo}) =>{
         <div className = "m-modal-sns">
             {StoreInfo.map((el)=>(
                 el.sns && 
-                <div>
+                <div key={"sns_"+el.id}>
                     <button onClick={openModal} className = "a-btn-modal-sns">
                         <FontAwesomeIcon icon={faLink}/>&nbsp;&nbsp;ＳＮＳ
                     </button>

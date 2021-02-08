@@ -8,7 +8,7 @@ const StoreMenu: React.FC<MenuProps> = ({Menu}) => (
     <div className = "m-menu">
         {Menu.map((el)=>(
             el.menu_type === 1 &&
-            <div className = "m-menu__card">
+            <div className = "m-menu__card" key={"menu_"+el.id}>
                 <img src="/images/croissant.jpg" alt="メニュー画像"/>
                 <h4>{el.bread_name}</h4>
                 <span>

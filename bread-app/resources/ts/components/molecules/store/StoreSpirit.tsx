@@ -8,7 +8,7 @@ const StoreSpirit: React.FC<SpiritProps> = ({Spirit}) => (
     <div className = "m-spirit">
         {Spirit.map((el)=>(
             el.menu_type === 2 &&
-            <div className = "m-spirit__container">
+            <div className = "m-spirit__container" key={"spirit_"+el.id}>
                 <div className = "m-spirit__container__section">
                     <h2>お店のこだわり</h2>
                     <div className = "m-spirit__container__section__content">
