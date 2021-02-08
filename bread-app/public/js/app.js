@@ -16397,16 +16397,22 @@ Object.defineProperty(exports, "__esModule", ({
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var Store_pickup = function Store_pickup(_a) {
-  var Pickup = _a.Pickup;
+  var PickupInfo = _a.PickupInfo;
   return react_1["default"].createElement("div", {
     className: "m-store-pickup"
-  }, react_1["default"].createElement("h2", null, "\u30D4\u30C3\u30AF\u30A2\u30C3\u30D7"), react_1["default"].createElement("div", {
+  }, react_1["default"].createElement("h2", {
+    className: "m-store-pickup__title"
+  }, "\u30D4\u30C3\u30AF\u30A2\u30C3\u30D7"), react_1["default"].createElement("div", {
     className: "m-store-pickup__list"
-  }, react_1["default"].createElement("ul", null, react_1["default"].createElement("li", {
-    className: "m-store-pickup__list__item"
-  }, react_1["default"].createElement("img", {
-    src: Pickup.img
-  }), react_1["default"].createElement("p", null, Pickup.name)))));
+  }, PickupInfo.map(function (el) {
+    return react_1["default"].createElement("div", {
+      className: "m-store-pickup__list__item",
+      key: el.id
+    }, react_1["default"].createElement("img", {
+      src: el.img,
+      alt: "\u5E97\u8217\u753B\u50CF"
+    }), react_1["default"].createElement("p", null, el.name));
+  })));
 };
 
 exports.default = Store_pickup;
@@ -16444,14 +16450,12 @@ var Days_1 = __importDefault(__webpack_require__(/*! ../../../info/Days */ "./re
 
 var Hours_1 = __importDefault(__webpack_require__(/*! ../../../info/Hours */ "./resources/ts/info/Hours.ts"));
 
-var Searchbar_1 = __importDefault(__webpack_require__(/*! ../../atoms/Searchbar */ "./resources/ts/components/atoms/Searchbar.tsx"));
-
 var Search_sidebar_item_1 = __importDefault(__webpack_require__(/*! ../../atoms/Search_sidebar_item */ "./resources/ts/components/atoms/Search_sidebar_item.tsx"));
 
 function Search_sidebar() {
   return react_1["default"].createElement("div", {
     className: "m-search-sidebar"
-  }, react_1["default"].createElement(Searchbar_1["default"], null), react_1["default"].createElement(Search_sidebar_item_1["default"], {
+  }, react_1["default"].createElement(Search_sidebar_item_1["default"], {
     sectionTitle: "\u30A8\u30EA\u30A2\u304B\u3089\u63A2\u3059",
     sectionContent: Districts_1["default"].districts
   }), react_1["default"].createElement(Search_sidebar_item_1["default"], {
@@ -19195,6 +19199,59 @@ var Modal_review_1 = __importDefault(__webpack_require__(/*! ../../atoms/modal/M
 
 var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../../molecules/Store_pickup */ "./resources/ts/components/molecules/Store_pickup.tsx"));
 
+var testPickInfo = [{
+  id: 56,
+  name: 'Le pain de Maki',
+  address: '福岡市博多区比恵町',
+  star: 3.3,
+  business_day: '月曜日',
+  busines_memo: '定休日！！！',
+  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  },
+  img: '/images/croissant.jpg'
+}, {
+  id: 56,
+  name: 'Le pain de Maki',
+  address: '福岡市博多区比恵町',
+  star: 3.3,
+  business_day: '月曜日',
+  busines_memo: '定休日！！！',
+  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  },
+  img: '/images/croissant.jpg'
+}, {
+  id: 56,
+  name: 'Le pain de Maki',
+  address: '福岡市博多区比恵町',
+  star: 3.3,
+  business_day: '月曜日',
+  busines_memo: '定休日！！！',
+  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  },
+  img: '/images/bakery.jpg'
+}, {
+  id: 56,
+  name: 'Le pain de Maki',
+  address: '福岡市博多区比恵町',
+  star: 3.3,
+  business_day: '月曜日',
+  busines_memo: '定休日！！！',
+  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  },
+  img: '/images/bakery2.jpg'
+}];
 var testReviewInfo = [{
   uuid: '2222',
   star: 4.4,
@@ -19234,7 +19291,7 @@ var Review = function Review(_a) {
   }, react_1["default"].createElement(ReviewList_1["default"], {
     ReviewInfo: ReviewInfo
   }))), react_1["default"].createElement("aside", null, react_1["default"].createElement(Store_pickup_1["default"], {
-    Pickup: StoreInfo
+    PickupInfo: testPickInfo
   }))));
 };
 
@@ -19251,183 +19308,6 @@ exports.default = Review;
 "use strict";
 
 
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  Object.defineProperty(o, k2, {
-    enumerable: true,
-    get: function get() {
-      return m[k];
-    }
-  });
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
-
-  __setModuleDefault(result, mod);
-
-  return result;
-};
-
-var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
-  function adopt(value) {
-    return value instanceof P ? value : new P(function (resolve) {
-      resolve(value);
-    });
-  }
-
-  return new (P || (P = Promise))(function (resolve, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-
-    function step(result) {
-      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-    }
-
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-
-var __generator = this && this.__generator || function (thisArg, body) {
-  var _ = {
-    label: 0,
-    sent: function sent() {
-      if (t[0] & 1) throw t[1];
-      return t[1];
-    },
-    trys: [],
-    ops: []
-  },
-      f,
-      y,
-      t,
-      g;
-  return g = {
-    next: verb(0),
-    "throw": verb(1),
-    "return": verb(2)
-  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
-    return this;
-  }), g;
-
-  function verb(n) {
-    return function (v) {
-      return step([n, v]);
-    };
-  }
-
-  function step(op) {
-    if (f) throw new TypeError("Generator is already executing.");
-
-    while (_) {
-      try {
-        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-        if (y = 0, t) op = [op[0] & 2, t.value];
-
-        switch (op[0]) {
-          case 0:
-          case 1:
-            t = op;
-            break;
-
-          case 4:
-            _.label++;
-            return {
-              value: op[1],
-              done: false
-            };
-
-          case 5:
-            _.label++;
-            y = op[1];
-            op = [0];
-            continue;
-
-          case 7:
-            op = _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-
-          default:
-            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-              _ = 0;
-              continue;
-            }
-
-            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
-              _.label = op[1];
-              break;
-            }
-
-            if (op[0] === 6 && _.label < t[1]) {
-              _.label = t[1];
-              t = op;
-              break;
-            }
-
-            if (t && _.label < t[2]) {
-              _.label = t[2];
-
-              _.ops.push(op);
-
-              break;
-            }
-
-            if (t[2]) _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-        }
-
-        op = body.call(thisArg, _);
-      } catch (e) {
-        op = [6, e];
-        y = 0;
-      } finally {
-        f = t = 0;
-      }
-    }
-
-    if (op[0] & 5) throw op[1];
-    return {
-      value: op[0] ? op[1] : void 0,
-      done: true
-    };
-  }
-};
-
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -19438,11 +19318,9 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-
-var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
 var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
 
@@ -19464,7 +19342,8 @@ var testInfo = [{
   sns: {
     twitter: 'twitter',
     instagram: 'sssss'
-  }
+  },
+  img: '/images/croissant.jpg'
 }, {
   name: 'sarasapan',
   address: '福岡市中央区薬院',
@@ -19475,73 +19354,56 @@ var testInfo = [{
   sns: {
     twitter: 'twitter',
     instagram: 'sssss'
-  }
+  },
+  img: '/images/croissant.jpg'
+}, {
+  id: 56,
+  name: 'Le pain de Maki',
+  address: '福岡市博多区比恵町',
+  star: 3.3,
+  business_day: '月曜日',
+  busines_memo: '定休日！！！',
+  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  },
+  img: '/images/bakery.jpg'
+}, {
+  id: 56,
+  name: 'Le pain de Maki',
+  address: '福岡市博多区比恵町',
+  star: 3.3,
+  business_day: '月曜日',
+  busines_memo: '定休日！！！',
+  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  },
+  img: '/images/bakery2.jpg'
 }];
 
 function Search() {
-  var _this = this;
-
-  var _a = react_1.useState([]),
-      users = _a[0],
-      setUsers = _a[1];
-
-  react_1.useEffect(function () {
-    getUsers();
-  }, []);
-
-  var getUsers = function getUsers() {
-    return __awaiter(_this, void 0, void 0, function () {
-      var response;
-      return __generator(this, function (_a) {
-        switch (_a.label) {
-          case 0:
-            return [4
-            /*yield*/
-            , axios_1["default"].get('/api/user')];
-
-          case 1:
-            response = _a.sent();
-            console.log(123);
-            console.log(response);
-            setUsers(response.data.users);
-            return [2
-            /*return*/
-            ];
-        }
-      });
-    });
-  };
-
-  var _b = react_1.useState([]),
-      stores = _b[0],
-      setStores = _b[1];
-
-  react_1.useEffect(function () {
-    getStores();
-  }, []);
-
-  var getStores = function getStores() {
-    return __awaiter(_this, void 0, void 0, function () {
-      var response;
-      return __generator(this, function (_a) {
-        switch (_a.label) {
-          case 0:
-            return [4
-            /*yield*/
-            , axios_1["default"].post('/api/store_all')];
-
-          case 1:
-            response = _a.sent();
-            console.log(response);
-            setStores(response.data);
-            return [2
-            /*return*/
-            ];
-        }
-      });
-    });
-  };
-
+  // const [users, setUsers] = useState<any[]>([]);
+  // useEffect(() => {
+  //     getUsers()
+  // },[])
+  // const getUsers = async () => {
+  //     const response = await axios.get('/api/user');
+  //     console.log(123)
+  //     console.log(response)
+  //     setUsers(response.data.users)
+  // }
+  // const [stores, setStores] = useState<any[]>([]);
+  // useEffect(()=>{
+  //     getStores()
+  // },[])
+  // const getStores = async () => {
+  //     const response = await axios.post('/api/store_all')
+  //     console.log(response)
+  //     setStores(response.data)
+  // }
   return react_1["default"].createElement("div", {
     className: "p-search"
   }, react_1["default"].createElement("div", {
@@ -19555,10 +19417,7 @@ function Search() {
   }, react_1["default"].createElement(Search_sidebar_1["default"], null), react_1["default"].createElement("div", {
     className: "p-search__container__content"
   }, react_1["default"].createElement(Store_pickup_1["default"], {
-    Pickup: {
-      'img': 1,
-      'name': "ありパン"
-    }
+    PickupInfo: testInfo
   }), react_1["default"].createElement("div", {
     className: "p-search__container__content__list"
   }, react_1["default"].createElement("div", {
@@ -19846,6 +19705,60 @@ var top_section_1 = __importDefault(__webpack_require__(/*! ../../molecules/top/
 var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../../molecules/Store_pickup */ "./resources/ts/components/molecules/Store_pickup.tsx")); // let img_bakery1 = require('../../../image/bakery2.jpg');
 
 
+var testPickInfo = [{
+  id: 56,
+  name: 'Le pain de Maki',
+  address: '福岡市博多区比恵町',
+  star: 3.3,
+  business_day: '月曜日',
+  busines_memo: '定休日！！！',
+  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  },
+  img: '/images/croissant.jpg'
+}, {
+  id: 56,
+  name: 'Le pain de Maki',
+  address: '福岡市博多区比恵町',
+  star: 3.3,
+  business_day: '月曜日',
+  busines_memo: '定休日！！！',
+  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  },
+  img: '/images/croissant.jpg'
+}, {
+  id: 56,
+  name: 'Le pain de Maki',
+  address: '福岡市博多区比恵町',
+  star: 3.3,
+  business_day: '月曜日',
+  busines_memo: '定休日！！！',
+  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  },
+  img: '/images/croissant.jpg'
+}, {
+  id: 56,
+  name: 'Le pain de Maki',
+  address: '福岡市博多区比恵町',
+  star: 3.3,
+  business_day: '月曜日',
+  busines_memo: '定休日！！！',
+  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  },
+  img: '/images/croissant.jpg'
+}];
+
 function Top() {
   return react_1["default"].createElement("div", {
     className: "p-top"
@@ -19865,10 +19778,7 @@ function Top() {
     sectionTitle: "\u55B6\u696D\u65E5\u304B\u3089\u63A2\u3059",
     sectionContent: Days_1["default"].days
   }), react_1["default"].createElement(Store_pickup_1["default"], {
-    Pickup: {
-      'img': 12,
-      'name': "ありパン"
-    }
+    PickupInfo: testPickInfo
   }), react_1["default"].createElement("section", {
     className: "p-top__content__section"
   }, react_1["default"].createElement("h2", null, "\u30A2\u30AF\u30BB\u30B9\u6570\u30E9\u30F3\u30AD\u30F3\u30B0"), react_1["default"].createElement("ul", null, react_1["default"].createElement("li", {

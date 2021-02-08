@@ -97,6 +97,11 @@
                 color: $brown;
                 font-size: 0.8rem;
                 margin: 8px 0;
+
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 3;
+                overflow: hidden;
             }
         }
     }

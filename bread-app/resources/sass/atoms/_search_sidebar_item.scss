@@ -2,21 +2,20 @@
     margin-bottom: $mp-xs;
 
     label {
-        font-size: 0.9rem;
+        font-size: 1rem;
         font-weight: bolder;
         color: $font-color-brown;
+        border-bottom: 2px solid $font-color-brown;
+        padding: 0 2px;
     }
 
     ul {
-        display: flex;
-        flex-wrap: wrap;
-        margin: 3px 0 0 0;
+        display: grid;
+        margin-top: $mp-xxs;
 
         li {
-            display: block;
-            font-size: 0.8rem;
-            margin: 0 2px 1.5px 0;
-
+            font-size: 0.9rem;
+            height: 1.5rem;
             input {
                 cursor: pointer;
             }

@@ -1,5 +1,5 @@
 .p-store {
-    padding-top: $mp-md;
+    margin: $margin-top_content 0;
 
     &__container {
         @include content-width;

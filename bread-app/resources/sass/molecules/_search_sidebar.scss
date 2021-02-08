@@ -5,10 +5,9 @@
 
         @include bp-600up {
             display: block;
-            background-color: $lightBrown;
+            // background-color: $white;
             flex-basis: 24%;
             margin-right: $mp-xxs;
-            margin-top: $mp-xs;
             padding: $mp-xxs;
             border-radius: $base-radius;
 

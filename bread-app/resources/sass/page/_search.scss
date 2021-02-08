@@ -1,6 +1,6 @@
 .p-search {
     @include content-width;
-    padding-top: $header-height;
+    margin: $margin-top_content auto;
 
     &__container {
         @include bp-600up {
@@ -15,7 +15,8 @@
             &__list {
                 background-color: $lightBrown;
                 border-radius: $base-radius;
-                padding: $mp-xs;
+                padding: $mp-xxs $mp-xs;
+                margin-top: $mp-xs;
 
                 &__order--mobile {
                     display: flex;
