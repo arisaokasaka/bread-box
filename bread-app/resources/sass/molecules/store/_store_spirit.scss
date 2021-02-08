@@ -1,17 +1,42 @@
 .m-spirit {
     &__container {
-        background-color: $white;
-        padding: $mp-xxs;
+        // padding: $mp-xxs;
 
         &__section {
-            margin: $mp-xxs 0;
+            margin: $mp-xs 0;
+            background-color: $lightestBrown;
+            border-radius: $sm-radius;
+            padding: $mp-xs;
 
-            p {
-                color: $font-color-brown;
+            & > h2 {
+                margin-bottom: $mp-xxs;
             }
 
             &__content {
-                display: flex;
+                display: grid;
+                @include bp-600up {
+                    grid-template-columns: 35% 1fr;
+                    column-gap: 0.9rem;
+                }
+
+                & > img {
+                    object-fit: cover;
+                    width: 100%;
+                    height: 150px;
+                    margin: $mp-xxs auto;
+
+                    @include bp-600up {
+                        width: auto;
+                        height: auto;
+                        margin: 0;
+                    }
+                }
+
+                & > p {
+                    color: $font-color-brown;
+                    font-size: 0.9rem;
+                    line-height: 2rem;
+                }
             }
         }
     }

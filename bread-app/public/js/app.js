@@ -15548,8 +15548,8 @@ function BtnEditUser() {
     to: "/user_edit",
     className: "a-btn-edit-user"
   }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-    icon: free_solid_svg_icons_1.faUserEdit
-  }), "\xA0\xA0\u7DE8\u96C6");
+    icon: free_solid_svg_icons_1.faPen
+  }), react_1["default"].createElement("span", null, "\xA0\xA0\u7DE8\u96C6"));
 }
 
 exports.default = BtnEditUser;
@@ -15834,7 +15834,8 @@ var Btn_homepage = function Btn_homepage(_a) {
     className: "a-btn-homepage"
   }, StoreInfo.map(function (el) {
     return el.url && react_1["default"].createElement("a", {
-      href: el.url
+      href: el.url,
+      key: el.url
     }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
       icon: free_solid_svg_icons_1.faPaperPlane
     }), "\xA0\xA0\u30DB\u30FC\u30E0\u30DA\u30FC\u30B8");
@@ -16174,7 +16175,9 @@ var ModalSNS = function ModalSNS(_a) {
   return react_1["default"].createElement("div", {
     className: "m-modal-sns"
   }, StoreInfo.map(function (el) {
-    return el.sns && react_1["default"].createElement("div", null, react_1["default"].createElement("button", {
+    return el.sns && react_1["default"].createElement("div", {
+      key: "sns_" + el.id
+    }, react_1["default"].createElement("button", {
       onClick: openModal,
       className: "a-btn-modal-sns"
     }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
@@ -16397,16 +16400,23 @@ Object.defineProperty(exports, "__esModule", ({
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var Store_pickup = function Store_pickup(_a) {
-  var Pickup = _a.Pickup;
+  var PickupInfo = _a.PickupInfo;
   return react_1["default"].createElement("div", {
     className: "m-store-pickup"
-  }, react_1["default"].createElement("h2", null, "\u30D4\u30C3\u30AF\u30A2\u30C3\u30D7"), react_1["default"].createElement("div", {
+  }, react_1["default"].createElement("h2", {
+    className: "m-store-pickup__title"
+  }, "\u30D4\u30C3\u30AF\u30A2\u30C3\u30D7"), react_1["default"].createElement("div", {
     className: "m-store-pickup__list"
-  }, react_1["default"].createElement("ul", null, react_1["default"].createElement("li", {
-    className: "m-store-pickup__list__item"
-  }, react_1["default"].createElement("img", {
-    src: Pickup.img
-  }), react_1["default"].createElement("p", null, Pickup.name)))));
+  }, PickupInfo.map(function (el) {
+    return react_1["default"].createElement("a", {
+      href: "",
+      className: "m-store-pickup__list__item",
+      key: el.id
+    }, react_1["default"].createElement("img", {
+      src: el.img,
+      alt: "\u5E97\u8217\u753B\u50CF"
+    }), react_1["default"].createElement("p", null, el.name));
+  })));
 };
 
 exports.default = Store_pickup;
@@ -16444,14 +16454,12 @@ var Days_1 = __importDefault(__webpack_require__(/*! ../../../info/Days */ "./re
 
 var Hours_1 = __importDefault(__webpack_require__(/*! ../../../info/Hours */ "./resources/ts/info/Hours.ts"));
 
-var Searchbar_1 = __importDefault(__webpack_require__(/*! ../../atoms/Searchbar */ "./resources/ts/components/atoms/Searchbar.tsx"));
-
 var Search_sidebar_item_1 = __importDefault(__webpack_require__(/*! ../../atoms/Search_sidebar_item */ "./resources/ts/components/atoms/Search_sidebar_item.tsx"));
 
 function Search_sidebar() {
   return react_1["default"].createElement("div", {
     className: "m-search-sidebar"
-  }, react_1["default"].createElement(Searchbar_1["default"], null), react_1["default"].createElement(Search_sidebar_item_1["default"], {
+  }, react_1["default"].createElement(Search_sidebar_item_1["default"], {
     sectionTitle: "\u30A8\u30EA\u30A2\u304B\u3089\u63A2\u3059",
     sectionContent: Districts_1["default"].districts
   }), react_1["default"].createElement(Search_sidebar_item_1["default"], {
@@ -17135,7 +17143,9 @@ var StoreBasicInfo = function StoreBasicInfo(_a) {
   }, react_1["default"].createElement("div", {
     className: "m-store-basicInfo__btn"
   }, react_1["default"].createElement(Btn_favorite_1["default"], null), react_1["default"].createElement(Btn_interested_1["default"], null)), StoreInfo.map(function (el) {
-    return react_1["default"].createElement("div", null, react_1["default"].createElement("h2", {
+    return react_1["default"].createElement("div", {
+      key: "basicInfo_" + el.id
+    }, react_1["default"].createElement("h2", {
       className: "m-store-basicInfo__name"
     }, el.name), react_1["default"].createElement("p", {
       className: "m-store-basicInfo__address"
@@ -17423,13 +17433,16 @@ var StoreMenu = function StoreMenu(_a) {
     className: "m-menu"
   }, Menu.map(function (el) {
     return el.menu_type === 1 && react_1["default"].createElement("div", {
-      className: "m-menu__card"
+      className: "m-menu__card",
+      key: "menu_" + el.id
     }, react_1["default"].createElement("img", {
-      src: "",
+      src: "/images/croissant.jpg",
       alt: "\u30E1\u30CB\u30E5\u30FC\u753B\u50CF"
-    }), react_1["default"].createElement("h4", null, el.bread_name), react_1["default"].createElement("p", {
+    }), react_1["default"].createElement("h4", null, el.bread_name), react_1["default"].createElement("span", null, react_1["default"].createElement("p", {
+      className: "m-menu__card__kind"
+    }, el.bread_kind), react_1["default"].createElement("p", {
       className: "m-menu__card__price"
-    }, el.bread_price, "\u5186"), react_1["default"].createElement("p", {
+    }, el.bread_price, "\u5186")), react_1["default"].createElement("p", {
       className: "m-menu__card__detail"
     }, el.bread_detail));
   }));
@@ -17466,20 +17479,21 @@ var StoreSpirit = function StoreSpirit(_a) {
     className: "m-spirit"
   }, Spirit.map(function (el) {
     return el.menu_type === 2 && react_1["default"].createElement("div", {
-      className: "m-spirit__container"
+      className: "m-spirit__container",
+      key: "spirit_" + el.id
     }, react_1["default"].createElement("div", {
       className: "m-spirit__container__section"
-    }, react_1["default"].createElement("h2", null, "\u3053\u3060\u308F\u308A"), react_1["default"].createElement("div", {
+    }, react_1["default"].createElement("h2", null, "\u304A\u5E97\u306E\u3053\u3060\u308F\u308A"), react_1["default"].createElement("div", {
       className: "m-spirit__container__section__content"
     }, react_1["default"].createElement("img", {
-      src: "",
+      src: "/images/croissant.jpg",
       alt: "\u3053\u3060\u308F\u308A\u306E\u5199\u771F"
     }), react_1["default"].createElement("p", null, el.advantage))), react_1["default"].createElement("div", {
       className: "m-spirit__container__section"
-    }, react_1["default"].createElement("h2", null, "\u601D\u3044"), react_1["default"].createElement("div", {
+    }, react_1["default"].createElement("h2", null, "\u304A\u5E97\u306E\u601D\u3044"), react_1["default"].createElement("div", {
       className: "m-spirit__container__section__content"
     }, react_1["default"].createElement("img", {
-      src: "",
+      src: "/images/bakery2.jpg",
       alt: "\u601D\u3044\u304C\u4F1D\u308F\u308B\u5199\u771F"
     }), react_1["default"].createElement("p", null, el.spirit))));
   }));
@@ -17520,17 +17534,6 @@ var Btn_homepage_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons
 
 var Modal_sns_1 = __importDefault(__webpack_require__(/*! ../../atoms/modal/Modal_sns */ "./resources/ts/components/atoms/modal/Modal_sns.tsx"));
 
-var testStoreInfo = [{
-  star: 2.5,
-  url: "https://de-milestones.com/",
-  sns: {
-    twitter: "https://twitter.com/dev_design8",
-    instagram: "ss",
-    facebook: "ss",
-    other: "Ss"
-  }
-}];
-
 var StoreSubInfo = function StoreSubInfo(_a) {
   var StoreInfo = _a.StoreInfo;
   return react_1["default"].createElement("div", {
@@ -17538,7 +17541,8 @@ var StoreSubInfo = function StoreSubInfo(_a) {
   }, StoreInfo.map(function (el) {
     el.url = 1;
     return react_1["default"].createElement("div", {
-      className: "m-store-subInfo__container"
+      className: "m-store-subInfo__container",
+      key: "subInfo_" + el.id
     }, react_1["default"].createElement("div", {
       className: "m-store-subInfo__container__item"
     }, react_1["default"].createElement(Score_1["default"], {
@@ -17550,14 +17554,59 @@ var StoreSubInfo = function StoreSubInfo(_a) {
     }), react_1["default"].createElement("p", null, el.business_memo)), react_1["default"].createElement("div", {
       className: "m-store-subInfo__container__item__btns"
     }, react_1["default"].createElement(Btn_homepage_1["default"], {
-      StoreInfo: testStoreInfo
+      StoreInfo: StoreInfo
     }), react_1["default"].createElement(Modal_sns_1["default"], {
-      StoreInfo: testStoreInfo
+      StoreInfo: StoreInfo
     })));
   }));
 };
 
 exports.default = StoreSubInfo;
+
+/***/ }),
+
+/***/ "./resources/ts/components/molecules/top/StoreRanking.tsx":
+/*!****************************************************************!*\
+  !*** ./resources/ts/components/molecules/top/StoreRanking.tsx ***!
+  \****************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var StorRanking = function StorRanking(_a) {
+  var RankingInfo = _a.RankingInfo;
+  return react_1["default"].createElement("div", {
+    className: "m-store-ranking"
+  }, react_1["default"].createElement("h2", {
+    className: "m-store-ranking__title"
+  }, "\u30E9\u30F3\u30AD\u30F3\u30B0"), react_1["default"].createElement("div", {
+    className: "m-store-ranking__list"
+  }, RankingInfo.map(function (el) {
+    return react_1["default"].createElement("a", {
+      href: "",
+      className: "m-store-ranking__list__item",
+      key: el.id
+    }, react_1["default"].createElement("img", {
+      src: el.img,
+      alt: "\u5E97\u8217\u753B\u50CF"
+    }), react_1["default"].createElement("p", null, el.name));
+  })));
+};
+
+exports.default = StorRanking;
 
 /***/ }),
 
@@ -17621,6 +17670,10 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 
 var BtnEditUser_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/BtnEditUser */ "./resources/ts/components/atoms/buttons/BtnEditUser.tsx"));
 
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
 var UserProf = function UserProf(_a) {
   var UserInfo = _a.UserInfo;
   return react_1["default"].createElement("div", {
@@ -17631,10 +17684,20 @@ var UserProf = function UserProf(_a) {
       key: el.uuid
     }, react_1["default"].createElement("div", {
       className: "m-user-prof__container__btn"
-    }, react_1["default"].createElement(BtnEditUser_1["default"], null)), react_1["default"].createElement("img", {
-      src: "",
+    }, react_1["default"].createElement(BtnEditUser_1["default"], null)), react_1["default"].createElement("div", {
+      className: "m-user-prof__container__content"
+    }, react_1["default"].createElement("img", {
+      src: "/images/croissant.jpg",
       alt: "\u30D7\u30ED\u30D5\u30A3\u30FC\u30EB\u753B\u50CF"
-    }), react_1["default"].createElement("div", null, react_1["default"].createElement("h3", null, el.name), react_1["default"].createElement("p", null, el.password), react_1["default"].createElement("p", null, "\u3044"), react_1["default"].createElement("p", null, "\u3046")));
+    }), react_1["default"].createElement("div", {
+      className: "m-user-prof__container__content__text"
+    }, react_1["default"].createElement("h3", null, el.name), react_1["default"].createElement("p", null, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+      icon: free_solid_svg_icons_1.faHeart
+    })), "\u304A\u6C17\u306B\u5165\u308A"), react_1["default"].createElement("p", null, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+      icon: free_solid_svg_icons_1.faFlag
+    })), "\u884C\u3063\u3066\u307F\u305F\u3044"), react_1["default"].createElement("p", null, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+      icon: free_solid_svg_icons_1.faCommentDots
+    })), "\u30EC\u30D3\u30E5\u30FC\u6570"))));
   }));
 };
 
@@ -17767,25 +17830,25 @@ var UserTable = function UserTable(_a) {
       setTable = _b[1];
 
   var TabFavorite = {
-    "class": "m-store-contents__tab--favorite",
+    "class": "m-user-table__tab--favorite",
     table: "favorite",
     value: "お気に入り",
     "function": handleFavorite
   };
   var TabInterested = {
-    "class": "m-store-contents__tab--interested",
+    "class": "m-user-table__tab--interested",
     table: "interested",
     value: "行ってみたい",
     "function": handleInterested
   };
   var TabReviewed = {
-    "class": "m-store-contents__tab--reviewed",
+    "class": "m-user-table__tab--reviewed",
     table: "reviewed",
     value: "レビュー",
     "function": handleReview
   };
   var TabStamp = {
-    "class": "m-store-contents__tab--stamp",
+    "class": "m-user-table__tab--stamp",
     table: "stamp",
     value: "スタンプ",
     "function": handleStamp
@@ -19204,6 +19267,59 @@ var Modal_review_1 = __importDefault(__webpack_require__(/*! ../../atoms/modal/M
 
 var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../../molecules/Store_pickup */ "./resources/ts/components/molecules/Store_pickup.tsx"));
 
+var testPickInfo = [{
+  id: 56,
+  name: 'Le pain de Maki',
+  address: '福岡市博多区比恵町',
+  star: 3.3,
+  business_day: '月曜日',
+  busines_memo: '定休日！！！',
+  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  },
+  img: '/images/croissant.jpg'
+}, {
+  id: 56,
+  name: 'Le pain de Maki',
+  address: '福岡市博多区比恵町',
+  star: 3.3,
+  business_day: '月曜日',
+  busines_memo: '定休日！！！',
+  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  },
+  img: '/images/croissant.jpg'
+}, {
+  id: 56,
+  name: 'Le pain de Maki',
+  address: '福岡市博多区比恵町',
+  star: 3.3,
+  business_day: '月曜日',
+  busines_memo: '定休日！！！',
+  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  },
+  img: '/images/bakery.jpg'
+}, {
+  id: 56,
+  name: 'Le pain de Maki',
+  address: '福岡市博多区比恵町',
+  star: 3.3,
+  business_day: '月曜日',
+  busines_memo: '定休日！！！',
+  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  },
+  img: '/images/bakery2.jpg'
+}];
 var testReviewInfo = [{
   uuid: '2222',
   star: 4.4,
@@ -19243,7 +19359,7 @@ var Review = function Review(_a) {
   }, react_1["default"].createElement(ReviewList_1["default"], {
     ReviewInfo: ReviewInfo
   }))), react_1["default"].createElement("aside", null, react_1["default"].createElement(Store_pickup_1["default"], {
-    Pickup: StoreInfo
+    PickupInfo: testPickInfo
   }))));
 };
 
@@ -19260,183 +19376,6 @@ exports.default = Review;
 "use strict";
 
 
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  Object.defineProperty(o, k2, {
-    enumerable: true,
-    get: function get() {
-      return m[k];
-    }
-  });
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
-
-  __setModuleDefault(result, mod);
-
-  return result;
-};
-
-var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
-  function adopt(value) {
-    return value instanceof P ? value : new P(function (resolve) {
-      resolve(value);
-    });
-  }
-
-  return new (P || (P = Promise))(function (resolve, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-
-    function step(result) {
-      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-    }
-
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-
-var __generator = this && this.__generator || function (thisArg, body) {
-  var _ = {
-    label: 0,
-    sent: function sent() {
-      if (t[0] & 1) throw t[1];
-      return t[1];
-    },
-    trys: [],
-    ops: []
-  },
-      f,
-      y,
-      t,
-      g;
-  return g = {
-    next: verb(0),
-    "throw": verb(1),
-    "return": verb(2)
-  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
-    return this;
-  }), g;
-
-  function verb(n) {
-    return function (v) {
-      return step([n, v]);
-    };
-  }
-
-  function step(op) {
-    if (f) throw new TypeError("Generator is already executing.");
-
-    while (_) {
-      try {
-        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-        if (y = 0, t) op = [op[0] & 2, t.value];
-
-        switch (op[0]) {
-          case 0:
-          case 1:
-            t = op;
-            break;
-
-          case 4:
-            _.label++;
-            return {
-              value: op[1],
-              done: false
-            };
-
-          case 5:
-            _.label++;
-            y = op[1];
-            op = [0];
-            continue;
-
-          case 7:
-            op = _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-
-          default:
-            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-              _ = 0;
-              continue;
-            }
-
-            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
-              _.label = op[1];
-              break;
-            }
-
-            if (op[0] === 6 && _.label < t[1]) {
-              _.label = t[1];
-              t = op;
-              break;
-            }
-
-            if (t && _.label < t[2]) {
-              _.label = t[2];
-
-              _.ops.push(op);
-
-              break;
-            }
-
-            if (t[2]) _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-        }
-
-        op = body.call(thisArg, _);
-      } catch (e) {
-        op = [6, e];
-        y = 0;
-      } finally {
-        f = t = 0;
-      }
-    }
-
-    if (op[0] & 5) throw op[1];
-    return {
-      value: op[0] ? op[1] : void 0,
-      done: true
-    };
-  }
-};
-
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -19447,11 +19386,9 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-
-var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
 var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
 
@@ -19473,7 +19410,8 @@ var testInfo = [{
   sns: {
     twitter: 'twitter',
     instagram: 'sssss'
-  }
+  },
+  img: '/images/croissant.jpg'
 }, {
   name: 'sarasapan',
   address: '福岡市中央区薬院',
@@ -19484,73 +19422,56 @@ var testInfo = [{
   sns: {
     twitter: 'twitter',
     instagram: 'sssss'
-  }
+  },
+  img: '/images/croissant.jpg'
+}, {
+  id: 56,
+  name: 'Le pain de Maki',
+  address: '福岡市博多区比恵町',
+  star: 3.3,
+  business_day: '月曜日',
+  busines_memo: '定休日！！！',
+  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  },
+  img: '/images/bakery.jpg'
+}, {
+  id: 56,
+  name: 'Le pain de Maki',
+  address: '福岡市博多区比恵町',
+  star: 3.3,
+  business_day: '月曜日',
+  busines_memo: '定休日！！！',
+  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  },
+  img: '/images/bakery2.jpg'
 }];
 
 function Search() {
-  var _this = this;
-
-  var _a = react_1.useState([]),
-      users = _a[0],
-      setUsers = _a[1];
-
-  react_1.useEffect(function () {
-    getUsers();
-  }, []);
-
-  var getUsers = function getUsers() {
-    return __awaiter(_this, void 0, void 0, function () {
-      var response;
-      return __generator(this, function (_a) {
-        switch (_a.label) {
-          case 0:
-            return [4
-            /*yield*/
-            , axios_1["default"].get('/api/user')];
-
-          case 1:
-            response = _a.sent();
-            console.log(123);
-            console.log(response);
-            setUsers(response.data.users);
-            return [2
-            /*return*/
-            ];
-        }
-      });
-    });
-  };
-
-  var _b = react_1.useState([]),
-      stores = _b[0],
-      setStores = _b[1];
-
-  react_1.useEffect(function () {
-    getStores();
-  }, []);
-
-  var getStores = function getStores() {
-    return __awaiter(_this, void 0, void 0, function () {
-      var response;
-      return __generator(this, function (_a) {
-        switch (_a.label) {
-          case 0:
-            return [4
-            /*yield*/
-            , axios_1["default"].post('/api/store_all')];
-
-          case 1:
-            response = _a.sent();
-            console.log(response);
-            setStores(response.data);
-            return [2
-            /*return*/
-            ];
-        }
-      });
-    });
-  };
-
+  // const [users, setUsers] = useState<any[]>([]);
+  // useEffect(() => {
+  //     getUsers()
+  // },[])
+  // const getUsers = async () => {
+  //     const response = await axios.get('/api/user');
+  //     console.log(123)
+  //     console.log(response)
+  //     setUsers(response.data.users)
+  // }
+  // const [stores, setStores] = useState<any[]>([]);
+  // useEffect(()=>{
+  //     getStores()
+  // },[])
+  // const getStores = async () => {
+  //     const response = await axios.post('/api/store_all')
+  //     console.log(response)
+  //     setStores(response.data)
+  // }
   return react_1["default"].createElement("div", {
     className: "p-search"
   }, react_1["default"].createElement("div", {
@@ -19564,10 +19485,7 @@ function Search() {
   }, react_1["default"].createElement(Search_sidebar_1["default"], null), react_1["default"].createElement("div", {
     className: "p-search__container__content"
   }, react_1["default"].createElement(Store_pickup_1["default"], {
-    Pickup: {
-      'img': 1,
-      'name': "ありパン"
-    }
+    PickupInfo: testInfo
   }), react_1["default"].createElement("div", {
     className: "p-search__container__content__list"
   }, react_1["default"].createElement("div", {
@@ -19741,17 +19659,19 @@ var StoreContents_1 = __importDefault(__webpack_require__(/*! ../../molecules/st
 function StorePage() {
   //テスト
   var testStoreInfo = [{
-    name: 'sarasapan',
-    address: 'dsdsdsdsdsdsd',
-    business_day: 'sasa',
+    name: 'Le pain de Maki',
+    address: '福岡市博多区比恵町',
+    star: 3.3,
+    business_day: '月曜日',
     busines_memo: '定休日！！！',
-    message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
+    message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
     sns: {
       twitter: 'twitter',
       instagram: 'sssss'
     }
   }];
   var testInfo = [{
+    id: 1,
     bread_name: 'くりーむ',
     bread_kind: '菓子パン',
     bread_price: 120,
@@ -19760,30 +19680,34 @@ function StorePage() {
     spirit: '',
     menu_type: 1
   }, {
+    id: 2,
     bread_name: 'くりーむ',
-    bread_kind: '菓子パン',
+    bread_kind: 'クロワッサン',
     bread_price: 120,
     bread_detail: '北海道の生クリーム！！！使ってるんだ！！！！！',
     advantage: '',
     spirit: '',
     menu_type: 1
   }, {
+    id: 4,
     bread_name: 'くりーむ',
-    bread_kind: '菓子パン',
+    bread_kind: 'クロワッサン',
     bread_price: 120,
     bread_detail: '北海道の生クリーム！！！使ってるんだ！！！！！',
-    advantage: 'sssssssss',
-    spirit: 'rrrrrrrrrrrr',
+    advantage: '落ち着いた空間で、京都らしい景色を眺めながらお食事が楽しめる【川間食堂】。ご注文が入ってから作るサンドイッチ・ライスバーガーは、気軽に食べられるバーガー袋でご提供いたします◎また季節限定メニュー・ドリンクもおすすめ♪',
+    spirit: '系列店「馬場FLAT」から毎日届く国産小麦100%の自家製パンは、ランチでもディナーでもおかわり自由ですので、ディップやオリジナリティあふれるお料理とともにお召しあがりください。パンのみの販売もしております。',
     menu_type: 2
   }, {
+    id: 5,
     bread_name: 'くりーむ',
-    bread_kind: '菓子パン',
+    bread_kind: '食パン',
     bread_price: 120,
     bread_detail: '北海道の生クリーム！！！使ってるんだ！！！！！',
     advantage: '',
     spirit: '',
     menu_type: 1
   }, {
+    id: 6,
     bread_name: 'くりーむ',
     bread_kind: '菓子パン',
     bread_price: 120,
@@ -19798,7 +19722,10 @@ function StorePage() {
     className: "p-store__container"
   }, react_1["default"].createElement("div", {
     className: "p-store__container__img"
-  }), react_1["default"].createElement("div", {
+  }, react_1["default"].createElement("img", {
+    src: "/images/bakery.jpg",
+    alt: "\u30C8\u30C3\u30D7\u753B\u50CF"
+  })), react_1["default"].createElement("div", {
     className: "p-store__container__content"
   }, react_1["default"].createElement("div", {
     className: "p-store__container__content__main"
@@ -19848,8 +19775,63 @@ var Searchbar_1 = __importDefault(__webpack_require__(/*! ../../atoms/Searchbar 
 
 var top_section_1 = __importDefault(__webpack_require__(/*! ../../molecules/top/top_section */ "./resources/ts/components/molecules/top/top_section.tsx"));
 
-var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../../molecules/Store_pickup */ "./resources/ts/components/molecules/Store_pickup.tsx")); // let img_bakery1 = require('../../../image/bakery2.jpg');
+var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../../molecules/Store_pickup */ "./resources/ts/components/molecules/Store_pickup.tsx"));
 
+var StoreRanking_1 = __importDefault(__webpack_require__(/*! ../../molecules/top/StoreRanking */ "./resources/ts/components/molecules/top/StoreRanking.tsx"));
+
+var testPickInfo = [{
+  id: 56,
+  name: 'Le pain de Maki',
+  address: '福岡市博多区比恵町',
+  star: 3.3,
+  business_day: '月曜日',
+  busines_memo: '定休日！！！',
+  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  },
+  img: '/images/croissant.jpg'
+}, {
+  id: 56,
+  name: 'Le pain de Maki',
+  address: '福岡市博多区比恵町',
+  star: 3.3,
+  business_day: '月曜日',
+  busines_memo: '定休日！！！',
+  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  },
+  img: '/images/croissant.jpg'
+}, {
+  id: 56,
+  name: 'Le pain de Maki',
+  address: '福岡市博多区比恵町',
+  star: 3.3,
+  business_day: '月曜日',
+  busines_memo: '定休日！！！',
+  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  },
+  img: '/images/croissant.jpg'
+}, {
+  id: 56,
+  name: 'Le pain de Maki',
+  address: '福岡市博多区比恵町',
+  star: 3.3,
+  business_day: '月曜日',
+  busines_memo: '定休日！！！',
+  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+  sns: {
+    twitter: 'twitter',
+    instagram: 'sssss'
+  },
+  img: '/images/croissant.jpg'
+}];
 
 function Top() {
   return react_1["default"].createElement("div", {
@@ -19870,15 +19852,10 @@ function Top() {
     sectionTitle: "\u55B6\u696D\u65E5\u304B\u3089\u63A2\u3059",
     sectionContent: Days_1["default"].days
   }), react_1["default"].createElement(Store_pickup_1["default"], {
-    Pickup: {
-      'img': 12,
-      'name': "ありパン"
-    }
-  }), react_1["default"].createElement("section", {
-    className: "p-top__content__section"
-  }, react_1["default"].createElement("h2", null, "\u30A2\u30AF\u30BB\u30B9\u6570\u30E9\u30F3\u30AD\u30F3\u30B0"), react_1["default"].createElement("ul", null, react_1["default"].createElement("li", {
-    className: "c-store-pickup__el"
-  }, react_1["default"].createElement("p", null, "\u3042\u308A\u3042\u308A\u30D1\u30F3"))))), react_1["default"].createElement("footer", {
+    PickupInfo: testPickInfo
+  }), react_1["default"].createElement(StoreRanking_1["default"], {
+    RankingInfo: testPickInfo
+  })), react_1["default"].createElement("footer", {
     className: "p-top__footer"
   }, react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/register_store"

@@ -9,6 +9,50 @@ type ReviewProps = ({
     StoreInfo: Array<any>;
 })
 
+const testPickInfo = [
+    {
+        id: 56,
+        name: 'Le pain de Maki',
+        address: '福岡市博多区比恵町',
+        star: 3.3,
+        business_day: '月曜日',
+        busines_memo: '定休日！！！',
+        message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+        sns: {twitter: 'twitter', instagram: 'sssss'},
+        img: '/images/croissant.jpg'
+    },{
+        id: 56,
+        name: 'Le pain de Maki',
+        address: '福岡市博多区比恵町',
+        star: 3.3,
+        business_day: '月曜日',
+        busines_memo: '定休日！！！',
+        message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+        sns: {twitter: 'twitter', instagram: 'sssss'},
+        img: '/images/croissant.jpg'
+    },{
+        id: 56,
+        name: 'Le pain de Maki',
+        address: '福岡市博多区比恵町',
+        star: 3.3,
+        business_day: '月曜日',
+        busines_memo: '定休日！！！',
+        message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+        sns: {twitter: 'twitter', instagram: 'sssss'},
+        img: '/images/bakery.jpg'
+    },{
+        id: 56,
+        name: 'Le pain de Maki',
+        address: '福岡市博多区比恵町',
+        star: 3.3,
+        business_day: '月曜日',
+        busines_memo: '定休日！！！',
+        message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+        sns: {twitter: 'twitter', instagram: 'sssss'},
+        img: '/images/bakery2.jpg'
+    },
+]
+
 const testReviewInfo = [{
     uuid: '2222',
     star: 4.4,
@@ -51,7 +95,7 @@ const Review : React.FC<ReviewProps> = ({ReviewInfo, StoreInfo}) => {
                 </main>
                 <aside>
                     <Store_Pickup
-                        Pickup = {StoreInfo}
+                        PickupInfo = {testPickInfo}
                     />
                 </aside>
             </div>

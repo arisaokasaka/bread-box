@@ -6,16 +6,28 @@
     &__card {
         background-color: $white;
         border-radius: $sm-radius;
-        padding: 5px;
+        padding: $mp-xxs;
+        color: $font-color-brown;
 
         h4 {
+            margin-top: 5px;
             font-size: 0.9rem;
             font-weight: 450;
         }
 
         p {
+            margin-top: 3px;
             font-size: 0.7rem;
-            color: $font-color-brown;
+        }
+
+        & span {
+            display: flex;
+            align-items: center;
+        }
+
+        &__kind {
+            @include btn-square;
+            margin-right: 5px;
         }
     }
 }

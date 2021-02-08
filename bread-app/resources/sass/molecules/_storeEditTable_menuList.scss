@@ -27,11 +27,7 @@
             &__text {
                 & > a {
                     margin-left: 0.5rem;
-                    color: $white;
-                    background-color: $brown;
-                    font-size: 0.7rem;
-                    border-radius: $sm-radius;
-                    padding: 2px 0.5rem;
+                    @include btn-square;
                 }
 
                 & > p,

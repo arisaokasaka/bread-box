@@ -60,28 +60,28 @@ const UserTable: React.FC<UserProps> = ({UserInfo}) => {
     const [Table, setTable] = useState('favorite');
     
     const TabFavorite = {
-        class: "m-store-contents__tab--favorite",
+        class: "m-user-table__tab--favorite",
         table: "favorite",
         value: "お気に入り",
         function: handleFavorite,
     }
     
     const TabInterested = {
-        class: "m-store-contents__tab--interested",
+        class: "m-user-table__tab--interested",
         table: "interested",
         value: "行ってみたい",
         function: handleInterested,
     }
     
     const TabReviewed = {
-        class: "m-store-contents__tab--reviewed",
+        class: "m-user-table__tab--reviewed",
         table: "reviewed",
         value: "レビュー",
         function: handleReview,
     }
 
     const TabStamp = {
-        class: "m-store-contents__tab--stamp",
+        class: "m-user-table__tab--stamp",
         table: "stamp",
         value: "スタンプ",
         function: handleStamp,
