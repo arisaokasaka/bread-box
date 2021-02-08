@@ -10,10 +10,10 @@ const Store_pickup: React.FC<PickupProps> = ({PickupInfo}) => (
         <div className="m-store-pickup__list">
             {PickupInfo.map((el)=>{
                 return(
-                    <div className="m-store-pickup__list__item" key={el.id}>
+                    <a href="" className="m-store-pickup__list__item" key={el.id}>
                         <img src={el.img} alt="店舗画像"/>
                         <p>{el.name}</p>
-                    </div>
+                    </a>
                 );
             })}
         </div>

@@ -10,10 +10,10 @@ const StorRanking: React.FC<RankingProps> = ({RankingInfo}) => (
         <div className="m-store-ranking__list">
             {RankingInfo.map((el)=>{
                 return(
-                    <div className="m-store-ranking__list__item" key={el.id}>
+                    <a href="" className="m-store-ranking__list__item" key={el.id}>
                         <img src={el.img} alt="店舗画像"/>
                         <p>{el.name}</p>
-                    </div>
+                    </a>
                 );
             })}
         </div>

@@ -21,6 +21,7 @@
             }
 
             & > p {
+                color: $black;
                 font-size: 1rem;
                 font-weight: 550;
             }
@@ -68,7 +69,6 @@
 
         @include bp-600up {
             display: block;
-            margn: $mp-xs 0;
 
             &__list {
                 grid-template-columns: 1fr 1fr 1fr 1fr;
