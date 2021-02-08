@@ -169,20 +169,34 @@
 
 //ユーザーマイページの編集ボタン
 .a-btn-edit-user {
-    display: inline-block;
-    width: 4.5rem;
-    height: 1.5rem;
-    line-height: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
     font-size: 0.7rem;
-    background-color: $darkBrown;
+    background-color: $brown;
     text-align: center;
-    border-radius: 2px;
     font-weight: 450;
+    border-radius: 50%;
     color: $white;
     cursor: pointer;
 
+    @include bp-600up {
+        width: 4.5rem;
+        border-radius: 20px;
+    }
+
+    & > span {
+        display: none;
+        @include bp-600up {
+            display: block;
+        }
+    }
+
     &:hover {
-        background-color: $darkestBrown;
+        background-color: $darkBrown;
     }
 }
 

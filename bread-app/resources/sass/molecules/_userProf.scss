@@ -1,19 +1,51 @@
 .m-user-prof {
-    // border: 1px solid $brown;
-    background-color: $lightestBrown;
-    border-radius: $sm-radius;
+    max-height: 500px;
+    border: 3px solid $lightBrown;
+    border-radius: $base-radius;
     margin-bottom: $mp-xs;
+    padding: $mp-xxs $mp-xs $mp-xs $mp-xs;
 
     @include bp-960up {
         margin: 0;
+        padding: 0;
     }
 
     &__container {
         margin: $mp-xxs;
-
         &__btn {
             display: flex;
             justify-content: flex-end;
+        }
+
+        &__content {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            column-gap: 1rem;
+
+            @include bp-960up {
+                grid-template-columns: auto;
+                row-gap: $mp-xs;
+                margin-top: $mp-xs;
+            }
+
+            & > img {
+                margin: 0 auto;
+                height: 100px;
+                width: 100px;
+                object-fit: cover;
+
+                @include bp-960up {
+                    height: 170px;
+                    width: 170px;
+                }
+            }
+
+            &__text {
+                & > p {
+                    font-size: 0.8rem;
+                    line-height: 1.5rem;
+                }
+            }
         }
     }
 }

@@ -14,12 +14,14 @@ const UserProf: React.FC<UserProps> = ({UserInfo}) => {
                         <div className = "m-user-prof__container__btn">
                             <BtnEditUser/>
                         </div>
-                        <img src="" alt="プロフィール画像"/>
-                        <div>
-                            <h3>{el.name}</h3>
-                            <p>{el.password}</p>
-                            <p>い</p>
-                            <p>う</p>
+                        <div className = "m-user-prof__container__content">
+                            <img src="/images/croissant.jpg" alt="プロフィール画像"/>
+                            <div className = "m-user-prof__container__content__text">
+                                <h3>{el.name}</h3>
+                                <p>お気に入り：</p>
+                                <p>行ってみたい：</p>
+                                <p>レビュー数：</p>
+                            </div>
                         </div>
                     </div>   
                 );
