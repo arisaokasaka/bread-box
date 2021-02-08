@@ -15045,26 +15045,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./resources/ts/UserAuthContext.ts":
-/*!*****************************************!*\
-  !*** ./resources/ts/UserAuthContext.ts ***!
-  \*****************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports.UserAuthContext = void 0;
-
-var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-exports.UserAuthContext = react_1.createContext({});
-
-/***/ }),
-
 /***/ "./resources/ts/app.tsx":
 /*!******************************!*\
   !*** ./resources/ts/app.tsx ***!
@@ -15129,7 +15109,7 @@ var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_mod
 
 var UserAuthReducer_1 = __webpack_require__(/*! ./reducers/UserAuthReducer */ "./resources/ts/reducers/UserAuthReducer.ts");
 
-var UserAuthContext_1 = __webpack_require__(/*! ./UserAuthContext */ "./resources/ts/UserAuthContext.ts"); //bootstrap(axios)
+var UserAuthContext_1 = __webpack_require__(/*! ./contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts"); //bootstrap(axios)
 // import bootstrap from './bootstrap';
 //i18n
 // import './18n';
@@ -18192,7 +18172,7 @@ var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_mod
 
 var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
 
-var UserAuthContext_1 = __webpack_require__(/*! ../../../UserAuthContext */ "./resources/ts/UserAuthContext.ts"); // declare global {
+var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts"); // declare global {
 //     interface Window {
 //         axios: AxiosStatic;
 //     }
@@ -19978,6 +19958,26 @@ var UserPage = function UserPage(_a) {
 };
 
 exports.default = UserPage;
+
+/***/ }),
+
+/***/ "./resources/ts/contexts/UserAuthContext.ts":
+/*!**************************************************!*\
+  !*** ./resources/ts/contexts/UserAuthContext.ts ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.UserAuthContext = void 0;
+
+var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+exports.UserAuthContext = react_1.createContext({});
 
 /***/ }),
 

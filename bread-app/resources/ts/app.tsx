@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 //ContextProvider
 // import UserAuthContextProvider from './UserAuthContext';
 import {UserAuthReducer, initialState } from './reducers/UserAuthReducer';
-import {UserAuthContext} from './UserAuthContext';
+import {UserAuthContext} from './contexts/UserAuthContext';
 
 //bootstrap(axios)
 // import bootstrap from './bootstrap';

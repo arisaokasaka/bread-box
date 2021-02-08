@@ -3,7 +3,7 @@ import axios, { AxiosStatic } from 'axios';
 import {Link, useHistory} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import bootstrap from '../../../bootstrap';
-import { UserAuthContext } from '../../../UserAuthContext';
+import { UserAuthContext } from '../../../contexts/UserAuthContext';
 
 // declare global {
 //     interface Window {
