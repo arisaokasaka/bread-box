@@ -15606,6 +15606,40 @@ exports.default = BtnLogin_icon;
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -15616,19 +15650,37 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+
+var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
 var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
 
 var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
 
 function BtnLogout_icon() {
+  var dispatch = react_1.useContext(UserAuthContext_1.UserAuthContext).dispatch; // ログアウト機能
+
+  var logout = function logout() {
+    axios_1["default"].get("/api/logout").then(function (res) {
+      console.log(res);
+      dispatch({
+        type: 'setOutId'
+      });
+    })["catch"](function (err) {
+      console.log(err);
+    });
+  };
+
   return react_1["default"].createElement("div", {
     className: "a-btn-logout"
   }, react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/"
+    to: "/",
+    onClick: logout
   }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
     icon: free_solid_svg_icons_1.faSignOutAlt
   })));
@@ -16280,6 +16332,8 @@ var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/reac
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+
 var Searchbar_1 = __importDefault(__webpack_require__(/*! ../atoms/Searchbar */ "./resources/ts/components/atoms/Searchbar.tsx"));
 
 var BtnSearch_icon_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnSearch_icon */ "./resources/ts/components/atoms/buttons/BtnSearch_icon.tsx"));
@@ -16295,14 +16349,35 @@ var Logo_1 = __importDefault(__webpack_require__(/*! ../atoms/Logo */ "./resourc
 var UserAuthContext_1 = __webpack_require__(/*! ../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
 function NavBar() {
-  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
+  var _a = react_1.useContext(UserAuthContext_1.UserAuthContext),
+      state = _a.state,
+      dispatch = _a.dispatch;
+
+  react_1.useEffect(function () {
+    console.log('effect');
+    getUser();
+  }, []); //認証ユーザー取得
+
+  var getUser = function getUser() {
+    axios_1["default"].get("/api/user").then(function (res) {
+      console.log('[getUser]ログイン済み');
+      console.log(res.data);
+      dispatch({
+        type: 'setId',
+        payload: res.data.uuid
+      });
+    })["catch"](function (err) {
+      console.log('[getUser]ログインしてません');
+    });
+  };
+
   var navPC;
   var navMobile;
 
   if (state.uuid) {
     navPC = react_1["default"].createElement("nav", {
       className: "l-navbar__content__nav--loggedin"
-    }, react_1["default"].createElement("ul", null, react_1["default"].createElement(BtnMypage_1["default"], null)));
+    }, react_1["default"].createElement(BtnMypage_1["default"], null), react_1["default"].createElement(BtnLogout_icon_1["default"], null));
     navMobile = react_1["default"].createElement("nav", {
       className: "l-navbar__mobile"
     }, react_1["default"].createElement(BtnSearch_icon_1["default"], null), react_1["default"].createElement(BtnLogout_icon_1["default"], null), react_1["default"].createElement(BtnMypage_1["default"], null));
@@ -18160,149 +18235,6 @@ var __importStar = this && this.__importStar || function (mod) {
   return result;
 };
 
-var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
-  function adopt(value) {
-    return value instanceof P ? value : new P(function (resolve) {
-      resolve(value);
-    });
-  }
-
-  return new (P || (P = Promise))(function (resolve, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-
-    function step(result) {
-      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-    }
-
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-
-var __generator = this && this.__generator || function (thisArg, body) {
-  var _ = {
-    label: 0,
-    sent: function sent() {
-      if (t[0] & 1) throw t[1];
-      return t[1];
-    },
-    trys: [],
-    ops: []
-  },
-      f,
-      y,
-      t,
-      g;
-  return g = {
-    next: verb(0),
-    "throw": verb(1),
-    "return": verb(2)
-  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
-    return this;
-  }), g;
-
-  function verb(n) {
-    return function (v) {
-      return step([n, v]);
-    };
-  }
-
-  function step(op) {
-    if (f) throw new TypeError("Generator is already executing.");
-
-    while (_) {
-      try {
-        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-        if (y = 0, t) op = [op[0] & 2, t.value];
-
-        switch (op[0]) {
-          case 0:
-          case 1:
-            t = op;
-            break;
-
-          case 4:
-            _.label++;
-            return {
-              value: op[1],
-              done: false
-            };
-
-          case 5:
-            _.label++;
-            y = op[1];
-            op = [0];
-            continue;
-
-          case 7:
-            op = _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-
-          default:
-            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-              _ = 0;
-              continue;
-            }
-
-            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
-              _.label = op[1];
-              break;
-            }
-
-            if (op[0] === 6 && _.label < t[1]) {
-              _.label = t[1];
-              t = op;
-              break;
-            }
-
-            if (t && _.label < t[2]) {
-              _.label = t[2];
-
-              _.ops.push(op);
-
-              break;
-            }
-
-            if (t[2]) _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-        }
-
-        op = body.call(thisArg, _);
-      } catch (e) {
-        op = [6, e];
-        y = 0;
-      } finally {
-        f = t = 0;
-      }
-    }
-
-    if (op[0] & 5) throw op[1];
-    return {
-      value: op[0] ? op[1] : void 0,
-      done: true
-    };
-  }
-};
-
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -18321,23 +18253,11 @@ var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_mod
 
 var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
 
-var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts"); // declare global {
-//     interface Window {
-//         axios: AxiosStatic;
-//     }
-//     interface Element {
-//         content: string;
-//     }
-// }
-
+var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
 var LoginUser = function LoginUser() {
   var _a;
 
-  react_1.useEffect(function () {
-    console.log('effect');
-    getUser();
-  }, []);
   var dispatch = react_1.useContext(UserAuthContext_1.UserAuthContext).dispatch;
 
   var _b = react_1.useState(""),
@@ -18348,155 +18268,81 @@ var LoginUser = function LoginUser() {
       password = _c[0],
       setPassword = _c[1];
 
-  var _d = react_1.useState(""),
-      user = _d[0],
-      setUser = _d[1];
+  var _d = react_hook_form_1.useForm(),
+      register = _d.register,
+      handleSubmit = _d.handleSubmit,
+      errors = _d.errors;
 
-  var _e = react_hook_form_1.useForm(),
-      register = _e.register,
-      handleSubmit = _e.handleSubmit,
-      errors = _e.errors,
-      getValues = _e.getValues;
+  var history = new react_router_dom_1.useHistory(); // ログイン
 
-  var history = new react_router_dom_1.useHistory(); //認証ユーザー取得
+  var login = function login() {
+    var _a;
 
-  var getUser = function getUser() {
-    axios_1["default"].get("/api/user").then(function (res) {
-      console.log('[getUser]ログイン済み');
-      console.log(res.data);
-      dispatch({
-        type: 'setId',
-        payload: res.data.uuid
-      });
-    })["catch"](function (err) {
-      console.log('[getUser]ログインしてません');
-    });
-  }; // ログイン
-
-
-  var login = function login(e) {
-    return __awaiter(void 0, void 0, void 0, function () {
-      var _a;
-
-      return __generator(this, function (_b) {
-        e.preventDefault();
-        axios_1["default"].defaults.withCredentials = true;
-        axios_1["default"].defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-        axios_1["default"].defaults.headers.common['X-CSRF-TOKEN'] = (_a = document.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('content');
-        axios_1["default"].get("/sanctum/csrf-cookie").then(function (response) {
-          axios_1["default"].post("/api/login", {
-            email: email,
-            password: password
-          }).then(function (res) {
-            console.log(res);
-            setUser(res.data.user);
-            history.push("/search");
-          })["catch"](function (err) {
-            console.log(err);
-            console.log('[login]fail_post');
-          });
-          console.log(123);
-          console.log(response);
-        })["catch"](function (err) {
-          console.log(err);
-          console.log('fail_get');
+    axios_1["default"].defaults.withCredentials = true;
+    axios_1["default"].defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    axios_1["default"].defaults.headers.common['X-CSRF-TOKEN'] = (_a = document.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('content');
+    axios_1["default"].get("/sanctum/csrf-cookie").then(function (response) {
+      axios_1["default"].post("/api/login", {
+        email: email,
+        password: password
+      }).then(function (res) {
+        console.log(res);
+        dispatch({
+          type: 'setId',
+          payload: res.data.user.uuid
         });
-        return [2
-        /*return*/
-        ];
-      });
-    });
-  }; // ログアウト
-
-
-  var logout = function logout() {
-    axios_1["default"].get("/api/logout").then(function (res) {
-      console.log(res);
-      dispatch({
-        type: 'setOutId'
+        history.push("/search");
+      })["catch"](function (err) {
+        console.log(err);
+        console.log('[login]fail_post');
       });
     })["catch"](function (err) {
       console.log(err);
+      console.log('fail_get');
     });
-  }; // // ユーザ情報
-  // let userInfo = null;
-  // //認証済みの場合、ログアウトボタンとユーザ情報を表示
-  // if (user) {
-  //     form = <button onClick={logout}>Logout</button>;
-  //     userInfo = (
-  //         <div>
-  //             <h2>User</h2>
-  //             <div>name: {user.name}</div>
-  //             <div>email: {user.email}</div>
-  //         </div>
-  //     );
-  // }
-  // axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
-  // axios.defaults.withCredentials = true;
-  // axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-  // window.axios = axios;
-  // window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-  // window.axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
-  // let csrf:any;
-  // csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
-  // const onSubmit = (data) => {
-  //     console.log(data);
-  //     console.log(axios.defaults.headers);
-  //     let abc = new FormData();
-  //     abc.append('_token', csrf)
-  //     abc.append('email', 'pan@pan.com')
-  //     abc.append('password', '12121212')
-  //     axios.post('api/login', abc)
-  //     .then(res => {
-  //         alert(123);
-  //         console.log(res);
-  //     })
-  //     .catch(errors => {
-  //         console.log(errors.response);
-  //         console.log(errors.response.status);
-  //     });
-  // }
-  // ログインフォーム
+  };
 
-
-  var csrf = (_a = document.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('content'); // let testa= React.createContext('user');
-
-  var form = react_1["default"].createElement("form", {
-    className: "p-login-user__container__form",
-    onSubmit: login
-  }, react_1["default"].createElement("label", {
-    onClick: function onClick() {
-      return console.log(user);
-    }
-  }, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9"), react_1["default"].createElement("input", {
-    type: 'hidden',
-    name: '_token',
-    value: csrf
-  }), react_1["default"].createElement("input", {
-    type: "email",
-    value: email,
-    onChange: function onChange(e) {
-      return setEmail(e.target.value);
-    }
-  }), react_1["default"].createElement("label", {
-    onClick: function onClick() {
-      return logout();
-    }
-  }, "\u30D1\u30B9\u30EF\u30FC\u30C9"), react_1["default"].createElement("input", {
-    type: "password",
-    value: password,
-    onChange: function onChange(e) {
-      return setPassword(e.target.value);
-    }
-  }), react_1["default"].createElement("input", {
-    type: "submit",
-    value: "\u30ED\u30B0\u30A4\u30F3"
-  }));
+  var csrf = (_a = document.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('content');
   return react_1["default"].createElement("div", {
     className: "p-login-user"
   }, react_1["default"].createElement("div", {
     className: "p-login-user__container"
-  }, form, react_1["default"].createElement("div", {
+  }, react_1["default"].createElement("form", {
+    className: "p-login-user__container__form",
+    onSubmit: handleSubmit(login)
+  }, react_1["default"].createElement("h2", null, "\u30ED\u30B0\u30A4\u30F3"), react_1["default"].createElement("input", {
+    type: 'hidden',
+    name: '_token',
+    value: csrf
+  }), react_1["default"].createElement("label", {
+    htmlFor: "user_email"
+  }, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9"), react_1["default"].createElement("input", {
+    type: "email",
+    name: "email",
+    id: "user_email",
+    onChange: function onChange(e) {
+      return setEmail(e.target.value);
+    },
+    ref: register({
+      required: true
+    })
+  }), errors.email && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
+    htmlFor: "user_password"
+  }, "\u30D1\u30B9\u30EF\u30FC\u30C9"), react_1["default"].createElement("input", {
+    type: "password",
+    name: "password",
+    id: "user_password",
+    onChange: function onChange(e) {
+      return setPassword(e.target.value);
+    },
+    ref: register({
+      required: true,
+      pattern: /[a-zA-Z0-9]{8,16}/
+    })
+  }), react_1["default"].createElement("input", {
+    type: "submit",
+    value: "\u30ED\u30B0\u30A4\u30F3\u3059\u308B"
+  })), react_1["default"].createElement("div", {
     className: "p-login-user__container__links"
   }, react_1["default"].createElement("span", null, "\u65B0\u898F\u767B\u9332\u306F", react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/register_user"
