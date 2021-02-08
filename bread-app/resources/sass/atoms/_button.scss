@@ -37,13 +37,16 @@
     & > span {
         font-weight: bolder;
 
+        @include bp-960up {
+            font-size: 0.8rem;
+        }
+
         &:nth-child(2) {
             display: none;
 
             @include bp-960up {
                 display: inline;
                 margin-left: 2px;
-                font-size: 0.9rem;
             }
         }
     }
@@ -68,7 +71,6 @@
             @include bp-960up {
                 display: inline;
                 margin-left: 2px;
-                font-size: 0.9rem;
             }
         }
     }
