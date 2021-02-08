@@ -616,6 +616,7 @@ label.a-label-required::before {
 }
 
 .m-store-ranking__list__item > p {
+  color: #555555;
   font-size: 1rem;
   font-weight: 550;
 }
@@ -1007,6 +1008,7 @@ label.a-label-required::before {
 }
 
 .m-store-pickup__list__item > p {
+  color: #555555;
   font-size: 1rem;
   font-weight: 550;
 }
@@ -1044,7 +1046,6 @@ label.a-label-required::before {
 @media screen and (min-width: 600px) {
   .p-search .m-store-pickup {
     display: block;
-    margn: 20px 0;
   }
   .p-search .m-store-pickup__list {
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -2249,7 +2250,7 @@ label.a-label-required::before {
   line-height: 2.2rem;
   background-color: transparent;
   text-align: center;
-  font-weight: 520;
+  font-weight: 510;
   font-size: 0.8rem;
   cursor: pointer;
 }

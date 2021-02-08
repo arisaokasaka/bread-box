@@ -16405,7 +16405,8 @@ var Store_pickup = function Store_pickup(_a) {
   }, "\u30D4\u30C3\u30AF\u30A2\u30C3\u30D7"), react_1["default"].createElement("div", {
     className: "m-store-pickup__list"
   }, PickupInfo.map(function (el) {
-    return react_1["default"].createElement("div", {
+    return react_1["default"].createElement("a", {
+      href: "",
       className: "m-store-pickup__list__item",
       key: el.id
     }, react_1["default"].createElement("img", {
@@ -17586,7 +17587,8 @@ var StorRanking = function StorRanking(_a) {
   }, "\u30E9\u30F3\u30AD\u30F3\u30B0"), react_1["default"].createElement("div", {
     className: "m-store-ranking__list"
   }, RankingInfo.map(function (el) {
-    return react_1["default"].createElement("div", {
+    return react_1["default"].createElement("a", {
+      href: "",
       className: "m-store-ranking__list__item",
       key: el.id
     }, react_1["default"].createElement("img", {
