@@ -10,15 +10,17 @@ import StoreList from '../../molecules/store/StoreList';
 const testInfo = [
     {
         name: 'sarasapan',
-        address: 'dsdsdsdsdsdsd',
+        address: '福岡市中央区白金',
+        star: 2,
         business_day: 'sasa',
         busines_memo: '定休日！！！',
-        message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
+        message: 'ニューヨーク・ブロードウェイに佇むレンガ造りのデザイナーズプレイラウンジをオマージュ。 ホテルっぽいの敷居の高さを排除し、日常の中にあるオシャレで少しだけ贅沢な時間をすごしたいときの場所。カフェやワークスペースとして、デートや少しの休息などにご利用ください。毎日26時まで営業しておりますので、夜カフェとしてのご利用もおすすめです。',
         sns: {twitter: 'twitter', instagram: 'sssss'}
     },
     {
         name: 'sarasapan',
-        address: 'dsdsdsdsdsdsd',
+        address: '福岡市中央区薬院',
+        star:3.4,
         business_day: 'sasa',
         busines_memo: '定休日！！！',
         message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
@@ -35,7 +37,8 @@ function Search() {
     },[])
 
     const getUsers = async () => {
-        const response = await axios.post('/api/user');
+        const response = await axios.get('/api/user');
+        console.log(123)
         console.log(response)
         setUsers(response.data.users)
     }

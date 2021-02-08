@@ -1,8 +1,9 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios, { AxiosStatic } from 'axios';
 import {Link, useHistory} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import bootstrap from '../../../bootstrap';
+import { UserAuthContext } from '../../../UserAuthContext';
 
 // declare global {
 //     interface Window {
@@ -13,14 +14,15 @@ import bootstrap from '../../../bootstrap';
 //     }
 // }
 
-
 const LoginUser = () =>  {
+    
     useEffect(() => {
             console.log('effect')
             getUser();
     },[]
     );
     
+    const { dispatch } = useContext(UserAuthContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [user, setUser] = useState("");
@@ -53,6 +55,10 @@ const LoginUser = () =>  {
             .then(res => {
                 console.log(res);
                 setUser(res.data.user);
+                dispatch({
+                    type: 'setId',
+                    payload: res.data.uuid,
+                });
                 history.push("/search")
             })
             .catch(err => {
@@ -72,16 +78,19 @@ const LoginUser = () =>  {
 
     // ログアウト
     const logout = () => {
-        
     axios
         .get("/api/logout")
         .then(res => {
             console.log(res);
+            dispatch({
+                type: 'setOutId'
+            });
         })
         .catch(err => {
             console.log(err);
         });
     }
+
     // // ユーザ情報
     // let userInfo = null;
 

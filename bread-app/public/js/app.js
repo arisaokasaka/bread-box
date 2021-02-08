@@ -15045,6 +15045,26 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./resources/ts/UserAuthContext.ts":
+/*!*****************************************!*\
+  !*** ./resources/ts/UserAuthContext.ts ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.UserAuthContext = void 0;
+
+var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+exports.UserAuthContext = react_1.createContext({});
+
+/***/ }),
+
 /***/ "./resources/ts/app.tsx":
 /*!******************************!*\
   !*** ./resources/ts/app.tsx ***!
@@ -15053,6 +15073,40 @@ module.exports = {
 
 "use strict";
 
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
 
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
@@ -15064,12 +15118,18 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 })); //React
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var react_dom_1 = __importDefault(__webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js")); //Router
 
 
-var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js"); //bootstrap(axios)
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js"); //ContextProvider
+// import UserAuthContextProvider from './UserAuthContext';
+
+
+var UserAuthReducer_1 = __webpack_require__(/*! ./reducers/UserAuthReducer */ "./resources/ts/reducers/UserAuthReducer.ts");
+
+var UserAuthContext_1 = __webpack_require__(/*! ./UserAuthContext */ "./resources/ts/UserAuthContext.ts"); //bootstrap(axios)
 // import bootstrap from './bootstrap';
 //i18n
 // import './18n';
@@ -15118,8 +15178,7 @@ if (token) {
   window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
   console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
-} // const user = React.createContext();
-
+}
 
 var test = axios_1["default"].create({
   baseURL: 'http://localhost:8000',
@@ -15136,8 +15195,20 @@ test.get("/api/user", {
 });
 
 var App = function App() {
-  // {bootstrap}
-  return react_1["default"].createElement(react_router_dom_1.BrowserRouter, null, react_1["default"].createElement("div", null, react_1["default"].createElement(Navbar_1["default"], null), react_1["default"].createElement("div", {
+  var _a = react_1.useReducer(UserAuthReducer_1.UserAuthReducer, UserAuthReducer_1.initialState),
+      state = _a[0],
+      dispatch = _a[1];
+
+  return react_1["default"].createElement(UserAuthContext_1.UserAuthContext.Provider, {
+    value: {
+      state: state,
+      dispatch: dispatch
+    }
+  }, react_1["default"].createElement(react_router_dom_1.BrowserRouter, null, react_1["default"].createElement("div", {
+    onClick: function onClick() {
+      return console.log(state);
+    }
+  }, react_1["default"].createElement(Navbar_1["default"], null), react_1["default"].createElement("div", {
     id: "global-container"
   }, react_1["default"].createElement(react_router_dom_1.Switch, null, react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/",
@@ -15182,7 +15253,7 @@ var App = function App() {
   }), react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/user_edit",
     component: UserEdit_1["default"]
-  })))));
+  }))))));
 };
 
 if (document.getElementById('app')) {
@@ -15690,10 +15761,16 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
 function Btn_favorite() {
   return react_1["default"].createElement("button", {
     className: "a-btn-favorite"
-  }, react_1["default"].createElement("span", null, "\u2665"), react_1["default"].createElement("span", null, "\u304A\u6C17\u306B\u5165\u308A"));
+  }, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faHeart
+  })), react_1["default"].createElement("span", null, "\u304A\u6C17\u306B\u5165\u308A"));
 }
 
 exports.default = Btn_favorite;
@@ -15763,10 +15840,16 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
 function Btn_interested() {
   return react_1["default"].createElement("button", {
     className: "a-btn-interested"
-  }, react_1["default"].createElement("span", null, "\u2605"), react_1["default"].createElement("span", null, "\u884C\u3063\u3066\u307F\u305F\u3044"));
+  }, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faFlag
+  })), react_1["default"].createElement("span", null, "\u884C\u3063\u3066\u307F\u305F\u3044"));
 }
 
 exports.default = Btn_interested;
@@ -17195,20 +17278,20 @@ var StoreList = function StoreList(_a) {
     }, react_1["default"].createElement("div", {
       className: "m-store-list__item--pc"
     }, react_1["default"].createElement("div", {
-      className: "m-store-list__item__images--pc__main"
+      className: "m-store-list__item--pc__images__main"
     }, react_1["default"].createElement("img", {
-      src: "",
+      src: "/images/bakery2.jpg",
       alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
     })), react_1["default"].createElement("div", {
-      className: "m-store-list__item__images--pc__sub"
+      className: "m-store-list__item--pc__images__sub"
     }, react_1["default"].createElement("img", {
-      src: "",
+      src: "/images/bread1.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
     }), react_1["default"].createElement("img", {
-      src: "",
+      src: "/images/bread1.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
     }), react_1["default"].createElement("img", {
-      src: "",
+      src: "/images/bread1.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
     }))), react_1["default"].createElement("div", {
       className: "m-store-list__item__container"
@@ -17220,27 +17303,22 @@ var StoreList = function StoreList(_a) {
       className: "hover-colorChange"
     }, el.name)), react_1["default"].createElement("p", {
       className: "m-store-list__item__container__access"
-    }, el.access), react_1["default"].createElement("div", {
+    }, el.address), react_1["default"].createElement("div", {
       className: "m-store-list__item--mobile"
     }, react_1["default"].createElement("div", {
-      className: "m-store-list__item--mobile__main"
+      className: "m-store-list__item--mobile__images"
     }, react_1["default"].createElement("img", {
-      src: "",
+      src: "/images/bread1.jpg",
       alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
-    })), react_1["default"].createElement("div", {
-      className: "m-store-list__item--mobile__sub"
-    }, react_1["default"].createElement("img", {
-      src: "",
+    }), react_1["default"].createElement("img", {
+      src: "/images/bread1.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
     }), react_1["default"].createElement("img", {
-      src: "",
-      alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
-    }), react_1["default"].createElement("img", {
-      src: "",
+      src: "/images/bread1.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
     }))), react_1["default"].createElement("p", {
       className: "m-store-list__item__container__explanation"
-    }, el.detail), react_1["default"].createElement(Schedule_1["default"], {
+    }, el.message), react_1["default"].createElement(Schedule_1["default"], {
       Week: Week_1["default"].week
     }), react_1["default"].createElement(Score_1["default"], {
       ScoreStar: el.star
@@ -18112,7 +18190,9 @@ var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/a
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
-var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js"); // declare global {
+var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
+
+var UserAuthContext_1 = __webpack_require__(/*! ../../../UserAuthContext */ "./resources/ts/UserAuthContext.ts"); // declare global {
 //     interface Window {
 //         axios: AxiosStatic;
 //     }
@@ -18129,6 +18209,7 @@ var LoginUser = function LoginUser() {
     console.log('effect');
     getUser();
   }, []);
+  var dispatch = react_1.useContext(UserAuthContext_1.UserAuthContext).dispatch;
 
   var _b = react_1.useState(""),
       email = _b[0],
@@ -18176,6 +18257,10 @@ var LoginUser = function LoginUser() {
           }).then(function (res) {
             console.log(res);
             setUser(res.data.user);
+            dispatch({
+              type: 'setId',
+              payload: res.data.uuid
+            });
             history.push("/search");
           })["catch"](function (err) {
             console.log(err);
@@ -18198,6 +18283,9 @@ var LoginUser = function LoginUser() {
   var logout = function logout() {
     axios_1["default"].get("/api/logout").then(function (res) {
       console.log(res);
+      dispatch({
+        type: 'setOutId'
+      });
     })["catch"](function (err) {
       console.log(err);
     });
@@ -19311,17 +19399,19 @@ var StoreList_1 = __importDefault(__webpack_require__(/*! ../../molecules/store/
 
 var testInfo = [{
   name: 'sarasapan',
-  address: 'dsdsdsdsdsdsd',
+  address: '福岡市中央区白金',
+  star: 2,
   business_day: 'sasa',
   busines_memo: '定休日！！！',
-  message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
+  message: 'ニューヨーク・ブロードウェイに佇むレンガ造りのデザイナーズプレイラウンジをオマージュ。 ホテルっぽいの敷居の高さを排除し、日常の中にあるオシャレで少しだけ贅沢な時間をすごしたいときの場所。カフェやワークスペースとして、デートや少しの休息などにご利用ください。毎日26時まで営業しておりますので、夜カフェとしてのご利用もおすすめです。',
   sns: {
     twitter: 'twitter',
     instagram: 'sssss'
   }
 }, {
   name: 'sarasapan',
-  address: 'dsdsdsdsdsdsd',
+  address: '福岡市中央区薬院',
+  star: 3.4,
   business_day: 'sasa',
   busines_memo: '定休日！！！',
   message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
@@ -19350,10 +19440,11 @@ function Search() {
           case 0:
             return [4
             /*yield*/
-            , axios_1["default"].post('/api/user')];
+            , axios_1["default"].get('/api/user')];
 
           case 1:
             response = _a.sent();
+            console.log(123);
             console.log(response);
             setUsers(response.data.users);
             return [2
@@ -20117,6 +20208,62 @@ function () {
 
 var week = new Week();
 exports.default = week;
+
+/***/ }),
+
+/***/ "./resources/ts/reducers/UserAuthReducer.ts":
+/*!**************************************************!*\
+  !*** ./resources/ts/reducers/UserAuthReducer.ts ***!
+  \**************************************************/
+/***/ (function(__unused_webpack_module, exports) {
+
+"use strict";
+
+
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.initialState = exports.UserAuthReducer = void 0;
+
+var UserAuthReducer = function UserAuthReducer(state, action) {
+  switch (action.type) {
+    case 'setId':
+      return __assign(__assign({}, state), {
+        uuid: action.payload
+      });
+
+    case 'setOutId':
+      return __assign(__assign({}, state), {
+        uuid: null
+      });
+
+    default:
+      return {
+        state: state
+      };
+  }
+};
+
+exports.UserAuthReducer = UserAuthReducer;
+exports.initialState = {
+  uuid: null
+};
 
 /***/ }),
 
