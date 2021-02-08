@@ -17556,6 +17556,50 @@ exports.default = StoreSubInfo;
 
 /***/ }),
 
+/***/ "./resources/ts/components/molecules/top/StoreRanking.tsx":
+/*!****************************************************************!*\
+  !*** ./resources/ts/components/molecules/top/StoreRanking.tsx ***!
+  \****************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var StorRanking = function StorRanking(_a) {
+  var RankingInfo = _a.RankingInfo;
+  return react_1["default"].createElement("div", {
+    className: "m-store-ranking"
+  }, react_1["default"].createElement("h2", {
+    className: "m-store-ranking__title"
+  }, "\u30E9\u30F3\u30AD\u30F3\u30B0"), react_1["default"].createElement("div", {
+    className: "m-store-ranking__list"
+  }, RankingInfo.map(function (el) {
+    return react_1["default"].createElement("div", {
+      className: "m-store-ranking__list__item",
+      key: el.id
+    }, react_1["default"].createElement("img", {
+      src: el.img,
+      alt: "\u5E97\u8217\u753B\u50CF"
+    }), react_1["default"].createElement("p", null, el.name));
+  })));
+};
+
+exports.default = StorRanking;
+
+/***/ }),
+
 /***/ "./resources/ts/components/molecules/top/top_section.tsx":
 /*!***************************************************************!*\
   !*** ./resources/ts/components/molecules/top/top_section.tsx ***!
@@ -19716,8 +19760,9 @@ var Searchbar_1 = __importDefault(__webpack_require__(/*! ../../atoms/Searchbar 
 
 var top_section_1 = __importDefault(__webpack_require__(/*! ../../molecules/top/top_section */ "./resources/ts/components/molecules/top/top_section.tsx"));
 
-var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../../molecules/Store_pickup */ "./resources/ts/components/molecules/Store_pickup.tsx")); // let img_bakery1 = require('../../../image/bakery2.jpg');
+var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../../molecules/Store_pickup */ "./resources/ts/components/molecules/Store_pickup.tsx"));
 
+var StoreRanking_1 = __importDefault(__webpack_require__(/*! ../../molecules/top/StoreRanking */ "./resources/ts/components/molecules/top/StoreRanking.tsx"));
 
 var testPickInfo = [{
   id: 56,
@@ -19793,11 +19838,9 @@ function Top() {
     sectionContent: Days_1["default"].days
   }), react_1["default"].createElement(Store_pickup_1["default"], {
     PickupInfo: testPickInfo
-  }), react_1["default"].createElement("section", {
-    className: "p-top__content__section"
-  }, react_1["default"].createElement("h2", null, "\u30A2\u30AF\u30BB\u30B9\u6570\u30E9\u30F3\u30AD\u30F3\u30B0"), react_1["default"].createElement("ul", null, react_1["default"].createElement("li", {
-    className: "c-store-pickup__el"
-  }, react_1["default"].createElement("p", null, "\u3042\u308A\u3042\u308A\u30D1\u30F3"))))), react_1["default"].createElement("footer", {
+  }), react_1["default"].createElement(StoreRanking_1["default"], {
+    RankingInfo: testPickInfo
+  })), react_1["default"].createElement("footer", {
     className: "p-top__footer"
   }, react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/register_store"
