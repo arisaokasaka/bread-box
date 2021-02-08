@@ -1,8 +1,18 @@
 .p-store {
-    padding-top: $header-height;
+    padding-top: $mp-md;
 
     &__container {
         @include content-width;
+
+        &__img {
+            height: 200px;
+            & > img {
+                object-fit: cover;
+                object-position: center;
+                width: 100%;
+                height: 100%;
+            }
+        }
 
         &__content {
             margin-top: $mp-xxs;

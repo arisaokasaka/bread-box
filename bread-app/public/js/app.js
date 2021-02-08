@@ -17425,11 +17425,13 @@ var StoreMenu = function StoreMenu(_a) {
     return el.menu_type === 1 && react_1["default"].createElement("div", {
       className: "m-menu__card"
     }, react_1["default"].createElement("img", {
-      src: "",
+      src: "/images/croissant.jpg",
       alt: "\u30E1\u30CB\u30E5\u30FC\u753B\u50CF"
-    }), react_1["default"].createElement("h4", null, el.bread_name), react_1["default"].createElement("p", {
+    }), react_1["default"].createElement("h4", null, el.bread_name), react_1["default"].createElement("span", null, react_1["default"].createElement("p", {
+      className: "m-menu__card__kind"
+    }, el.bread_kind), react_1["default"].createElement("p", {
       className: "m-menu__card__price"
-    }, el.bread_price, "\u5186"), react_1["default"].createElement("p", {
+    }, el.bread_price, "\u5186")), react_1["default"].createElement("p", {
       className: "m-menu__card__detail"
     }, el.bread_detail));
   }));
@@ -17469,17 +17471,17 @@ var StoreSpirit = function StoreSpirit(_a) {
       className: "m-spirit__container"
     }, react_1["default"].createElement("div", {
       className: "m-spirit__container__section"
-    }, react_1["default"].createElement("h2", null, "\u3053\u3060\u308F\u308A"), react_1["default"].createElement("div", {
+    }, react_1["default"].createElement("h2", null, "\u304A\u5E97\u306E\u3053\u3060\u308F\u308A"), react_1["default"].createElement("div", {
       className: "m-spirit__container__section__content"
     }, react_1["default"].createElement("img", {
-      src: "",
+      src: "/images/croissant.jpg",
       alt: "\u3053\u3060\u308F\u308A\u306E\u5199\u771F"
     }), react_1["default"].createElement("p", null, el.advantage))), react_1["default"].createElement("div", {
       className: "m-spirit__container__section"
-    }, react_1["default"].createElement("h2", null, "\u601D\u3044"), react_1["default"].createElement("div", {
+    }, react_1["default"].createElement("h2", null, "\u304A\u5E97\u306E\u601D\u3044"), react_1["default"].createElement("div", {
       className: "m-spirit__container__section__content"
     }, react_1["default"].createElement("img", {
-      src: "",
+      src: "/images/bakery2.jpg",
       alt: "\u601D\u3044\u304C\u4F1D\u308F\u308B\u5199\u771F"
     }), react_1["default"].createElement("p", null, el.spirit))));
   }));
@@ -17520,17 +17522,6 @@ var Btn_homepage_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons
 
 var Modal_sns_1 = __importDefault(__webpack_require__(/*! ../../atoms/modal/Modal_sns */ "./resources/ts/components/atoms/modal/Modal_sns.tsx"));
 
-var testStoreInfo = [{
-  star: 2.5,
-  url: "https://de-milestones.com/",
-  sns: {
-    twitter: "https://twitter.com/dev_design8",
-    instagram: "ss",
-    facebook: "ss",
-    other: "Ss"
-  }
-}];
-
 var StoreSubInfo = function StoreSubInfo(_a) {
   var StoreInfo = _a.StoreInfo;
   return react_1["default"].createElement("div", {
@@ -17550,9 +17541,9 @@ var StoreSubInfo = function StoreSubInfo(_a) {
     }), react_1["default"].createElement("p", null, el.business_memo)), react_1["default"].createElement("div", {
       className: "m-store-subInfo__container__item__btns"
     }, react_1["default"].createElement(Btn_homepage_1["default"], {
-      StoreInfo: testStoreInfo
+      StoreInfo: StoreInfo
     }), react_1["default"].createElement(Modal_sns_1["default"], {
-      StoreInfo: testStoreInfo
+      StoreInfo: StoreInfo
     })));
   }));
 };
@@ -19741,11 +19732,12 @@ var StoreContents_1 = __importDefault(__webpack_require__(/*! ../../molecules/st
 function StorePage() {
   //テスト
   var testStoreInfo = [{
-    name: 'sarasapan',
-    address: 'dsdsdsdsdsdsd',
-    business_day: 'sasa',
+    name: 'Le pain de Maki',
+    address: '福岡市博多区比恵町',
+    star: 3.3,
+    business_day: '月曜日',
     busines_memo: '定休日！！！',
-    message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
+    message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
     sns: {
       twitter: 'twitter',
       instagram: 'sssss'
@@ -19761,7 +19753,7 @@ function StorePage() {
     menu_type: 1
   }, {
     bread_name: 'くりーむ',
-    bread_kind: '菓子パン',
+    bread_kind: 'クロワッサン',
     bread_price: 120,
     bread_detail: '北海道の生クリーム！！！使ってるんだ！！！！！',
     advantage: '',
@@ -19769,15 +19761,15 @@ function StorePage() {
     menu_type: 1
   }, {
     bread_name: 'くりーむ',
-    bread_kind: '菓子パン',
+    bread_kind: 'クロワッサン',
     bread_price: 120,
     bread_detail: '北海道の生クリーム！！！使ってるんだ！！！！！',
-    advantage: 'sssssssss',
-    spirit: 'rrrrrrrrrrrr',
+    advantage: '落ち着いた空間で、京都らしい景色を眺めながらお食事が楽しめる【川間食堂】。ご注文が入ってから作るサンドイッチ・ライスバーガーは、気軽に食べられるバーガー袋でご提供いたします◎また季節限定メニュー・ドリンクもおすすめ♪',
+    spirit: '系列店「馬場FLAT」から毎日届く国産小麦100%の自家製パンは、ランチでもディナーでもおかわり自由ですので、ディップやオリジナリティあふれるお料理とともにお召しあがりください。パンのみの販売もしております。',
     menu_type: 2
   }, {
     bread_name: 'くりーむ',
-    bread_kind: '菓子パン',
+    bread_kind: '食パン',
     bread_price: 120,
     bread_detail: '北海道の生クリーム！！！使ってるんだ！！！！！',
     advantage: '',
@@ -19798,7 +19790,10 @@ function StorePage() {
     className: "p-store__container"
   }, react_1["default"].createElement("div", {
     className: "p-store__container__img"
-  }), react_1["default"].createElement("div", {
+  }, react_1["default"].createElement("img", {
+    src: "/images/bakery.jpg",
+    alt: "\u30C8\u30C3\u30D7\u753B\u50CF"
+  })), react_1["default"].createElement("div", {
     className: "p-store__container__content"
   }, react_1["default"].createElement("div", {
     className: "p-store__container__content__main"

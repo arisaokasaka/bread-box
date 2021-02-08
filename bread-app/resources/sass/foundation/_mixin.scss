@@ -95,3 +95,11 @@
         color: $hover-color;
     }
 }
+
+@mixin btn-square() {
+    color: $white;
+    background-color: $brown;
+    font-size: 0.7rem;
+    border-radius: $sm-radius;
+    padding: 2px 0.5rem;
+}

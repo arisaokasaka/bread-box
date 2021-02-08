@@ -10,19 +10,6 @@ type StoreInfoProps = ({
     StoreInfo? : any;
 })
 
-let testStoreInfo = [
-    {
-        star: 2.5,
-        url: "https://de-milestones.com/",
-        sns: {
-            twitter: "https://twitter.com/dev_design8",
-            instagram: "ss",
-            facebook: "ss",
-            other: "Ss"
-        },
-    }    
-]
-
 const StoreSubInfo: React.FC<StoreInfoProps> = ({StoreInfo}) => (
     <div className = "m-store-subInfo">
         {StoreInfo.map((el)=>{
@@ -42,10 +29,10 @@ const StoreSubInfo: React.FC<StoreInfoProps> = ({StoreInfo}) => (
                 </div>
                 <div className = "m-store-subInfo__container__item__btns">
                     <Btn_homepage
-                        StoreInfo = {testStoreInfo}
+                        StoreInfo = {StoreInfo}
                     />
                     <ModalSNS
-                        StoreInfo = {testStoreInfo}
+                        StoreInfo = {StoreInfo}
                     />
                 </div>
             </div>
