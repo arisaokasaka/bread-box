@@ -34,6 +34,10 @@ const LoginUser = () =>  {
         axios.get("/api/user").then(res => {
             console.log('[getUser]ログイン済み');
             console.log(res.data);
+            dispatch({
+                type: 'setId',
+                payload: res.data.uuid,
+            });
         }).catch(err => {
             console.log('[getUser]ログインしてません');
         })
@@ -55,10 +59,6 @@ const LoginUser = () =>  {
             .then(res => {
                 console.log(res);
                 setUser(res.data.user);
-                dispatch({
-                    type: 'setId',
-                    payload: res.data.uuid,
-                });
                 history.push("/search")
             })
             .catch(err => {

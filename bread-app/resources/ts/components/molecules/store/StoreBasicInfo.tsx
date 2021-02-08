@@ -8,21 +8,13 @@ type StoreInfoProps = ({
 })
 
 const StoreBasicInfo: React.FC<StoreInfoProps> = ({StoreInfo}) => {
-    let buttons: any;
-    if(true){
-        buttons = (
+
+    return(
+        <div className = "m-store-basicInfo">
             <div className = "m-store-basicInfo__btn">
                 <Btn_favorite />
                 <Btn_interested />
             </div>
-        );
-    }else{
-        buttons = null;
-    }
-
-    return(
-        <div className = "m-store-basicInfo">
-            {buttons}
             {StoreInfo.map((el)=>{
                 return(
                 <div>

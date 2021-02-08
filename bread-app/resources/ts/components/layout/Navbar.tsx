@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
 import Searchbar from '../atoms/Searchbar'
 import BtnSearch_icon from '../atoms/buttons/BtnSearch_icon';
@@ -6,13 +6,14 @@ import BtnMypage from '../atoms/buttons/BtnMypage';
 import BtnLogin_icon from '../atoms/buttons/BtnLogin_icon';
 import BtnLogout_icon from '../atoms/buttons/BtnLogout_icon';
 import Logo from '../atoms/Logo';
+import { UserAuthContext } from '../../contexts/UserAuthContext';
 
 function NavBar() {
-    const [user, SetUser] = useState('');
+    const { state } = useContext(UserAuthContext);
 
     let navPC: any;
     let navMobile: any;
-    if(user){
+    if(state.uuid){
         navPC = (
             <nav className="l-navbar__content__nav--loggedin">
                 <ul>
