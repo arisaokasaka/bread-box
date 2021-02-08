@@ -1,19 +1,21 @@
 import React from 'react';
 
-type storePickup = {
-    Pickup?: any;
-}
+type PickupProps = ({
+    PickupInfo: Array<any>;
+})
 
-const Store_pickup: React.FC<storePickup> = ({Pickup}) => (
+const Store_pickup: React.FC<PickupProps> = ({PickupInfo}) => (
     <div className="m-store-pickup">
-        <h2>ピックアップ</h2>
+        <h2 className="m-store-pickup__title">ピックアップ</h2>
         <div className="m-store-pickup__list">
-            <ul>
-                <li className="m-store-pickup__list__item">
-                    <img src={Pickup.img}></img>
-                    <p>{Pickup.name}</p>
-                </li>
-            </ul>
+            {PickupInfo.map((el)=>{
+                return(
+                    <div className="m-store-pickup__list__item" key={el.id}>
+                        <img src={el.img} alt="店舗画像"/>
+                        <p>{el.name}</p>
+                    </div>
+                );
+            })}
         </div>
     </div>
 );

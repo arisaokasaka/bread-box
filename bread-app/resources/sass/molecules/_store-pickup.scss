@@ -1,21 +1,77 @@
 .m-store-pickup {
-    @include bp-960up {
-        margin-top: $mp-xs;
-    }
-
-    h4 {
-        color: $font-color-brown;
-    }
-
     &__list {
-        background-color: $lightBrown;
-        border-radius: 5px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 1rem;
+        row-gap: 1rem;
+        margin-top: 5px;
 
         &__item {
             cursor: pointer;
 
+            & > img {
+                height: 100px;
+                width: 100%;
+                border-radius: $base-radius;
+                object-fit: cover;
+
+                @include bp-600up {
+                    height: 130px;
+                }
+            }
+
             & > p {
-                font-size: 0.8rem;
+                font-size: 1rem;
+                font-weight: 550;
+            }
+
+            &:hover {
+                color: $brown;
+            }
+        }
+    }
+}
+
+//トップページの場合
+.p-top {
+    .m-store-pickup {
+        @include bp-960up {
+            margin-top: $mp-xs;
+        }
+
+        &__list {
+            @include bp-600up {
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+            }
+        }
+    }
+}
+
+//レビューページの場合
+.p-review {
+    .m-store-pickup {
+        &__title {
+            font-size: 1.1rem;
+        }
+
+        &__list {
+            @include bp-600up {
+                grid-template-columns: 1fr;
+            }
+        }
+    }
+}
+
+.p-search {
+    .m-store-pickup {
+        display: none;
+
+        @include bp-600up {
+            display: block;
+            margn: $mp-xs 0;
+
+            &__list {
+                grid-template-columns: 1fr 1fr 1fr 1fr;
             }
         }
     }

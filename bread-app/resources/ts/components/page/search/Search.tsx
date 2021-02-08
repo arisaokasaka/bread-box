@@ -15,7 +15,8 @@ const testInfo = [
         business_day: 'sasa',
         busines_memo: '定休日！！！',
         message: 'ニューヨーク・ブロードウェイに佇むレンガ造りのデザイナーズプレイラウンジをオマージュ。 ホテルっぽいの敷居の高さを排除し、日常の中にあるオシャレで少しだけ贅沢な時間をすごしたいときの場所。カフェやワークスペースとして、デートや少しの休息などにご利用ください。毎日26時まで営業しておりますので、夜カフェとしてのご利用もおすすめです。',
-        sns: {twitter: 'twitter', instagram: 'sssss'}
+        sns: {twitter: 'twitter', instagram: 'sssss'},
+        img: '/images/croissant.jpg'
     },
     {
         name: 'sarasapan',
@@ -24,36 +25,57 @@ const testInfo = [
         business_day: 'sasa',
         busines_memo: '定休日！！！',
         message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
-        sns: {twitter: 'twitter', instagram: 'sssss'}
-    }
+        sns: {twitter: 'twitter', instagram: 'sssss'},
+        img: '/images/croissant.jpg'
+    },{
+        id: 56,
+        name: 'Le pain de Maki',
+        address: '福岡市博多区比恵町',
+        star: 3.3,
+        business_day: '月曜日',
+        busines_memo: '定休日！！！',
+        message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+        sns: {twitter: 'twitter', instagram: 'sssss'},
+        img: '/images/bakery.jpg'
+    },{
+        id: 56,
+        name: 'Le pain de Maki',
+        address: '福岡市博多区比恵町',
+        star: 3.3,
+        business_day: '月曜日',
+        busines_memo: '定休日！！！',
+        message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+        sns: {twitter: 'twitter', instagram: 'sssss'},
+        img: '/images/bakery2.jpg'
+    },
 ]
 
 
 function Search() {
-    const [users, setUsers] = useState<any[]>([]);
+    // const [users, setUsers] = useState<any[]>([]);
     
-    useEffect(() => {
-        getUsers()
-    },[])
+    // useEffect(() => {
+    //     getUsers()
+    // },[])
 
-    const getUsers = async () => {
-        const response = await axios.get('/api/user');
-        console.log(123)
-        console.log(response)
-        setUsers(response.data.users)
-    }
+    // const getUsers = async () => {
+    //     const response = await axios.get('/api/user');
+    //     console.log(123)
+    //     console.log(response)
+    //     setUsers(response.data.users)
+    // }
 
-    const [stores, setStores] = useState<any[]>([]);
+    // const [stores, setStores] = useState<any[]>([]);
 
-    useEffect(()=>{
-        getStores()
-    },[])
+    // useEffect(()=>{
+    //     getStores()
+    // },[])
 
-    const getStores = async () => {
-        const response = await axios.post('/api/store_all')
-        console.log(response)
-        setStores(response.data)
-    }
+    // const getStores = async () => {
+    //     const response = await axios.post('/api/store_all')
+    //     console.log(response)
+    //     setStores(response.data)
+    // }
 
     return (
         <div className="p-search">
@@ -64,10 +86,7 @@ function Search() {
                 <Search_sidebar />
                 <div className="p-search__container__content">
                     <Store_pickup 
-                        Pickup={{
-                            'img': 1,
-                            'name': "ありパン"
-                        }}
+                        PickupInfo={testInfo}
                     />
                     <div className="p-search__container__content__list">
                         <div className = "p-search__container__content__list__order--pc">

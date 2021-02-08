@@ -9,6 +9,50 @@ import Store_pickup from '../../molecules/Store_pickup';
 
 // let img_bakery1 = require('../../../image/bakery2.jpg');
 
+const testPickInfo = [
+    {
+        id: 56,
+        name: 'Le pain de Maki',
+        address: '福岡市博多区比恵町',
+        star: 3.3,
+        business_day: '月曜日',
+        busines_memo: '定休日！！！',
+        message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+        sns: {twitter: 'twitter', instagram: 'sssss'},
+        img: '/images/croissant.jpg'
+    },{
+        id: 56,
+        name: 'Le pain de Maki',
+        address: '福岡市博多区比恵町',
+        star: 3.3,
+        business_day: '月曜日',
+        busines_memo: '定休日！！！',
+        message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+        sns: {twitter: 'twitter', instagram: 'sssss'},
+        img: '/images/croissant.jpg'
+    },{
+        id: 56,
+        name: 'Le pain de Maki',
+        address: '福岡市博多区比恵町',
+        star: 3.3,
+        business_day: '月曜日',
+        busines_memo: '定休日！！！',
+        message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+        sns: {twitter: 'twitter', instagram: 'sssss'},
+        img: '/images/croissant.jpg'
+    },{
+        id: 56,
+        name: 'Le pain de Maki',
+        address: '福岡市博多区比恵町',
+        star: 3.3,
+        business_day: '月曜日',
+        busines_memo: '定休日！！！',
+        message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
+        sns: {twitter: 'twitter', instagram: 'sssss'},
+        img: '/images/croissant.jpg'
+    },
+]
+
 function Top() {
     return (
         <div className="p-top">
@@ -32,16 +76,12 @@ function Top() {
                 sectionContent={days.days}
                 />
                 <Store_pickup 
-                Pickup={{
-                    'img': 12,
-                    'name': "ありパン"
-                }}
+                    PickupInfo={testPickInfo}
                 />
                 <section className="p-top__content__section">
                     <h2>アクセス数ランキング</h2>
                     <ul>
                         <li className="c-store-pickup__el">
-                            {/* <img src={img_bakery1}></img> */}
                             <p>ありありパン</p>
                         </li>
                     </ul>
