@@ -157,7 +157,11 @@
 }
 
 .l-navbar__content__nav--loggedin {
-    .a-btn-mypage {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    .a-btn-mypage,
+    .a-btn-logout {
         @include bp-960up {
             display: block;
             a {
@@ -176,7 +180,7 @@
     height: 2rem;
     line-height: 2rem;
     font-size: 0.8rem;
-    background-color: $white;
+    background-color: $lightestBrown;
     border: 2px solid $brown;
     text-align: center;
     font-weight: 500;
