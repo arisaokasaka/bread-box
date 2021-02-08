@@ -15548,8 +15548,8 @@ function BtnEditUser() {
     to: "/user_edit",
     className: "a-btn-edit-user"
   }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-    icon: free_solid_svg_icons_1.faUserEdit
-  }), "\xA0\xA0\u7DE8\u96C6");
+    icon: free_solid_svg_icons_1.faPen
+  }), react_1["default"].createElement("span", null, "\xA0\xA0\u7DE8\u96C6"));
 }
 
 exports.default = BtnEditUser;
@@ -17626,10 +17626,14 @@ var UserProf = function UserProf(_a) {
       key: el.uuid
     }, react_1["default"].createElement("div", {
       className: "m-user-prof__container__btn"
-    }, react_1["default"].createElement(BtnEditUser_1["default"], null)), react_1["default"].createElement("img", {
-      src: "",
+    }, react_1["default"].createElement(BtnEditUser_1["default"], null)), react_1["default"].createElement("div", {
+      className: "m-user-prof__container__content"
+    }, react_1["default"].createElement("img", {
+      src: "/images/croissant.jpg",
       alt: "\u30D7\u30ED\u30D5\u30A3\u30FC\u30EB\u753B\u50CF"
-    }), react_1["default"].createElement("div", null, react_1["default"].createElement("h3", null, el.name), react_1["default"].createElement("p", null, el.password), react_1["default"].createElement("p", null, "\u3044"), react_1["default"].createElement("p", null, "\u3046")));
+    }), react_1["default"].createElement("div", {
+      className: "m-user-prof__container__content__text"
+    }, react_1["default"].createElement("h3", null, el.name), react_1["default"].createElement("p", null, "\u304A\u6C17\u306B\u5165\u308A\uFF1A"), react_1["default"].createElement("p", null, "\u884C\u3063\u3066\u307F\u305F\u3044\uFF1A"), react_1["default"].createElement("p", null, "\u30EC\u30D3\u30E5\u30FC\u6570\uFF1A"))));
   }));
 };
 
@@ -17762,25 +17766,25 @@ var UserTable = function UserTable(_a) {
       setTable = _b[1];
 
   var TabFavorite = {
-    "class": "m-store-contents__tab--favorite",
+    "class": "m-user-table__tab--favorite",
     table: "favorite",
     value: "お気に入り",
     "function": handleFavorite
   };
   var TabInterested = {
-    "class": "m-store-contents__tab--interested",
+    "class": "m-user-table__tab--interested",
     table: "interested",
     value: "行ってみたい",
     "function": handleInterested
   };
   var TabReviewed = {
-    "class": "m-store-contents__tab--reviewed",
+    "class": "m-user-table__tab--reviewed",
     table: "reviewed",
     value: "レビュー",
     "function": handleReview
   };
   var TabStamp = {
-    "class": "m-store-contents__tab--stamp",
+    "class": "m-user-table__tab--stamp",
     table: "stamp",
     value: "スタンプ",
     "function": handleStamp
