@@ -1,5 +1,7 @@
 import React from 'react';
 import BtnEditUser from '../../atoms/buttons/BtnEditUser';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faHeart, faFlag, faCommentDots} from '@fortawesome/free-solid-svg-icons';
 
 type UserProps = ({
         UserInfo?: any;
@@ -18,9 +20,9 @@ const UserProf: React.FC<UserProps> = ({UserInfo}) => {
                             <img src="/images/croissant.jpg" alt="プロフィール画像"/>
                             <div className = "m-user-prof__container__content__text">
                                 <h3>{el.name}</h3>
-                                <p>お気に入り：</p>
-                                <p>行ってみたい：</p>
-                                <p>レビュー数：</p>
+                                <p><span><FontAwesomeIcon icon={faHeart}/></span>お気に入り</p>
+                                <p><span><FontAwesomeIcon icon={faFlag}/></span>行ってみたい</p>
+                                <p><span><FontAwesomeIcon icon={faCommentDots}/></span>レビュー数</p>
                             </div>
                         </div>
                     </div>   

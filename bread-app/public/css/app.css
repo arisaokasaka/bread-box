@@ -375,19 +375,23 @@ h2 {
   width: 2rem;
   height: 2rem;
   line-height: 2rem;
-  font-size: 0.7rem;
-  background-color: #c47d2c;
+  font-size: 0.8rem;
+  background-color: #f8fafc;
+  border: 2px solid #c47d2c;
   text-align: center;
-  font-weight: 450;
+  font-weight: 500;
   border-radius: 50%;
-  color: #f8fafc;
+  color: #c47d2c;
   cursor: pointer;
 }
 
 @media screen and (min-width: 600px) {
   .a-btn-edit-user {
-    width: 4.5rem;
+    width: 4rem;
+    height: 1.8rem;
+    line-height: 1.8rem;
     border-radius: 20px;
+    font-size: 0.7rem;
   }
 }
 
@@ -402,7 +406,8 @@ h2 {
 }
 
 .a-btn-edit-user:hover {
-  background-color: #7c4920;
+  background-color: #c47d2c;
+  color: #f8fafc;
 }
 
 .a-btn-modal-review {
@@ -1324,6 +1329,22 @@ label.a-label-required::before {
 .m-user-prof__container__content__text > p {
   font-size: 0.8rem;
   line-height: 1.5rem;
+}
+
+.m-user-prof__container__content__text > p > span {
+  margin-right: 0.2rem;
+}
+
+.m-user-prof__container__content__text > p:nth-of-type(1) > span {
+  color: #e45e5e;
+}
+
+.m-user-prof__container__content__text > p:nth-of-type(2) > span {
+  color: #108b10;
+}
+
+.m-user-prof__container__content__text > p:nth-of-type(3) > span {
+  color: #9aa0a6;
 }
 
 .m-review-list__item {

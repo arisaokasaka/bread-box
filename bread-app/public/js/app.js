@@ -17616,6 +17616,10 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 
 var BtnEditUser_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/BtnEditUser */ "./resources/ts/components/atoms/buttons/BtnEditUser.tsx"));
 
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
 var UserProf = function UserProf(_a) {
   var UserInfo = _a.UserInfo;
   return react_1["default"].createElement("div", {
@@ -17633,7 +17637,13 @@ var UserProf = function UserProf(_a) {
       alt: "\u30D7\u30ED\u30D5\u30A3\u30FC\u30EB\u753B\u50CF"
     }), react_1["default"].createElement("div", {
       className: "m-user-prof__container__content__text"
-    }, react_1["default"].createElement("h3", null, el.name), react_1["default"].createElement("p", null, "\u304A\u6C17\u306B\u5165\u308A\uFF1A"), react_1["default"].createElement("p", null, "\u884C\u3063\u3066\u307F\u305F\u3044\uFF1A"), react_1["default"].createElement("p", null, "\u30EC\u30D3\u30E5\u30FC\u6570\uFF1A"))));
+    }, react_1["default"].createElement("h3", null, el.name), react_1["default"].createElement("p", null, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+      icon: free_solid_svg_icons_1.faHeart
+    })), "\u304A\u6C17\u306B\u5165\u308A"), react_1["default"].createElement("p", null, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+      icon: free_solid_svg_icons_1.faFlag
+    })), "\u884C\u3063\u3066\u307F\u305F\u3044"), react_1["default"].createElement("p", null, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+      icon: free_solid_svg_icons_1.faCommentDots
+    })), "\u30EC\u30D3\u30E5\u30FC\u6570"))));
   }));
 };
 

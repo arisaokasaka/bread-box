@@ -175,17 +175,21 @@
     width: 2rem;
     height: 2rem;
     line-height: 2rem;
-    font-size: 0.7rem;
-    background-color: $brown;
+    font-size: 0.8rem;
+    background-color: $white;
+    border: 2px solid $brown;
     text-align: center;
-    font-weight: 450;
+    font-weight: 500;
     border-radius: 50%;
-    color: $white;
+    color: $brown;
     cursor: pointer;
 
     @include bp-600up {
-        width: 4.5rem;
+        width: 4rem;
+        height: 1.8rem;
+        line-height: 1.8rem;
         border-radius: 20px;
+        font-size: 0.7rem;
     }
 
     & > span {
@@ -196,7 +200,8 @@
     }
 
     &:hover {
-        background-color: $darkBrown;
+        background-color: $brown;
+        color: $white;
     }
 }
 

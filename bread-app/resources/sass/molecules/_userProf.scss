@@ -44,6 +44,26 @@
                 & > p {
                     font-size: 0.8rem;
                     line-height: 1.5rem;
+
+                    & > span {
+                        margin-right: 0.2rem;
+                    }
+
+                    &:nth-of-type(1) {
+                        & > span {
+                            color: $pink;
+                        }
+                    }
+                    &:nth-of-type(2) {
+                        & > span {
+                            color: $green;
+                        }
+                    }
+                    &:nth-of-type(3) {
+                        & > span {
+                            color: $textGray;
+                        }
+                    }
                 }
             }
         }
