@@ -17,7 +17,6 @@
                 @include bp-600up {
                     top: -1.5rem;
                     right: 0;
-                    // color: $font-color-brown;
                 }
 
                 & > a {
@@ -29,7 +28,6 @@
                     color: $darkGray;
 
                     @include bp-600up {
-                        // color: $font-color-brown;
                         border-bottom: 2px $textGray solid;
                     }
                 }
