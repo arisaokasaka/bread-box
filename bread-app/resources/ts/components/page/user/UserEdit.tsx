@@ -3,10 +3,6 @@ import {Link} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import BtnBack from '../../atoms/buttons/BtnBack';
 
-type UserEditProps = ({
-    UserInfo: Array<any>;
-})
-
 const testUserInfo = [
     {
         id: 123456,
@@ -17,8 +13,7 @@ const testUserInfo = [
     }
 ]
 
-
-const UserEdit: React.FC<UserEditProps> = ({UserInfo}) => {
+const UserEdit:any = ({UserInfo}) => {
     UserInfo = testUserInfo;
     const { register, handleSubmit, errors, getValues } = useForm();
 

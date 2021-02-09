@@ -15,7 +15,7 @@ export default function BtnLogout_icon() {
         .then(res => {
             console.log(res);
             dispatch({
-                type: 'setOutId'
+                type: 'setOut'
             });
         })
         .catch(err => {

@@ -24,7 +24,7 @@ function NavBar() {
             console.log('[getUser]ログイン済み');
             console.log(res.data);
             dispatch({
-                type: 'setId',
+                type: 'setUser',
                 payload: res.data.uuid,
             });
         }).catch(err => {
