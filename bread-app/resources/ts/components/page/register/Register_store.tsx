@@ -110,8 +110,8 @@ export default function Register_store() {
                 {/* <div className = "p-register-store__container__links">
                     <span>既にご登録済の方は<Link to="/login_store">こちら</Link></span>
                 </div> */}
-                <h2>新規店舗登録</h2>
-                <p>ご登録に費用はかかりません。<br></br>店舗情報が最新のものであることをご確認のうえ、ご入力ください。</p>
+                <h2>新規店舗登録(無料)</h2>
+                <p>店舗情報が最新のものであることをご確認のうえ、ご入力ください。</p>
                 <form className="p-register-store__container__form" name="form_storeRegister" onSubmit={handleSubmit(onSubmit)}>
                     <div className = "p-register-store__container__form__item">
                         <label htmlFor="store_name" className="a-label-required__red">店舗名</label>

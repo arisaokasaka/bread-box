@@ -18783,7 +18783,7 @@ function Register_store() {
     className: "p-register-store"
   }, react_1["default"].createElement("div", {
     className: "p-register-store__container"
-  }, react_1["default"].createElement("h2", null, "\u65B0\u898F\u5E97\u8217\u767B\u9332"), react_1["default"].createElement("p", null, "\u3054\u767B\u9332\u306B\u8CBB\u7528\u306F\u304B\u304B\u308A\u307E\u305B\u3093\u3002", react_1["default"].createElement("br", null), "\u5E97\u8217\u60C5\u5831\u304C\u6700\u65B0\u306E\u3082\u306E\u3067\u3042\u308B\u3053\u3068\u3092\u3054\u78BA\u8A8D\u306E\u3046\u3048\u3001\u3054\u5165\u529B\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("form", {
+  }, react_1["default"].createElement("h2", null, "\u65B0\u898F\u5E97\u8217\u767B\u9332(\u7121\u6599)"), react_1["default"].createElement("p", null, "\u5E97\u8217\u60C5\u5831\u304C\u6700\u65B0\u306E\u3082\u306E\u3067\u3042\u308B\u3053\u3068\u3092\u3054\u78BA\u8A8D\u306E\u3046\u3048\u3001\u3054\u5165\u529B\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("form", {
     className: "p-register-store__container__form",
     name: "form_storeRegister",
     onSubmit: handleSubmit(onSubmit)

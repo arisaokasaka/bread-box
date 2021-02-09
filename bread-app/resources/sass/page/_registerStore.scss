@@ -100,6 +100,7 @@
                     & > span {
                         color: $textGray;
                         font-size: 0.7rem;
+                        margin-bottom: 2px;
                     }
                 }
             }
@@ -114,10 +115,8 @@
 
                 &__day {
                     display: grid;
-                    // grid-template-columns: 6rem 1fr;
                     font-size: 0.8rem;
                     margin: 0.5rem 0;
-                    // height: 1.2rem;
 
                     @include bp-600up {
                         grid-template-columns: 6rem 1fr;
