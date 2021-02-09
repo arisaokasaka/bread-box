@@ -11,4 +11,19 @@ label {
             padding: 1px 3px;
         }
     }
+
+    &.a-label-required__red {
+        &::after {
+            content: "[必須]";
+            position: absolute;
+            color: $color-error;
+            font-size: 0.7rem;
+            padding-left: 4px;
+
+            @include bp-600up {
+                top: 0;
+                right: 8px;
+            }
+        }
+    }
 }

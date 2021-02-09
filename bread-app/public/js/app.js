@@ -16386,7 +16386,7 @@ function NavBar() {
       className: "l-navbar__content__nav--loggedout"
     }, react_1["default"].createElement("ul", null, react_1["default"].createElement(react_router_dom_1.Link, {
       to: "/register_user"
-    }, react_1["default"].createElement("li", null, "\u4F1A\u54E1\u767B\u9332")), react_1["default"].createElement(react_router_dom_1.Link, {
+    }, react_1["default"].createElement("li", null, "\u7121\u6599\u4F1A\u54E1\u767B\u9332")), react_1["default"].createElement(react_router_dom_1.Link, {
       to: "/login_user"
     }, react_1["default"].createElement("li", null, "\u30ED\u30B0\u30A4\u30F3"))));
     navMobile = react_1["default"].createElement("nav", {
@@ -17673,7 +17673,7 @@ var StorRanking = function StorRanking(_a) {
     return react_1["default"].createElement("a", {
       href: "",
       className: "m-store-ranking__list__item",
-      key: el.id
+      key: "ranking_" + el.id
     }, react_1["default"].createElement("img", {
       src: el.img,
       alt: "\u5E97\u8217\u753B\u50CF"
@@ -18783,14 +18783,19 @@ function Register_store() {
     className: "p-register-store"
   }, react_1["default"].createElement("div", {
     className: "p-register-store__container"
-  }, react_1["default"].createElement("h2", null, "\u65B0\u898F\u5E97\u8217\u767B\u9332"), react_1["default"].createElement("form", {
+  }, react_1["default"].createElement("h2", null, "\u65B0\u898F\u5E97\u8217\u767B\u9332(\u7121\u6599)"), react_1["default"].createElement("p", null, "\u5E97\u8217\u60C5\u5831\u304C\u6700\u65B0\u306E\u3082\u306E\u3067\u3042\u308B\u3053\u3068\u3092\u3054\u78BA\u8A8D\u306E\u3046\u3048\u3001\u3054\u5165\u529B\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("div", {
+    className: "p-register-store__container__links"
+  }, react_1["default"].createElement("span", null, "\u65E2\u306B\u767B\u9332\u6E08\u3067\u3059\u304B\uFF1F", react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/login_store"
+  }, "\u5E97\u8217\u30ED\u30B0\u30A4\u30F3"))), react_1["default"].createElement("form", {
     className: "p-register-store__container__form",
     name: "form_storeRegister",
     onSubmit: handleSubmit(onSubmit)
   }, react_1["default"].createElement("div", {
     className: "p-register-store__container__form__item"
   }, react_1["default"].createElement("label", {
-    htmlFor: "store_name"
+    htmlFor: "store_name",
+    className: "a-label-required__red"
   }, "\u5E97\u8217\u540D"), react_1["default"].createElement("div", {
     className: "p-register-store__container__form__item__input"
   }, react_1["default"].createElement("input", {
@@ -18803,7 +18808,8 @@ function Register_store() {
   }), errors.name && react_1["default"].createElement("p", null, "\u5E97\u8217\u540D\u306F\u5FC5\u9808\u3067\u3059\u3002"))), react_1["default"].createElement("div", {
     className: "p-register-store__container__form__item"
   }, react_1["default"].createElement("label", {
-    htmlFor: "store_email"
+    htmlFor: "store_email",
+    className: "a-label-required__red"
   }, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9"), react_1["default"].createElement("div", {
     className: "p-register-store__container__form__item__input"
   }, react_1["default"].createElement("input", {
@@ -18816,7 +18822,8 @@ function Register_store() {
   }), errors.email && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F\u5FC5\u9808\u3067\u3059\u3002"), emailErrorMessage(emailError))), react_1["default"].createElement("div", {
     className: "p-register-store__container__form__item"
   }, react_1["default"].createElement("label", {
-    htmlFor: "store_address"
+    htmlFor: "store_address",
+    className: "a-label-required__red"
   }, "\u4F4F\u6240"), react_1["default"].createElement("div", {
     className: "p-register-store__container__form__item__input"
   }, react_1["default"].createElement("input", {
@@ -18829,7 +18836,8 @@ function Register_store() {
   }), errors.address && react_1["default"].createElement("p", null, "\u4F4F\u6240\u306F\u5FC5\u9808\u3067\u3059\u3002"))), react_1["default"].createElement("div", {
     className: "p-register-store__container__form__item"
   }, react_1["default"].createElement("label", {
-    htmlFor: "store_tel"
+    htmlFor: "store_tel",
+    className: "a-label-required__red"
   }, "\u96FB\u8A71\u756A\u53F7"), react_1["default"].createElement("div", {
     className: "p-register-store__container__form__item__input"
   }, react_1["default"].createElement("span", null, "\u534A\u89D2\u30FB\u30CF\u30A4\u30D5\u30F3\u306A\u3057\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("input", {
@@ -18843,7 +18851,8 @@ function Register_store() {
   }), errors.tel && errors.tel.type === "required" && react_1["default"].createElement("p", null, "\u96FB\u8A71\u756A\u53F7\u306F\u5FC5\u9808\u3067\u3059\u3002"), errors.tel && errors.tel.type === "pattern" && react_1["default"].createElement("p", null, "10~11\u6587\u5B57\u306E\u534A\u89D2\u6570\u5B57\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
     className: "p-register-store__container__form__item"
   }, react_1["default"].createElement("label", {
-    htmlFor: "store_password"
+    htmlFor: "store_password",
+    className: "a-label-required__red"
   }, "\u30D1\u30B9\u30EF\u30FC\u30C9"), react_1["default"].createElement("div", {
     className: "p-register-store__container__form__item__input"
   }, react_1["default"].createElement("input", {
@@ -18857,8 +18866,9 @@ function Register_store() {
   }), errors.password && errors.password.type === "required" && react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u306F\u5FC5\u9808\u3067\u3059\u3002"), errors.password && errors.password.type === "pattern" && react_1["default"].createElement("p", null, "8~16\u6587\u5B57\u306E\u534A\u89D2\u82F1\u6570\u5B57\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
     className: "p-register-store__container__form__item"
   }, react_1["default"].createElement("label", {
-    htmlFor: "store_password-check"
-  }, "\u30D1\u30B9\u30EF\u30FC\u30C9(\u78BA\u8A8D\u7528)"), react_1["default"].createElement("div", {
+    htmlFor: "store_password-check",
+    className: "a-label-required__red"
+  }, "\u78BA\u8A8D\u7528\u30D1\u30B9\u30EF\u30FC\u30C9"), react_1["default"].createElement("div", {
     className: "p-register-store__container__form__item__input"
   }, react_1["default"].createElement("input", {
     type: "password",
@@ -18867,10 +18877,11 @@ function Register_store() {
     ref: register({
       required: true
     })
-  }), errors.password_check && errors.password_check.type === "required" && react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9(\u78BA\u8A8D\u7528)\u306F\u5FC5\u9808\u3067\u3059\u3002"), PasswordErrorMessage(getValues('password'), getValues('password_check')))), react_1["default"].createElement("div", {
+  }), errors.password_check && errors.password_check.type === "required" && react_1["default"].createElement("p", null, "\u78BA\u8A8D\u7528\u30D1\u30B9\u30EF\u30FC\u30C9\u306F\u5FC5\u9808\u3067\u3059\u3002"), PasswordErrorMessage(getValues('password'), getValues('password_check')))), react_1["default"].createElement("div", {
     className: "p-register-store__container__form__item"
   }, react_1["default"].createElement("label", {
-    htmlFor: "business_day"
+    htmlFor: "business_day",
+    className: "a-label-required__red"
   }, "\u55B6\u696D\u65E5\u30FB\u55B6\u696D\u6642\u9593"), react_1["default"].createElement("div", {
     className: "p-register-store__container__form__item__input"
   }, react_1["default"].createElement("input", {
@@ -18883,21 +18894,16 @@ function Register_store() {
     return WeekItem(day);
   })))), react_1["default"].createElement("div", {
     className: "p-register-store__container__form__item"
-  }, react_1["default"].createElement("label", null, "\u55B6\u696D\u65E5\u306B\u95A2\u3059\u308B\u3072\u3068\u3053\u3068"), react_1["default"].createElement("div", {
+  }, react_1["default"].createElement("label", null, "\u55B6\u696D\u306B\u95A2\u3059\u308B\u5099\u8003"), react_1["default"].createElement("div", {
     className: "p-register-store__container__form__item__input"
   }, react_1["default"].createElement("span", null, "\u3010\u4F8B1\u3011\u5B9A\u4F11\u65E5\uFF1A\u7B2C3\u6C34\u66DC\u65E5", react_1["default"].createElement("br", null), "\u3010\u4F8B2\u3011\u795D\u65E5\u3001\u304A\u76C6\u3001\u5E74\u672B\u5E74\u59CB\u306F\u304A\u4F11\u307F\u3067\u3059\u3002"), react_1["default"].createElement("textarea", {
     name: "business_memo",
     ref: register
   }))), react_1["default"].createElement("input", {
+    className: "p-register-store__container__form__input--submit",
     type: "submit",
     value: "\u767B\u9332\u3059\u308B"
-  })), react_1["default"].createElement("div", {
-    className: "p-register-store__container__links"
-  }, react_1["default"].createElement("span", null, "\u30ED\u30B0\u30A4\u30F3\u306F", react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/login_store"
-  }, "\u3053\u3061\u3089")), react_1["default"].createElement("span", null, "\u30C8\u30C3\u30D7\u30DA\u30FC\u30B8\u306F", react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/"
-  }, "\u3053\u3061\u3089")))));
+  }))));
 }
 
 exports.default = Register_store;
