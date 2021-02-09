@@ -115,7 +115,7 @@
 .a-btn-modal-sns,
 .a-btn-homepage > a {
     display: inline-block;
-    width: 8.5rem;
+    width: 7rem;
     height: 25px;
     line-height: 25px;
     font-size: 0.7rem;
@@ -130,25 +130,50 @@
     &:hover {
         background-color: $darkestBrown;
     }
+
+    @include bp-960up {
+        width: 168px;
+    }
 }
 
 .a-btn-modal-sns {
     border: none;
+
+    @include bp-960up {
+        margin-top: 2px;
+    }
 }
 
-//モバイルヘッダーのメニューアイコン
+//ログイン・検索・マイページボタン（アイコン）
 .a-btn-search_icon,
-.a-btn-mypage,
 .a-btn-logIn,
-.a-btn-logout {
+.a-btn-mypage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $header-height;
+    height: $header-height;
+
     a {
-        display: inline-block;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 87%;
+        height: 87%;
         color: white;
-        width: $header-height;
-        height: $header-height;
-        line-height: $header-height;
-        text-align: center;
         font-size: 1.2rem;
+        border-radius: 50%;
+
+        & > span {
+            margin-top: 4px;
+            line-height: 0.5rem;
+            font-size: 0.5rem;
+        }
+
+        &:hover {
+            background-color: $darkBrown;
+        }
     }
 
     @include bp-960up {
@@ -160,8 +185,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
 
-    .a-btn-mypage,
-    .a-btn-logout {
+    .a-btn-mypage {
         @include bp-960up {
             display: block;
             a {
@@ -206,6 +230,24 @@
     &:hover {
         background-color: $brown;
         color: $white;
+    }
+}
+
+//ユーザーマイページのログアウトボタン
+.a-btn-logout {
+    display: flex;
+    justify-content: flex-end;
+
+    @include bp-960up {
+        justify-content: unset;
+        margin-top: $mp-xs;
+    }
+
+    & > a {
+        font-size: 0.8rem;
+        color: $darkGray;
+        padding: 0 3px;
+        cursor: pointer;
     }
 }
 

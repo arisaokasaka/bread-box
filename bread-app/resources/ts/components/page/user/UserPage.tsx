@@ -12,20 +12,16 @@ const testInfo = [{
     interested: {},   
 }]
 
-
-type UserProps = ({
-    UserInfo: any;
-});
-
-const UserPage: React.FC<UserProps> = ({UserInfo}) => {
+const UserPage:any = ({UserInfo}) => {
+    UserInfo = testInfo;
     return(
         <div className = "p-user">
             <div className = "p-user__container">
                 <UserTable
-                    UserInfo = {testInfo}
+                    UserInfo = {UserInfo}
                 />
                 <UserProf
-                    UserInfo = {testInfo}
+                    UserInfo = {UserInfo}
                 />
             </div>
         </div>

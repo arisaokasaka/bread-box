@@ -26,7 +26,7 @@ const LoginUser = () =>  {
             .then(res => {
                 console.log(res);
                 dispatch({
-                    type: 'setId',
+                    type: 'setUser',
                     payload: res.data.user.uuid,
                 });
                 history.push("/search");

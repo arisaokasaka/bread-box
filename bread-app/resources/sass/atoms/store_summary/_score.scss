@@ -1,33 +1,101 @@
 .a-score {
-    width: 120px;
-
     &__container {
         display: flex;
+        align-items: center;
 
-        & > h2 {
-            color: $black;
+        &__result {
+            display: flex;
+            align-items: center;
+
+            &__stars {
+                position: relative;
+                width: 110px;
+
+                & span {
+                    font-size: 23px;
+                    letter-spacing: -2px;
+                }
+
+                &__content {
+                    color: $brown;
+                    overflow: hidden;
+                }
+
+                &__frame {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    color: $brown;
+                }
+            }
+
+            & > h3 {
+                color: $black;
+                vertical-align: center;
+            }
         }
 
-        &__stars {
-            position: relative;
-            width: 80px;
-            margin: 0.1rem 0 0 0.2rem;
+        &__comment {
+            color: $lightGray;
+            margin-left: 10px;
+            font-size: 0.8rem;
+
+            & > a {
+                margin-left: 2px;
+                color: $darkGray;
+                font-weight: 600;
+                text-decoration: underline $darkGray;
+
+                &:hover {
+                    color: $brown;
+                }
+            }
+        }
+    }
+}
+
+//店舗ページにおける調整
+.p-store {
+    .a-score {
+        margin: 0 auto;
+
+        &__container {
+            display: flex;
+            align-items: center;
 
             @include bp-960up {
-                margin-top: 0.3rem;
+                flex-direction: center;
+                flex-wrap: wrap;
             }
 
-            &__content {
-                color: $brown;
-                overflow: hidden;
+            &__result {
+                display: flex;
+                align-items: center;
             }
 
-            &__frame {
-                position: absolute;
-                top: 0;
-                left: 0;
-                color: $brown;
+            &__comment {
+                display: flex;
+                align-items: center;
+                color: $lightGray;
+
+                @include bp-960up {
+                    margin-left: 0;
+                }
             }
+        }
+    }
+}
+
+.m-store-basicInfo__container {
+    .a-score {
+        display: none;
+    }
+}
+
+.p-review {
+    .m-store-basicInfo__container {
+        .a-score {
+            display: block;
         }
     }
 }

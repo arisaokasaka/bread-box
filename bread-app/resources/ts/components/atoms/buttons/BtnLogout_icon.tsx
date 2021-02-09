@@ -1,12 +1,11 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { UserAuthContext } from '../../../contexts/UserAuthContext';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
 export default function BtnLogout_icon() {
     const { dispatch } = useContext(UserAuthContext);
+    const history = useHistory();
 
     // ログアウト機能
     const logout = () => {
@@ -15,8 +14,9 @@ export default function BtnLogout_icon() {
         .then(res => {
             console.log(res);
             dispatch({
-                type: 'setOutId'
+                type: 'setOut'
             });
+            history.push('/')
         })
         .catch(err => {
             console.log(err);
@@ -25,7 +25,7 @@ export default function BtnLogout_icon() {
 
     return (
         <div className = "a-btn-logout">
-            <Link to={"/"} onClick={logout}><FontAwesomeIcon icon={faSignOutAlt}/></Link>
+            <a onClick={logout}>ログアウトする</a>
         </div>
     )
 }

@@ -17,9 +17,9 @@
         &__content {
             margin-top: $mp-xxs;
 
-            @include bp-600up {
+            @include bp-960up {
                 display: grid;
-                grid-template-columns: 1fr 160px;
+                grid-template-columns: 1fr 200px;
                 grid-gap: 5px;
             }
         }

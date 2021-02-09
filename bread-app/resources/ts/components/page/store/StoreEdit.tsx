@@ -2,11 +2,6 @@ import React from 'react';
 import BtnBack from '../../atoms/buttons/BtnBack';
 import StoreEditTable from '../../molecules/storeEdit/StoreEditTable';
 
-type StoreEditProps = ({
-    MenuInfo: Array<any>;
-    StoreInfo: Array<any>;
-})
-
 let testMenuInfo = [
     {
         id: 45,
@@ -43,8 +38,7 @@ let testStoreInfo = [
     }
 ]
 
-
-const StoreEdit: React.FC<StoreEditProps> = ({MenuInfo, StoreInfo}) => {
+const StoreEdit:any = ({MenuInfo, StoreInfo}) => {
     MenuInfo = testMenuInfo;
     StoreInfo = testStoreInfo;
 

@@ -5,7 +5,6 @@ import Searchbar from '../atoms/Searchbar'
 import BtnSearch_icon from '../atoms/buttons/BtnSearch_icon';
 import BtnMypage from '../atoms/buttons/BtnMypage';
 import BtnLogin_icon from '../atoms/buttons/BtnLogin_icon';
-import BtnLogout_icon from '../atoms/buttons/BtnLogout_icon';
 import Logo from '../atoms/Logo';
 import { UserAuthContext } from '../../contexts/UserAuthContext';
 
@@ -24,7 +23,7 @@ function NavBar() {
             console.log('[getUser]ログイン済み');
             console.log(res.data);
             dispatch({
-                type: 'setId',
+                type: 'setUser',
                 payload: res.data.uuid,
             });
         }).catch(err => {
@@ -38,13 +37,11 @@ function NavBar() {
         navPC = (
             <nav className="l-navbar__content__nav--loggedin">
                 <BtnMypage/>
-                <BtnLogout_icon/>
             </nav>
         );
         navMobile = (
             <nav className="l-navbar__mobile">
                 <BtnSearch_icon/>
-                <BtnLogout_icon/>
                 <BtnMypage/>
             </nav>
         );

@@ -7,13 +7,15 @@ import { UserAuthContext } from '../../../contexts/UserAuthContext';
 export default function Btn_interested() {
     const { state } = useContext(UserAuthContext);
     let BtnInterested: any;
-    if(state.uuid){
+    if(state.uuid && state.auth==="user"){
         BtnInterested = (
             <button className="a-btn-interested">
                 <span><FontAwesomeIcon icon={faFlag}/></span>
                 <span>行ってみたい</span>
             </button> 
         );
+    }else if(state.uuid && state.auth==="store"){
+        BtnInterested = null;
     }else{
         BtnInterested = (
             <Link to="/login_user" className="a-btn-interested">

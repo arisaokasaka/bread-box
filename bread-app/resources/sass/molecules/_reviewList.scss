@@ -1,6 +1,21 @@
 .m-review-list {
     &__item {
-        background-color: white;
+        display: grid;
+        grid-template-columns: 40px 1fr;
+        background-color: $white;
         padding: $mp-xxs;
+
+        & > img {
+            height: 30px;
+            width: 30px;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        &__content {
+            & > p {
+                font-size: 0.8rem;
+            }
+        }
     }
 }
