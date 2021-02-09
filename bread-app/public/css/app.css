@@ -94,7 +94,8 @@ ul li {
   list-style: none;
 }
 
-input {
+input,
+textarea {
   border: none;
   outline: 0;
 }
@@ -359,11 +360,18 @@ h2 {
   }
 }
 
+.l-navbar__content__nav--loggedin {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 @media screen and (min-width: 960px) {
-  .l-navbar__content__nav--loggedin .a-btn-mypage {
+  .l-navbar__content__nav--loggedin .a-btn-mypage,
+  .l-navbar__content__nav--loggedin .a-btn-logout {
     display: block;
   }
-  .l-navbar__content__nav--loggedin .a-btn-mypage a {
+  .l-navbar__content__nav--loggedin .a-btn-mypage a,
+  .l-navbar__content__nav--loggedin .a-btn-logout a {
     font-size: 1.6rem;
   }
 }
@@ -376,7 +384,7 @@ h2 {
   height: 2rem;
   line-height: 2rem;
   font-size: 0.8rem;
-  background-color: #f8fafc;
+  background-color: #faf8f5;
   border: 2px solid #c47d2c;
   text-align: center;
   font-weight: 500;
@@ -557,10 +565,25 @@ label.a-label-required::before {
   position: absolute;
   top: 3.5px;
   left: -2rem;
-  background-color: #493020;
+  background-color: #7c4920;
   color: white;
   font-size: 0.6rem;
   padding: 1px 3px;
+}
+
+label.a-label-required__red::after {
+  content: "[必須]";
+  position: absolute;
+  color: #c92222;
+  font-size: 0.7rem;
+  padding-left: 4px;
+}
+
+@media screen and (min-width: 600px) {
+  label.a-label-required__red::after {
+    top: 0;
+    right: 8px;
+  }
 }
 
 .ReactModal__Overlay {
@@ -1393,7 +1416,7 @@ label.a-label-required::before {
 }
 
 .m-user-prof__container__content__text > p:nth-of-type(3) > span {
-  color: #9aa0a6;
+  color: #8d8c8c;
 }
 
 .m-review-list__item {
@@ -1780,14 +1803,12 @@ label.a-label-required::before {
 }
 
 .p-register-store {
-  background-color: #faf8f5;
+  margin: 100px 0;
 }
 
 .p-register-store__container {
   margin: 0 auto;
   width: 90%;
-  margin-top: 40px;
-  padding: 40px;
   border-radius: 2px;
   color: #67491b;
 }
@@ -1811,41 +1832,88 @@ label.a-label-required::before {
   }
 }
 
+.p-register-store__container__links {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.p-register-store__container__links > span {
+  display: block;
+  color: #67491b;
+  font-size: 0.8rem;
+  margin: 3px 0;
+}
+
+.p-register-store__container__links > span > a {
+  margin-left: 2px;
+  color: #67491b;
+  font-weight: 600;
+}
+
+.p-register-store__container > p {
+  margin-top: 5px;
+  color: #8d8c8c;
+  font-size: 0.8rem;
+}
+
 .p-register-store__container__form {
   display: flex;
   flex-direction: column;
   width: 100%;
   margin: 0 auto;
+  margin-top: 20px;
 }
 
 .p-register-store__container__form__item {
   display: grid;
-  grid-template-columns: 10rem 1fr;
-  height: 4rem;
-  border-bottom: 0.3px solid #c7c7c7;
   box-sizing: border-box;
 }
 
+@media screen and (min-width: 600px) {
+  .p-register-store__container__form__item {
+    grid-template-columns: 10rem 1fr;
+    border-bottom: 0.3px solid #c7c7c7;
+  }
+  .p-register-store__container__form__item:nth-child(1) {
+    border-top: 0.3px solid #c7c7c7;
+  }
+}
+
 .p-register-store__container__form__item > label {
-  display: inline;
+  display: block;
+  width: auto;
   position: relative;
-  line-height: 4rem;
-  height: 4rem;
   font-size: 0.8rem;
-  font-weight: 450;
-  padding-left: 1rem;
-  background-color: rgba(252, 222, 184, 0.3);
+  font-weight: 550;
+  line-height: 1.5rem;
+}
+
+@media screen and (min-width: 600px) {
+  .p-register-store__container__form__item > label {
+    font-weight: 450;
+    line-height: 4rem;
+    padding: 0 1rem;
+    background-color: rgba(252, 222, 184, 0.3);
+  }
 }
 
 .p-register-store__container__form__item__input {
   display: flex;
-  align-items: center;
   flex-direction: column;
-  height: 4rem;
-  padding-left: 1.5rem;
+  justify-content: center;
+  padding: 0 0 0.8rem 0;
 }
 
-.p-register-store__container__form__item__input input {
+@media screen and (min-width: 600px) {
+  .p-register-store__container__form__item__input {
+    padding: 0.5rem 1.5rem;
+  }
+}
+
+.p-register-store__container__form__item__input > input,
+.p-register-store__container__form__item__input > textarea {
+  font-size: 0.9rem;
   border-radius: 2px;
   height: 1.8rem;
   padding: 0 5px;
@@ -1853,31 +1921,30 @@ label.a-label-required::before {
   width: 100%;
 }
 
-.p-register-store__container__form__item__input input[type="submit"] {
-  background-color: #7c4920;
-  color: #f8fafc;
-  font-size: 0.9rem;
-  letter-spacing: 2px;
-  margin-top: 10px;
-  cursor: pointer;
+.p-register-store__container__form__item__input > textarea {
+  height: 5rem;
+  padding: 2px 5px;
 }
 
-.p-register-store__container__form__item__input input[type="submit"]:hover {
-  background-color: #493020;
-}
-
-.p-register-store__container__form__item p {
+.p-register-store__container__form__item__input > p {
   color: #c92222;
   font-size: 0.7rem;
 }
 
-.p-register-store__container__form__item span {
-  color: #9aa0a6;
+.p-register-store__container__form__item__input > span {
+  color: #8d8c8c;
   font-size: 0.7rem;
 }
 
 .p-register-store__container__form__week {
   display: grid;
+  margin-left: 0.8rem;
+}
+
+@media screen and (min-width: 600px) {
+  .p-register-store__container__form__week {
+    margin: 0;
+  }
 }
 
 .p-register-store__container__form__week__day {
@@ -1889,6 +1956,7 @@ label.a-label-required::before {
 @media screen and (min-width: 600px) {
   .p-register-store__container__form__week__day {
     grid-template-columns: 6rem 1fr;
+    height: 1.2rem;
   }
 }
 
@@ -1905,6 +1973,7 @@ label.a-label-required::before {
   height: 12px;
   background-color: #c7c7c7;
   margin-left: 1rem;
+  cursor: pointer;
 }
 
 .p-register-store__container__form__week__day__heading__btn > span {
@@ -1918,7 +1987,6 @@ label.a-label-required::before {
   background-color: #f8fafc;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.4);
   transition: transform 0.2s ease;
-  cursor: pointer;
 }
 
 .p-register-store__container__form__week__day__heading__btn.active {
@@ -1934,8 +2002,9 @@ label.a-label-required::before {
 }
 
 .p-register-store__container__form__week__day__hours.active {
-  display: block;
+  display: inline-block;
   margin-top: 3px;
+  margin-left: 3.3rem;
 }
 
 @media screen and (min-width: 600px) {
@@ -1950,30 +2019,28 @@ label.a-label-required::before {
   border-radius: 2px;
 }
 
-.p-register-store__container__links {
-  width: 100%;
-  margin: 0 auto;
-  margin-top: 40px;
+.p-register-store__container__form__input--submit {
+  width: 70%;
+  height: 2rem;
+  background-color: #7c4920;
+  color: #f8fafc;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  margin: 40px auto;
+  border-radius: 2px;
+  cursor: pointer;
 }
 
-.p-register-store__container__links > span {
-  display: block;
-  color: #67491b;
-  font-size: 0.8rem;
-  margin: 3px 0;
+.p-register-store__container__form__input--submit:hover {
+  background-color: #493020;
 }
 
-.p-register-store__container__links > span > a {
-  color: #67491b;
-  font-weight: 800;
-}
-
-.p-register-user,
-.p-login-store,
-.p-login-user,
-.p-password-reset-store,
-.p-password-reset-user {
-  background-color: white;
+@media screen and (min-width: 600px) {
+  .p-register-store__container__form__input--submit {
+    width: 30%;
+    height: 2.3rem;
+    font-size: 1rem;
+  }
 }
 
 .p-register-user__container,
@@ -1982,10 +2049,10 @@ label.a-label-required::before {
 .p-password-reset-store__container,
 .p-password-reset-user__container {
   width: 50%;
-  min-width: 280px;
+  min-width: 250px;
   max-width: 450px;
   margin: 120px auto;
-  padding: 40px;
+  padding: 40px 20px;
   border-radius: 2px;
   color: #67491b;
 }
@@ -1996,7 +2063,18 @@ label.a-label-required::before {
   .p-login-user__container,
   .p-password-reset-store__container,
   .p-password-reset-user__container {
-    box-shadow: 0px 0pt 10px;
+    background-color: #f8fafc;
+    box-shadow: 2px 3pt 8px 0px #9aa0a67a;
+    padding: 40px;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .p-register-user__container,
+  .p-login-store__container,
+  .p-login-user__container,
+  .p-password-reset-store__container,
+  .p-password-reset-user__container {
     padding: 40px 80px;
   }
 }
