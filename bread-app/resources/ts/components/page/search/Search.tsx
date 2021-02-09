@@ -28,7 +28,7 @@ const testInfo = [
         sns: {twitter: 'twitter', instagram: 'sssss'},
         img: '/images/croissant.jpg'
     },{
-        id: 56,
+        id: 6,
         name: 'Le pain de Maki',
         address: '福岡市博多区比恵町',
         star: 3.3,

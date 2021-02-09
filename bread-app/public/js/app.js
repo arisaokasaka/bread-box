@@ -15144,35 +15144,32 @@ var Top_1 = __importDefault(__webpack_require__(/*! ./components/page/top/Top */
 
 var UserPage_1 = __importDefault(__webpack_require__(/*! ./components/page/user/UserPage */ "./resources/ts/components/page/user/UserPage.tsx"));
 
-var UserEdit_1 = __importDefault(__webpack_require__(/*! ./components/page/user/UserEdit */ "./resources/ts/components/page/user/UserEdit.tsx"));
+var UserEdit_1 = __importDefault(__webpack_require__(/*! ./components/page/user/UserEdit */ "./resources/ts/components/page/user/UserEdit.tsx")); //RouteAuth
 
-var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
-window.axios = axios_1["default"];
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.withCredentials = true;
-var token = document.head.querySelector('meta[name="csrf-token"]');
+var StoreOnly_1 = __importDefault(__webpack_require__(/*! ./routeAuth/StoreOnly */ "./resources/ts/routeAuth/StoreOnly.tsx"));
 
-if (token) {
-  console.log(token);
-  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-} else {
-  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
-}
+var UserOnly_1 = __importDefault(__webpack_require__(/*! ./routeAuth/UserOnly */ "./resources/ts/routeAuth/UserOnly.tsx")); // window.axios = axios;
+// window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+// window.axios.defaults.withCredentials = true;
+// let token = document.head.querySelector('meta[name="csrf-token"]');
+// if (token) {
+//   console.log(token);
+//   window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+// } else {
+//   console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+// }
+// let test=axios.create({
+//   baseURL: 'http://localhost:8000',
+//   withCredentials: true
+// })
+// console.log(axios.defaults.headers)
+// test.get("/api/user", {withCredentials: true}).then(response => {
+//     console.log(response);
+// }).catch(err=>{
+//   console.log('err')
+//   console.log(err)})
 
-var test = axios_1["default"].create({
-  baseURL: 'http://localhost:8000',
-  withCredentials: true
-});
-console.log(axios_1["default"].defaults.headers);
-test.get("/api/user", {
-  withCredentials: true
-}).then(function (response) {
-  console.log(response);
-})["catch"](function (err) {
-  console.log('err');
-  console.log(err);
-});
 
 var App = function App() {
   var _a = react_1.useReducer(UserAuthReducer_1.UserAuthReducer, UserAuthReducer_1.initialState),
@@ -15222,18 +15219,15 @@ var App = function App() {
     path: "/review",
     component: Review_1["default"]
   }), react_1["default"].createElement(react_router_dom_1.Route, {
-    path: "/store_edit",
-    component: StoreEdit_1["default"]
-  }), react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/store",
     component: StorePage_1["default"]
-  }), react_1["default"].createElement(react_router_dom_1.Route, {
-    path: "/user",
-    component: UserPage_1["default"]
-  }), react_1["default"].createElement(react_router_dom_1.Route, {
-    path: "/user_edit",
-    component: UserEdit_1["default"]
-  }))))));
+  }), react_1["default"].createElement(StoreOnly_1["default"], {
+    path: "/store_edit"
+  }, react_1["default"].createElement(StoreEdit_1["default"], null)), react_1["default"].createElement(UserOnly_1["default"], {
+    path: "/user"
+  }, react_1["default"].createElement(UserPage_1["default"], null)), react_1["default"].createElement(UserOnly_1["default"], {
+    path: "/user_edit"
+  }, react_1["default"].createElement(UserEdit_1["default"], null)))))));
 };
 
 if (document.getElementById('app')) {
@@ -15669,7 +15663,7 @@ function BtnLogout_icon() {
     axios_1["default"].get("/api/logout").then(function (res) {
       console.log(res);
       dispatch({
-        type: 'setOutId'
+        type: 'setOut'
       });
     })["catch"](function (err) {
       console.log(err);
@@ -15833,12 +15827,14 @@ function Btn_favorite() {
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
   var BtnFavorite;
 
-  if (state.uuid) {
+  if (state.uuid && state.auth === "user") {
     BtnFavorite = react_1["default"].createElement("button", {
       className: "a-btn-favorite"
     }, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
       icon: free_solid_svg_icons_1.faHeart
     })), react_1["default"].createElement("span", null, "\u304A\u6C17\u306B\u5165\u308A"));
+  } else if (state.uuid && state.auth === "store") {
+    BtnFavorite = null;
   } else {
     BtnFavorite = react_1["default"].createElement(react_router_dom_1.Link, {
       to: "/login_user",
@@ -15959,12 +15955,14 @@ function Btn_interested() {
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
   var BtnInterested;
 
-  if (state.uuid) {
+  if (state.uuid && state.auth === "user") {
     BtnInterested = react_1["default"].createElement("button", {
       className: "a-btn-interested"
     }, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
       icon: free_solid_svg_icons_1.faFlag
     })), react_1["default"].createElement("span", null, "\u884C\u3063\u3066\u307F\u305F\u3044"));
+  } else if (state.uuid && state.auth === "store") {
+    BtnInterested = null;
   } else {
     BtnInterested = react_1["default"].createElement(react_router_dom_1.Link, {
       to: "/login_user",
@@ -16363,7 +16361,7 @@ function NavBar() {
       console.log('[getUser]ログイン済み');
       console.log(res.data);
       dispatch({
-        type: 'setId',
+        type: 'setUser',
         payload: res.data.uuid
       });
     })["catch"](function (err) {
@@ -17712,7 +17710,7 @@ var Top_section = function Top_section(_a) {
   return react_1["default"].createElement("div", null, react_1["default"].createElement("h2", null, sectionTitle), react_1["default"].createElement("ul", null, sectionContent.map(function (el) {
     return react_1["default"].createElement("li", null, react_1["default"].createElement("input", {
       type: "text",
-      key: el.id,
+      key: el.key + el.id,
       value: el.name
     }));
   })));
@@ -18288,7 +18286,7 @@ var LoginUser = function LoginUser() {
       }).then(function (res) {
         console.log(res);
         dispatch({
-          type: 'setId',
+          type: 'setUser',
           payload: res.data.user.uuid
         });
         history.push("/search");
@@ -19277,7 +19275,7 @@ var testInfo = [{
   },
   img: '/images/croissant.jpg'
 }, {
-  id: 56,
+  id: 6,
   name: 'Le pain de Maki',
   address: '福岡市博多区比恵町',
   star: 3.3,
@@ -19621,8 +19619,6 @@ var Districts_1 = __importDefault(__webpack_require__(/*! ../../../info/District
 
 var Bread_kinds_1 = __importDefault(__webpack_require__(/*! ../../../info/Bread_kinds */ "./resources/ts/info/Bread_kinds.ts"));
 
-var Days_1 = __importDefault(__webpack_require__(/*! ../../../info/Days */ "./resources/ts/info/Days.ts"));
-
 var Searchbar_1 = __importDefault(__webpack_require__(/*! ../../atoms/Searchbar */ "./resources/ts/components/atoms/Searchbar.tsx"));
 
 var top_section_1 = __importDefault(__webpack_require__(/*! ../../molecules/top/top_section */ "./resources/ts/components/molecules/top/top_section.tsx"));
@@ -19632,7 +19628,7 @@ var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../../molecules/Sto
 var StoreRanking_1 = __importDefault(__webpack_require__(/*! ../../molecules/top/StoreRanking */ "./resources/ts/components/molecules/top/StoreRanking.tsx"));
 
 var testPickInfo = [{
-  id: 56,
+  id: 5,
   name: 'Le pain de Maki',
   address: '福岡市博多区比恵町',
   star: 3.3,
@@ -19645,7 +19641,7 @@ var testPickInfo = [{
   },
   img: '/images/croissant.jpg'
 }, {
-  id: 56,
+  id: 6,
   name: 'Le pain de Maki',
   address: '福岡市博多区比恵町',
   star: 3.3,
@@ -19658,7 +19654,7 @@ var testPickInfo = [{
   },
   img: '/images/croissant.jpg'
 }, {
-  id: 56,
+  id: 356,
   name: 'Le pain de Maki',
   address: '福岡市博多区比恵町',
   star: 3.3,
@@ -19671,7 +19667,7 @@ var testPickInfo = [{
   },
   img: '/images/croissant.jpg'
 }, {
-  id: 56,
+  id: 456,
   name: 'Le pain de Maki',
   address: '福岡市博多区比恵町',
   star: 3.3,
@@ -19695,14 +19691,13 @@ function Top() {
   }, react_1["default"].createElement("h1", null, "\u304A\u6C17\u306B\u5165\u308A\u306E\u30D1\u30F3\u5C4B\u3055\u3093\u3092", react_1["default"].createElement("br", null), "\u898B\u3064\u3051\u308B\u3001\u3064\u306A\u304C\u308B"), react_1["default"].createElement(Searchbar_1["default"], null))), react_1["default"].createElement("main", {
     className: "p-top__content"
   }, react_1["default"].createElement(top_section_1["default"], {
+    key: "content",
     sectionTitle: "\u30A8\u30EA\u30A2\u304B\u3089\u63A2\u3059",
     sectionContent: Districts_1["default"].districts
   }), react_1["default"].createElement(top_section_1["default"], {
+    key: "kind",
     sectionTitle: "\u30D1\u30F3\u306E\u7A2E\u985E\u304B\u3089\u63A2\u3059",
     sectionContent: Bread_kinds_1["default"].bread_kinds
-  }), react_1["default"].createElement(top_section_1["default"], {
-    sectionTitle: "\u55B6\u696D\u65E5\u304B\u3089\u63A2\u3059",
-    sectionContent: Days_1["default"].days
   }), react_1["default"].createElement(Store_pickup_1["default"], {
     PickupInfo: testPickInfo
   }), react_1["default"].createElement(StoreRanking_1["default"], {
@@ -19861,14 +19856,15 @@ var testInfo = [{
 
 var UserPage = function UserPage(_a) {
   var UserInfo = _a.UserInfo;
+  UserInfo = testInfo;
   return react_1["default"].createElement("div", {
     className: "p-user"
   }, react_1["default"].createElement("div", {
     className: "p-user__container"
   }, react_1["default"].createElement(UserTable_1["default"], {
-    UserInfo: testInfo
+    UserInfo: UserInfo
   }), react_1["default"].createElement(UserProf_1["default"], {
-    UserInfo: testInfo
+    UserInfo: UserInfo
   })));
 };
 
@@ -20158,14 +20154,22 @@ exports.initialState = exports.UserAuthReducer = void 0;
 
 var UserAuthReducer = function UserAuthReducer(state, action) {
   switch (action.type) {
-    case 'setId':
+    case 'setUser':
       return __assign(__assign({}, state), {
-        uuid: action.payload
+        uuid: action.payload,
+        auth: "user"
       });
 
-    case 'setOutId':
+    case 'setStore':
       return __assign(__assign({}, state), {
-        uuid: null
+        uuid: action.payload,
+        auth: "store"
+      });
+
+    case 'setOut':
+      return __assign(__assign({}, state), {
+        uuid: null,
+        auth: null
       });
 
     default:
@@ -20177,8 +20181,221 @@ var UserAuthReducer = function UserAuthReducer(state, action) {
 
 exports.UserAuthReducer = UserAuthReducer;
 exports.initialState = {
-  uuid: null
+  uuid: null,
+  auth: null
 };
+
+/***/ }),
+
+/***/ "./resources/ts/routeAuth/StoreOnly.tsx":
+/*!**********************************************!*\
+  !*** ./resources/ts/routeAuth/StoreOnly.tsx ***!
+  \**********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __rest = this && this.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) {
+    if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+  }
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var UserAuthContext_1 = __webpack_require__(/*! ../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
+
+function StoreOnly(_a) {
+  var children = _a.children,
+      rest = __rest(_a, ["children"]);
+
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
+  return react_1["default"].createElement(react_router_dom_1.Route, __assign({}, rest, {
+    render: function render(_a) {
+      var location = _a.location;
+      return state.auth === "store" ? children : react_1["default"].createElement(react_router_dom_1.Redirect, {
+        to: {
+          pathname: "/",
+          state: {
+            from: location
+          }
+        }
+      });
+    }
+  }));
+}
+
+exports.default = StoreOnly;
+
+/***/ }),
+
+/***/ "./resources/ts/routeAuth/UserOnly.tsx":
+/*!*********************************************!*\
+  !*** ./resources/ts/routeAuth/UserOnly.tsx ***!
+  \*********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __rest = this && this.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) {
+    if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+  }
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var UserAuthContext_1 = __webpack_require__(/*! ../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
+
+function UserOnly(_a) {
+  var children = _a.children,
+      rest = __rest(_a, ["children"]);
+
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
+  return react_1["default"].createElement(react_router_dom_1.Route, __assign({}, rest, {
+    render: function render(_a) {
+      var location = _a.location;
+      return state.auth == 'user' ? children : react_1["default"].createElement(react_router_dom_1.Redirect, {
+        to: {
+          pathname: "/",
+          state: {
+            from: location
+          }
+        }
+      });
+    }
+  }));
+}
+
+exports.default = UserOnly;
 
 /***/ }),
 

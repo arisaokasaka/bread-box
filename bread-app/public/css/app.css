@@ -81,7 +81,7 @@ html {
 }
 
 body {
-  font-family: "Noto Sans JP", sans-serif;
+  font-family: "Nunito", sans-serif, "Noto Sans JP", sans-serif;
   color: #555555;
   background-color: #faf8f5;
 }

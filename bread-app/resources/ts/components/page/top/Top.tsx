@@ -10,7 +10,7 @@ import StoreRanking from '../../molecules/top/StoreRanking';
 
 const testPickInfo = [
     {
-        id: 56,
+        id: 5,
         name: 'Le pain de Maki',
         address: '福岡市博多区比恵町',
         star: 3.3,
@@ -20,7 +20,7 @@ const testPickInfo = [
         sns: {twitter: 'twitter', instagram: 'sssss'},
         img: '/images/croissant.jpg'
     },{
-        id: 56,
+        id: 6,
         name: 'Le pain de Maki',
         address: '福岡市博多区比恵町',
         star: 3.3,
@@ -30,7 +30,7 @@ const testPickInfo = [
         sns: {twitter: 'twitter', instagram: 'sssss'},
         img: '/images/croissant.jpg'
     },{
-        id: 56,
+        id: 356,
         name: 'Le pain de Maki',
         address: '福岡市博多区比恵町',
         star: 3.3,
@@ -40,7 +40,7 @@ const testPickInfo = [
         sns: {twitter: 'twitter', instagram: 'sssss'},
         img: '/images/croissant.jpg'
     },{
-        id: 56,
+        id: 456,
         name: 'Le pain de Maki',
         address: '福岡市博多区比恵町',
         star: 3.3,
@@ -63,17 +63,20 @@ function Top() {
             </div>
             <main className="p-top__content">
                 <Top_section 
+                key="content"
                 sectionTitle="エリアから探す"
                 sectionContent={districts.districts}
                 />
                 <Top_section 
+                key="kind"
                 sectionTitle="パンの種類から探す"
                 sectionContent={bread_kinds.bread_kinds}
                 />
-                <Top_section 
+                {/* <Top_section 
+                key="day"
                 sectionTitle="営業日から探す"
                 sectionContent={days.days}
-                />
+                /> */}
                 <Store_pickup 
                     PickupInfo={testPickInfo}
                 />
