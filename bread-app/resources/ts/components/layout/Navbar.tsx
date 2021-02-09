@@ -53,7 +53,7 @@ function NavBar() {
             <nav className="l-navbar__content__nav--loggedout">
                 <ul>
                     <Link to="/register_user">
-                        <li>会員登録</li>
+                        <li>無料会員登録</li>
                     </Link>
                     <Link to="/login_user">
                         <li>ログイン</li>
