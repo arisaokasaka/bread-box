@@ -1,5 +1,6 @@
 import React from 'react';
 import BtnEditUser from '../../atoms/buttons/BtnEditUser';
+import BtnLogout_icon from '../../atoms/buttons/BtnLogout_icon';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faHeart, faFlag, faCommentDots} from '@fortawesome/free-solid-svg-icons';
 
@@ -24,6 +25,7 @@ const UserProf: React.FC<UserProps> = ({UserInfo}) => {
                                 <p><span><FontAwesomeIcon icon={faFlag}/></span>行ってみたい</p>
                                 <p><span><FontAwesomeIcon icon={faCommentDots}/></span>レビュー数</p>
                             </div>
+                            <BtnLogout_icon/>
                         </div>
                     </div>   
                 );
