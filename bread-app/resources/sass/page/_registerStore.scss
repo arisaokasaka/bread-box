@@ -2,32 +2,43 @@
     margin: $margin-top_content 0;
 
     &__container {
+        position: relative;
         @include content-width;
         border-radius: $sm-radius;
         color: $font-color-brown;
 
         &__links {
-            display: flex;
-            justify-content: flex-end;
-            width: 100%;
-
             & > span {
-                display: block;
-                color: $font-color-brown;
-                font-size: 0.8rem;
-                margin: 3px 0;
+                position: absolute;
+                color: $textGray;
+                font-size: 0.7rem;
+                padding-top: 5px;
+
+                @include bp-600up {
+                    top: -1.5rem;
+                    right: 0;
+                    // color: $font-color-brown;
+                }
 
                 & > a {
-                    margin-left: 2px;
-                    color: $font-color-brown;
-                    font-weight: 600;
+                    padding: 0 3px;
+                    margin-top: 2px;
+                    font-size: 0.7rem;
+                    font-weight: 550;
+                    text-align: center;
+                    color: $darkGray;
+
+                    @include bp-600up {
+                        // color: $font-color-brown;
+                        border-bottom: 2px $textGray solid;
+                    }
                 }
             }
         }
 
         & > p {
             margin-top: 5px;
-            color: $textGray;
+            color: $font-color-brown;
             font-size: 0.8rem;
         }
 
@@ -36,7 +47,7 @@
             flex-direction: column;
             width: 100%;
             margin: 0 auto;
-            margin-top: $mp-xs;
+            margin-top: $mp-sm;
 
             &__item {
                 display: grid;
@@ -192,6 +203,7 @@
                 font-size: 0.9rem;
                 letter-spacing: 2px;
                 margin: $mp-sm auto;
+                margin-bottom: 0;
                 border-radius: $sm-radius;
                 cursor: pointer;
 

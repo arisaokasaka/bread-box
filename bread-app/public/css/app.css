@@ -1807,6 +1807,7 @@ label.a-label-required__red::after {
 }
 
 .p-register-store__container {
+  position: relative;
   margin: 0 auto;
   width: 90%;
   border-radius: 2px;
@@ -1832,28 +1833,38 @@ label.a-label-required__red::after {
   }
 }
 
-.p-register-store__container__links {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
+.p-register-store__container__links > span {
+  position: absolute;
+  color: #8d8c8c;
+  font-size: 0.7rem;
+  padding-top: 5px;
 }
 
-.p-register-store__container__links > span {
-  display: block;
-  color: #67491b;
-  font-size: 0.8rem;
-  margin: 3px 0;
+@media screen and (min-width: 600px) {
+  .p-register-store__container__links > span {
+    top: -1.5rem;
+    right: 0;
+  }
 }
 
 .p-register-store__container__links > span > a {
-  margin-left: 2px;
-  color: #67491b;
-  font-weight: 600;
+  padding: 0 3px;
+  margin-top: 2px;
+  font-size: 0.7rem;
+  font-weight: 550;
+  text-align: center;
+  color: #757575;
+}
+
+@media screen and (min-width: 600px) {
+  .p-register-store__container__links > span > a {
+    border-bottom: 2px #8d8c8c solid;
+  }
 }
 
 .p-register-store__container > p {
   margin-top: 5px;
-  color: #8d8c8c;
+  color: #67491b;
   font-size: 0.8rem;
 }
 
@@ -1862,7 +1873,7 @@ label.a-label-required__red::after {
   flex-direction: column;
   width: 100%;
   margin: 0 auto;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 .p-register-store__container__form__item {
@@ -1873,10 +1884,10 @@ label.a-label-required__red::after {
 @media screen and (min-width: 600px) {
   .p-register-store__container__form__item {
     grid-template-columns: 10rem 1fr;
-    border-bottom: 0.3px solid #c0c0c0;
+    border-bottom: 0.3px solid #a5a5a5;
   }
   .p-register-store__container__form__item:nth-child(1) {
-    border-top: 0.3px solid #c0c0c0;
+    border-top: 0.3px solid #a5a5a5;
   }
 }
 
@@ -1917,7 +1928,7 @@ label.a-label-required__red::after {
   border-radius: 2px;
   height: 1.8rem;
   padding: 0 5px;
-  border: 0.5px solid #c0c0c0;
+  border: 0.5px solid #a5a5a5;
   width: 100%;
 }
 
@@ -1972,7 +1983,7 @@ label.a-label-required__red::after {
   border-radius: 10px;
   width: 28px;
   height: 12px;
-  background-color: #c0c0c0;
+  background-color: #a5a5a5;
   margin-left: 1rem;
   cursor: pointer;
 }
@@ -2015,7 +2026,7 @@ label.a-label-required__red::after {
 }
 
 .p-register-store__container__form__week__day__hours.active > input {
-  border: 0.5px solid #c0c0c0;
+  border: 0.5px solid #a5a5a5;
   padding: 1px 2px;
   border-radius: 2px;
 }
@@ -2028,6 +2039,7 @@ label.a-label-required__red::after {
   font-size: 0.9rem;
   letter-spacing: 2px;
   margin: 40px auto;
+  margin-bottom: 0;
   border-radius: 2px;
   cursor: pointer;
 }

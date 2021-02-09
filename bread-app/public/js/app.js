@@ -18783,7 +18783,11 @@ function Register_store() {
     className: "p-register-store"
   }, react_1["default"].createElement("div", {
     className: "p-register-store__container"
-  }, react_1["default"].createElement("h2", null, "\u65B0\u898F\u5E97\u8217\u767B\u9332(\u7121\u6599)"), react_1["default"].createElement("p", null, "\u5E97\u8217\u60C5\u5831\u304C\u6700\u65B0\u306E\u3082\u306E\u3067\u3042\u308B\u3053\u3068\u3092\u3054\u78BA\u8A8D\u306E\u3046\u3048\u3001\u3054\u5165\u529B\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("form", {
+  }, react_1["default"].createElement("h2", null, "\u65B0\u898F\u5E97\u8217\u767B\u9332(\u7121\u6599)"), react_1["default"].createElement("p", null, "\u5E97\u8217\u60C5\u5831\u304C\u6700\u65B0\u306E\u3082\u306E\u3067\u3042\u308B\u3053\u3068\u3092\u3054\u78BA\u8A8D\u306E\u3046\u3048\u3001\u3054\u5165\u529B\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("div", {
+    className: "p-register-store__container__links"
+  }, react_1["default"].createElement("span", null, "\u65E2\u306B\u767B\u9332\u6E08\u3067\u3059\u304B\uFF1F", react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/login_store"
+  }, "\u5E97\u8217\u30ED\u30B0\u30A4\u30F3"))), react_1["default"].createElement("form", {
     className: "p-register-store__container__form",
     name: "form_storeRegister",
     onSubmit: handleSubmit(onSubmit)
