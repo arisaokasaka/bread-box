@@ -1,4 +1,6 @@
-import React,{useState} from 'react';
+import React,{useState, useContext} from 'react';
+import {Link} from 'react-router-dom';
+import { UserAuthContext } from '../../../contexts/UserAuthContext';
 import Modal from 'react-modal';
 import {useForm} from 'react-hook-form';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,6 +11,8 @@ type StoreInfoProps = ({
 })
 
 const ModalCreateReview: React.FC<StoreInfoProps> = ({StoreInfo}) =>{
+    const { state } = useContext(UserAuthContext);
+    const [modalIsOpen,setIsOpen] = useState(false);
     const customStyles = {
         content : {
             top: '50%',
@@ -25,8 +29,6 @@ const ModalCreateReview: React.FC<StoreInfoProps> = ({StoreInfo}) =>{
         console.log();
     }
 
-    const [modalIsOpen,setIsOpen] = useState(false);
-
     function openModal() {
       setIsOpen(true);
     }
@@ -35,12 +37,29 @@ const ModalCreateReview: React.FC<StoreInfoProps> = ({StoreInfo}) =>{
       setIsOpen(false);
     }
 
+    //ログイン状態に応じてレビューボタンの仕様変更
+    let btnReview: any;
+    if(state.uuid && state.auth==="user"){
+        btnReview = (
+            <button onClick={openModal} className = "a-btn-modal-review">
+                <FontAwesomeIcon icon={faPen}/>&nbsp;&nbsp;レビューを書く
+            </button>
+        )
+    }else if(state.uuid && state.auth==="store"){
+        btnReview = null;
+    }else{
+        btnReview = (
+            <Link to="login_user" className = "a-btn-modal-review">
+                <FontAwesomeIcon icon={faPen}/>&nbsp;&nbsp;レビューを書く
+            </Link>
+        )
+    }
+    
+
     return(
         <div className = "m-modal-review">
             <div>
-                <button onClick={openModal} className = "a-btn-modal-review">
-                    <FontAwesomeIcon icon={faPen}/>&nbsp;&nbsp;レビューを書く
-                </button>
+                {btnReview}
                 <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}

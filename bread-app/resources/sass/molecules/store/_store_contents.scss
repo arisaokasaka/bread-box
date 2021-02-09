@@ -5,35 +5,36 @@
     &__tab {
         display: flex;
         position: relative;
-        border: 2px solid $lightBrown;
-        background-color: $lightBrown;
         height: 35px;
         width: 100%;
-        box-sizing: border-box;
 
         @include bp-600up {
             height: 42px;
         }
 
         & > input {
-            background-color: $white;
+            position: relative;
+            background-color: transparent;
             font-size: 0.7rem;
             height: 100%;
             width: 33.33%;
             text-align: center;
-            color: $brown;
+            color: $darkGray;
             font-weight: 550;
             box-sizing: border-box;
             cursor: pointer;
 
-            &:nth-child(2) {
-                border-left: solid 2px $lightBrown;
-                border-right: solid 2px $lightBrown;
+            &:hover {
+                background-color: $lighterBrown;
             }
 
             &.selected {
                 background-color: $lightBrown;
                 color: $font-color-brown;
+
+                &:hover {
+                    background-color: $lightBrown;
+                }
             }
 
             @include bp-600up {
@@ -45,7 +46,6 @@
     &__container {
         background-color: $lightBrown;
         padding: $mp-xxs;
-        margin-bottom: $mp-md;
 
         &__table {
             min-height: 6rem;

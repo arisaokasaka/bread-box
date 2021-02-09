@@ -10,6 +10,10 @@
             column-gap: $mp-xs;
         }
 
+        &__info {
+            margin-bottom: $mp-xxs;
+        }
+
         &__table {
             background-color: $lightBrown;
             padding: $mp-xs;
@@ -17,7 +21,6 @@
         }
 
         & > aside {
-            // background-color: $lightBrown;
             border-radius: $sm-radius;
             padding: $mp-xxs;
         }

@@ -3,6 +3,7 @@ import StoreBasicInfo from '../../molecules/store/StoreBasicInfo';
 import ReviewList from '../../molecules/ReviewList';
 import ModalCreateReview from '../../atoms/modal/Modal_review';
 import Store_Pickup from '../../molecules/Store_pickup';
+import StoreSubInfo from '../../molecules/store/StoreSubinfo';
 
 type ReviewProps = ({
     ReviewInfo: Array<any>;

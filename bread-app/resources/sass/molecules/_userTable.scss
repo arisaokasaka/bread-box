@@ -2,8 +2,6 @@
     &__tab {
         display: flex;
         position: relative;
-        border: 2px solid $lightBrown;
-        background-color: $lightBrown;
         height: 35px;
         width: 100%;
 
@@ -12,24 +10,27 @@
         }
 
         & > input {
-            background-color: $white;
+            position: relative;
+            background-color: transparent;
             font-size: 0.7rem;
             height: 100%;
             width: 25%;
             text-align: center;
-            color: $brown;
+            color: $darkGray;
             font-weight: 550;
             cursor: pointer;
 
-            &:nth-child(2),
-            &:nth-child(3),
-            &:nth-child(4) {
-                border-left: solid 2px $lightBrown;
+            &:hover {
+                background-color: $lighterBrown;
             }
 
             &.selected {
                 background-color: $lightBrown;
                 color: $font-color-brown;
+
+                &:hover {
+                    background-color: $lightBrown;
+                }
             }
 
             @include bp-600up {

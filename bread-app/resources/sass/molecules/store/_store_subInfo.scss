@@ -1,8 +1,8 @@
 .m-store-subInfo {
     max-width: 12rem;
 
-    @include bp-600up {
-        height: 300px;
+    @include bp-960up {
+        height: 200px;
     }
 
     &__container {
@@ -31,7 +31,7 @@
                     margin-right: 0.5rem;
                 }
 
-                @include bp-600up {
+                @include bp-960up {
                     flex-direction: column;
                     a {
                         margin-right: auto;
@@ -46,7 +46,7 @@
 .m-store-subInfo {
     display: none;
 
-    @include bp-600up {
+    @include bp-960up {
         display: block;
         border: 1px solid $brown;
         border-radius: $base-radius;
@@ -72,11 +72,20 @@
 
 //モバイル用表示設定
 .m-store-basicInfo {
-    .m-store-subInfo {
+    & > .m-store-subInfo {
         display: block;
 
-        @include bp-600up {
+        @include bp-960up {
             display: none;
+        }
+    }
+}
+
+//レビューページの表示設定
+.p-review {
+    .m-store-basicInfo__container {
+        & > .m-store-subInfo {
+            display: block;
         }
     }
 }

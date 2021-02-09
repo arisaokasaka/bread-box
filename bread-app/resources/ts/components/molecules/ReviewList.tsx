@@ -10,7 +10,7 @@ const ReviewList: React.FC<ReviewProps> = ({ReviewInfo}) => (
         {ReviewInfo.map((el)=>{
             return(
                 <div className ="m-review-list__item" key={el.uuid}>
-                    <img src="" alt="投稿者のアイコン"/>
+                    <img src="/images/croissant.jpg" alt="投稿者のアイコン"/>
                     <div className ="m-review-list__item__content">
                         <Score ScoreStar = {el.star}/>
                         <p>{el.comment}</p>

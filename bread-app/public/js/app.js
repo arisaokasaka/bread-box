@@ -15332,22 +15332,36 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
 var Score = function Score(_a) {
   var ScoreStar = _a.ScoreStar;
   return react_1["default"].createElement("div", {
     className: "a-score"
   }, react_1["default"].createElement("div", {
     className: "a-score__container"
-  }, react_1["default"].createElement("h2", null, ScoreStar), react_1["default"].createElement("div", {
-    className: "a-score__container__stars"
   }, react_1["default"].createElement("div", {
-    className: "a-score__container__stars__content",
+    className: "a-score__container__result"
+  }, react_1["default"].createElement("div", {
+    className: "a-score__container__result__stars"
+  }, react_1["default"].createElement("div", {
+    className: "a-score__container__result__stars__content",
     style: {
       width: ScoreStar * 20 + "%"
     }
   }, react_1["default"].createElement("span", null, "\u2605\u2605\u2605\u2605\u2605")), react_1["default"].createElement("span", {
-    className: "a-score__container__stars__frame"
-  }, "\u2606\u2606\u2606\u2606\u2606"))));
+    className: "a-score__container__result__stars__frame"
+  }, "\u2606\u2606\u2606\u2606\u2606")), react_1["default"].createElement("h3", null, ScoreStar)), react_1["default"].createElement("p", {
+    className: "a-score__container__comment"
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faCommentDots
+  }), react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/review"
+  }, "1234"), "\u4EF6")));
 };
 
 exports.default = Score;
@@ -15583,8 +15597,8 @@ function BtnLogin_icon() {
   }, react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/login_user"
   }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-    icon: free_solid_svg_icons_1.faSignInAlt
-  })));
+    icon: free_solid_svg_icons_1.faLock
+  }), react_1["default"].createElement("span", null, "\u30ED\u30B0\u30A4\u30F3")));
 }
 
 exports.default = BtnLogin_icon;
@@ -15652,12 +15666,9 @@ var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/a
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
-var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
-
-var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-
 function BtnLogout_icon() {
-  var dispatch = react_1.useContext(UserAuthContext_1.UserAuthContext).dispatch; // ログアウト機能
+  var dispatch = react_1.useContext(UserAuthContext_1.UserAuthContext).dispatch;
+  var history = react_router_dom_1.useHistory(); // ログアウト機能
 
   var logout = function logout() {
     axios_1["default"].get("/api/logout").then(function (res) {
@@ -15665,6 +15676,7 @@ function BtnLogout_icon() {
       dispatch({
         type: 'setOut'
       });
+      history.push('/');
     })["catch"](function (err) {
       console.log(err);
     });
@@ -15672,12 +15684,9 @@ function BtnLogout_icon() {
 
   return react_1["default"].createElement("div", {
     className: "a-btn-logout"
-  }, react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/",
+  }, react_1["default"].createElement("a", {
     onClick: logout
-  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-    icon: free_solid_svg_icons_1.faSignOutAlt
-  })));
+  }, "\u30ED\u30B0\u30A2\u30A6\u30C8\u3059\u308B"));
 }
 
 exports.default = BtnLogout_icon;
@@ -15693,17 +15702,45 @@ exports.default = BtnLogout_icon;
 "use strict";
 
 
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
 };
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
@@ -15711,14 +15748,31 @@ var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome
 
 var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
 
+var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
+
 function BtnSearch_icon() {
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
+  var icon;
+
+  if (state.auth === "user") {
+    icon = react_1["default"].createElement(react_router_dom_1.Link, {
+      to: "/user"
+    }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+      icon: free_solid_svg_icons_1.faUserCircle
+    }), react_1["default"].createElement("span", null, "\u30DE\u30A4\u30DA\u30FC\u30B8"));
+  } else if (state.auth === "store") {
+    icon = react_1["default"].createElement(react_router_dom_1.Link, {
+      to: "/store"
+    }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+      icon: free_solid_svg_icons_1.faUserCircle
+    }), react_1["default"].createElement("span", null, "\u30DE\u30A4\u30DA\u30FC\u30B8"));
+  } else {
+    icon = null;
+  }
+
   return react_1["default"].createElement("div", {
     className: "a-btn-mypage"
-  }, react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/user"
-  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-    icon: free_solid_svg_icons_1.faUserCircle
-  })));
+  }, icon);
 }
 
 exports.default = BtnSearch_icon;
@@ -15759,7 +15813,7 @@ function BtnSearch_icon() {
     to: "/search_mobile"
   }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
     icon: free_solid_svg_icons_1.faSearch
-  })));
+  }), react_1["default"].createElement("span", null, "\u691C\u7D22")));
 }
 
 exports.default = BtnSearch_icon;
@@ -16034,6 +16088,10 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
+
 var react_modal_1 = __importDefault(__webpack_require__(/*! react-modal */ "./node_modules/react-modal/lib/index.js"));
 
 var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
@@ -16044,6 +16102,12 @@ var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg
 
 var ModalCreateReview = function ModalCreateReview(_a) {
   var StoreInfo = _a.StoreInfo;
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
+
+  var _b = react_1.useState(false),
+      modalIsOpen = _b[0],
+      setIsOpen = _b[1];
+
   var customStyles = {
     content: {
       top: '50%',
@@ -16055,19 +16119,15 @@ var ModalCreateReview = function ModalCreateReview(_a) {
     }
   };
 
-  var _b = react_hook_form_1.useForm(),
-      register = _b.register,
-      handleSubmit = _b.handleSubmit,
-      errors = _b.errors,
-      getValues = _b.getValues;
+  var _c = react_hook_form_1.useForm(),
+      register = _c.register,
+      handleSubmit = _c.handleSubmit,
+      errors = _c.errors,
+      getValues = _c.getValues;
 
   var onSubmit = function onSubmit() {
     console.log();
   };
-
-  var _c = react_1.useState(false),
-      modalIsOpen = _c[0],
-      setIsOpen = _c[1];
 
   function openModal() {
     setIsOpen(true);
@@ -16075,16 +16135,32 @@ var ModalCreateReview = function ModalCreateReview(_a) {
 
   function closeModal() {
     setIsOpen(false);
+  } //ログイン状態に応じてレビューボタンの仕様変更
+
+
+  var btnReview;
+
+  if (state.uuid && state.auth === "user") {
+    btnReview = react_1["default"].createElement("button", {
+      onClick: openModal,
+      className: "a-btn-modal-review"
+    }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+      icon: free_solid_svg_icons_1.faPen
+    }), "\xA0\xA0\u30EC\u30D3\u30E5\u30FC\u3092\u66F8\u304F");
+  } else if (state.uuid && state.auth === "store") {
+    btnReview = null;
+  } else {
+    btnReview = react_1["default"].createElement(react_router_dom_1.Link, {
+      to: "login_user",
+      className: "a-btn-modal-review"
+    }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+      icon: free_solid_svg_icons_1.faPen
+    }), "\xA0\xA0\u30EC\u30D3\u30E5\u30FC\u3092\u66F8\u304F");
   }
 
   return react_1["default"].createElement("div", {
     className: "m-modal-review"
-  }, react_1["default"].createElement("div", null, react_1["default"].createElement("button", {
-    onClick: openModal,
-    className: "a-btn-modal-review"
-  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-    icon: free_solid_svg_icons_1.faPen
-  }), "\xA0\xA0\u30EC\u30D3\u30E5\u30FC\u3092\u66F8\u304F"), react_1["default"].createElement(react_modal_1["default"], {
+  }, react_1["default"].createElement("div", null, btnReview, react_1["default"].createElement(react_modal_1["default"], {
     isOpen: modalIsOpen,
     onRequestClose: closeModal,
     style: customStyles,
@@ -16340,8 +16416,6 @@ var BtnMypage_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnMy
 
 var BtnLogin_icon_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnLogin_icon */ "./resources/ts/components/atoms/buttons/BtnLogin_icon.tsx"));
 
-var BtnLogout_icon_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnLogout_icon */ "./resources/ts/components/atoms/buttons/BtnLogout_icon.tsx"));
-
 var Logo_1 = __importDefault(__webpack_require__(/*! ../atoms/Logo */ "./resources/ts/components/atoms/Logo.tsx"));
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
@@ -16375,10 +16449,10 @@ function NavBar() {
   if (state.uuid) {
     navPC = react_1["default"].createElement("nav", {
       className: "l-navbar__content__nav--loggedin"
-    }, react_1["default"].createElement(BtnMypage_1["default"], null), react_1["default"].createElement(BtnLogout_icon_1["default"], null));
+    }, react_1["default"].createElement(BtnMypage_1["default"], null));
     navMobile = react_1["default"].createElement("nav", {
       className: "l-navbar__mobile"
-    }, react_1["default"].createElement(BtnSearch_icon_1["default"], null), react_1["default"].createElement(BtnLogout_icon_1["default"], null), react_1["default"].createElement(BtnMypage_1["default"], null));
+    }, react_1["default"].createElement(BtnSearch_icon_1["default"], null), react_1["default"].createElement(BtnMypage_1["default"], null));
   } else {
     navPC = react_1["default"].createElement("nav", {
       className: "l-navbar__content__nav--loggedout"
@@ -16437,7 +16511,7 @@ var ReviewList = function ReviewList(_a) {
       className: "m-review-list__item",
       key: el.uuid
     }, react_1["default"].createElement("img", {
-      src: "",
+      src: "/images/croissant.jpg",
       alt: "\u6295\u7A3F\u8005\u306E\u30A2\u30A4\u30B3\u30F3"
     }), react_1["default"].createElement("div", {
       className: "m-review-list__item__content"
@@ -17209,6 +17283,8 @@ var Btn_interested_1 = __importDefault(__webpack_require__(/*! ../../atoms/butto
 
 var StoreSubinfo_1 = __importDefault(__webpack_require__(/*! ./StoreSubinfo */ "./resources/ts/components/molecules/store/StoreSubinfo.tsx"));
 
+var Score_1 = __importDefault(__webpack_require__(/*! ../../atoms/Score */ "./resources/ts/components/atoms/Score.tsx"));
+
 var StoreBasicInfo = function StoreBasicInfo(_a) {
   var StoreInfo = _a.StoreInfo;
   return react_1["default"].createElement("div", {
@@ -17217,14 +17293,17 @@ var StoreBasicInfo = function StoreBasicInfo(_a) {
     className: "m-store-basicInfo__btn"
   }, react_1["default"].createElement(Btn_favorite_1["default"], null), react_1["default"].createElement(Btn_interested_1["default"], null)), StoreInfo.map(function (el) {
     return react_1["default"].createElement("div", {
-      key: "basicInfo_" + el.id
+      key: "basicInfo_" + el.id,
+      className: "m-store-basicInfo__container"
     }, react_1["default"].createElement("h2", {
       className: "m-store-basicInfo__name"
     }, el.name), react_1["default"].createElement("p", {
       className: "m-store-basicInfo__address"
     }, el.address), react_1["default"].createElement("p", {
       className: "m-store-basicInfo__message"
-    }, el.message));
+    }, el.message), react_1["default"].createElement(Score_1["default"], {
+      ScoreStar: el.star
+    }));
   }), react_1["default"].createElement(StoreSubinfo_1["default"], {
     StoreInfo: StoreInfo
   }));
@@ -17743,6 +17822,8 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 
 var BtnEditUser_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/BtnEditUser */ "./resources/ts/components/atoms/buttons/BtnEditUser.tsx"));
 
+var BtnLogout_icon_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/BtnLogout_icon */ "./resources/ts/components/atoms/buttons/BtnLogout_icon.tsx"));
+
 var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
 
 var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
@@ -17770,7 +17851,7 @@ var UserProf = function UserProf(_a) {
       icon: free_solid_svg_icons_1.faFlag
     })), "\u884C\u3063\u3066\u307F\u305F\u3044"), react_1["default"].createElement("p", null, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
       icon: free_solid_svg_icons_1.faCommentDots
-    })), "\u30EC\u30D3\u30E5\u30FC\u6570"))));
+    })), "\u30EC\u30D3\u30E5\u30FC\u6570"), react_1["default"].createElement(BtnLogout_icon_1["default"], null))));
   }));
 };
 

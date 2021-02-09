@@ -24,8 +24,8 @@ const UserProf: React.FC<UserProps> = ({UserInfo}) => {
                                 <p><span><FontAwesomeIcon icon={faHeart}/></span>お気に入り</p>
                                 <p><span><FontAwesomeIcon icon={faFlag}/></span>行ってみたい</p>
                                 <p><span><FontAwesomeIcon icon={faCommentDots}/></span>レビュー数</p>
+                                <BtnLogout_icon/>
                             </div>
-                            <BtnLogout_icon/>
                         </div>
                     </div>   
                 );
