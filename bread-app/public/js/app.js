@@ -15144,10 +15144,7 @@ var Top_1 = __importDefault(__webpack_require__(/*! ./components/page/top/Top */
 
 var UserPage_1 = __importDefault(__webpack_require__(/*! ./components/page/user/UserPage */ "./resources/ts/components/page/user/UserPage.tsx"));
 
-var UserEdit_1 = __importDefault(__webpack_require__(/*! ./components/page/user/UserEdit */ "./resources/ts/components/page/user/UserEdit.tsx")); //RouteAuth
-
-
-var StoreOnly_1 = __importDefault(__webpack_require__(/*! ./routeAuth/StoreOnly */ "./resources/ts/routeAuth/StoreOnly.tsx"));
+var UserEdit_1 = __importDefault(__webpack_require__(/*! ./components/page/user/UserEdit */ "./resources/ts/components/page/user/UserEdit.tsx"));
 
 var UserOnly_1 = __importDefault(__webpack_require__(/*! ./routeAuth/UserOnly */ "./resources/ts/routeAuth/UserOnly.tsx")); // window.axios = axios;
 // window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -15221,9 +15218,10 @@ var App = function App() {
   }), react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/store",
     component: StorePage_1["default"]
-  }), react_1["default"].createElement(StoreOnly_1["default"], {
-    path: "/store_edit"
-  }, react_1["default"].createElement(StoreEdit_1["default"], null)), react_1["default"].createElement(UserOnly_1["default"], {
+  }), react_1["default"].createElement(react_router_dom_1.Route, {
+    path: "/store_edit",
+    component: StoreEdit_1["default"]
+  }), react_1["default"].createElement(UserOnly_1["default"], {
     path: "/user"
   }, react_1["default"].createElement(UserPage_1["default"], null)), react_1["default"].createElement(UserOnly_1["default"], {
     path: "/user_edit"
@@ -15779,6 +15777,44 @@ exports.default = BtnSearch_icon;
 
 /***/ }),
 
+/***/ "./resources/ts/components/atoms/buttons/BtnSave.tsx":
+/*!***********************************************************!*\
+  !*** ./resources/ts/components/atoms/buttons/BtnSave.tsx ***!
+  \***********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var BtnSave = function BtnSave(_a) {
+  var InputType = _a.InputType,
+      OnClickFunction = _a.OnClickFunction;
+  return react_1["default"].createElement("input", {
+    className: "a-btnSave",
+    value: "\u4FDD\u5B58\u3059\u308B",
+    type: InputType,
+    onClick: function onClick() {
+      return OnClickFunction;
+    }
+  });
+};
+
+exports.default = BtnSave;
+
+/***/ }),
+
 /***/ "./resources/ts/components/atoms/buttons/BtnSearch_icon.tsx":
 /*!******************************************************************!*\
   !*** ./resources/ts/components/atoms/buttons/BtnSearch_icon.tsx ***!
@@ -16030,6 +16066,377 @@ function Btn_interested() {
 }
 
 exports.default = Btn_interested;
+
+/***/ }),
+
+/***/ "./resources/ts/components/atoms/modal/Modal_editMenu.tsx":
+/*!****************************************************************!*\
+  !*** ./resources/ts/components/atoms/modal/Modal_editMenu.tsx ***!
+  \****************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_modal_1 = __importDefault(__webpack_require__(/*! react-modal */ "./node_modules/react-modal/lib/index.js"));
+
+var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
+
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
+var BtnSave_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/BtnSave */ "./resources/ts/components/atoms/buttons/BtnSave.tsx"));
+
+var Bread_kinds_1 = __importDefault(__webpack_require__(/*! ../../../info/Bread_kinds */ "./resources/ts/info/Bread_kinds.ts"));
+
+var Modal_editMenu = function Modal_editMenu(_a) {
+  var menu = _a.menu;
+
+  var _b = react_1.useState(false),
+      modalIsOpen = _b[0],
+      setModal = _b[1];
+
+  var customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)'
+    }
+  };
+
+  var _c = react_hook_form_1.useForm(),
+      register = _c.register,
+      handleSubmit = _c.handleSubmit,
+      errors = _c.errors,
+      getValues = _c.getValues;
+
+  var onSubmit = function onSubmit() {
+    console.log();
+  };
+
+  return react_1["default"].createElement("div", {
+    className: "m-modalEditMenu"
+  }, react_1["default"].createElement("button", {
+    onClick: function onClick() {
+      return setModal(true);
+    },
+    className: "a-btn-editMenu"
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faPen
+  }), "\u7DE8\u96C6\u3059\u308B"), react_1["default"].createElement(react_modal_1["default"], {
+    isOpen: modalIsOpen,
+    onRequestClose: function onRequestClose() {
+      return setModal(false);
+    },
+    style: customStyles,
+    ariaHideApp: false
+  }, react_1["default"].createElement("div", {
+    className: "m-modalEditMenu__btn--close"
+  }, react_1["default"].createElement("button", {
+    onClick: function onClick() {
+      return setModal(false);
+    }
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faTimes
+  }))), react_1["default"].createElement("form", {
+    className: "m-storeEdit-menuCreate__container__form m-storeForm",
+    onSubmit: handleSubmit(onSubmit)
+  }, react_1["default"].createElement("div", {
+    className: "m-storeEdit-menuCreate__container__form__item m-storeForm__item"
+  }, react_1["default"].createElement("label", {
+    htmlFor: "bread_name",
+    className: "a-label-required__red"
+  }, "\u30E1\u30CB\u30E5\u30FC\u540D"), react_1["default"].createElement("div", {
+    className: "m-storeForm__item__input"
+  }, react_1["default"].createElement("input", {
+    type: "text",
+    id: "bread_name",
+    name: "bread_name",
+    value: menu.bread_name,
+    ref: register({
+      required: true
+    })
+  }), errors.bread_name && react_1["default"].createElement("p", null, "\u30E1\u30CB\u30E5\u30FC\u540D\u306F\u5FC5\u9808\u3067\u3059\u3002"))), react_1["default"].createElement("div", {
+    className: "m-storeEdit-menuCreate__container__form__item m-storeForm__item"
+  }, react_1["default"].createElement("label", {
+    htmlFor: "bread_kind",
+    className: "a-label-required__red"
+  }, "\u30D1\u30F3\u306E\u7A2E\u985E"), react_1["default"].createElement("div", {
+    className: "m-storeForm__item__input"
+  }, react_1["default"].createElement("select", {
+    name: "bread_kind",
+    id: "bread_kind",
+    value: menu.bread_kind,
+    ref: register({
+      required: true
+    })
+  }, Bread_kinds_1["default"].bread_kinds.map(function (bread) {
+    return react_1["default"].createElement("option", {
+      value: bread.name,
+      key: bread.id
+    }, bread.name);
+  })), errors.bread_kind && react_1["default"].createElement("p", null, "\u30D1\u30F3\u306E\u7A2E\u985E\u306F\u5FC5\u9808\u3067\u3059\u3002"))), react_1["default"].createElement("div", {
+    className: "m-storeEdit-menuCreate__container__form__item m-storeForm__item"
+  }, react_1["default"].createElement("label", {
+    htmlFor: "bread_price"
+  }, "\u5024\u6BB5"), react_1["default"].createElement("div", {
+    className: "m-storeForm__item__input a-label-yen"
+  }, react_1["default"].createElement("input", {
+    type: "number",
+    name: "bread_price",
+    id: "bread_price",
+    value: menu.bread_price,
+    ref: register
+  }))), react_1["default"].createElement("div", {
+    className: "m-storeEdit-menuCreate__container__form__item m-storeForm__item"
+  }, react_1["default"].createElement("label", {
+    htmlFor: "bread_detail"
+  }, "\u8A73\u7D30\u30FB\u8AAC\u660E"), react_1["default"].createElement("div", {
+    className: "m-storeForm__item__input"
+  }, react_1["default"].createElement("textarea", {
+    name: "bread_detail",
+    id: "bread_detail",
+    value: menu.bread_detail,
+    ref: register
+  }))), react_1["default"].createElement("div", {
+    className: "m-storeEdit-menuCreate__container__form__item m-storeForm__item"
+  }, react_1["default"].createElement("label", {
+    htmlFor: "bread_img"
+  }, "\u753B\u50CF\u30A2\u30C3\u30D7\u30ED\u30FC\u30C9"), react_1["default"].createElement("div", {
+    className: "m-storeForm__item__input"
+  }, react_1["default"].createElement("input", {
+    name: "bread_img",
+    type: "file",
+    accept: "image/*"
+  }))), react_1["default"].createElement("div", {
+    className: "m-storeEdit-menuCreate__container__form__btn m-storeForm__btn"
+  }, react_1["default"].createElement(BtnSave_1["default"], {
+    InputType: "submit",
+    OnClickFunction: onSubmit
+  })))));
+};
+
+exports.default = Modal_editMenu;
+
+/***/ }),
+
+/***/ "./resources/ts/components/atoms/modal/Modal_editSpirit.tsx":
+/*!******************************************************************!*\
+  !*** ./resources/ts/components/atoms/modal/Modal_editSpirit.tsx ***!
+  \******************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_modal_1 = __importDefault(__webpack_require__(/*! react-modal */ "./node_modules/react-modal/lib/index.js"));
+
+var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
+
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
+var BtnSave_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/BtnSave */ "./resources/ts/components/atoms/buttons/BtnSave.tsx"));
+
+var Modal_editSpirit = function Modal_editSpirit(_a) {
+  var kind = _a.kind;
+
+  var _b = react_1.useState(false),
+      modalIsOpen = _b[0],
+      setModal = _b[1];
+
+  var customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)'
+    }
+  };
+
+  var _c = react_hook_form_1.useForm(),
+      register = _c.register,
+      handleSubmit = _c.handleSubmit,
+      errors = _c.errors;
+
+  var onSubmit = function onSubmit() {
+    console.log();
+  };
+
+  return react_1["default"].createElement("div", {
+    className: "m-modalEditSpirit"
+  }, react_1["default"].createElement("button", {
+    className: "m-modalEditSpirit__btn--edit",
+    onClick: function onClick() {
+      return setModal(true);
+    }
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faPen
+  }), "\u7DE8\u96C6\u3059\u308B"), react_1["default"].createElement(react_modal_1["default"], {
+    isOpen: modalIsOpen,
+    onRequestClose: function onRequestClose() {
+      return setModal(false);
+    },
+    style: customStyles,
+    ariaHideApp: false
+  }, react_1["default"].createElement("div", {
+    className: "m-modalEditSpirit__btn--close"
+  }, react_1["default"].createElement("button", {
+    onClick: function onClick() {
+      return setModal(false);
+    }
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faTimes
+  }))), react_1["default"].createElement("form", {
+    className: "m-modalEditSpirit__form",
+    onSubmit: handleSubmit(onSubmit)
+  }, react_1["default"].createElement("div", {
+    className: "m-modalEditSpirit__form__item"
+  }, react_1["default"].createElement("label", {
+    htmlFor: "img_spirit",
+    className: "a-label-required"
+  }, "\u753B\u50CF\u3092\u9078\u629E"), react_1["default"].createElement("input", {
+    type: "file",
+    accept: "image/*",
+    name: "img",
+    id: "img",
+    ref: register({
+      required: true
+    })
+  }), errors.img && react_1["default"].createElement("p", null, "\u753B\u50CF\u306F\u5FC5\u9808\u3067\u3059\u3002")), kind === "spirit" && react_1["default"].createElement("div", {
+    className: "m-modalEditSpirit__form__item"
+  }, react_1["default"].createElement("label", {
+    htmlFor: "spirit",
+    className: "a-label-required"
+  }, "\u5185\u5BB9"), react_1["default"].createElement("textarea", {
+    name: "spirit",
+    id: "spirit",
+    placeholder: "\u304A\u5E97\u3084\u30D1\u30F3\u306B\u8FBC\u3081\u3089\u308C\u3066\u3044\u308B\u601D\u3044\u3092\u6559\u3048\u3066\u304F\u3060\u3055\u3044\u3002",
+    rows: 6,
+    ref: register({
+      required: true
+    })
+  }), errors.spirit && react_1["default"].createElement("p", null, "\u5185\u5BB9\u306F\u5FC5\u9808\u3067\u3059\u3002")), kind === "advantage" && react_1["default"].createElement("div", {
+    className: "m-modalEditSpirit__form__item"
+  }, react_1["default"].createElement("label", {
+    htmlFor: "advantage",
+    className: "a-label-required"
+  }, "\u5185\u5BB9"), react_1["default"].createElement("textarea", {
+    name: "advantage",
+    id: "advantage",
+    placeholder: "\u304A\u5E97\u306E\u3053\u3060\u308F\u308A\u30DD\u30A4\u30F3\u30C8\u3092\u8A18\u8F09\u3057\u3066\u304F\u3060\u3055\u3044\u3002",
+    rows: 6,
+    ref: register({
+      required: true
+    })
+  }), errors.advantage && react_1["default"].createElement("p", null, "\u5185\u5BB9\u306F\u5FC5\u9808\u3067\u3059\u3002")), react_1["default"].createElement("div", {
+    className: "m-modalEditSpirit__form__btn"
+  }, react_1["default"].createElement(BtnSave_1["default"], {
+    InputType: "submit",
+    OnClickFunction: onSubmit
+  })))));
+};
+
+exports.default = Modal_editSpirit;
 
 /***/ }),
 
@@ -16479,6 +16886,155 @@ exports.default = NavBar;
 
 /***/ }),
 
+/***/ "./resources/ts/components/molecules/InputSchedule.tsx":
+/*!*************************************************************!*\
+  !*** ./resources/ts/components/molecules/InputSchedule.tsx ***!
+  \*************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var Week_1 = __importDefault(__webpack_require__(/*! ../../info/Week */ "./resources/ts/info/Week.ts"));
+
+var InputSchedule = function InputSchedule(_a) {
+  var Week = _a.Week;
+  Week = Week_1["default"].week;
+
+  var _b = react_1.useState({
+    monday_open: null,
+    monday_close: null,
+    tuesday_open: null,
+    tuesday_close: null,
+    wednesday_open: null,
+    wednesday_close: null,
+    thursday_open: null,
+    thursday_close: null,
+    friday_open: null,
+    friday_close: null,
+    saturday_open: null,
+    saturday_close: null,
+    sunday_open: null,
+    sunday_close: null
+  }),
+      businessHours = _b[0],
+      SetBusinessHours = _b[1];
+
+  var handleClick = function handleClick(targetClass) {
+    var classInfo = document.getElementsByClassName(targetClass);
+    var classInfoArray = Array.from(classInfo);
+    classInfoArray.forEach(function (el) {
+      if (el.className.includes('active')) {
+        el.classList.remove('active');
+      } else {
+        el.className += ' active';
+      }
+    });
+  };
+
+  return react_1["default"].createElement("div", {
+    className: "m-inputSchedule__week"
+  }, Week.map(function (day) {
+    return react_1["default"].createElement("div", {
+      className: "m-inputSchedule__week__day",
+      key: day.id
+    }, react_1["default"].createElement("div", {
+      className: "m-inputSchedule__week__day__heading"
+    }, react_1["default"].createElement("label", {
+      htmlFor: day.id
+    }, day.name), react_1["default"].createElement("div", {
+      className: "m-inputSchedule__week__day__heading__btn " + day["class"],
+      onClick: function onClick() {
+        return handleClick(day["class"]);
+      }
+    }, react_1["default"].createElement("span", null))), react_1["default"].createElement("div", {
+      className: "m-inputSchedule__week__day__hours " + day["class"]
+    }, react_1["default"].createElement("input", {
+      type: "time",
+      name: day.id + "_open",
+      onChange: function onChange(el) {
+        var _a;
+
+        return SetBusinessHours(__assign(__assign({}, businessHours), (_a = {}, _a[el.target.name] = el.target.value, _a)));
+      }
+    }), react_1["default"].createElement("span", null, "\xA0\uFF5E\xA0"), react_1["default"].createElement("input", {
+      type: "time",
+      name: day.id + "_close",
+      onChange: function onChange(el) {
+        var _a;
+
+        return SetBusinessHours(__assign(__assign({}, businessHours), (_a = {}, _a[el.target.name] = el.target.value, _a)));
+      }
+    })));
+  }));
+};
+
+exports.default = InputSchedule;
+
+/***/ }),
+
 /***/ "./resources/ts/components/molecules/ReviewList.tsx":
 /*!**********************************************************!*\
   !*** ./resources/ts/components/molecules/ReviewList.tsx ***!
@@ -16683,107 +17239,141 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var StoreEditTable_menu_1 = __importDefault(__webpack_require__(/*! ./StoreEditTable_menu */ "./resources/ts/components/molecules/storeEdit/StoreEditTable_menu.tsx"));
+var MenuCreate_1 = __importDefault(__webpack_require__(/*! ./storeEditMenu/MenuCreate */ "./resources/ts/components/molecules/storeEdit/storeEditMenu/MenuCreate.tsx"));
 
-var StoreEditTable_spirit_1 = __importDefault(__webpack_require__(/*! ./StoreEditTable_spirit */ "./resources/ts/components/molecules/storeEdit/StoreEditTable_spirit.tsx"));
+var MenuList_1 = __importDefault(__webpack_require__(/*! ./storeEditMenu/MenuList */ "./resources/ts/components/molecules/storeEdit/storeEditMenu/MenuList.tsx"));
 
-var StoreEditTable_basic_1 = __importDefault(__webpack_require__(/*! ./StoreEditTable_basic */ "./resources/ts/components/molecules/storeEdit/StoreEditTable_basic.tsx"));
+var EditBusinessDays_1 = __importDefault(__webpack_require__(/*! ./storeEditBasic/EditBusinessDays */ "./resources/ts/components/molecules/storeEdit/storeEditBasic/EditBusinessDays.tsx"));
+
+var EditBusinessMemo_1 = __importDefault(__webpack_require__(/*! ./storeEditBasic/EditBusinessMemo */ "./resources/ts/components/molecules/storeEdit/storeEditBasic/EditBusinessMemo.tsx"));
+
+var EditHomepage_1 = __importDefault(__webpack_require__(/*! ./storeEditBasic/EditHomepage */ "./resources/ts/components/molecules/storeEdit/storeEditBasic/EditHomepage.tsx"));
+
+var EditSNS_1 = __importDefault(__webpack_require__(/*! ./storeEditBasic/EditSNS */ "./resources/ts/components/molecules/storeEdit/storeEditBasic/EditSNS.tsx"));
+
+var StoreEditTable_spirit_1 = __importDefault(__webpack_require__(/*! ./storeEditSpirit/StoreEditTable_spirit */ "./resources/ts/components/molecules/storeEdit/storeEditSpirit/StoreEditTable_spirit.tsx"));
+
+var StoreEditTable_advantage_1 = __importDefault(__webpack_require__(/*! ./storeEditSpirit/StoreEditTable_advantage */ "./resources/ts/components/molecules/storeEdit/storeEditSpirit/StoreEditTable_advantage.tsx"));
+
+var EditBasicInfo_1 = __importDefault(__webpack_require__(/*! ./storeEditBasic/EditBasicInfo */ "./resources/ts/components/molecules/storeEdit/storeEditBasic/EditBasicInfo.tsx"));
+
+var StoreEditMenus_1 = __webpack_require__(/*! ../../../info/StoreEditMenus */ "./resources/ts/info/StoreEditMenus.ts");
+
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
 
 var StoreEditTable = function StoreEditTable(_a) {
   var StoreInfo = _a.StoreInfo,
       MenuInfo = _a.MenuInfo;
 
-  var _b = react_1.useState('menu'),
+  var _b = react_1.useState('basicInfo'),
       Table = _b[0],
       setTable = _b[1];
 
-  var TabMenu = {
-    "class": "m-store-contents__tab--menu",
-    table: "menu",
-    value: "メニュー",
-    "function": handleMenu
-  };
-  var TabStamp = {
-    "class": "m-store-contents__tab--stamp",
-    table: "stamp",
-    value: "スタンプカード",
-    "function": handleStamp
-  };
-  var TabSpirit = {
-    "class": "m-store-contents__tab--spirit",
-    table: "spirit",
-    value: "こだわり・思い",
-    "function": handleSpirit
-  };
-  var TabBasic = {
-    "class": "m-store-contents__tab--basic",
-    table: "basic",
-    value: "基本情報",
-    "function": handleBasic
-  };
-
-  function handleMenu() {
-    setTable('menu');
-  }
-
-  function handleStamp() {
-    setTable('stamp');
-  }
-
-  function handleSpirit() {
-    setTable('spirit');
-  }
-
-  function handleBasic() {
-    setTable('basic');
-  }
-
   var Tab = function Tab(tab) {
-    var className = tab["class"];
+    var TabClassName = tab.category + "_" + tab.tableName;
+    console.log(tab);
 
-    if (Table === tab.table) {
-      className += ' selected';
+    if (Table === tab.tableName) {
+      TabClassName += ' selected';
     }
 
-    return react_1["default"].createElement("input", {
+    return react_1["default"].createElement("span", {
+      className: TabClassName,
+      key: TabClassName,
+      onClick: function onClick() {
+        return setTable(tab.tableName);
+      }
+    }, react_1["default"].createElement("input", {
       type: "text",
-      value: tab.value,
-      className: className,
-      onClick: tab["function"]
-    });
+      value: tab.label
+    }), react_1["default"].createElement("a", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+      icon: free_solid_svg_icons_1.faChevronRight
+    })));
   };
 
   var CurrentTable = function CurrentTable(table) {
     switch (table) {
-      case 'menu':
-        return react_1["default"].createElement(StoreEditTable_menu_1["default"], {
+      case 'basicInfo':
+        return react_1["default"].createElement(EditBasicInfo_1["default"], {
+          StoreInfo: StoreInfo
+        });
+
+      case 'basicDays':
+        return react_1["default"].createElement(EditBusinessDays_1["default"], {
+          StoreInfo: StoreInfo
+        });
+
+      case 'basicMemo':
+        return react_1["default"].createElement(EditBusinessMemo_1["default"], {
+          StoreInfo: StoreInfo
+        });
+
+      case 'basicHomepage':
+        return react_1["default"].createElement(EditHomepage_1["default"], {
+          StoreInfo: StoreInfo
+        });
+
+      case 'basicSNS':
+        return react_1["default"].createElement(EditSNS_1["default"], {
+          StoreInfo: StoreInfo
+        });
+
+      case 'menuAdd':
+        return react_1["default"].createElement(MenuCreate_1["default"], null);
+
+      case 'menuEdit':
+        return react_1["default"].createElement(MenuList_1["default"], {
           MenuInfo: MenuInfo
         });
-        break;
 
-      case 'spirit':
+      case 'spiritSpirit':
         return react_1["default"].createElement(StoreEditTable_spirit_1["default"], {
           Spirit: MenuInfo
         });
-        break;
 
-      case 'stamp':
-        return react_1["default"].createElement("h2", null, "stamp");
-        break;
-
-      case 'basic':
-        return react_1["default"].createElement(StoreEditTable_basic_1["default"], {
-          StoreInfo: StoreInfo
+      case 'spiritAdvantage':
+        return react_1["default"].createElement(StoreEditTable_advantage_1["default"], {
+          Spirit: MenuInfo
         });
-        break;
+
+      case 'stampAdd':
+        return react_1["default"].createElement("h2", null, "stamp");
     }
   };
 
   return react_1["default"].createElement("div", {
     className: "m-store-edit-table"
-  }, react_1["default"].createElement("div", {
-    className: "m-store-edit-table__tab"
-  }, Tab(TabMenu), Tab(TabSpirit), Tab(TabStamp), Tab(TabBasic)), react_1["default"].createElement("div", {
+  }, react_1["default"].createElement("nav", {
+    className: "m-store-edit-table__nav"
+  }, react_1["default"].createElement("ul", null, react_1["default"].createElement("li", {
+    className: "m-store-edit-table__nav__basic"
+  }, react_1["default"].createElement("label", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faChevronCircleDown
+  }), "\u5E97\u8217\u60C5\u5831\u306E\u7DE8\u96C6"), StoreEditMenus_1.StoreEditNav_basic.map(function (arr) {
+    return Tab(arr);
+  })), react_1["default"].createElement("li", {
+    className: "m-store-edit-table__nav__menu"
+  }, react_1["default"].createElement("label", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faChevronCircleDown
+  }), "\u30E1\u30CB\u30E5\u30FC\u306E\u8FFD\u52A0\u30FB\u7DE8\u96C6"), StoreEditMenus_1.StoreEditNav_menu.map(function (arr) {
+    return Tab(arr);
+  })), react_1["default"].createElement("li", {
+    className: "m-store-edit-table__nav__spirit"
+  }, react_1["default"].createElement("label", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faChevronCircleDown
+  }), "\u3053\u3060\u308F\u308A\u30FB\u601D\u3044\u306E\u7DE8\u96C6"), StoreEditMenus_1.StoreEditNav_spirit.map(function (arr) {
+    return Tab(arr);
+  })), react_1["default"].createElement("li", {
+    className: "m-store-edit-table__nav__stamp"
+  }, react_1["default"].createElement("label", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faChevronCircleDown
+  }), "\u30B9\u30BF\u30F3\u30D7\u30AB\u30FC\u30C9\u306E\u7DE8\u96C6"), StoreEditMenus_1.StoreEditNav_stamp.map(function (arr) {
+    return Tab(arr);
+  })), react_1["default"].createElement("li", {
+    className: "m-store-edit-table__nav__others"
+  }, react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u306E\u518D\u8A2D\u5B9A"), react_1["default"].createElement("p", null, "\u30ED\u30B0\u30A2\u30A6\u30C8\u3059\u308B")))), react_1["default"].createElement("div", {
     className: "m-store-edit-table__container"
   }, react_1["default"].createElement("div", {
     className: "m-store-edit-table__container__content"
@@ -16794,10 +17384,10 @@ exports.default = StoreEditTable;
 
 /***/ }),
 
-/***/ "./resources/ts/components/molecules/storeEdit/StoreEditTable_basic.tsx":
-/*!******************************************************************************!*\
-  !*** ./resources/ts/components/molecules/storeEdit/StoreEditTable_basic.tsx ***!
-  \******************************************************************************/
+/***/ "./resources/ts/components/molecules/storeEdit/storeEditBasic/EditBasicInfo.tsx":
+/*!**************************************************************************************!*\
+  !*** ./resources/ts/components/molecules/storeEdit/storeEditBasic/EditBasicInfo.tsx ***!
+  \**************************************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -16817,9 +17407,9 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 
 var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
 
-var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+var BtnSave_1 = __importDefault(__webpack_require__(/*! ../../../atoms/buttons/BtnSave */ "./resources/ts/components/atoms/buttons/BtnSave.tsx"));
 
-var StoreEditTable_basic = function StoreEditTable_basic(_a) {
+var EditBasicInfo = function EditBasicInfo(_a) {
   var StoreInfo = _a.StoreInfo;
 
   var _b = react_hook_form_1.useForm(),
@@ -16837,13 +17427,17 @@ var StoreEditTable_basic = function StoreEditTable_basic(_a) {
     return react_1["default"].createElement("div", {
       className: "m-storeEdit-basic__container",
       key: el.uuid
-    }, react_1["default"].createElement("form", {
-      className: "m-storeEdit-basic__container__form",
+    }, react_1["default"].createElement("h3", null, "\u57FA\u672C\u60C5\u5831\u7DE8\u96C6"), react_1["default"].createElement("form", {
+      className: "m-storeEdit-basic__container__form m-storeForm",
       onSubmit: handleSubmit(onSubmit)
+    }, react_1["default"].createElement("div", {
+      className: "m-storeEdit-basic__container__form__item m-storeForm__item"
     }, react_1["default"].createElement("label", {
       htmlFor: "store_name",
-      className: "a-label-required"
-    }, "\u5E97\u8217\u540D"), react_1["default"].createElement("input", {
+      className: "a-label-required__red"
+    }, "\u5E97\u8217\u540D"), react_1["default"].createElement("div", {
+      className: "m-storeEdit-basic__container__form__item__input m-storeForm__item__input"
+    }, react_1["default"].createElement("input", {
       type: "text",
       id: "store_name",
       name: "name",
@@ -16851,10 +17445,14 @@ var StoreEditTable_basic = function StoreEditTable_basic(_a) {
       ref: register({
         required: true
       })
-    }), errors.name && react_1["default"].createElement("p", null, "\u5E97\u8217\u540D\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
+    }), errors.name && react_1["default"].createElement("p", null, "\u5E97\u8217\u540D\u306F\u5FC5\u9808\u3067\u3059\u3002"))), react_1["default"].createElement("div", {
+      className: "m-storeEdit-basic__container__form__item m-storeForm__item"
+    }, react_1["default"].createElement("label", {
       htmlFor: "store_address",
-      className: "a-label-required"
-    }, "\u4F4F\u6240"), react_1["default"].createElement("input", {
+      className: "a-label-required__red"
+    }, "\u4F4F\u6240"), react_1["default"].createElement("div", {
+      className: "m-storeEdit-basic__container__form__item__input m-storeForm__item__input"
+    }, react_1["default"].createElement("input", {
       type: "text",
       name: "address",
       id: "store_address",
@@ -16862,10 +17460,14 @@ var StoreEditTable_basic = function StoreEditTable_basic(_a) {
       ref: register({
         required: true
       })
-    }), errors.address && react_1["default"].createElement("p", null, "\u4F4F\u6240\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
+    }), errors.address && react_1["default"].createElement("p", null, "\u4F4F\u6240\u306F\u5FC5\u9808\u3067\u3059\u3002"))), react_1["default"].createElement("div", {
+      className: "m-storeEdit-basic__container__form__item m-storeForm__item"
+    }, react_1["default"].createElement("label", {
       htmlFor: "store_email",
-      className: "a-label-required"
-    }, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9"), react_1["default"].createElement("input", {
+      className: "a-label-required__red"
+    }, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9"), react_1["default"].createElement("div", {
+      className: "m-storeEdit-basic__container__form__item__input m-storeForm__item__input"
+    }, react_1["default"].createElement("input", {
       type: "email",
       name: "email",
       id: "store_email",
@@ -16873,186 +17475,49 @@ var StoreEditTable_basic = function StoreEditTable_basic(_a) {
       ref: register({
         required: true
       })
-    }), errors.email && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
+    }), errors.email && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F\u5FC5\u9808\u3067\u3059\u3002"))), react_1["default"].createElement("div", {
+      className: "m-storeEdit-basic__container__form__item m-storeForm__item"
+    }, react_1["default"].createElement("label", {
       htmlFor: "store_tel",
-      className: "a-label-required"
-    }, "\u96FB\u8A71\u756A\u53F7(\u534A\u89D2)"), react_1["default"].createElement("input", {
-      type: "text",
+      className: "a-label-required__red"
+    }, "\u96FB\u8A71\u756A\u53F7(\u534A\u89D2)"), react_1["default"].createElement("div", {
+      className: "m-storeEdit-basic__container__form__item__input m-storeForm__item__input"
+    }, react_1["default"].createElement("input", {
+      type: "tel",
       name: "tel",
       id: "store_tel",
       ref: register({
         required: true,
         pattern: /[0-9]{10,11}/
       })
-    }), errors.tel && errors.tel.type === "required" && react_1["default"].createElement("p", null, "\u96FB\u8A71\u756A\u53F7\u306F\u5FC5\u9808\u3067\u3059\u3002"), errors.tel && errors.tel.type === "pattern" && react_1["default"].createElement("p", null, "10~11\u6587\u5B57\u306E\u534A\u89D2\u6570\u5B57\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("label", {
+    }), errors.tel && errors.tel.type === "required" && react_1["default"].createElement("p", null, "\u96FB\u8A71\u756A\u53F7\u306F\u5FC5\u9808\u3067\u3059\u3002"), errors.tel && errors.tel.type === "pattern" && react_1["default"].createElement("p", null, "10~11\u6587\u5B57\u306E\u534A\u89D2\u6570\u5B57\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
+      className: "m-storeEdit-basic__container__form__item m-storeForm__item"
+    }, react_1["default"].createElement("label", {
       htmlFor: "store_message"
-    }, "\u5E97\u8217\u8AAC\u660E"), react_1["default"].createElement("span", null, "\u304A\u5E97\u306E\u30DA\u30FC\u30B8\u30C8\u30C3\u30D7\u306B\u8868\u793A\u3055\u308C\u308B\u90E8\u5206\u3067\u3059\u3002"), react_1["default"].createElement("textarea", {
+    }, "\u5E97\u8217\u8AAC\u660E"), react_1["default"].createElement("div", {
+      className: "m-storeEdit-basic__container__form__item__input m-storeForm__item__input"
+    }, react_1["default"].createElement("span", null, "\u304A\u5E97\u306E\u30DA\u30FC\u30B8\u30C8\u30C3\u30D7\u306B\u8868\u793A\u3055\u308C\u308B\u90E8\u5206\u3067\u3059\u3002"), react_1["default"].createElement("textarea", {
       id: "store_message",
       name: "message",
       value: el.message,
       ref: register
-    }), react_1["default"].createElement("label", {
-      htmlFor: "business_day",
-      className: "a-label-required"
-    }, "\u55B6\u696D\u65E5"), react_1["default"].createElement("span", null, "\u55B6\u696D\u3057\u3066\u3044\u308B\u66DC\u65E5\u3092\u5168\u3066\u30C1\u30A7\u30C3\u30AF\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("div", {
-      className: "p-register-store__container__form__week"
-    }, react_1["default"].createElement("div", {
-      className: "p-register-store__container__form__week__day"
-    }, react_1["default"].createElement("input", {
-      type: "checkbox",
-      id: "monday",
-      name: "monday",
-      ref: register
-    }), react_1["default"].createElement("label", {
-      htmlFor: "monday"
-    }, "\u6708\u66DC\u65E5")), react_1["default"].createElement("div", {
-      className: "p-register-store__container__form__week__day"
-    }, react_1["default"].createElement("input", {
-      type: "checkbox",
-      id: "tuesday",
-      name: "tuesday",
-      ref: register
-    }), react_1["default"].createElement("label", {
-      htmlFor: "tuesday"
-    }, "\u706B\u66DC\u65E5")), react_1["default"].createElement("div", {
-      className: "p-register-store__container__form__week__day"
-    }, react_1["default"].createElement("input", {
-      type: "checkbox",
-      id: "wednesday",
-      name: "wednesday",
-      ref: register
-    }), react_1["default"].createElement("label", {
-      htmlFor: "wednesday"
-    }, "\u6C34\u66DC\u65E5")), react_1["default"].createElement("div", {
-      className: "p-register-store__container__form__week__day"
-    }, react_1["default"].createElement("input", {
-      type: "checkbox",
-      id: "thursday",
-      name: "thursday",
-      ref: register
-    }), react_1["default"].createElement("label", {
-      htmlFor: "thursday"
-    }, "\u6728\u66DC\u65E5")), react_1["default"].createElement("div", {
-      className: "p-register-store__container__form__week__day"
-    }, react_1["default"].createElement("input", {
-      type: "checkbox",
-      id: "friday",
-      name: "friday",
-      ref: register
-    }), react_1["default"].createElement("label", {
-      htmlFor: "friday"
-    }, "\u91D1\u66DC\u65E5")), react_1["default"].createElement("div", {
-      className: "p-register-store__container__form__week__day"
-    }, react_1["default"].createElement("input", {
-      type: "checkbox",
-      id: "saturday",
-      name: "saturday",
-      ref: register
-    }), react_1["default"].createElement("label", {
-      htmlFor: "saturday"
-    }, "\u571F\u66DC\u65E5")), react_1["default"].createElement("div", {
-      className: "p-register-store__container__form__week__day"
-    }, react_1["default"].createElement("input", {
-      type: "checkbox",
-      id: "sunday",
-      name: "sunday",
-      ref: register
-    }), react_1["default"].createElement("label", {
-      htmlFor: "sunday"
-    }, "\u65E5\u66DC\u65E5"))), react_1["default"].createElement("label", null, "\u55B6\u696D\u65E5\u30FB\u55B6\u696D\u6642\u9593\u5099\u8003"), react_1["default"].createElement("span", null, "\u3010\u8A18\u8F09\u4F8B\u3011", react_1["default"].createElement("br", null), "\u5B9A\u4F11\u65E5\uFF1A\u7B2C3\u6C34\u66DC\u65E5", react_1["default"].createElement("br", null), "\u55B6\u696D\u6642\u9593\uFF1A\u6708\uFF5E\u6C34 9\u6642\uFF5E19\u6642 / \u6728\uFF5E\u571F 8\u6642\uFF5E13\u6642"), react_1["default"].createElement("textarea", {
-      name: "business_memo",
-      ref: register
-    }), react_1["default"].createElement("label", {
-      htmlFor: "store_url"
-    }, "\u30DB\u30FC\u30E0\u30DA\u30FC\u30B8URL"), react_1["default"].createElement("input", {
-      type: "url",
-      id: "store_url",
-      name: "url",
-      value: el.url,
-      ref: register
-    }), react_1["default"].createElement("label", {
-      htmlFor: "store_url"
-    }, "SNS"), react_1["default"].createElement("span", null, "\u304A\u6301\u3061\u306ESNS\u306EURL\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("div", {
-      className: "m-storeEdit-basic__container__form__sns"
-    }, react_1["default"].createElement("div", {
-      className: "m-storeEdit-basic__container__form__sns__item"
-    }, react_1["default"].createElement("a", null, "Instagram"), react_1["default"].createElement("input", {
-      type: "url",
-      value: el.sns.instagram
-    })), react_1["default"].createElement("div", {
-      className: "m-storeEdit-basic__container__form__sns__item"
-    }, react_1["default"].createElement("a", null, "Twitter"), react_1["default"].createElement("input", {
-      type: "url",
-      value: el.sns.twitter
-    })), react_1["default"].createElement("div", {
-      className: "m-storeEdit-basic__container__form__sns__item"
-    }, react_1["default"].createElement("a", null, "Facebook"), react_1["default"].createElement("input", {
-      type: "url",
-      value: el.sns.facebook
-    })), react_1["default"].createElement("div", {
-      className: "m-storeEdit-basic__container__form__sns__item"
-    }, react_1["default"].createElement("a", null, "\u305D\u306E\u4ED6"), react_1["default"].createElement("input", {
-      type: "url",
-      value: el.sns.other
     }))), react_1["default"].createElement("div", {
-      className: "m-storeEdit-basic__container__form__btn"
-    }, react_1["default"].createElement("input", {
-      type: "submit",
-      value: "\u5909\u66F4\u3059\u308B"
-    })), react_1["default"].createElement("div", {
-      className: "m-storeEdit-basic__container__form__links"
-    }, react_1["default"].createElement(react_router_dom_1.Link, {
-      to: "/password_store"
-    }, "\u30D1\u30B9\u30EF\u30FC\u30C9\u3092\u518D\u8A2D\u5B9A\u3059\u308B\u5834\u5408"))));
+      className: "m-storeEdit-basic__container__form__btn m-storeForm__btn"
+    }, react_1["default"].createElement(BtnSave_1["default"], {
+      InputType: "submit",
+      OnClickFunction: null
+    }))));
   }));
 };
 
-exports.default = StoreEditTable_basic;
+exports.default = EditBasicInfo;
 
 /***/ }),
 
-/***/ "./resources/ts/components/molecules/storeEdit/StoreEditTable_menu.tsx":
-/*!*****************************************************************************!*\
-  !*** ./resources/ts/components/molecules/storeEdit/StoreEditTable_menu.tsx ***!
-  \*****************************************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var StoreEditTable_menuCreate_1 = __importDefault(__webpack_require__(/*! ./StoreEditTable_menuCreate */ "./resources/ts/components/molecules/storeEdit/StoreEditTable_menuCreate.tsx"));
-
-var StoreEditTable_menuList_1 = __importDefault(__webpack_require__(/*! ./StoreEditTable_menuList */ "./resources/ts/components/molecules/storeEdit/StoreEditTable_menuList.tsx"));
-
-var StoreEditTable_menu = function StoreEditTable_menu(_a) {
-  var MenuInfo = _a.MenuInfo;
-  return react_1["default"].createElement("div", {
-    className: "m-storeEdit-menu"
-  }, react_1["default"].createElement(StoreEditTable_menuCreate_1["default"], null), react_1["default"].createElement(StoreEditTable_menuList_1["default"], {
-    MenuInfo: MenuInfo
-  }));
-};
-
-exports.default = StoreEditTable_menu;
-
-/***/ }),
-
-/***/ "./resources/ts/components/molecules/storeEdit/StoreEditTable_menuCreate.tsx":
-/*!***********************************************************************************!*\
-  !*** ./resources/ts/components/molecules/storeEdit/StoreEditTable_menuCreate.tsx ***!
-  \***********************************************************************************/
+/***/ "./resources/ts/components/molecules/storeEdit/storeEditBasic/EditBusinessDays.tsx":
+/*!*****************************************************************************************!*\
+  !*** ./resources/ts/components/molecules/storeEdit/storeEditBasic/EditBusinessDays.tsx ***!
+  \*****************************************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -17072,9 +17537,306 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 
 var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
 
-var Bread_kinds_1 = __importDefault(__webpack_require__(/*! ../../../info/Bread_kinds */ "./resources/ts/info/Bread_kinds.ts"));
+var InputSchedule_1 = __importDefault(__webpack_require__(/*! ../../InputSchedule */ "./resources/ts/components/molecules/InputSchedule.tsx"));
 
-function StoreEditTable_menuCreate() {
+var BtnSave_1 = __importDefault(__webpack_require__(/*! ../../../atoms/buttons/BtnSave */ "./resources/ts/components/atoms/buttons/BtnSave.tsx"));
+
+var EditBusinessDays = function EditBusinessDays(_a) {
+  var StoreInfo = _a.StoreInfo;
+
+  var _b = react_hook_form_1.useForm(),
+      register = _b.register,
+      handleSubmit = _b.handleSubmit,
+      errors = _b.errors;
+
+  var onSubmit = function onSubmit(data) {
+    console.log(data);
+  };
+
+  return react_1["default"].createElement("div", {
+    className: "m-storeEdit-businessDay"
+  }, StoreInfo.map(function (el) {
+    return react_1["default"].createElement("div", {
+      className: "m-storeEdit-businessDay__container",
+      key: el.uuid
+    }, react_1["default"].createElement("h3", null, "\u55B6\u696D\u65E5\u30FB\u55B6\u696D\u6642\u9593"), react_1["default"].createElement("form", {
+      className: "m-storeEdit-businessDay__container__form m-storeForm",
+      onSubmit: handleSubmit(onSubmit)
+    }, react_1["default"].createElement("div", {
+      className: "m-storeForm__item"
+    }, react_1["default"].createElement("label", {
+      htmlFor: "business_day"
+    }, "\u55B6\u696D\u65E5"), react_1["default"].createElement("div", {
+      className: "m-storeForm__item__input"
+    }, react_1["default"].createElement("span", null, "\u55B6\u696D\u3057\u3066\u3044\u308B\u66DC\u65E5\u3092\u5168\u3066\u30C1\u30A7\u30C3\u30AF\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement(InputSchedule_1["default"], null))), react_1["default"].createElement("div", {
+      className: "m-storeEdit-businessDay__container__form__btn m-storeForm__btn"
+    }, react_1["default"].createElement(BtnSave_1["default"], {
+      InputType: "submit",
+      OnClickFunction: null
+    }))));
+  }));
+};
+
+exports.default = EditBusinessDays;
+
+/***/ }),
+
+/***/ "./resources/ts/components/molecules/storeEdit/storeEditBasic/EditBusinessMemo.tsx":
+/*!*****************************************************************************************!*\
+  !*** ./resources/ts/components/molecules/storeEdit/storeEditBasic/EditBusinessMemo.tsx ***!
+  \*****************************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
+
+var BtnSave_1 = __importDefault(__webpack_require__(/*! ../../../atoms/buttons/BtnSave */ "./resources/ts/components/atoms/buttons/BtnSave.tsx"));
+
+var EditBusinessMemo = function EditBusinessMemo(_a) {
+  var StoreInfo = _a.StoreInfo;
+
+  var _b = react_hook_form_1.useForm(),
+      register = _b.register,
+      handleSubmit = _b.handleSubmit,
+      errors = _b.errors;
+
+  var onSubmit = function onSubmit(data) {
+    console.log(data);
+  };
+
+  return react_1["default"].createElement("div", {
+    className: "m-storeEdit-businessMemo"
+  }, StoreInfo.map(function (el) {
+    return react_1["default"].createElement("div", {
+      className: "m-storeEdit-businessMemo__container",
+      key: el.uuid
+    }, react_1["default"].createElement("h3", null, "\u55B6\u696D\u306B\u95A2\u3059\u308B\u304A\u77E5\u3089\u305B"), react_1["default"].createElement("form", {
+      className: "m-storeEdit-businessMemo__container__form m-storeForm",
+      onSubmit: handleSubmit(onSubmit)
+    }, react_1["default"].createElement("div", {
+      className: "m-storeForm__item"
+    }, react_1["default"].createElement("label", null, "\u304A\u77E5\u3089\u305B\u5185\u5BB9"), react_1["default"].createElement("div", {
+      className: "m-storeForm__item__input"
+    }, react_1["default"].createElement("span", null, "\u3010\u8A18\u8F09\u4F8B\u3011", react_1["default"].createElement("br", null), "\u5B9A\u4F11\u65E5\uFF1A\u7B2C3\u6C34\u66DC\u65E5", react_1["default"].createElement("br", null), "\u55B6\u696D\u6642\u9593\uFF1A\u6708\uFF5E\u6C34 9\u6642\uFF5E19\u6642 / \u6728\uFF5E\u571F 8\u6642\uFF5E13\u6642"), react_1["default"].createElement("textarea", {
+      name: "business_memo",
+      ref: register({
+        required: true
+      })
+    }))), react_1["default"].createElement("div", {
+      className: "m-storeEdit-businessMemo__container__form__btn m-storeForm__btn"
+    }, react_1["default"].createElement(BtnSave_1["default"], {
+      InputType: "submit",
+      OnClickFunction: null
+    }))));
+  }));
+};
+
+exports.default = EditBusinessMemo;
+
+/***/ }),
+
+/***/ "./resources/ts/components/molecules/storeEdit/storeEditBasic/EditHomepage.tsx":
+/*!*************************************************************************************!*\
+  !*** ./resources/ts/components/molecules/storeEdit/storeEditBasic/EditHomepage.tsx ***!
+  \*************************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
+
+var BtnSave_1 = __importDefault(__webpack_require__(/*! ../../../atoms/buttons/BtnSave */ "./resources/ts/components/atoms/buttons/BtnSave.tsx"));
+
+var EditHomepage = function EditHomepage(_a) {
+  var StoreInfo = _a.StoreInfo;
+
+  var _b = react_hook_form_1.useForm(),
+      register = _b.register,
+      handleSubmit = _b.handleSubmit,
+      errors = _b.errors;
+
+  var onSubmit = function onSubmit(data) {
+    console.log(data);
+  };
+
+  return react_1["default"].createElement("div", {
+    className: "m-storeEdit-homepage"
+  }, StoreInfo.map(function (el) {
+    return react_1["default"].createElement("div", {
+      className: "m-storeEdit-homepage__container",
+      key: el.uuid
+    }, react_1["default"].createElement("h3", null, "\u30DB\u30FC\u30E0\u30DA\u30FC\u30B8"), react_1["default"].createElement("a", null, "\u30DB\u30FC\u30E0\u30DA\u30FC\u30B8\u306EURL\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044"), react_1["default"].createElement("form", {
+      className: "m-storeEdit-homepage__container__form m-storeForm",
+      onSubmit: handleSubmit(onSubmit)
+    }, react_1["default"].createElement("div", {
+      className: "m-storeForm__item"
+    }, react_1["default"].createElement("label", {
+      htmlFor: "store_url"
+    }, "\u30DB\u30FC\u30E0\u30DA\u30FC\u30B8URL"), react_1["default"].createElement("div", {
+      className: "m-storeForm__item__input"
+    }, react_1["default"].createElement("input", {
+      type: "url",
+      id: "store_url",
+      name: "url",
+      value: el.url,
+      ref: register({
+        required: true
+      })
+    }))), react_1["default"].createElement("div", {
+      className: "m-storeEdit-homepage__container__form__btn m-storeForm__btn"
+    }, react_1["default"].createElement(BtnSave_1["default"], {
+      InputType: "submit",
+      OnClickFunction: null
+    }))));
+  }));
+};
+
+exports.default = EditHomepage;
+
+/***/ }),
+
+/***/ "./resources/ts/components/molecules/storeEdit/storeEditBasic/EditSNS.tsx":
+/*!********************************************************************************!*\
+  !*** ./resources/ts/components/molecules/storeEdit/storeEditBasic/EditSNS.tsx ***!
+  \********************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
+
+var BtnSave_1 = __importDefault(__webpack_require__(/*! ../../../atoms/buttons/BtnSave */ "./resources/ts/components/atoms/buttons/BtnSave.tsx"));
+
+var EditSNS = function EditSNS(_a) {
+  var StoreInfo = _a.StoreInfo;
+
+  var _b = react_hook_form_1.useForm(),
+      register = _b.register,
+      handleSubmit = _b.handleSubmit,
+      errors = _b.errors;
+
+  var onSubmit = function onSubmit(data) {
+    console.log(data);
+  };
+
+  return react_1["default"].createElement("div", {
+    className: "m-storeEdit-SNS"
+  }, StoreInfo.map(function (el) {
+    return react_1["default"].createElement("div", {
+      className: "m-storeEdit-SNS__container",
+      key: el.uuid
+    }, react_1["default"].createElement("h3", null, "SNS"), react_1["default"].createElement("span", null, "\u304A\u6301\u3061\u306ESNS\u306EURL\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("form", {
+      className: "m-storeEdit-SNS__container__form m-storeForm",
+      onSubmit: handleSubmit(onSubmit)
+    }, react_1["default"].createElement("div", {
+      className: "m-storeEdit-SNS__container__form__sns__item m-storeForm__item"
+    }, react_1["default"].createElement("label", null, "Instagram"), react_1["default"].createElement("div", {
+      className: "m-storeEdit-SNS__container__form__sns__item__input m-storeForm__item__input"
+    }, react_1["default"].createElement("input", {
+      type: "url",
+      value: el.sns.instagram
+    }))), react_1["default"].createElement("div", {
+      className: "m-storeEdit-SNS__container__form__sns__item m-storeForm__item"
+    }, react_1["default"].createElement("label", null, "Twitter"), react_1["default"].createElement("div", {
+      className: "m-storeEdit-SNS__container__form__sns__item__input m-storeForm__item__input"
+    }, react_1["default"].createElement("input", {
+      type: "url",
+      value: el.sns.twitter
+    }))), react_1["default"].createElement("div", {
+      className: "m-storeEdit-SNS__container__form__sns__item m-storeForm__item"
+    }, react_1["default"].createElement("label", null, "Facebook"), react_1["default"].createElement("div", {
+      className: "m-storeEdit-SNS__container__form__sns__item__input m-storeForm__item__input"
+    }, react_1["default"].createElement("input", {
+      type: "url",
+      value: el.sns.facebook
+    }))), react_1["default"].createElement("div", {
+      className: "m-storeEdit-SNS__container__form__sns__item m-storeForm__item"
+    }, react_1["default"].createElement("label", null, "\u305D\u306E\u4ED6"), react_1["default"].createElement("div", {
+      className: "m-storeEdit-SNS__container__form__sns__item__input m-storeForm__item__input"
+    }, react_1["default"].createElement("input", {
+      type: "url",
+      value: el.sns.other
+    }))), react_1["default"].createElement("div", {
+      className: "m-storeEdit-SNS__container__form__btn m-storeForm__btn"
+    }, react_1["default"].createElement(BtnSave_1["default"], {
+      InputType: "submit",
+      OnClickFunction: null
+    }))));
+  }));
+};
+
+exports.default = EditSNS;
+
+/***/ }),
+
+/***/ "./resources/ts/components/molecules/storeEdit/storeEditMenu/MenuCreate.tsx":
+/*!**********************************************************************************!*\
+  !*** ./resources/ts/components/molecules/storeEdit/storeEditMenu/MenuCreate.tsx ***!
+  \**********************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
+
+var Bread_kinds_1 = __importDefault(__webpack_require__(/*! ../../../../info/Bread_kinds */ "./resources/ts/info/Bread_kinds.ts"));
+
+var BtnSave_1 = __importDefault(__webpack_require__(/*! ../../../atoms/buttons/BtnSave */ "./resources/ts/components/atoms/buttons/BtnSave.tsx"));
+
+function MenuCreate() {
   var _a = react_hook_form_1.useForm(),
       register = _a.register,
       handleSubmit = _a.handleSubmit,
@@ -17085,81 +17847,91 @@ function StoreEditTable_menuCreate() {
   };
 
   return react_1["default"].createElement("div", {
-    className: "m-storeEdit-menu-create"
-  }, react_1["default"].createElement("div", {
-    className: "m-storeEdit-menu-create__container"
+    className: "m-storeEdit-menuCreate"
+  }, react_1["default"].createElement("h3", null, "\u30E1\u30CB\u30E5\u30FC\u8FFD\u52A0"), react_1["default"].createElement("div", {
+    className: "m-storeEdit-menuCreate__container"
   }, react_1["default"].createElement("form", {
-    className: "m-storeEdit-menu-create__container__form",
+    className: "m-storeEdit-menuCreate__container__form m-storeForm",
     onSubmit: handleSubmit(onSubmit)
   }, react_1["default"].createElement("div", {
-    className: "m-storeEdit-menu-create__container__form__item"
+    className: "m-storeEdit-menuCreate__container__form__item m-storeForm__item"
   }, react_1["default"].createElement("label", {
     htmlFor: "bread_name",
-    className: "a-label-required"
-  }, "\u30E1\u30CB\u30E5\u30FC\u540D"), react_1["default"].createElement("input", {
+    className: "a-label-required__red"
+  }, "\u30E1\u30CB\u30E5\u30FC\u540D"), react_1["default"].createElement("div", {
+    className: "m-storeForm__item__input"
+  }, react_1["default"].createElement("input", {
     type: "text",
     id: "bread_name",
     name: "bread_name",
     ref: register({
       required: true
     })
-  }), errors.bread_name && react_1["default"].createElement("p", null, "\u30E1\u30CB\u30E5\u30FC\u540D\u306F\u5FC5\u9808\u3067\u3059\u3002")), react_1["default"].createElement("div", {
-    className: "m-storeEdit-menu-create__container__form__item"
+  }), errors.bread_name && react_1["default"].createElement("p", null, "\u30E1\u30CB\u30E5\u30FC\u540D\u306F\u5FC5\u9808\u3067\u3059\u3002"))), react_1["default"].createElement("div", {
+    className: "m-storeEdit-menuCreate__container__form__item m-storeForm__item"
   }, react_1["default"].createElement("label", {
     htmlFor: "bread_kind",
-    className: "a-label-required"
-  }, "\u30D1\u30F3\u306E\u7A2E\u985E"), react_1["default"].createElement("select", {
+    className: "a-label-required__red"
+  }, "\u30D1\u30F3\u306E\u7A2E\u985E"), react_1["default"].createElement("div", {
+    className: "m-storeForm__item__input"
+  }, react_1["default"].createElement("select", {
     name: "bread_kind",
     id: "bread_kind",
     ref: register({
       required: true
     })
-  }, Bread_kinds_1["default"].bread_kinds.map(function (el) {
+  }, Bread_kinds_1["default"].bread_kinds.map(function (bread) {
     return react_1["default"].createElement("option", {
-      value: el.name,
-      key: el.id
-    }, el.name);
-  })), errors.bread_kind && react_1["default"].createElement("p", null, "\u30D1\u30F3\u306E\u7A2E\u985E\u306F\u5FC5\u9808\u3067\u3059\u3002")), react_1["default"].createElement("div", {
-    className: "m-storeEdit-menu-create__container__form__item"
+      value: bread.name,
+      key: bread.id
+    }, bread.name);
+  })), errors.bread_kind && react_1["default"].createElement("p", null, "\u30D1\u30F3\u306E\u7A2E\u985E\u306F\u5FC5\u9808\u3067\u3059\u3002"))), react_1["default"].createElement("div", {
+    className: "m-storeEdit-menuCreate__container__form__item m-storeForm__item"
   }, react_1["default"].createElement("label", {
     htmlFor: "bread_price"
-  }, "\u5024\u6BB5"), react_1["default"].createElement("span", null, react_1["default"].createElement("input", {
+  }, "\u5024\u6BB5"), react_1["default"].createElement("div", {
+    className: "m-storeForm__item__input a-label-yen"
+  }, react_1["default"].createElement("input", {
     type: "number",
     name: "bread_price",
     id: "bread_price",
     ref: register
-  }), "\u5186")), react_1["default"].createElement("div", {
-    className: "m-storeEdit-menu-create__container__form__item"
+  }))), react_1["default"].createElement("div", {
+    className: "m-storeEdit-menuCreate__container__form__item m-storeForm__item"
   }, react_1["default"].createElement("label", {
     htmlFor: "bread_detail"
-  }, "\u8A73\u7D30\u30FB\u8AAC\u660E"), react_1["default"].createElement("textarea", {
+  }, "\u8A73\u7D30\u30FB\u8AAC\u660E"), react_1["default"].createElement("div", {
+    className: "m-storeForm__item__input"
+  }, react_1["default"].createElement("textarea", {
     name: "bread_detail",
     id: "bread_detail",
     ref: register
-  })), react_1["default"].createElement("div", {
-    className: "m-storeEdit-menu-create__container__form__item"
+  }))), react_1["default"].createElement("div", {
+    className: "m-storeEdit-menuCreate__container__form__item m-storeForm__item"
   }, react_1["default"].createElement("label", {
     htmlFor: "bread_img"
-  }, "\u753B\u50CF\u30A2\u30C3\u30D7\u30ED\u30FC\u30C9"), react_1["default"].createElement("input", {
+  }, "\u753B\u50CF\u30A2\u30C3\u30D7\u30ED\u30FC\u30C9"), react_1["default"].createElement("div", {
+    className: "m-storeForm__item__input"
+  }, react_1["default"].createElement("input", {
     name: "bread_img",
     type: "file",
     accept: "image/*"
-  })), react_1["default"].createElement("div", {
-    className: "m-storeEdit-menu-create__container__form__btn"
-  }, react_1["default"].createElement("input", {
-    type: "submit",
-    value: "\u8FFD\u52A0\u3059\u308B"
+  }))), react_1["default"].createElement("div", {
+    className: "m-storeEdit-menuCreate__container__form__btn m-storeForm__btn"
+  }, react_1["default"].createElement(BtnSave_1["default"], {
+    InputType: "submit",
+    OnClickFunction: onSubmit
   })))));
 }
 
-exports.default = StoreEditTable_menuCreate;
+exports.default = MenuCreate;
 
 /***/ }),
 
-/***/ "./resources/ts/components/molecules/storeEdit/StoreEditTable_menuList.tsx":
-/*!*********************************************************************************!*\
-  !*** ./resources/ts/components/molecules/storeEdit/StoreEditTable_menuList.tsx ***!
-  \*********************************************************************************/
+/***/ "./resources/ts/components/molecules/storeEdit/storeEditMenu/MenuList.tsx":
+/*!********************************************************************************!*\
+  !*** ./resources/ts/components/molecules/storeEdit/storeEditMenu/MenuList.tsx ***!
+  \********************************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -17177,35 +17949,47 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var StoreEditTable_menuList = function StoreEditTable_menuList(_a) {
+var Modal_editMenu_1 = __importDefault(__webpack_require__(/*! ../../../atoms/modal/Modal_editMenu */ "./resources/ts/components/atoms/modal/Modal_editMenu.tsx"));
+
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
+var MenuList = function MenuList(_a) {
   var MenuInfo = _a.MenuInfo;
   return react_1["default"].createElement("div", {
-    className: "m-storeEdit-menu-list"
-  }, MenuInfo.map(function (el) {
+    className: "m-storeEdit-menuList"
+  }, react_1["default"].createElement("h3", null, "\u30E1\u30CB\u30E5\u30FC\u4E00\u89A7"), MenuInfo.map(function (el) {
     return el.menu_type === 1 && react_1["default"].createElement("div", {
-      className: "m-storeEdit-menu-list__item",
+      className: "m-storeEdit-menuList__item",
       key: el.id
     }, react_1["default"].createElement("div", {
-      className: "m-storeEdit-menu-list__item__btn"
-    }, react_1["default"].createElement("button", null, "\u7DE8\u96C6\u3059\u308B"), react_1["default"].createElement("button", null, "\u524A\u9664\u3059\u308B")), react_1["default"].createElement("div", {
-      className: "m-storeEdit-menu-list__item__content"
+      className: "m-storeEdit-menuList__item__btn"
+    }, react_1["default"].createElement(Modal_editMenu_1["default"], {
+      menu: el
+    }), react_1["default"].createElement("button", {
+      className: "a-btn-deleteMenu"
+    }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+      icon: free_solid_svg_icons_1.faTrash
+    }), "\u524A\u9664\u3059\u308B")), react_1["default"].createElement("div", {
+      className: "m-storeEdit-menuList__item__content"
     }, react_1["default"].createElement("img", {
-      src: "",
+      src: "/images/croissant.jpg",
       alt: "\u30D1\u30F3\u306E\u753B\u50CF"
     }), react_1["default"].createElement("div", {
-      className: "m-storeEdit-menu-list__item__content__text"
+      className: "m-storeEdit-menuList__item__content__text"
     }, react_1["default"].createElement("h4", null, el.bread_name), react_1["default"].createElement("span", null, el.bread_price, "\u5186"), react_1["default"].createElement("a", null, el.bread_kind), react_1["default"].createElement("p", null, el.bread_detail))));
   }));
 };
 
-exports.default = StoreEditTable_menuList;
+exports.default = MenuList;
 
 /***/ }),
 
-/***/ "./resources/ts/components/molecules/storeEdit/StoreEditTable_spirit.tsx":
-/*!*******************************************************************************!*\
-  !*** ./resources/ts/components/molecules/storeEdit/StoreEditTable_spirit.tsx ***!
-  \*******************************************************************************/
+/***/ "./resources/ts/components/molecules/storeEdit/storeEditSpirit/StoreEditTable_advantage.tsx":
+/*!**************************************************************************************************!*\
+  !*** ./resources/ts/components/molecules/storeEdit/storeEditSpirit/StoreEditTable_advantage.tsx ***!
+  \**************************************************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -17223,32 +18007,76 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var Modal_editSpirit_1 = __importDefault(__webpack_require__(/*! ../../../atoms/modal/Modal_editSpirit */ "./resources/ts/components/atoms/modal/Modal_editSpirit.tsx"));
+
+var StoreEditTable_advantage = function StoreEditTable_advantage(_a) {
+  var Spirit = _a.Spirit;
+  return react_1["default"].createElement("div", {
+    className: "m-storeEdit-spirit"
+  }, react_1["default"].createElement("div", {
+    className: "m-storeEdit-spirit__title"
+  }, react_1["default"].createElement("h3", null, "\u3053\u3060\u308F\u308A"), react_1["default"].createElement(Modal_editSpirit_1["default"], {
+    kind: "spirit"
+  })), Spirit.map(function (el) {
+    return el.menu_type === 2 && react_1["default"].createElement("div", {
+      className: "m-storeEdit-spirit__container"
+    }, react_1["default"].createElement("div", {
+      className: "m-storeEdit-spirit__container__item"
+    }, react_1["default"].createElement("label", null, "\u767B\u9332\u753B\u50CF"), react_1["default"].createElement("img", {
+      src: "/images/croissant.jpg",
+      alt: "\u3053\u3060\u308F\u308A\u306E\u5199\u771F"
+    })), react_1["default"].createElement("div", {
+      className: "m-storeEdit-spirit__container__item"
+    }, react_1["default"].createElement("label", null, "\u5185\u5BB9"), react_1["default"].createElement("p", null, el.advantage)));
+  }));
+};
+
+exports.default = StoreEditTable_advantage;
+
+/***/ }),
+
+/***/ "./resources/ts/components/molecules/storeEdit/storeEditSpirit/StoreEditTable_spirit.tsx":
+/*!***********************************************************************************************!*\
+  !*** ./resources/ts/components/molecules/storeEdit/storeEditSpirit/StoreEditTable_spirit.tsx ***!
+  \***********************************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var Modal_editSpirit_1 = __importDefault(__webpack_require__(/*! ../../../atoms/modal/Modal_editSpirit */ "./resources/ts/components/atoms/modal/Modal_editSpirit.tsx"));
+
 var StoreEditTable_spirit = function StoreEditTable_spirit(_a) {
   var Spirit = _a.Spirit;
   return react_1["default"].createElement("div", {
-    className: "m-store-edit-spirit"
-  }, Spirit.map(function (el) {
+    className: "m-storeEdit-spirit"
+  }, react_1["default"].createElement("div", {
+    className: "m-storeEdit-spirit__title"
+  }, react_1["default"].createElement("h3", null, "\u601D\u3044"), react_1["default"].createElement(Modal_editSpirit_1["default"], {
+    kind: "spirit"
+  })), Spirit.map(function (el) {
     return el.menu_type === 2 && react_1["default"].createElement("div", {
-      className: "m-store-edit-spirit__container"
+      className: "m-storeEdit-spirit__container"
     }, react_1["default"].createElement("div", {
-      className: "m-store-edit-spirit__container__section"
-    }, react_1["default"].createElement("div", {
-      className: "m-store-edit-spirit__container__section__title"
-    }, react_1["default"].createElement("h2", null, "\u3053\u3060\u308F\u308A"), react_1["default"].createElement("button", null, "\u7DE8\u96C6\u3059\u308B")), react_1["default"].createElement("div", {
-      className: "m-store-edit-spirit__container__section__content"
-    }, react_1["default"].createElement("img", {
-      src: "",
-      alt: "\u3053\u3060\u308F\u308A\u306E\u5199\u771F"
-    }), react_1["default"].createElement("p", null, el.advantage))), react_1["default"].createElement("div", {
-      className: "m-store-edit-spirit__container__section"
-    }, react_1["default"].createElement("div", {
-      className: "m-store-edit-spirit__container__section__title"
-    }, react_1["default"].createElement("h2", null, "\u601D\u3044"), react_1["default"].createElement("button", null, "\u7DE8\u96C6\u3059\u308B")), react_1["default"].createElement("div", {
-      className: "m-store-edit-spirit__container__section__content"
-    }, react_1["default"].createElement("img", {
-      src: "",
+      className: "m-storeEdit-spirit__container__item"
+    }, react_1["default"].createElement("label", null, "\u767B\u9332\u753B\u50CF"), react_1["default"].createElement("img", {
+      src: "/images/croissant.jpg",
       alt: "\u601D\u3044\u304C\u4F1D\u308F\u308B\u5199\u771F"
-    }), react_1["default"].createElement("p", null, el.spirit))));
+    })), react_1["default"].createElement("div", {
+      className: "m-storeEdit-spirit__container__item"
+    }, react_1["default"].createElement("label", null, "\u5185\u5BB9"), react_1["default"].createElement("p", null, el.spirit)));
   }));
 };
 
@@ -18665,22 +19493,6 @@ exports.default = PasswordReset_user;
 "use strict";
 
 
-var __assign = this && this.__assign || function () {
-  __assign = Object.assign || function (t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-      s = arguments[i];
-
-      for (var p in s) {
-        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-      }
-    }
-
-    return t;
-  };
-
-  return __assign.apply(this, arguments);
-};
-
 var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
   if (k2 === undefined) k2 = k;
   Object.defineProperty(o, k2, {
@@ -18731,7 +19543,7 @@ var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_mod
 
 var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
 
-var Week_1 = __importDefault(__webpack_require__(/*! ../../../info/Week */ "./resources/ts/info/Week.ts"));
+var InputSchedule_1 = __importDefault(__webpack_require__(/*! ../../molecules/InputSchedule */ "./resources/ts/components/molecules/InputSchedule.tsx"));
 
 function emailErrorMessage(emailError) {
   if (emailError) {
@@ -18767,95 +19579,15 @@ function Register_store() {
       emailError = _b[0],
       SetEmailError = _b[1];
 
-  var _c = react_1.useState({
-    monday_open: null,
-    monday_close: null,
-    tuesday_open: null,
-    tuesday_close: null,
-    wednesday_open: null,
-    wednesday_close: null,
-    thursday_open: null,
-    thursday_close: null,
-    friday_open: null,
-    friday_close: null,
-    saturday_open: null,
-    saturday_close: null,
-    sunday_open: null,
-    sunday_close: null
-  }),
-      businessHours = _c[0],
-      SetBusinessHours = _c[1];
-
   var checkBusinessDay = function checkBusinessDay(day) {
     var checkInfo = document.getElementsByClassName(day["class"] + ' active');
     var checkInfoArray = Array.from(checkInfo);
     checkInfoArray.forEach;
   };
 
-  var handleClick = function handleClick(targetClass) {
-    var classInfo = document.getElementsByClassName(targetClass);
-    var classInfoArray = Array.from(classInfo);
-    classInfoArray.forEach(function (el) {
-      if (el.className.includes('active')) {
-        el.classList.remove('active');
-      } else {
-        el.className += ' active';
-      }
-    });
-  };
-
-  var WeekItem = function WeekItem(day) {
-    var HoursClassName = 'p-register-store__container__form__week__day__hours ' + day["class"];
-    var BtnClassName = 'p-register-store__container__form__week__day__heading__btn ' + day["class"];
-    return react_1["default"].createElement("div", {
-      className: "p-register-store__container__form__week__day",
-      key: day.id
-    }, react_1["default"].createElement("div", {
-      className: "p-register-store__container__form__week__heading"
-    }, react_1["default"].createElement("label", {
-      htmlFor: day.id
-    }, day.name), react_1["default"].createElement("div", {
-      className: BtnClassName,
-      onClick: function onClick() {
-        return handleClick(day["class"]);
-      }
-    }, react_1["default"].createElement("span", null))), react_1["default"].createElement("div", {
-      className: HoursClassName
-    }, react_1["default"].createElement("input", {
-      type: "time",
-      name: day.id + "_open",
-      onChange: function onChange(el) {
-        var _a;
-
-        return SetBusinessHours(__assign(__assign({}, businessHours), (_a = {}, _a[el.target.name] = el.target.value, _a)));
-      }
-    }), react_1["default"].createElement("span", null, "\xA0\uFF5E\xA0"), react_1["default"].createElement("input", {
-      type: "time",
-      name: day.id + "_close",
-      onChange: function onChange(el) {
-        var _a;
-
-        return SetBusinessHours(__assign(__assign({}, businessHours), (_a = {}, _a[el.target.name] = el.target.value, _a)));
-      }
-    })));
-  };
-
   var onSubmit = function onSubmit(data) {
     SetEmailError(false);
-    data['business_day'] = JSON.stringify(businessHours);
-    console.log(data); // monday : ['23:23', '23:23']
-    // axios.post('/api/create_store', data)
-    // .then(res => {
-    //     console.log(res);
-    //     history.push('/store');
-    // })
-    // .catch(errors => {
-    //     console.log(errors.response.data.errors);
-    //     console.log(errors.response.status);
-    //     if(errors.response.status === 422){
-    //         SetEmailError(true);
-    //     }
-    // });
+    console.log(data);
   };
 
   return react_1["default"].createElement("div", {
@@ -18867,16 +19599,16 @@ function Register_store() {
   }, react_1["default"].createElement("span", null, "\u65E2\u306B\u767B\u9332\u6E08\u3067\u3059\u304B\uFF1F", react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/login_store"
   }, "\u5E97\u8217\u30ED\u30B0\u30A4\u30F3"))), react_1["default"].createElement("form", {
-    className: "p-register-store__container__form",
+    className: "p-register-store__container__form m-storeForm",
     name: "form_storeRegister",
     onSubmit: handleSubmit(onSubmit)
   }, react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__item"
+    className: "p-register-store__container__form__item m-storeForm__item"
   }, react_1["default"].createElement("label", {
     htmlFor: "store_name",
     className: "a-label-required__red"
   }, "\u5E97\u8217\u540D"), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__item__input"
+    className: "p-register-store__container__form__item__input m-storeForm__item__input"
   }, react_1["default"].createElement("input", {
     type: "text",
     id: "store_name",
@@ -18885,12 +19617,12 @@ function Register_store() {
       required: true
     })
   }), errors.name && react_1["default"].createElement("p", null, "\u5E97\u8217\u540D\u306F\u5FC5\u9808\u3067\u3059\u3002"))), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__item"
+    className: "p-register-store__container__form__item m-storeForm__item"
   }, react_1["default"].createElement("label", {
     htmlFor: "store_email",
     className: "a-label-required__red"
   }, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9"), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__item__input"
+    className: "p-register-store__container__form__item__input m-storeForm__item__input"
   }, react_1["default"].createElement("input", {
     type: "email",
     name: "email",
@@ -18899,12 +19631,12 @@ function Register_store() {
       required: true
     })
   }), errors.email && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F\u5FC5\u9808\u3067\u3059\u3002"), emailErrorMessage(emailError))), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__item"
+    className: "p-register-store__container__form__item m-storeForm__item"
   }, react_1["default"].createElement("label", {
     htmlFor: "store_address",
     className: "a-label-required__red"
   }, "\u4F4F\u6240"), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__item__input"
+    className: "p-register-store__container__form__item__input m-storeForm__item__input"
   }, react_1["default"].createElement("input", {
     type: "text",
     name: "address",
@@ -18913,12 +19645,12 @@ function Register_store() {
       required: true
     })
   }), errors.address && react_1["default"].createElement("p", null, "\u4F4F\u6240\u306F\u5FC5\u9808\u3067\u3059\u3002"))), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__item"
+    className: "p-register-store__container__form__item m-storeForm__item"
   }, react_1["default"].createElement("label", {
     htmlFor: "store_tel",
     className: "a-label-required__red"
   }, "\u96FB\u8A71\u756A\u53F7"), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__item__input"
+    className: "p-register-store__container__form__item__input m-storeForm__item__input"
   }, react_1["default"].createElement("span", null, "\u534A\u89D2\u30FB\u30CF\u30A4\u30D5\u30F3\u306A\u3057\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("input", {
     type: "text",
     name: "tel",
@@ -18928,12 +19660,12 @@ function Register_store() {
       pattern: /[0-9]{10,11}/
     })
   }), errors.tel && errors.tel.type === "required" && react_1["default"].createElement("p", null, "\u96FB\u8A71\u756A\u53F7\u306F\u5FC5\u9808\u3067\u3059\u3002"), errors.tel && errors.tel.type === "pattern" && react_1["default"].createElement("p", null, "10~11\u6587\u5B57\u306E\u534A\u89D2\u6570\u5B57\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__item"
+    className: "p-register-store__container__form__item m-storeForm__item"
   }, react_1["default"].createElement("label", {
     htmlFor: "store_password",
     className: "a-label-required__red"
   }, "\u30D1\u30B9\u30EF\u30FC\u30C9"), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__item__input"
+    className: "p-register-store__container__form__item__input m-storeForm__item__input"
   }, react_1["default"].createElement("input", {
     type: "password",
     name: "password",
@@ -18943,12 +19675,12 @@ function Register_store() {
       pattern: /[a-zA-Z0-9]{8,16}/
     })
   }), errors.password && errors.password.type === "required" && react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u306F\u5FC5\u9808\u3067\u3059\u3002"), errors.password && errors.password.type === "pattern" && react_1["default"].createElement("p", null, "8~16\u6587\u5B57\u306E\u534A\u89D2\u82F1\u6570\u5B57\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__item"
+    className: "p-register-store__container__form__item m-storeForm__item"
   }, react_1["default"].createElement("label", {
     htmlFor: "store_password-check",
     className: "a-label-required__red"
   }, "\u78BA\u8A8D\u7528\u30D1\u30B9\u30EF\u30FC\u30C9"), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__item__input"
+    className: "p-register-store__container__form__item__input m-storeForm__item__input"
   }, react_1["default"].createElement("input", {
     type: "password",
     name: "password_check",
@@ -18957,24 +19689,20 @@ function Register_store() {
       required: true
     })
   }), errors.password_check && errors.password_check.type === "required" && react_1["default"].createElement("p", null, "\u78BA\u8A8D\u7528\u30D1\u30B9\u30EF\u30FC\u30C9\u306F\u5FC5\u9808\u3067\u3059\u3002"), PasswordErrorMessage(getValues('password'), getValues('password_check')))), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__item"
+    className: "p-register-store__container__form__item m-storeForm__item"
   }, react_1["default"].createElement("label", {
     htmlFor: "business_day",
     className: "a-label-required__red"
   }, "\u55B6\u696D\u65E5\u30FB\u55B6\u696D\u6642\u9593"), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__item__input"
+    className: "p-register-store__container__form__item__input m-storeForm__item__input"
   }, react_1["default"].createElement("input", {
     type: "hidden",
     name: "business_day",
     ref: register
-  }), react_1["default"].createElement("span", null, "\u55B6\u696D\u3057\u3066\u3044\u308B\u66DC\u65E5\u3092\u30C1\u30A7\u30C3\u30AF\u306E\u3046\u3048\u3001\u55B6\u696D\u6642\u9593\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__week"
-  }, Week_1["default"].week.map(function (day) {
-    return WeekItem(day);
-  })))), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__item"
+  }), react_1["default"].createElement("span", null, "\u55B6\u696D\u3057\u3066\u3044\u308B\u66DC\u65E5\u3092\u30C1\u30A7\u30C3\u30AF\u306E\u3046\u3048\u3001\u55B6\u696D\u6642\u9593\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement(InputSchedule_1["default"], null))), react_1["default"].createElement("div", {
+    className: "p-register-store__container__form__item m-storeForm__item"
   }, react_1["default"].createElement("label", null, "\u55B6\u696D\u306B\u95A2\u3059\u308B\u5099\u8003"), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__item__input"
+    className: "p-register-store__container__form__item__input m-storeForm__item__input"
   }, react_1["default"].createElement("span", null, "\u3010\u4F8B1\u3011\u5B9A\u4F11\u65E5\uFF1A\u7B2C3\u6C34\u66DC\u65E5", react_1["default"].createElement("br", null), "\u3010\u4F8B2\u3011\u795D\u65E5\u3001\u304A\u76C6\u3001\u5E74\u672B\u5E74\u59CB\u306F\u304A\u4F11\u307F\u3067\u3059\u3002"), react_1["default"].createElement("textarea", {
     name: "business_memo",
     ref: register
@@ -19499,9 +20227,11 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var BtnBack_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/BtnBack */ "./resources/ts/components/atoms/buttons/BtnBack.tsx"));
-
 var StoreEditTable_1 = __importDefault(__webpack_require__(/*! ../../molecules/storeEdit/StoreEditTable */ "./resources/ts/components/molecules/storeEdit/StoreEditTable.tsx"));
+
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
 
 var testMenuInfo = [{
   id: 45,
@@ -19545,9 +20275,11 @@ var StoreEdit = function StoreEdit(_a) {
   }, react_1["default"].createElement("div", {
     className: "p-store-edit__container"
   }, react_1["default"].createElement("div", {
-    className: "p-store-edit__container__btn"
-  }, react_1["default"].createElement(BtnBack_1["default"], {
-    URL: '/store'
+    className: "p-store-edit__container__title"
+  }, react_1["default"].createElement("h2", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faStore
+  }), "\u5E97\u8217\u7BA1\u7406"), StoreInfo.map(function (el) {
+    return react_1["default"].createElement("span", null, el.name + "様");
   })), react_1["default"].createElement("div", {
     className: "p-store-edit__container__table"
   }, react_1["default"].createElement(StoreEditTable_1["default"], {
@@ -20139,6 +20871,56 @@ exports.default = hours;
 
 /***/ }),
 
+/***/ "./resources/ts/info/StoreEditMenus.ts":
+/*!*********************************************!*\
+  !*** ./resources/ts/info/StoreEditMenus.ts ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+ //店舗編集画面で使用されるメニューリスト
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.StoreEditNav_stamp = exports.StoreEditNav_basic = exports.StoreEditNav_spirit = exports.StoreEditNav_menu = void 0;
+exports.StoreEditNav_menu = [{
+  tableName: "menuAdd",
+  label: "メニュー追加"
+}, {
+  tableName: "menuEdit",
+  label: "メニュー編集・一覧"
+}];
+exports.StoreEditNav_spirit = [{
+  tableName: "spiritAdvantage",
+  label: "こだわり"
+}, {
+  tableName: "spiritSpirit",
+  label: "思い"
+}];
+exports.StoreEditNav_basic = [{
+  tableName: "basicInfo",
+  label: "基本情報"
+}, {
+  tableName: "basicDays",
+  label: "営業日・営業時間"
+}, {
+  tableName: "basicMemo",
+  label: "営業に関するお知らせ"
+}, {
+  tableName: "basicHomepage",
+  label: "ホームページ"
+}, {
+  tableName: "basicSNS",
+  label: "SNS"
+}];
+exports.StoreEditNav_stamp = [{
+  tableName: "stampAdd",
+  label: "追加"
+}];
+
+/***/ }),
+
 /***/ "./resources/ts/info/Week.ts":
 /*!***********************************!*\
   !*** ./resources/ts/info/Week.ts ***!
@@ -20268,112 +21050,6 @@ exports.initialState = {
 
 /***/ }),
 
-/***/ "./resources/ts/routeAuth/StoreOnly.tsx":
-/*!**********************************************!*\
-  !*** ./resources/ts/routeAuth/StoreOnly.tsx ***!
-  \**********************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __assign = this && this.__assign || function () {
-  __assign = Object.assign || function (t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-      s = arguments[i];
-
-      for (var p in s) {
-        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-      }
-    }
-
-    return t;
-  };
-
-  return __assign.apply(this, arguments);
-};
-
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  Object.defineProperty(o, k2, {
-    enumerable: true,
-    get: function get() {
-      return m[k];
-    }
-  });
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
-
-  __setModuleDefault(result, mod);
-
-  return result;
-};
-
-var __rest = this && this.__rest || function (s, e) {
-  var t = {};
-
-  for (var p in s) {
-    if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
-  }
-
-  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
-  }
-  return t;
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-
-var UserAuthContext_1 = __webpack_require__(/*! ../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
-
-function StoreOnly(_a) {
-  var children = _a.children,
-      rest = __rest(_a, ["children"]);
-
-  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
-  return react_1["default"].createElement(react_router_dom_1.Route, __assign({}, rest, {
-    render: function render(_a) {
-      var location = _a.location;
-      return state.auth === "store" ? children : react_1["default"].createElement(react_router_dom_1.Redirect, {
-        to: {
-          pathname: "/",
-          state: {
-            from: location
-          }
-        }
-      });
-    }
-  }));
-}
-
-exports.default = StoreOnly;
-
-/***/ }),
-
 /***/ "./resources/ts/routeAuth/UserOnly.tsx":
 /*!*********************************************!*\
   !*** ./resources/ts/routeAuth/UserOnly.tsx ***!
@@ -20464,7 +21140,7 @@ function UserOnly(_a) {
   return react_1["default"].createElement(react_router_dom_1.Route, __assign({}, rest, {
     render: function render(_a) {
       var location = _a.location;
-      return state.auth == 'user' ? children : react_1["default"].createElement(react_router_dom_1.Redirect, {
+      return state.auth === "user" ? children : react_1["default"].createElement(react_router_dom_1.Redirect, {
         to: {
           pathname: "/",
           state: {
