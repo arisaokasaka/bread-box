@@ -4,9 +4,22 @@
     &__container {
         @include content-width;
 
-        & > h2 {
-            margin-bottom: $mp-xxs;
-            text-decoration: underline 2px;
+        &__title {
+            display: flex;
+            align-items: center;
+            margin-bottom: $mp-xs;
+
+            & > h2 {
+                color: $darkestBrown;
+
+                & > svg {
+                    margin-right: 5px;
+                }
+            }
+
+            & > span {
+                margin-left: 1rem;
+            }
         }
 
         &__btn {
