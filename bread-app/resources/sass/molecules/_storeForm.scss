@@ -27,10 +27,10 @@
             color: $font-color-brown;
 
             @include bp-600up {
-                font-weight: 450;
+                font-weight: 500;
                 line-height: 4rem;
                 padding: 0 1rem;
-                background-color: rgba(252, 222, 184, 0.3);
+                background-color: $lighterBrown;
             }
         }
 
@@ -52,6 +52,10 @@
                 padding: 0 5px;
                 border: 0.5px solid $lightGray;
                 width: 100%;
+
+                &:focus {
+                    box-shadow: 0 0 6px 0 $brown;
+                }
             }
 
             & > textarea {
