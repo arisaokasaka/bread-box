@@ -1,5 +1,6 @@
 import React from 'react'
 import {useForm} from 'react-hook-form';
+import BtnSave from '../../../atoms/buttons/BtnSave';
 
 type BasicProps = ({
     StoreInfo: Array<any>;
@@ -17,25 +18,38 @@ const EditSNS: React.FC<BasicProps> = ({StoreInfo}) => {
             {StoreInfo.map((el)=>{
                 return(
                     <div className = "m-storeEdit-SNS__container" key = {el.uuid}>
-                        <form className="m-storeEdit-SNS__container__form" onSubmit={handleSubmit(onSubmit)}>
-                            <label htmlFor="store_url">SNS</label>
-                            <span>お持ちのSNSのURLを入力してください。</span>
-                            <div className="m-storeEdit-SNS__container__form__sns">
-                                <div className = "m-storeEdit-SNS__container__form__sns__item">
-                                    <a>Instagram</a><input type="url" value={el.sns.instagram} />
-                                </div>
-                                <div className = "m-storeEdit-SNS__container__form__sns__item">
-                                    <a>Twitter</a><input type="url" value={el.sns.twitter} />
-                                </div>
-                                <div className = "m-storeEdit-SNS__container__form__sns__item">
-                                    <a>Facebook</a><input type="url" value={el.sns.facebook} />
-                                </div>
-                                <div className = "m-storeEdit-SNS__container__form__sns__item">
-                                    <a>その他</a><input type="url" value={el.sns.other} />
+                        <h3>SNS</h3>
+                        <span>お持ちのSNSのURLを入力してください。</span>    
+                        <form className="m-storeEdit-SNS__container__form m-storeForm" onSubmit={handleSubmit(onSubmit)}>
+                            <div className = "m-storeEdit-SNS__container__form__sns__item m-storeForm__item">
+                                <label>Instagram</label>
+                                <div className = "m-storeEdit-SNS__container__form__sns__item__input m-storeForm__item__input">
+                                    <input type="url" value={el.sns.instagram} />
                                 </div>
                             </div>
-                            <div className="m-storeEdit-SNS__container__form__btn">
-                                <input type="submit" value="変更する"/>
+                            <div className = "m-storeEdit-SNS__container__form__sns__item m-storeForm__item">
+                                <label>Twitter</label>
+                                <div className = "m-storeEdit-SNS__container__form__sns__item__input m-storeForm__item__input">
+                                    <input type="url" value={el.sns.twitter} />
+                                </div>
+                            </div>
+                            <div className = "m-storeEdit-SNS__container__form__sns__item m-storeForm__item">
+                                <label>Facebook</label>
+                                <div className = "m-storeEdit-SNS__container__form__sns__item__input m-storeForm__item__input">
+                                    <input type="url" value={el.sns.facebook} />
+                                </div>
+                            </div>
+                            <div className = "m-storeEdit-SNS__container__form__sns__item m-storeForm__item">
+                                <label>その他</label>
+                                <div className = "m-storeEdit-SNS__container__form__sns__item__input m-storeForm__item__input">
+                                    <input type="url" value={el.sns.other} />
+                                </div>
+                            </div>
+                            <div className="m-storeEdit-SNS__container__form__btn m-storeForm__btn">
+                                <BtnSave
+                                    InputType={"submit"}
+                                    OnClickFunction={null}
+                                />
                             </div>
                         </form>
                     </div>
