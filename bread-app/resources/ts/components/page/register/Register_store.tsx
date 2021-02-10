@@ -3,6 +3,7 @@ import axios from 'axios';
 import {Link, useHistory} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import week from '../../../info/Week';
+import InputSchedule from '../../molecules/InputSchedule';
 
 function emailErrorMessage(emailError){
     if(emailError){
@@ -24,22 +25,6 @@ export default function Register_store() {
     const { register, handleSubmit, errors, getValues, setValue } = useForm();
     const history = new useHistory();
     const [emailError, SetEmailError] = useState(false);
-    const [businessHours, SetBusinessHours] = useState({
-        monday_open: null,
-        monday_close: null,
-        tuesday_open: null,
-        tuesday_close: null,
-        wednesday_open: null,
-        wednesday_close: null,
-        thursday_open: null,
-        thursday_close: null,
-        friday_open: null,
-        friday_close: null,
-        saturday_open: null,
-        saturday_close: null,
-        sunday_open: null,
-        sunday_close: null,
-    })
 
     const checkBusinessDay = (day) => {
         let checkInfo = document.getElementsByClassName(day.class + ' active');
@@ -47,61 +32,9 @@ export default function Register_store() {
         checkInfoArray.forEach
     }
 
-    const handleClick = (targetClass) => {
-        let classInfo = document.getElementsByClassName(targetClass);
-        let classInfoArray = Array.from(classInfo);
-        classInfoArray.forEach(el => {
-            if(el.className.includes('active')) {
-                el.classList.remove('active') 
-            } else {
-                el.className += ' active';
-            }
-        });
-    }
-
-    const WeekItem = (day) => {
-        let HoursClassName = 'p-register-store__container__form__week__day__hours ' + day.class;
-        let BtnClassName = 'p-register-store__container__form__week__day__heading__btn ' + day.class;
-
-        return(
-            <div className = "p-register-store__container__form__week__day" key={day.id}>
-                <div className = "p-register-store__container__form__week__heading">
-                    <label htmlFor={day.id}>{day.name}</label>
-                    <div className = {BtnClassName} onClick={()=>handleClick(day.class)}>
-                        <span></span>
-                    </div>
-                </div>
-                <div className = {HoursClassName}>
-                    <input type="time" name={day.id+"_open"}
-                     onChange = {(el) => SetBusinessHours({...businessHours, [el.target.name]: el.target.value})}
-                    />
-                    <span>&nbsp;～&nbsp;</span>
-                    <input type="time" name={day.id+"_close"}
-                     onChange = {(el) => SetBusinessHours({...businessHours, [el.target.name]: el.target.value})}
-                    />
-                </div>
-            </div>
-        );
-    }
-
     const onSubmit = (data) => {
         SetEmailError(false);
-
-        data['business_day'] = JSON.stringify(businessHours);
         console.log(data);
-        // monday : ['23:23', '23:23']
-        // axios.post('/api/create_store', data)
-        // .then(res => {
-        //     console.log(res);
-        //     history.push('/store');
-        // })
-        // .catch(errors => {
-        //     console.log(errors.response.data.errors);
-        //     console.log(errors.response.status);
-        //     if(errors.response.status === 422){
-        //         SetEmailError(true);
-        //     }
-        // });
     }
 
     return (
@@ -171,9 +104,7 @@ export default function Register_store() {
                         <div className = "p-register-store__container__form__item__input">
                             <input type="hidden" name="business_day" ref={register} />
                             <span>営業している曜日をチェックのうえ、営業時間を入力してください。</span>
-                            <div className = "p-register-store__container__form__week">
-                                {week.week.map((day)=> WeekItem(day))}
-                            </div>
+                            <InputSchedule/>
                         </div>
                     </div>
                     
