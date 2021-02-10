@@ -1,38 +1,72 @@
 .m-store-edit-table {
-    &__tab {
-        display: flex;
-        position: relative;
-        height: 35px;
-        width: 100%;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    column-gap: 1rem;
 
-        @include bp-600up {
-            height: 42px;
-        }
+    &__nav {
+        & > ul {
+            margin: 0;
 
-        & > input {
-            font-size: 0.7rem;
-            background-color: transparent;
-            width: calc(100% / 3);
-            text-align: center;
-            color: $darkGray;
-            font-weight: 550;
-            cursor: pointer;
-
-            &:hover {
-                background-color: $lighterBrown;
-            }
-
-            &.selected {
-                background-color: $lightBrown;
-                color: $font-color-brown;
-
-                &:hover {
-                    background-color: $lightBrown;
+            & > li {
+                &:last-child {
+                    margin-top: $mp-xs;
                 }
-            }
 
-            @include bp-600up {
-                font-size: 0.8rem;
+                & > label {
+                    @include bg_GradationBrown;
+                    display: block;
+                    color: $white;
+                    font-weight: 500;
+                    font-size: 0.8rem;
+                    width: 100%;
+                    padding: 2px 5px;
+
+                    & > svg {
+                        margin-right: 3px;
+                        font-size: 0.7rem;
+                    }
+                }
+
+                & span {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 100%;
+                    border: 0.1px solid $lightGray;
+                    border-top: none;
+                    border-radius: none;
+                    background-color: $white;
+
+                    & input {
+                        padding: 3px 0 2px 3px;
+                        font-size: 0.8rem;
+                        color: $black;
+                        background-color: $white;
+                        cursor: pointer;
+                    }
+
+                    & a {
+                        width: 20px;
+                        font-size: 0.6rem;
+                        color: $font-color-brown;
+                    }
+
+                    &.selected {
+                        background-color: $lightBrown;
+
+                        & > input {
+                            background-color: $lightBrown;
+                            color: $font-color-brown;
+                        }
+                    }
+                }
+
+                & > p {
+                    margin-top: 3px;
+                    font-size: 0.7rem;
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
             }
         }
     }

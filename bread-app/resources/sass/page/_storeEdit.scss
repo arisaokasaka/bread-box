@@ -4,6 +4,11 @@
     &__container {
         @include content-width;
 
+        & > h2 {
+            margin-bottom: $mp-xxs;
+            text-decoration: underline 2px;
+        }
+
         &__btn {
             margin-bottom: 3px;
         }

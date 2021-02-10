@@ -1,9 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import {useForm} from 'react-hook-form';
-import bread_kinds from '../../../info/Bread_kinds';
+import bread_kinds from '../../../../info/Bread_kinds';
 
-export default function StoreEditTable_menuCreate() {
+export default function MenuCreate() {
     const { register, handleSubmit, errors} = useForm();
   
     const onSubmit = (data) => {
