@@ -27,15 +27,7 @@ const EditBusinessDays: React.FC<BasicProps> = ({StoreInfo}) => {
                                     <span>営業している曜日を全てチェックしてください。</span>
                                     <InputSchedule/>
                                 </div>
-                            </div>
-                            <div className="m-storeForm__item">
-                                <label>営業日・営業時間備考</label>
-                                <div className="m-storeForm__item__input">    
-                                    <span>【記載例】<br></br>定休日：第3水曜日<br></br>営業時間：月～水 9時～19時 / 木～土 8時～13時</span>
-                                    <textarea name="business_memo" ref={register}/>
-                                </div>
-                            </div>
-                            
+                            </div>                            
                             <div className="m-storeEdit-businessDay__container__form__btn m-storeForm__btn">
                                 <BtnSave
                                     InputType={"submit"}
