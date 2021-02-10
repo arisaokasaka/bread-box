@@ -47,7 +47,7 @@ const EditBasicInfo: React.FC<BasicProps> = ({StoreInfo}) => {
                             <div className="m-storeEdit-basic__container__form__item m-storeForm__item">
                                 <label htmlFor="store_tel" className="a-label-required__red">電話番号(半角)</label>
                                 <div className="m-storeEdit-basic__container__form__item__input m-storeForm__item__input">
-                                    <input type="text" name="tel" id="store_tel" ref={register({required: true, pattern: /[0-9]{10,11}/})}/>
+                                    <input type="tel" name="tel" id="store_tel" ref={register({required: true, pattern: /[0-9]{10,11}/})}/>
                                     {errors.tel && errors.tel.type === "required" && (<p>電話番号は必須です。</p>)}
                                     {errors.tel && errors.tel.type === "pattern" && (<p>10~11文字の半角数字で指定してください。</p>)}
                                 </div>
