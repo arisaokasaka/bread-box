@@ -20,11 +20,11 @@
 @import "./atoms/labelRequired";
 
 //molecules
-@import "./molecules/reactModal";
+@import "./molecules/modal/reactModal";
+@import "./molecules/modal/modal-sns";
+@import "./molecules/modal/modal_review";
 @import "./molecules/storeRanking";
 @import "./molecules/inputSchedule";
-@import "./molecules/modal-sns";
-@import "./molecules/modal_review";
 @import "./molecules/search_sidebar";
 @import "./molecules/search_bar";
 @import "./molecules/store/store_menu";
@@ -34,9 +34,9 @@
 @import "./molecules/store/storeList";
 @import "./molecules/store/store_basicInfo";
 @import "./molecules/store/store_subInfo";
-@import "./molecules/userTable_favorite";
-@import "./molecules/userTable";
-@import "./molecules/userProf";
+@import "./molecules/user/userTable_favorite";
+@import "./molecules/user/userTable";
+@import "./molecules/user/userProf";
 @import "./molecules/reviewList";
 @import "./molecules/storeEDit/storeEditTable_menuCreate";
 @import "./molecules/storeEDit/storeEditTable_menuList";
