@@ -46,22 +46,22 @@ const Modal_editSpirit: React.FC<kindProps> = ({kind}) =>{
                 </div>
                 <form className="m-modalEditSpirit__form" onSubmit={handleSubmit(onSubmit)}>
                     <div className="m-modalEditSpirit__form__item">
-                        <label htmlFor="img_spirit" className="a-label-required">画像</label>
-                        <input type="file" name="img" id="img" ref={register({required: true})}/>
+                        <label htmlFor="img_spirit" className="a-label-required">画像を選択</label>
+                        <input type="file"  accept="image/*" name="img" id="img" ref={register({required: true})}/>
                         {errors.img && <p>画像は必須です。</p>}
                     </div>
 
                     {kind==="spirit" && 
                     <div className="m-modalEditSpirit__form__item">
                         <label htmlFor="spirit" className="a-label-required">内容</label>
-                        <textarea name="spirit" id="spirit" rows={4} ref={register({required: true})}/>
+                        <textarea name="spirit" id="spirit" placeholder="お店やパンに込められている思いを教えてください。" rows={6} ref={register({required: true})}/>
                         {errors.spirit && <p>内容は必須です。</p>}
                     </div>}
 
                     {kind==="advantage" && 
                     <div className="m-modalEditSpirit__form__item">
                         <label htmlFor="advantage" className="a-label-required">内容</label>
-                        <textarea name="advantage" id="advantage" rows={4} ref={register({required: true})}/>
+                        <textarea name="advantage" id="advantage" placeholder="お店のこだわりポイントを記載してください。" rows={6} ref={register({required: true})}/>
                         {errors.advantage && <p>内容は必須です。</p>}
                     </div>}
 
