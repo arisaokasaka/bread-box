@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import MenuCreate from './storeEditMenu/MenuCreate';
-import MenuEdit from './storeEditMenu/MenuEdit';
+import MenuList from './storeEditMenu/MenuList';
 import EditBusinessDays from './storeEditBasic/EditBusinessDays';
 import EditBusinessMemo from './storeEditBasic/EditBusinessMemo';
 import EditHomepage from './storeEditBasic/EditHomepage';
@@ -56,7 +56,7 @@ const StoreEditTable: React.FC<EditProps> = ({StoreInfo, MenuInfo}) => {
             case 'menuAdd':
                 return <MenuCreate />
             case 'menuEdit':
-                return <MenuEdit MenuInfo = {MenuInfo}/>
+                return <MenuList MenuInfo = {MenuInfo}/>
             case 'spiritSpirit':
                 return <StoreEditTable_spirit Spirit = {MenuInfo}/>
             case 'spiritAdvantage':

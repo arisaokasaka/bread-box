@@ -45,7 +45,9 @@
             }
 
             & > input,
+            & > select,
             & > textarea {
+                outline: none;
                 font-size: 0.9rem;
                 border-radius: $sm-radius;
                 height: 1.8rem;
@@ -55,6 +57,21 @@
 
                 &:focus {
                     @include focusShadow;
+                }
+            }
+
+            & > input {
+                &[type="file"] {
+                    border: none;
+                    font-size: 0.8rem;
+
+                    &:focus {
+                        box-shadow: none;
+                    }
+                }
+
+                &[type="number"] {
+                    width: 50%;
                 }
             }
 
