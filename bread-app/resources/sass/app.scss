@@ -38,11 +38,11 @@
 @import "./molecules/userTable";
 @import "./molecules/userProf";
 @import "./molecules/reviewList";
-@import "./molecules/storeEditTable_menuCreate";
-@import "./molecules/storeEditTable_menuList";
-@import "./molecules/storeEditTable_spirit";
-@import "./molecules/storeEditTable_basic";
-@import "./molecules/storeEditTable";
+@import "./molecules/storeEDit/storeEditTable_menuCreate";
+@import "./molecules/storeEDit/storeEditTable_menuList";
+@import "./molecules/storeEDit/storeEditTable_spirit";
+@import "./molecules/storeEDit/storeEditTable_basic";
+@import "./molecules/storeEDit/storeEditTable";
 
 //layout
 @import "./layout/navbar";
