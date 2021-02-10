@@ -8,7 +8,7 @@ function StoreOnly({ children, ...rest }) {
       <Route
         {...rest}
         render={({ location }) =>
-          state.auth==="store"? (
+          state.auth === "store" ? (
             children
           ) : (
             <Redirect

@@ -1,6 +1,8 @@
 import React from 'react';
 import BtnBack from '../../atoms/buttons/BtnBack';
 import StoreEditTable from '../../molecules/storeEdit/StoreEditTable';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faStore} from '@fortawesome/free-solid-svg-icons';
 
 let testMenuInfo = [
     {
@@ -45,10 +47,14 @@ const StoreEdit:any = ({MenuInfo, StoreInfo}) => {
     return(
         <div className = "p-store-edit">
             <div className = "p-store-edit__container">
-                <div className = "p-store-edit__container__btn">
+                {/* <div className = "p-store-edit__container__btn">
                     <BtnBack
                         URL = '/store'
                     />
+                </div> */}
+                <div className = "p-store-edit__container__title">
+                    <h2><FontAwesomeIcon icon={faStore}/>店舗管理</h2>
+                    {StoreInfo.map((el) => <span>{el.name+"様"}</span>)}
                 </div>
                 <div className = "p-store-edit__container__table">
                     <StoreEditTable

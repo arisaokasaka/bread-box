@@ -1,0 +1,19 @@
+.a-label-yen {
+    position: relative;
+
+    &::after {
+        content: "円";
+        display: inline-block;
+        position: absolute;
+        height: 1rem;
+        width: 1rem;
+        font-size: 0.9rem;
+        top: 50%;
+        left: 50%;
+        transform: translate(calc(-50% + 0.8rem), calc(-50% - 0.1rem));
+
+        @include bp-600up {
+            transform: translate(calc(-50% + 0.8rem), calc(-50% + 0.3rem));
+        }
+    }
+}

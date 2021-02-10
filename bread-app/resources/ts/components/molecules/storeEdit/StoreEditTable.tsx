@@ -1,7 +1,16 @@
 import React, { useState } from 'react'
-import StoreEditTable_menu from './StoreEditTable_menu';
-import StoreEditTable_spirit from './StoreEditTable_spirit';
-import StoreEditTable_basic from './StoreEditTable_basic';
+import MenuCreate from './storeEditMenu/MenuCreate';
+import MenuList from './storeEditMenu/MenuList';
+import EditBusinessDays from './storeEditBasic/EditBusinessDays';
+import EditBusinessMemo from './storeEditBasic/EditBusinessMemo';
+import EditHomepage from './storeEditBasic/EditHomepage';
+import EditSNS from './storeEditBasic/EditSNS';
+import StoreEditTable_spirit from './storeEditSpirit/StoreEditTable_spirit';
+import StoreEditTable_advantage from './storeEditSpirit/StoreEditTable_advantage';
+import EditBasicInfo from './storeEditBasic/EditBasicInfo';
+import { StoreEditNav_menu, StoreEditNav_basic, StoreEditNav_spirit, StoreEditNav_stamp } from '../../../info/StoreEditMenus';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faChevronRight, faChevronCircleDown} from '@fortawesome/free-solid-svg-icons';
 
 type EditProps = ({
     MenuInfo: Array<any>;
@@ -9,85 +18,80 @@ type EditProps = ({
 });
 
 const StoreEditTable: React.FC<EditProps> = ({StoreInfo, MenuInfo}) => {  
-    const [Table, setTable] = useState('menu');
-    
-    const TabMenu = {
-        class: "m-store-contents__tab--menu",
-        table: "menu",
-        value: "メニュー",
-        function: handleMenu,
-    }
-    
-    const TabStamp = {
-        class: "m-store-contents__tab--stamp",
-        table: "stamp",
-        value: "スタンプカード",
-        function: handleStamp,
-    }
-    
-    const TabSpirit = {
-        class: "m-store-contents__tab--spirit",
-        table: "spirit",
-        value: "こだわり・思い",
-        function: handleSpirit,
-    }
-
-    const TabBasic = {
-        class: "m-store-contents__tab--basic",
-        table: "basic",
-        value: "基本情報",
-        function: handleBasic,
-    }
-
-    function handleMenu(){
-        setTable('menu');
-    }
-
-    function handleStamp(){
-        setTable('stamp');
-    }
-
-    function handleSpirit(){
-        setTable('spirit')
-    }
-
-    function handleBasic(){
-        setTable('basic')
-    }
+    const [Table, setTable] = useState('basicInfo');
 
     const Tab = (tab) => {
-        let className = tab.class;
-        if(Table === tab.table){
-            className += ' selected';
+        let TabClassName = tab.category + "_" + tab.tableName;
+        console.log(tab);
+        if(Table === tab.tableName){
+            TabClassName += ' selected';
         }
-        return <input type="text" value = {tab.value} className={className} onClick = {tab.function}/>
+        return (
+            <span 
+            className={TabClassName} 
+            key = {TabClassName}
+            onClick = {() => setTable(tab.tableName)}
+            >
+                <input
+                type="text"
+                value = {tab.label}
+                />
+                <a><FontAwesomeIcon icon={faChevronRight} /></a>
+            </span>
+        );
     }
 
     const CurrentTable = (table) => {
         switch(table){
-        case 'menu':
-            return <StoreEditTable_menu MenuInfo = {MenuInfo}/>
-            break;
-        case 'spirit':
-            return <StoreEditTable_spirit Spirit = {MenuInfo}/>
-            break;
-        case 'stamp':
-            return <h2>stamp</h2>
-            break;
-        case 'basic':
-        return <StoreEditTable_basic StoreInfo = {StoreInfo}/>
-        break;
+            case 'basicInfo':
+                return <EditBasicInfo StoreInfo = {StoreInfo}/>
+            case 'basicDays':
+                return <EditBusinessDays StoreInfo = {StoreInfo}/>
+            case 'basicMemo':
+                return <EditBusinessMemo StoreInfo = {StoreInfo}/>
+            case 'basicHomepage':
+                return <EditHomepage StoreInfo = {StoreInfo}/>
+            case 'basicSNS':
+                return <EditSNS StoreInfo = {StoreInfo}/>
+            case 'menuAdd':
+                return <MenuCreate />
+            case 'menuEdit':
+                return <MenuList MenuInfo = {MenuInfo}/>
+            case 'spiritSpirit':
+                return <StoreEditTable_spirit Spirit = {MenuInfo}/>
+            case 'spiritAdvantage':
+                return <StoreEditTable_advantage Spirit = {MenuInfo}/>
+            case 'stampAdd':
+                return <h2>stamp</h2>
         }
     }
 
     return (
         <div className = "m-store-edit-table">
-            <div className = "m-store-edit-table__tab">
-                {Tab(TabMenu)}
-                {Tab(TabSpirit)}
-                {Tab(TabStamp)}
-                {Tab(TabBasic)}
-            </div>
+            <nav className = "m-store-edit-table__nav">
+                <ul>
+                    <li className = "m-store-edit-table__nav__basic">
+                        <label><FontAwesomeIcon icon={faChevronCircleDown}/>店舗情報の編集</label>
+                        {StoreEditNav_basic.map((arr)=>Tab(arr))}
+                    </li>
+                    <li className = "m-store-edit-table__nav__menu">
+                        <label><FontAwesomeIcon icon={faChevronCircleDown}/>メニューの追加・編集</label>
+                        {StoreEditNav_menu.map((arr)=>Tab(arr))}
+                    </li>
+                    <li className = "m-store-edit-table__nav__spirit">
+                        <label><FontAwesomeIcon icon={faChevronCircleDown}/>こだわり・思いの編集</label>
+                        {StoreEditNav_spirit.map((arr)=>Tab(arr))}
+                    </li>
+                    <li className = "m-store-edit-table__nav__stamp">
+                        <label><FontAwesomeIcon icon={faChevronCircleDown}/>スタンプカードの編集</label>
+                        {StoreEditNav_stamp.map((arr)=>Tab(arr))}
+                    </li>
+                    <li className = "m-store-edit-table__nav__others">
+                        <p>パスワードの再設定</p>
+                        <p>ログアウトする</p>
+                    </li>
+                </ul>
+            </nav>
             <div className = "m-store-edit-table__container">
                 <div className = "m-store-edit-table__container__content">
                     {CurrentTable(Table)}

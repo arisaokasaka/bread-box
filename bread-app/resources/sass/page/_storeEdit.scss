@@ -4,6 +4,24 @@
     &__container {
         @include content-width;
 
+        &__title {
+            display: flex;
+            align-items: center;
+            margin-bottom: $mp-xs;
+
+            & > h2 {
+                color: $darkestBrown;
+
+                & > svg {
+                    margin-right: 5px;
+                }
+            }
+
+            & > span {
+                margin-left: 1rem;
+            }
+        }
+
         &__btn {
             margin-bottom: 3px;
         }

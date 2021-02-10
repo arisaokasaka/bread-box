@@ -5,7 +5,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: $brown;
+    background: linear-gradient(
+        0deg,
+        rgba(164, 102, 39, 1) 8%,
+        rgba(177, 111, 41, 1) 30%,
+        rgba(196, 125, 44, 1) 100%
+    );
     height: $header-height;
     z-index: 900;
 

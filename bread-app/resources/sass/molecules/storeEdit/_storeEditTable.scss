@@ -1,0 +1,78 @@
+.m-store-edit-table {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    column-gap: 1rem;
+
+    h3 {
+        color: $font-color-brown;
+        margin-bottom: $mp-xxs;
+    }
+
+    &__nav {
+        & > ul {
+            margin: 0;
+
+            & > li {
+                &:last-child {
+                    margin-top: $mp-xs;
+                }
+
+                & > label {
+                    @include bg_GradationBrown;
+                    display: block;
+                    color: $white;
+                    font-weight: 500;
+                    font-size: 0.8rem;
+                    width: 100%;
+                    padding: 2px 5px;
+
+                    & > svg {
+                        margin-right: 3px;
+                        font-size: 0.7rem;
+                    }
+                }
+
+                & span {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 100%;
+                    border: 0.1px solid $lightGray;
+                    border-top: none;
+                    border-radius: none;
+                    background-color: $white;
+
+                    & input {
+                        padding: 3px 0 2px 3px;
+                        font-size: 0.8rem;
+                        color: $black;
+                        background-color: $white;
+                        cursor: pointer;
+                    }
+
+                    & a {
+                        width: 20px;
+                        font-size: 0.6rem;
+                        color: $font-color-brown;
+                    }
+
+                    &.selected {
+                        background-color: $lightBrown;
+
+                        & > input {
+                            background-color: $lightBrown;
+                            color: $font-color-brown;
+                        }
+                    }
+                }
+
+                & > p {
+                    margin-top: 3px;
+                    font-size: 0.7rem;
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

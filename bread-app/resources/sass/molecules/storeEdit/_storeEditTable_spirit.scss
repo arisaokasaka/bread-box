@@ -1,0 +1,59 @@
+.m-storeEdit-spirit {
+    &__title {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__container {
+        &__item {
+            display: grid;
+            box-sizing: border-box;
+
+            @include bp-600up {
+                grid-template-columns: 10rem 1fr;
+                border-bottom: 0.3px solid $lightGray;
+
+                &:nth-child(1) {
+                    border-top: 0.3px solid $lightGray;
+                }
+            }
+
+            & > label {
+                display: block;
+                width: auto;
+                position: relative;
+                font-size: 0.8rem;
+                font-weight: 550;
+                line-height: 1.5rem;
+                color: $font-color-brown;
+
+                @include bp-600up {
+                    font-weight: 500;
+                    line-height: 4rem;
+                    padding: 0 1rem;
+                    background-color: $lighterBrown;
+                }
+            }
+
+            & > img,
+            & > p {
+                padding: 0 0 0.8rem 0;
+
+                @include bp-600up {
+                    padding: 0.5rem 1.5rem;
+                }
+            }
+
+            & > img {
+                width: 250px;
+                height: 150px;
+                object-fit: cover;
+            }
+
+            & > p {
+                color: $font-color-brown;
+                font-size: 0.8rem;
+            }
+        }
+    }
+}

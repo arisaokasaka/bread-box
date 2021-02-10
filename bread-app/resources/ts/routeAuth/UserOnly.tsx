@@ -8,7 +8,7 @@ function UserOnly({ children, ...rest }) {
       <Route
         {...rest}
         render={({ location }) =>
-          state.auth=='user'? (
+          state.auth==="user" ? (
             children
           ) : (
             <Redirect
