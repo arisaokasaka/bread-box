@@ -103,3 +103,11 @@
     border-radius: $sm-radius;
     padding: 2px 0.5rem;
 }
+
+@mixin bg_GradationBrown() {
+    background: linear-gradient(
+        0deg,
+        rgba(97, 57, 26, 1) 0%,
+        rgba(124, 73, 32, 1) 100%
+    );
+}
