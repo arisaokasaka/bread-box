@@ -287,3 +287,19 @@
         background-color: $lightBrown;
     }
 }
+
+//保存ボタン
+.a-btnSave {
+    @include bg_GradationBrown;
+    position: relative;
+    color: $white;
+    font-weight: 500;
+    border-radius: $sm-radius;
+    width: 6rem;
+    height: 2rem;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.88;
+    }
+}
