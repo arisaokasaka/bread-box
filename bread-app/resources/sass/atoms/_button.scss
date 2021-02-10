@@ -303,3 +303,52 @@
         opacity: 0.88;
     }
 }
+
+//メニュー編集ボタン
+.a-btn-editMenu {
+    @include bg_GradationBrown;
+    position: relative;
+    color: $white;
+    font-weight: 500;
+    font-size: 0.8rem;
+    border: none;
+    border-radius: $sm-radius;
+    width: 5rem;
+    height: 1.6rem;
+    cursor: pointer;
+
+    & > svg {
+        margin-right: 5px;
+        font-size: 0.7rem;
+    }
+
+    &:hover {
+        opacity: 0.88;
+    }
+}
+
+.a-btn-deleteMenu {
+    background: linear-gradient(
+        180deg,
+        rgb(238, 238, 238) 0%,
+        rgb(196, 196, 196) 100%
+    );
+    position: relative;
+    color: $black;
+    font-weight: 500;
+    font-size: 0.8rem;
+    border: none;
+    border-radius: $sm-radius;
+    width: 5rem;
+    height: 1.6rem;
+    cursor: pointer;
+
+    & > svg {
+        margin-right: 5px;
+        font-size: 0.7rem;
+    }
+
+    &:hover {
+        opacity: 0.8;
+    }
+}

@@ -1,11 +1,9 @@
-.m-storeEdit-menu-list {
-    margin-top: $mp-xs;
-
+.m-storeEdit-menuList {
     &__item {
         background-color: $white;
-        border-radius: $sm-radius;
         margin-bottom: $mp-xxs;
         padding: $mp-xxs $mp-xs;
+        box-shadow: 1px 1.5px 4px 0px #c47d2c82;
 
         @include bp-600up {
             padding: $mp-xxs $mp-sm;
@@ -20,8 +18,12 @@
             display: grid;
 
             @include bp-600up {
-                grid-template-columns: 100px 1fr;
+                grid-template-columns: 150px 1fr;
                 column-gap: $mp-xxs;
+            }
+
+            & > img {
+                object-fit: cover;
             }
 
             &__text {
