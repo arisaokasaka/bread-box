@@ -1,0 +1,77 @@
+.m-modalEditSpirit {
+    &__btn--edit {
+        @include bg_GradationBrown;
+        color: $white;
+        border: none;
+        border-radius: $sm-radius;
+        font-weight: 500;
+        width: 7.5rem;
+        height: 2rem;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.9;
+        }
+
+        & > svg {
+            margin-right: 5px;
+        }
+    }
+
+    &__btn--close {
+        display: flex;
+        justify-content: flex-end;
+
+        & > button {
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+        }
+    }
+
+    &__form {
+        display: grid;
+        row-gap: 1rem;
+
+        &__item {
+            display: grid;
+
+            & > label {
+                font-weight: 550;
+                color: $font-color-brown;
+            }
+
+            & > input[type="file"] {
+                font-size: 0.7rem;
+            }
+
+            & > textarea {
+                border: 0.3px solid $textGray;
+                border-radius: $sm-radius;
+                padding: 2px 3px;
+
+                &:focus {
+                    @include focusShadow;
+                }
+
+                @include bp-600up {
+                    width: 22rem;
+                }
+            }
+
+            & > p {
+                font-size: 0.7rem;
+                color: $color-error;
+            }
+        }
+
+        &__btn {
+            display: flex;
+            justify-content: center;
+
+            @include bp-600up {
+                justify-content: flex-end;
+            }
+        }
+    }
+}

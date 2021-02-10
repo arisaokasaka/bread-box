@@ -111,3 +111,7 @@
         rgba(124, 73, 32, 1) 100%
     );
 }
+
+@mixin focusShadow {
+    box-shadow: 0 0 6px 0 $brown;
+}
