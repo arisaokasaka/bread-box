@@ -1,5 +1,6 @@
 .p-user {
-    margin: $margin-top_content 0;
+    @include marginContent;
+
     &__container {
         @include content-width;
         display: flex;

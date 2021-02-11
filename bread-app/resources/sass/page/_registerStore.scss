@@ -1,5 +1,5 @@
 .p-register-store {
-    margin: $margin-top_content 0;
+    @include marginContent;
 
     &__container {
         position: relative;

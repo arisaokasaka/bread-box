@@ -115,3 +115,9 @@
 @mixin focusShadow {
     box-shadow: 0 0 6px 0 $brown;
 }
+
+@mixin marginContent {
+    margin: auto;
+    margin-top: $margin-top_content;
+    margin-bottom: $margin-bottom_content;
+}
