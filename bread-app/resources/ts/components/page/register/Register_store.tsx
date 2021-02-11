@@ -2,42 +2,30 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import {Link, useHistory} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
-import InputSchedule from '../../molecules/InputSchedule';
-import week from '../../../info/Week';
-
-function emailErrorMessage(emailError){
-    if(emailError){
-        return(<p>既に登録されているメールアドレスです。</p>);
-    }else{
-        return null;
-    }
-};
-
-function PasswordErrorMessage(original, check){
-    if(original===check){
-        return null;
-    }else{
-        return (<p>パスワードが一致していません。</p>);
-    }
-};
-
 
 export default function Register_store() {
     const { register, handleSubmit, errors, getValues } = useForm();
     const history = new useHistory();
     const [emailError, SetEmailError] = useState(false);
-    let business_day = {};
+    
+    const emailErrorMessage = (emailError) => {
+        if(emailError){
+            return(<p>既に登録されているメールアドレスです。</p>);
+        }else{
+            return null;
+        }
+    };
+    
+    const PasswordErrorMessage = (original, check) => {
+        if(original===check){
+            return null;
+        }else{
+            return (<p>パスワードが一致していません。</p>);
+        }
+    };
 
     const onSubmit = (data) => {
-        week.week.map((day)=>{
-            let open = document.getElementsByName(day.id + '_open')[0] as HTMLInputElement;
-            let close = document.getElementsByName(day.id + '_close')[0] as HTMLInputElement;
-            if(open.value && close.value) business_day[day.id] = [open.value, close.value];
-        })
-
         SetEmailError(false);
-        console.log(data);
-        data['business_day'] = JSON.stringify(business_day);
         axios.post('/api/create_store', data)
         .then(res => {
             console.log(res);
@@ -115,23 +103,6 @@ export default function Register_store() {
                             <input type="password" name="password_check" id="store_password-check" ref={register({required: true})}/>
                             {errors.password_check && errors.password_check.type === "required" && (<p>確認用パスワードは必須です。</p>)}
                             {PasswordErrorMessage(getValues('password'),getValues('password_check'))}
-                        </div>
-                    </div>
-
-                    <div className = "p-register-store__container__form__item m-storeForm__item">
-                        <label htmlFor="business_day" className="a-label-required__red">営業日・営業時間</label>
-                        <div className = "p-register-store__container__form__item__input m-storeForm__item__input">
-                            <input type="hidden" name="business_day" ref={register} />
-                            <span>営業している曜日をチェックのうえ、営業時間を入力してください。</span>
-                            <InputSchedule/>
-                        </div>
-                    </div>
-                  
-                    <div className = "p-register-store__container__form__item m-storeForm__item">
-                        <label>営業に関する備考</label>
-                        <div className = "p-register-store__container__form__item__input m-storeForm__item__input">
-                            <span>【例1】定休日：第3水曜日<br></br>【例2】祝日、お盆、年末年始はお休みです。</span>
-                            <textarea name="business_memo" ref={register}/>
                         </div>
                     </div>
 
