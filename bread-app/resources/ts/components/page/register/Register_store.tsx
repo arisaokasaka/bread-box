@@ -31,7 +31,6 @@ export default function Register_store() {
 
     //新規登録
     const onSubmit = (data) => {
-        console.log(data);
         SetEmailError(false);
         data['type_user'] = 'store';
         axios.post('/api/create_user', data)
@@ -57,18 +56,30 @@ export default function Register_store() {
                 password
             })
             .then(res => {
+                let tmp_store_user_uuid;
+                tmp_store_user_uuid= res.data.user.uuid
                 dispatch({
                     type: 'setStore',
-                    payload: res.data.user.uuid,
+                    payload: tmp_store_user_uuid,
                 });
+                createStore(tmp_store_user_uuid);
             })
             .catch(err => {
-                console.log('[login]fail_post');
             });
         })
         .catch(err => {
-            console.log('fail_get');
         })
+    }
+
+    //storeテーブルにレコード作成
+    const createStore = (data) => {
+        let form_data = new FormData();
+        form_data.append('user_uuid', data);
+        axios.post('/api/create_store', form_data)
+        .then(res => {
+        })
+        .catch(errors => {
+        });
     }
     
     return (
