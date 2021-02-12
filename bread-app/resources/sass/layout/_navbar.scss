@@ -17,8 +17,9 @@
 
             @include bp-960up {
                 display: block;
-
-                @include content-width;
+                width: 95%;
+                max-width: 1920px;
+                margin: 0 auto;
                 position: relative;
                 display: flex;
                 justify-content: space-between;
@@ -26,7 +27,15 @@
                 height: 100%;
 
                 &__content {
+                    display: flex;
+                    align-items: center;
                     &__nav {
+                        &--loggedin {
+                            & > .a-btn-mypage {
+                                vertical-align: middle;
+                            }
+                        }
+
                         &--loggedout {
                             ul {
                                 position: absolute;
