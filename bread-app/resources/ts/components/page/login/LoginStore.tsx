@@ -18,7 +18,7 @@ export default function LoginStore() {
         axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
         axios.get("/sanctum/csrf-cookie").then(response => {
-            axios.post("/api/login_store", {
+            axios.post("/api/login", {
                 email,
                 password
             })
