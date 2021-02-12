@@ -15,8 +15,10 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::post('/login', 'Api\Auth\UserLoginController@login')->name('login');;
+Route::post('/login', 'Api\Auth\UserLoginController@login')->name('login');
 Route::get('/logout', 'Api\Auth\UserLoginController@logout')->name('logout');
+Route::post('/login_store', 'Api\Auth\StoreLoginController@login')->name('login_store');;
+Route::get('/logout_store', 'Api\Auth\StoreLoginController@logout')->name('logout_store');;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     Log::info('auth:sanctum');
