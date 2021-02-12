@@ -76,6 +76,35 @@
     }
 }
 
+//店舗編集ボタン
+.a-btn-storeEdit {
+    @include btn-rounded($color: $darkGray, $background-color: $lightestBrown);
+    margin-right: 0.5rem;
+    cursor: pointer;
+
+    &:hover {
+        color: $white;
+        background-color: $darkGray;
+    }
+
+    & > span {
+        font-weight: bolder;
+
+        &:nth-child(1) {
+            display: inline-block;
+        }
+
+        &:nth-child(2) {
+            display: none;
+
+            @include bp-960up {
+                display: inline;
+                margin-left: 2px;
+            }
+        }
+    }
+}
+
 //条件変更ボタン
 .a-btn-modificate {
     display: flex;
