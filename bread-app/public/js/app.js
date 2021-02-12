@@ -19031,55 +19031,94 @@ var __importStar = this && this.__importStar || function (mod) {
   return result;
 };
 
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
 
+var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
+
 function LoginStore() {
-  var _a = react_hook_form_1.useForm(),
-      register = _a.register,
-      handleSubmit = _a.handleSubmit,
-      errors = _a.errors,
-      getValues = _a.getValues;
+  var _a;
 
-  var _b = react_1.useState(false),
-      emailError = _b[0],
-      SetEmailError = _b[1];
+  var _b = react_hook_form_1.useForm(),
+      register = _b.register,
+      handleSubmit = _b.handleSubmit,
+      errors = _b.errors;
 
-  var onSubmit = function onSubmit(data) {//     SetEmailError(false);
-    //     console.log(data);
-    //     axios.post('/api/create_store', data)
-    //     .then(res => {
-    //         console.log(res);
-    //     })
-    //     .catch(errors => {
-    //         console.log(errors.response.data.errors);
-    //         console.log(errors.response.status);
-    //         if(errors.response.status === 422){
-    //             SetEmailError(true);
-    //         }
-    //     });
+  var dispatch = react_1.useContext(UserAuthContext_1.UserAuthContext).dispatch;
+
+  var _c = react_1.useState(""),
+      email = _c[0],
+      setEmail = _c[1];
+
+  var _d = react_1.useState(""),
+      password = _d[0],
+      setPassword = _d[1];
+
+  var history = new react_router_dom_1.useHistory(); // ログイン
+
+  var login = function login() {
+    var _a;
+
+    axios_1["default"].defaults.withCredentials = true;
+    axios_1["default"].defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    axios_1["default"].defaults.headers.common['X-CSRF-TOKEN'] = (_a = document.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('content');
+    axios_1["default"].get("/sanctum/csrf-cookie").then(function (response) {
+      axios_1["default"].post("/api/login_store", {
+        email: email,
+        password: password
+      }).then(function (res) {
+        console.log(res);
+        dispatch({
+          type: 'setStore',
+          payload: res.data.user.uuid
+        });
+        history.push("/store_edit");
+      })["catch"](function (err) {
+        console.log(err);
+        console.log('[login]fail_post');
+      });
+    })["catch"](function (err) {
+      console.log(err);
+      console.log('fail_get');
+    });
   };
 
+  var csrf = (_a = document.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('content');
   return react_1["default"].createElement("div", {
     className: "p-login-store"
   }, react_1["default"].createElement("div", {
     className: "p-login-store__container"
   }, react_1["default"].createElement("form", {
     className: "p-login-store__container__form",
-    onSubmit: handleSubmit(onSubmit)
-  }, react_1["default"].createElement("h2", null, "\u5E97\u8217\u30ED\u30B0\u30A4\u30F3"), react_1["default"].createElement("label", {
+    onSubmit: handleSubmit(login)
+  }, react_1["default"].createElement("h2", null, "\u5E97\u8217\u30ED\u30B0\u30A4\u30F3"), react_1["default"].createElement("input", {
+    type: 'hidden',
+    name: '_token',
+    value: csrf
+  }), react_1["default"].createElement("label", {
     htmlFor: "store_email"
   }, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9"), react_1["default"].createElement("input", {
     type: "email",
     name: "email",
     id: "store_email",
+    onChange: function onChange(e) {
+      return setEmail(e.target.value);
+    },
     ref: register({
       required: true
     })
@@ -19089,6 +19128,9 @@ function LoginStore() {
     type: "password",
     name: "password",
     id: "store_password",
+    onChange: function onChange(e) {
+      return setPassword(e.target.value);
+    },
     ref: register({
       required: true,
       pattern: /[a-zA-Z0-9]{8,16}/
