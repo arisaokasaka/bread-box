@@ -49,30 +49,6 @@ declare global {
   }
 }
 
-// window.axios = axios;
-// window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-// window.axios.defaults.withCredentials = true;
-
-// let token = document.head.querySelector('meta[name="csrf-token"]');
-
-// if (token) {
-//   console.log(token);
-//   window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-// } else {
-//   console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
-// }
-
-// let test=axios.create({
-//   baseURL: 'http://localhost:8000',
-//   withCredentials: true
-// })
-// console.log(axios.defaults.headers)
-// test.get("/api/user", {withCredentials: true}).then(response => {
-//     console.log(response);
-// }).catch(err=>{
-//   console.log('err')
-//   console.log(err)})
-
 const App: React.FC = () => {
   const [state, dispatch] = useReducer(UserAuthReducer, initialState);
     return (
