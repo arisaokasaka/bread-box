@@ -15104,7 +15104,6 @@ var react_dom_1 = __importDefault(__webpack_require__(/*! react-dom */ "./node_m
 
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js"); //ContextProvider
-// import UserAuthContextProvider from './UserAuthContext';
 
 
 var UserAuthReducer_1 = __webpack_require__(/*! ./reducers/UserAuthReducer */ "./resources/ts/reducers/UserAuthReducer.ts");
@@ -15144,7 +15143,10 @@ var Top_1 = __importDefault(__webpack_require__(/*! ./components/page/top/Top */
 
 var UserPage_1 = __importDefault(__webpack_require__(/*! ./components/page/user/UserPage */ "./resources/ts/components/page/user/UserPage.tsx"));
 
-var UserEdit_1 = __importDefault(__webpack_require__(/*! ./components/page/user/UserEdit */ "./resources/ts/components/page/user/UserEdit.tsx"));
+var UserEdit_1 = __importDefault(__webpack_require__(/*! ./components/page/user/UserEdit */ "./resources/ts/components/page/user/UserEdit.tsx")); //RouteAuth
+
+
+var StoreOnly_1 = __importDefault(__webpack_require__(/*! ./routeAuth/StoreOnly */ "./resources/ts/routeAuth/StoreOnly.tsx"));
 
 var UserOnly_1 = __importDefault(__webpack_require__(/*! ./routeAuth/UserOnly */ "./resources/ts/routeAuth/UserOnly.tsx")); // window.axios = axios;
 // window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -15218,10 +15220,9 @@ var App = function App() {
   }), react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/store",
     component: StorePage_1["default"]
-  }), react_1["default"].createElement(react_router_dom_1.Route, {
-    path: "/store_edit",
-    component: StoreEdit_1["default"]
-  }), react_1["default"].createElement(UserOnly_1["default"], {
+  }), react_1["default"].createElement(StoreOnly_1["default"], {
+    path: "/store_edit"
+  }, react_1["default"].createElement(StoreEdit_1["default"], null)), react_1["default"].createElement(UserOnly_1["default"], {
     path: "/user"
   }, react_1["default"].createElement(UserPage_1["default"], null)), react_1["default"].createElement(UserOnly_1["default"], {
     path: "/user_edit"
@@ -16895,56 +16896,6 @@ exports.default = NavBar;
 "use strict";
 
 
-var __assign = this && this.__assign || function () {
-  __assign = Object.assign || function (t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-      s = arguments[i];
-
-      for (var p in s) {
-        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-      }
-    }
-
-    return t;
-  };
-
-  return __assign.apply(this, arguments);
-};
-
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  Object.defineProperty(o, k2, {
-    enumerable: true,
-    get: function get() {
-      return m[k];
-    }
-  });
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
-
-  __setModuleDefault(result, mod);
-
-  return result;
-};
-
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -16955,32 +16906,13 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var Week_1 = __importDefault(__webpack_require__(/*! ../../info/Week */ "./resources/ts/info/Week.ts"));
 
 var InputSchedule = function InputSchedule(_a) {
   var Week = _a.Week;
   Week = Week_1["default"].week;
-
-  var _b = react_1.useState({
-    monday_open: null,
-    monday_close: null,
-    tuesday_open: null,
-    tuesday_close: null,
-    wednesday_open: null,
-    wednesday_close: null,
-    thursday_open: null,
-    thursday_close: null,
-    friday_open: null,
-    friday_close: null,
-    saturday_open: null,
-    saturday_close: null,
-    sunday_open: null,
-    sunday_close: null
-  }),
-      businessHours = _b[0],
-      SetBusinessHours = _b[1];
 
   var handleClick = function handleClick(targetClass) {
     var classInfo = document.getElementsByClassName(targetClass);
@@ -17014,19 +16946,11 @@ var InputSchedule = function InputSchedule(_a) {
     }, react_1["default"].createElement("input", {
       type: "time",
       name: day.id + "_open",
-      onChange: function onChange(el) {
-        var _a;
-
-        return SetBusinessHours(__assign(__assign({}, businessHours), (_a = {}, _a[el.target.name] = el.target.value, _a)));
-      }
+      className: day.id + "_open"
     }), react_1["default"].createElement("span", null, "\xA0\uFF5E\xA0"), react_1["default"].createElement("input", {
       type: "time",
       name: day.id + "_close",
-      onChange: function onChange(el) {
-        var _a;
-
-        return SetBusinessHours(__assign(__assign({}, businessHours), (_a = {}, _a[el.target.name] = el.target.value, _a)));
-      }
+      className: day.id + "_close"
     })));
   }));
 };
@@ -17523,6 +17447,40 @@ exports.default = EditBasicInfo;
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -17533,13 +17491,15 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
 
 var InputSchedule_1 = __importDefault(__webpack_require__(/*! ../../InputSchedule */ "./resources/ts/components/molecules/InputSchedule.tsx"));
 
 var BtnSave_1 = __importDefault(__webpack_require__(/*! ../../../atoms/buttons/BtnSave */ "./resources/ts/components/atoms/buttons/BtnSave.tsx"));
+
+var Week_1 = __importDefault(__webpack_require__(/*! ../../../../info/Week */ "./resources/ts/info/Week.ts"));
 
 var EditBusinessDays = function EditBusinessDays(_a) {
   var StoreInfo = _a.StoreInfo;
@@ -17549,8 +17509,53 @@ var EditBusinessDays = function EditBusinessDays(_a) {
       handleSubmit = _b.handleSubmit,
       errors = _b.errors;
 
+  var _c = react_1.useState(false),
+      alertOpen = _c[0],
+      setAlertOpenHour = _c[1];
+
+  var _d = react_1.useState(false),
+      alertClose = _d[0],
+      setAlertCloseHour = _d[1];
+
+  var business_day = {};
+
+  var alertMessage = function alertMessage() {
+    if (alertOpen === true && alertClose === false) {
+      return react_1["default"].createElement("p", null, "\u958B\u5E97\u6642\u9593\u30FB\u9589\u5E97\u6642\u9593\u3069\u3061\u3089\u3082\u8A18\u5165\u3057\u3066\u304F\u3060\u3055\u3044\u3002");
+    } else if (alertOpen === true && alertClose === false) {
+      return react_1["default"].createElement("p", null, "\u958B\u5E97\u6642\u9593\u304C\u672A\u8A18\u5165\u306E\u3082\u306E\u304C\u3042\u308A\u307E\u3059\u3002");
+    } else if (alertOpen === false && alertClose === true) {
+      return react_1["default"].createElement("p", null, "\u9589\u5E97\u6642\u9593\u304C\u672A\u8A18\u5165\u306E\u3082\u306E\u304C\u3042\u308A\u307E\u3059\u3002");
+    }
+  };
+
   var onSubmit = function onSubmit(data) {
-    console.log(data);
+    var business_day_check = false;
+    setAlertOpenHour(false);
+    setAlertCloseHour(false);
+    console.log('submit');
+    Week_1["default"].week.map(function (day) {
+      var open = document.getElementsByName(day.id + '_open')[0];
+      var close = document.getElementsByName(day.id + '_close')[0];
+
+      if (open.value && close.value) {
+        business_day[day.id] = [open.value, close.value];
+        business_day_check = true;
+      } else if (open.value && close.value === '') {
+        console.log('開店');
+        setAlertCloseHour(true); // alertMessage();
+      } else if (close.value && open.value === '') {
+        console.log('heiten');
+        setAlertOpenHour(true); // alertMessage();
+      }
+    });
+    data['business_day'] = JSON.stringify(business_day);
+
+    if (business_day_check) {
+      console.log('success');
+    } else {
+      console.log('false');
+    }
   };
 
   return react_1["default"].createElement("div", {
@@ -17565,14 +17570,19 @@ var EditBusinessDays = function EditBusinessDays(_a) {
     }, react_1["default"].createElement("div", {
       className: "m-storeForm__item"
     }, react_1["default"].createElement("label", {
-      htmlFor: "business_day"
+      htmlFor: "business_day",
+      className: "a-label-required__red"
     }, "\u55B6\u696D\u65E5"), react_1["default"].createElement("div", {
       className: "m-storeForm__item__input"
-    }, react_1["default"].createElement("span", null, "\u55B6\u696D\u3057\u3066\u3044\u308B\u66DC\u65E5\u3092\u5168\u3066\u30C1\u30A7\u30C3\u30AF\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement(InputSchedule_1["default"], null))), react_1["default"].createElement("div", {
+    }, react_1["default"].createElement("input", {
+      type: "hidden",
+      name: "business_day",
+      ref: register
+    }), react_1["default"].createElement("span", null, "\u55B6\u696D\u3057\u3066\u3044\u308B\u66DC\u65E5\u3092\u30C1\u30A7\u30C3\u30AF\u306E\u3046\u3048\u3001\u55B6\u696D\u6642\u9593\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement(InputSchedule_1["default"], null))), react_1["default"].createElement("div", {
       className: "m-storeEdit-businessDay__container__form__btn m-storeForm__btn"
     }, react_1["default"].createElement(BtnSave_1["default"], {
       InputType: "submit",
-      OnClickFunction: null
+      OnClickFunction: alertMessage
     }))));
   }));
 };
@@ -19539,39 +19549,18 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
-
-var InputSchedule_1 = __importDefault(__webpack_require__(/*! ../../molecules/InputSchedule */ "./resources/ts/components/molecules/InputSchedule.tsx"));
-
-function emailErrorMessage(emailError) {
-  if (emailError) {
-    return react_1["default"].createElement("p", null, "\u65E2\u306B\u767B\u9332\u3055\u308C\u3066\u3044\u308B\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u3067\u3059\u3002");
-  } else {
-    return null;
-  }
-}
-
-;
-
-function PasswordErrorMessage(original, check) {
-  if (original === check) {
-    return null;
-  } else {
-    return react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u304C\u4E00\u81F4\u3057\u3066\u3044\u307E\u305B\u3093\u3002");
-  }
-}
-
-;
 
 function Register_store() {
   var _a = react_hook_form_1.useForm(),
       register = _a.register,
       handleSubmit = _a.handleSubmit,
       errors = _a.errors,
-      getValues = _a.getValues,
-      setValue = _a.setValue;
+      getValues = _a.getValues;
 
   var history = new react_router_dom_1.useHistory();
 
@@ -19579,15 +19568,34 @@ function Register_store() {
       emailError = _b[0],
       SetEmailError = _b[1];
 
-  var checkBusinessDay = function checkBusinessDay(day) {
-    var checkInfo = document.getElementsByClassName(day["class"] + ' active');
-    var checkInfoArray = Array.from(checkInfo);
-    checkInfoArray.forEach;
+  var emailErrorMessage = function emailErrorMessage(emailError) {
+    if (emailError) {
+      return react_1["default"].createElement("p", null, "\u65E2\u306B\u767B\u9332\u3055\u308C\u3066\u3044\u308B\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u3067\u3059\u3002");
+    } else {
+      return null;
+    }
+  };
+
+  var PasswordErrorMessage = function PasswordErrorMessage(original, check) {
+    if (original === check) {
+      return null;
+    } else {
+      return react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u304C\u4E00\u81F4\u3057\u3066\u3044\u307E\u305B\u3093\u3002");
+    }
   };
 
   var onSubmit = function onSubmit(data) {
     SetEmailError(false);
-    console.log(data);
+    axios_1["default"].post('/api/create_store', data).then(function (res) {
+      console.log(res);
+      history.push("/search");
+    })["catch"](function (errors) {
+      console.log(errors);
+
+      if (errors.response.status === 422) {
+        SetEmailError(true);
+      }
+    });
   };
 
   return react_1["default"].createElement("div", {
@@ -19628,9 +19636,10 @@ function Register_store() {
     name: "email",
     id: "store_email",
     ref: register({
-      required: true
+      required: true,
+      pattern: /[^\s]+@[^\s]+/
     })
-  }), errors.email && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F\u5FC5\u9808\u3067\u3059\u3002"), emailErrorMessage(emailError))), react_1["default"].createElement("div", {
+  }), errors.email && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F\u5FC5\u9808\u3067\u3059\u3002"), errors.email && errors.email.type === "pattern" && react_1["default"].createElement("p", null, "@\u3092\u542B\u3081\u305F\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u3092\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), emailErrorMessage(emailError))), react_1["default"].createElement("div", {
     className: "p-register-store__container__form__item m-storeForm__item"
   }, react_1["default"].createElement("label", {
     htmlFor: "store_address",
@@ -19651,15 +19660,17 @@ function Register_store() {
     className: "a-label-required__red"
   }, "\u96FB\u8A71\u756A\u53F7"), react_1["default"].createElement("div", {
     className: "p-register-store__container__form__item__input m-storeForm__item__input"
-  }, react_1["default"].createElement("span", null, "\u534A\u89D2\u30FB\u30CF\u30A4\u30D5\u30F3\u306A\u3057\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("input", {
-    type: "text",
+  }, react_1["default"].createElement("span", null, "\u534A\u89D2\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002(\u30CF\u30A4\u30D5\u30F3\u306A\u3057)"), react_1["default"].createElement("input", {
+    type: "tel",
     name: "tel",
     id: "store_tel",
     ref: register({
       required: true,
-      pattern: /[0-9]{10,11}/
+      pattern: /[0-9]/,
+      maxLength: 11,
+      minLength: 10
     })
-  }), errors.tel && errors.tel.type === "required" && react_1["default"].createElement("p", null, "\u96FB\u8A71\u756A\u53F7\u306F\u5FC5\u9808\u3067\u3059\u3002"), errors.tel && errors.tel.type === "pattern" && react_1["default"].createElement("p", null, "10~11\u6587\u5B57\u306E\u534A\u89D2\u6570\u5B57\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
+  }), errors.tel && errors.tel.type === "required" && react_1["default"].createElement("p", null, "\u96FB\u8A71\u756A\u53F7\u306F\u5FC5\u9808\u3067\u3059\u3002"), errors.tel && errors.tel.type === "pattern" && react_1["default"].createElement("p", null, "\u534A\u89D2\u6570\u5B57\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), errors.tel && errors.tel.type === "minLength" && react_1["default"].createElement("p", null, "10\uFF5E11\u6587\u5B57\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), errors.tel && errors.tel.type === "maxLength" && react_1["default"].createElement("p", null, "10\uFF5E11\u6587\u5B57\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
     className: "p-register-store__container__form__item m-storeForm__item"
   }, react_1["default"].createElement("label", {
     htmlFor: "store_password",
@@ -19672,9 +19683,11 @@ function Register_store() {
     id: "store_password",
     ref: register({
       required: true,
-      pattern: /[a-zA-Z0-9]{8,16}/
+      pattern: /[a-zA-Z0-9!-[/:-@-`{-~]/,
+      minLength: 8,
+      maxLength: 16
     })
-  }), errors.password && errors.password.type === "required" && react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u306F\u5FC5\u9808\u3067\u3059\u3002"), errors.password && errors.password.type === "pattern" && react_1["default"].createElement("p", null, "8~16\u6587\u5B57\u306E\u534A\u89D2\u82F1\u6570\u5B57\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
+  }), errors.password && errors.password.type === "required" && react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u306F\u5FC5\u9808\u3067\u3059\u3002"), errors.password && errors.password.type === "pattern" && react_1["default"].createElement("p", null, "\u534A\u89D2\u82F1\u6570\u5B57\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), errors.password && errors.password.type === "minLength" && react_1["default"].createElement("p", null, "8\u6587\u5B57\u4EE5\u4E0A\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), errors.password && errors.password.type === "maxLength" && react_1["default"].createElement("p", null, "16\u6587\u5B57\u4EE5\u4E0B\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
     className: "p-register-store__container__form__item m-storeForm__item"
   }, react_1["default"].createElement("label", {
     htmlFor: "store_password-check",
@@ -19688,25 +19701,7 @@ function Register_store() {
     ref: register({
       required: true
     })
-  }), errors.password_check && errors.password_check.type === "required" && react_1["default"].createElement("p", null, "\u78BA\u8A8D\u7528\u30D1\u30B9\u30EF\u30FC\u30C9\u306F\u5FC5\u9808\u3067\u3059\u3002"), PasswordErrorMessage(getValues('password'), getValues('password_check')))), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__item m-storeForm__item"
-  }, react_1["default"].createElement("label", {
-    htmlFor: "business_day",
-    className: "a-label-required__red"
-  }, "\u55B6\u696D\u65E5\u30FB\u55B6\u696D\u6642\u9593"), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__item__input m-storeForm__item__input"
-  }, react_1["default"].createElement("input", {
-    type: "hidden",
-    name: "business_day",
-    ref: register
-  }), react_1["default"].createElement("span", null, "\u55B6\u696D\u3057\u3066\u3044\u308B\u66DC\u65E5\u3092\u30C1\u30A7\u30C3\u30AF\u306E\u3046\u3048\u3001\u55B6\u696D\u6642\u9593\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement(InputSchedule_1["default"], null))), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__item m-storeForm__item"
-  }, react_1["default"].createElement("label", null, "\u55B6\u696D\u306B\u95A2\u3059\u308B\u5099\u8003"), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__item__input m-storeForm__item__input"
-  }, react_1["default"].createElement("span", null, "\u3010\u4F8B1\u3011\u5B9A\u4F11\u65E5\uFF1A\u7B2C3\u6C34\u66DC\u65E5", react_1["default"].createElement("br", null), "\u3010\u4F8B2\u3011\u795D\u65E5\u3001\u304A\u76C6\u3001\u5E74\u672B\u5E74\u59CB\u306F\u304A\u4F11\u307F\u3067\u3059\u3002"), react_1["default"].createElement("textarea", {
-    name: "business_memo",
-    ref: register
-  }))), react_1["default"].createElement("input", {
+  }), errors.password_check && errors.password_check.type === "required" && react_1["default"].createElement("p", null, "\u78BA\u8A8D\u7528\u30D1\u30B9\u30EF\u30FC\u30C9\u306F\u5FC5\u9808\u3067\u3059\u3002"), PasswordErrorMessage(getValues('password'), getValues('password_check')))), react_1["default"].createElement("input", {
     className: "p-register-store__container__form__input--submit",
     type: "submit",
     value: "\u767B\u9332\u3059\u308B"
@@ -21047,6 +21042,112 @@ exports.initialState = {
   uuid: null,
   auth: null
 };
+
+/***/ }),
+
+/***/ "./resources/ts/routeAuth/StoreOnly.tsx":
+/*!**********************************************!*\
+  !*** ./resources/ts/routeAuth/StoreOnly.tsx ***!
+  \**********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __rest = this && this.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) {
+    if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+  }
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var UserAuthContext_1 = __webpack_require__(/*! ../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
+
+function StoreOnly(_a) {
+  var children = _a.children,
+      rest = __rest(_a, ["children"]);
+
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
+  return react_1["default"].createElement(react_router_dom_1.Route, __assign({}, rest, {
+    render: function render(_a) {
+      var location = _a.location;
+      return state.auth === "store" ? children : react_1["default"].createElement(react_router_dom_1.Redirect, {
+        to: {
+          pathname: "/",
+          state: {
+            from: location
+          }
+        }
+      });
+    }
+  }));
+}
+
+exports.default = StoreOnly;
 
 /***/ }),
 

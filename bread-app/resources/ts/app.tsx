@@ -1,12 +1,11 @@
 //React
-import React,{useReducer, createContext} from 'react';
+import React, {useReducer} from 'react';
 import ReactDOM from 'react-dom';
 
 //Router
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 //ContextProvider
-// import UserAuthContextProvider from './UserAuthContext';
 import {UserAuthReducer, initialState } from './reducers/UserAuthReducer';
 import {UserAuthContext} from './contexts/UserAuthContext';
 

@@ -1,6 +1,6 @@
 .p-search {
     @include content-width;
-    margin: $margin-top_content auto;
+    @include marginContent;
 
     &__container {
         @include bp-600up {

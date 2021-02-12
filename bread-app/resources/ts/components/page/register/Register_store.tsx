@@ -2,39 +2,41 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import {Link, useHistory} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
-import week from '../../../info/Week';
-import InputSchedule from '../../molecules/InputSchedule';
-
-function emailErrorMessage(emailError){
-    if(emailError){
-        return(<p>既に登録されているメールアドレスです。</p>);
-    }else{
-        return null;
-    }
-};
-
-function PasswordErrorMessage(original, check){
-    if(original===check){
-        return null;
-    }else{
-        return (<p>パスワードが一致していません。</p>);
-    }
-};
 
 export default function Register_store() {
-    const { register, handleSubmit, errors, getValues, setValue } = useForm();
+    const { register, handleSubmit, errors, getValues } = useForm();
     const history = new useHistory();
     const [emailError, SetEmailError] = useState(false);
-
-    const checkBusinessDay = (day) => {
-        let checkInfo = document.getElementsByClassName(day.class + ' active');
-        let checkInfoArray = Array.from(checkInfo);
-        checkInfoArray.forEach
-    }
+    
+    const emailErrorMessage = (emailError) => {
+        if(emailError){
+            return(<p>既に登録されているメールアドレスです。</p>);
+        }else{
+            return null;
+        }
+    };
+    
+    const PasswordErrorMessage = (original, check) => {
+        if(original===check){
+            return null;
+        }else{
+            return (<p>パスワードが一致していません。</p>);
+        }
+    };
 
     const onSubmit = (data) => {
         SetEmailError(false);
-        console.log(data);
+        axios.post('/api/create_store', data)
+        .then(res => {
+            console.log(res);
+            history.push("/search");
+        })
+        .catch(errors => {
+            console.log(errors);
+            if(errors.response.status === 422){
+                SetEmailError(true);
+            }
+        });
     }
 
     return (
@@ -57,8 +59,9 @@ export default function Register_store() {
                     <div className = "p-register-store__container__form__item m-storeForm__item">
                         <label htmlFor="store_email" className="a-label-required__red">メールアドレス</label>
                         <div className = "p-register-store__container__form__item__input m-storeForm__item__input">
-                            <input type="email" name="email" id="store_email" ref={register({required: true})}/>
+                            <input type="email" name="email" id="store_email" ref={register({required: true, pattern: /[^\s]+@[^\s]+/})}/>
                             {errors.email && <p>メールアドレスは必須です。</p>}
+                            {errors.email && errors.email.type === "pattern" && (<p>@を含めたメールアドレスを指定してください。</p>)}
                             {emailErrorMessage(emailError)}
                         </div>
                     </div>
@@ -74,19 +77,23 @@ export default function Register_store() {
                     <div className = "p-register-store__container__form__item m-storeForm__item">
                         <label htmlFor="store_tel" className="a-label-required__red">電話番号</label>
                         <div className = "p-register-store__container__form__item__input m-storeForm__item__input">
-                            <span>半角・ハイフンなしで入力してください。</span>
-                            <input type="text" name="tel" id="store_tel" ref={register({required: true, pattern: /[0-9]{10,11}/})}/>
+                            <span>半角で入力してください。(ハイフンなし)</span>
+                            <input type="tel" name="tel" id="store_tel" ref={register({required: true, pattern: /[0-9]/, maxLength: 11, minLength:10})}/>
                             {errors.tel && errors.tel.type === "required" && (<p>電話番号は必須です。</p>)}
-                            {errors.tel && errors.tel.type === "pattern" && (<p>10~11文字の半角数字で指定してください。</p>)}
+                            {errors.tel && errors.tel.type === "pattern" && (<p>半角数字で指定してください。</p>)}
+                            {errors.tel && errors.tel.type === "minLength" && (<p>10～11文字で入力してください。</p>)}
+                            {errors.tel && errors.tel.type === "maxLength" && (<p>10～11文字で入力してください。</p>)}
                         </div>
                     </div>
 
                     <div className = "p-register-store__container__form__item m-storeForm__item">
                         <label htmlFor="store_password" className="a-label-required__red">パスワード</label>
                         <div className = "p-register-store__container__form__item__input m-storeForm__item__input">
-                            <input type="password" name="password" id="store_password" ref={register({required: true, pattern: /[a-zA-Z0-9]{8,16}/})}/>
+                            <input type="password" name="password" id="store_password" ref={register({required: true, pattern: /[a-zA-Z0-9!-[/:-@-`{-~]/, minLength: 8, maxLength: 16})}/>
                             {errors.password && errors.password.type === "required" && (<p>パスワードは必須です。</p>)}
-                            {errors.password && errors.password.type === "pattern" && (<p>8~16文字の半角英数字で指定してください。</p>)}
+                            {errors.password && errors.password.type === "pattern" && (<p>半角英数字で指定してください。</p>)}
+                            {errors.password && errors.password.type === "minLength" && (<p>8文字以上で指定してください。</p>)}
+                            {errors.password && errors.password.type === "maxLength" && (<p>16文字以下で指定してください。</p>)}
                         </div>
                     </div>
 
@@ -99,25 +106,11 @@ export default function Register_store() {
                         </div>
                     </div>
 
-                    <div className = "p-register-store__container__form__item m-storeForm__item">
-                        <label htmlFor="business_day" className="a-label-required__red">営業日・営業時間</label>
-                        <div className = "p-register-store__container__form__item__input m-storeForm__item__input">
-                            <input type="hidden" name="business_day" ref={register} />
-                            <span>営業している曜日をチェックのうえ、営業時間を入力してください。</span>
-                            <InputSchedule/>
-                        </div>
-                    </div>
-                    
-
-                    <div className = "p-register-store__container__form__item m-storeForm__item">
-                        <label>営業に関する備考</label>
-                        <div className = "p-register-store__container__form__item__input m-storeForm__item__input">
-                            <span>【例1】定休日：第3水曜日<br></br>【例2】祝日、お盆、年末年始はお休みです。</span>
-                            <textarea name="business_memo" ref={register}/>
-                        </div>
-                    </div>
-
-                    <input className = "p-register-store__container__form__input--submit" type="submit" value="登録する"/>
+                    <input
+                        className = "p-register-store__container__form__input--submit"
+                        type="submit"
+                        value="登録する"
+                    />
                 </form>
             </div>
         </div>
