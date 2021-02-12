@@ -33,9 +33,9 @@ class StoreLoginController extends Controller
         if (Auth::attempt($credentials)) {
             Log::info('Auth::attempt');
 
-            $user = Auth::user();
-            $user->tokens()->where('name', 'token-name')->delete();
-            $token = $user->createToken('token-name')->plainTextToken;
+            $store = Auth::user();
+            $store->tokens()->where('name', 'token-name')->delete();
+            $token = $store->createToken('token-name')->plainTextToken;
             Log::info('$token');
             Log::info($token);
 
@@ -45,7 +45,7 @@ class StoreLoginController extends Controller
         Log::info(Auth::check());
 
         return response()->json([
-            'user' => $user, 
+            'store' => $store,
             'access_token' => $token,
         ]);
     }
