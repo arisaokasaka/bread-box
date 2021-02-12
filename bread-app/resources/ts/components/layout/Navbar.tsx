@@ -17,15 +17,22 @@ function NavBar() {
     },[]
     );
 
-     //認証ユーザー取得
-     const getUser = () => {
+    //認証ユーザー取得
+    const getUser = () => {
         axios.get("/api/user").then(res => {
             console.log('[getUser]ログイン済み');
             console.log(res.data);
-            dispatch({
-                type: 'setUser',
-                payload: res.data.uuid,
-            });
+            if(res.data.type_user === 'user'){
+                dispatch({
+                    type: 'setUser',
+                    payload: res.data.uuid,
+                });
+            }else if(res.data.type_user === 'store'){
+                dispatch({
+                    type: 'setStore',
+                    payload: res.data.uuid,
+                });
+            }
         }).catch(err => {
             console.log('[getUser]ログインしてません');
         })

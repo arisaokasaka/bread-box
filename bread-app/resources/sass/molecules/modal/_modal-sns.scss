@@ -26,18 +26,30 @@
 
                 &.instagram {
                     background-color: $color-instagram;
+                    &:hover {
+                        background-color: $color-instagram_hover;
+                    }
                 }
 
                 &.facebook {
                     background-color: $color-facebook;
+                    &:hover {
+                        background-color: $color-facebook_hover;
+                    }
                 }
 
                 &.twitter {
                     background-color: $color-twitter;
+                    &:hover {
+                        background-color: $color-twitter_hover;
+                    }
                 }
 
                 &.other {
                     background-color: $color-other;
+                    &:hover {
+                        background-color: $color-other_hover;
+                    }
                 }
             }
         }

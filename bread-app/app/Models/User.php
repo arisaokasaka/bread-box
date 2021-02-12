@@ -49,6 +49,7 @@ class User extends Authenticatable
         $this->email = $user_info['email'];
         $this->password = bcrypt($user_info['password']);
         $this->address = $user_info['address'];
+        if($user_info['type_user']) $this->type_user = $user_info['type_user'];
         $this->save();
     }
 }

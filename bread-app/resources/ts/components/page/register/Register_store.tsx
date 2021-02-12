@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import {Link, useHistory} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
+import {UserAuthContext} from '../../../contexts/UserAuthContext';
 
 export default function Register_store() {
     const { register, handleSubmit, errors, getValues } = useForm();
     const history = new useHistory();
     const [emailError, SetEmailError] = useState(false);
-    
+    const { dispatch } = useContext(UserAuthContext);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    let csrf:any = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+
     const emailErrorMessage = (emailError) => {
         if(emailError){
             return(<p>既に登録されているメールアドレスです。</p>);
@@ -24,21 +29,48 @@ export default function Register_store() {
         }
     };
 
+    //新規登録
     const onSubmit = (data) => {
+        console.log(data);
         SetEmailError(false);
-        axios.post('/api/create_store', data)
+        data['type_user'] = 'store';
+        axios.post('/api/create_user', data)
         .then(res => {
-            console.log(res);
-            history.push("/search");
+            login();
+            history.push("/store");
         })
         .catch(errors => {
-            console.log(errors);
             if(errors.response.status === 422){
                 SetEmailError(true);
             }
         });
     }
 
+    // ログイン
+    const login = () => {        
+        axios.defaults.withCredentials = true;
+        axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+        axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+        axios.get("/sanctum/csrf-cookie").then(response => {
+            axios.post("/api/login", {
+                email,
+                password
+            })
+            .then(res => {
+                dispatch({
+                    type: 'setStore',
+                    payload: res.data.user.uuid,
+                });
+            })
+            .catch(err => {
+                console.log('[login]fail_post');
+            });
+        })
+        .catch(err => {
+            console.log('fail_get');
+        })
+    }
+    
     return (
         <div className = "p-register-store">
             <div className = "p-register-store__container">
@@ -48,6 +80,7 @@ export default function Register_store() {
                     <span>既に登録済ですか？<Link to="/login_store">店舗ログイン</Link></span>
                 </div>
                 <form className="p-register-store__container__form m-storeForm" name="form_storeRegister" onSubmit={handleSubmit(onSubmit)}>
+                    <input type='hidden' name='_token' value={csrf} />
                     <div className = "p-register-store__container__form__item m-storeForm__item">
                         <label htmlFor="store_name" className="a-label-required__red">店舗名</label>
                         <div className = "p-register-store__container__form__item__input m-storeForm__item__input">
@@ -59,7 +92,7 @@ export default function Register_store() {
                     <div className = "p-register-store__container__form__item m-storeForm__item">
                         <label htmlFor="store_email" className="a-label-required__red">メールアドレス</label>
                         <div className = "p-register-store__container__form__item__input m-storeForm__item__input">
-                            <input type="email" name="email" id="store_email" ref={register({required: true, pattern: /[^\s]+@[^\s]+/})}/>
+                            <input type="email" name="email" id="store_email" onChange={e => setEmail(e.target.value)} ref={register({required: true, pattern: /[^\s]+@[^\s]+/})}/>
                             {errors.email && <p>メールアドレスは必須です。</p>}
                             {errors.email && errors.email.type === "pattern" && (<p>@を含めたメールアドレスを指定してください。</p>)}
                             {emailErrorMessage(emailError)}
@@ -75,21 +108,9 @@ export default function Register_store() {
                     </div>
 
                     <div className = "p-register-store__container__form__item m-storeForm__item">
-                        <label htmlFor="store_tel" className="a-label-required__red">電話番号</label>
-                        <div className = "p-register-store__container__form__item__input m-storeForm__item__input">
-                            <span>半角で入力してください。(ハイフンなし)</span>
-                            <input type="tel" name="tel" id="store_tel" ref={register({required: true, pattern: /[0-9]/, maxLength: 11, minLength:10})}/>
-                            {errors.tel && errors.tel.type === "required" && (<p>電話番号は必須です。</p>)}
-                            {errors.tel && errors.tel.type === "pattern" && (<p>半角数字で指定してください。</p>)}
-                            {errors.tel && errors.tel.type === "minLength" && (<p>10～11文字で入力してください。</p>)}
-                            {errors.tel && errors.tel.type === "maxLength" && (<p>10～11文字で入力してください。</p>)}
-                        </div>
-                    </div>
-
-                    <div className = "p-register-store__container__form__item m-storeForm__item">
                         <label htmlFor="store_password" className="a-label-required__red">パスワード</label>
                         <div className = "p-register-store__container__form__item__input m-storeForm__item__input">
-                            <input type="password" name="password" id="store_password" ref={register({required: true, pattern: /[a-zA-Z0-9!-[/:-@-`{-~]/, minLength: 8, maxLength: 16})}/>
+                            <input type="password" name="password" id="store_password" onChange={e => setPassword(e.target.value)} ref={register({required: true, pattern: /[a-zA-Z0-9!-[/:-@-`{-~]/, minLength: 8, maxLength: 16})}/>
                             {errors.password && errors.password.type === "required" && (<p>パスワードは必須です。</p>)}
                             {errors.password && errors.password.type === "pattern" && (<p>半角英数字で指定してください。</p>)}
                             {errors.password && errors.password.type === "minLength" && (<p>8文字以上で指定してください。</p>)}

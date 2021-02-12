@@ -11,6 +11,7 @@ import EditBasicInfo from './storeEditBasic/EditBasicInfo';
 import { StoreEditNav_menu, StoreEditNav_basic, StoreEditNav_spirit, StoreEditNav_stamp } from '../../../info/StoreEditMenus';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faChevronRight, faChevronCircleDown} from '@fortawesome/free-solid-svg-icons';
+import BtnLogout from '../../atoms/buttons/BtnLogout';
 
 type EditProps = ({
     MenuInfo: Array<any>;
@@ -22,7 +23,6 @@ const StoreEditTable: React.FC<EditProps> = ({StoreInfo, MenuInfo}) => {
 
     const Tab = (tab) => {
         let TabClassName = tab.category + "_" + tab.tableName;
-        console.log(tab);
         if(Table === tab.tableName){
             TabClassName += ' selected';
         }
@@ -88,7 +88,7 @@ const StoreEditTable: React.FC<EditProps> = ({StoreInfo, MenuInfo}) => {
                     </li>
                     <li className = "m-store-edit-table__nav__others">
                         <p>パスワードの再設定</p>
-                        <p>ログアウトする</p>
+                        <BtnLogout/>
                     </li>
                 </ul>
             </nav>

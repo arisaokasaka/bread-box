@@ -1,41 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
+import { UserAuthContext } from '../../../contexts/UserAuthContext';
 
 export default function LoginStore() {
-    const { register, handleSubmit, errors, getValues } = useForm();
-    const [emailError, SetEmailError] = useState(false);
-  
-    const onSubmit = (data) => {
-    //     SetEmailError(false);
-    //     console.log(data);
-    //     axios.post('/api/create_store', data)
-    //     .then(res => {
-    //         console.log(res);
-    //     })
-    //     .catch(errors => {
-    //         console.log(errors.response.data.errors);
-    //         console.log(errors.response.status);
-    //         if(errors.response.status === 422){
-    //             SetEmailError(true);
-    //         }
-    //     });
+    const { register, handleSubmit, errors } = useForm();
+    const { dispatch } = useContext(UserAuthContext);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const history = new useHistory();
+
+    // ログイン
+    const login = () => {        
+        axios.defaults.withCredentials = true;
+        axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+        axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+
+        axios.get("/sanctum/csrf-cookie").then(response => {
+            axios.post("/api/login", {
+                email,
+                password
+            })
+            .then(res => {
+                console.log(res);
+                dispatch({
+                    type: 'setStore',
+                    payload: res.data.user.uuid,
+                });
+                history.push("/store_edit");
+            })
+            .catch(err => {
+                console.log(err);
+                console.log('[login]fail_post');
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            console.log('fail_get');
+        })
     }
+    
+    let csrf:any = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
     return (
         <div className = "p-login-store">
             <div className = "p-login-store__container">
                 
-                <form className="p-login-store__container__form" onSubmit={handleSubmit(onSubmit)}>
+                <form className="p-login-store__container__form" onSubmit={handleSubmit(login)}>
                     <h2>店舗ログイン</h2>
+                    <input type='hidden' name='_token' value={csrf} />
 
                     <label htmlFor="store_email">メールアドレス</label>
-                    <input type="email" name="email" id="store_email" ref={register({required: true})}/>
+                    <input type="email" name="email" id="store_email" onChange={e => setEmail(e.target.value)} ref={register({required: true})}/>
                     {errors.email && <p>メールアドレスは必須です。</p>}
                 
                     <label htmlFor="store_password">パスワード</label>
-                    <input type="password" name="password" id="store_password" ref={register({required: true, pattern: /[a-zA-Z0-9]{8,16}/})}/>
+                    <input type="password" name="password" id="store_password" onChange={e => setPassword(e.target.value)} ref={register({required: true, pattern: /[a-zA-Z0-9]{8,16}/})}/>
                     
                     <input type="submit" value="ログインする"/>
                 </form>
