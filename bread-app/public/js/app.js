@@ -15148,27 +15148,7 @@ var UserEdit_1 = __importDefault(__webpack_require__(/*! ./components/page/user/
 
 var StoreOnly_1 = __importDefault(__webpack_require__(/*! ./routeAuth/StoreOnly */ "./resources/ts/routeAuth/StoreOnly.tsx"));
 
-var UserOnly_1 = __importDefault(__webpack_require__(/*! ./routeAuth/UserOnly */ "./resources/ts/routeAuth/UserOnly.tsx")); // window.axios = axios;
-// window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-// window.axios.defaults.withCredentials = true;
-// let token = document.head.querySelector('meta[name="csrf-token"]');
-// if (token) {
-//   console.log(token);
-//   window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-// } else {
-//   console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
-// }
-// let test=axios.create({
-//   baseURL: 'http://localhost:8000',
-//   withCredentials: true
-// })
-// console.log(axios.defaults.headers)
-// test.get("/api/user", {withCredentials: true}).then(response => {
-//     console.log(response);
-// }).catch(err=>{
-//   console.log('err')
-//   console.log(err)})
-
+var UserOnly_1 = __importDefault(__webpack_require__(/*! ./routeAuth/UserOnly */ "./resources/ts/routeAuth/UserOnly.tsx"));
 
 var App = function App() {
   var _a = react_1.useReducer(UserAuthReducer_1.UserAuthReducer, UserAuthReducer_1.initialState),
@@ -15614,10 +15594,10 @@ exports.default = BtnLogin_icon;
 
 /***/ }),
 
-/***/ "./resources/ts/components/atoms/buttons/BtnLogout_icon.tsx":
-/*!******************************************************************!*\
-  !*** ./resources/ts/components/atoms/buttons/BtnLogout_icon.tsx ***!
-  \******************************************************************/
+/***/ "./resources/ts/components/atoms/buttons/BtnLogout.tsx":
+/*!*************************************************************!*\
+  !*** ./resources/ts/components/atoms/buttons/BtnLogout.tsx ***!
+  \*************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -15675,7 +15655,7 @@ var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/a
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
-function BtnLogout_icon() {
+function BtnLogout() {
   var dispatch = react_1.useContext(UserAuthContext_1.UserAuthContext).dispatch;
   var history = react_router_dom_1.useHistory(); // ログアウト機能
 
@@ -15698,7 +15678,7 @@ function BtnLogout_icon() {
   }, "\u30ED\u30B0\u30A2\u30A6\u30C8\u3059\u308B"));
 }
 
-exports.default = BtnLogout_icon;
+exports.default = BtnLogout;
 
 /***/ }),
 
@@ -15864,6 +15844,85 @@ function BtnSearch_icon() {
 }
 
 exports.default = BtnSearch_icon;
+
+/***/ }),
+
+/***/ "./resources/ts/components/atoms/buttons/BtnStoreEdit.tsx":
+/*!****************************************************************!*\
+  !*** ./resources/ts/components/atoms/buttons/BtnStoreEdit.tsx ***!
+  \****************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
+var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
+
+function BtnStoreEdit() {
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
+  var BtnFavorite;
+
+  if (state.uuid && state.auth === "store") {
+    BtnFavorite = react_1["default"].createElement(react_router_dom_1.Link, {
+      to: "/store_edit",
+      className: "a-btn-storeEdit"
+    }, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+      icon: free_solid_svg_icons_1.faPen
+    })), react_1["default"].createElement("span", null, "\u5E97\u8217\u60C5\u5831\u3092\u7DE8\u96C6\u3059\u308B"));
+  } else {
+    BtnFavorite = null;
+  }
+
+  return react_1["default"].createElement("div", null, BtnFavorite);
+}
+
+exports.default = BtnStoreEdit;
 
 /***/ }),
 
@@ -16852,10 +16911,18 @@ function NavBar() {
     axios_1["default"].get("/api/user").then(function (res) {
       console.log('[getUser]ログイン済み');
       console.log(res.data);
-      dispatch({
-        type: 'setUser',
-        payload: res.data.uuid
-      });
+
+      if (res.data.type_user === 'user') {
+        dispatch({
+          type: 'setUser',
+          payload: res.data.uuid
+        });
+      } else if (res.data.type_user === 'store') {
+        dispatch({
+          type: 'setStore',
+          payload: res.data.uuid
+        });
+      }
     })["catch"](function (err) {
       console.log('[getUser]ログインしてません');
     });
@@ -17203,6 +17270,8 @@ var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome
 
 var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
 
+var BtnLogout_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/BtnLogout */ "./resources/ts/components/atoms/buttons/BtnLogout.tsx"));
+
 var StoreEditTable = function StoreEditTable(_a) {
   var StoreInfo = _a.StoreInfo,
       MenuInfo = _a.MenuInfo;
@@ -17213,7 +17282,6 @@ var StoreEditTable = function StoreEditTable(_a) {
 
   var Tab = function Tab(tab) {
     var TabClassName = tab.category + "_" + tab.tableName;
-    console.log(tab);
 
     if (Table === tab.tableName) {
       TabClassName += ' selected';
@@ -17313,7 +17381,7 @@ var StoreEditTable = function StoreEditTable(_a) {
     return Tab(arr);
   })), react_1["default"].createElement("li", {
     className: "m-store-edit-table__nav__others"
-  }, react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u306E\u518D\u8A2D\u5B9A"), react_1["default"].createElement("p", null, "\u30ED\u30B0\u30A2\u30A6\u30C8\u3059\u308B")))), react_1["default"].createElement("div", {
+  }, react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u306E\u518D\u8A2D\u5B9A"), react_1["default"].createElement(BtnLogout_1["default"], null)))), react_1["default"].createElement("div", {
     className: "m-store-edit-table__container"
   }, react_1["default"].createElement("div", {
     className: "m-store-edit-table__container__content"
@@ -17422,15 +17490,17 @@ var EditBasicInfo = function EditBasicInfo(_a) {
       className: "a-label-required__red"
     }, "\u96FB\u8A71\u756A\u53F7(\u534A\u89D2)"), react_1["default"].createElement("div", {
       className: "m-storeEdit-basic__container__form__item__input m-storeForm__item__input"
-    }, react_1["default"].createElement("input", {
+    }, react_1["default"].createElement("span", null, "\u534A\u89D2\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002(\u30CF\u30A4\u30D5\u30F3\u306A\u3057)"), react_1["default"].createElement("input", {
       type: "tel",
       name: "tel",
       id: "store_tel",
       ref: register({
         required: true,
-        pattern: /[0-9]{10,11}/
+        pattern: /[0-9]/,
+        maxLength: 11,
+        minLength: 10
       })
-    }), errors.tel && errors.tel.type === "required" && react_1["default"].createElement("p", null, "\u96FB\u8A71\u756A\u53F7\u306F\u5FC5\u9808\u3067\u3059\u3002"), errors.tel && errors.tel.type === "pattern" && react_1["default"].createElement("p", null, "10~11\u6587\u5B57\u306E\u534A\u89D2\u6570\u5B57\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
+    }), errors.tel && errors.tel.type === "required" && react_1["default"].createElement("p", null, "\u96FB\u8A71\u756A\u53F7\u306F\u5FC5\u9808\u3067\u3059\u3002"), errors.tel && errors.tel.type === "pattern" && react_1["default"].createElement("p", null, "\u534A\u89D2\u6570\u5B57\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), errors.tel && errors.tel.type === "minLength" && react_1["default"].createElement("p", null, "10\uFF5E11\u6587\u5B57\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), errors.tel && errors.tel.type === "maxLength" && react_1["default"].createElement("p", null, "10\uFF5E11\u6587\u5B57\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
       className: "m-storeEdit-basic__container__form__item m-storeForm__item"
     }, react_1["default"].createElement("label", {
       htmlFor: "store_message"
@@ -18135,6 +18205,8 @@ var Btn_favorite_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons
 
 var Btn_interested_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/Btn_interested */ "./resources/ts/components/atoms/buttons/Btn_interested.tsx"));
 
+var BtnStoreEdit_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/BtnStoreEdit */ "./resources/ts/components/atoms/buttons/BtnStoreEdit.tsx"));
+
 var StoreSubinfo_1 = __importDefault(__webpack_require__(/*! ./StoreSubinfo */ "./resources/ts/components/molecules/store/StoreSubinfo.tsx"));
 
 var Score_1 = __importDefault(__webpack_require__(/*! ../../atoms/Score */ "./resources/ts/components/atoms/Score.tsx"));
@@ -18145,7 +18217,7 @@ var StoreBasicInfo = function StoreBasicInfo(_a) {
     className: "m-store-basicInfo"
   }, react_1["default"].createElement("div", {
     className: "m-store-basicInfo__btn"
-  }, react_1["default"].createElement(Btn_favorite_1["default"], null), react_1["default"].createElement(Btn_interested_1["default"], null)), StoreInfo.map(function (el) {
+  }, react_1["default"].createElement(Btn_favorite_1["default"], null), react_1["default"].createElement(Btn_interested_1["default"], null), react_1["default"].createElement(BtnStoreEdit_1["default"], null)), StoreInfo.map(function (el) {
     return react_1["default"].createElement("div", {
       key: "basicInfo_" + el.id,
       className: "m-store-basicInfo__container"
@@ -18676,7 +18748,7 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 
 var BtnEditUser_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/BtnEditUser */ "./resources/ts/components/atoms/buttons/BtnEditUser.tsx"));
 
-var BtnLogout_icon_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/BtnLogout_icon */ "./resources/ts/components/atoms/buttons/BtnLogout_icon.tsx"));
+var BtnLogout_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/BtnLogout */ "./resources/ts/components/atoms/buttons/BtnLogout.tsx"));
 
 var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
 
@@ -18705,7 +18777,7 @@ var UserProf = function UserProf(_a) {
       icon: free_solid_svg_icons_1.faFlag
     })), "\u884C\u3063\u3066\u307F\u305F\u3044"), react_1["default"].createElement("p", null, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
       icon: free_solid_svg_icons_1.faCommentDots
-    })), "\u30EC\u30D3\u30E5\u30FC\u6570"), react_1["default"].createElement(BtnLogout_icon_1["default"], null))));
+    })), "\u30EC\u30D3\u30E5\u30FC\u6570"), react_1["default"].createElement(BtnLogout_1["default"], null))));
   }));
 };
 
@@ -19094,7 +19166,7 @@ function LoginStore() {
     axios_1["default"].defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     axios_1["default"].defaults.headers.common['X-CSRF-TOKEN'] = (_a = document.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('content');
     axios_1["default"].get("/sanctum/csrf-cookie").then(function (response) {
-      axios_1["default"].post("/api/login_store", {
+      axios_1["default"].post("/api/login", {
         email: email,
         password: password
       }).then(function (res) {
@@ -19613,18 +19685,34 @@ var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_mod
 
 var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
 
+var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
+
 function Register_store() {
-  var _a = react_hook_form_1.useForm(),
-      register = _a.register,
-      handleSubmit = _a.handleSubmit,
-      errors = _a.errors,
-      getValues = _a.getValues;
+  var _a;
+
+  var _b = react_hook_form_1.useForm(),
+      register = _b.register,
+      handleSubmit = _b.handleSubmit,
+      errors = _b.errors,
+      getValues = _b.getValues;
 
   var history = new react_router_dom_1.useHistory();
 
-  var _b = react_1.useState(false),
-      emailError = _b[0],
-      SetEmailError = _b[1];
+  var _c = react_1.useState(false),
+      emailError = _c[0],
+      SetEmailError = _c[1];
+
+  var dispatch = react_1.useContext(UserAuthContext_1.UserAuthContext).dispatch;
+
+  var _d = react_1.useState(""),
+      email = _d[0],
+      setEmail = _d[1];
+
+  var _e = react_1.useState(""),
+      password = _e[0],
+      setPassword = _e[1];
+
+  var csrf = (_a = document.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('content');
 
   var emailErrorMessage = function emailErrorMessage(emailError) {
     if (emailError) {
@@ -19640,19 +19728,44 @@ function Register_store() {
     } else {
       return react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u304C\u4E00\u81F4\u3057\u3066\u3044\u307E\u305B\u3093\u3002");
     }
-  };
+  }; //新規登録
+
 
   var onSubmit = function onSubmit(data) {
+    console.log(data);
     SetEmailError(false);
-    axios_1["default"].post('/api/create_store', data).then(function (res) {
-      console.log(res);
-      history.push("/search");
+    data['type_user'] = 'store';
+    axios_1["default"].post('/api/create_user', data).then(function (res) {
+      login();
+      history.push("/store");
     })["catch"](function (errors) {
-      console.log(errors);
-
       if (errors.response.status === 422) {
         SetEmailError(true);
       }
+    });
+  }; // ログイン
+
+
+  var login = function login() {
+    var _a;
+
+    axios_1["default"].defaults.withCredentials = true;
+    axios_1["default"].defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    axios_1["default"].defaults.headers.common['X-CSRF-TOKEN'] = (_a = document.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('content');
+    axios_1["default"].get("/sanctum/csrf-cookie").then(function (response) {
+      axios_1["default"].post("/api/login", {
+        email: email,
+        password: password
+      }).then(function (res) {
+        dispatch({
+          type: 'setStore',
+          payload: res.data.user.uuid
+        });
+      })["catch"](function (err) {
+        console.log('[login]fail_post');
+      });
+    })["catch"](function (err) {
+      console.log('fail_get');
     });
   };
 
@@ -19668,7 +19781,11 @@ function Register_store() {
     className: "p-register-store__container__form m-storeForm",
     name: "form_storeRegister",
     onSubmit: handleSubmit(onSubmit)
-  }, react_1["default"].createElement("div", {
+  }, react_1["default"].createElement("input", {
+    type: 'hidden',
+    name: '_token',
+    value: csrf
+  }), react_1["default"].createElement("div", {
     className: "p-register-store__container__form__item m-storeForm__item"
   }, react_1["default"].createElement("label", {
     htmlFor: "store_name",
@@ -19693,6 +19810,9 @@ function Register_store() {
     type: "email",
     name: "email",
     id: "store_email",
+    onChange: function onChange(e) {
+      return setEmail(e.target.value);
+    },
     ref: register({
       required: true,
       pattern: /[^\s]+@[^\s]+/
@@ -19714,23 +19834,6 @@ function Register_store() {
   }), errors.address && react_1["default"].createElement("p", null, "\u4F4F\u6240\u306F\u5FC5\u9808\u3067\u3059\u3002"))), react_1["default"].createElement("div", {
     className: "p-register-store__container__form__item m-storeForm__item"
   }, react_1["default"].createElement("label", {
-    htmlFor: "store_tel",
-    className: "a-label-required__red"
-  }, "\u96FB\u8A71\u756A\u53F7"), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__item__input m-storeForm__item__input"
-  }, react_1["default"].createElement("span", null, "\u534A\u89D2\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002(\u30CF\u30A4\u30D5\u30F3\u306A\u3057)"), react_1["default"].createElement("input", {
-    type: "tel",
-    name: "tel",
-    id: "store_tel",
-    ref: register({
-      required: true,
-      pattern: /[0-9]/,
-      maxLength: 11,
-      minLength: 10
-    })
-  }), errors.tel && errors.tel.type === "required" && react_1["default"].createElement("p", null, "\u96FB\u8A71\u756A\u53F7\u306F\u5FC5\u9808\u3067\u3059\u3002"), errors.tel && errors.tel.type === "pattern" && react_1["default"].createElement("p", null, "\u534A\u89D2\u6570\u5B57\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), errors.tel && errors.tel.type === "minLength" && react_1["default"].createElement("p", null, "10\uFF5E11\u6587\u5B57\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), errors.tel && errors.tel.type === "maxLength" && react_1["default"].createElement("p", null, "10\uFF5E11\u6587\u5B57\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__item m-storeForm__item"
-  }, react_1["default"].createElement("label", {
     htmlFor: "store_password",
     className: "a-label-required__red"
   }, "\u30D1\u30B9\u30EF\u30FC\u30C9"), react_1["default"].createElement("div", {
@@ -19739,6 +19842,9 @@ function Register_store() {
     type: "password",
     name: "password",
     id: "store_password",
+    onChange: function onChange(e) {
+      return setPassword(e.target.value);
+    },
     ref: register({
       required: true,
       pattern: /[a-zA-Z0-9!-[/:-@-`{-~]/,
