@@ -5,24 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Log;
 
 class Store extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory;
 
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
 
     public function all_stores() {
         return $this->newQuery()->select("*")->get();
@@ -63,11 +56,11 @@ Log::info($store_info);
         // ];
 
         $this->uuid = Str::uuid();
-        $this->name = $store_info['name'];
-        $this->email = $store_info['email'];
+        // $this->name = $store_info['name'];
+        // $this->email = $store_info['email'];
         $this->tel = $store_info['tel'];
-        $this->password = bcrypt($store_info['password']);
-        $this->address = $store_info['address'];
+        // $this->password = bcrypt($store_info['password']);
+        // $this->address = $store_info['address'];
         // $this->business_day = $store_info['business_day'];
         $this->business_memo = json_encode(['123' => 123]); //←stringに変更したい
         // $this->message = $store_info['message'];
