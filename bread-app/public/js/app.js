@@ -17447,6 +17447,40 @@ exports.default = EditBasicInfo;
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -17457,7 +17491,7 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
 
@@ -17475,39 +17509,31 @@ var EditBusinessDays = function EditBusinessDays(_a) {
       handleSubmit = _b.handleSubmit,
       errors = _b.errors;
 
-  var business_day = {}; // function alert_hours(){
-  //     week.week.map((day)=>{
-  //         let open = document.getElementsByName(day.id + '_open')[0] as HTMLInputElement;
-  //         let close = document.getElementsByName(day.id + '_close')[0] as HTMLInputElement;
-  //         if(open.value && close.value){
-  //             business_day[day.id] = [open.value, close.value]
-  //         }else if(open.value && close.value===null){
-  //             alert_hour = <p>閉店時間が未記入のものがあります。</p>;
-  //             console.log('閉店')
-  //         }else if(open.value===null && close.value){
-  //             alert_hour = <p>開店時間も記入してください。</p>
-  //             console.log('開店')
-  //         }
-  //     })
-  // }
-  // const handleValidation = () => {
-  //     console.log('validation')
-  //     alert_hours();
-  //     week.week.map((day)=>{
-  //         let open = document.getElementsByName(day.id + '_open')[0] as HTMLInputElement;
-  //         let close = document.getElementsByName(day.id + '_close')[0] as HTMLInputElement;
-  //         if(open.value && close.value){
-  //             business_day[day.id] = [open.value, close.value]
-  //         }else if(open.value && close.value===null){
-  //             return <p>閉店時間が未記入のものがあります。</p>;
-  //         }else if(open.value===null && close.value){
-  //             return <p>開店時間も記入してください。</p>
-  //         }
-  //     })
-  // }
+  var _c = react_1.useState(false),
+      alertOpen = _c[0],
+      setAlertOpenHour = _c[1];
+
+  var _d = react_1.useState(false),
+      alertClose = _d[0],
+      setAlertCloseHour = _d[1];
+
+  var business_day = {};
+
+  var alertMessage = function alertMessage() {
+    if (alertOpen === true && alertClose === false) {
+      return react_1["default"].createElement("p", null, "\u958B\u5E97\u6642\u9593\u30FB\u9589\u5E97\u6642\u9593\u3069\u3061\u3089\u3082\u8A18\u5165\u3057\u3066\u304F\u3060\u3055\u3044\u3002");
+    } else if (alertOpen === true && alertClose === false) {
+      return react_1["default"].createElement("p", null, "\u958B\u5E97\u6642\u9593\u304C\u672A\u8A18\u5165\u306E\u3082\u306E\u304C\u3042\u308A\u307E\u3059\u3002");
+    } else if (alertOpen === false && alertClose === true) {
+      return react_1["default"].createElement("p", null, "\u9589\u5E97\u6642\u9593\u304C\u672A\u8A18\u5165\u306E\u3082\u306E\u304C\u3042\u308A\u307E\u3059\u3002");
+    }
+  };
 
   var onSubmit = function onSubmit(data) {
     var business_day_check = false;
+    setAlertOpenHour(false);
+    setAlertCloseHour(false);
+    console.log('submit');
     Week_1["default"].week.map(function (day) {
       var open = document.getElementsByName(day.id + '_open')[0];
       var close = document.getElementsByName(day.id + '_close')[0];
@@ -17515,15 +17541,21 @@ var EditBusinessDays = function EditBusinessDays(_a) {
       if (open.value && close.value) {
         business_day[day.id] = [open.value, close.value];
         business_day_check = true;
-      } else if (open.value && close.value === '') {// alert_hour = <p>閉店時間が未記入のものがあります。</p>;
-      } else if (open.value === '' && close.value) {// alert_hour = <p>開店時間も記入してください。</p>
+      } else if (open.value && close.value === '') {
+        console.log('開店');
+        setAlertCloseHour(true); // alertMessage();
+      } else if (close.value && open.value === '') {
+        console.log('heiten');
+        setAlertOpenHour(true); // alertMessage();
       }
     });
     data['business_day'] = JSON.stringify(business_day);
 
-    if (business_day_check) {}
-
-    console.log(data);
+    if (business_day_check) {
+      console.log('success');
+    } else {
+      console.log('false');
+    }
   };
 
   return react_1["default"].createElement("div", {
@@ -17550,7 +17582,7 @@ var EditBusinessDays = function EditBusinessDays(_a) {
       className: "m-storeEdit-businessDay__container__form__btn m-storeForm__btn"
     }, react_1["default"].createElement(BtnSave_1["default"], {
       InputType: "submit",
-      OnClickFunction: null
+      OnClickFunction: alertMessage
     }))));
   }));
 };
