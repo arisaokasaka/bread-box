@@ -2,58 +2,74 @@
     position: fixed;
     top: 0;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     background: linear-gradient(
         0deg,
-        rgba(164, 102, 39, 1) 8%,
+        rgb(175, 104, 37) 8%,
         rgba(177, 111, 41, 1) 30%,
         rgba(196, 125, 44, 1) 100%
     );
     height: $header-height;
     z-index: 900;
 
-    &__content {
-        display: none;
+    &__container {
+        &--pc {
+            display: none;
 
-        @include bp-960up {
-            display: flex;
-            align-items: center;
-            margin-right: 3rem;
-            letter-spacing: 1px;
+            @include bp-960up {
+                display: block;
 
-            &__nav {
-                &--loggedout {
-                    ul {
-                        display: flex;
+                @include content-width;
+                position: relative;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                height: 100%;
 
-                        li {
-                            height: 40px;
-                            width: 100px;
-                            margin-left: 1rem;
-                            line-height: 36px;
-                            text-align: center;
-                            font-size: 0.8rem;
-                            color: $white;
-                            border: 2px solid $white;
-                            border-radius: 5px;
+                &__content {
+                    &__nav {
+                        &--loggedout {
+                            ul {
+                                position: absolute;
+                                top: 0;
+                                right: 0;
+                                margin: 0;
+                                display: flex;
 
-                            &:hover {
-                                background-color: $darkBrown;
+                                li {
+                                    display: block;
+                                    font-size: 0.7rem;
+
+                                    &:nth-child(1) {
+                                        padding-right: 10px;
+                                    }
+
+                                    & > a {
+                                        color: $white;
+                                        &:hover {
+                                            text-decoration: underline 1px;
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
                 }
             }
         }
-    }
 
-    &__mobile {
-        display: flex;
+        &--mobile {
+            display: flex;
+            justify-content: space-between;
+            width: 95%;
+            margin: 0 auto;
 
-        @include bp-960up {
-            display: none;
+            @include bp-960up {
+                display: none;
+            }
+
+            &__nav {
+                display: flex;
+            }
         }
     }
 }

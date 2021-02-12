@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faUserCircle} from "@fortawesome/free-solid-svg-icons";
 import { UserAuthContext } from '../../../contexts/UserAuthContext';
 
-export default function BtnSearch_icon() {
+export default function BtnMypage_icon() {
     const { state } = useContext(UserAuthContext);
     let icon: any;
     
