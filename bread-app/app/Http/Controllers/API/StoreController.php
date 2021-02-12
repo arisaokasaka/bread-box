@@ -23,8 +23,8 @@ class StoreController extends Controller
         return $info->find_keyword('');
     }
 
-    // public function create_store(StoreRequest $request){
-    //     $store = new Store();
-    //     $store->create_store($request);
-    // }
+    public function create_store(Request $request){
+        $store = new Store();
+        $store->create_store($request->input('user_uuid'));
+    }
 }
