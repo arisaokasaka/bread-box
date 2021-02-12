@@ -35,34 +35,39 @@ function NavBar() {
     let navMobile: any;
     if(state.uuid){
         navPC = (
-            <nav className="l-navbar__content__nav--loggedin">
+            <nav className="l-navbar__container--pc__content__nav--loggedin">
                 <BtnMypage/>
             </nav>
         );
         navMobile = (
-            <nav className="l-navbar__mobile">
+            <nav className="l-navbar__container--mobile__nav">
                 <BtnSearch_icon/>
                 <BtnMypage/>
             </nav>
         );
     }else{
         navPC = (
-            <nav className="l-navbar__content__nav--loggedout">
+            <nav className="l-navbar__container--pc__content__nav--loggedout">
                 <ul>
-                    <Link to="/register_user">
-                        <li>無料会員登録</li>
-                    </Link>
-                    <Link to="/login_user">
-                        <li>ログイン</li>
-                    </Link>
+                    <li>
+                        <Link to="/register_user">
+                            無料会員登録
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/login_user">
+                            ログイン
+                        </Link>
+                    </li>
                     {/* <Link to="">
                         <li>ゲスト</li>
                     </Link> */}
                 </ul>
             </nav>
         );
+
         navMobile = (
-            <nav className="l-navbar__mobile">
+            <nav className="l-navbar__container--mobile__nav">
                 <BtnSearch_icon/>
                 <BtnLogin_icon/>
             </nav>
@@ -72,14 +77,19 @@ function NavBar() {
 
     return (
         <div className="l-navbar">
-            <Logo/>
-            <div className="l-navbar__content">
-                <Searchbar />
-                <div className="l-navbar__content__nav">
-                    {navPC}
+            <div className="l-navbar__container--pc">
+                <Logo/>
+                <div className="l-navbar__container--pc__content">
+                    <Searchbar />
+                    <div className="l-navbar__container--pc__content__nav">
+                        {navPC}
+                    </div>
                 </div>
             </div>
-            {navMobile}
+            <div className="l-navbar__container--mobile">
+                <Logo/>
+                {navMobile}
+            </div>
         </div>
     )
 }

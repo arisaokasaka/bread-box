@@ -16856,31 +16856,35 @@ function NavBar() {
 
   if (state.uuid) {
     navPC = react_1["default"].createElement("nav", {
-      className: "l-navbar__content__nav--loggedin"
+      className: "l-navbar__container--pc__content__nav--loggedin"
     }, react_1["default"].createElement(BtnMypage_1["default"], null));
     navMobile = react_1["default"].createElement("nav", {
-      className: "l-navbar__mobile"
+      className: "l-navbar__container--mobile__nav"
     }, react_1["default"].createElement(BtnSearch_icon_1["default"], null), react_1["default"].createElement(BtnMypage_1["default"], null));
   } else {
     navPC = react_1["default"].createElement("nav", {
-      className: "l-navbar__content__nav--loggedout"
-    }, react_1["default"].createElement("ul", null, react_1["default"].createElement(react_router_dom_1.Link, {
+      className: "l-navbar__container--pc__content__nav--loggedout"
+    }, react_1["default"].createElement("ul", null, react_1["default"].createElement("li", null, react_1["default"].createElement(react_router_dom_1.Link, {
       to: "/register_user"
-    }, react_1["default"].createElement("li", null, "\u7121\u6599\u4F1A\u54E1\u767B\u9332")), react_1["default"].createElement(react_router_dom_1.Link, {
+    }, "\u7121\u6599\u4F1A\u54E1\u767B\u9332")), react_1["default"].createElement("li", null, react_1["default"].createElement(react_router_dom_1.Link, {
       to: "/login_user"
-    }, react_1["default"].createElement("li", null, "\u30ED\u30B0\u30A4\u30F3"))));
+    }, "\u30ED\u30B0\u30A4\u30F3"))));
     navMobile = react_1["default"].createElement("nav", {
-      className: "l-navbar__mobile"
+      className: "l-navbar__container--mobile__nav"
     }, react_1["default"].createElement(BtnSearch_icon_1["default"], null), react_1["default"].createElement(BtnLogin_icon_1["default"], null));
   }
 
   return react_1["default"].createElement("div", {
     className: "l-navbar"
+  }, react_1["default"].createElement("div", {
+    className: "l-navbar__container--pc"
   }, react_1["default"].createElement(Logo_1["default"], null), react_1["default"].createElement("div", {
-    className: "l-navbar__content"
+    className: "l-navbar__container--pc__content"
   }, react_1["default"].createElement(Searchbar_1["default"], null), react_1["default"].createElement("div", {
-    className: "l-navbar__content__nav"
-  }, navPC)), navMobile);
+    className: "l-navbar__container--pc__content__nav"
+  }, navPC))), react_1["default"].createElement("div", {
+    className: "l-navbar__container--mobile"
+  }, react_1["default"].createElement(Logo_1["default"], null), navMobile));
 }
 
 exports.default = NavBar;
