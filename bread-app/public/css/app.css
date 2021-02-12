@@ -1333,8 +1333,9 @@ label.a-label-required__red::after {
   position: absolute;
   top: 0;
   right: 0;
-  width: 60px;
+  width: 40px;
   height: 28px;
+  font-size: 0.8rem;
 }
 
 .m-search-sidebar .a-bar-search {

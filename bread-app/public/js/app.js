@@ -15457,10 +15457,16 @@ var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/reac
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
-function Searchbar() {
-  var _a = react_1.useState(''),
-      keyword = _a[0],
-      Setkeyword = _a[1];
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
+var Searchbar = function Searchbar(_a) {
+  var text = _a.text;
+
+  var _b = react_1.useState(''),
+      keyword = _b[0],
+      Setkeyword = _b[1];
 
   var onChangeKeyword = function onChangeKeyword(e) {
     Setkeyword(e.target.value);
@@ -15473,10 +15479,14 @@ function Searchbar() {
     placeholder: "\u30AD\u30FC\u30EF\u30FC\u30C9\u304B\u3089\u63A2\u3059",
     value: keyword,
     onChange: onChangeKeyword
-  }), react_1["default"].createElement(react_router_dom_1.Link, {
+  }), text && react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/search/" + keyword
-  }, react_1["default"].createElement("span", null, "\u691C\u7D22")));
-}
+  }, react_1["default"].createElement("span", null, "\u691C\u7D22")), text === null && react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/search"
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faSearch
+  })));
+};
 
 exports.default = Searchbar;
 
@@ -15749,7 +15759,7 @@ var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
-function BtnSearch_icon() {
+function BtnMypage_icon() {
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
   var icon;
 
@@ -15774,7 +15784,7 @@ function BtnSearch_icon() {
   }, icon);
 }
 
-exports.default = BtnSearch_icon;
+exports.default = BtnMypage_icon;
 
 /***/ }),
 
@@ -16880,7 +16890,9 @@ function NavBar() {
     className: "l-navbar__container--pc"
   }, react_1["default"].createElement(Logo_1["default"], null), react_1["default"].createElement("div", {
     className: "l-navbar__container--pc__content"
-  }, react_1["default"].createElement(Searchbar_1["default"], null), react_1["default"].createElement("div", {
+  }, react_1["default"].createElement(Searchbar_1["default"], {
+    text: null
+  }), react_1["default"].createElement("div", {
     className: "l-navbar__container--pc__content__nav"
   }, navPC))), react_1["default"].createElement("div", {
     className: "l-navbar__container--mobile"
@@ -20500,7 +20512,9 @@ function Top() {
     className: "p-top__hero"
   }, react_1["default"].createElement("div", {
     className: "p-top__hero__content"
-  }, react_1["default"].createElement("h1", null, "\u304A\u6C17\u306B\u5165\u308A\u306E\u30D1\u30F3\u5C4B\u3055\u3093\u3092", react_1["default"].createElement("br", null), "\u898B\u3064\u3051\u308B\u3001\u3064\u306A\u304C\u308B"), react_1["default"].createElement(Searchbar_1["default"], null))), react_1["default"].createElement("main", {
+  }, react_1["default"].createElement("h1", null, "\u304A\u6C17\u306B\u5165\u308A\u306E\u30D1\u30F3\u5C4B\u3055\u3093\u3092", react_1["default"].createElement("br", null), "\u898B\u3064\u3051\u308B\u3001\u3064\u306A\u304C\u308B"), react_1["default"].createElement(Searchbar_1["default"], {
+    text: '検索'
+  }))), react_1["default"].createElement("main", {
     className: "p-top__content"
   }, react_1["default"].createElement(top_section_1["default"], {
     key: "content",

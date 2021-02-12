@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Searchbar from '../atoms/Searchbar'
 import BtnSearch_icon from '../atoms/buttons/BtnSearch_icon';
-import BtnMypage from '../atoms/buttons/BtnMypage';
+import BtnMypage_icon from '../atoms/buttons/BtnMypage';
 import BtnLogin_icon from '../atoms/buttons/BtnLogin_icon';
 import Logo from '../atoms/Logo';
 import { UserAuthContext } from '../../contexts/UserAuthContext';
@@ -36,13 +36,14 @@ function NavBar() {
     if(state.uuid){
         navPC = (
             <nav className="l-navbar__container--pc__content__nav--loggedin">
-                <BtnMypage/>
+                <BtnMypage_icon/>
             </nav>
         );
         navMobile = (
             <nav className="l-navbar__container--mobile__nav">
-                <BtnSearch_icon/>
-                <BtnMypage/>
+                <BtnSearch_icon
+                />
+                <BtnMypage_icon/>
             </nav>
         );
     }else{
@@ -80,7 +81,9 @@ function NavBar() {
             <div className="l-navbar__container--pc">
                 <Logo/>
                 <div className="l-navbar__container--pc__content">
-                    <Searchbar />
+                    <Searchbar
+                        text = {null}
+                    />
                     <div className="l-navbar__container--pc__content__nav">
                         {navPC}
                     </div>

@@ -58,7 +58,9 @@ function Top() {
             <div className="p-top__hero">
                 <div className="p-top__hero__content">
                     <h1>お気に入りのパン屋さんを<br></br>見つける、つながる</h1>
-                    <Searchbar />
+                    <Searchbar
+                        text = {'検索'}
+                    />
                 </div>
             </div>
             <main className="p-top__content">
