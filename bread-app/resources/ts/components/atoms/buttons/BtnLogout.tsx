@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { UserAuthContext } from '../../../contexts/UserAuthContext';
 
-export default function BtnLogout_icon() {
+export default function BtnLogout() {
     const { dispatch } = useContext(UserAuthContext);
     const history = useHistory();
 
