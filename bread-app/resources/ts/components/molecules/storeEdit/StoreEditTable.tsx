@@ -23,7 +23,6 @@ const StoreEditTable: React.FC<EditProps> = ({StoreInfo, MenuInfo}) => {
 
     const Tab = (tab) => {
         let TabClassName = tab.category + "_" + tab.tableName;
-        console.log(tab);
         if(Table === tab.tableName){
             TabClassName += ' selected';
         }
