@@ -34,13 +34,11 @@ class UserLoginController extends Controller
         
         if (Auth::attempt($credentials)) {
             Log::info('Auth::attempt');
-
             $user = Auth::user();
             $user->tokens()->where('name', 'token-name')->delete();
             $token = $user->createToken('token-name')->plainTextToken;
             Log::info('$token');
             Log::info($token);
-
         }
 
         Log::info(Auth::user());
@@ -67,7 +65,7 @@ class UserLoginController extends Controller
 
         Auth::logout();
         // Auth::user()->currentAccessToken()->delete();
-                        Log::info('ログアウトしました');
+        Log::info('ログアウトしました');
 
         Log::info(Auth::user());
         Log::info(Auth::check());

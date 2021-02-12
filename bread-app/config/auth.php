@@ -46,12 +46,6 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
-
-        'stores' => [
-            'driver' => 'token',
-            'provider' => 'stores',
-            'hash' => false,
-        ],
     ],
 
     /*
@@ -75,11 +69,6 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
-        ],
-        
-        'stores' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Store::class,
         ],
 
         // 'users' => [

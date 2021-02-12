@@ -25,11 +25,12 @@ export default function Register_store() {
     };
 
     const onSubmit = (data) => {
+        console.log(data);
         SetEmailError(false);
-        axios.post('/api/create_store', data)
+        axios.post('/api/create_user', data)
         .then(res => {
             console.log(res);
-            history.push("/search");
+            history.push("/store_edit");
         })
         .catch(errors => {
             console.log(errors);
@@ -74,7 +75,7 @@ export default function Register_store() {
                         </div>
                     </div>
 
-                    <div className = "p-register-store__container__form__item m-storeForm__item">
+                    {/* <div className = "p-register-store__container__form__item m-storeForm__item">
                         <label htmlFor="store_tel" className="a-label-required__red">電話番号</label>
                         <div className = "p-register-store__container__form__item__input m-storeForm__item__input">
                             <span>半角で入力してください。(ハイフンなし)</span>
@@ -84,7 +85,7 @@ export default function Register_store() {
                             {errors.tel && errors.tel.type === "minLength" && (<p>10～11文字で入力してください。</p>)}
                             {errors.tel && errors.tel.type === "maxLength" && (<p>10～11文字で入力してください。</p>)}
                         </div>
-                    </div>
+                    </div> */}
 
                     <div className = "p-register-store__container__form__item m-storeForm__item">
                         <label htmlFor="store_password" className="a-label-required__red">パスワード</label>
