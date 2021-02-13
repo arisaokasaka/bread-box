@@ -15,9 +15,11 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+//UserLoginController
 Route::post('/login', 'Api\Auth\UserLoginController@login')->name('login');
 Route::get('/logout', 'Api\Auth\UserLoginController@logout')->name('logout');
 
+//Auth
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     Log::info('auth:sanctum');
     Log::info($request);
@@ -32,7 +34,13 @@ Route::post('/tokens/create', function (Request $request) {
     return ['token' => $token->plainTextToken];
 });
 
+//UserContoller
+Route::post('/create_user', 'Api\UserController@create_user');
+
+//StoreController
 Route::post('/create_store', 'Api\StoreController@create_store');
 Route::post('/store_all', 'Api\StoreController@search_store');
 Route::post('/index_store', 'Api\StoreController@index_store');
-Route::post('/create_user', 'Api\UserController@create_user');
+
+//Store_menuController
+Route::post('/create_store_menu', 'Api\StoreMenuController@create_store_menu');

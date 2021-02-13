@@ -1,13 +1,24 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import axios from 'axios';
 import {useForm} from 'react-hook-form';
 import bread_kinds from '../../../../info/Bread_kinds';
 import BtnSave from '../../../atoms/buttons/BtnSave';
+import {UserAuthContext} from '../../../../contexts/UserAuthContext';
 
 export default function MenuCreate() {
     const { register, handleSubmit, errors} = useForm();
-  
+    const { state } = useContext(UserAuthContext);
+
+    //store_menusテーブルにレコード作成
     const onSubmit = (data) => {
-        console.log(data);
+        data['menu_type'] = 1;
+        data['store_uuid'] = state.uuid;
+        axios.post('/api/create_store_menu', data)
+        .then(res => {
+            alert('新しいメニューを追加しました。追加したメニューは、メニュー一覧から確認できます。')
+        })
+        .catch(errors => {
+        });
     }
 
     return (
