@@ -12,7 +12,7 @@ function NavBar() {
     const { state, dispatch } = useContext(UserAuthContext);
 
     useEffect(() => {
-        console.log('effect')
+        console.log('effect-navbar')
         getUser();
     },[]
     );

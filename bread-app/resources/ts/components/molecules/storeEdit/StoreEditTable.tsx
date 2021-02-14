@@ -9,8 +9,8 @@ import StoreEditTable_spirit from './storeEditSpirit/StoreEditTable_spirit';
 import StoreEditTable_advantage from './storeEditSpirit/StoreEditTable_advantage';
 import EditBasicInfo from './storeEditBasic/EditBasicInfo';
 import { StoreEditNav_menu, StoreEditNav_basic, StoreEditNav_spirit, StoreEditNav_stamp } from '../../../info/StoreEditMenus';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faChevronRight, faChevronCircleDown} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight, faChevronCircleDown } from '@fortawesome/free-solid-svg-icons';
 import BtnLogout from '../../atoms/buttons/BtnLogout';
 
 type EditProps = ({

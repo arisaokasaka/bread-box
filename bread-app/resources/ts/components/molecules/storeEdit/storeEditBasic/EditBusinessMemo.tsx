@@ -1,8 +1,8 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import axios from 'axios';
-import {useForm} from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import { UserAuthContext } from '../../../../contexts/UserAuthContext';
 import BtnSave from '../../../atoms/buttons/BtnSave';
-import {UserAuthContext} from '../../../../contexts/UserAuthContext';
 
 type BasicProps = ({
     StoreInfo: any;
@@ -33,7 +33,7 @@ const EditBusinessMemo: React.FC<BasicProps> = ({StoreInfo}) => {
                         <label>お知らせ内容</label>
                         <div className="m-storeForm__item__input">
                             <span>【記載例】<br/>定休日：第3水曜日<br/>営業時間：月～水 9時～19時 / 木～土 8時～13時</span>
-                            <textarea name="business_memo" defaultValue={StoreInfo.business_memo} ref={register({required: true})} onClick = {()=>console.log(StoreInfo.email)}/>
+                            <textarea name="business_memo" defaultValue={StoreInfo.business_memo} ref={register({required: true})} />
                             {errors.business_memo && <p>お知らせ内容を記入してください。</p>}
                         </div>
                     </div>

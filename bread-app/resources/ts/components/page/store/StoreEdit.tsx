@@ -30,25 +30,12 @@ let testMenuInfo = [
     }
 ]
 
-let testStoreInfo = [
-    {
-        uuid: 23456789,
-        name: 'sarasapan',
-        address: 'dsdsdsdsdsdsd',
-        business_day: 'sasa',
-        busines_memo: '定休日！！！',
-        message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
-        sns: {twitter: 'twitter', instagram: 'sssss'}
-    }
-]
-
-const StoreEdit:any = () => {
-    const { state, dispatch } = useContext(UserAuthContext);
+const StoreEdit: React.FC = () => {
+    const { state } = useContext(UserAuthContext);
     const [ storeInfo, setStoreInfo ] = useState({data: []});
 
     let MenuInfo: any;
     useEffect(() => {
-        console.log('effect')
         getStoreInfo();
     },[]);
 
@@ -76,7 +63,7 @@ const StoreEdit:any = () => {
                     />
                 </div> */}
                 <div className = "p-store-edit__container__title">
-                    <h2 onClick = {()=>console.log(storeInfo)}><FontAwesomeIcon icon={faStore}/>店舗管理</h2>
+                    <h2><FontAwesomeIcon icon={faStore}/>店舗管理</h2>
                     {/* {StoreInfo.map((el) => <span>{el.name+"様"}</span>)} */}
                 </div>
                 <div className = "p-store-edit__container__table">
