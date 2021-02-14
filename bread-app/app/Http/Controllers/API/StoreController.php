@@ -23,16 +23,22 @@ class StoreController extends Controller
         return $info->find_keyword('');
     }
 
-    //店舗新規登録
+    // 作成：店舗レコード作成（店舗の新規登録時に実行）
     public function create_store(Request $request){
         $store = new Store();
         $store->create_store($request->input('user_uuid'));
     }
 
-    //usersテーブルとstoresテーブルをjoinのうえ、そのレコード情報を取得
+    // 取得：usersテーブルとstoresテーブルをjoinのうえ、そのレコード情報を取得
     public function index_storeInfo(Request $request){
         $store = new Store();
         $get_info = $store->index_storeInfo($request->input('user_uuid'));
         return $get_info;
+    }
+
+    // 更新：店舗からのお知らせ
+    public function update_businessMemo(Request $request){
+        $store = new Store();
+        $store->update_businessMemo($request);
     }
 }
