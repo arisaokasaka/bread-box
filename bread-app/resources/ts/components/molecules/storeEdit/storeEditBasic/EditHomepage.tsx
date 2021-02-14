@@ -34,6 +34,7 @@ const EditHomepage: React.FC<BasicProps> = ({StoreInfo}) => {
                         <label htmlFor="store_url">ホームページURL</label>
                         <div className="m-storeForm__item__input">
                             <input type="url" id="store_url" name="url" value={StoreInfo.url} ref={register({required: true})} />
+                            {errors.url && <p>ホームページのURLを記入してください。</p>}
                         </div>
                     </div>
                     <div className="m-storeEdit-homepage__container__form__btn m-storeForm__btn">
