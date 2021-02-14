@@ -5,7 +5,7 @@ import BtnSave from '../../../atoms/buttons/BtnSave';
 import week from '../../../../info/Week';
 
 type BasicProps = ({
-    StoreInfo: Array<any>;
+    StoreInfo: any;
 });
 
 const EditBusinessDays: React.FC<BasicProps> = ({StoreInfo}) => {
@@ -58,30 +58,26 @@ const EditBusinessDays: React.FC<BasicProps> = ({StoreInfo}) => {
 
     return(
         <div className = "m-storeEdit-businessDay">
-            {StoreInfo.map((el)=>{
-                return(
-                    <div className = "m-storeEdit-businessDay__container" key = {el.uuid}>
-                        <h3>営業日・営業時間</h3>
-                        <form className="m-storeEdit-businessDay__container__form m-storeForm" onSubmit={handleSubmit(onSubmit)}>
-                            <div className="m-storeForm__item">
-                                <label htmlFor="business_day" className="a-label-required__red">営業日</label>
-                                <div className="m-storeForm__item__input">
-                                    <input type="hidden" name="business_day" ref={register} />
-                                    <span>営業している曜日をチェックのうえ、営業時間を入力してください。</span>
-                                    <InputSchedule/>
-                                    {/* {alertMessage} */}
-                                </div>
-                            </div>   
-                            <div className="m-storeEdit-businessDay__container__form__btn m-storeForm__btn">
-                                <BtnSave
-                                    InputType={"submit"}
-                                    OnClickFunction={alertMessage}
-                                />
-                            </div>
-                        </form>
+            <div className = "m-storeEdit-businessDay__container" key = {StoreInfo.uuid}>
+                <h3>営業日・営業時間</h3>
+                <form className="m-storeEdit-businessDay__container__form m-storeForm" onSubmit={handleSubmit(onSubmit)}>
+                    <div className="m-storeForm__item">
+                        <label htmlFor="business_day" className="a-label-required__red">営業日</label>
+                        <div className="m-storeForm__item__input">
+                            <input type="hidden" name="business_day" ref={register} />
+                            <span>営業している曜日をチェックのうえ、営業時間を入力してください。</span>
+                            <InputSchedule/>
+                            {/* {alertMessage} */}
+                        </div>
+                    </div>   
+                    <div className="m-storeEdit-businessDay__container__form__btn m-storeForm__btn">
+                        <BtnSave
+                            InputType={"submit"}
+                            OnClickFunction={alertMessage}
+                        />
                     </div>
-                );
-            })}
+                </form>
+            </div>
         </div>
     );
 }

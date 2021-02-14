@@ -15,7 +15,7 @@ import BtnLogout from '../../atoms/buttons/BtnLogout';
 
 type EditProps = ({
     MenuInfo: Array<any>;
-    StoreInfo: Array<any>;
+    StoreInfo: any;
 });
 
 const StoreEditTable: React.FC<EditProps> = ({StoreInfo, MenuInfo}) => {  
