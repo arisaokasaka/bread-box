@@ -17401,22 +17401,6 @@ exports.default = StoreEditTable;
 "use strict";
 
 
-var __assign = this && this.__assign || function () {
-  __assign = Object.assign || function (t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-      s = arguments[i];
-
-      for (var p in s) {
-        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-      }
-    }
-
-    return t;
-  };
-
-  return __assign.apply(this, arguments);
-};
-
 var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
   if (k2 === undefined) k2 = k;
   Object.defineProperty(o, k2, {
@@ -17622,18 +17606,7 @@ var EditBasicInfo = function EditBasicInfo(_a) {
       handleSubmit = _b.handleSubmit,
       errors = _b.errors;
 
-  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
-
-  var _c = react_1.useState({
-    name: '',
-    address: '',
-    tel: '',
-    email: '',
-    message: ''
-  }),
-      info = _c[0],
-      setInfo = _c[1]; //送信時の動作
-
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state; //送信時の動作
 
   var onSubmit = function onSubmit(data) {
     return __awaiter(void 0, void 0, void 0, function () {
@@ -17677,11 +17650,6 @@ var EditBasicInfo = function EditBasicInfo(_a) {
     name: "name",
     id: "store_name",
     defaultValue: StoreInfo.name,
-    onChange: function onChange(e) {
-      return setInfo(__assign(__assign({}, info), {
-        name: e.target.value
-      }));
-    },
     ref: register({
       required: true
     })
@@ -17697,11 +17665,6 @@ var EditBasicInfo = function EditBasicInfo(_a) {
     name: "address",
     id: "store_address",
     defaultValue: StoreInfo.address,
-    onChange: function onChange(e) {
-      return setInfo(__assign(__assign({}, info), {
-        address: e.target.value
-      }));
-    },
     ref: register({
       required: true
     })
@@ -17717,11 +17680,6 @@ var EditBasicInfo = function EditBasicInfo(_a) {
     name: "email",
     id: "store_email",
     defaultValue: StoreInfo.email,
-    onChange: function onChange(e) {
-      return setInfo(__assign(__assign({}, info), {
-        email: e.target.value
-      }));
-    },
     ref: register({
       required: true
     })
@@ -17736,11 +17694,6 @@ var EditBasicInfo = function EditBasicInfo(_a) {
     name: "tel",
     id: "store_tel",
     defaultValue: StoreInfo.tel,
-    onChange: function onChange(e) {
-      return setInfo(__assign(__assign({}, info), {
-        tel: e.target.value
-      }));
-    },
     ref: register({
       pattern: /[0-9]/,
       maxLength: 11,
@@ -17756,11 +17709,6 @@ var EditBasicInfo = function EditBasicInfo(_a) {
     name: "message",
     id: "store_message",
     defaultValue: StoreInfo.message,
-    onChange: function onChange(e) {
-      return setInfo(__assign(__assign({}, info), {
-        message: e.target.value
-      }));
-    },
     ref: register
   }))), react_1["default"].createElement("div", {
     className: "m-storeEdit-basic__container__form__btn m-storeForm__btn"
@@ -17853,7 +17801,7 @@ var EditBusinessDays = function EditBusinessDays(_a) {
       alertClose = _d[0],
       setAlertCloseHour = _d[1];
 
-  var business_day = {};
+  var business_day;
 
   var alertMessage = function alertMessage() {
     if (alertOpen === true && alertClose === false) {
@@ -17869,7 +17817,6 @@ var EditBusinessDays = function EditBusinessDays(_a) {
     var business_day_check = false;
     setAlertOpenHour(false);
     setAlertCloseHour(false);
-    console.log('submit');
     Week_1["default"].week.map(function (day) {
       var open = document.getElementsByName(day.id + '_open')[0];
       var close = document.getElementsByName(day.id + '_close')[0];
@@ -18160,6 +18107,40 @@ exports.default = EditHomepage;
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -18170,9 +18151,13 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
 var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
+
+var UserAuthContext_1 = __webpack_require__(/*! ../../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
 var BtnSave_1 = __importDefault(__webpack_require__(/*! ../../../atoms/buttons/BtnSave */ "./resources/ts/components/atoms/buttons/BtnSave.tsx"));
 
@@ -18181,18 +18166,43 @@ var EditSNS = function EditSNS(_a) {
 
   var _b = react_hook_form_1.useForm(),
       register = _b.register,
-      handleSubmit = _b.handleSubmit,
-      errors = _b.errors;
+      handleSubmit = _b.handleSubmit;
+
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
+  var sns;
+  var defaultData; // StoreInfo.snsにデータがあれば、defaultDataにそのデータを設定・defaultValueに反映
+
+  if (StoreInfo.sns) {
+    defaultData = JSON.parse(StoreInfo.sns);
+  } else {
+    defaultData = {
+      instagram: '',
+      twitter: '',
+      facebook: '',
+      other: ''
+    };
+  } // SNS情報の送信
+
 
   var onSubmit = function onSubmit(data) {
-    console.log(data);
+    //snsをまとめたobject作成し、objectを送信
+    sns['instagram'] = data['instagram'];
+    sns['twitter'] = data['twitter'];
+    sns['facebook'] = data['facebook'];
+    sns['other'] = data['other'];
+    data['sns'] = sns;
+    data['user_uuid'] = state.uuid;
+    axios_1["default"].post("/api/update_sns", data).then(function (res) {
+      alert('保存しました。');
+    })["catch"](function (err) {
+      alert('保存に失敗しました。');
+    });
   };
 
   return react_1["default"].createElement("div", {
     className: "m-storeEdit-SNS"
   }, react_1["default"].createElement("div", {
-    className: "m-storeEdit-SNS__container",
-    key: StoreInfo.uuid
+    className: "m-storeEdit-SNS__container"
   }, react_1["default"].createElement("h3", null, "SNS"), react_1["default"].createElement("span", null, "\u304A\u6301\u3061\u306ESNS\u306EURL\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("form", {
     className: "m-storeEdit-SNS__container__form m-storeForm",
     onSubmit: handleSubmit(onSubmit)
@@ -18202,28 +18212,36 @@ var EditSNS = function EditSNS(_a) {
     className: "m-storeEdit-SNS__container__form__sns__item__input m-storeForm__item__input"
   }, react_1["default"].createElement("input", {
     type: "url",
-    value: StoreInfo.sns
+    name: "instagram",
+    defaultValue: defaultData.instagram,
+    ref: register
   }))), react_1["default"].createElement("div", {
     className: "m-storeEdit-SNS__container__form__sns__item m-storeForm__item"
   }, react_1["default"].createElement("label", null, "Twitter"), react_1["default"].createElement("div", {
     className: "m-storeEdit-SNS__container__form__sns__item__input m-storeForm__item__input"
   }, react_1["default"].createElement("input", {
     type: "url",
-    value: StoreInfo.sns
+    name: "twitter",
+    defaultValue: defaultData.twitter,
+    ref: register
   }))), react_1["default"].createElement("div", {
     className: "m-storeEdit-SNS__container__form__sns__item m-storeForm__item"
   }, react_1["default"].createElement("label", null, "Facebook"), react_1["default"].createElement("div", {
     className: "m-storeEdit-SNS__container__form__sns__item__input m-storeForm__item__input"
   }, react_1["default"].createElement("input", {
     type: "url",
-    value: StoreInfo.sns
+    name: "facebook",
+    defaultValue: defaultData.facebook,
+    ref: register
   }))), react_1["default"].createElement("div", {
     className: "m-storeEdit-SNS__container__form__sns__item m-storeForm__item"
   }, react_1["default"].createElement("label", null, "\u305D\u306E\u4ED6"), react_1["default"].createElement("div", {
     className: "m-storeEdit-SNS__container__form__sns__item__input m-storeForm__item__input"
   }, react_1["default"].createElement("input", {
     type: "url",
-    value: StoreInfo.sns
+    name: "other",
+    defaultValue: defaultData.other,
+    ref: register
   }))), react_1["default"].createElement("div", {
     className: "m-storeEdit-SNS__container__form__btn m-storeForm__btn"
   }, react_1["default"].createElement(BtnSave_1["default"], {

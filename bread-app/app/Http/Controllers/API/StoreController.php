@@ -53,4 +53,10 @@ class StoreController extends Controller
         $store = new Store();
         $store->update_homepage($request);
     }
+
+    // 更新：SNS
+    public function update_sns(Request $request){
+        $store = new Store();
+        $store->update_sns($request);
+    }
 }

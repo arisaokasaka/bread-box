@@ -86,4 +86,11 @@ class Store extends Model
         ->where('user_uuid', '=', $request['user_uuid'])
         ->update(['url' => $request['url']]);
     }
+
+    // 更新：SNS
+    public function update_sns($request){
+        return $this
+        ->where('user_uuid', '=', $request['user_uuid'])
+        ->update(['sns' => $request['sns']]);
+    }
 }
