@@ -36,16 +36,30 @@ class Store extends Model
         ->get();
     }
 
+    // 店舗レコード作成（店舗の新規登録時に実行）
     public function create_store($store_user_uuid){
         $this->uuid = Str::uuid();
         $this->user_uuid = $store_user_uuid;
         $this->save();
     }
-}
 
-// $this->tel = $store_info['tel'];
-// $this->business_day = $store_info['business_day'];
-// $this->business_memo = json_encode(['123' => 123]); //←stringに変更したい
-// $this->message = $store_info['message'];
-// $this->url = $store_info['url'];
-// $this->sns = json_encode($sns_array);
+    //usersテーブルとstoresテーブルをjoinのうえ、そのレコード情報を取得
+    public function index_storeInfo($request){
+        return $this
+        ->newQuery()
+        ->select([
+            'users.name',
+            'users.email',
+            'users.address',
+            'stores.tel',
+            'stores.business_day',
+            'stores.business_memo',
+            'stores.message',
+            'stores.url',
+            'stores.sns'
+        ])
+        ->join('users', 'stores.user_uuid', '=', 'users.uuid')
+        ->where('user_uuid', '=', $request)
+        ->first();
+    }
+}
