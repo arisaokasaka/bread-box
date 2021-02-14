@@ -41,4 +41,10 @@ class StoreController extends Controller
         $store = new Store();
         $store->update_businessMemo($request);
     }
+    
+    // 更新：ホームページ
+    public function update_homepage(Request $request){
+        $store = new Store();
+        $store->update_homepage($request);
+    }
 }

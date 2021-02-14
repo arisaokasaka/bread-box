@@ -69,4 +69,11 @@ class Store extends Model
         ->where('user_uuid', '=', $request['user_uuid'])
         ->update(['business_memo' => $request['business_memo']]);
     }
+
+    // 更新：ホームページ
+    public function update_homepage($request){
+        return $this
+        ->where('user_uuid', '=', $request['user_uuid'])
+        ->update(['url' => $request['url']]);
+    }
 }

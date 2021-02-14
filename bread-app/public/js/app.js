@@ -16903,7 +16903,7 @@ function NavBar() {
       dispatch = _a.dispatch;
 
   react_1.useEffect(function () {
-    console.log('effect');
+    console.log('effect-navbar');
     getUser();
   }, []); //認証ユーザー取得
 
@@ -17401,6 +17401,56 @@ exports.default = StoreEditTable;
 "use strict";
 
 
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -17411,7 +17461,7 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
 
@@ -17425,99 +17475,131 @@ var EditBasicInfo = function EditBasicInfo(_a) {
       handleSubmit = _b.handleSubmit,
       errors = _b.errors;
 
+  var _c = react_1.useState({
+    name: '',
+    address: '',
+    tel: '',
+    email: '',
+    message: ''
+  }),
+      info = _c[0],
+      setInfo = _c[1];
+
   var onSubmit = function onSubmit(data) {
     console.log(data);
   };
 
   return react_1["default"].createElement("div", {
     className: "m-storeEdit-basic"
-  }, StoreInfo.map(function (el) {
-    return react_1["default"].createElement("div", {
-      className: "m-storeEdit-basic__container",
-      key: el.uuid
-    }, react_1["default"].createElement("h3", null, "\u57FA\u672C\u60C5\u5831\u7DE8\u96C6"), react_1["default"].createElement("form", {
-      className: "m-storeEdit-basic__container__form m-storeForm",
-      onSubmit: handleSubmit(onSubmit)
-    }, react_1["default"].createElement("div", {
-      className: "m-storeEdit-basic__container__form__item m-storeForm__item"
-    }, react_1["default"].createElement("label", {
-      htmlFor: "store_name",
-      className: "a-label-required__red"
-    }, "\u5E97\u8217\u540D"), react_1["default"].createElement("div", {
-      className: "m-storeEdit-basic__container__form__item__input m-storeForm__item__input"
-    }, react_1["default"].createElement("input", {
-      type: "text",
-      id: "store_name",
-      name: "name",
-      value: el.name,
-      ref: register({
-        required: true
-      })
-    }), errors.name && react_1["default"].createElement("p", null, "\u5E97\u8217\u540D\u306F\u5FC5\u9808\u3067\u3059\u3002"))), react_1["default"].createElement("div", {
-      className: "m-storeEdit-basic__container__form__item m-storeForm__item"
-    }, react_1["default"].createElement("label", {
-      htmlFor: "store_address",
-      className: "a-label-required__red"
-    }, "\u4F4F\u6240"), react_1["default"].createElement("div", {
-      className: "m-storeEdit-basic__container__form__item__input m-storeForm__item__input"
-    }, react_1["default"].createElement("input", {
-      type: "text",
-      name: "address",
-      id: "store_address",
-      value: el.address,
-      ref: register({
-        required: true
-      })
-    }), errors.address && react_1["default"].createElement("p", null, "\u4F4F\u6240\u306F\u5FC5\u9808\u3067\u3059\u3002"))), react_1["default"].createElement("div", {
-      className: "m-storeEdit-basic__container__form__item m-storeForm__item"
-    }, react_1["default"].createElement("label", {
-      htmlFor: "store_email",
-      className: "a-label-required__red"
-    }, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9"), react_1["default"].createElement("div", {
-      className: "m-storeEdit-basic__container__form__item__input m-storeForm__item__input"
-    }, react_1["default"].createElement("input", {
-      type: "email",
-      name: "email",
-      id: "store_email",
-      value: el.email,
-      ref: register({
-        required: true
-      })
-    }), errors.email && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F\u5FC5\u9808\u3067\u3059\u3002"))), react_1["default"].createElement("div", {
-      className: "m-storeEdit-basic__container__form__item m-storeForm__item"
-    }, react_1["default"].createElement("label", {
-      htmlFor: "store_tel",
-      className: "a-label-required__red"
-    }, "\u96FB\u8A71\u756A\u53F7(\u534A\u89D2)"), react_1["default"].createElement("div", {
-      className: "m-storeEdit-basic__container__form__item__input m-storeForm__item__input"
-    }, react_1["default"].createElement("span", null, "\u534A\u89D2\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002(\u30CF\u30A4\u30D5\u30F3\u306A\u3057)"), react_1["default"].createElement("input", {
-      type: "tel",
-      name: "tel",
-      id: "store_tel",
-      ref: register({
-        required: true,
-        pattern: /[0-9]/,
-        maxLength: 11,
-        minLength: 10
-      })
-    }), errors.tel && errors.tel.type === "required" && react_1["default"].createElement("p", null, "\u96FB\u8A71\u756A\u53F7\u306F\u5FC5\u9808\u3067\u3059\u3002"), errors.tel && errors.tel.type === "pattern" && react_1["default"].createElement("p", null, "\u534A\u89D2\u6570\u5B57\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), errors.tel && errors.tel.type === "minLength" && react_1["default"].createElement("p", null, "10\uFF5E11\u6587\u5B57\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), errors.tel && errors.tel.type === "maxLength" && react_1["default"].createElement("p", null, "10\uFF5E11\u6587\u5B57\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
-      className: "m-storeEdit-basic__container__form__item m-storeForm__item"
-    }, react_1["default"].createElement("label", {
-      htmlFor: "store_message"
-    }, "\u5E97\u8217\u8AAC\u660E"), react_1["default"].createElement("div", {
-      className: "m-storeEdit-basic__container__form__item__input m-storeForm__item__input"
-    }, react_1["default"].createElement("span", null, "\u304A\u5E97\u306E\u30DA\u30FC\u30B8\u30C8\u30C3\u30D7\u306B\u8868\u793A\u3055\u308C\u308B\u90E8\u5206\u3067\u3059\u3002"), react_1["default"].createElement("textarea", {
-      id: "store_message",
-      name: "message",
-      value: el.message,
-      ref: register
-    }))), react_1["default"].createElement("div", {
-      className: "m-storeEdit-basic__container__form__btn m-storeForm__btn"
-    }, react_1["default"].createElement(BtnSave_1["default"], {
-      InputType: "submit",
-      OnClickFunction: null
-    }))));
-  }));
+  }, react_1["default"].createElement("div", {
+    className: "m-storeEdit-basic__container",
+    key: StoreInfo.uuid
+  }, react_1["default"].createElement("h3", null, "\u57FA\u672C\u60C5\u5831\u7DE8\u96C6"), react_1["default"].createElement("form", {
+    className: "m-storeEdit-basic__container__form m-storeForm",
+    onSubmit: handleSubmit(onSubmit)
+  }, react_1["default"].createElement("div", {
+    className: "m-storeEdit-basic__container__form__item m-storeForm__item"
+  }, react_1["default"].createElement("label", {
+    htmlFor: "store_name",
+    className: "a-label-required__red"
+  }, "\u5E97\u8217\u540D"), react_1["default"].createElement("div", {
+    className: "m-storeEdit-basic__container__form__item__input m-storeForm__item__input"
+  }, react_1["default"].createElement("input", {
+    type: "text",
+    id: "store_name",
+    name: "name",
+    defaultValue: StoreInfo.name,
+    onChange: function onChange(e) {
+      return setInfo(__assign(__assign({}, info), {
+        name: e.target.value
+      }));
+    },
+    ref: register({
+      required: true
+    })
+  }), errors.name && react_1["default"].createElement("p", null, "\u5E97\u8217\u540D\u306F\u5FC5\u9808\u3067\u3059\u3002"))), react_1["default"].createElement("div", {
+    className: "m-storeEdit-basic__container__form__item m-storeForm__item"
+  }, react_1["default"].createElement("label", {
+    htmlFor: "store_address",
+    className: "a-label-required__red"
+  }, "\u4F4F\u6240"), react_1["default"].createElement("div", {
+    className: "m-storeEdit-basic__container__form__item__input m-storeForm__item__input"
+  }, react_1["default"].createElement("input", {
+    type: "text",
+    name: "address",
+    id: "store_address",
+    defaultValue: StoreInfo.address,
+    onChange: function onChange(e) {
+      return setInfo(__assign(__assign({}, info), {
+        address: e.target.value
+      }));
+    },
+    ref: register({
+      required: true
+    })
+  }), errors.address && react_1["default"].createElement("p", null, "\u4F4F\u6240\u306F\u5FC5\u9808\u3067\u3059\u3002"))), react_1["default"].createElement("div", {
+    className: "m-storeEdit-basic__container__form__item m-storeForm__item"
+  }, react_1["default"].createElement("label", {
+    htmlFor: "store_email",
+    className: "a-label-required__red"
+  }, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9"), react_1["default"].createElement("div", {
+    className: "m-storeEdit-basic__container__form__item__input m-storeForm__item__input"
+  }, react_1["default"].createElement("input", {
+    type: "email",
+    name: "email",
+    id: "store_email",
+    defaultValue: StoreInfo.email,
+    onChange: function onChange(e) {
+      return setInfo(__assign(__assign({}, info), {
+        email: e.target.value
+      }));
+    },
+    ref: register({
+      required: true
+    })
+  }), errors.email && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F\u5FC5\u9808\u3067\u3059\u3002"))), react_1["default"].createElement("div", {
+    className: "m-storeEdit-basic__container__form__item m-storeForm__item"
+  }, react_1["default"].createElement("label", {
+    htmlFor: "store_tel"
+  }, "\u96FB\u8A71\u756A\u53F7(\u534A\u89D2)"), react_1["default"].createElement("div", {
+    className: "m-storeEdit-basic__container__form__item__input m-storeForm__item__input"
+  }, react_1["default"].createElement("span", null, "\u534A\u89D2\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002(\u30CF\u30A4\u30D5\u30F3\u306A\u3057)"), react_1["default"].createElement("input", {
+    type: "tel",
+    name: "tel",
+    id: "store_tel",
+    defaultValue: StoreInfo.tel,
+    onChange: function onChange(e) {
+      return setInfo(__assign(__assign({}, info), {
+        tel: e.target.value
+      }));
+    },
+    ref: register({
+      pattern: /[0-9]/,
+      maxLength: 11,
+      minLength: 10
+    })
+  }), errors.tel && errors.tel.type === "pattern" && react_1["default"].createElement("p", null, "\u534A\u89D2\u6570\u5B57\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), errors.tel && errors.tel.type === "minLength" && react_1["default"].createElement("p", null, "10\uFF5E11\u6587\u5B57\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), errors.tel && errors.tel.type === "maxLength" && react_1["default"].createElement("p", null, "10\uFF5E11\u6587\u5B57\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
+    className: "m-storeEdit-basic__container__form__item m-storeForm__item"
+  }, react_1["default"].createElement("label", {
+    htmlFor: "store_message"
+  }, "\u5E97\u8217\u8AAC\u660E"), react_1["default"].createElement("div", {
+    className: "m-storeEdit-basic__container__form__item__input m-storeForm__item__input"
+  }, react_1["default"].createElement("span", null, "\u304A\u5E97\u306E\u30DA\u30FC\u30B8\u306E\u6700\u521D\u306B\u8868\u793A\u3055\u308C\u308B\u90E8\u5206\u3067\u3059\u3002"), react_1["default"].createElement("textarea", {
+    id: "store_message",
+    name: "message",
+    defaultValue: StoreInfo.message,
+    onChange: function onChange(e) {
+      return setInfo(__assign(__assign({}, info), {
+        message: e.target.value
+      }));
+    },
+    ref: register
+  }))), react_1["default"].createElement("div", {
+    className: "m-storeEdit-basic__container__form__btn m-storeForm__btn"
+  }, react_1["default"].createElement(BtnSave_1["default"], {
+    InputType: "submit",
+    OnClickFunction: null
+  })))));
 };
 
 exports.default = EditBasicInfo;
@@ -17646,31 +17728,29 @@ var EditBusinessDays = function EditBusinessDays(_a) {
 
   return react_1["default"].createElement("div", {
     className: "m-storeEdit-businessDay"
-  }, StoreInfo.map(function (el) {
-    return react_1["default"].createElement("div", {
-      className: "m-storeEdit-businessDay__container",
-      key: el.uuid
-    }, react_1["default"].createElement("h3", null, "\u55B6\u696D\u65E5\u30FB\u55B6\u696D\u6642\u9593"), react_1["default"].createElement("form", {
-      className: "m-storeEdit-businessDay__container__form m-storeForm",
-      onSubmit: handleSubmit(onSubmit)
-    }, react_1["default"].createElement("div", {
-      className: "m-storeForm__item"
-    }, react_1["default"].createElement("label", {
-      htmlFor: "business_day",
-      className: "a-label-required__red"
-    }, "\u55B6\u696D\u65E5"), react_1["default"].createElement("div", {
-      className: "m-storeForm__item__input"
-    }, react_1["default"].createElement("input", {
-      type: "hidden",
-      name: "business_day",
-      ref: register
-    }), react_1["default"].createElement("span", null, "\u55B6\u696D\u3057\u3066\u3044\u308B\u66DC\u65E5\u3092\u30C1\u30A7\u30C3\u30AF\u306E\u3046\u3048\u3001\u55B6\u696D\u6642\u9593\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement(InputSchedule_1["default"], null))), react_1["default"].createElement("div", {
-      className: "m-storeEdit-businessDay__container__form__btn m-storeForm__btn"
-    }, react_1["default"].createElement(BtnSave_1["default"], {
-      InputType: "submit",
-      OnClickFunction: alertMessage
-    }))));
-  }));
+  }, react_1["default"].createElement("div", {
+    className: "m-storeEdit-businessDay__container",
+    key: StoreInfo.uuid
+  }, react_1["default"].createElement("h3", null, "\u55B6\u696D\u65E5\u30FB\u55B6\u696D\u6642\u9593"), react_1["default"].createElement("form", {
+    className: "m-storeEdit-businessDay__container__form m-storeForm",
+    onSubmit: handleSubmit(onSubmit)
+  }, react_1["default"].createElement("div", {
+    className: "m-storeForm__item"
+  }, react_1["default"].createElement("label", {
+    htmlFor: "business_day",
+    className: "a-label-required__red"
+  }, "\u55B6\u696D\u65E5"), react_1["default"].createElement("div", {
+    className: "m-storeForm__item__input"
+  }, react_1["default"].createElement("input", {
+    type: "hidden",
+    name: "business_day",
+    ref: register
+  }), react_1["default"].createElement("span", null, "\u55B6\u696D\u3057\u3066\u3044\u308B\u66DC\u65E5\u3092\u30C1\u30A7\u30C3\u30AF\u306E\u3046\u3048\u3001\u55B6\u696D\u6642\u9593\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement(InputSchedule_1["default"], null))), react_1["default"].createElement("div", {
+    className: "m-storeEdit-businessDay__container__form__btn m-storeForm__btn"
+  }, react_1["default"].createElement(BtnSave_1["default"], {
+    InputType: "submit",
+    OnClickFunction: alertMessage
+  })))));
 };
 
 exports.default = EditBusinessDays;
@@ -17686,6 +17766,40 @@ exports.default = EditBusinessDays;
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -17696,9 +17810,13 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
 var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
+
+var UserAuthContext_1 = __webpack_require__(/*! ../../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
 var BtnSave_1 = __importDefault(__webpack_require__(/*! ../../../atoms/buttons/BtnSave */ "./resources/ts/components/atoms/buttons/BtnSave.tsx"));
 
@@ -17710,35 +17828,40 @@ var EditBusinessMemo = function EditBusinessMemo(_a) {
       handleSubmit = _b.handleSubmit,
       errors = _b.errors;
 
-  var onSubmit = function onSubmit(data) {
-    console.log(data);
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state; // アップデート機能
+
+  var updateBusinessMemo = function updateBusinessMemo(data) {
+    data['user_uuid'] = state.uuid;
+    axios_1["default"].post("/api/update_businessMemo", data).then(function (res) {
+      alert('保存しました。');
+    })["catch"](function (err) {
+      alert('保存に失敗しました。');
+    });
   };
 
   return react_1["default"].createElement("div", {
     className: "m-storeEdit-businessMemo"
-  }, StoreInfo.map(function (el) {
-    return react_1["default"].createElement("div", {
-      className: "m-storeEdit-businessMemo__container",
-      key: el.uuid
-    }, react_1["default"].createElement("h3", null, "\u55B6\u696D\u306B\u95A2\u3059\u308B\u304A\u77E5\u3089\u305B"), react_1["default"].createElement("form", {
-      className: "m-storeEdit-businessMemo__container__form m-storeForm",
-      onSubmit: handleSubmit(onSubmit)
-    }, react_1["default"].createElement("div", {
-      className: "m-storeForm__item"
-    }, react_1["default"].createElement("label", null, "\u304A\u77E5\u3089\u305B\u5185\u5BB9"), react_1["default"].createElement("div", {
-      className: "m-storeForm__item__input"
-    }, react_1["default"].createElement("span", null, "\u3010\u8A18\u8F09\u4F8B\u3011", react_1["default"].createElement("br", null), "\u5B9A\u4F11\u65E5\uFF1A\u7B2C3\u6C34\u66DC\u65E5", react_1["default"].createElement("br", null), "\u55B6\u696D\u6642\u9593\uFF1A\u6708\uFF5E\u6C34 9\u6642\uFF5E19\u6642 / \u6728\uFF5E\u571F 8\u6642\uFF5E13\u6642"), react_1["default"].createElement("textarea", {
-      name: "business_memo",
-      ref: register({
-        required: true
-      })
-    }))), react_1["default"].createElement("div", {
-      className: "m-storeEdit-businessMemo__container__form__btn m-storeForm__btn"
-    }, react_1["default"].createElement(BtnSave_1["default"], {
-      InputType: "submit",
-      OnClickFunction: null
-    }))));
-  }));
+  }, react_1["default"].createElement("div", {
+    className: "m-storeEdit-businessMemo__container"
+  }, react_1["default"].createElement("h3", null, "\u55B6\u696D\u306B\u95A2\u3059\u308B\u304A\u77E5\u3089\u305B"), react_1["default"].createElement("form", {
+    className: "m-storeEdit-businessMemo__container__form m-storeForm",
+    onSubmit: handleSubmit(updateBusinessMemo)
+  }, react_1["default"].createElement("div", {
+    className: "m-storeForm__item"
+  }, react_1["default"].createElement("label", null, "\u304A\u77E5\u3089\u305B\u5185\u5BB9"), react_1["default"].createElement("div", {
+    className: "m-storeForm__item__input"
+  }, react_1["default"].createElement("span", null, "\u3010\u8A18\u8F09\u4F8B\u3011", react_1["default"].createElement("br", null), "\u5B9A\u4F11\u65E5\uFF1A\u7B2C3\u6C34\u66DC\u65E5", react_1["default"].createElement("br", null), "\u55B6\u696D\u6642\u9593\uFF1A\u6708\uFF5E\u6C34 9\u6642\uFF5E19\u6642 / \u6728\uFF5E\u571F 8\u6642\uFF5E13\u6642"), react_1["default"].createElement("textarea", {
+    name: "business_memo",
+    defaultValue: StoreInfo.business_memo,
+    ref: register({
+      required: true
+    })
+  }), errors.business_memo && react_1["default"].createElement("p", null, "\u304A\u77E5\u3089\u305B\u5185\u5BB9\u3092\u8A18\u5165\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
+    className: "m-storeEdit-businessMemo__container__form__btn m-storeForm__btn"
+  }, react_1["default"].createElement(BtnSave_1["default"], {
+    InputType: "submit",
+    OnClickFunction: null
+  })))));
 };
 
 exports.default = EditBusinessMemo;
@@ -17754,6 +17877,40 @@ exports.default = EditBusinessMemo;
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -17764,9 +17921,13 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
 var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
+
+var UserAuthContext_1 = __webpack_require__(/*! ../../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
 var BtnSave_1 = __importDefault(__webpack_require__(/*! ../../../atoms/buttons/BtnSave */ "./resources/ts/components/atoms/buttons/BtnSave.tsx"));
 
@@ -17778,40 +17939,44 @@ var EditHomepage = function EditHomepage(_a) {
       handleSubmit = _b.handleSubmit,
       errors = _b.errors;
 
-  var onSubmit = function onSubmit(data) {
-    console.log(data);
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state; // アップデート機能
+
+  var updateHomepage = function updateHomepage(data) {
+    data['user_uuid'] = state.uuid;
+    axios_1["default"].post("/api/update_homepage", data).then(function (res) {
+      alert('保存しました。');
+    })["catch"](function (err) {
+      alert('保存に失敗しました。');
+    });
   };
 
   return react_1["default"].createElement("div", {
     className: "m-storeEdit-homepage"
-  }, StoreInfo.map(function (el) {
-    return react_1["default"].createElement("div", {
-      className: "m-storeEdit-homepage__container",
-      key: el.uuid
-    }, react_1["default"].createElement("h3", null, "\u30DB\u30FC\u30E0\u30DA\u30FC\u30B8"), react_1["default"].createElement("a", null, "\u30DB\u30FC\u30E0\u30DA\u30FC\u30B8\u306EURL\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044"), react_1["default"].createElement("form", {
-      className: "m-storeEdit-homepage__container__form m-storeForm",
-      onSubmit: handleSubmit(onSubmit)
-    }, react_1["default"].createElement("div", {
-      className: "m-storeForm__item"
-    }, react_1["default"].createElement("label", {
-      htmlFor: "store_url"
-    }, "\u30DB\u30FC\u30E0\u30DA\u30FC\u30B8URL"), react_1["default"].createElement("div", {
-      className: "m-storeForm__item__input"
-    }, react_1["default"].createElement("input", {
-      type: "url",
-      id: "store_url",
-      name: "url",
-      value: el.url,
-      ref: register({
-        required: true
-      })
-    }))), react_1["default"].createElement("div", {
-      className: "m-storeEdit-homepage__container__form__btn m-storeForm__btn"
-    }, react_1["default"].createElement(BtnSave_1["default"], {
-      InputType: "submit",
-      OnClickFunction: null
-    }))));
-  }));
+  }, react_1["default"].createElement("div", {
+    className: "m-storeEdit-homepage__container"
+  }, react_1["default"].createElement("h3", null, "\u30DB\u30FC\u30E0\u30DA\u30FC\u30B8"), react_1["default"].createElement("a", null, "\u30DB\u30FC\u30E0\u30DA\u30FC\u30B8\u306EURL\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044"), react_1["default"].createElement("form", {
+    className: "m-storeEdit-homepage__container__form m-storeForm",
+    onSubmit: handleSubmit(updateHomepage)
+  }, react_1["default"].createElement("div", {
+    className: "m-storeForm__item"
+  }, react_1["default"].createElement("label", {
+    htmlFor: "store_url"
+  }, "\u30DB\u30FC\u30E0\u30DA\u30FC\u30B8URL"), react_1["default"].createElement("div", {
+    className: "m-storeForm__item__input"
+  }, react_1["default"].createElement("input", {
+    type: "url",
+    id: "store_url",
+    name: "url",
+    value: StoreInfo.url,
+    ref: register({
+      required: true
+    })
+  }))), react_1["default"].createElement("div", {
+    className: "m-storeEdit-homepage__container__form__btn m-storeForm__btn"
+  }, react_1["default"].createElement(BtnSave_1["default"], {
+    InputType: "submit",
+    OnClickFunction: null
+  })))));
 };
 
 exports.default = EditHomepage;
@@ -17857,48 +18022,46 @@ var EditSNS = function EditSNS(_a) {
 
   return react_1["default"].createElement("div", {
     className: "m-storeEdit-SNS"
-  }, StoreInfo.map(function (el) {
-    return react_1["default"].createElement("div", {
-      className: "m-storeEdit-SNS__container",
-      key: el.uuid
-    }, react_1["default"].createElement("h3", null, "SNS"), react_1["default"].createElement("span", null, "\u304A\u6301\u3061\u306ESNS\u306EURL\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("form", {
-      className: "m-storeEdit-SNS__container__form m-storeForm",
-      onSubmit: handleSubmit(onSubmit)
-    }, react_1["default"].createElement("div", {
-      className: "m-storeEdit-SNS__container__form__sns__item m-storeForm__item"
-    }, react_1["default"].createElement("label", null, "Instagram"), react_1["default"].createElement("div", {
-      className: "m-storeEdit-SNS__container__form__sns__item__input m-storeForm__item__input"
-    }, react_1["default"].createElement("input", {
-      type: "url",
-      value: el.sns.instagram
-    }))), react_1["default"].createElement("div", {
-      className: "m-storeEdit-SNS__container__form__sns__item m-storeForm__item"
-    }, react_1["default"].createElement("label", null, "Twitter"), react_1["default"].createElement("div", {
-      className: "m-storeEdit-SNS__container__form__sns__item__input m-storeForm__item__input"
-    }, react_1["default"].createElement("input", {
-      type: "url",
-      value: el.sns.twitter
-    }))), react_1["default"].createElement("div", {
-      className: "m-storeEdit-SNS__container__form__sns__item m-storeForm__item"
-    }, react_1["default"].createElement("label", null, "Facebook"), react_1["default"].createElement("div", {
-      className: "m-storeEdit-SNS__container__form__sns__item__input m-storeForm__item__input"
-    }, react_1["default"].createElement("input", {
-      type: "url",
-      value: el.sns.facebook
-    }))), react_1["default"].createElement("div", {
-      className: "m-storeEdit-SNS__container__form__sns__item m-storeForm__item"
-    }, react_1["default"].createElement("label", null, "\u305D\u306E\u4ED6"), react_1["default"].createElement("div", {
-      className: "m-storeEdit-SNS__container__form__sns__item__input m-storeForm__item__input"
-    }, react_1["default"].createElement("input", {
-      type: "url",
-      value: el.sns.other
-    }))), react_1["default"].createElement("div", {
-      className: "m-storeEdit-SNS__container__form__btn m-storeForm__btn"
-    }, react_1["default"].createElement(BtnSave_1["default"], {
-      InputType: "submit",
-      OnClickFunction: null
-    }))));
-  }));
+  }, react_1["default"].createElement("div", {
+    className: "m-storeEdit-SNS__container",
+    key: StoreInfo.uuid
+  }, react_1["default"].createElement("h3", null, "SNS"), react_1["default"].createElement("span", null, "\u304A\u6301\u3061\u306ESNS\u306EURL\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("form", {
+    className: "m-storeEdit-SNS__container__form m-storeForm",
+    onSubmit: handleSubmit(onSubmit)
+  }, react_1["default"].createElement("div", {
+    className: "m-storeEdit-SNS__container__form__sns__item m-storeForm__item"
+  }, react_1["default"].createElement("label", null, "Instagram"), react_1["default"].createElement("div", {
+    className: "m-storeEdit-SNS__container__form__sns__item__input m-storeForm__item__input"
+  }, react_1["default"].createElement("input", {
+    type: "url",
+    value: StoreInfo.sns
+  }))), react_1["default"].createElement("div", {
+    className: "m-storeEdit-SNS__container__form__sns__item m-storeForm__item"
+  }, react_1["default"].createElement("label", null, "Twitter"), react_1["default"].createElement("div", {
+    className: "m-storeEdit-SNS__container__form__sns__item__input m-storeForm__item__input"
+  }, react_1["default"].createElement("input", {
+    type: "url",
+    value: StoreInfo.sns
+  }))), react_1["default"].createElement("div", {
+    className: "m-storeEdit-SNS__container__form__sns__item m-storeForm__item"
+  }, react_1["default"].createElement("label", null, "Facebook"), react_1["default"].createElement("div", {
+    className: "m-storeEdit-SNS__container__form__sns__item__input m-storeForm__item__input"
+  }, react_1["default"].createElement("input", {
+    type: "url",
+    value: StoreInfo.sns
+  }))), react_1["default"].createElement("div", {
+    className: "m-storeEdit-SNS__container__form__sns__item m-storeForm__item"
+  }, react_1["default"].createElement("label", null, "\u305D\u306E\u4ED6"), react_1["default"].createElement("div", {
+    className: "m-storeEdit-SNS__container__form__sns__item__input m-storeForm__item__input"
+  }, react_1["default"].createElement("input", {
+    type: "url",
+    value: StoreInfo.sns
+  }))), react_1["default"].createElement("div", {
+    className: "m-storeEdit-SNS__container__form__btn m-storeForm__btn"
+  }, react_1["default"].createElement(BtnSave_1["default"], {
+    InputType: "submit",
+    OnClickFunction: null
+  })))));
 };
 
 exports.default = EditSNS;
@@ -17914,6 +18077,40 @@ exports.default = EditSNS;
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -17924,7 +18121,9 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
 var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
 
@@ -17932,14 +18131,22 @@ var Bread_kinds_1 = __importDefault(__webpack_require__(/*! ../../../../info/Bre
 
 var BtnSave_1 = __importDefault(__webpack_require__(/*! ../../../atoms/buttons/BtnSave */ "./resources/ts/components/atoms/buttons/BtnSave.tsx"));
 
+var UserAuthContext_1 = __webpack_require__(/*! ../../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
+
 function MenuCreate() {
   var _a = react_hook_form_1.useForm(),
       register = _a.register,
       handleSubmit = _a.handleSubmit,
       errors = _a.errors;
 
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state; //store_menusテーブルにレコード作成
+
   var onSubmit = function onSubmit(data) {
-    console.log(data);
+    data['menu_type'] = 1;
+    data['store_uuid'] = state.uuid;
+    axios_1["default"].post('/api/create_store_menu', data).then(function (res) {
+      alert('新しいメニューを追加しました。追加したメニューは、メニュー一覧から確認できます。');
+    })["catch"](function (errors) {});
   };
 
   return react_1["default"].createElement("div", {
@@ -19139,7 +19346,7 @@ var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modul
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
-function LoginStore() {
+var LoginStore = function LoginStore() {
   var _a;
 
   var _b = react_hook_form_1.useForm(),
@@ -19170,18 +19377,15 @@ function LoginStore() {
         email: email,
         password: password
       }).then(function (res) {
-        console.log(res);
         dispatch({
           type: 'setStore',
           payload: res.data.user.uuid
         });
         history.push("/store_edit");
       })["catch"](function (err) {
-        console.log(err);
         console.log('[login]fail_post');
       });
     })["catch"](function (err) {
-      console.log(err);
       console.log('fail_get');
     });
   };
@@ -19233,7 +19437,7 @@ function LoginStore() {
   }, "\u3053\u3061\u3089")), react_1["default"].createElement("span", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u3092\u5FD8\u308C\u305F\u65B9\u306F", react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/password_store"
   }, "\u3053\u3061\u3089")))));
-}
+};
 
 exports.default = LoginStore;
 
@@ -19320,7 +19524,7 @@ var LoginUser = function LoginUser() {
       handleSubmit = _d.handleSubmit,
       errors = _d.errors;
 
-  var history = new react_router_dom_1.useHistory(); // ログイン
+  var history = new react_router_dom_1.useHistory(); // ログイン機能
 
   var login = function login() {
     var _a;
@@ -19333,20 +19537,13 @@ var LoginUser = function LoginUser() {
         email: email,
         password: password
       }).then(function (res) {
-        console.log(res);
         dispatch({
           type: 'setUser',
           payload: res.data.user.uuid
         });
         history.push("/search");
-      })["catch"](function (err) {
-        console.log(err);
-        console.log('[login]fail_post');
-      });
-    })["catch"](function (err) {
-      console.log(err);
-      console.log('fail_get');
-    });
+      })["catch"](function (err) {});
+    })["catch"](function (err) {});
   };
 
   var csrf = (_a = document.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('content');
@@ -19712,7 +19909,7 @@ function Register_store() {
       password = _e[0],
       setPassword = _e[1];
 
-  var csrf = (_a = document.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('content');
+  var csrf = (_a = document.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('content'); //メアドが既に登録されていた場合のエラーメッセージ
 
   var emailErrorMessage = function emailErrorMessage(emailError) {
     if (emailError) {
@@ -19720,7 +19917,8 @@ function Register_store() {
     } else {
       return null;
     }
-  };
+  }; //パスワードが一致しない場合のエラーメッセージ
+
 
   var PasswordErrorMessage = function PasswordErrorMessage(original, check) {
     if (original === check) {
@@ -19728,11 +19926,10 @@ function Register_store() {
     } else {
       return react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u304C\u4E00\u81F4\u3057\u3066\u3044\u307E\u305B\u3093\u3002");
     }
-  }; //新規登録
+  }; //新規登録機能
 
 
   var onSubmit = function onSubmit(data) {
-    console.log(data);
     SetEmailError(false);
     data['type_user'] = 'store';
     axios_1["default"].post('/api/create_user', data).then(function (res) {
@@ -19743,7 +19940,7 @@ function Register_store() {
         SetEmailError(true);
       }
     });
-  }; // ログイン
+  }; // ログイン(新規登録時にログインも組み込む) 
 
 
   var login = function login() {
@@ -19757,16 +19954,22 @@ function Register_store() {
         email: email,
         password: password
       }).then(function (res) {
+        var tmp_store_user_uuid;
+        tmp_store_user_uuid = res.data.user.uuid;
         dispatch({
           type: 'setStore',
-          payload: res.data.user.uuid
+          payload: tmp_store_user_uuid
         });
-      })["catch"](function (err) {
-        console.log('[login]fail_post');
-      });
-    })["catch"](function (err) {
-      console.log('fail_get');
-    });
+        createStore(tmp_store_user_uuid);
+      })["catch"](function (err) {});
+    })["catch"](function (err) {});
+  }; //storesテーブルにレコード作成(ログイン機能実行時に、こちらも実行)
+
+
+  var createStore = function createStore(data) {
+    var form_data = new FormData();
+    form_data.append('user_uuid', data);
+    axios_1["default"].post('/api/create_store', form_data).then(function (res) {})["catch"](function (errors) {});
   };
 
   return react_1["default"].createElement("div", {
@@ -20374,6 +20577,40 @@ exports.default = Search_input_mobile;
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -20384,13 +20621,17 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
 var StoreEditTable_1 = __importDefault(__webpack_require__(/*! ../../molecules/storeEdit/StoreEditTable */ "./resources/ts/components/molecules/storeEdit/StoreEditTable.tsx"));
 
 var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
 
 var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
+var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
 var testMenuInfo = [{
   id: 45,
@@ -20411,24 +20652,32 @@ var testMenuInfo = [{
   advantage: 'だって私がつくったぱんは全部おいしいんだもん！！！！',
   spirit: 'おじいちゃんが作ってくれたパンが美味しすぎてパン屋になりました！！！'
 }];
-var testStoreInfo = [{
-  uuid: 23456789,
-  name: 'sarasapan',
-  address: 'dsdsdsdsdsdsd',
-  business_day: 'sasa',
-  busines_memo: '定休日！！！',
-  message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
-  sns: {
-    twitter: 'twitter',
-    instagram: 'sssss'
-  }
-}];
 
-var StoreEdit = function StoreEdit(_a) {
-  var MenuInfo = _a.MenuInfo,
-      StoreInfo = _a.StoreInfo;
+var StoreEdit = function StoreEdit() {
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
+
+  var _a = react_1.useState({
+    data: []
+  }),
+      storeInfo = _a[0],
+      setStoreInfo = _a[1];
+
+  var MenuInfo;
+  react_1.useEffect(function () {
+    getStoreInfo();
+  }, []); // 店舗情報取得
+
+  var getStoreInfo = function getStoreInfo() {
+    var formData = new FormData();
+    formData.append('user_uuid', state.uuid);
+    axios_1["default"].post("/api/index_storeInfo", {
+      user_uuid: state.uuid
+    }).then(function (res) {
+      setStoreInfo(res.data);
+    })["catch"](function (err) {});
+  };
+
   MenuInfo = testMenuInfo;
-  StoreInfo = testStoreInfo;
   return react_1["default"].createElement("div", {
     className: "p-store-edit"
   }, react_1["default"].createElement("div", {
@@ -20437,13 +20686,11 @@ var StoreEdit = function StoreEdit(_a) {
     className: "p-store-edit__container__title"
   }, react_1["default"].createElement("h2", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
     icon: free_solid_svg_icons_1.faStore
-  }), "\u5E97\u8217\u7BA1\u7406"), StoreInfo.map(function (el) {
-    return react_1["default"].createElement("span", null, el.name + "様");
-  })), react_1["default"].createElement("div", {
+  }), "\u5E97\u8217\u7BA1\u7406")), react_1["default"].createElement("div", {
     className: "p-store-edit__container__table"
   }, react_1["default"].createElement(StoreEditTable_1["default"], {
     MenuInfo: MenuInfo,
-    StoreInfo: StoreInfo
+    StoreInfo: storeInfo
   }))));
 };
 

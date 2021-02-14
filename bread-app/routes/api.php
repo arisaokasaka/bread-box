@@ -43,6 +43,7 @@ Route::post('/index_storeInfo', 'Api\StoreController@index_storeInfo');
 Route::post('/store_all', 'Api\StoreController@search_store');
 Route::post('/index_store', 'Api\StoreController@index_store');
 Route::post('/update_businessMemo', 'Api\StoreController@update_businessMemo');
+Route::post('/update_homepage', 'Api\StoreController@update_homepage');
 
 //Store_menuController
 Route::post('/create_store_menu', 'Api\StoreMenuController@create_store_menu');
