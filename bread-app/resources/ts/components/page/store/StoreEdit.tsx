@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
 import BtnBack from '../../atoms/buttons/BtnBack';
 import StoreEditTable from '../../molecules/storeEdit/StoreEditTable';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faStore} from '@fortawesome/free-solid-svg-icons';
+import { UserAuthContext } from '../../../contexts/UserAuthContext';
 
 let testMenuInfo = [
     {
@@ -40,9 +42,30 @@ let testStoreInfo = [
     }
 ]
 
-const StoreEdit:any = ({MenuInfo, StoreInfo}) => {
+const StoreEdit:any = () => {
+    const { state, dispatch } = useContext(UserAuthContext);
+    const [ storeInfo, setStoreInfo ] = useState({data: []});
+
+    let MenuInfo: any;
+    useEffect(() => {
+        console.log('effect')
+        getStoreInfo();
+    },[]);
+
+    // 店舗情報取得
+    const getStoreInfo = () => {
+        let formData = new FormData()
+        formData.append('user_uuid', state.uuid)
+        axios.post("/api/index_storeInfo", {
+            user_uuid: state.uuid
+        })
+        .then(res => {
+            setStoreInfo(res.data);
+        })
+        .catch(err => {
+        });
+    }
     MenuInfo = testMenuInfo;
-    StoreInfo = testStoreInfo;
 
     return(
         <div className = "p-store-edit">
@@ -53,13 +76,13 @@ const StoreEdit:any = ({MenuInfo, StoreInfo}) => {
                     />
                 </div> */}
                 <div className = "p-store-edit__container__title">
-                    <h2><FontAwesomeIcon icon={faStore}/>店舗管理</h2>
-                    {StoreInfo.map((el) => <span>{el.name+"様"}</span>)}
+                    <h2 onClick = {()=>console.log(storeInfo)}><FontAwesomeIcon icon={faStore}/>店舗管理</h2>
+                    {/* {StoreInfo.map((el) => <span>{el.name+"様"}</span>)} */}
                 </div>
                 <div className = "p-store-edit__container__table">
                     <StoreEditTable
                         MenuInfo = {MenuInfo}
-                        StoreInfo = {StoreInfo}
+                        StoreInfo = {storeInfo}
                     />
                 </div>
             </div>
