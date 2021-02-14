@@ -63,6 +63,16 @@ class Store extends Model
         ->first();
     }
 
+    // 更新：店舗基本情報(電話番頭、メッセージ)
+    public function update_basicInfo_storesTable($request){
+        return $this
+        ->where('user_uuid', '=', $request['user_uuid'])
+        ->update([
+            'tel' => $request['tel'],
+            'message' => $request['message'],
+        ]);
+    }
+
     // 更新：店舗からのお知らせ
     public function update_businessMemo($request){
         return $this

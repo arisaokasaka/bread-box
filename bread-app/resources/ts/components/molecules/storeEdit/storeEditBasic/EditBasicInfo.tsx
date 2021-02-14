@@ -1,5 +1,7 @@
-import React, {useState} from 'react'
-import {useForm} from 'react-hook-form';
+import React, { useState, useContext } from 'react';
+import axios from 'axios';
+import { useForm } from 'react-hook-form';
+import { UserAuthContext } from '../../../../contexts/UserAuthContext';
 import BtnSave from '../../../atoms/buttons/BtnSave';
 
 type BasicProps = ({
@@ -8,6 +10,7 @@ type BasicProps = ({
 
 const EditBasicInfo: React.FC<BasicProps> = ({StoreInfo}) => {
     const { register, handleSubmit, errors} = useForm();
+    const { state } = useContext(UserAuthContext);
     const [info, setInfo] = useState({
         name: '',
         address: '',
@@ -16,19 +19,40 @@ const EditBasicInfo: React.FC<BasicProps> = ({StoreInfo}) => {
         message: '',
     })
 
-    const onSubmit = (data) => {
-        console.log(data);
+    //送信時の動作
+    const onSubmit = async (data) => {
+        data['user_uuid'] = state.uuid;
+        updateBasicInfo_storesTable(data);
+        updateBasicInfo_usersTable(data);
+    }
+
+    // アップデート機能（storesテーブル）
+    const updateBasicInfo_storesTable = (data) => {
+        axios.post("/api/update_basicInfo_storesTable", data)
+        .then(res => {
+        })
+        .catch(err => {
+        });
+    }
+
+    // アップデート機能（usersテーブル）
+    const updateBasicInfo_usersTable = (data) => {
+        axios.post("/api/update_basicInfo_usersTable", data)
+        .then(res => {
+        })
+        .catch(err => {
+        });
     }
 
     return(
         <div className = "m-storeEdit-basic">
-            <div className = "m-storeEdit-basic__container" key = {StoreInfo.uuid}>
+            <div className = "m-storeEdit-basic__container">
                 <h3>基本情報編集</h3>
                 <form className="m-storeEdit-basic__container__form m-storeForm" onSubmit={handleSubmit(onSubmit)}>
                     <div className="m-storeEdit-basic__container__form__item m-storeForm__item">
                         <label htmlFor="store_name" className="a-label-required__red">店舗名</label>
                         <div className="m-storeEdit-basic__container__form__item__input m-storeForm__item__input">
-                            <input type="text" id="store_name" name="name" defaultValue={StoreInfo.name} onChange={e => setInfo({...info, name: e.target.value})} ref={ register({required: true})} />
+                            <input type="text" name="name" id="store_name" defaultValue={StoreInfo.name} onChange={e => setInfo({...info, name: e.target.value})} ref={ register({required: true})} />
                             {errors.name && <p>店舗名は必須です。</p>}
                         </div>
                     </div>
@@ -60,7 +84,7 @@ const EditBasicInfo: React.FC<BasicProps> = ({StoreInfo}) => {
                         <label htmlFor="store_message">店舗説明</label>
                         <div className="m-storeEdit-basic__container__form__item__input m-storeForm__item__input">
                             <span>お店のページの最初に表示される部分です。</span>
-                            <textarea id="store_message" name="message" defaultValue={StoreInfo.message} onChange={e => setInfo({...info, message: e.target.value})} ref={ register} />
+                            <textarea name="message" id="store_message" defaultValue={StoreInfo.message} onChange={e => setInfo({...info, message: e.target.value})} ref={ register} />
                         </div>
                     </div>
                     <div className="m-storeEdit-basic__container__form__btn m-storeForm__btn">

@@ -43,6 +43,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // 更新：店舗基本情報
+    public function update_basicInfo_usersTable($request){
+        return $this
+        ->where('uuid', '=', $request['user_uuid'])
+        ->update([
+            'name' => $request['name'],
+            'address' => $request['address'],
+            'email' => $request['email'],
+        ]);
+    }
+
     public function create_user($user_info){
         $this->uuid = Str::uuid();
         $this->name = $user_info['name'];

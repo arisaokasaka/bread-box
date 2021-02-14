@@ -36,6 +36,12 @@ class StoreController extends Controller
         return $get_info;
     }
 
+    // 更新：店舗基本情報
+    public function update_basicInfo_storesTable(Request $request){
+        $store = new Store();
+        $store->update_basicInfo_storesTable($request);
+    }
+
     // 更新：店舗からのお知らせ
     public function update_businessMemo(Request $request){
         $store = new Store();
