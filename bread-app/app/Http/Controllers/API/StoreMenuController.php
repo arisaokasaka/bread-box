@@ -22,4 +22,12 @@ class StoreMenuController extends Controller
         $get_info = $store_menu->index_menuInfo($request->input('store_uuid'));
         return $get_info;
     }
+
+    //削除：指定するuuidのレコード削除
+    public function delete_menu(Request $request){
+        Log::info('controller');
+        Log::info($request);
+        $store_menu = new StoreMenu();
+        $store_menu->delete_menu($request->input('uuid'));
+    }
 }

@@ -28,12 +28,16 @@
 
             &__text {
                 & > a {
-                    margin-left: 0.5rem;
                     @include btn-square;
                 }
 
-                & > p,
+                & > p {
+                    color: $font-color-brown;
+                    font-size: 0.8rem;
+                }
+
                 & > span {
+                    margin-right: 0.5rem;
                     color: $font-color-brown;
                     font-size: 0.8rem;
                 }

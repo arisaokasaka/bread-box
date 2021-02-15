@@ -31,4 +31,12 @@ class StoreMenu extends Model
         ->select("*")
         ->get();
     }
+
+    //削除：指定するuuidのレコード削除
+    public function delete_menu($request){
+        return $this
+        ->newQuery()
+        ->where('uuid', '=', $request)
+        ->delete();
+    }
 }
