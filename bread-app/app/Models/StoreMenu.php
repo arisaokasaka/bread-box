@@ -22,4 +22,13 @@ class StoreMenu extends Model
         $this->bread_detail = $menu_info['bread_detail'];
         $this->save();
     }
+
+    // 取得：指定するstore_uuidを持つレコード情報を取得
+    public function index_menuInfo($request){
+        return $this
+        ->newQuery()
+        ->where('store_uuid', '=', $request)
+        ->select("*")
+        ->get();
+    }
 }

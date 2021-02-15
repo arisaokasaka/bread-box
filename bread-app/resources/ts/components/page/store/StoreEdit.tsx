@@ -6,43 +6,32 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faStore} from '@fortawesome/free-solid-svg-icons';
 import { UserAuthContext } from '../../../contexts/UserAuthContext';
 
-let testMenuInfo = [
-    {
-        id: 45,
-        menu_type: 1,
-        bread_name: 'ほんじこみ',
-        bread_kind: '食パン',
-        bread_price: 300,
-        bread_detail: 'ここでしか味わえないキメ細かな“口どけの良さ”を実現するための厳選小麦粉、豊かな風味を引き出すための国産バター、そして岩手県「のだ塩」をはじめ、材料１つ１つにこだわり、魂を込めた贅沢な食パン。'
-    },
-    {
-        id: 6,
-        menu_type: 1,
-        bread_name: 'ぐっどぱん',
-        bread_kind: 'クロワッサン',
-        bread_price: 300,
-        bread_detail: 'ここでしか味わえないキメ細かな“口どけの良さ”を実現するための厳選小麦粉、豊かな風味を引き出すための国産バター、そして岩手県「のだ塩」をはじめ、材料１つ１つにこだわり、魂を込めた贅沢な食パン。'
-    },
-    {
-        menu_type: 2,
-        advantage: 'だって私がつくったぱんは全部おいしいんだもん！！！！',
-        spirit: 'おじいちゃんが作ってくれたパンが美味しすぎてパン屋になりました！！！'
-    }
-]
-
 const StoreEdit: React.FC = () => {
     const { state } = useContext(UserAuthContext);
     const [ storeInfo, setStoreInfo ] = useState({data: []});
+    const [ menuInfo, setMenuInfo ] = useState({data: []});
+    let resData: any;
+    let name_loggedin: any;
 
-    let MenuInfo: any;
     useEffect(() => {
         getStoreInfo();
+        getMenuInfo();
     },[]);
+
+    // メニュー情報取得
+    const getMenuInfo = () => {
+        axios.post("/api/index_menuInfo", {
+            store_uuid: state.uuid
+        })
+        .then(res => {
+            setMenuInfo(res.data);
+        })
+        .catch(err => {
+        });
+    }
 
     // 店舗情報取得
     const getStoreInfo = () => {
-        let formData = new FormData()
-        formData.append('user_uuid', state.uuid)
         axios.post("/api/index_storeInfo", {
             user_uuid: state.uuid
         })
@@ -52,7 +41,14 @@ const StoreEdit: React.FC = () => {
         .catch(err => {
         });
     }
-    MenuInfo = testMenuInfo;
+
+    //店舗情報を取得後、名前のHTML要素作成
+    if(storeInfo){
+        resData = storeInfo;
+        name_loggedin = (
+            <span>{resData.name}様</span>
+        );
+    }
 
     return(
         <div className = "p-store-edit">
@@ -64,11 +60,11 @@ const StoreEdit: React.FC = () => {
                 </div> */}
                 <div className = "p-store-edit__container__title">
                     <h2><FontAwesomeIcon icon={faStore}/>店舗管理</h2>
-                    {/* {StoreInfo.map((el) => <span>{el.name+"様"}</span>)} */}
+                    {name_loggedin}
                 </div>
                 <div className = "p-store-edit__container__table">
                     <StoreEditTable
-                        MenuInfo = {MenuInfo}
+                        MenuInfo = {menuInfo}
                         StoreInfo = {storeInfo}
                     />
                 </div>

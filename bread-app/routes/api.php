@@ -50,3 +50,4 @@ Route::post('/update_sns', 'Api\StoreController@update_sns');
 
 //Store_menuController
 Route::post('/create_store_menu', 'Api\StoreMenuController@create_store_menu');
+Route::post('/index_menuInfo', 'Api\StoreMenuController@index_menuInfo');
