@@ -18,39 +18,53 @@
             }
 
             &__heading {
-                & > label {
-                    vertical-align: middle;
-                }
+                & > input[type="checkbox"] {
+                    display: none;
 
-                &__btn {
-                    vertical-align: middle;
-                    position: relative;
-                    display: inline-block;
-                    border-radius: 10px;
-                    width: 28px;
-                    height: 12px;
-                    background-color: $lightGray;
-                    margin-left: 1rem;
-                    cursor: pointer;
+                    & + label {
+                        position: relative;
+                        vertical-align: middle;
+                        cursor: pointer;
 
-                    & > span {
-                        position: absolute;
-                        display: block;
-                        top: -3px;
-                        left: 0;
-                        height: 16px;
-                        width: 16px;
-                        border-radius: 50%;
-                        background-color: $white;
-                        box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.4);
-                        transition: transform 0.2s ease;
+                        // スライドボタンの背景
+                        &::before {
+                            content: "";
+                            position: absolute;
+                            display: block;
+                            top: 50%;
+                            right: -40px;
+                            transform: translateY(-50%);
+                            border-radius: 10px;
+                            width: 28px;
+                            height: 12px;
+                            background-color: $lightGray;
+                        }
+
+                        // スライドボタンの丸部分
+                        &::after {
+                            content: "";
+                            position: absolute;
+                            display: block;
+                            top: 50%;
+                            right: -27px;
+                            transform: translateY(-50%);
+                            height: 16px;
+                            width: 16px;
+                            border-radius: 50%;
+                            background-color: $white;
+                            box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.4);
+                            transition: transform 0.2s ease;
+                        }
                     }
 
-                    &.active {
-                        background-color: $brown;
+                    // チェックされたとき
+                    &:checked + label {
+                        &::before {
+                            background-color: $brown;
+                        }
 
-                        & > span {
-                            transform: translateX(0.9rem);
+                        &::after {
+                            transform: translate(15px, -50%);
                         }
                     }
                 }
