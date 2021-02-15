@@ -14,7 +14,7 @@ import { faChevronRight, faChevronCircleDown } from '@fortawesome/free-solid-svg
 import BtnLogout from '../../atoms/buttons/BtnLogout';
 
 type EditProps = ({
-    MenuInfo: Array<any>;
+    MenuInfo: any;
     StoreInfo: any;
 });
 
