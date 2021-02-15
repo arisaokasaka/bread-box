@@ -54,25 +54,25 @@ const EditSNS: React.FC<BasicProps> = ({StoreInfo}) => {
                     <div className = "m-storeEdit-SNS__container__form__sns__item m-storeForm__item">
                         <label>Instagram</label>
                         <div className = "m-storeEdit-SNS__container__form__sns__item__input m-storeForm__item__input">
-                            <input type="url" name="instagram" defaultValue={defaultData.instagram} ref={register}/>
+                            <input type="url" name="instagram" placeholder="InstagramアカウントのURLを入力してください。" defaultValue={defaultData.instagram} ref={register}/>
                         </div>
                     </div>
                     <div className = "m-storeEdit-SNS__container__form__sns__item m-storeForm__item">
                         <label>Twitter</label>
                         <div className = "m-storeEdit-SNS__container__form__sns__item__input m-storeForm__item__input">
-                            <input type="url" name="twitter" defaultValue={defaultData.twitter} ref={register}/>
+                            <input type="url" name="twitter" placeholder="TwitterアカウントのURLを入力してください。" defaultValue={defaultData.twitter} ref={register}/>
                         </div>
                     </div>
                     <div className = "m-storeEdit-SNS__container__form__sns__item m-storeForm__item">
                         <label>Facebook</label>
                         <div className = "m-storeEdit-SNS__container__form__sns__item__input m-storeForm__item__input">
-                            <input type="url" name="facebook" defaultValue={defaultData.facebook} ref={register}/>
+                            <input type="url" name="facebook" placeholder="FacebookアカウントのURLを入力してください。" defaultValue={defaultData.facebook} ref={register}/>
                         </div>
                     </div>
                     <div className = "m-storeEdit-SNS__container__form__sns__item m-storeForm__item">
                         <label>その他</label>
                         <div className = "m-storeEdit-SNS__container__form__sns__item__input m-storeForm__item__input">
-                            <input type="url" name="other" defaultValue={defaultData.other} ref={register}/>
+                            <input type="url" name="other" placeholder="その他あれば、URLを入力してください。" defaultValue={defaultData.other} ref={register}/>
                         </div>
                     </div>
                     <div className="m-storeEdit-SNS__container__form__btn m-storeForm__btn">
