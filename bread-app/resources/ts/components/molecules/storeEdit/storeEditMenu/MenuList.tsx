@@ -14,6 +14,7 @@ const MenuList: React.FC<MenuProps> = ({MenuInfo}) => {
             <h3>メニュー一覧</h3>
             {MenuInfo.map((el)=>{
                 return(
+                    // menu_type1：パンのメニュー, menu_type2：店のこだわり, menu_type3：店の思い
                     el.menu_type === 1 &&
                     <div className = "m-storeEdit-menuList__item" key = {el.id}>
                         <div className = "m-storeEdit-menuList__item__btn">
