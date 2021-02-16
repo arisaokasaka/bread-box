@@ -39,7 +39,7 @@ class Store extends Model
     /**
      * 【作成】店舗レコード作成（店舗の新規登録時に実行）
      *
-     * @param string $store_user_uuid
+     * @param $store_user_uuid
      * @return void
      */
     public function create_store(string $store_user_uuid){
@@ -51,10 +51,10 @@ class Store extends Model
     /**
      * 【取得】usersテーブルとstoresテーブルをjoinのうえ、そのレコード情報を取得
      *
-     * @param Request $request
+     * @param $request
      * @return void
      */
-    public function index_storeInfo(Request $request){
+    public function index_storeInfo($request){
         return $this
         ->newQuery()
         ->select([
@@ -76,10 +76,10 @@ class Store extends Model
     /**
      * 【更新】店舗基本情報(電話番号、メッセージ)
      *
-     * @param Request $request
+     * @param $request
      * @return void
      */
-    public function update_basicInfo_storesTable(Request $request){
+    public function update_basicInfo_storesTable($request){
         return $this
         ->where('user_uuid', '=', $request['user_uuid'])
         ->update([
@@ -92,10 +92,10 @@ class Store extends Model
     /**
      * 【更新】店舗からのお知らせ
      *
-     * @param Request $request
+     * @param $request
      * @return void
      */
-    public function update_businessMemo(Request $request){
+    public function update_businessMemo($request){
         return $this
         ->where('user_uuid', '=', $request['user_uuid'])
         ->update(['business_memo' => $request['business_memo']]);
@@ -104,10 +104,10 @@ class Store extends Model
     /**
      * 【更新】ホームページ
      *
-     * @param Request $request
+     * @param $request
      * @return void
      */
-    public function update_homepage(Request $request){
+    public function update_homepage($request){
         return $this
         ->where('user_uuid', '=', $request['user_uuid'])
         ->update(['url' => $request['url']]);
@@ -116,10 +116,10 @@ class Store extends Model
     /**
      * 【更新】SNS
      *
-     * @param Request $request
+     * @param $request
      * @return void
      */
-    public function update_sns(Request $request){
+    public function update_sns($request){
         return $this
         ->where('user_uuid', '=', $request['user_uuid'])
         ->update(['sns' => $request['sns']]);
@@ -128,10 +128,10 @@ class Store extends Model
     /**
      * 【更新】営業日・営業時間
      *
-     * @param Request $request
+     * @param $request
      * @return void
      */
-    public function update_businessDay(Request $request){
+    public function update_businessDay($request){
         return $this
         ->where('user_uuid', '=', $request['user_uuid'])
         ->update(['business_day' => $request['business_day']]);
