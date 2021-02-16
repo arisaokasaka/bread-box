@@ -14,22 +14,10 @@ const EditBusinessDays: React.FC<BasicProps> = ({StoreInfo}) => {
     const { register, handleSubmit, errors} = useForm();
     const [ dayValidation, setDayValidation ] = useState(false);
     const { state } = useContext(UserAuthContext);
-    let defaultData: Object;
-
-    // useEffect(()=>{
-    //     getDefaultData(StoreInfo);
-    // },[])
-
-    // // 既に保存されている情報を取得
-    // const getDefaultData = (info) => {
-    //     if(info.business_day){
-    //         defaultData = JSON.parse(info.business_day)
-    //     }
-    // }
-
+    
     const onSubmit = (data) => {
         let business_day = {};
-        let business_day_check = false;
+        let business_day_check = true;
         setDayValidation(false);
 
         // その曜日にチェック入ってるか確認のうえ、営業時間データを挿入
@@ -41,24 +29,24 @@ const EditBusinessDays: React.FC<BasicProps> = ({StoreInfo}) => {
             if(checkbox.checked){
                 if(open.value && close.value){                    
                     business_day[day.id] = [ open.value, close.value]
-                    business_day_check = true;
                 }else{
                     setDayValidation(true);
+                    business_day_check = false;
                 }
             }            
         })
 
-        if(business_day_check) {
+        if(business_day_check===true) {
             //更新データ送信
             data['user_uuid'] = state.uuid;
             data['business_day'] = JSON.stringify(business_day);
             console.log(data);
             axios.post("/api/update_businessDay", data)
             .then(res => {
-                alert('保存しました');
+                alert('営業日・営業時間を保存しました。');
             })
             .catch(err => {
-                alert('保存に失敗しました。');
+                alert('営業日・営業時間の保存に失敗しました。');
             });
         }
     }
