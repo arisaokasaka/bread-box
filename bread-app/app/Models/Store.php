@@ -21,7 +21,7 @@ class Store extends Model
         return $this->newQuery()->select("*")->get();
     }
 
-    public function find_keyword($keyword){
+    public function find_keyword(string $keyword){
         return $this
         ->newQuery()
         ->join('store_menus', 'stores.uuid', '=', 'store_menus.stores_uuid')
@@ -36,15 +36,25 @@ class Store extends Model
         ->get();
     }
 
-    // 作成：店舗レコード作成（店舗の新規登録時に実行）
-    public function create_store($store_user_uuid){
+    /**
+     * 【作成】店舗レコード作成（店舗の新規登録時に実行）
+     *
+     * @param string $store_user_uuid
+     * @return void
+     */
+    public function create_store(string $store_user_uuid){
         $this->uuid = Str::uuid();
         $this->user_uuid = $store_user_uuid;
         $this->save();
     }
 
-    // 取得：usersテーブルとstoresテーブルをjoinのうえ、そのレコード情報を取得
-    public function index_storeInfo($request){
+    /**
+     * 【取得】usersテーブルとstoresテーブルをjoinのうえ、そのレコード情報を取得
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function index_storeInfo(Request $request){
         return $this
         ->newQuery()
         ->select([
@@ -63,8 +73,13 @@ class Store extends Model
         ->first();
     }
 
-    // 更新：店舗基本情報(電話番号、メッセージ)
-    public function update_basicInfo_storesTable($request){
+    /**
+     * 【更新】店舗基本情報(電話番号、メッセージ)
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function update_basicInfo_storesTable(Request $request){
         return $this
         ->where('user_uuid', '=', $request['user_uuid'])
         ->update([
@@ -73,31 +88,50 @@ class Store extends Model
         ]);
     }
 
-    // 更新：店舗からのお知らせ
-    public function update_businessMemo($request){
+    
+    /**
+     * 【更新】店舗からのお知らせ
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function update_businessMemo(Request $request){
         return $this
         ->where('user_uuid', '=', $request['user_uuid'])
         ->update(['business_memo' => $request['business_memo']]);
     }
 
-    // 更新：ホームページ
-    public function update_homepage($request){
+    /**
+     * 【更新】ホームページ
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function update_homepage(Request $request){
         return $this
         ->where('user_uuid', '=', $request['user_uuid'])
         ->update(['url' => $request['url']]);
     }
 
-    // 更新：SNS
-    public function update_sns($request){
+    /**
+     * 【更新】SNS
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function update_sns(Request $request){
         return $this
         ->where('user_uuid', '=', $request['user_uuid'])
         ->update(['sns' => $request['sns']]);
     }
 
-    // 更新：営業日・営業時間
-    public function update_businessDay($request){
-        Log::info('model');
-        Log::info($request);
+    /**
+     * 【更新】営業日・営業時間
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function update_businessDay(Request $request){
         return $this
         ->where('user_uuid', '=', $request['user_uuid'])
         ->update(['business_day' => $request['business_day']]);
