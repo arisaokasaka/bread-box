@@ -59,4 +59,12 @@ class StoreController extends Controller
         $store = new Store();
         $store->update_sns($request);
     }
+
+    // 更新：営業日・営業時間
+    public function update_businessDay(Request $request){
+        Log::info('controller');
+        Log::info($request);
+        $store = new Store();
+        $store->update_businessDay($request);
+    }
 }

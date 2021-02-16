@@ -47,6 +47,7 @@ Route::post('/update_basicInfo_storesTable', 'Api\StoreController@update_basicIn
 Route::post('/update_businessMemo', 'Api\StoreController@update_businessMemo');
 Route::post('/update_homepage', 'Api\StoreController@update_homepage');
 Route::post('/update_sns', 'Api\StoreController@update_sns');
+Route::post('/update_businessDay', 'Api\StoreController@update_businessDay');
 
 //Store_menuController
 Route::post('/create_store_menu', 'Api\StoreMenuController@create_store_menu');

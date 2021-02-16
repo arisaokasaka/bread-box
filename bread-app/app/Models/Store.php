@@ -63,7 +63,7 @@ class Store extends Model
         ->first();
     }
 
-    // 更新：店舗基本情報(電話番頭、メッセージ)
+    // 更新：店舗基本情報(電話番号、メッセージ)
     public function update_basicInfo_storesTable($request){
         return $this
         ->where('user_uuid', '=', $request['user_uuid'])
@@ -92,5 +92,14 @@ class Store extends Model
         return $this
         ->where('user_uuid', '=', $request['user_uuid'])
         ->update(['sns' => $request['sns']]);
+    }
+
+    // 更新：営業日・営業時間
+    public function update_businessDay($request){
+        Log::info('model');
+        Log::info($request);
+        return $this
+        ->where('user_uuid', '=', $request['user_uuid'])
+        ->update(['business_day' => $request['business_day']]);
     }
 }
