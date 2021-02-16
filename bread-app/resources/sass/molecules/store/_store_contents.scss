@@ -12,17 +12,22 @@
             height: 42px;
         }
 
-        & > input {
-            position: relative;
+        & > a {
+            width: 33.33%;
+            height: 35px;
+            line-height: 35px;
             background-color: transparent;
             font-size: 0.7rem;
-            height: 100%;
-            width: 33.33%;
             text-align: center;
             color: $darkGray;
             font-weight: 550;
-            box-sizing: border-box;
             cursor: pointer;
+
+            @include bp-600up {
+                height: 42px;
+                line-height: 42px;
+                font-size: 0.8rem;
+            }
 
             &:hover {
                 background-color: $lighterBrown;
@@ -35,10 +40,6 @@
                 &:hover {
                     background-color: $lightBrown;
                 }
-            }
-
-            @include bp-600up {
-                font-size: 0.8rem;
             }
         }
     }

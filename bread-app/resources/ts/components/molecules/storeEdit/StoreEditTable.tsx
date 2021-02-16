@@ -32,10 +32,7 @@ const StoreEditTable: React.FC<EditProps> = ({StoreInfo, MenuInfo}) => {
             key = {TabClassName}
             onClick = {() => setTable(tab.tableName)}
             >
-                <input
-                type="text"
-                value = {tab.label}
-                />
+                <a>{tab.label}</a>
                 <a><FontAwesomeIcon icon={faChevronRight} /></a>
             </span>
         );

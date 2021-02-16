@@ -48,7 +48,7 @@ const StoreContents: React.FC<InfoProps> = ({StoreInfo}) => {
         if(table === section.table){
             className += ' selected';
         }
-        return <input type="text" value = {section.value} className={className} onClick = {section.function}/>
+        return <a className={className} onClick = {section.function}>{section.value}</a>
     }
 
     const CurrentTable = (table) => {
