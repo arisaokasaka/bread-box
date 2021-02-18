@@ -2,25 +2,48 @@ import React, { useContext } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { UserAuthContext } from '../../../../contexts/UserAuthContext';
+import { StoreInfoContext } from '../../../../contexts/StoreInfoContext';
 import BtnSave from '../../../atoms/buttons/BtnSave';
 
-type BasicProps = ({
-    StoreInfo: any;
-});
-
-const EditBusinessMemo: React.FC<BasicProps> = ({StoreInfo}) => {
+const EditBusinessMemo: React.FC = () => {
     const { register, handleSubmit, errors} = useForm();
     const { state } = useContext(UserAuthContext);
+    const { stateInfo, dispatch } = useContext(StoreInfoContext);
+       
+    let StoreInfo = {
+        business_memo: '',
+    }
 
+    if(stateInfo.storeInfo){
+        StoreInfo = stateInfo.storeInfo;
+    }
+    
     // アップデート機能
     const updateBusinessMemo = (data) => {
         data['user_uuid'] = state.uuid;
         axios.post("/api/update_businessMemo", data)
         .then(res => {
+            getStoreInfo();
             alert('保存しました。')
         })
         .catch(err => {
             alert('保存に失敗しました。')
+        });
+    }
+
+    // 店舗情報取得
+    const getStoreInfo = () => {
+        axios.post("/api/index_storeInfo", {
+            user_uuid: state.uuid
+        })
+        .then(res => {
+            console.log('storeinfo')
+            dispatch({
+                type: 'inputStoreInfo',
+                payload: res.data,
+            });
+        })
+        .catch(err => {
         });
     }
 

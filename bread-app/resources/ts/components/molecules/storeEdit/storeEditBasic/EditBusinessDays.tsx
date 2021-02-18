@@ -1,19 +1,25 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { UserAuthContext } from '../../../../contexts/UserAuthContext';
+import { StoreInfoContext } from '../../../../contexts/StoreInfoContext';
 import InputSchedule from '../../InputSchedule';
 import BtnSave from '../../../atoms/buttons/BtnSave';
 import week from '../../../../info/Week';
 
-type BasicProps = ({
-    StoreInfo: any;
-});
-
-const EditBusinessDays: React.FC<BasicProps> = ({StoreInfo}) => {
+const EditBusinessDays: React.FC = () => {
     const { register, handleSubmit, errors} = useForm();
     const [ dayValidation, setDayValidation ] = useState(false);
     const { state } = useContext(UserAuthContext);
+    const { stateInfo, dispatch } = useContext(StoreInfoContext);
+        
+    let StoreInfo = {
+        business_day: '',
+    }
+
+    if(stateInfo.storeInfo){
+        StoreInfo = stateInfo.storeInfo;
+    }
     
     const onSubmit = (data) => {
         let business_day = {};
@@ -25,7 +31,6 @@ const EditBusinessDays: React.FC<BasicProps> = ({StoreInfo}) => {
             let checkbox = document.getElementById(day.id + '_checked') as HTMLInputElement;
             let open = document.getElementsByName(day.id + '_open')[0] as HTMLInputElement;
             let close = document.getElementsByName(day.id + '_close')[0] as HTMLInputElement;
-            
             if(checkbox.checked){
                 if(open.value && close.value){                    
                     business_day[day.id] = [ open.value, close.value]
@@ -43,12 +48,29 @@ const EditBusinessDays: React.FC<BasicProps> = ({StoreInfo}) => {
             console.log(data);
             axios.post("/api/update_businessDay", data)
             .then(res => {
+                getStoreInfo();
                 alert('営業日・営業時間を保存しました。');
             })
             .catch(err => {
                 alert('営業日・営業時間の保存に失敗しました。');
             });
         }
+    }
+
+    // 店舗情報取得＆更新
+    const getStoreInfo = () => {
+        axios.post("/api/index_storeInfo", {
+            user_uuid: state.uuid
+        })
+        .then(res => {
+            console.log('storeinfo')
+            dispatch({
+                type: 'inputStoreInfo',
+                payload: res.data,
+            });
+        })
+        .catch(err => {
+        });
     }
 
     return(

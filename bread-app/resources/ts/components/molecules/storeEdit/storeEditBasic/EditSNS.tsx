@@ -2,21 +2,19 @@ import React, { useContext } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { UserAuthContext } from '../../../../contexts/UserAuthContext';
+import { StoreInfoContext } from '../../../../contexts/StoreInfoContext';
 import BtnSave from '../../../atoms/buttons/BtnSave';
 
-type BasicProps = ({
-    StoreInfo: any;
-});
-
-const EditSNS: React.FC<BasicProps> = ({StoreInfo}) => {
+const EditSNS: React.FC = () => {
     const { register, handleSubmit } = useForm();
     const { state } = useContext(UserAuthContext);
-    let sns: object;
+    const { stateInfo, dispatch } = useContext(StoreInfoContext);
+    let snsSubmitted: object;
     let defaultData: any;
 
     // StoreInfo.snsにデータがあれば、defaultDataにそのデータを設定・defaultValueに反映
-    if(StoreInfo.sns){
-        defaultData = JSON.parse(StoreInfo.sns)
+    if(stateInfo.storeInfo.sns){
+        defaultData = JSON.parse(stateInfo.storeInfo.sns)
     }else{
         defaultData = {
             instagram: '',
@@ -27,21 +25,38 @@ const EditSNS: React.FC<BasicProps> = ({StoreInfo}) => {
     }
 
     // SNS情報の送信
-    const onSubmit = (data) => {
+    const onSubmit = (data) => {        
         //snsをまとめたobject作成し、objectを送信
-        sns['instagram'] = data['instagram'];
-        sns['twitter'] = data['twitter'];
-        sns['facebook'] = data['facebook'];
-        sns['other'] = data['other'];
-        data['sns'] = sns;
+        snsSubmitted['instagram'] = data['instagram'];
+        snsSubmitted['twitter'] = data['twitter'];
+        snsSubmitted['facebook'] = data['facebook'];
+        snsSubmitted['other'] = data['other'];
+        data['sns'] = snsSubmitted;
         data['user_uuid'] = state.uuid;
         
         axios.post("/api/update_sns", data)
         .then(res => {
+            getStoreInfo();
             alert('保存しました。')
         })
         .catch(err => {
             alert('保存に失敗しました。')
+        });
+    }
+
+    // 店舗情報取得＆更新
+    const getStoreInfo = () => {
+        axios.post("/api/index_storeInfo", {
+            user_uuid: state.uuid
+        })
+        .then(res => {
+            console.log('storeinfo')
+            dispatch({
+                type: 'inputStoreInfo',
+                payload: res.data,
+            });
+        })
+        .catch(err => {
         });
     }
 
