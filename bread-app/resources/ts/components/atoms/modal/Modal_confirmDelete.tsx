@@ -1,15 +1,19 @@
-import React,{ useState } from 'react';
+import React,{ useState, useContext } from 'react';
 import Modal from 'react-modal';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { UserAuthContext } from '../../../contexts/UserAuthContext';
+import { StoreInfoContext } from '../../../contexts/StoreInfoContext';
 
 type MenuInfoProps = ({
     menu: any;
 })
 
 const Modal_confirmDelete: React.FC<MenuInfoProps> = ({menu}) =>{
+    const { state } = useContext(UserAuthContext);
+    const { dispatch } = useContext(StoreInfoContext);
     const [modalIsOpen, setModal] = useState(false);
     const { handleSubmit } = useForm();
     const customStyles = {
@@ -30,11 +34,27 @@ const Modal_confirmDelete: React.FC<MenuInfoProps> = ({menu}) =>{
             uuid: menu.uuid
         })
         .then(res => {
+            getMenuInfo();
             alert('削除しました。');
         })
         .catch(err => {
             alert('削除に失敗しました。');
             setModal(false);
+        });
+    }
+
+    // メニュー情報取得
+    const getMenuInfo = () => {
+        axios.post("/api/index_menuInfo", {
+            store_uuid: state.uuid
+        })
+        .then(res => {
+            dispatch({
+                type: 'inputMenuInfo',
+                payload: res.data,
+            });
+        })
+        .catch(err => {
         });
     }
 
