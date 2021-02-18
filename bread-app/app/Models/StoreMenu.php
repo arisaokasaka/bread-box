@@ -12,7 +12,7 @@ class StoreMenu extends Model
     use HasFactory;
 
     // パンのメニューのレコード作成
-    public function create_store_menu($menu_info){
+    public function create_store_menu($menu_info, $bread_number){
         $this->uuid = Str::uuid();
         $this->store_uuid = $menu_info['store_uuid'];
         $this->menu_type = $menu_info['menu_type'];
@@ -20,6 +20,7 @@ class StoreMenu extends Model
         $this->bread_kind = $menu_info['bread_kind'];
         $this->bread_price = $menu_info['bread_price'];
         $this->bread_detail = $menu_info['bread_detail'];
+        $this->bread_order = $bread_number;
         $this->save();
     }
 

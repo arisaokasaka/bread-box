@@ -1,23 +1,67 @@
-import React, {useContext} from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
-import {useForm} from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import bread_kinds from '../../../../info/Bread_kinds';
 import BtnSave from '../../../atoms/buttons/BtnSave';
-import {UserAuthContext} from '../../../../contexts/UserAuthContext';
+import BtnReset from '../../../atoms/buttons/BtnReset';
+import { UserAuthContext } from '../../../../contexts/UserAuthContext';
+import { StoreInfoContext } from '../../../../contexts/StoreInfoContext';
 
-export default function MenuCreate() {
+const MenuCreate: React.FC = () =>  {
     const { register, handleSubmit, errors} = useForm();
     const { state } = useContext(UserAuthContext);
+    const { dispatch } = useContext(StoreInfoContext);
+    const [ file, setFile ] = useState();
 
-    //store_menusテーブルにレコード作成
+    // 送信機能
     const onSubmit = (data) => {
         data['menu_type'] = 1;
         data['store_uuid'] = state.uuid;
-        axios.post('/api/create_store_menu', data)
+        console.log(file);
+        createMenu(data, file);
+    }
+
+    // 画像ファイル取得
+    const onChangeFile = (e) => {
+
+        setFile(e.target.files[0]);
+    }
+
+    // store_menusテーブルにレコード作成
+    const createMenu = (data, fileSubmitted) => {
+        let dataSubmit = new FormData();
+        dataSubmit.append("bread_img", fileSubmitted)
+        for( let el in data){
+            dataSubmit.append(el, data[el])
+        }
+        console.log('datasubmit')
+        console.log(dataSubmit);
+        axios({
+            url: '/api/create_store_menu',
+            method: "post",
+            data: dataSubmit,
+        })
         .then(res => {
-            alert('新しいメニューを追加しました。追加したメニューは、メニュー一覧から確認できます。')
+            getMenuInfo();
+            alert('新しいメニューを追加しました。追加したメニューは、メニュー一覧から確認できます。');
+
         })
         .catch(errors => {
+        });
+    }
+
+    // メニュー情報取得
+    const getMenuInfo = () => {
+        axios.post("/api/index_menuInfo", {
+            store_uuid: state.uuid
+        })
+        .then(res => {
+            dispatch({
+                type: 'inputMenuInfo',
+                payload: res.data,
+            });
+        })
+        .catch(err => {
         });
     }
 
@@ -59,13 +103,14 @@ export default function MenuCreate() {
                     <div className="m-storeEdit-menuCreate__container__form__item m-storeForm__item">
                         <label htmlFor="bread_img">画像アップロード</label>
                         <div className="m-storeForm__item__input">
-                            <input name="bread_img" type="file" accept="image/*"/>
+                            <input type="file" accept="image/*" onChange={(e)=>onChangeFile(e)}/>
                         </div>
                     </div>
                     <div className="m-storeEdit-menuCreate__container__form__btn m-storeForm__btn">
+                        <BtnReset />
                         <BtnSave
                             InputType={"submit"}
-                            OnClickFunction={onSubmit}
+                            OnClickFunction={null}
                         />
                     </div>
                 </form>
@@ -73,3 +118,5 @@ export default function MenuCreate() {
         </div>
     )
 }
+
+export default MenuCreate;
