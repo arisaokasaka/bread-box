@@ -51,11 +51,11 @@ const EditHomepage: React.FC = () => {
         <div className = "m-storeEdit-homepage">
             <div className = "m-storeEdit-homepage__container">
                 <h3>ホームページ</h3>
-                <a>ホームページのURLを入力してください</a>
                 <form className="m-storeEdit-homepage__container__form m-storeForm" onSubmit={handleSubmit(updateHomepage)}>
                     <div className="m-storeForm__item">
                         <label htmlFor="store_url">ホームページURL</label>
                         <div className="m-storeForm__item__input">
+                            <span>ホームページのURLを入力してください。</span>
                             <input type="url" id="store_url" name="url" defaultValue={StoreInfo.url} ref={register({required: true})} />
                             {errors.url && <p>ホームページのURLを記入してください。</p>}
                         </div>
