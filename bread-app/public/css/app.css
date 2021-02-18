@@ -1167,6 +1167,71 @@ label.a-label-required__red::after {
   cursor: pointer;
 }
 
+.m-modalConfirmDelete__btn--close {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.m-modalConfirmDelete__btn--close > button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.m-modalConfirmDelete__form {
+  margin-top: 20px;
+  width: 12rem;
+}
+
+@media screen and (min-width: 480px) {
+  .m-modalConfirmDelete__form {
+    width: 17rem;
+  }
+}
+
+.m-modalConfirmDelete__form > p {
+  text-align: center;
+}
+
+.m-modalConfirmDelete__form__btns {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.m-modalConfirmDelete__form__btns > button {
+  width: 5.5rem;
+  height: 1.6rem;
+  border: none;
+  border-radius: 2px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 480px) {
+  .m-modalConfirmDelete__form__btns > button {
+    width: 8rem;
+  }
+}
+
+.m-modalConfirmDelete__form__btns > button:nth-child(1) {
+  background: linear-gradient(180deg, #eeeeee 0%, #c4c4c4 100%);
+}
+
+.m-modalConfirmDelete__form__btns > button:nth-child(1):hover {
+  opacity: 0.8;
+}
+
+.m-modalConfirmDelete__form__btns > button:nth-child(2) {
+  background: linear-gradient(0deg, #61391a 0%, #7c4920 100%);
+  color: #fafafa;
+}
+
+.m-modalConfirmDelete__form__btns > button:nth-child(2):hover {
+  opacity: 0.88;
+}
+
 @media screen and (min-width: 960px) {
   .m-store-ranking {
     margin-top: 20px;
@@ -1240,27 +1305,36 @@ label.a-label-required__red::after {
   }
 }
 
-.m-inputSchedule__week__day__heading > label {
-  vertical-align: middle;
+.m-inputSchedule__week__day__heading > input[type="checkbox"] {
+  display: none;
 }
 
-.m-inputSchedule__week__day__heading__btn {
-  vertical-align: middle;
+.m-inputSchedule__week__day__heading > input[type="checkbox"] + label {
   position: relative;
-  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.m-inputSchedule__week__day__heading > input[type="checkbox"] + label::before {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 50%;
+  right: -40px;
+  transform: translateY(-50%);
   border-radius: 10px;
   width: 28px;
   height: 12px;
   background-color: #a5a5a5;
-  margin-left: 1rem;
-  cursor: pointer;
 }
 
-.m-inputSchedule__week__day__heading__btn > span {
+.m-inputSchedule__week__day__heading > input[type="checkbox"] + label::after {
+  content: "";
   position: absolute;
   display: block;
-  top: -3px;
-  left: 0;
+  top: 50%;
+  right: -27px;
+  transform: translateY(-50%);
   height: 16px;
   width: 16px;
   border-radius: 50%;
@@ -1269,12 +1343,12 @@ label.a-label-required__red::after {
   transition: transform 0.2s ease;
 }
 
-.m-inputSchedule__week__day__heading__btn.active {
+.m-inputSchedule__week__day__heading > input[type="checkbox"]:checked + label::before {
   background-color: #c47d2c;
 }
 
-.m-inputSchedule__week__day__heading__btn.active > span {
-  transform: translateX(0.9rem);
+.m-inputSchedule__week__day__heading > input[type="checkbox"]:checked + label::after {
+  transform: translate(15px, -50%);
 }
 
 .m-inputSchedule__week__day__hours {
@@ -1523,36 +1597,37 @@ label.a-label-required__red::after {
   }
 }
 
-.m-store-contents__tab > input {
-  position: relative;
+.m-store-contents__tab > a {
+  width: 33.33%;
+  height: 35px;
+  line-height: 35px;
   background-color: transparent;
   font-size: 0.7rem;
-  height: 100%;
-  width: 33.33%;
   text-align: center;
   color: #757575;
   font-weight: 550;
-  box-sizing: border-box;
   cursor: pointer;
 }
 
-.m-store-contents__tab > input:hover {
+@media screen and (min-width: 600px) {
+  .m-store-contents__tab > a {
+    height: 42px;
+    line-height: 42px;
+    font-size: 0.8rem;
+  }
+}
+
+.m-store-contents__tab > a:hover {
   background-color: #fff2e1;
 }
 
-.m-store-contents__tab > input.selected {
+.m-store-contents__tab > a.selected {
   background-color: #fae6c9;
   color: #67491b;
 }
 
-.m-store-contents__tab > input.selected:hover {
+.m-store-contents__tab > a.selected:hover {
   background-color: #fae6c9;
-}
-
-@media screen and (min-width: 600px) {
-  .m-store-contents__tab > input {
-    font-size: 0.8rem;
-  }
 }
 
 .m-store-contents__container {
@@ -1876,35 +1951,37 @@ label.a-label-required__red::after {
   }
 }
 
-.m-user-table__tab > input {
-  position: relative;
+.m-user-table__tab > a {
+  width: 25%;
+  height: 35px;
+  line-height: 35px;
   background-color: transparent;
   font-size: 0.7rem;
-  height: 100%;
-  width: 25%;
   text-align: center;
   color: #757575;
   font-weight: 550;
   cursor: pointer;
 }
 
-.m-user-table__tab > input:hover {
+@media screen and (min-width: 600px) {
+  .m-user-table__tab > a {
+    font-size: 0.8rem;
+    height: 42px;
+    line-height: 42px;
+  }
+}
+
+.m-user-table__tab > a:hover {
   background-color: #fff2e1;
 }
 
-.m-user-table__tab > input.selected {
+.m-user-table__tab > a.selected {
   background-color: #fae6c9;
   color: #67491b;
 }
 
-.m-user-table__tab > input.selected:hover {
+.m-user-table__tab > a.selected:hover {
   background-color: #fae6c9;
-}
-
-@media screen and (min-width: 600px) {
-  .m-user-table__tab > input {
-    font-size: 0.8rem;
-  }
 }
 
 .m-user-table__container {
@@ -2043,7 +2120,6 @@ label.a-label-required__red::after {
 }
 
 .m-storeEdit-menuList__item__content__text > a {
-  margin-left: 0.5rem;
   color: #fafafa;
   background-color: #c47d2c;
   font-size: 0.7rem;
@@ -2051,8 +2127,13 @@ label.a-label-required__red::after {
   padding: 2px 0.5rem;
 }
 
-.m-storeEdit-menuList__item__content__text > p,
+.m-storeEdit-menuList__item__content__text > p {
+  color: #67491b;
+  font-size: 0.8rem;
+}
+
 .m-storeEdit-menuList__item__content__text > span {
+  margin-right: 0.5rem;
   color: #67491b;
   font-size: 0.8rem;
 }
@@ -2164,17 +2245,17 @@ label.a-label-required__red::after {
   border-top: none;
   border-radius: none;
   background-color: #fafafa;
+  cursor: pointer;
 }
 
-.m-store-edit-table__nav > ul > li span input {
+.m-store-edit-table__nav > ul > li span > a:nth-child(1) {
   padding: 3px 0 2px 3px;
   font-size: 0.8rem;
   color: #555555;
   background-color: #fafafa;
-  cursor: pointer;
 }
 
-.m-store-edit-table__nav > ul > li span a {
+.m-store-edit-table__nav > ul > li span > a:nth-child(2) {
   width: 20px;
   font-size: 0.6rem;
   color: #67491b;
@@ -2184,7 +2265,7 @@ label.a-label-required__red::after {
   background-color: #fae6c9;
 }
 
-.m-store-edit-table__nav > ul > li span.selected > input {
+.m-store-edit-table__nav > ul > li span.selected > a {
   background-color: #fae6c9;
   color: #67491b;
 }
