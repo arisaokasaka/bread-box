@@ -43,6 +43,10 @@ export const StoreEditNav_basic: Array<any> = [
         tableName: "basicSNS",
         label: "SNS"
     },
+    {
+        tableName: "basicImage",
+        label: "画像"
+    },
 ]
 
 

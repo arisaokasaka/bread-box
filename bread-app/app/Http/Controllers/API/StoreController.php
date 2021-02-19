@@ -4,10 +4,11 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use App\Models\Store;
-use Illuminate\Support\Facades\Log;
 use App\Http\Requests\StoreRequest;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class StoreController extends Controller
 {
@@ -99,5 +100,26 @@ class StoreController extends Controller
     public function update_businessDay(Request $request){
         $store = new Store();
         $store->update_businessDay($request);
+    }
+    
+    /**
+     * ヘッダー・サムネイル画像の保存・更新
+     *
+     * @param $request
+     * @return void
+     */
+    public function save_storeImages(Request $request){
+        $user_uuid = $request->input('user_uuid');
+        $path = '/public/store/' . $user_uuid;
+        $file_header = $request->file('img_header');
+        $file_thumbnail = $request->file('img_thumbnail');
+        if($file_header != null){
+            $fileName = 'header.jpg';
+            Storage::putFileAs($path, $file_header, $fileName, 'public');
+        }
+        if($file_thumbnail != null){
+            $fileName = 'thumbnail.jpg';
+            Storage::putFileAs($path, $file_thumbnail, $fileName, 'public');
+        }
     }
 }
