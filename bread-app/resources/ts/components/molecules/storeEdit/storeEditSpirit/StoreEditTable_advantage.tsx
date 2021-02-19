@@ -10,13 +10,21 @@ const StoreEditTable_advantage: React.FC = () => {
     let content: any;
     let funcType: string;
     let advantageInfo: any;
-    
-    info.map((el)=>{
-        // menu_type1：パンのメニュー, menu_type2：店のこだわり, menu_type3：店の思い
-        el.menu_type === 2 && setIsRegisterd(true);
-        advantageInfo = el;
-    })
 
+    // メニュー情報があるか判断
+    if(stateInfo.menuInfo){
+        info.map((el)=>{
+            // menu_type1：パンのメニュー, menu_type2：店のこだわり, menu_type3：店の思い
+            el.menu_type === 2 && setIsRegisterd(true);
+            advantageInfo = el;
+        })
+    }else{
+        content = (
+            <p>まだ登録されていません。右上のボタンより追加してください。</p>
+        );
+    }
+
+    // こだわり(advantage)が既に登録されているか判断
     if(isRegisterd){
         btnName = '編集する'
         funcType = 'edit'

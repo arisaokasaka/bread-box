@@ -10,13 +10,21 @@ const StoreEditTable_spirit: React.FC = () => {
     let funcType: string;
     let btnName: string;
     let content: any;
+    
+    // メニュー情報があるか判断
+    if(stateInfo.menuInfo){
+        info.map((el)=>{
+            // menu_type1：パンのメニュー, menu_type2：店のこだわり, menu_type3：店の思い
+            el.menu_type === 3 && setIsRegisterd(true);
+            Spirit = el;
+        })
+    }else{
+        content = (
+            <p>まだ登録されていません。右上のボタンより追加してください。</p>
+        );
+    }
 
-    info.map((el)=>{
-        // menu_type1：パンのメニュー, menu_type2：店のこだわり, menu_type3：店の思い
-        el.menu_type === 3 && setIsRegisterd(true);
-        Spirit = el;
-    })
-
+    // 思い(spirit)が既に登録されているか判断
     if(isRegisterd){
         btnName = '編集する'
         funcType = 'edit'
