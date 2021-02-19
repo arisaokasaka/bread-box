@@ -40,4 +40,21 @@ class StoreMenu extends Model
         ->where('uuid', '=', $request)
         ->delete();
     }
+
+    /**
+     * 【更新】パンのメニュー
+     *
+     * @param $request
+     * @return void
+     */
+    public function update_menu_type_1($request){
+        return $this
+        ->where('store_uuid', '=', $request['store_uuid'])
+        ->update([
+            'bread_name' => $request['bread_name'],
+            'bread_kind' => $request['bread_kind'],
+            'bread_detail' => $request['bread_detail'],
+            'bread_price' => $request['bread_price'],
+        ]);
+    }
 }

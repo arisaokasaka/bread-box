@@ -5,8 +5,11 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\StoreMenu;
 use Illuminate\Http\Request;
+use Illuminate\Http\File;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class StoreMenuController extends Controller
 {
@@ -31,10 +34,20 @@ class StoreMenuController extends Controller
         // 画像ファイルをStorageに保存
         $store_uuid = $request->input('store_uuid');
         $path = '/public/store/' . $store_uuid . '/menu';
-        $file = $request->file('bread_img');
-        $fileExtension = $file->getClientOriginalExtension();
-        $fileName = 'item_' . $bread_number . '.' . $fileExtension;
-        Storage::putFileAs($path, $file, $fileName, 'public');
+        $fileSave = $request->file('bread_img');
+        $fileName = 'item_' . $bread_number . '.jpg';
+        Storage::putFileAs($path, $fileSave, $fileName, 'public');
+        
+        // 以下、後ほど修正したい(安全に拡張子を変更する)。
+        // $fileExtension = $fileContent->getClientOriginalExtension();
+        // if($fileExtension === "jpg" || $fileExtension === "jpeg"){
+        //     $fileTemp = imagecreatefromjpeg($fileContent);
+        //     $fileSave = imagePng($fileTemp);
+        //     // $newFile = new UploadedFile('image/' .Auth::id(). '.png', null, true);
+        // } else {
+        //     $fileSave = $fileContent;
+        // }
+        // $fileName = 'item_' . $bread_number . '.png';
 
         // テキストデータをDBに保存
         $store_menu = new StoreMenu();
@@ -64,5 +77,24 @@ class StoreMenuController extends Controller
         Log::info($request);
         $store_menu = new StoreMenu();
         $store_menu->delete_menu($request->input('uuid'));
+    }
+
+    /**
+     * 【更新】パンのメニュー更新
+     *
+     * @param $request
+     * @return void
+     */
+    public function update_menu_type_1(Request $request){
+        $image = $request->file('bread_img');
+        if($image != null){
+            $bread_number = $request->input('bread_order');
+            $store_uuid = $request->input('store_uuid');
+            $path = '/public/store/' . $store_uuid . '/menu';
+            $fileName = 'item_' . $bread_number . '.jpg';
+            Storage::putFileAs($path, $image, $fileName, 'public');
+        }
+        $store_menu = new StoreMenu();
+        $store_menu->update_menu_type_1($request);
     }
 }
