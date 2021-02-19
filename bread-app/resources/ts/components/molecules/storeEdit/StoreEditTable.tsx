@@ -9,6 +9,7 @@ import EditSNS from './storeEditBasic/EditSNS';
 import StoreEditTable_spirit from './storeEditSpirit/StoreEditTable_spirit';
 import StoreEditTable_advantage from './storeEditSpirit/StoreEditTable_advantage';
 import EditBasicInfo from './storeEditBasic/EditBasicInfo';
+import EditImage from './storeEditBasic/EditImage';
 import { StoreEditNav_menu, StoreEditNav_basic, StoreEditNav_spirit, StoreEditNav_stamp } from '../../../info/StoreEditMenus';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronCircleDown } from '@fortawesome/free-solid-svg-icons';
@@ -88,6 +89,8 @@ const StoreEditTable: React.FC = () => {
                 return <EditHomepage />
             case 'basicSNS':
                 return <EditSNS />
+            case 'basicImage':
+                return <EditImage />
             case 'menuAdd':
                 return <MenuCreate />
             case 'menuEdit':
