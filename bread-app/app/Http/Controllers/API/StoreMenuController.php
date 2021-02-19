@@ -54,6 +54,29 @@ class StoreMenuController extends Controller
         $store_menu->create_store_menu($request, $bread_number);
     }
 
+    // こだわり(menu_type2, advantage), 思い(menu_type3, spirit)作成
+    public function create_spirit(Request $request){
+        // テキストデータをDBに保存
+        $store_menu = new StoreMenu();
+        $store_menu->create_spirit($request);
+
+        // 画像をstorageに保存
+        $menu_type = $request->input('menu_type');
+        $store_uuid = $request->input('store_uuid');
+        $path = '/public/store/' . $store_uuid . '/menu';
+        $fileSave = $request->file('img_spirit');
+        switch($menu_type){
+            case 2:
+                $fileName = 'advantage.jpg';
+                Storage::putFileAs($path, $fileSave, $fileName, 'public');
+            break;
+            case 3:
+                $fileName = 'spirit.jpg';
+                Storage::putFileAs($path, $fileSave, $fileName, 'public');
+            break;
+        }
+    }
+
     /**
      * 【取得】store_uuidが一致するメニューレコード取得
      * 
@@ -80,7 +103,7 @@ class StoreMenuController extends Controller
     }
 
     /**
-     * 【更新】パンのメニュー更新
+     * 【更新】パンのメニュー更新(画像含む)
      *
      * @param $request
      * @return void

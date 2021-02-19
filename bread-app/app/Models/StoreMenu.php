@@ -11,8 +11,14 @@ class StoreMenu extends Model
 {
     use HasFactory;
 
-    // パンのメニューのレコード作成
-    public function create_store_menu($menu_info, $bread_number){
+    /**
+     * 【作成】パンのメニューのレコード作成
+     *
+     * @param array $menu_info
+     * @param int $bread_number
+     * @return void
+     */
+    public function create_store_menu(array $menu_info, int $bread_number){
         $this->uuid = Str::uuid();
         $this->store_uuid = $menu_info['store_uuid'];
         $this->menu_type = $menu_info['menu_type'];
@@ -21,6 +27,21 @@ class StoreMenu extends Model
         $this->bread_price = $menu_info['bread_price'];
         $this->bread_detail = $menu_info['bread_detail'];
         $this->bread_order = $bread_number;
+        $this->save();
+    }
+
+    /**
+     * 【作成】こだわり(advantage), 思い(spirit)のレコード作成
+     *
+     * @param array $menu_info
+     * @return void
+     */
+    public function create_spirit(object $menu_info){
+        $this->uuid = Str::uuid();
+        $this->store_uuid = $menu_info['store_uuid'];
+        $this->menu_type = $menu_info['menu_type'];
+        $this->advantage = $menu_info['advantage'];
+        $this->spirit = $menu_info['spirit'];
         $this->save();
     }
 
