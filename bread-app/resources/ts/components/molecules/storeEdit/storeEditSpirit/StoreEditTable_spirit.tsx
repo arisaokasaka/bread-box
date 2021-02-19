@@ -5,7 +5,6 @@ import { StoreInfoContext } from '../../../../contexts/StoreInfoContext';
 const StoreEditTable_spirit: React.FC = () => {
     const { stateInfo } = useContext(StoreInfoContext);
     const [ isRegisterd, setIsRegisterd ] = useState(false);
-    let info = stateInfo.menuInfo;
     let Spirit: any;
     let funcType: string;
     let btnName: string;
@@ -13,7 +12,7 @@ const StoreEditTable_spirit: React.FC = () => {
     
     // メニュー情報があるか判断
     if(stateInfo.menuInfo){
-        info.map((el)=>{
+        stateInfo.menuInfo.map((el)=>{
             // menu_type1：パンのメニュー, menu_type2：店のこだわり, menu_type3：店の思い
             el.menu_type === 3 && setIsRegisterd(true);
             Spirit = el;

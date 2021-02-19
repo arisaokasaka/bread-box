@@ -54,7 +54,7 @@ const App: React.FC = () => {
     return (
     <UserAuthContext.Provider value={{ state, dispatch }}>
       <Router>
-          <div onClick = {() => console.log(state)}>
+          <div>
               <NavBar />
               <div id="global-container">
                   <Switch>

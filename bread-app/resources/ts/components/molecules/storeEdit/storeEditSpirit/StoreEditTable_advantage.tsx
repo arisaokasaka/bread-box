@@ -5,7 +5,6 @@ import { StoreInfoContext } from '../../../../contexts/StoreInfoContext';
 const StoreEditTable_advantage: React.FC = () => {
     const { stateInfo } = useContext(StoreInfoContext);
     const [ isRegisterd, setIsRegisterd ] = useState(false);
-    let info = stateInfo.menuInfo;
     let btnName: string;
     let content: any;
     let funcType: string;
@@ -13,7 +12,7 @@ const StoreEditTable_advantage: React.FC = () => {
 
     // メニュー情報があるか判断
     if(stateInfo.menuInfo){
-        info.map((el)=>{
+        stateInfo.menuInfo.map((el)=>{
             // menu_type1：パンのメニュー, menu_type2：店のこだわり, menu_type3：店の思い
             el.menu_type === 2 && setIsRegisterd(true);
             advantageInfo = el;

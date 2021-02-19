@@ -29,7 +29,6 @@ const EditBasicInfo: React.FC = () => {
         updateBasicInfo_usersTable(data);
         getStoreInfo();
     }
-
     // アップデート機能（storesテーブル）
     const updateBasicInfo_storesTable = (data) => {
         axios.post("/api/update_basicInfo_storesTable", data)
