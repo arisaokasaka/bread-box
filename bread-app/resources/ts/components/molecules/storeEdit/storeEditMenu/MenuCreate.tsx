@@ -20,7 +20,6 @@ const MenuCreate: React.FC = () =>  {
         if(fileSize <= 3000000){
             data['menu_type'] = 1;
             data['store_uuid'] = state.uuid;
-            console.log(file);
             createMenu(data, file);
         }else{
             alert('画像ファイルが上限サイズ3MBを超えています。圧縮するか、別の画像を選択してください。');
