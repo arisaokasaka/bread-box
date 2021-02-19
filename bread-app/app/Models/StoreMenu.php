@@ -14,11 +14,11 @@ class StoreMenu extends Model
     /**
      * 【作成】パンのメニューのレコード作成
      *
-     * @param array $menu_info
+     * @param object $menu_info
      * @param int $bread_number
      * @return void
      */
-    public function create_store_menu(array $menu_info, int $bread_number){
+    public function create_store_menu(object $menu_info, int $bread_number){
         $this->uuid = Str::uuid();
         $this->store_uuid = $menu_info['store_uuid'];
         $this->menu_type = $menu_info['menu_type'];
@@ -45,8 +45,13 @@ class StoreMenu extends Model
         $this->save();
     }
 
-    // 取得：指定するstore_uuidを持つレコード情報を取得
-    public function index_menuInfo($request){
+    /**
+     * 【取得】指定するstore_uuidを持つレコード情報を取得
+     *
+     * @param string $request
+     * @return void
+     */
+    public function index_menuInfo(string $request){
         return $this
         ->newQuery()
         ->where('store_uuid', '=', $request)
@@ -54,8 +59,13 @@ class StoreMenu extends Model
         ->get();
     }
 
-    //削除：指定するuuidのレコード削除
-    public function delete_menu($request){
+    /**
+     * 【削除】指定するuuidのレコード削除
+     *
+     * @param string $request
+     * @return void
+     */
+    public function delete_menu(string $request){
         return $this
         ->newQuery()
         ->where('uuid', '=', $request)
@@ -65,10 +75,10 @@ class StoreMenu extends Model
     /**
      * 【更新】パンのメニュー
      *
-     * @param $request
+     * @param object $request
      * @return void
      */
-    public function update_menu_type_1($request){
+    public function update_menu_type_1(object $request){
         return $this
         ->where('store_uuid', '=', $request['store_uuid'])
         ->update([

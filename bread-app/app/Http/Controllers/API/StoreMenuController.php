@@ -54,7 +54,12 @@ class StoreMenuController extends Controller
         $store_menu->create_store_menu($request, $bread_number);
     }
 
-    // こだわり(menu_type2, advantage), 思い(menu_type3, spirit)作成
+    /**
+     * 【作成】こだわり(menu_type2, advantage), 思い(menu_type3, spirit)作成
+     *
+     * @param Request $request
+     * @return void
+     */
     public function create_spirit(Request $request){
         // テキストデータをDBに保存
         $store_menu = new StoreMenu();
