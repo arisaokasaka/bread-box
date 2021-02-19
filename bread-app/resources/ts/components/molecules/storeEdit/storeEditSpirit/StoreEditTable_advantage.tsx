@@ -1,52 +1,42 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import Modal_editSpirit from "../../../atoms/modal/Modal_editSpirit";
+import { UserAuthContext } from '../../../../contexts/UserAuthContext';
 import { StoreInfoContext } from '../../../../contexts/StoreInfoContext';
 
 const StoreEditTable_advantage: React.FC = () => {
+    const { state } = useContext(UserAuthContext);
     const { stateInfo } = useContext(StoreInfoContext);
-    const [ isRegisterd, setIsRegisterd ] = useState(false);
-    let btnName: string;
-    let content: any;
-    let funcType: string;
+    let mainContent: any;
     let advantageInfo: any;
-
+    let funcType: string = 'create';
+    let btnName: string = '追加する';
+    let content: any　= <p>まだ登録されていません。右上のボタンより追加してください。</p>;
+    
     // メニュー情報があるか判断
     if(stateInfo.menuInfo){
         stateInfo.menuInfo.map((el)=>{
             // menu_type1：パンのメニュー, menu_type2：店のこだわり, menu_type3：店の思い
-            el.menu_type === 2 && setIsRegisterd(true);
-            advantageInfo = el;
-        })
-    }else{
-        content = (
-            <p>まだ登録されていません。右上のボタンより追加してください。</p>
-        );
+            if(el.menu_type === 2){
+                advantageInfo = el;
+                content = null;
+                btnName = '編集する'
+                funcType = 'edit'
+                mainContent = (
+                    <div className = "m-storeEdit-spirit__container">
+                        <div className = "m-storeEdit-spirit__container__item">
+                            <label>登録画像</label>
+                            <img src={"storage/store/" + state.uuid + "/menu/advantage.jpg"} alt="こだわりの写真"/>
+                        </div>
+                        <div className = "m-storeEdit-spirit__container__item">
+                            <label>内容</label>
+                            <p>{el.advantage}</p>
+                        </div>
+                    </div>
+                )
+            }
+        })    
     }
-
-    // こだわり(advantage)が既に登録されているか判断
-    if(isRegisterd){
-        btnName = '編集する'
-        funcType = 'edit'
-        content = (
-            <div className = "m-storeEdit-spirit__container">
-                <div className = "m-storeEdit-spirit__container__item">
-                    <label>登録画像</label>
-                    <img src="/images/croissant.jpg" alt="こだわりの写真"/>
-                </div>
-                <div className = "m-storeEdit-spirit__container__item">
-                    <label>内容</label>
-                    <p>{advantageInfo.advantage}</p>
-                </div>
-            </div>
-        );
-    }else{
-        btnName = '追加する'
-        funcType = 'create'
-        content = (
-            <p>まだ登録されていません。右上のボタンより追加してください。</p>
-        );
-    }
-
+    
     return(
         <div className = "m-storeEdit-spirit">
             <div className = "m-storeEdit-spirit__title">
@@ -59,6 +49,7 @@ const StoreEditTable_advantage: React.FC = () => {
                 />
             </div>
             {content}
+            {mainContent}
         </div>
     );
 }
