@@ -74,6 +74,7 @@ const Modal_editSpirit: React.FC<infoProps> = ({SpiritInfo, btnName, funcType, m
         errorMessage_imageSize = <p>ファイルの上限サイズ3MBを超えています。圧縮するか、別の画像を選択してください。</p>
     }
 
+    // 送信時
     const onSubmit = (data) => {
         if(image.image_size <= 3000000){
             let formData = new FormData();
@@ -87,26 +88,26 @@ const Modal_editSpirit: React.FC<infoProps> = ({SpiritInfo, btnName, funcType, m
                     formData.append('spirit', data['content']);  
                 break;
             }
-            console.log(data['menu_type'])
-            console.log('forfor')
+
             for( let el in data){
                 formData.append(el, data[el])
             }
-            console.log(formData);
+
             switch(funcType){
                 case 'create':
                     console.log('switch')
                     createSpirit(formData, image.image);
+                break;
+                case 'edit':
+                    updateSpirit(formData, image.image);
                 break;
             }
         }else{
             alert('ファイルの上限サイズ3MBを超えています。圧縮するか、別の画像を選択してください。');
         }
     }
-
+    // 新規作成機能
     const createSpirit = (data, file) => {
-        console.log('createSpirit');
-        console.log(data);
         data.append('img_spirit', file);
         axios.post("/api/create_spirit", data)
         .then(res=>{
@@ -116,6 +117,20 @@ const Modal_editSpirit: React.FC<infoProps> = ({SpiritInfo, btnName, funcType, m
         })        
         .catch(err=>
             alert('登録に失敗しました。')
+        )
+    }
+
+    // 更新機能
+    const updateSpirit = (data, file) => {
+        data.append('img_spirit', file);
+        axios.post("/api/update_spirit", data)
+        .then(res=>{
+            getMenuInfo();
+            alert('保存しました。');
+            setModal(false);
+        })        
+        .catch(err=>
+            alert('保存に失敗しました。')
         )
     }
 
@@ -156,14 +171,13 @@ const Modal_editSpirit: React.FC<infoProps> = ({SpiritInfo, btnName, funcType, m
                     <input type="hidden" name="menu_type" value={menuType} ref={register}/>
                     <div className="m-modalEditSpirit__form__item">
                         <label htmlFor="img_spirit" className="a-label-required">画像を選択</label>
+                        {funcType === 'edit' && <span>新しい画像に変える場合のみ、選択してください。</span>}
                         <input
                             type="file"
                             accept="image/*"
                             name="img_spirit"
-                            ref={register({required: true})}
                             onChange={onChangeImage}
                         />
-                        {errors.img && <p>画像は必須です。</p>}
                         {errorMessage_imageSize}
                     </div>
                     

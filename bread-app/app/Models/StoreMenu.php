@@ -33,15 +33,15 @@ class StoreMenu extends Model
     /**
      * 【作成】こだわり(advantage), 思い(spirit)のレコード作成
      *
-     * @param array $menu_info
+     * @param array $request
      * @return void
      */
-    public function create_spirit(object $menu_info){
+    public function create_spirit(object $request){
         $this->uuid = Str::uuid();
-        $this->store_uuid = $menu_info['store_uuid'];
-        $this->menu_type = $menu_info['menu_type'];
-        $this->advantage = $menu_info['advantage'];
-        $this->spirit = $menu_info['spirit'];
+        $this->store_uuid = $request['store_uuid'];
+        $this->menu_type = $request['menu_type'];
+        $this->advantage = $request['advantage'];
+        $this->spirit = $request['spirit'];
         $this->save();
     }
 
@@ -76,6 +76,22 @@ class StoreMenu extends Model
             'bread_kind' => $request['bread_kind'],
             'bread_detail' => $request['bread_detail'],
             'bread_price' => $request['bread_price'],
+        ]);
+    }
+
+    /**
+     * 【更新】こだわり(advantage), 思い(spirit)のレコード更新
+     *
+     * @param object $request
+     * @return void
+     */
+    public function update_spirit(object $request){
+        return $this
+        ->where('store_uuid', '=', $request['store_uuid'])
+        ->where('menu_type', '=', $request['menu_type'])
+        ->update([
+            'advantage' => $request['advantage'],
+            'spirit' => $request['spirit']
         ]);
     }
 }

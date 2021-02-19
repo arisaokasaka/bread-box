@@ -62,18 +62,20 @@ class StoreMenuController extends Controller
 
         // 画像をstorageに保存
         $menu_type = $request->input('menu_type');
-        $store_uuid = $request->input('store_uuid');
-        $path = '/public/store/' . $store_uuid . '/menu';
-        $fileSave = $request->file('img_spirit');
-        switch($menu_type){
-            case 2:
-                $fileName = 'advantage.jpg';
-                Storage::putFileAs($path, $fileSave, $fileName, 'public');
-            break;
-            case 3:
-                $fileName = 'spirit.jpg';
-                Storage::putFileAs($path, $fileSave, $fileName, 'public');
-            break;
+        if($menu_type != null || undefined){
+            $store_uuid = $request->input('store_uuid');
+            $path = '/public/store/' . $store_uuid . '/menu';
+            $fileSave = $request->file('img_spirit');
+            switch($menu_type){
+                case 2:
+                    $fileName = 'advantage.jpg';
+                    Storage::putFileAs($path, $fileSave, $fileName, 'public');
+                break;
+                case 3:
+                    $fileName = 'spirit.jpg';
+                    Storage::putFileAs($path, $fileSave, $fileName, 'public');
+                break;
+            }
         }
     }
 
@@ -119,5 +121,36 @@ class StoreMenuController extends Controller
         }
         $store_menu = new StoreMenu();
         $store_menu->update_menu_type_1($request);
+    }
+
+    /**
+     * 【更新】こだわり(advantage), 思い(spirit)のレコード更新
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function update_spirit(Request $request){
+        // テキストデータ更新
+        $store_menu = new StoreMenu();
+        $store_menu->update_spirit($request);
+
+        // 画像をstorageに保存
+        $image = $request->file('img_spirit');
+        if($image != null){
+            $menu_type = $request->input('menu_type');
+            $store_uuid = $request->input('store_uuid');
+            $path = '/public/store/' . $store_uuid . '/menu';
+            $fileSave = $request->file('img_spirit');
+            switch($menu_type){
+                case 2:
+                    $fileName = 'advantage.jpg';
+                    Storage::putFileAs($path, $fileSave, $fileName, 'public');
+                break;
+                case 3:
+                    $fileName = 'spirit.jpg';
+                    Storage::putFileAs($path, $fileSave, $fileName, 'public');
+                break;
+            }
+        }   
     }
 }
