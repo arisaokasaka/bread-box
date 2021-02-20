@@ -14,8 +14,8 @@ type MenuInfoProps = ({
 const Modal_confirmDelete: React.FC<MenuInfoProps> = ({menu}) =>{
     const { state } = useContext(UserAuthContext);
     const { dispatch } = useContext(StoreInfoContext);
-    const [modalIsOpen, setModal] = useState(false);
-    const { handleSubmit } = useForm();
+    const [ modalIsOpen, setModal ] = useState(false);
+    const { handleSubmit, register } = useForm();
     const customStyles = {
         content : {
             top: '50%',
@@ -28,18 +28,15 @@ const Modal_confirmDelete: React.FC<MenuInfoProps> = ({menu}) =>{
     }
     
     //削除機能（削除するメニューのuuid送信）
-    const onSubmit = () => {
-        setModal(false);
-        axios.post("/api/delete_menu", {
-            uuid: menu.uuid
-        })
+    const onSubmit = (data) => {
+        axios.post("/api/delete_menu", data)
         .then(res => {
-            getMenuInfo();
             alert('削除しました。');
+            getMenuInfo();
+            setModal(false);
         })
         .catch(err => {
             alert('削除に失敗しました。');
-            setModal(false);
         });
     }
 
@@ -76,10 +73,13 @@ const Modal_confirmDelete: React.FC<MenuInfoProps> = ({menu}) =>{
                     </button>
                 </div>
                 <form className="m-modalConfirmDelete__form" onSubmit={handleSubmit(onSubmit)}>
+                    <input type="hidden" name="uuid" value={menu.uuid} ref={register}/>
+                    <input type="hidden" name="store_uuid" value={state.uuid} ref={register}/>
+                    <input type="hidden" name="bread_order" value={menu.bread_order} ref={register}/>
                     <p>「{menu.bread_name}」<br/>本当に削除しますか？</p>
                     <div className="m-modalConfirmDelete__form__btns">
                         <button className="a-btn-cancel" onClick={()=>setModal(false)}>キャンセル</button>
-                        <button className="a-btn-delete--menu"type="submit">削除する</button>
+                        <button className="a-btn-delete--menu" type="submit">削除する</button>
                     </div>
                 </form>
             </Modal>
