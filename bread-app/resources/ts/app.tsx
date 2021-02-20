@@ -68,7 +68,7 @@ const App: React.FC = () => {
                       <Route path="/register_store" component={Register_store} />
                       <Route path="/register_user" component={Register_user} />
                       <Route path="/review" component={Review} />
-                      <Route path="/store" component={StorePage} />
+                      <Route path="/store/:user_uuid" component={StorePage} />
                       <StoreOnly path="/store_edit">
                         <StoreEdit />
                       </StoreOnly>
