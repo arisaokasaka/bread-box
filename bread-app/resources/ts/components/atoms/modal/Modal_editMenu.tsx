@@ -108,6 +108,7 @@ const Modal_editMenu: React.FC<MenuInfoProps> = ({menu}) =>{
                 </div>
                 <form className="m-storeEdit-menuCreate__container__form m-storeForm" onSubmit={handleSubmit(onSubmit)}>
                     <input type="hidden" name="bread_order" value={menu.bread_order} ref={ register }/>
+                    <input type="hidden" name="uuid" value={menu.uuid} ref={ register }/>
                     <div className="m-storeEdit-menuCreate__container__form__item m-storeForm__item">
                         <label htmlFor="bread_name" className="a-label-required__red">メニュー名</label>
                         <div className="m-storeForm__item__input">

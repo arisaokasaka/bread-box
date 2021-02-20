@@ -9,10 +9,13 @@ use Illuminate\Http\File;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class StoreMenuController extends Controller
 {
+    const NOMAL_MENU = 1;
+
     /**
      * 【作成】パンのメニュー作成
      *
@@ -103,10 +106,34 @@ class StoreMenuController extends Controller
      * @return void
      */
     public function delete_menu(Request $request){
-        Log::info('controller');
-        Log::info($request);
         $store_menu = new StoreMenu();
-        $store_menu->delete_menu($request->input('uuid'));
+        $store_uuid = $request->input('store_uuid');
+        $bread_order = $request->input('bread_order');
+        
+        // Storageの画像削除
+        $deleteFile = '/public/store/' . $store_uuid . '/menu/item_' . $bread_order . '.jpg'; 
+        Storage::delete($deleteFile);
+        
+        // bread_order更新
+        $select_info = $store_menu->newQuery()
+        ->select('uuid', 'bread_order')
+        ->where('bread_order', '>', (int)($bread_order))
+        ->where('store_uuid', '=',  $store_uuid)
+        ->where('menu_type', '=', self::NOMAL_MENU)
+        ->get();
+
+        if($select_info != null){
+            foreach($select_info as $bread_menu) {
+                $bread_order_update = $bread_menu->bread_order-1;
+                $image_original = '/public/store/' . $store_uuid . '/menu/item_' . $bread_menu->bread_order . '.jpg';
+                $image_update = '/public/store/' . $store_uuid . '/menu/item_' . $bread_order_update . '.jpg';
+                StoreMenu::where('uuid', $bread_menu->uuid)->update(['bread_order' => $bread_order_update]);
+                Storage::move($image_original, $image_update);
+            }
+        }
+
+        // 指定のメニューレコード削除
+        $store_menu->delete_menu($request->input('uuid'));      
     }
 
     /**
