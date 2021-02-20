@@ -7,22 +7,19 @@ import { StoreInfoContext } from '../../../../contexts/StoreInfoContext';
 const MenuList: React.FC = () => {
     const { state } = useContext(UserAuthContext);
     const { stateInfo } = useContext(StoreInfoContext);
+    let time_current: string;
     let MenuInfo: any;
-    let content: any;
-    let menuItem: HTMLCollection = document.getElementsByClassName('m-storeEdit-menuList__item');
-
+    let content: any = <p>まだ登録されていません。メニュー追加ページより、追加してください。</p>;
+    
     // メニュー情報があるか判断
     if(stateInfo.menuInfo){
         MenuInfo = stateInfo.menuInfo;
-    }else{
-        content = <p>まだ登録されていません。メニュー追加ページより、メニューを追加してください。</p>
-    }
-
-    // 表示するメニューが無い時に表示するもの
-    if(menuItem[0] === null || undefined){
-        content = <p>まだ登録されていません。メニュー追加ページより、メニューを追加してください。</p>
-    }else{
-        content = null;
+        MenuInfo.map((el)=>{
+            if(el.menu_type === 1){
+                content = null;
+                time_current = String(Date.now());
+            }
+        })
     }
 
     return(
@@ -43,7 +40,7 @@ const MenuList: React.FC = () => {
                         </div>
                         <div className = "m-storeEdit-menuList__item__content">
                             <img
-                                src={"storage/store/" + state.uuid + "/menu/item_" + el.bread_order + ".jpg"}
+                                src={"storage/store/" + state.uuid + "/menu/item_" + el.bread_order + ".jpg?" + time_current}
                                 alt="パンの画像"
                             />
                             <div className = "m-storeEdit-menuList__item__content__text">
