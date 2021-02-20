@@ -2,15 +2,18 @@ import React from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faPaperPlane} from "@fortawesome/free-solid-svg-icons";
 
-type StoreInfoProps = ({
-    StoreInfo: any
+type HomepageProps = ({
+    url: string
 })
 
-const Btn_homepage: React.FC<StoreInfoProps> = ({StoreInfo}) =>(
+const Btn_homepage: React.FC<HomepageProps> = ({url}) =>(
     <div className = "a-btn-homepage">
-        {StoreInfo.map((el)=>(
-        el.url && <a href={el.url} key={el.url}><FontAwesomeIcon icon={faPaperPlane}/>&nbsp;&nbsp;ホームページ</a>
-        ))}
+        {url && 
+            <a href={url} key={url} onClick={()=>window.confirm("外部ページに遷移します。よろしいですか？")}>
+                <FontAwesomeIcon icon={faPaperPlane}/>
+                &nbsp;&nbsp;ホームページ
+            </a>
+        }
     </div>
 )
 
