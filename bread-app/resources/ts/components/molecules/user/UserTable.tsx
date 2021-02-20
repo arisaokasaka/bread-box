@@ -108,7 +108,7 @@ const UserTable: React.FC<UserProps> = ({UserInfo}) => {
         if(Table === tab.table){
             className += ' selected';
         }
-        return <input type="text" value = {tab.value} className={className} onClick = {tab.function}/>
+        return <a className={className} onClick = {tab.function}>{tab.value}</a>
     }
 
     const CurrentTable = (table) => {

@@ -1,13 +1,78 @@
-import React from 'react';
-import {useForm} from 'react-hook-form';
+import React, { useContext, useState } from 'react';
+import axios from 'axios';
+import { useForm } from 'react-hook-form';
 import bread_kinds from '../../../../info/Bread_kinds';
 import BtnSave from '../../../atoms/buttons/BtnSave';
+import BtnReset from '../../../atoms/buttons/BtnReset';
+import { UserAuthContext } from '../../../../contexts/UserAuthContext';
+import { StoreInfoContext } from '../../../../contexts/StoreInfoContext';
 
-export default function MenuCreate() {
+const MenuCreate: React.FC = () =>  {
     const { register, handleSubmit, errors} = useForm();
-  
+    const { state } = useContext(UserAuthContext);
+    const { dispatch } = useContext(StoreInfoContext);
+    const [ file, setFile ] = useState(null);
+    const [ fileSize, setFileSize ] = useState(0);
+    let error_fileSize: any = null;
+
+    // 送信機能
     const onSubmit = (data) => {
-        console.log(data);
+        if(fileSize <= 3000000){
+            data['menu_type'] = 1;
+            data['store_uuid'] = state.uuid;
+            createMenu(data, file);
+        }else{
+            alert('画像ファイルが上限サイズ3MBを超えています。圧縮するか、別の画像を選択してください。');
+        }
+    }
+
+    // 画像ファイル取得
+    const onChangeFile = (e) => {
+        setFile(e.target.files[0]);
+        setFileSize(e.target.files[0].size);
+    }
+
+    // ファイルサイズが3MBを超えていた場合のエラーメッセージ
+    if(fileSize > 3000000){
+        error_fileSize = (
+            <p>ファイルの上限サイズ3MBを超えています。圧縮するか、別の画像を選択してください。</p>
+        );
+    }
+
+    // store_menusテーブルにレコード作成
+    const createMenu = (data, fileSubmitted) => {
+        let dataSubmit = new FormData();
+        dataSubmit.append("bread_img", fileSubmitted)
+        for( let el in data){
+            dataSubmit.append(el, data[el])
+        }
+        axios({
+            url: '/api/create_store_menu',
+            method: "post",
+            data: dataSubmit,
+        })
+        .then(res => {
+            getMenuInfo();
+            alert('メニューを追加しました。追加したメニューは、メニュー一覧から確認できます。');
+        })
+        .catch(errors => {
+            alert('メニューの追加に失敗しました。')
+        });
+    }
+
+    // メニュー情報取得
+    const getMenuInfo = () => {
+        axios.post("/api/index_menuInfo", {
+            store_uuid: state.uuid
+        })
+        .then(res => {
+            dispatch({
+                type: 'inputMenuInfo',
+                payload: res.data,
+            });
+        })
+        .catch(err => {
+        });
     }
 
     return (
@@ -48,13 +113,15 @@ export default function MenuCreate() {
                     <div className="m-storeEdit-menuCreate__container__form__item m-storeForm__item">
                         <label htmlFor="bread_img">画像アップロード</label>
                         <div className="m-storeForm__item__input">
-                            <input name="bread_img" type="file" accept="image/*"/>
+                            <input type="file" accept="image/*" onChange={(e)=>onChangeFile(e)}/>
+                            {error_fileSize}
                         </div>
                     </div>
                     <div className="m-storeEdit-menuCreate__container__form__btn m-storeForm__btn">
+                        <BtnReset />
                         <BtnSave
                             InputType={"submit"}
-                            OnClickFunction={onSubmit}
+                            OnClickFunction={null}
                         />
                     </div>
                 </form>
@@ -62,3 +129,5 @@ export default function MenuCreate() {
         </div>
     )
 }
+
+export default MenuCreate;

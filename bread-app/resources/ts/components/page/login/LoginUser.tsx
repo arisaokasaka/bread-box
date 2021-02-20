@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import {Link, useHistory} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
-import bootstrap from '../../../bootstrap';
 import { UserAuthContext } from '../../../contexts/UserAuthContext';
 
 const LoginUser = () =>  {  
@@ -12,7 +11,7 @@ const LoginUser = () =>  {
     const { register, handleSubmit, errors } = useForm();
     const history = new useHistory();
     
-    // ログイン
+    // ログイン機能
     const login = () => {        
         axios.defaults.withCredentials = true;
         axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -24,7 +23,6 @@ const LoginUser = () =>  {
                 password
             })
             .then(res => {
-                console.log(res);
                 dispatch({
                     type: 'setUser',
                     payload: res.data.user.uuid,
@@ -32,13 +30,9 @@ const LoginUser = () =>  {
                 history.push("/search");
             })
             .catch(err => {
-                console.log(err);
-                console.log('[login]fail_post');
             });
         })
         .catch(err => {
-            console.log(err);
-            console.log('fail_get');
         })
     }
 

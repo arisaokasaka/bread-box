@@ -42,8 +42,14 @@
                 color: $font-color-brown;
             }
 
+            & > span {
+                font-size: 0.8rem;
+                color: $textGray;
+                margin-bottom: 3px;
+            }
+
             & > input[type="file"] {
-                font-size: 0.7rem;
+                font-size: 0.8rem;
             }
 
             & > textarea {

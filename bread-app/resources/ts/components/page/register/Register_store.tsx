@@ -13,6 +13,7 @@ export default function Register_store() {
     const [password, setPassword] = useState("");
     let csrf:any = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
+    //メアドが既に登録されていた場合のエラーメッセージ
     const emailErrorMessage = (emailError) => {
         if(emailError){
             return(<p>既に登録されているメールアドレスです。</p>);
@@ -20,7 +21,8 @@ export default function Register_store() {
             return null;
         }
     };
-    
+
+    //パスワードが一致しない場合のエラーメッセージ
     const PasswordErrorMessage = (original, check) => {
         if(original===check){
             return null;
@@ -29,9 +31,8 @@ export default function Register_store() {
         }
     };
 
-    //新規登録
+    //新規登録機能
     const onSubmit = (data) => {
-        console.log(data);
         SetEmailError(false);
         data['type_user'] = 'store';
         axios.post('/api/create_user', data)
@@ -46,7 +47,7 @@ export default function Register_store() {
         });
     }
 
-    // ログイン
+    // ログイン(新規登録時にログインも組み込む) 
     const login = () => {        
         axios.defaults.withCredentials = true;
         axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -57,20 +58,32 @@ export default function Register_store() {
                 password
             })
             .then(res => {
+                let tmp_store_user_uuid;
+                tmp_store_user_uuid= res.data.user.uuid
                 dispatch({
                     type: 'setStore',
-                    payload: res.data.user.uuid,
+                    payload: tmp_store_user_uuid,
                 });
+                createStore(tmp_store_user_uuid);
             })
             .catch(err => {
-                console.log('[login]fail_post');
             });
         })
         .catch(err => {
-            console.log('fail_get');
         })
     }
-    
+
+    //storesテーブルにレコード作成(ログイン機能実行時に、こちらも実行)
+    const createStore = (data) => {
+        let form_data = new FormData();
+        form_data.append('user_uuid', data);
+        axios.post('/api/create_store', form_data)
+        .then(res => {
+        })
+        .catch(errors => {
+        });
+    }
+   
     return (
         <div className = "p-register-store">
             <div className = "p-register-store__container">
@@ -88,7 +101,6 @@ export default function Register_store() {
                             {errors.name && <p>店舗名は必須です。</p>}
                         </div>
                     </div>
-
                     <div className = "p-register-store__container__form__item m-storeForm__item">
                         <label htmlFor="store_email" className="a-label-required__red">メールアドレス</label>
                         <div className = "p-register-store__container__form__item__input m-storeForm__item__input">
@@ -98,7 +110,6 @@ export default function Register_store() {
                             {emailErrorMessage(emailError)}
                         </div>
                     </div>
-
                     <div className = "p-register-store__container__form__item m-storeForm__item">
                         <label htmlFor="store_address" className="a-label-required__red">住所</label>
                         <div className = "p-register-store__container__form__item__input m-storeForm__item__input">
@@ -106,7 +117,6 @@ export default function Register_store() {
                             {errors.address && <p>住所は必須です。</p>}
                         </div>
                     </div>
-
                     <div className = "p-register-store__container__form__item m-storeForm__item">
                         <label htmlFor="store_password" className="a-label-required__red">パスワード</label>
                         <div className = "p-register-store__container__form__item__input m-storeForm__item__input">
@@ -117,7 +127,6 @@ export default function Register_store() {
                             {errors.password && errors.password.type === "maxLength" && (<p>16文字以下で指定してください。</p>)}
                         </div>
                     </div>
-
                     <div className = "p-register-store__container__form__item m-storeForm__item">
                         <label htmlFor="store_password-check" className="a-label-required__red">確認用パスワード</label>
                         <div className = "p-register-store__container__form__item__input m-storeForm__item__input">
@@ -126,7 +135,6 @@ export default function Register_store() {
                             {PasswordErrorMessage(getValues('password'),getValues('password_check'))}
                         </div>
                     </div>
-
                     <input
                         className = "p-register-store__container__form__input--submit"
                         type="submit"

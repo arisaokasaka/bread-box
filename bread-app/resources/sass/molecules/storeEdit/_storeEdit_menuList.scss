@@ -6,7 +6,7 @@
         box-shadow: 1px 1.5px 4px 0px #c47d2c82;
 
         @include bp-600up {
-            padding: $mp-xxs $mp-sm;
+            padding: $mp-xxs $mp-sm $mp-xs $mp-sm;
         }
 
         &__btn {
@@ -18,22 +18,32 @@
             display: grid;
 
             @include bp-600up {
-                grid-template-columns: 150px 1fr;
-                column-gap: $mp-xxs;
+                grid-template-columns: 120px 1fr;
+                column-gap: $mp-xs;
             }
 
             & > img {
                 object-fit: cover;
+                object-position: center;
+                width: 120px;
+                height: 120px;
             }
 
             &__text {
                 & > a {
-                    margin-left: 0.5rem;
+                    display: inline-block;
+                    margin-top: 5px;
                     @include btn-square;
                 }
 
-                & > p,
+                & > p {
+                    margin-top: 5px;
+                    color: $font-color-brown;
+                    font-size: 0.8rem;
+                }
+
                 & > span {
+                    margin-right: 0.5rem;
                     color: $font-color-brown;
                     font-size: 0.8rem;
                 }

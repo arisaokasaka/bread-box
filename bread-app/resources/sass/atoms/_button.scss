@@ -341,8 +341,9 @@
     color: $white;
     font-weight: 500;
     border-radius: $sm-radius;
-    width: 6rem;
+    width: 7rem;
     height: 2rem;
+    // font-size: 0.9rem;
     cursor: pointer;
 
     &:hover {
@@ -373,6 +374,7 @@
     }
 }
 
+//削除ボタン
 .a-btn-deleteMenu {
     background: linear-gradient(
         180deg,
@@ -393,6 +395,28 @@
         margin-right: 5px;
         font-size: 0.7rem;
     }
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+// リセットボタン
+.a-btn-reset {
+    background: linear-gradient(
+        180deg,
+        rgb(238, 238, 238) 0%,
+        rgb(196, 196, 196) 100%
+    );
+    width: 7rem;
+    height: 2rem;
+    color: $black;
+    font-weight: 500;
+    font-size: 0.95rem;
+    border: none;
+    border-radius: $sm-radius;
+    margin-right: 0.5rem;
+    cursor: pointer;
 
     &:hover {
         opacity: 0.8;

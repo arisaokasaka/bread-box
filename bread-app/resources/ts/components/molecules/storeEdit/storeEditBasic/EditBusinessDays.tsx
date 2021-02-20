@@ -1,87 +1,102 @@
-import React, {useState} from 'react'
-import {useForm} from 'react-hook-form';
+import React, { useState, useContext } from 'react'
+import axios from 'axios';
+import { useForm } from 'react-hook-form';
+import { UserAuthContext } from '../../../../contexts/UserAuthContext';
+import { StoreInfoContext } from '../../../../contexts/StoreInfoContext';
 import InputSchedule from '../../InputSchedule';
 import BtnSave from '../../../atoms/buttons/BtnSave';
 import week from '../../../../info/Week';
 
-type BasicProps = ({
-    StoreInfo: Array<any>;
-});
-
-const EditBusinessDays: React.FC<BasicProps> = ({StoreInfo}) => {
+const EditBusinessDays: React.FC = () => {
     const { register, handleSubmit, errors} = useForm();
-    const [ alertOpen, setAlertOpenHour ] = useState(false);
-    const [ alertClose, setAlertCloseHour ] = useState(false);
-    let business_day = {};
+    const [ dayValidation, setDayValidation ] = useState(false);
+    const { state } = useContext(UserAuthContext);
+    const { stateInfo, dispatch } = useContext(StoreInfoContext);
+        
+    let StoreInfo = {
+        business_day: '',
+    }
 
-    const alertMessage:any = () => {
-        if(alertOpen === true && alertClose === false){
-            return <p>開店時間・閉店時間どちらも記入してください。</p>
-        }else if(alertOpen === true && alertClose === false){
-            return <p>開店時間が未記入のものがあります。</p>
-        }else if(alertOpen === false && alertClose === true){
-            return <p>閉店時間が未記入のものがあります。</p>
+    if(stateInfo.storeInfo){
+        StoreInfo = stateInfo.storeInfo;
+    }
+    
+    const onSubmit = (data) => {
+        let business_day = {};
+        let business_day_check = true;
+        setDayValidation(false);
+
+        // その曜日にチェック入ってるか確認のうえ、営業時間データを挿入
+        week.week.map((day)=>{
+            let checkbox = document.getElementById(day.id + '_checked') as HTMLInputElement;
+            let open = document.getElementsByName(day.id + '_open')[0] as HTMLInputElement;
+            let close = document.getElementsByName(day.id + '_close')[0] as HTMLInputElement;
+            if(checkbox.checked){
+                if(open.value && close.value){                    
+                    business_day[day.id] = [ open.value, close.value]
+                }else{
+                    setDayValidation(true);
+                    business_day_check = false;
+                }
+            }            
+        })
+
+        if(business_day_check===true) {
+            //更新データ送信
+            data['user_uuid'] = state.uuid;
+            data['business_day'] = JSON.stringify(business_day);
+            console.log(data);
+            axios.post("/api/update_businessDay", data)
+            .then(res => {
+                getStoreInfo();
+                alert('営業日・営業時間を保存しました。');
+            })
+            .catch(err => {
+                alert('営業日・営業時間の保存に失敗しました。');
+            });
         }
     }
 
-    const onSubmit = (data) => {
-        let business_day_check = false;
-        setAlertOpenHour(false);
-        setAlertCloseHour(false);
-        console.log('submit')
-
-        week.week.map((day)=>{
-            let open = document.getElementsByName(day.id + '_open')[0] as HTMLInputElement;
-            let close = document.getElementsByName(day.id + '_close')[0] as HTMLInputElement;
-            if(open.value && close.value){
-                business_day[day.id] = [open.value, close.value]
-                business_day_check = true;
-            }else if(open.value && close.value===''){
-                console.log('開店')
-                setAlertCloseHour(true);
-                // alertMessage();
-            }else if(close.value && open.value==='' ){
-                console.log('heiten')
-                setAlertOpenHour(true);
-                // alertMessage();
-            }
+    // 店舗情報取得＆更新
+    const getStoreInfo = () => {
+        axios.post("/api/index_storeInfo", {
+            user_uuid: state.uuid
         })
-
-        data['business_day'] = JSON.stringify(business_day);
-        
-        if(business_day_check) {
-            console.log('success')
-        }else{
-            console.log('false')
-        }
+        .then(res => {
+            console.log('storeinfo')
+            dispatch({
+                type: 'inputStoreInfo',
+                payload: res.data,
+            });
+        })
+        .catch(err => {
+        });
     }
 
     return(
         <div className = "m-storeEdit-businessDay">
-            {StoreInfo.map((el)=>{
-                return(
-                    <div className = "m-storeEdit-businessDay__container" key = {el.uuid}>
-                        <h3>営業日・営業時間</h3>
-                        <form className="m-storeEdit-businessDay__container__form m-storeForm" onSubmit={handleSubmit(onSubmit)}>
-                            <div className="m-storeForm__item">
-                                <label htmlFor="business_day" className="a-label-required__red">営業日</label>
-                                <div className="m-storeForm__item__input">
-                                    <input type="hidden" name="business_day" ref={register} />
-                                    <span>営業している曜日をチェックのうえ、営業時間を入力してください。</span>
-                                    <InputSchedule/>
-                                    {/* {alertMessage} */}
-                                </div>
-                            </div>   
-                            <div className="m-storeEdit-businessDay__container__form__btn m-storeForm__btn">
-                                <BtnSave
-                                    InputType={"submit"}
-                                    OnClickFunction={alertMessage}
-                                />
-                            </div>
-                        </form>
+            <div className = "m-storeEdit-businessDay__container">
+                <h3>営業日・営業時間</h3>
+                <form className="m-storeEdit-businessDay__container__form m-storeForm" onSubmit={handleSubmit(onSubmit)}>
+                    <div className="m-storeForm__item">
+                        <label htmlFor="business_day" className="a-label-required__red">営業日</label>
+                        <div className="m-storeForm__item__input">
+                            <input type="hidden" name="business_day" ref={register} />
+                            <span>営業している曜日をチェックのうえ、営業時間を入力してください。</span>
+                            <InputSchedule
+                                Info = {StoreInfo}
+                            />
+                            {dayValidation===true && <p>開店時間・閉店時間どちらも記入してください。</p>}
+                        </div>
+                    </div>   
+                    <div className="m-storeEdit-businessDay__container__form__btn m-storeForm__btn">
+                        <BtnSave
+                            InputType={"submit"}
+                            OnClickFunction={null}
+                        />
                     </div>
-                );
-            })}
+                </form>
+            </div>
         </div>
     );
 }

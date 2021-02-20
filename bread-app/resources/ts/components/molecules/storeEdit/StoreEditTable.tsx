@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react';
+import axios from 'axios';
 import MenuCreate from './storeEditMenu/MenuCreate';
 import MenuList from './storeEditMenu/MenuList';
 import EditBusinessDays from './storeEditBasic/EditBusinessDays';
@@ -8,19 +9,57 @@ import EditSNS from './storeEditBasic/EditSNS';
 import StoreEditTable_spirit from './storeEditSpirit/StoreEditTable_spirit';
 import StoreEditTable_advantage from './storeEditSpirit/StoreEditTable_advantage';
 import EditBasicInfo from './storeEditBasic/EditBasicInfo';
+import EditImage from './storeEditBasic/EditImage';
 import { StoreEditNav_menu, StoreEditNav_basic, StoreEditNav_spirit, StoreEditNav_stamp } from '../../../info/StoreEditMenus';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faChevronRight, faChevronCircleDown} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight, faChevronCircleDown } from '@fortawesome/free-solid-svg-icons';
 import BtnLogout from '../../atoms/buttons/BtnLogout';
+import { StoreInfoContext } from '../../../contexts/StoreInfoContext';
+import { UserAuthContext } from '../../../contexts/UserAuthContext';
 
-type EditProps = ({
-    MenuInfo: Array<any>;
-    StoreInfo: Array<any>;
-});
 
-const StoreEditTable: React.FC<EditProps> = ({StoreInfo, MenuInfo}) => {  
-    const [Table, setTable] = useState('basicInfo');
+const StoreEditTable: React.FC = () => {
+    const { state } = useContext(UserAuthContext);
+    const { dispatch } = useContext(StoreInfoContext);
+    const [ Table, setTable ] = useState('basicInfo');
 
+    useEffect(() => {
+        getStoreInfo();
+        getMenuInfo();
+    },[]);
+
+    // 店舗情報取得
+    const getStoreInfo = () => {
+        axios.post("/api/index_storeInfo", {
+            user_uuid: state.uuid
+        })
+        .then(res => {
+            console.log('storeinfo')
+            dispatch({
+                type: 'inputStoreInfo',
+                payload: res.data,
+            });
+        })
+        .catch(err => {
+        });
+    }
+
+    // メニュー情報取得
+    const getMenuInfo = () => {
+        axios.post("/api/index_menuInfo", {
+            store_uuid: state.uuid
+        })
+        .then(res => {
+            dispatch({
+                type: 'inputMenuInfo',
+                payload: res.data,
+            });
+        })
+        .catch(err => {
+        });
+    }
+
+    //サイドメニューのタブ一覧
     const Tab = (tab) => {
         let TabClassName = tab.category + "_" + tab.tableName;
         if(Table === tab.tableName){
@@ -28,14 +67,11 @@ const StoreEditTable: React.FC<EditProps> = ({StoreInfo, MenuInfo}) => {
         }
         return (
             <span 
-            className={TabClassName} 
-            key = {TabClassName}
-            onClick = {() => setTable(tab.tableName)}
+                className={TabClassName} 
+                key = {TabClassName}
+                onClick = {() => setTable(tab.tableName)}
             >
-                <input
-                type="text"
-                value = {tab.label}
-                />
+                <a>{tab.label}</a>
                 <a><FontAwesomeIcon icon={faChevronRight} /></a>
             </span>
         );
@@ -44,23 +80,25 @@ const StoreEditTable: React.FC<EditProps> = ({StoreInfo, MenuInfo}) => {
     const CurrentTable = (table) => {
         switch(table){
             case 'basicInfo':
-                return <EditBasicInfo StoreInfo = {StoreInfo}/>
+                return <EditBasicInfo />
             case 'basicDays':
-                return <EditBusinessDays StoreInfo = {StoreInfo}/>
+                return <EditBusinessDays />
             case 'basicMemo':
-                return <EditBusinessMemo StoreInfo = {StoreInfo}/>
+                return <EditBusinessMemo />
             case 'basicHomepage':
-                return <EditHomepage StoreInfo = {StoreInfo}/>
+                return <EditHomepage />
             case 'basicSNS':
-                return <EditSNS StoreInfo = {StoreInfo}/>
+                return <EditSNS />
+            case 'basicImage':
+                return <EditImage />
             case 'menuAdd':
                 return <MenuCreate />
             case 'menuEdit':
-                return <MenuList MenuInfo = {MenuInfo}/>
+                return <MenuList />
             case 'spiritSpirit':
-                return <StoreEditTable_spirit Spirit = {MenuInfo}/>
+                return <StoreEditTable_spirit />
             case 'spiritAdvantage':
-                return <StoreEditTable_advantage Spirit = {MenuInfo}/>
+                return <StoreEditTable_advantage />
             case 'stampAdd':
                 return <h2>stamp</h2>
         }

@@ -1,67 +1,30 @@
-import React from 'react';
+import React, { useContext, useReducer } from 'react';
 import BtnBack from '../../atoms/buttons/BtnBack';
 import StoreEditTable from '../../molecules/storeEdit/StoreEditTable';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faStore} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStore } from '@fortawesome/free-solid-svg-icons';
+import { StoreInfoReducer, initialState } from '../../../reducers/StoreInfoReducer';
+import { StoreInfoContext } from '../../../contexts/StoreInfoContext';
 
-let testMenuInfo = [
-    {
-        id: 45,
-        menu_type: 1,
-        bread_name: 'ほんじこみ',
-        bread_kind: '食パン',
-        bread_price: 300,
-        bread_detail: 'ここでしか味わえないキメ細かな“口どけの良さ”を実現するための厳選小麦粉、豊かな風味を引き出すための国産バター、そして岩手県「のだ塩」をはじめ、材料１つ１つにこだわり、魂を込めた贅沢な食パン。'
-    },
-    {
-        id: 6,
-        menu_type: 1,
-        bread_name: 'ぐっどぱん',
-        bread_kind: 'クロワッサン',
-        bread_price: 300,
-        bread_detail: 'ここでしか味わえないキメ細かな“口どけの良さ”を実現するための厳選小麦粉、豊かな風味を引き出すための国産バター、そして岩手県「のだ塩」をはじめ、材料１つ１つにこだわり、魂を込めた贅沢な食パン。'
-    },
-    {
-        menu_type: 2,
-        advantage: 'だって私がつくったぱんは全部おいしいんだもん！！！！',
-        spirit: 'おじいちゃんが作ってくれたパンが美味しすぎてパン屋になりました！！！'
-    }
-]
-
-let testStoreInfo = [
-    {
-        uuid: 23456789,
-        name: 'sarasapan',
-        address: 'dsdsdsdsdsdsd',
-        business_day: 'sasa',
-        busines_memo: '定休日！！！',
-        message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
-        sns: {twitter: 'twitter', instagram: 'sssss'}
-    }
-]
-
-const StoreEdit:any = ({MenuInfo, StoreInfo}) => {
-    MenuInfo = testMenuInfo;
-    StoreInfo = testStoreInfo;
+const StoreEdit: React.FC = () => {
+    const [ stateInfo, dispatch] = useReducer(StoreInfoReducer, initialState);
 
     return(
         <div className = "p-store-edit">
             <div className = "p-store-edit__container">
-                {/* <div className = "p-store-edit__container__btn">
-                    <BtnBack
-                        URL = '/store'
-                    />
-                </div> */}
-                <div className = "p-store-edit__container__title">
-                    <h2><FontAwesomeIcon icon={faStore}/>店舗管理</h2>
-                    {StoreInfo.map((el) => <span>{el.name+"様"}</span>)}
-                </div>
-                <div className = "p-store-edit__container__table">
-                    <StoreEditTable
-                        MenuInfo = {MenuInfo}
-                        StoreInfo = {StoreInfo}
-                    />
-                </div>
+                <StoreInfoContext.Provider value={{ stateInfo, dispatch }}>
+                    {/* <div className = "p-store-edit__container__btn">
+                        <BtnBack
+                            URL = '/store'
+                        />
+                    </div> */}
+                    <div className = "p-store-edit__container__title">
+                        <h2><FontAwesomeIcon icon={faStore}/>店舗管理</h2>
+                    </div>
+                    <div className = "p-store-edit__container__table">
+                        <StoreEditTable />
+                    </div>
+                </StoreInfoContext.Provider>
             </div>
         </div>
     );

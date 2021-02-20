@@ -21,7 +21,7 @@ class Store extends Model
         return $this->newQuery()->select("*")->get();
     }
 
-    public function find_keyword($keyword){
+    public function find_keyword(string $keyword){
         return $this
         ->newQuery()
         ->join('store_menus', 'stores.uuid', '=', 'store_menus.stores_uuid')
@@ -36,36 +36,104 @@ class Store extends Model
         ->get();
     }
 
-    public function create_store($store_info){
-Log::info($store_info);
-        // $this->$businessDay_array = [
-        //     'monday'=>[$store_info['monday_open'], $store_info['monday_close']], 
-        //     'tuesday'=>[$store_info['tuesday_open'], $store_info['tuesday_close']], 
-        //     'wednesday'=>[$store_info['wednesday_open'], $store_info['wednesday_close']], 
-        //     'thursday'=>[$store_info['thursday_open'], $store_info['thursday_close']], 
-        //     'friday'=>[$store_info['friday_open'], $store_info['friday_close']], 
-        //     'saturday'=>[$store_info['saturday_open'], $store_info['saturday_close']], 
-        //     'sunday'=>[$store_info['sunday_open'], $store_info['sunday_close']], 
-        // ];
-        
-        // $this->$sns_array = [
-        //     'twitter'=>$store_info['twitter'],
-        //     'instagram'=>$store_info['instagram'],
-        //     'facebook'=>$store_info['facebook'],
-        //     'other'=>$store_info['other']
-        // ];
-
+    /**
+     * 【作成】店舗レコード作成（店舗の新規登録時に実行）
+     *
+     * @param $store_user_uuid
+     * @return void
+     */
+    public function create_store(string $store_user_uuid){
         $this->uuid = Str::uuid();
-        // $this->name = $store_info['name'];
-        // $this->email = $store_info['email'];
-        $this->tel = $store_info['tel'];
-        // $this->password = bcrypt($store_info['password']);
-        // $this->address = $store_info['address'];
-        // $this->business_day = $store_info['business_day'];
-        $this->business_memo = json_encode(['123' => 123]); //←stringに変更したい
-        // $this->message = $store_info['message'];
-        // $this->url = $store_info['url'];
-        // $this->sns = json_encode($sns_array);
+        $this->user_uuid = $store_user_uuid;
         $this->save();
+    }
+
+    /**
+     * 【取得】usersテーブルとstoresテーブルをjoinのうえ、そのレコード情報を取得
+     *
+     * @param $request
+     * @return void
+     */
+    public function index_storeInfo($request){
+        return $this
+        ->newQuery()
+        ->select([
+            'users.name',
+            'users.email',
+            'users.address',
+            'stores.tel',
+            'stores.business_day',
+            'stores.business_memo',
+            'stores.message',
+            'stores.url',
+            'stores.sns'
+        ])
+        ->join('users', 'stores.user_uuid', '=', 'users.uuid')
+        ->where('user_uuid', '=', $request)
+        ->first();
+    }
+
+    /**
+     * 【更新】店舗基本情報(電話番号、メッセージ)
+     *
+     * @param $request
+     * @return void
+     */
+    public function update_basicInfo_storesTable($request){
+        return $this
+        ->where('user_uuid', '=', $request['user_uuid'])
+        ->update([
+            'tel' => $request['tel'],
+            'message' => $request['message'],
+        ]);
+    }
+
+    
+    /**
+     * 【更新】店舗からのお知らせ
+     *
+     * @param $request
+     * @return void
+     */
+    public function update_businessMemo($request){
+        return $this
+        ->where('user_uuid', '=', $request['user_uuid'])
+        ->update(['business_memo' => $request['business_memo']]);
+    }
+
+    /**
+     * 【更新】ホームページ
+     *
+     * @param $request
+     * @return void
+     */
+    public function update_homepage($request){
+        return $this
+        ->where('user_uuid', '=', $request['user_uuid'])
+        ->update(['url' => $request['url']]);
+    }
+
+    /**
+     * 【更新】SNS
+     *
+     * @param $request
+     * @return void
+     */
+    public function update_sns($request){
+        return $this
+        ->where('user_uuid', '=', $request['user_uuid'])
+        ->update(['sns' => $request['sns']]);
+    }
+
+    /**
+     * 【更新】営業日・営業時間
+     *
+     * @param $request
+     * @return void
+     */
+    public function update_businessDay($request){
+        return $this
+        ->where('user_uuid', '=', $request['user_uuid'])
+        ->update(['business_day' => $request['business_day']]);
     }
 }

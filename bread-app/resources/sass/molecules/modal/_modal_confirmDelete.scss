@@ -1,0 +1,66 @@
+.m-modalConfirmDelete {
+    &__btn--close {
+        display: flex;
+        justify-content: flex-end;
+
+        & > button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+    }
+
+    &__form {
+        margin-top: $mp-xs;
+        width: 12rem;
+
+        @include bp-480up {
+            width: 17rem;
+        }
+
+        & > p {
+            text-align: center;
+        }
+
+        &__btns {
+            display: flex;
+            justify-content: space-between;
+            margin-top: $mp-sm;
+
+            & > button {
+                width: 5.5rem;
+                height: 1.6rem;
+                border: none;
+                border-radius: $sm-radius;
+                font-weight: 500;
+                font-size: 0.9rem;
+                cursor: pointer;
+
+                @include bp-480up {
+                    width: 8rem;
+                }
+
+                &:nth-child(1) {
+                    background: linear-gradient(
+                        180deg,
+                        rgb(238, 238, 238) 0%,
+                        rgb(196, 196, 196) 100%
+                    );
+
+                    &:hover {
+                        opacity: 0.8;
+                    }
+                }
+
+                &:nth-child(2) {
+                    @include bg_GradationBrown;
+                    color: $white;
+
+                    &:hover {
+                        opacity: 0.88;
+                    }
+                }
+            }
+        }
+    }
+}

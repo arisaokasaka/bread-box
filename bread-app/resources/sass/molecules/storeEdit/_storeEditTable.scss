@@ -41,25 +41,27 @@
                     border-top: none;
                     border-radius: none;
                     background-color: $white;
+                    cursor: pointer;
 
-                    & input {
-                        padding: 3px 0 2px 3px;
-                        font-size: 0.8rem;
-                        color: $black;
-                        background-color: $white;
-                        cursor: pointer;
-                    }
+                    & > a {
+                        &:nth-child(1) {
+                            padding: 3px 0 2px 3px;
+                            font-size: 0.8rem;
+                            color: $black;
+                            background-color: $white;
+                        }
 
-                    & a {
-                        width: 20px;
-                        font-size: 0.6rem;
-                        color: $font-color-brown;
+                        &:nth-child(2) {
+                            width: 20px;
+                            font-size: 0.6rem;
+                            color: $font-color-brown;
+                        }
                     }
 
                     &.selected {
                         background-color: $lightBrown;
 
-                        & > input {
+                        & > a {
                             background-color: $lightBrown;
                             color: $font-color-brown;
                         }

@@ -1,17 +1,31 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Modal_editMenu from '../../../atoms/modal/Modal_editMenu';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faTrash} from '@fortawesome/free-solid-svg-icons';
+import Modal_confirmDelete from '../../../atoms/modal/Modal_confirmDelete';
+import { UserAuthContext } from '../../../../contexts/UserAuthContext';
+import { StoreInfoContext } from '../../../../contexts/StoreInfoContext';
 
-type MenuProps = ({
-    MenuInfo: Array<any>;
-});
+const MenuList: React.FC = () => {
+    const { state } = useContext(UserAuthContext);
+    const { stateInfo } = useContext(StoreInfoContext);
+    let time_current: string;
+    let MenuInfo: any;
+    let content: any = <p>まだ登録されていません。メニュー追加ページより、追加してください。</p>;
+    
+    // メニュー情報があるか判断
+    if(stateInfo.menuInfo){
+        MenuInfo = stateInfo.menuInfo;
+        MenuInfo.map((el)=>{
+            if(el.menu_type === 1){
+                content = null;
+                time_current = String(Date.now());
+            }
+        })
+    }
 
-
-const MenuList: React.FC<MenuProps> = ({MenuInfo}) => {
     return(
         <div className = "m-storeEdit-menuList">
             <h3>メニュー一覧</h3>
+            {content}
             {MenuInfo.map((el)=>{
                 return(
                     el.menu_type === 1 &&
@@ -20,13 +34,18 @@ const MenuList: React.FC<MenuProps> = ({MenuInfo}) => {
                             <Modal_editMenu
                                 menu={el}
                             />
-                            <button className="a-btn-deleteMenu"><FontAwesomeIcon icon={faTrash}/>削除する</button>
+                            <Modal_confirmDelete
+                                menu={el}
+                            />
                         </div>
                         <div className = "m-storeEdit-menuList__item__content">
-                            <img src="/images/croissant.jpg" alt="パンの画像"/>
+                            <img
+                                src={"storage/store/" + state.uuid + "/menu/item_" + el.bread_order + ".jpg?" + time_current}
+                                alt="パンの画像"
+                            />
                             <div className = "m-storeEdit-menuList__item__content__text">
                                 <h4>{el.bread_name}</h4>
-                                <span>{el.bread_price}円</span><a>{el.bread_kind}</a>
+                                {el.bread_price && <span>{el.bread_price}円</span>}<a>{el.bread_kind}</a>
                                 <p>{el.bread_detail}</p>
                             </div>
                         </div>

@@ -4,7 +4,7 @@ import {Link, useHistory} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import { UserAuthContext } from '../../../contexts/UserAuthContext';
 
-export default function LoginStore() {
+const LoginStore: React.FC = () => {
     const { register, handleSubmit, errors } = useForm();
     const { dispatch } = useContext(UserAuthContext);
     const [email, setEmail] = useState("");
@@ -23,7 +23,6 @@ export default function LoginStore() {
                 password
             })
             .then(res => {
-                console.log(res);
                 dispatch({
                     type: 'setStore',
                     payload: res.data.user.uuid,
@@ -31,12 +30,10 @@ export default function LoginStore() {
                 history.push("/store_edit");
             })
             .catch(err => {
-                console.log(err);
                 console.log('[login]fail_post');
             });
         })
         .catch(err => {
-            console.log(err);
             console.log('fail_get');
         })
     }
@@ -69,3 +66,5 @@ export default function LoginStore() {
         </div>
     )
 }
+
+export default LoginStore;
