@@ -33,7 +33,7 @@ class StoreMenu extends Model
     /**
      * 【作成】こだわり(advantage), 思い(spirit)のレコード作成
      *
-     * @param array $request
+     * @param object $request
      * @return void
      */
     public function create_spirit(object $request){
@@ -80,7 +80,7 @@ class StoreMenu extends Model
      */
     public function update_menu_type_1(object $request){
         return $this
-        ->where('store_uuid', '=', $request['store_uuid'])
+        ->where('uuid', '=', $request['uuid'])
         ->update([
             'bread_name' => $request['bread_name'],
             'bread_kind' => $request['bread_kind'],
