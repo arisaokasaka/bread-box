@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 export type StateType = {
     storeInfo: {data:[]};
     menuInfo: {data:[]};
@@ -12,34 +10,6 @@ export type ActionType = {
 
 export const StoreInfoReducer:any= (stateInfo: StateType, action: ActionType) => {
     switch (action.type) {
-        // case 'indexStore':
-        //     console.log('indexStore')
-        //     axios.post("/api/index_storeInfo", action.payload)
-        //     .then(res => {
-        //         console.log(res);
-        //         return {
-        //             ...stateInfo,
-        //             storeInfo: res.data,
-        //         }
-        //     })
-        //     .catch(err => {
-        //         console.log(err)
-        //     })
-
-        // case 'indexMenu':
-        //     console.log('indexMenu')
-        //     axios.post("/api/index_menuInfo", action.payload)
-        //     .then(res => {
-        //         console.log(res);
-        //         return {
-        //             ...stateInfo,
-        //             menuInfo: res.data,
-        //         }
-        //     })
-        //     .catch(err => {
-        //         console.log(err)
-        //     })
-
         case 'inputStoreInfo':
             return{
                 ...stateInfo,

@@ -3,11 +3,10 @@ import StoreMenu from './StoreMenu';
 import StoreSpirit from './StoreSpirit';
 
 type InfoProps = ({
-    StoreInfo? : any;
+    menuInfo : Array<any>
 })
 
-const StoreContents: React.FC<InfoProps> = ({StoreInfo}) => {
-
+const StoreContents: React.FC<InfoProps> = ({menuInfo}) => {
     const [table, setTable] = useState('menu');
     
     const SectionMenu = {
@@ -54,13 +53,13 @@ const StoreContents: React.FC<InfoProps> = ({StoreInfo}) => {
     const CurrentTable = (table) => {
         switch(table){
         case 'menu':
-            return <StoreMenu Menu = {StoreInfo}/>
+            return <StoreMenu Menu = {menuInfo}/>
             break;
         case 'stamp':
             return <h2>stamp</h2>
             break;
         case 'spirit':
-            return <StoreSpirit Spirit = {StoreInfo}/>
+            return <StoreSpirit Spirit = {menuInfo}/>
             break;
         }
     }

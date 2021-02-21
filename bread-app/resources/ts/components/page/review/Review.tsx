@@ -82,7 +82,7 @@ const Review : React.FC<ReviewProps> = ({ReviewInfo, StoreInfo}) => {
                 <main>
                     <div className = "p-review__container__info">
                         <StoreBasicInfo
-                            StoreInfo = {StoreInfo}
+                            storeInfo = {StoreInfo}
                         />
                     </div>
                     <ModalCreateReview

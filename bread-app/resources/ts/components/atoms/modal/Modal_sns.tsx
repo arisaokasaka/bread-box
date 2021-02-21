@@ -1,14 +1,16 @@
-import React,{useState} from 'react';
+import React,{ useState } from 'react';
 import Modal from 'react-modal'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faTimes, faStar, faLink} from "@fortawesome/free-solid-svg-icons";
 import {faTwitter, faFacebook, faInstagram} from "@fortawesome/free-brands-svg-icons";
 
-type StoreInfoProps = ({
-    StoreInfo: any
+type SNSProps = ({
+    sns: any
 })
 
-const ModalSNS: React.FC<StoreInfoProps> = ({StoreInfo}) =>{
+const ModalSNS: React.FC<SNSProps> = ({sns}) =>{
+    const [ isModelOpen, setModal ] = useState(false);
+    const snsInfo:any = JSON.parse(sns);
     const customStyles = {
         content : {
             top: '50%',
@@ -19,45 +21,34 @@ const ModalSNS: React.FC<StoreInfoProps> = ({StoreInfo}) =>{
             transform: 'translate(-50%, -50%)'
         }
     }
-
-    const [modalIsOpen,setIsOpen] = useState(false);
-
-    function openModal() {
-      setIsOpen(true);
-    }
-      
-    function closeModal(){
-      setIsOpen(false);
-    }
-
+    
     return(
-        <div className = "m-modal-sns">
-            {StoreInfo.map((el)=>(
-                el.sns && 
-                <div key={"sns_"+el.id}>
-                    <button onClick={openModal} className = "a-btn-modal-sns">
+        <div className = "m-modal-sns" onClick = {()=>console.log(snsInfo)}>
+            {snsInfo &&
+                <div key={"sns_"+snsInfo.id}>
+                    <button onClick={()=>setModal(true)} className = "a-btn-modal-sns">
                         <FontAwesomeIcon icon={faLink}/>&nbsp;&nbsp;ＳＮＳ
                     </button>
                     <Modal
-                    isOpen={modalIsOpen}
-                    onRequestClose={closeModal}
+                    isOpen={isModelOpen}
+                    onRequestClose={()=>setModal(false)}
                     style={customStyles}
                     ariaHideApp={false}
                     >
                     <div className = "m-modal-sns__btn--close">
-                        <button onClick={closeModal}><FontAwesomeIcon icon={faTimes}/></button>
+                        <button onClick={()=>setModal(false)}><FontAwesomeIcon icon={faTimes}/></button>
                     </div>
                     <div className = "m-modal-sns__links">
                         <ul>
-                            {el.sns.instagram && <li><a href={el.sns.instagram} className = "m-modal-sns__links__item instagram"><FontAwesomeIcon icon={faInstagram}/>&nbsp;&nbsp;Instagram</a></li>}
-                            {el.sns.facebook && <li><a href={el.sns.facebook} className = "m-modal-sns__links__item facebook"><FontAwesomeIcon icon={faFacebook}/>&nbsp;&nbsp;Facebook</a></li>}
-                            {el.sns.twitter && <li><a href={el.sns.twitter} className = "m-modal-sns__links__item twitter"><FontAwesomeIcon icon={faTwitter}/>&nbsp;&nbsp;Twitter</a></li>}
-                            {el.sns.other && <li><a href={el.sns.other} className = "m-modal-sns__links__item other"><FontAwesomeIcon icon={faStar}/>&nbsp;&nbsp;その他</a></li>}
+                            {snsInfo.instagram && <li><a href={snsInfo.instagram} className = "m-modal-sns__links__item instagram"><FontAwesomeIcon icon={faInstagram}/>&nbsp;&nbsp;Instagram</a></li>}
+                            {snsInfo.facebook && <li><a href={snsInfo.facebook} className = "m-modal-sns__links__item facebook"><FontAwesomeIcon icon={faFacebook}/>&nbsp;&nbsp;Facebook</a></li>}
+                            {snsInfo.twitter && <li><a href={snsInfo.twitter} className = "m-modal-sns__links__item twitter"><FontAwesomeIcon icon={faTwitter}/>&nbsp;&nbsp;Twitter</a></li>}
+                            {snsInfo.other && <li><a href={snsInfo.other} className = "m-modal-sns__links__item other"><FontAwesomeIcon icon={faStar}/>&nbsp;&nbsp;その他</a></li>}
                         </ul>
                     </div>
                     </Modal>
                 </div>
-            ))}            
+            }
         </div>
     );
 }
