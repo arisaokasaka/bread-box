@@ -17,7 +17,7 @@ export default function BtnMypage_icon() {
         );
     }else if(state.auth === "store"){
         icon = (
-        <Link to="/store">
+        <Link to="/store_edit">
             <FontAwesomeIcon icon={faUserCircle}/>
             <span>マイページ</span>
         </Link>
