@@ -31,10 +31,10 @@ class StoreController extends Controller
             $get_info = $store->find_keyword($keyword);
         }
         foreach($get_info as $store) {
-            $store['thumbnail'] = Storage::exists(self::storage_path . $store->uuid . self::storage_thumbnail);
-            $store['menu1'] = Storage::exists(self::storage_path . $store->uuid . self::storage_menu . '1.jpg');
-            $store['menu2'] = Storage::exists(self::storage_path . $store->uuid . self::storage_menu . '2.jpg');
-            $store['menu3'] = Storage::exists(self::storage_path . $store->uuid . self::storage_menu . '3.jpg');
+            $store['thumbnail'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_thumbnail);
+            $store['menu1'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_menu . '1.jpg');
+            $store['menu2'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_menu . '2.jpg');
+            $store['menu3'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_menu . '3.jpg');
         }
         return $get_info;
     }
