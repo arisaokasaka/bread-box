@@ -28,7 +28,8 @@
             @include bp-960up {
                 display: block;
                 width: 195px;
-                height: 260px;
+                // height: 260px;
+
                 &__images {
                     &__main {
                         overflow: hidden;
@@ -44,13 +45,15 @@
                     }
 
                     &__sub {
-                        display: flex;
-                        justify-content: space-between;
+                        display: grid;
+                        grid-template-columns: 1fr 1fr 1fr;
+                        column-gap: 5px;
 
                         & > img {
                             height: 62px;
                             width: 62px;
                             object-fit: cover;
+                            object-position: center;
                         }
                     }
                 }

@@ -7,11 +7,16 @@ type Props = {
 
 const Search_sidebar_item : React.FC<Props> = ({sectionTitle, sectionContent}) => (
     <div className="a-search-sidebar-item">
-        <label>{sectionTitle}</label>
+        <h4>{sectionTitle}</h4>
         <ul>
             {sectionContent.map(
                 (el)=>{
-                    return (<li><input type="checkbox" value={el.name} key={el.id}/><a>{el.name}</a></li>);
+                    return (
+                    <li key={"sidebar"+el.id}>
+                        <input id={el.id} type="checkbox" value={el.name}/>
+                        <label htmlFor={el.id}>{el.name}</label>
+                    </li>
+                    );
                 })}
         </ul>
     </div>
