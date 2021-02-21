@@ -12,16 +12,31 @@ use Illuminate\Support\Facades\Log;
 
 class StoreController extends Controller
 {
-    public function index_store() {
-       
-        Log::info(Auth::user());
-        $info = new Store();
-        return $info->all_stores();
-    }
-
-    public function search_store() {
-        $info = new Store();
-        return $info->find_keyword('');
+    
+    /**
+     * 店舗検索
+     *
+     * @param Request $request
+     * @return $get_info
+     */
+    const storage_path = 'public/store/';
+    const storage_thumbnail = '/thumbnail.jpg';
+    const storage_menu = '/menu/item_';
+    public function search_store(Request $request) {
+        $store = new Store();
+        $keyword = $request->input('keyword');
+        if($keyword === ""){
+            $get_info = $store->find_keyword("");
+        }else{
+            $get_info = $store->find_keyword($keyword);
+        }
+        foreach($get_info as $store) {
+            $store['thumbnail'] = Storage::exists(self::storage_path . $store->uuid . self::storage_thumbnail);
+            $store['menu1'] = Storage::exists(self::storage_path . $store->uuid . self::storage_menu . '1.jpg');
+            $store['menu2'] = Storage::exists(self::storage_path . $store->uuid . self::storage_menu . '2.jpg');
+            $store['menu3'] = Storage::exists(self::storage_path . $store->uuid . self::storage_menu . '3.jpg');
+        }
+        return $get_info;
     }
 
     /**
