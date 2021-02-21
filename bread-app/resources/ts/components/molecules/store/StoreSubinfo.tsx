@@ -3,7 +3,6 @@ import Score from '../../atoms/Score';
 import Week from '../../../info/Week';
 import Schedule from '../../atoms/Schedule';
 import Btn_homepage from '../../atoms/buttons/Btn_homepage';
-
 import ModalSNS from '../../atoms/modal/Modal_sns';
 
 type StoreInfoProps = ({
@@ -14,9 +13,11 @@ const StoreSubInfo: React.FC<StoreInfoProps> = ({storeInfo}) => (
     <div className = "m-store-subInfo">
         <div className = "m-store-subInfo__container" key={"subInfo_"+storeInfo.id}>
             <div className = "m-store-subInfo__container__item">
-                <Score
-                    ScoreStar = {storeInfo.star}
-                />
+                {storeInfo.star &&
+                    <Score
+                        ScoreStar = {storeInfo.star}
+                    />
+                }
             </div>
             <div className = "m-store-subInfo__container__item">
                 <Schedule
@@ -25,12 +26,16 @@ const StoreSubInfo: React.FC<StoreInfoProps> = ({storeInfo}) => (
                 <p>{storeInfo.business_memo}</p>
             </div>
             <div className = "m-store-subInfo__container__item__btns">
-                <Btn_homepage
-                    url = {storeInfo.url}
-                />
-                <ModalSNS
-                    snsInfo = {storeInfo.sns}
-                />
+                {storeInfo.url &&
+                    <Btn_homepage
+                        url = {storeInfo.url}
+                    />
+                }
+                {storeInfo.sns &&
+                    <ModalSNS
+                        sns = {storeInfo.sns}
+                    />
+                }
             </div>
         </div>
     </div>
