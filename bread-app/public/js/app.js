@@ -15369,12 +15369,16 @@ var Search_sidebar_item = function Search_sidebar_item(_a) {
       sectionContent = _a.sectionContent;
   return react_1["default"].createElement("div", {
     className: "a-search-sidebar-item"
-  }, react_1["default"].createElement("label", null, sectionTitle), react_1["default"].createElement("ul", null, sectionContent.map(function (el) {
-    return react_1["default"].createElement("li", null, react_1["default"].createElement("input", {
+  }, react_1["default"].createElement("h4", null, sectionTitle), react_1["default"].createElement("ul", null, sectionContent.map(function (el) {
+    return react_1["default"].createElement("li", {
+      key: "sidebar" + el.id
+    }, react_1["default"].createElement("input", {
+      id: el.id,
       type: "checkbox",
-      value: el.name,
-      key: el.id
-    }), react_1["default"].createElement("a", null, el.name));
+      value: el.name
+    }), react_1["default"].createElement("label", {
+      htmlFor: el.id
+    }, el.name));
   })));
 };
 
@@ -15747,7 +15751,7 @@ function BtnMypage_icon() {
     }), react_1["default"].createElement("span", null, "\u30DE\u30A4\u30DA\u30FC\u30B8"));
   } else if (state.auth === "store") {
     icon = react_1["default"].createElement(react_router_dom_1.Link, {
-      to: "/store"
+      to: "/store_edit"
     }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
       icon: free_solid_svg_icons_1.faUserCircle
     }), react_1["default"].createElement("span", null, "\u30DE\u30A4\u30DA\u30FC\u30B8"));
@@ -17422,7 +17426,15 @@ var Week_1 = __importDefault(__webpack_require__(/*! ../../info/Week */ "./resou
 var InputSchedule = function InputSchedule(_a) {
   var Info = _a.Info;
   var Week = Week_1["default"].week;
-  var defaultData; // 営業日・営業時間情報のJSONをObjectに変換
+  var defaultData = {
+    monday: '',
+    tuesday: '',
+    wednesday: '',
+    thursday: '',
+    friday: '',
+    saturday: '',
+    sunday: ''
+  }; // 営業日・営業時間情報のJSONをObjectに変換
 
   if (Info.business_day) {
     defaultData = JSON.parse(Info.business_day);
@@ -19886,6 +19898,7 @@ var Score_1 = __importDefault(__webpack_require__(/*! ../../atoms/Score */ "./re
 
 var StoreList = function StoreList(_a) {
   var StoreInfo = _a.StoreInfo;
+  var history = react_router_dom_1.useHistory();
   return react_1["default"].createElement("div", {
     className: "m-store-list"
   }, StoreInfo.map(function (el) {
@@ -19893,47 +19906,60 @@ var StoreList = function StoreList(_a) {
       className: "m-store-list__item",
       key: el.uuid
     }, react_1["default"].createElement("div", {
-      className: "m-store-list__item--pc"
+      className: "m-store-list__item--pc",
+      onClick: function onClick() {
+        return history.push("/store/" + el.user_uuid);
+      }
     }, react_1["default"].createElement("div", {
       className: "m-store-list__item--pc__images__main"
-    }, react_1["default"].createElement("img", {
-      src: "/images/bakery2.jpg",
+    }, el.thumbnail ? react_1["default"].createElement("img", {
+      src: "/storage/store/" + el.user_uuid + "/thumbnail.jpg",
+      alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
+    }) : react_1["default"].createElement("img", {
+      src: "/images/no_image.jpg",
       alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
     })), react_1["default"].createElement("div", {
       className: "m-store-list__item--pc__images__sub"
-    }, react_1["default"].createElement("img", {
-      src: "/images/bread1.jpg",
+    }, el.menu1 && react_1["default"].createElement("img", {
+      src: "/storage/store/" + el.user_uuid + "/menu/item_1.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
-    }), react_1["default"].createElement("img", {
-      src: "/images/bread1.jpg",
+    }), el.menu2 && react_1["default"].createElement("img", {
+      src: "/storage/store/" + el.user_uuid + "/menu/item_2.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
-    }), react_1["default"].createElement("img", {
-      src: "/images/bread1.jpg",
+    }), el.menu3 && react_1["default"].createElement("img", {
+      src: "/storage/store/" + el.user_uuid + "/menu/item_3.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
     }))), react_1["default"].createElement("div", {
       className: "m-store-list__item__container"
     }, react_1["default"].createElement("div", {
       className: "m-store-list__item__container__buttons"
-    }, react_1["default"].createElement(Btn_favorite_1["default"], null), react_1["default"].createElement(Btn_interested_1["default"], null)), react_1["default"].createElement(react_router_dom_1.Link, {
-      to: "/store"
-    }, react_1["default"].createElement("div", {
-      className: "m-store-list__item__container__name"
+    }, react_1["default"].createElement(Btn_favorite_1["default"], null), react_1["default"].createElement(Btn_interested_1["default"], null)), react_1["default"].createElement("div", {
+      className: "m-store-list__item__container__name",
+      onClick: function onClick() {
+        return history.push("/store/" + el.user_uuid);
+      }
     }, react_1["default"].createElement("h2", {
       className: "hover-colorChange"
     }, el.name)), react_1["default"].createElement("p", {
       className: "m-store-list__item__container__access"
     }, el.address), react_1["default"].createElement("div", {
-      className: "m-store-list__item--mobile"
+      className: "m-store-list__item--mobile",
+      onClick: function onClick() {
+        return history.push("/store/" + el.user_uuid);
+      }
     }, react_1["default"].createElement("div", {
       className: "m-store-list__item--mobile__images"
-    }, react_1["default"].createElement("img", {
-      src: "/images/bread1.jpg",
+    }, el.thumbnail ? react_1["default"].createElement("img", {
+      src: "/storage/store/" + el.user_uuid + "/thumbnail.jpg",
       alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
-    }), react_1["default"].createElement("img", {
-      src: "/images/bread1.jpg",
+    }) : react_1["default"].createElement("img", {
+      src: "/images/no_image.jpg",
+      alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
+    }), el.menu1 && react_1["default"].createElement("img", {
+      src: "/storage/store/" + el.user_uuid + "/menu/item_1.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
-    }), react_1["default"].createElement("img", {
-      src: "/images/bread1.jpg",
+    }), el.menu2 && react_1["default"].createElement("img", {
+      src: "/storage/store/" + el.user_uuid + "/menu/item_2.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
     }))), react_1["default"].createElement("p", {
       className: "m-store-list__item__container__explanation"
@@ -19941,7 +19967,7 @@ var StoreList = function StoreList(_a) {
       Week: Week_1["default"].week
     }), react_1["default"].createElement(Score_1["default"], {
       ScoreStar: el.star
-    }))));
+    })));
   }));
 };
 
@@ -19972,7 +19998,7 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 
 var StoreMenu = function StoreMenu(_a) {
   var Menu = _a.Menu;
-  var content = react_1["default"].createElement("p", null, "\u307E\u3060\u767B\u9332\u3055\u308C\u3066\u3044\u307E\u305B\u3093\u3002");
+  var content = react_1["default"].createElement("p", null, "\u6E96\u5099\u4E2D\u3067\u3059\u3002");
 
   if (Menu) {
     Menu.map(function (el) {
@@ -19984,7 +20010,7 @@ var StoreMenu = function StoreMenu(_a) {
 
   return react_1["default"].createElement("div", {
     className: "m-menu"
-  }, Menu.map(function (el) {
+  }, content, Menu.map(function (el) {
     return el.menu_type === 1 && react_1["default"].createElement("div", {
       className: "m-menu__card",
       key: "menu_" + el.id
@@ -20028,9 +20054,15 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 
 var StoreSpirit = function StoreSpirit(_a) {
   var Spirit = _a.Spirit;
+  var content = react_1["default"].createElement("p", null, "\u6E96\u5099\u4E2D\u3067\u3059\u3002");
+  Spirit.map(function (el) {
+    if (el.menu_type === 2) {
+      content = null;
+    }
+  });
   return react_1["default"].createElement("div", {
     className: "m-spirit"
-  }, Spirit.map(function (el) {
+  }, content, Spirit.map(function (el) {
     return react_1["default"].createElement("div", {
       className: "m-spirit__container",
       key: "spirit_" + el.id
@@ -21660,6 +21692,40 @@ exports.default = Review;
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -21670,9 +21736,11 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
 var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
 
@@ -21680,76 +21748,37 @@ var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg
 
 var Search_sidebar_1 = __importDefault(__webpack_require__(/*! ../../molecules/search/Search_sidebar */ "./resources/ts/components/molecules/search/Search_sidebar.tsx"));
 
-var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../../molecules/Store_pickup */ "./resources/ts/components/molecules/Store_pickup.tsx"));
-
 var StoreList_1 = __importDefault(__webpack_require__(/*! ../../molecules/store/StoreList */ "./resources/ts/components/molecules/store/StoreList.tsx"));
-
-var testInfo = [{
-  name: 'sarasapan',
-  address: '福岡市中央区白金',
-  star: 2,
-  business_day: 'sasa',
-  busines_memo: '定休日！！！',
-  message: 'ニューヨーク・ブロードウェイに佇むレンガ造りのデザイナーズプレイラウンジをオマージュ。 ホテルっぽいの敷居の高さを排除し、日常の中にあるオシャレで少しだけ贅沢な時間をすごしたいときの場所。カフェやワークスペースとして、デートや少しの休息などにご利用ください。毎日26時まで営業しておりますので、夜カフェとしてのご利用もおすすめです。',
-  sns: {
-    twitter: 'twitter',
-    instagram: 'sssss'
-  },
-  img: '/images/croissant.jpg'
-}, {
-  name: 'sarasapan',
-  address: '福岡市中央区薬院',
-  star: 3.4,
-  business_day: 'sasa',
-  busines_memo: '定休日！！！',
-  message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
-  sns: {
-    twitter: 'twitter',
-    instagram: 'sssss'
-  },
-  img: '/images/croissant.jpg'
-}, {
-  id: 6,
-  name: 'Le pain de Maki',
-  address: '福岡市博多区比恵町',
-  star: 3.3,
-  business_day: '月曜日',
-  busines_memo: '定休日！！！',
-  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
-  sns: {
-    twitter: 'twitter',
-    instagram: 'sssss'
-  },
-  img: '/images/bakery.jpg'
-}, {
-  id: 56,
-  name: 'Le pain de Maki',
-  address: '福岡市博多区比恵町',
-  star: 3.3,
-  business_day: '月曜日',
-  busines_memo: '定休日！！！',
-  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
-  sns: {
-    twitter: 'twitter',
-    instagram: 'sssss'
-  },
-  img: '/images/bakery2.jpg'
-}];
 
 var Search = function Search() {
   // const [users, setUsers] = useState<any[]>([]);
   // useEffect(() => {
   //     getUsers()
   // },[])
-  // const [stores, setStores] = useState<any[]>([]);
-  // useEffect(()=>{
-  //     getStores()
-  // },[])
-  // const getStores = () => {
-  //     const response = await axios.post('/api/store_all')
+  // const getUsers = async () => {
+  //     const response = await axios.get('/api/user');
+  //     console.log(123)
   //     console.log(response)
-  //     setStores(response.data)
+  //     setUsers(response.data.users)
   // }
+  var _a = react_1.useState([]),
+      stores = _a[0],
+      setStores = _a[1];
+
+  react_1.useEffect(function () {
+    getStores();
+  }, []);
+
+  var getStores = function getStores() {
+    axios_1["default"].post('/api/search_store', {
+      keyword: ''
+    }).then(function (res) {
+      setStores(res.data);
+      console.log(res.data);
+    });
+  };
+
+  console.log(stores);
   return react_1["default"].createElement("div", {
     className: "p-search"
   }, react_1["default"].createElement("div", {
@@ -21762,9 +21791,7 @@ var Search = function Search() {
     className: "p-search__container"
   }, react_1["default"].createElement(Search_sidebar_1["default"], null), react_1["default"].createElement("div", {
     className: "p-search__container__content"
-  }, react_1["default"].createElement(Store_pickup_1["default"], {
-    PickupInfo: testInfo
-  }), react_1["default"].createElement("div", {
+  }, react_1["default"].createElement("div", {
     className: "p-search__container__content__list"
   }, react_1["default"].createElement("div", {
     className: "p-search__container__content__list__order--pc"
@@ -21779,7 +21806,7 @@ var Search = function Search() {
   }, "\u53E3\u30B3\u30DF\u6570\u9806"), react_1["default"].createElement("option", {
     value: ""
   }, "\u30A2\u30AF\u30BB\u30B9\u6570\u9806"))), react_1["default"].createElement(StoreList_1["default"], {
-    StoreInfo: testInfo
+    StoreInfo: stores
   })))));
 };
 

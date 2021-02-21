@@ -763,7 +763,7 @@ h2 {
   margin-bottom: 20px;
 }
 
-.a-search-sidebar-item label {
+.a-search-sidebar-item h4 {
   font-size: 1rem;
   font-weight: bolder;
   color: #67491b;
@@ -1803,7 +1803,6 @@ label.a-label-required__red::after {
   .m-store-list__item--pc {
     display: block;
     width: 195px;
-    height: 260px;
   }
   .m-store-list__item--pc__images__main {
     overflow: hidden;
@@ -1818,14 +1817,18 @@ label.a-label-required__red::after {
        object-fit: cover;
   }
   .m-store-list__item--pc__images__sub {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    -moz-column-gap: 5px;
+         column-gap: 5px;
   }
   .m-store-list__item--pc__images__sub > img {
     height: 62px;
     width: 62px;
     -o-object-fit: cover;
        object-fit: cover;
+    -o-object-position: center;
+       object-position: center;
   }
 }
 
