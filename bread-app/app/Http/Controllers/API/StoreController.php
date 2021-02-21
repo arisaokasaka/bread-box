@@ -59,6 +59,7 @@ class StoreController extends Controller
     public function index_storeInfo(Request $request){
         $store = new Store();
         $get_info = $store->index_storeInfo($request->input('user_uuid'));
+        Log::info($get_info);
         return $get_info;
     }
 
