@@ -5,11 +5,12 @@ import {faTimes, faStar, faLink} from "@fortawesome/free-solid-svg-icons";
 import {faTwitter, faFacebook, faInstagram} from "@fortawesome/free-brands-svg-icons";
 
 type SNSProps = ({
-    snsInfo: any
+    sns: any
 })
 
-const ModalSNS: React.FC<SNSProps> = ({snsInfo}) =>{
+const ModalSNS: React.FC<SNSProps> = ({sns}) =>{
     const [ isModelOpen, setModal ] = useState(false);
+    const snsInfo:any = JSON.parse(sns);
     const customStyles = {
         content : {
             top: '50%',
@@ -20,9 +21,9 @@ const ModalSNS: React.FC<SNSProps> = ({snsInfo}) =>{
             transform: 'translate(-50%, -50%)'
         }
     }
-
+    
     return(
-        <div className = "m-modal-sns">
+        <div className = "m-modal-sns" onClick = {()=>console.log(snsInfo)}>
             {snsInfo &&
                 <div key={"sns_"+snsInfo.id}>
                     <button onClick={()=>setModal(true)} className = "a-btn-modal-sns">
