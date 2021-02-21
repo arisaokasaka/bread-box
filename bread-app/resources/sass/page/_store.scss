@@ -5,7 +5,12 @@
         @include content-width;
 
         &__img {
-            height: 200px;
+            height: 100px;
+
+            @include bp-960up {
+                height: 180px;
+            }
+
             & > img {
                 object-fit: cover;
                 object-position: center;

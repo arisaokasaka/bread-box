@@ -48,6 +48,10 @@
         background-color: $lightBrown;
         padding: $mp-xxs;
 
+        @include bp-600up {
+            padding: $mp-xs;
+        }
+
         &__table {
             min-height: 6rem;
         }

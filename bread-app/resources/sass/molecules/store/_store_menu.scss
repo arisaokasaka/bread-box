@@ -1,13 +1,28 @@
 .m-menu {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: 1fr 1fr;
     grid-gap: 8px;
+
+    @include bp-480up {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    @include bp-600up {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
 
     &__card {
         background-color: $white;
         border-radius: $sm-radius;
         padding: $mp-xxs;
         color: $font-color-brown;
+
+        & > img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            object-position: center;
+        }
 
         h4 {
             margin-top: 5px;
@@ -21,8 +36,12 @@
         }
 
         & span {
-            display: flex;
-            align-items: center;
+            display: grid;
+
+            @include bp-480up {
+                display: flex;
+                align-items: center;
+            }
         }
 
         &__kind {

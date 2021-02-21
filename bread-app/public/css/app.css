@@ -1522,8 +1522,20 @@ label.a-label-required__red::after {
 
 .m-menu {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-columns: 1fr 1fr;
   grid-gap: 8px;
+}
+
+@media screen and (min-width: 480px) {
+  .m-menu {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .m-menu {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }
 
 .m-menu__card {
@@ -1531,6 +1543,15 @@ label.a-label-required__red::after {
   border-radius: 2px;
   padding: 10px;
   color: #67491b;
+}
+
+.m-menu__card > img {
+  width: 100%;
+  height: 100px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
 }
 
 .m-menu__card h4 {
@@ -1545,8 +1566,14 @@ label.a-label-required__red::after {
 }
 
 .m-menu__card span {
-  display: flex;
-  align-items: center;
+  display: grid;
+}
+
+@media screen and (min-width: 480px) {
+  .m-menu__card span {
+    display: flex;
+    align-items: center;
+  }
 }
 
 .m-menu__card__kind {
@@ -1560,13 +1587,13 @@ label.a-label-required__red::after {
 
 .m-spirit__container__section {
   margin: 20px 0;
-  background-color: #faf8f5;
   border-radius: 2px;
-  padding: 20px;
 }
 
-.m-spirit__container__section > h2 {
+.m-spirit__container__section > h3 {
+  color: #493020;
   margin-bottom: 10px;
+  border-bottom: 1px solid;
 }
 
 .m-spirit__container__section__content {
@@ -1575,7 +1602,7 @@ label.a-label-required__red::after {
 
 @media screen and (min-width: 600px) {
   .m-spirit__container__section__content {
-    grid-template-columns: 35% 1fr;
+    grid-template-columns: 25% 1fr;
     -moz-column-gap: 0.9rem;
          column-gap: 0.9rem;
   }
@@ -1585,7 +1612,7 @@ label.a-label-required__red::after {
   -o-object-fit: cover;
      object-fit: cover;
   width: 100%;
-  height: 150px;
+  height: 100px;
   margin: 10px auto;
 }
 
@@ -1657,6 +1684,12 @@ label.a-label-required__red::after {
 .m-store-contents__container {
   background-color: #fae6c9;
   padding: 10px;
+}
+
+@media screen and (min-width: 600px) {
+  .m-store-contents__container {
+    padding: 20px;
+  }
 }
 
 .m-store-contents__container__table {
@@ -2953,7 +2986,13 @@ label.a-label-required__red::after {
 }
 
 .p-store__container__img {
-  height: 200px;
+  height: 100px;
+}
+
+@media screen and (min-width: 960px) {
+  .p-store__container__img {
+    height: 180px;
+  }
 }
 
 .p-store__container__img > img {

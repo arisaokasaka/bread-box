@@ -15194,7 +15194,7 @@ var App = function App() {
     path: "/review",
     component: Review_1["default"]
   }), react_1["default"].createElement(react_router_dom_1.Route, {
-    path: "/store",
+    path: "/store/:user_uuid",
     component: StorePage_1["default"]
   }), react_1["default"].createElement(StoreOnly_1["default"], {
     path: "/store_edit"
@@ -16066,17 +16066,22 @@ var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome
 var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
 
 var Btn_homepage = function Btn_homepage(_a) {
-  var StoreInfo = _a.StoreInfo;
+  var url = _a.url;
+
+  var handleClick = function handleClick() {
+    if (window.confirm('外部ページに遷移します。よろしいですか？')) {
+      location.href = url;
+    }
+  };
+
   return react_1["default"].createElement("div", {
     className: "a-btn-homepage"
-  }, StoreInfo.map(function (el) {
-    return el.url && react_1["default"].createElement("a", {
-      href: el.url,
-      key: el.url
-    }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-      icon: free_solid_svg_icons_1.faPaperPlane
-    }), "\xA0\xA0\u30DB\u30FC\u30E0\u30DA\u30FC\u30B8");
-  }));
+  }, url && react_1["default"].createElement("a", {
+    key: url,
+    onClick: handleClick
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faPaperPlane
+  }), "\xA0\xA0\u30DB\u30FC\u30E0\u30DA\u30FC\u30B8"));
 };
 
 exports.default = Btn_homepage;
@@ -17172,7 +17177,13 @@ var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg
 var free_brands_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-brands-svg-icons */ "./node_modules/@fortawesome/free-brands-svg-icons/index.es.js");
 
 var ModalSNS = function ModalSNS(_a) {
-  var StoreInfo = _a.StoreInfo;
+  var sns = _a.sns;
+
+  var _b = react_1.useState(false),
+      isModelOpen = _b[0],
+      setModal = _b[1];
+
+  var snsInfo = JSON.parse(sns);
   var customStyles = {
     content: {
       top: '50%',
@@ -17183,64 +17194,58 @@ var ModalSNS = function ModalSNS(_a) {
       transform: 'translate(-50%, -50%)'
     }
   };
-
-  var _b = react_1.useState(false),
-      modalIsOpen = _b[0],
-      setIsOpen = _b[1];
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
   return react_1["default"].createElement("div", {
-    className: "m-modal-sns"
-  }, StoreInfo.map(function (el) {
-    return el.sns && react_1["default"].createElement("div", {
-      key: "sns_" + el.id
-    }, react_1["default"].createElement("button", {
-      onClick: openModal,
-      className: "a-btn-modal-sns"
-    }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-      icon: free_solid_svg_icons_1.faLink
-    }), "\xA0\xA0\uFF33\uFF2E\uFF33"), react_1["default"].createElement(react_modal_1["default"], {
-      isOpen: modalIsOpen,
-      onRequestClose: closeModal,
-      style: customStyles,
-      ariaHideApp: false
-    }, react_1["default"].createElement("div", {
-      className: "m-modal-sns__btn--close"
-    }, react_1["default"].createElement("button", {
-      onClick: closeModal
-    }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-      icon: free_solid_svg_icons_1.faTimes
-    }))), react_1["default"].createElement("div", {
-      className: "m-modal-sns__links"
-    }, react_1["default"].createElement("ul", null, el.sns.instagram && react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
-      href: el.sns.instagram,
-      className: "m-modal-sns__links__item instagram"
-    }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-      icon: free_brands_svg_icons_1.faInstagram
-    }), "\xA0\xA0Instagram")), el.sns.facebook && react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
-      href: el.sns.facebook,
-      className: "m-modal-sns__links__item facebook"
-    }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-      icon: free_brands_svg_icons_1.faFacebook
-    }), "\xA0\xA0Facebook")), el.sns.twitter && react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
-      href: el.sns.twitter,
-      className: "m-modal-sns__links__item twitter"
-    }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-      icon: free_brands_svg_icons_1.faTwitter
-    }), "\xA0\xA0Twitter")), el.sns.other && react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
-      href: el.sns.other,
-      className: "m-modal-sns__links__item other"
-    }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-      icon: free_solid_svg_icons_1.faStar
-    }), "\xA0\xA0\u305D\u306E\u4ED6"))))));
-  }));
+    className: "m-modal-sns",
+    onClick: function onClick() {
+      return console.log(snsInfo);
+    }
+  }, snsInfo && react_1["default"].createElement("div", {
+    key: "sns_" + snsInfo.id
+  }, react_1["default"].createElement("button", {
+    onClick: function onClick() {
+      return setModal(true);
+    },
+    className: "a-btn-modal-sns"
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faLink
+  }), "\xA0\xA0\uFF33\uFF2E\uFF33"), react_1["default"].createElement(react_modal_1["default"], {
+    isOpen: isModelOpen,
+    onRequestClose: function onRequestClose() {
+      return setModal(false);
+    },
+    style: customStyles,
+    ariaHideApp: false
+  }, react_1["default"].createElement("div", {
+    className: "m-modal-sns__btn--close"
+  }, react_1["default"].createElement("button", {
+    onClick: function onClick() {
+      return setModal(false);
+    }
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faTimes
+  }))), react_1["default"].createElement("div", {
+    className: "m-modal-sns__links"
+  }, react_1["default"].createElement("ul", null, snsInfo.instagram && react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
+    href: snsInfo.instagram,
+    className: "m-modal-sns__links__item instagram"
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_brands_svg_icons_1.faInstagram
+  }), "\xA0\xA0Instagram")), snsInfo.facebook && react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
+    href: snsInfo.facebook,
+    className: "m-modal-sns__links__item facebook"
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_brands_svg_icons_1.faFacebook
+  }), "\xA0\xA0Facebook")), snsInfo.twitter && react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
+    href: snsInfo.twitter,
+    className: "m-modal-sns__links__item twitter"
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_brands_svg_icons_1.faTwitter
+  }), "\xA0\xA0Twitter")), snsInfo.other && react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
+    href: snsInfo.other,
+    className: "m-modal-sns__links__item other"
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faStar
+  }), "\xA0\xA0\u305D\u306E\u4ED6")))))));
 };
 
 exports.default = ModalSNS;
@@ -19676,26 +19681,24 @@ var StoreSubinfo_1 = __importDefault(__webpack_require__(/*! ./StoreSubinfo */ "
 var Score_1 = __importDefault(__webpack_require__(/*! ../../atoms/Score */ "./resources/ts/components/atoms/Score.tsx"));
 
 var StoreBasicInfo = function StoreBasicInfo(_a) {
-  var StoreInfo = _a.StoreInfo;
+  var storeInfo = _a.storeInfo;
   return react_1["default"].createElement("div", {
     className: "m-store-basicInfo"
   }, react_1["default"].createElement("div", {
     className: "m-store-basicInfo__btn"
-  }, react_1["default"].createElement(Btn_favorite_1["default"], null), react_1["default"].createElement(Btn_interested_1["default"], null), react_1["default"].createElement(BtnStoreEdit_1["default"], null)), StoreInfo.map(function (el) {
-    return react_1["default"].createElement("div", {
-      key: "basicInfo_" + el.id,
-      className: "m-store-basicInfo__container"
-    }, react_1["default"].createElement("h2", {
-      className: "m-store-basicInfo__name"
-    }, el.name), react_1["default"].createElement("p", {
-      className: "m-store-basicInfo__address"
-    }, el.address), react_1["default"].createElement("p", {
-      className: "m-store-basicInfo__message"
-    }, el.message), react_1["default"].createElement(Score_1["default"], {
-      ScoreStar: el.star
-    }));
-  }), react_1["default"].createElement(StoreSubinfo_1["default"], {
-    StoreInfo: StoreInfo
+  }, react_1["default"].createElement(Btn_favorite_1["default"], null), react_1["default"].createElement(Btn_interested_1["default"], null), react_1["default"].createElement(BtnStoreEdit_1["default"], null)), react_1["default"].createElement("div", {
+    key: "basicInfo_" + storeInfo.id,
+    className: "m-store-basicInfo__container"
+  }, react_1["default"].createElement("h2", {
+    className: "m-store-basicInfo__name"
+  }, storeInfo.name), react_1["default"].createElement("p", {
+    className: "m-store-basicInfo__address"
+  }, storeInfo.address), react_1["default"].createElement("p", {
+    className: "m-store-basicInfo__message"
+  }, storeInfo.message), react_1["default"].createElement(Score_1["default"], {
+    ScoreStar: storeInfo.star
+  })), react_1["default"].createElement(StoreSubinfo_1["default"], {
+    storeInfo: storeInfo
   }));
 };
 
@@ -19763,7 +19766,7 @@ var StoreMenu_1 = __importDefault(__webpack_require__(/*! ./StoreMenu */ "./reso
 var StoreSpirit_1 = __importDefault(__webpack_require__(/*! ./StoreSpirit */ "./resources/ts/components/molecules/store/StoreSpirit.tsx"));
 
 var StoreContents = function StoreContents(_a) {
-  var StoreInfo = _a.StoreInfo;
+  var menuInfo = _a.menuInfo;
 
   var _b = react_1.useState('menu'),
       table = _b[0],
@@ -19817,7 +19820,7 @@ var StoreContents = function StoreContents(_a) {
     switch (table) {
       case 'menu':
         return react_1["default"].createElement(StoreMenu_1["default"], {
-          Menu: StoreInfo
+          Menu: menuInfo
         });
         break;
 
@@ -19827,7 +19830,7 @@ var StoreContents = function StoreContents(_a) {
 
       case 'spirit':
         return react_1["default"].createElement(StoreSpirit_1["default"], {
-          Spirit: StoreInfo
+          Spirit: menuInfo
         });
         break;
     }
@@ -19969,6 +19972,16 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 
 var StoreMenu = function StoreMenu(_a) {
   var Menu = _a.Menu;
+  var content = react_1["default"].createElement("p", null, "\u307E\u3060\u767B\u9332\u3055\u308C\u3066\u3044\u307E\u305B\u3093\u3002");
+
+  if (Menu) {
+    Menu.map(function (el) {
+      if (el.menu_type === 1) {
+        content = null;
+      }
+    });
+  }
+
   return react_1["default"].createElement("div", {
     className: "m-menu"
   }, Menu.map(function (el) {
@@ -19976,7 +19989,7 @@ var StoreMenu = function StoreMenu(_a) {
       className: "m-menu__card",
       key: "menu_" + el.id
     }, react_1["default"].createElement("img", {
-      src: "/images/croissant.jpg",
+      src: "/storage/store/" + el.store_uuid + "/menu/item_" + el.bread_order + ".jpg",
       alt: "\u30E1\u30CB\u30E5\u30FC\u753B\u50CF"
     }), react_1["default"].createElement("h4", null, el.bread_name), react_1["default"].createElement("span", null, react_1["default"].createElement("p", {
       className: "m-menu__card__kind"
@@ -20018,22 +20031,22 @@ var StoreSpirit = function StoreSpirit(_a) {
   return react_1["default"].createElement("div", {
     className: "m-spirit"
   }, Spirit.map(function (el) {
-    return el.menu_type === 2 && react_1["default"].createElement("div", {
+    return react_1["default"].createElement("div", {
       className: "m-spirit__container",
       key: "spirit_" + el.id
-    }, react_1["default"].createElement("div", {
+    }, el.menu_type === 2 && react_1["default"].createElement("div", {
       className: "m-spirit__container__section"
-    }, react_1["default"].createElement("h2", null, "\u304A\u5E97\u306E\u3053\u3060\u308F\u308A"), react_1["default"].createElement("div", {
+    }, react_1["default"].createElement("h3", null, "\u304A\u5E97\u306E\u3053\u3060\u308F\u308A"), react_1["default"].createElement("div", {
       className: "m-spirit__container__section__content"
     }, react_1["default"].createElement("img", {
-      src: "/images/croissant.jpg",
+      src: "/storage/store/" + el.store_uuid + "/menu/advantage.jpg",
       alt: "\u3053\u3060\u308F\u308A\u306E\u5199\u771F"
-    }), react_1["default"].createElement("p", null, el.advantage))), react_1["default"].createElement("div", {
+    }), react_1["default"].createElement("p", null, el.advantage))), el.menu_type === 3 && react_1["default"].createElement("div", {
       className: "m-spirit__container__section"
-    }, react_1["default"].createElement("h2", null, "\u304A\u5E97\u306E\u601D\u3044"), react_1["default"].createElement("div", {
+    }, react_1["default"].createElement("h3", null, "\u304A\u5E97\u306E\u601D\u3044"), react_1["default"].createElement("div", {
       className: "m-spirit__container__section__content"
     }, react_1["default"].createElement("img", {
-      src: "/images/bakery2.jpg",
+      src: "/storage/store/" + el.store_uuid + "/menu/spirit.jpg",
       alt: "\u601D\u3044\u304C\u4F1D\u308F\u308B\u5199\u771F"
     }), react_1["default"].createElement("p", null, el.spirit))));
   }));
@@ -20075,30 +20088,27 @@ var Btn_homepage_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons
 var Modal_sns_1 = __importDefault(__webpack_require__(/*! ../../atoms/modal/Modal_sns */ "./resources/ts/components/atoms/modal/Modal_sns.tsx"));
 
 var StoreSubInfo = function StoreSubInfo(_a) {
-  var StoreInfo = _a.StoreInfo;
+  var storeInfo = _a.storeInfo;
   return react_1["default"].createElement("div", {
     className: "m-store-subInfo"
-  }, StoreInfo.map(function (el) {
-    el.url = 1;
-    return react_1["default"].createElement("div", {
-      className: "m-store-subInfo__container",
-      key: "subInfo_" + el.id
-    }, react_1["default"].createElement("div", {
-      className: "m-store-subInfo__container__item"
-    }, react_1["default"].createElement(Score_1["default"], {
-      ScoreStar: el.star
-    })), react_1["default"].createElement("div", {
-      className: "m-store-subInfo__container__item"
-    }, react_1["default"].createElement(Schedule_1["default"], {
-      Week: Week_1["default"].week
-    }), react_1["default"].createElement("p", null, el.business_memo)), react_1["default"].createElement("div", {
-      className: "m-store-subInfo__container__item__btns"
-    }, react_1["default"].createElement(Btn_homepage_1["default"], {
-      StoreInfo: StoreInfo
-    }), react_1["default"].createElement(Modal_sns_1["default"], {
-      StoreInfo: StoreInfo
-    })));
-  }));
+  }, react_1["default"].createElement("div", {
+    className: "m-store-subInfo__container",
+    key: "subInfo_" + storeInfo.id
+  }, react_1["default"].createElement("div", {
+    className: "m-store-subInfo__container__item"
+  }, storeInfo.star && react_1["default"].createElement(Score_1["default"], {
+    ScoreStar: storeInfo.star
+  })), react_1["default"].createElement("div", {
+    className: "m-store-subInfo__container__item"
+  }, react_1["default"].createElement(Schedule_1["default"], {
+    Week: Week_1["default"].week
+  }), react_1["default"].createElement("p", null, storeInfo.business_memo)), react_1["default"].createElement("div", {
+    className: "m-store-subInfo__container__item__btns"
+  }, storeInfo.url && react_1["default"].createElement(Btn_homepage_1["default"], {
+    url: storeInfo.url
+  }), storeInfo.sns && react_1["default"].createElement(Modal_sns_1["default"], {
+    sns: storeInfo.sns
+  }))));
 };
 
 exports.default = StoreSubInfo;
@@ -21625,7 +21635,7 @@ var Review = function Review(_a) {
   }, react_1["default"].createElement("main", null, react_1["default"].createElement("div", {
     className: "p-review__container__info"
   }, react_1["default"].createElement(StoreBasicInfo_1["default"], {
-    StoreInfo: StoreInfo
+    storeInfo: StoreInfo
   })), react_1["default"].createElement(Modal_review_1["default"], {
     StoreInfo: StoreInfo
   }), react_1["default"].createElement("div", {
@@ -21726,22 +21736,16 @@ var testInfo = [{
   img: '/images/bakery2.jpg'
 }];
 
-function Search() {
+var Search = function Search() {
   // const [users, setUsers] = useState<any[]>([]);
   // useEffect(() => {
   //     getUsers()
   // },[])
-  // const getUsers = async () => {
-  //     const response = await axios.get('/api/user');
-  //     console.log(123)
-  //     console.log(response)
-  //     setUsers(response.data.users)
-  // }
   // const [stores, setStores] = useState<any[]>([]);
   // useEffect(()=>{
   //     getStores()
   // },[])
-  // const getStores = async () => {
+  // const getStores = () => {
   //     const response = await axios.post('/api/store_all')
   //     console.log(response)
   //     setStores(response.data)
@@ -21777,7 +21781,7 @@ function Search() {
   }, "\u30A2\u30AF\u30BB\u30B9\u6570\u9806"))), react_1["default"].createElement(StoreList_1["default"], {
     StoreInfo: testInfo
   })))));
-}
+};
 
 exports.default = Search;
 
@@ -21922,6 +21926,40 @@ exports.default = StoreEdit;
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -21932,7 +21970,9 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
 var StoreBasicInfo_1 = __importDefault(__webpack_require__(/*! ../../molecules/store/StoreBasicInfo */ "./resources/ts/components/molecules/store/StoreBasicInfo.tsx"));
 
@@ -21940,66 +21980,41 @@ var StoreSubinfo_1 = __importDefault(__webpack_require__(/*! ../../molecules/sto
 
 var StoreContents_1 = __importDefault(__webpack_require__(/*! ../../molecules/store/StoreContents */ "./resources/ts/components/molecules/store/StoreContents.tsx"));
 
-function StorePage() {
-  //テスト
-  var testStoreInfo = [{
-    name: 'Le pain de Maki',
-    address: '福岡市博多区比恵町',
-    star: 3.3,
-    business_day: '月曜日',
-    busines_memo: '定休日！！！',
-    message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
-    sns: {
-      twitter: 'twitter',
-      instagram: 'sssss'
-    }
-  }];
-  var testInfo = [{
-    id: 1,
-    bread_name: 'くりーむ',
-    bread_kind: '菓子パン',
-    bread_price: 120,
-    bread_detail: '北海道の生クリーム！！！使ってるんだ！！！！！',
-    advantage: '',
-    spirit: '',
-    menu_type: 1
-  }, {
-    id: 2,
-    bread_name: 'くりーむ',
-    bread_kind: 'クロワッサン',
-    bread_price: 120,
-    bread_detail: '北海道の生クリーム！！！使ってるんだ！！！！！',
-    advantage: '',
-    spirit: '',
-    menu_type: 1
-  }, {
-    id: 4,
-    bread_name: 'くりーむ',
-    bread_kind: 'クロワッサン',
-    bread_price: 120,
-    bread_detail: '北海道の生クリーム！！！使ってるんだ！！！！！',
-    advantage: '落ち着いた空間で、京都らしい景色を眺めながらお食事が楽しめる【川間食堂】。ご注文が入ってから作るサンドイッチ・ライスバーガーは、気軽に食べられるバーガー袋でご提供いたします◎また季節限定メニュー・ドリンクもおすすめ♪',
-    spirit: '系列店「馬場FLAT」から毎日届く国産小麦100%の自家製パンは、ランチでもディナーでもおかわり自由ですので、ディップやオリジナリティあふれるお料理とともにお召しあがりください。パンのみの販売もしております。',
-    menu_type: 2
-  }, {
-    id: 5,
-    bread_name: 'くりーむ',
-    bread_kind: '食パン',
-    bread_price: 120,
-    bread_detail: '北海道の生クリーム！！！使ってるんだ！！！！！',
-    advantage: '',
-    spirit: '',
-    menu_type: 1
-  }, {
-    id: 6,
-    bread_name: 'くりーむ',
-    bread_kind: '菓子パン',
-    bread_price: 120,
-    bread_detail: '北海道の生クリーム！！！使ってるんだ！！！！！',
-    advantage: '',
-    spirit: '',
-    menu_type: 1
-  }];
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var StorePage = function StorePage() {
+  var user_uuid = react_router_dom_1.useParams().user_uuid;
+
+  var _a = react_1.useState({}),
+      storeInfo = _a[0],
+      setStoreInfo = _a[1];
+
+  var _b = react_1.useState([]),
+      menuInfo = _b[0],
+      setMenuInfo = _b[1];
+
+  react_1.useEffect(function () {
+    getStoreInfo();
+    getMenuInfo();
+  }, []); // 店舗情報取得
+
+  var getStoreInfo = function getStoreInfo() {
+    axios_1["default"].post("/api/index_storeInfo", {
+      user_uuid: user_uuid
+    }).then(function (res) {
+      setStoreInfo(res.data);
+    })["catch"](function (err) {});
+  }; // メニュー情報取得
+
+
+  var getMenuInfo = function getMenuInfo() {
+    axios_1["default"].post("/api/index_menuInfo", {
+      store_uuid: user_uuid
+    }).then(function (res) {
+      setMenuInfo(res.data);
+    })["catch"](function (err) {});
+  };
+
   return react_1["default"].createElement("div", {
     className: "p-store"
   }, react_1["default"].createElement("div", {
@@ -22007,20 +22022,20 @@ function StorePage() {
   }, react_1["default"].createElement("div", {
     className: "p-store__container__img"
   }, react_1["default"].createElement("img", {
-    src: "/images/bakery.jpg",
+    src: "/storage/store/" + user_uuid + "/header.jpg",
     alt: "\u30C8\u30C3\u30D7\u753B\u50CF"
   })), react_1["default"].createElement("div", {
     className: "p-store__container__content"
   }, react_1["default"].createElement("div", {
     className: "p-store__container__content__main"
   }, react_1["default"].createElement(StoreBasicInfo_1["default"], {
-    StoreInfo: testStoreInfo
+    storeInfo: storeInfo
   }), react_1["default"].createElement(StoreContents_1["default"], {
-    StoreInfo: testInfo
+    menuInfo: menuInfo
   })), react_1["default"].createElement(StoreSubinfo_1["default"], {
-    StoreInfo: testStoreInfo
+    storeInfo: storeInfo
   }))));
-}
+};
 
 exports.default = StorePage;
 
@@ -22663,32 +22678,6 @@ exports.initialState = exports.StoreInfoReducer = void 0;
 
 var StoreInfoReducer = function StoreInfoReducer(stateInfo, action) {
   switch (action.type) {
-    // case 'indexStore':
-    //     console.log('indexStore')
-    //     axios.post("/api/index_storeInfo", action.payload)
-    //     .then(res => {
-    //         console.log(res);
-    //         return {
-    //             ...stateInfo,
-    //             storeInfo: res.data,
-    //         }
-    //     })
-    //     .catch(err => {
-    //         console.log(err)
-    //     })
-    // case 'indexMenu':
-    //     console.log('indexMenu')
-    //     axios.post("/api/index_menuInfo", action.payload)
-    //     .then(res => {
-    //         console.log(res);
-    //         return {
-    //             ...stateInfo,
-    //             menuInfo: res.data,
-    //         }
-    //     })
-    //     .catch(err => {
-    //         console.log(err)
-    //     })
     case 'inputStoreInfo':
       return __assign(__assign({}, stateInfo), {
         storeInfo: action.payload
