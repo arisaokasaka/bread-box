@@ -17,7 +17,7 @@ const StoreList: React.FC<StoreProps> = ({StoreInfo}) => {
         <div className ="m-store-list">
             {StoreInfo.map((el)=>{
                 return(
-                    <div className ="m-store-list__item" key={el.uuid}>
+                    <div className ="m-store-list__item" key={"storeList_" + el.user_uuid}>
                         <div className ="m-store-list__item--pc" onClick={()=>history.push("/store/" + el.user_uuid)}>
                             <div className ="m-store-list__item--pc__images__main">
                                 {el.thumbnail ? 
