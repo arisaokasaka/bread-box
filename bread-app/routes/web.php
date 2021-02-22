@@ -15,8 +15,5 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/{any}', function () {
-    Log::info('any');
-    Log::info(Auth::check());
-    Log::info(Auth::user());
     return view('app');
 })->where('any','.*');

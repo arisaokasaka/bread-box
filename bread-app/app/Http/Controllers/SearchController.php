@@ -24,7 +24,7 @@ class SearchController extends Controller
      */
     public function index(string $keyword, Request $request)
     {
-        Log::info($keyword);
-        Log::info($request);
+        // Log::info($keyword);
+        // Log::info($request);
     }
 }
