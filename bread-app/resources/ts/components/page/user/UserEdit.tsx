@@ -28,9 +28,7 @@ const UserEdit:any = ({UserInfo}) => {
                 <div className = "p-userEdit__container">
                     <form className="p-userEdit__container__form" onSubmit={handleSubmit(onSubmit)}>
                         <div className = "p-userEdit__container__btn">
-                            <BtnBack
-                                URL = "/user"
-                            />
+                            <BtnBack/>
                         </div>
                         <h2>ユーザー情報編集</h2>
 
