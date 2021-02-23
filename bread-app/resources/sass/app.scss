@@ -16,7 +16,6 @@
 @import "./atoms/button";
 @import "./atoms/store_summary/score";
 @import "./atoms//store_summary/schedule";
-@import "./atoms/search_sidebar_item";
 @import "./atoms/labelRequired";
 @import "./atoms/labelYen";
 
@@ -28,6 +27,7 @@
 @import "./molecules/modal/modal_editSpirit";
 @import "./molecules/modal/modal_editMenu";
 @import "./molecules/modal/modal_confirmDelete";
+@import "./molecules/topSection";
 @import "./molecules/storeRanking";
 @import "./molecules/inputSchedule";
 @import "./molecules/search_sidebar";
