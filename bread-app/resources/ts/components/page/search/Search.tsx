@@ -11,6 +11,7 @@ const Search: React.FC = () => {
     const location = useLocation();
     const keyword = location.search;
     const [ stores, setStores ] = useState([]);
+    let message_noResult: any = null;
 
     useEffect(()=>{
         getStores()
@@ -21,6 +22,10 @@ const Search: React.FC = () => {
         .then(res => {
             setStores(res.data)
         })
+    }
+
+    if(stores[0] === undefined){
+        message_noResult = <p>該当する店舗がありません。</p>
     }
 
     return (
@@ -34,7 +39,7 @@ const Search: React.FC = () => {
                     {/* <Store_pickup 
                         PickupInfo={testInfo}
                     /> */}
-                    <div className="p-search__container__content__list">
+                    <div className="p-search__container__content__list" onClick = {()=> console.log(stores, stores[0])}>
                         <div className = "p-search__container__content__list__order--pc">
                             <a>おすすめ順</a>
                             <a>評価順</a>
@@ -49,6 +54,7 @@ const Search: React.FC = () => {
                                 <option value="">アクセス数順</option>
                             </select>
                         </div>
+                        {message_noResult}
                         <StoreList
                             StoreInfo = {stores}
                         />
