@@ -24,19 +24,33 @@ class StoreController extends Controller
     const storage_menu = '/menu/item_';
     public function search_store(Request $request) {
         $store = new Store();
-        $keyword = $request->input('keyword');
+        $keyword = $request->input('key');
+        $result = [];
+
         if($keyword === ""){
-            $get_info = $store->find_keyword("");
+            $result = $store->find_keyword("");
         }else{
             $get_info = $store->find_keyword($keyword);
-        }
-        foreach($get_info as $store) {
+            
+            if($get_info) {
+                $check_uuid = [];
+                foreach($get_info as $el){
+                    if(!(in_array($el->user_uuid, $check_uuid))) {
+                        array_push($check_uuid, $el->user_uuid);
+                        array_push($result, $el);
+                    }
+                }    
+            }
+        }    
+
+        foreach($result as $store) {
             $store['thumbnail'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_thumbnail);
             $store['menu1'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_menu . '1.jpg');
             $store['menu2'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_menu . '2.jpg');
             $store['menu3'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_menu . '3.jpg');
         }
-        return $get_info;
+        
+        return $result;
     }
 
     /**

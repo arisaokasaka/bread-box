@@ -27,10 +27,11 @@ class Store extends Model
     public function find_keyword($keyword){
         $query = $this
         ->newQuery()
-        ->join('users', 'stores.user_uuid', '=', 'users.uuid');
+        ->leftjoin('users', 'stores.user_uuid', '=', 'users.uuid');
 
         if($keyword){
             $query
+            ->leftjoin('store_menus', 'stores.user_uuid', '=', 'store_menus.store_uuid')
             ->where('stores.message', 'like', '%' .$keyword. '%')
             ->orWhere('store_menus.bread_name', 'like', '%' .$keyword. '%')
             ->orWhere('store_menus.bread_kind', 'like', '%' .$keyword. '%')
@@ -46,7 +47,8 @@ class Store extends Model
                 'stores.business_day',
                 'stores.business_memo',
                 'stores.message',
-            ]);
+            ])
+            ->get();
         }else{
             $query
             ->select([
@@ -58,7 +60,6 @@ class Store extends Model
                 'stores.message',
             ]);
         }
-        
         return $query->get();
     }
 
