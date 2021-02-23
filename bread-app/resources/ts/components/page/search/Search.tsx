@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faEdit} from "@fortawesome/free-solid-svg-icons";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import Search_sidebar from '../../molecules/search/Search_sidebar';
 import Store_pickup from '../../molecules/Store_pickup';
 import StoreList from '../../molecules/store/StoreList';
@@ -36,9 +36,7 @@ const Search: React.FC = () => {
             <div className = "p-search__container">
                 <Search_sidebar />
                 <div className="p-search__container__content">
-                    {/* <Store_pickup 
-                        PickupInfo={testInfo}
-                    /> */}
+                    <Store_pickup />
                     <div className="p-search__container__content__list" onClick = {()=> console.log(stores, stores[0])}>
                         <div className = "p-search__container__content__list__order--pc">
                             <a>おすすめ順</a>

@@ -17578,6 +17578,40 @@ exports.default = ReviewList;
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -17588,23 +17622,46 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var Store_pickup = function Store_pickup(_a) {
-  var PickupInfo = _a.PickupInfo;
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var Store_pickup = function Store_pickup() {
+  var _a = react_1.useState([]),
+      info = _a[0],
+      setInfo = _a[1];
+
+  var storeInfo = info;
+  react_1.useEffect(function () {
+    getStore();
+  }, []);
+
+  var getStore = function getStore() {
+    axios_1["default"].post('/api/store_pickup', {
+      count: 4
+    }).then(function (res) {
+      setInfo(res.data);
+    })["catch"]();
+  };
+
   return react_1["default"].createElement("div", {
     className: "m-store-pickup"
   }, react_1["default"].createElement("h2", {
     className: "m-store-pickup__title"
   }, "\u30D4\u30C3\u30AF\u30A2\u30C3\u30D7"), react_1["default"].createElement("div", {
     className: "m-store-pickup__list"
-  }, PickupInfo.map(function (el) {
-    return react_1["default"].createElement("a", {
-      href: "",
+  }, storeInfo.map(function (el) {
+    return react_1["default"].createElement(react_router_dom_1.Link, {
+      to: "/store/" + el.user_uuid,
       className: "m-store-pickup__list__item",
-      key: el.id
-    }, react_1["default"].createElement("img", {
-      src: el.img,
+      key: "pickup_" + el.id
+    }, el.thumbnail ? react_1["default"].createElement("img", {
+      src: "/storage/store/" + el.user_uuid + "/thumbnail.jpg",
+      alt: "\u5E97\u8217\u753B\u50CF"
+    }) : react_1["default"].createElement("img", {
+      src: "/images/no_image.jpg",
       alt: "\u5E97\u8217\u753B\u50CF"
     }), react_1["default"].createElement("p", null, el.name));
   })));
@@ -21757,9 +21814,7 @@ var Review = function Review(_a) {
     className: "p-review__container__table"
   }, react_1["default"].createElement(ReviewList_1["default"], {
     ReviewInfo: ReviewInfo
-  }))), react_1["default"].createElement("aside", null, react_1["default"].createElement(Store_pickup_1["default"], {
-    PickupInfo: testPickInfo
-  }))));
+  }))), react_1["default"].createElement("aside", null, react_1["default"].createElement(Store_pickup_1["default"], null))));
 };
 
 exports.default = Review;
@@ -21831,6 +21886,8 @@ var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg
 
 var Search_sidebar_1 = __importDefault(__webpack_require__(/*! ../../molecules/search/Search_sidebar */ "./resources/ts/components/molecules/search/Search_sidebar.tsx"));
 
+var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../../molecules/Store_pickup */ "./resources/ts/components/molecules/Store_pickup.tsx"));
+
 var StoreList_1 = __importDefault(__webpack_require__(/*! ../../molecules/store/StoreList */ "./resources/ts/components/molecules/store/StoreList.tsx"));
 
 var Search = function Search() {
@@ -21868,7 +21925,7 @@ var Search = function Search() {
     className: "p-search__container"
   }, react_1["default"].createElement(Search_sidebar_1["default"], null), react_1["default"].createElement("div", {
     className: "p-search__container__content"
-  }, react_1["default"].createElement("div", {
+  }, react_1["default"].createElement(Store_pickup_1["default"], null), react_1["default"].createElement("div", {
     className: "p-search__container__content__list",
     onClick: function onClick() {
       return console.log(stores, stores[0]);
@@ -22255,9 +22312,7 @@ function Top() {
     key: "kind",
     sectionTitle: "\u30D1\u30F3\u306E\u7A2E\u985E\u304B\u3089\u63A2\u3059",
     sectionContent: Bread_kinds_1["default"].bread_kinds
-  }), react_1["default"].createElement(Store_pickup_1["default"], {
-    PickupInfo: testPickInfo
-  }), react_1["default"].createElement(StoreRanking_1["default"], {
+  }), react_1["default"].createElement(Store_pickup_1["default"], null), react_1["default"].createElement(StoreRanking_1["default"], {
     RankingInfo: testPickInfo
   })), react_1["default"].createElement("footer", {
     className: "p-top__footer"

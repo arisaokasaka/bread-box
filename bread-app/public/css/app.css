@@ -1754,7 +1754,14 @@ label.a-label-required__red::after {
 }
 
 .m-store-pickup__list__item {
+  color: #555555;
+  font-size: 1rem;
+  font-weight: 550;
   cursor: pointer;
+}
+
+.m-store-pickup__list__item:hover {
+  color: #c47d2c;
 }
 
 .m-store-pickup__list__item > img {
@@ -1769,16 +1776,6 @@ label.a-label-required__red::after {
   .m-store-pickup__list__item > img {
     height: 130px;
   }
-}
-
-.m-store-pickup__list__item > p {
-  color: #555555;
-  font-size: 1rem;
-  font-weight: 550;
-}
-
-.m-store-pickup__list__item:hover {
-  color: #c47d2c;
 }
 
 @media screen and (min-width: 960px) {

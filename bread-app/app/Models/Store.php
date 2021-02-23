@@ -100,6 +100,25 @@ class Store extends Model
     }
 
     /**
+     * ピックアップ店舗（ランダム）
+     * @param int $count
+     * @return $query
+     */
+    public function store_pickup(int $count) {
+        $query = $this
+        ->newQuery()
+        ->leftjoin('users', 'stores.user_uuid', '=', 'users.uuid')
+        ->inRandomOrder()
+        ->take($count)
+        ->select([
+            'users.name',
+            'stores.user_uuid',
+        ])
+        ->get();
+        return $query;
+    }
+
+    /**
      * 【作成】店舗レコード作成（店舗の新規登録時に実行）
      *
      * @param $store_user_uuid
