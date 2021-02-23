@@ -1,17 +1,16 @@
 import React from 'react';
-import {faArrowLeft} from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
-type LinkProps= ({
-    URL? : string,
-});
+const BtnBack : React.FC = () => {
+    const history = useHistory();
 
-const BtnBack : React.FC<LinkProps> = ({URL}) => {
     return(
-        <Link to = {URL} className = "a-btn-back">
+        <a onClick={()=>history.goBack()} className="a-btn-back">
             <FontAwesomeIcon icon={faArrowLeft}/>
-        </Link>
+            <span>戻る</span>
+        </a>
     );
 }
 
