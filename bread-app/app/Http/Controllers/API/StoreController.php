@@ -133,12 +133,31 @@ class StoreController extends Controller
         $store = new Store();
         $count = $request->input('count');
         $get_info = $store->store_pickup($count);
-        Log::info($get_info);
         
         foreach($get_info as $store){
             $store['thumbnail'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_thumbnail);
         }
             
+        return $get_info;
+    }
+    
+    /**
+     * 店舗ランキング（星の点数順）
+     *
+     * @param Request $request
+     * @return $get_info
+     */
+    public function store_ranking(Request $request) {
+        $store = new Store();
+        $count = $request->input('count');
+        $get_info = $store->store_ranking($count);
+        
+        if(!$get_info){
+            $get_info = $store->store_pickup($count);
+        }
+        foreach($get_info as $store){
+            $store['thumbnail'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_thumbnail);
+        }
         return $get_info;
     }
 

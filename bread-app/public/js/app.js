@@ -20289,6 +20289,40 @@ exports.default = StoreSubInfo;
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -20299,23 +20333,46 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var StorRanking = function StorRanking(_a) {
-  var RankingInfo = _a.RankingInfo;
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var StorRanking = function StorRanking() {
+  var _a = react_1.useState([]),
+      info = _a[0],
+      setInfo = _a[1];
+
+  var storeInfo = info;
+  react_1.useEffect(function () {
+    getStore();
+  }, []);
+
+  var getStore = function getStore() {
+    axios_1["default"].post('/api/store_ranking', {
+      count: 4
+    }).then(function (res) {
+      setInfo(res.data);
+    })["catch"]();
+  };
+
   return react_1["default"].createElement("div", {
     className: "m-store-ranking"
   }, react_1["default"].createElement("h2", {
     className: "m-store-ranking__title"
   }, "\u30E9\u30F3\u30AD\u30F3\u30B0"), react_1["default"].createElement("div", {
     className: "m-store-ranking__list"
-  }, RankingInfo.map(function (el) {
-    return react_1["default"].createElement("a", {
-      href: "",
+  }, storeInfo.map(function (el) {
+    return react_1["default"].createElement(react_router_dom_1.Link, {
+      to: "/store/" + el.user_uuid,
       className: "m-store-ranking__list__item",
       key: "ranking_" + el.id
-    }, react_1["default"].createElement("img", {
-      src: el.img,
+    }, el.thumbnail ? react_1["default"].createElement("img", {
+      src: "/storage/store/" + el.user_uuid + "/thumbnail.jpg",
+      alt: "\u5E97\u8217\u753B\u50CF"
+    }) : react_1["default"].createElement("img", {
+      src: "/images/no_image.jpg",
       alt: "\u5E97\u8217\u753B\u50CF"
     }), react_1["default"].createElement("p", null, el.name));
   })));
@@ -22239,61 +22296,7 @@ var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../../molecules/Sto
 
 var StoreRanking_1 = __importDefault(__webpack_require__(/*! ../../molecules/top/StoreRanking */ "./resources/ts/components/molecules/top/StoreRanking.tsx"));
 
-var testPickInfo = [{
-  id: 5,
-  name: 'Le pain de Maki',
-  address: '福岡市博多区比恵町',
-  star: 3.3,
-  business_day: '月曜日',
-  busines_memo: '定休日！！！',
-  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
-  sns: {
-    twitter: 'twitter',
-    instagram: 'sssss'
-  },
-  img: '/images/croissant.jpg'
-}, {
-  id: 6,
-  name: 'Le pain de Maki',
-  address: '福岡市博多区比恵町',
-  star: 3.3,
-  business_day: '月曜日',
-  busines_memo: '定休日！！！',
-  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
-  sns: {
-    twitter: 'twitter',
-    instagram: 'sssss'
-  },
-  img: '/images/croissant.jpg'
-}, {
-  id: 356,
-  name: 'Le pain de Maki',
-  address: '福岡市博多区比恵町',
-  star: 3.3,
-  business_day: '月曜日',
-  busines_memo: '定休日！！！',
-  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
-  sns: {
-    twitter: 'twitter',
-    instagram: 'sssss'
-  },
-  img: '/images/croissant.jpg'
-}, {
-  id: 456,
-  name: 'Le pain de Maki',
-  address: '福岡市博多区比恵町',
-  star: 3.3,
-  business_day: '月曜日',
-  busines_memo: '定休日！！！',
-  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
-  sns: {
-    twitter: 'twitter',
-    instagram: 'sssss'
-  },
-  img: '/images/croissant.jpg'
-}];
-
-function Top() {
+var Top = function Top() {
   return react_1["default"].createElement("div", {
     className: "p-top"
   }, react_1["default"].createElement("div", {
@@ -22312,14 +22315,12 @@ function Top() {
     key: "kind",
     sectionTitle: "\u30D1\u30F3\u306E\u7A2E\u985E\u304B\u3089\u63A2\u3059",
     sectionContent: Bread_kinds_1["default"].bread_kinds
-  }), react_1["default"].createElement(Store_pickup_1["default"], null), react_1["default"].createElement(StoreRanking_1["default"], {
-    RankingInfo: testPickInfo
-  })), react_1["default"].createElement("footer", {
+  }), react_1["default"].createElement(Store_pickup_1["default"], null), react_1["default"].createElement(StoreRanking_1["default"], null)), react_1["default"].createElement("footer", {
     className: "p-top__footer"
   }, react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/register_store"
   }, "\u4E8B\u696D\u4E3B\u306E\u65B9\u306F\u3053\u3061\u3089")));
-}
+};
 
 exports.default = Top;
 

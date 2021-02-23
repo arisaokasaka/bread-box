@@ -16,6 +16,13 @@
 
         &__item {
             cursor: pointer;
+            color: $black;
+            font-size: 1rem;
+            font-weight: 550;
+
+            &:hover {
+                color: $brown;
+            }
 
             & > img {
                 height: 100px;
@@ -26,16 +33,6 @@
                 @include bp-600up {
                     height: 130px;
                 }
-            }
-
-            & > p {
-                color: $black;
-                font-size: 1rem;
-                font-weight: 550;
-            }
-
-            &:hover {
-                color: $brown;
             }
         }
     }
