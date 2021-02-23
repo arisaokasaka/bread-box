@@ -24,15 +24,18 @@ class StoreController extends Controller
     const storage_thumbnail = '/thumbnail.jpg';
     const storage_menu = '/menu/item_';
     public function search_store(Request $request) {
+        Log::info($request);
         $store = new Store();
         $keyword = $request->input('key');
+        $district = $request->input('di');
+        $bread_kind = $request->input('br');
+        $district && $array_district = explode('&', $district);
+        $bread_kind && $array_bread_kind = explode('&', $district);
         $result = [];
         $get_info = [];
         $check_uuid = [];
         
-        if(!$keyword){
-            $result = $store->find_keyword("");
-        }else{
+        if($keyword){
             $keyword = str_replace('　', ' ', $keyword);
             $keyword = str_replace('%', ' ', $keyword);
             $array_keyword = explode(' ', $keyword);
@@ -49,6 +52,42 @@ class StoreController extends Controller
                     }
                 }
             }
+        }else if($district){
+            if($bread_kind){
+                foreach($array_district as $el){
+                    $get_info = $store->search_by_district($el);
+                    foreach($array_bread_kind as $el){
+                        $get_info = $store->search_by_bread($el);
+                        if($get_info) {
+                            foreach($get_info as $el){
+                                if(!(in_array($el->user_uuid, $check_uuid))) {
+                                    array_push($check_uuid, $el->user_uuid);
+                                    array_push($result, $el);
+                                }
+                            }
+                        }
+                    }
+                }
+            }else{
+                foreach($array_district as $el){
+                    $result = $store->search_by_district($el);
+                }
+            }
+        }else if($bread_kind){
+            foreach($array_bread_kind as $el){
+                $get_info = $store->search_by_bread($el);
+                
+                if($get_info) {
+                    foreach($get_info as $el){
+                        if(!(in_array($el->user_uuid, $check_uuid))) {
+                            array_push($check_uuid, $el->user_uuid);
+                            array_push($result, $el);
+                        }
+                    }
+                }
+            }
+        }else{
+            $result = $store->find_keyword("");
         }
 
         foreach($result as $store) {

@@ -63,6 +63,42 @@ class Store extends Model
         return $query->get();
     }
 
+    public function search_by_district($district) {
+        $query_district = $this
+        ->newQuery()
+        ->leftjoin('users', 'stores.user_uuid', '=', 'users.uuid')
+        ->where('users.address', 'like', '%' .$district. '%')
+        ->select([
+            'users.name',
+            'users.address',
+            'stores.user_uuid',
+            'stores.business_day',
+            'stores.business_memo',
+            'stores.message',
+        ])
+        ->get();
+        return $query_district;
+    }
+
+    public function search_by_bread($bread_kind) {
+        $query_bread = $this
+        ->newQuery()
+        ->leftjoin('users', 'stores.user_uuid', '=', 'users.uuid')
+        ->leftjoin('store_menus', 'stores.user_uuid', '=', 'store_menus.store_uuid')
+        ->where('store_menus.bread_kind', 'like', '%' .$keyword. '%')
+        ->select([
+            'users.name',
+            'users.address',
+            'stores.user_uuid',
+            'stores.business_day',
+            'stores.business_memo',
+            'stores.message',
+        ])
+        ->get();
+
+        return $query_bread;
+    }
+
     /**
      * 【作成】店舗レコード作成（店舗の新規登録時に実行）
      *
