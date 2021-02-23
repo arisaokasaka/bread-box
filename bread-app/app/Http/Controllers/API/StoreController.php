@@ -9,6 +9,7 @@ use App\Models\Store;
 use App\Http\Requests\StoreRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Database\Eloquent\Collection;
 
 class StoreController extends Controller
 {
@@ -26,22 +27,29 @@ class StoreController extends Controller
         $store = new Store();
         $keyword = $request->input('key');
         $result = [];
-
-        if($keyword === ""){
+        $get_info = [];
+        $check_uuid = [];
+        
+        if(!$keyword){
             $result = $store->find_keyword("");
         }else{
-            $get_info = $store->find_keyword($keyword);
+            $keyword = str_replace('　', ' ', $keyword);
+            $keyword = str_replace('%', ' ', $keyword);
+            $array_keyword = explode(' ', $keyword);
             
-            if($get_info) {
-                $check_uuid = [];
-                foreach($get_info as $el){
-                    if(!(in_array($el->user_uuid, $check_uuid))) {
-                        array_push($check_uuid, $el->user_uuid);
-                        array_push($result, $el);
+            foreach($array_keyword as $word){
+                $get_info = $store->find_keyword($word);
+            
+                if($get_info) {
+                    foreach($get_info as $el){
+                        if(!(in_array($el->user_uuid, $check_uuid))) {
+                            array_push($check_uuid, $el->user_uuid);
+                            array_push($result, $el);
+                        }
                     }
-                }    
+                }
             }
-        }    
+        }
 
         foreach($result as $store) {
             $store['thumbnail'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_thumbnail);
