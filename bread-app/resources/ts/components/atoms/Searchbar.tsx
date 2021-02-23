@@ -1,7 +1,7 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faSearch} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 type TextProps = ({
     text: any;
@@ -9,9 +9,12 @@ type TextProps = ({
 
 const Searchbar: React.FC<TextProps> = ({text}) => {
     const [keyword, Setkeyword] = useState('');
-    
     const onChangeKeyword = e => {
         Setkeyword(e.target.value);
+    }
+
+    const onClick_deleteValue = () => {
+        Setkeyword('');
     }
 
     return (
@@ -20,8 +23,24 @@ const Searchbar: React.FC<TextProps> = ({text}) => {
                 value={keyword}
                 onChange = {onChangeKeyword}
             />
-            {text && <Link to={"/search/" + keyword }><span>検索</span></Link>}
-            {text === null && <Link to={"/search"}><FontAwesomeIcon icon={faSearch}/></Link>}
+            {text && 
+                <Link to={{
+                    pathname: '/search/',
+                    search: '?key=' + keyword
+                    }}
+                    onClick = {onClick_deleteValue}
+                >
+                    <span>検索</span>
+                </Link>}
+            {text === null &&
+                <Link to={{
+                    pathname: '/search/',
+                    search: '?key=' + keyword
+                    }}
+                    onClick = {onClick_deleteValue}
+                >
+                    <FontAwesomeIcon icon={faSearch}/>
+                </Link>}
         </div>
     )
 }

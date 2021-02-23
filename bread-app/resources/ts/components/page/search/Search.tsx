@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faEdit} from "@fortawesome/free-solid-svg-icons";
@@ -8,34 +8,20 @@ import Store_pickup from '../../molecules/Store_pickup';
 import StoreList from '../../molecules/store/StoreList';
 
 const Search: React.FC = () => {
-    // const [users, setUsers] = useState<any[]>([]);
-    
-    // useEffect(() => {
-    //     getUsers()
-    // },[])
-
-    // const getUsers = async () => {
-    //     const response = await axios.get('/api/user');
-    //     console.log(123)
-    //     console.log(response)
-    //     setUsers(response.data.users)
-    // }
-
-    const [stores, setStores] = useState([]);
+    const location = useLocation();
+    const keyword = location.search;
+    const [ stores, setStores ] = useState([]);
 
     useEffect(()=>{
         getStores()
     },[])
 
     const getStores = () => {
-        axios.post('/api/search_store', {keyword: ''})
+        axios.get('/api/search_store'+ keyword)
         .then(res => {
             setStores(res.data)
-            console.log(res.data)
         })
     }
-
-    console.log(stores)
 
     return (
         <div className="p-search">

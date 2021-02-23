@@ -35,7 +35,7 @@ Route::post('/update_basicInfo_usersTable', 'Api\UserController@update_basicInfo
 
 //StoreController
 Route::post('/create_store', 'Api\StoreController@create_store');
-Route::post('/search_store', 'Api\StoreController@search_store');
+Route::get('/search_store', 'Api\StoreController@search_store');
 Route::post('/index_storeInfo', 'Api\StoreController@index_storeInfo');
 Route::post('/update_basicInfo_storesTable', 'Api\StoreController@update_basicInfo_storesTable');
 Route::post('/update_businessMemo', 'Api\StoreController@update_businessMemo');
