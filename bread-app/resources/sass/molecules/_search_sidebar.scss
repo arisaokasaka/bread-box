@@ -7,7 +7,7 @@
             display: block;
             flex-basis: 24%;
             margin-right: $mp-xxs;
-            padding: $mp-xxs;
+            padding: 0 $mp-xxs;
             border-radius: $base-radius;
 
             &__btn {
@@ -27,10 +27,46 @@
                     background-color: $darkestBrown;
                 }
             }
-        }
 
-        @include bp-960up {
-            flex-basis: 20%;
+            @include bp-960up {
+                flex-basis: 20%;
+            }
+
+            &__item {
+                margin-bottom: $mp-xs;
+
+                & > h4 {
+                    font-size: 1rem;
+                    font-weight: bolder;
+                    color: $font-color-brown;
+                    border-bottom: 2px solid $font-color-brown;
+                    padding: 0 2px;
+                }
+
+                & > ul {
+                    display: grid;
+                    margin-top: $mp-xxs;
+
+                    & > li {
+                        font-size: 0.9rem;
+                        height: 1.5rem;
+                        input {
+                            cursor: pointer;
+                        }
+                    }
+                }
+
+                & > input[type="text"] {
+                    width: 100%;
+                    height: 2rem;
+                    line-height: 2rem;
+                    margin-top: $mp-xxs;
+                    border: 1px solid $textGray;
+                    border-radius: $sm-radius;
+                    font-size: 0.9rem;
+                    padding: 0 3px;
+                }
+            }
         }
     }
 }
@@ -56,6 +92,31 @@
 
             &:hover {
                 background-color: $darkestBrown;
+            }
+        }
+
+        &__item {
+            margin-bottom: $mp-xs;
+
+            h4 {
+                font-size: 1prem;
+                font-weight: bolder;
+                color: $font-color-brown;
+            }
+
+            ul {
+                grid-template-columns: 1fr 1fr;
+                margin: 3px 0 0 0;
+
+                li {
+                    display: block;
+                    font-size: 1em;
+                    margin: 0 5px 5px 0;
+
+                    input {
+                        cursor: pointer;
+                    }
+                }
             }
         }
     }

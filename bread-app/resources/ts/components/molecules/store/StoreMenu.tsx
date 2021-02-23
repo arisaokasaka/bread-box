@@ -5,7 +5,7 @@ type MenuProps = ({
 })
 
 const StoreMenu: React.FC<MenuProps> = ({Menu}) => {
-    let content: any = <p>まだ登録されていません。</p>;
+    let content: any = <p>準備中です。</p>;
     
     if(Menu){
         Menu.map((el) => {
@@ -17,6 +17,7 @@ const StoreMenu: React.FC<MenuProps> = ({Menu}) => {
 
     return(
         <div className = "m-menu">
+            {content}
             {Menu.map((el)=>(
                 el.menu_type === 1 &&
                 <div className = "m-menu__card" key={"menu_"+el.id}>

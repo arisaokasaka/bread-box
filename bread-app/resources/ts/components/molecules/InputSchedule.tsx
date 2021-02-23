@@ -7,7 +7,15 @@ type DefaultProps = ({
 
 const InputSchedule: React.FC<DefaultProps> = ({Info}) => {
     const Week = week.week;
-    let defaultData: any;
+    let defaultData: any = {
+        monday: '',
+        tuesday: '',
+        wednesday: '',
+        thursday: '',
+        friday: '',
+        saturday: '',
+        sunday: ''
+    }
 
     // 営業日・営業時間情報のJSONをObjectに変換
     if(Info.business_day){

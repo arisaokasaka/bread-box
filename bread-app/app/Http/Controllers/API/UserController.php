@@ -11,14 +11,12 @@ use App\Http\Requests\UserRequest;
 class UserController extends Controller
 {
     public function create_user(UserRequest $request){
-        Log::info($request);
         $user = new User();
         $user->create_user($request);
     }
 
     // 更新：店舗基本情報
     public function update_basicInfo_usersTable(Request $request){
-        Log::info($request);
         $user = new User();
         $user->update_basicInfo_usersTable($request);
     }

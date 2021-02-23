@@ -15343,45 +15343,6 @@ exports.default = Score;
 
 /***/ }),
 
-/***/ "./resources/ts/components/atoms/Search_sidebar_item.tsx":
-/*!***************************************************************!*\
-  !*** ./resources/ts/components/atoms/Search_sidebar_item.tsx ***!
-  \***************************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var Search_sidebar_item = function Search_sidebar_item(_a) {
-  var sectionTitle = _a.sectionTitle,
-      sectionContent = _a.sectionContent;
-  return react_1["default"].createElement("div", {
-    className: "a-search-sidebar-item"
-  }, react_1["default"].createElement("label", null, sectionTitle), react_1["default"].createElement("ul", null, sectionContent.map(function (el) {
-    return react_1["default"].createElement("li", null, react_1["default"].createElement("input", {
-      type: "checkbox",
-      value: el.name,
-      key: el.id
-    }), react_1["default"].createElement("a", null, el.name));
-  })));
-};
-
-exports.default = Search_sidebar_item;
-
-/***/ }),
-
 /***/ "./resources/ts/components/atoms/Searchbar.tsx":
 /*!*****************************************************!*\
   !*** ./resources/ts/components/atoms/Searchbar.tsx ***!
@@ -15448,6 +15409,10 @@ var Searchbar = function Searchbar(_a) {
     Setkeyword(e.target.value);
   };
 
+  var onClick_deleteValue = function onClick_deleteValue() {
+    Setkeyword('');
+  };
+
   return react_1["default"].createElement("div", {
     className: "a-bar-search"
   }, react_1["default"].createElement("input", {
@@ -15456,9 +15421,17 @@ var Searchbar = function Searchbar(_a) {
     value: keyword,
     onChange: onChangeKeyword
   }), text && react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/search/" + keyword
+    to: {
+      pathname: '/search/',
+      search: '?key=' + keyword
+    },
+    onClick: onClick_deleteValue
   }, react_1["default"].createElement("span", null, "\u691C\u7D22")), text === null && react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/search"
+    to: {
+      pathname: '/search/',
+      search: '?key=' + keyword
+    },
+    onClick: onClick_deleteValue
   }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
     icon: free_solid_svg_icons_1.faSearch
   })));
@@ -15495,14 +15468,16 @@ var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
-var BtnBack = function BtnBack(_a) {
-  var URL = _a.URL;
-  return react_1["default"].createElement(react_router_dom_1.Link, {
-    to: URL,
+var BtnBack = function BtnBack() {
+  var history = react_router_dom_1.useHistory();
+  return react_1["default"].createElement("a", {
+    onClick: function onClick() {
+      return history.goBack();
+    },
     className: "a-btn-back"
   }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
     icon: free_solid_svg_icons_1.faArrowLeft
-  }));
+  }), react_1["default"].createElement("span", null, "\u623B\u308B"));
 };
 
 exports.default = BtnBack;
@@ -15747,7 +15722,7 @@ function BtnMypage_icon() {
     }), react_1["default"].createElement("span", null, "\u30DE\u30A4\u30DA\u30FC\u30B8"));
   } else if (state.auth === "store") {
     icon = react_1["default"].createElement(react_router_dom_1.Link, {
-      to: "/store"
+      to: "/store_edit"
     }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
       icon: free_solid_svg_icons_1.faUserCircle
     }), react_1["default"].createElement("span", null, "\u30DE\u30A4\u30DA\u30FC\u30B8"));
@@ -15789,7 +15764,8 @@ var BtnReset = function BtnReset() {
   return react_1["default"].createElement("input", {
     className: "a-btn-reset",
     value: "\u30EA\u30BB\u30C3\u30C8\u3059\u308B",
-    type: "reset"
+    type: "reset",
+    readOnly: true
   });
 };
 
@@ -17422,7 +17398,15 @@ var Week_1 = __importDefault(__webpack_require__(/*! ../../info/Week */ "./resou
 var InputSchedule = function InputSchedule(_a) {
   var Info = _a.Info;
   var Week = Week_1["default"].week;
-  var defaultData; // 営業日・営業時間情報のJSONをObjectに変換
+  var defaultData = {
+    monday: '',
+    tuesday: '',
+    wednesday: '',
+    thursday: '',
+    friday: '',
+    saturday: '',
+    sunday: ''
+  }; // 営業日・営業時間情報のJSONをObjectに変換
 
   if (Info.business_day) {
     defaultData = JSON.parse(Info.business_day);
@@ -17639,6 +17623,56 @@ exports.default = Store_pickup;
 "use strict";
 
 
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -17649,7 +17683,7 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
@@ -17657,32 +17691,86 @@ var Districts_1 = __importDefault(__webpack_require__(/*! ../../../info/District
 
 var Bread_kinds_1 = __importDefault(__webpack_require__(/*! ../../../info/Bread_kinds */ "./resources/ts/info/Bread_kinds.ts"));
 
-var Days_1 = __importDefault(__webpack_require__(/*! ../../../info/Days */ "./resources/ts/info/Days.ts"));
+var Search_sidebar = function Search_sidebar() {
+  var _a = react_1.useState({
+    district: '',
+    bread_kind: ''
+  }),
+      condition = _a[0],
+      setCondition = _a[1];
 
-var Hours_1 = __importDefault(__webpack_require__(/*! ../../../info/Hours */ "./resources/ts/info/Hours.ts"));
+  var sum_district = function sum_district() {
+    var info = '&di=';
+    Districts_1["default"].districts.map(function (el) {
+      var checkbox = document.getElementById(el.id);
 
-var Search_sidebar_item_1 = __importDefault(__webpack_require__(/*! ../../atoms/Search_sidebar_item */ "./resources/ts/components/atoms/Search_sidebar_item.tsx"));
+      if (checkbox.checked) {
+        info = info + checkbox.value + '|';
+      }
+    });
+    setCondition(__assign(__assign({}, condition), {
+      district: info
+    }));
+  };
 
-function Search_sidebar() {
+  var sum_bread_kind = function sum_bread_kind() {
+    var info = '&br=';
+    Bread_kinds_1["default"].bread_kinds.map(function (el) {
+      var checkbox = document.getElementById(el.id);
+
+      if (checkbox.checked) {
+        info = info + checkbox.value + '|';
+      }
+    });
+    setCondition(__assign(__assign({}, condition), {
+      bread_kind: info
+    }));
+  };
+
   return react_1["default"].createElement("div", {
     className: "m-search-sidebar"
-  }, react_1["default"].createElement(Search_sidebar_item_1["default"], {
-    sectionTitle: "\u30A8\u30EA\u30A2\u304B\u3089\u63A2\u3059",
-    sectionContent: Districts_1["default"].districts
-  }), react_1["default"].createElement(Search_sidebar_item_1["default"], {
-    sectionTitle: "\u30D1\u30F3\u306E\u7A2E\u985E\u304B\u3089\u63A2\u3059",
-    sectionContent: Bread_kinds_1["default"].bread_kinds
-  }), react_1["default"].createElement(Search_sidebar_item_1["default"], {
-    sectionTitle: "\u55B6\u696D\u65E5\u304B\u3089\u63A2\u3059",
-    sectionContent: Days_1["default"].days
-  }), react_1["default"].createElement(Search_sidebar_item_1["default"], {
-    sectionTitle: "\u55B6\u696D\u6642\u9593\u304B\u3089\u63A2\u3059",
-    sectionContent: Hours_1["default"].hours
-  }), react_1["default"].createElement(react_router_dom_1.Link, {
-    to: '/search',
+  }, react_1["default"].createElement("div", {
+    className: "m-search-sidebar__item"
+  }, react_1["default"].createElement("h4", null, "\u30AD\u30FC\u30EF\u30FC\u30C9\u304B\u3089\u63A2\u3059"), react_1["default"].createElement("input", {
+    type: "text",
+    placeholder: "\u4F8B:\u3042\u3093\u30D1\u30F3\u3001\u5E97\u540D"
+  })), react_1["default"].createElement("div", {
+    className: "m-search-sidebar__item"
+  }, react_1["default"].createElement("h4", null, "\u30A8\u30EA\u30A2\u304B\u3089\u63A2\u3059"), react_1["default"].createElement("ul", null, Districts_1["default"].districts.map(function (el) {
+    return react_1["default"].createElement("li", {
+      key: "sidebar" + el.id
+    }, react_1["default"].createElement("input", {
+      id: el.id,
+      name: el.id,
+      className: "m-search-sidebar__item__district",
+      type: "checkbox",
+      value: el.name,
+      onClick: sum_district
+    }), react_1["default"].createElement("label", {
+      htmlFor: el.id
+    }, el.name));
+  }))), react_1["default"].createElement("div", {
+    className: "m-search-sidebar__item"
+  }, react_1["default"].createElement("h4", null, "\u30D1\u30F3\u306E\u7A2E\u985E\u304B\u3089\u63A2\u3059"), react_1["default"].createElement("ul", null, Bread_kinds_1["default"].bread_kinds.map(function (el) {
+    return react_1["default"].createElement("li", {
+      key: "sidebar" + el.id
+    }, react_1["default"].createElement("input", {
+      id: el.id,
+      className: "m-search-sidebar__item__bread",
+      type: "checkbox",
+      value: el.name,
+      onClick: sum_bread_kind
+    }), react_1["default"].createElement("label", {
+      htmlFor: el.id
+    }, el.name));
+  }))), react_1["default"].createElement(react_router_dom_1.Link, {
+    to: {
+      pathname: '/search/',
+      search: condition.district + condition.bread_kind
+    },
     className: "m-search-sidebar__btn"
   }, "\u7D5E\u308A\u8FBC\u3080"));
-}
+};
 
 exports.default = Search_sidebar;
 
@@ -19886,54 +19974,68 @@ var Score_1 = __importDefault(__webpack_require__(/*! ../../atoms/Score */ "./re
 
 var StoreList = function StoreList(_a) {
   var StoreInfo = _a.StoreInfo;
+  var history = react_router_dom_1.useHistory();
   return react_1["default"].createElement("div", {
     className: "m-store-list"
   }, StoreInfo.map(function (el) {
     return react_1["default"].createElement("div", {
       className: "m-store-list__item",
-      key: el.uuid
+      key: "storeList_" + el.user_uuid
     }, react_1["default"].createElement("div", {
-      className: "m-store-list__item--pc"
+      className: "m-store-list__item--pc",
+      onClick: function onClick() {
+        return history.push("/store/" + el.user_uuid);
+      }
     }, react_1["default"].createElement("div", {
       className: "m-store-list__item--pc__images__main"
-    }, react_1["default"].createElement("img", {
-      src: "/images/bakery2.jpg",
+    }, el.thumbnail ? react_1["default"].createElement("img", {
+      src: "/storage/store/" + el.user_uuid + "/thumbnail.jpg",
+      alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
+    }) : react_1["default"].createElement("img", {
+      src: "/images/no_image.jpg",
       alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
     })), react_1["default"].createElement("div", {
       className: "m-store-list__item--pc__images__sub"
-    }, react_1["default"].createElement("img", {
-      src: "/images/bread1.jpg",
+    }, el.menu1 && react_1["default"].createElement("img", {
+      src: "/storage/store/" + el.user_uuid + "/menu/item_1.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
-    }), react_1["default"].createElement("img", {
-      src: "/images/bread1.jpg",
+    }), el.menu2 && react_1["default"].createElement("img", {
+      src: "/storage/store/" + el.user_uuid + "/menu/item_2.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
-    }), react_1["default"].createElement("img", {
-      src: "/images/bread1.jpg",
+    }), el.menu3 && react_1["default"].createElement("img", {
+      src: "/storage/store/" + el.user_uuid + "/menu/item_3.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
     }))), react_1["default"].createElement("div", {
       className: "m-store-list__item__container"
     }, react_1["default"].createElement("div", {
       className: "m-store-list__item__container__buttons"
-    }, react_1["default"].createElement(Btn_favorite_1["default"], null), react_1["default"].createElement(Btn_interested_1["default"], null)), react_1["default"].createElement(react_router_dom_1.Link, {
-      to: "/store"
-    }, react_1["default"].createElement("div", {
-      className: "m-store-list__item__container__name"
+    }, react_1["default"].createElement(Btn_favorite_1["default"], null), react_1["default"].createElement(Btn_interested_1["default"], null)), react_1["default"].createElement("div", {
+      className: "m-store-list__item__container__name",
+      onClick: function onClick() {
+        return history.push("/store/" + el.user_uuid);
+      }
     }, react_1["default"].createElement("h2", {
       className: "hover-colorChange"
     }, el.name)), react_1["default"].createElement("p", {
       className: "m-store-list__item__container__access"
     }, el.address), react_1["default"].createElement("div", {
-      className: "m-store-list__item--mobile"
+      className: "m-store-list__item--mobile",
+      onClick: function onClick() {
+        return history.push("/store/" + el.user_uuid);
+      }
     }, react_1["default"].createElement("div", {
       className: "m-store-list__item--mobile__images"
-    }, react_1["default"].createElement("img", {
-      src: "/images/bread1.jpg",
+    }, el.thumbnail ? react_1["default"].createElement("img", {
+      src: "/storage/store/" + el.user_uuid + "/thumbnail.jpg",
       alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
-    }), react_1["default"].createElement("img", {
-      src: "/images/bread1.jpg",
+    }) : react_1["default"].createElement("img", {
+      src: "/images/no_image.jpg",
+      alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
+    }), el.menu1 && react_1["default"].createElement("img", {
+      src: "/storage/store/" + el.user_uuid + "/menu/item_1.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
-    }), react_1["default"].createElement("img", {
-      src: "/images/bread1.jpg",
+    }), el.menu2 && react_1["default"].createElement("img", {
+      src: "/storage/store/" + el.user_uuid + "/menu/item_2.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
     }))), react_1["default"].createElement("p", {
       className: "m-store-list__item__container__explanation"
@@ -19941,7 +20043,7 @@ var StoreList = function StoreList(_a) {
       Week: Week_1["default"].week
     }), react_1["default"].createElement(Score_1["default"], {
       ScoreStar: el.star
-    }))));
+    })));
   }));
 };
 
@@ -19972,7 +20074,7 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 
 var StoreMenu = function StoreMenu(_a) {
   var Menu = _a.Menu;
-  var content = react_1["default"].createElement("p", null, "\u307E\u3060\u767B\u9332\u3055\u308C\u3066\u3044\u307E\u305B\u3093\u3002");
+  var content = react_1["default"].createElement("p", null, "\u6E96\u5099\u4E2D\u3067\u3059\u3002");
 
   if (Menu) {
     Menu.map(function (el) {
@@ -19984,7 +20086,7 @@ var StoreMenu = function StoreMenu(_a) {
 
   return react_1["default"].createElement("div", {
     className: "m-menu"
-  }, Menu.map(function (el) {
+  }, content, Menu.map(function (el) {
     return el.menu_type === 1 && react_1["default"].createElement("div", {
       className: "m-menu__card",
       key: "menu_" + el.id
@@ -20028,9 +20130,15 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 
 var StoreSpirit = function StoreSpirit(_a) {
   var Spirit = _a.Spirit;
+  var content = react_1["default"].createElement("p", null, "\u6E96\u5099\u4E2D\u3067\u3059\u3002");
+  Spirit.map(function (el) {
+    if (el.menu_type === 2) {
+      content = null;
+    }
+  });
   return react_1["default"].createElement("div", {
     className: "m-spirit"
-  }, Spirit.map(function (el) {
+  }, content, Spirit.map(function (el) {
     return react_1["default"].createElement("div", {
       className: "m-spirit__container",
       key: "spirit_" + el.id
@@ -20181,15 +20289,22 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
 var Top_section = function Top_section(_a) {
   var sectionTitle = _a.sectionTitle,
       sectionContent = _a.sectionContent;
-  return react_1["default"].createElement("div", null, react_1["default"].createElement("h2", null, sectionTitle), react_1["default"].createElement("ul", null, sectionContent.map(function (el) {
-    return react_1["default"].createElement("li", null, react_1["default"].createElement("input", {
-      type: "text",
-      key: el.key + el.id,
-      value: el.name
-    }));
+  return react_1["default"].createElement("div", {
+    className: "m-top-section"
+  }, react_1["default"].createElement("h2", null, sectionTitle), react_1["default"].createElement("ul", null, sectionContent.map(function (el) {
+    return react_1["default"].createElement("li", {
+      key: 'section_' + el.id
+    }, react_1["default"].createElement(react_router_dom_1.Link, {
+      to: {
+        pathname: '/search/',
+        search: '?key=' + el.name
+      }
+    }, el.name));
   })));
 };
 
@@ -21660,6 +21775,40 @@ exports.default = Review;
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -21670,9 +21819,11 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
 var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
 
@@ -21680,76 +21831,31 @@ var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg
 
 var Search_sidebar_1 = __importDefault(__webpack_require__(/*! ../../molecules/search/Search_sidebar */ "./resources/ts/components/molecules/search/Search_sidebar.tsx"));
 
-var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../../molecules/Store_pickup */ "./resources/ts/components/molecules/Store_pickup.tsx"));
-
 var StoreList_1 = __importDefault(__webpack_require__(/*! ../../molecules/store/StoreList */ "./resources/ts/components/molecules/store/StoreList.tsx"));
 
-var testInfo = [{
-  name: 'sarasapan',
-  address: '福岡市中央区白金',
-  star: 2,
-  business_day: 'sasa',
-  busines_memo: '定休日！！！',
-  message: 'ニューヨーク・ブロードウェイに佇むレンガ造りのデザイナーズプレイラウンジをオマージュ。 ホテルっぽいの敷居の高さを排除し、日常の中にあるオシャレで少しだけ贅沢な時間をすごしたいときの場所。カフェやワークスペースとして、デートや少しの休息などにご利用ください。毎日26時まで営業しておりますので、夜カフェとしてのご利用もおすすめです。',
-  sns: {
-    twitter: 'twitter',
-    instagram: 'sssss'
-  },
-  img: '/images/croissant.jpg'
-}, {
-  name: 'sarasapan',
-  address: '福岡市中央区薬院',
-  star: 3.4,
-  business_day: 'sasa',
-  busines_memo: '定休日！！！',
-  message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
-  sns: {
-    twitter: 'twitter',
-    instagram: 'sssss'
-  },
-  img: '/images/croissant.jpg'
-}, {
-  id: 6,
-  name: 'Le pain de Maki',
-  address: '福岡市博多区比恵町',
-  star: 3.3,
-  business_day: '月曜日',
-  busines_memo: '定休日！！！',
-  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
-  sns: {
-    twitter: 'twitter',
-    instagram: 'sssss'
-  },
-  img: '/images/bakery.jpg'
-}, {
-  id: 56,
-  name: 'Le pain de Maki',
-  address: '福岡市博多区比恵町',
-  star: 3.3,
-  business_day: '月曜日',
-  busines_memo: '定休日！！！',
-  message: '大規模な再開発が進む渋谷の新ランドマーク「MIYASHITA PARK」に大人気『パンとエスプレッソ』の姉妹店が誕生。卵をイメージした黄色と白をモチーフにした温かみのある店内に天気のいい日にはテラスも。絶品ホットサンドから大人気のムー、話題の『シメパフェ』には当店こだわりのパンとコーヒーを使用。夜はお酒も提供。型にとらわれない、渋谷の新しい『まちあわせ』使いにもどうぞ。',
-  sns: {
-    twitter: 'twitter',
-    instagram: 'sssss'
-  },
-  img: '/images/bakery2.jpg'
-}];
-
 var Search = function Search() {
-  // const [users, setUsers] = useState<any[]>([]);
-  // useEffect(() => {
-  //     getUsers()
-  // },[])
-  // const [stores, setStores] = useState<any[]>([]);
-  // useEffect(()=>{
-  //     getStores()
-  // },[])
-  // const getStores = () => {
-  //     const response = await axios.post('/api/store_all')
-  //     console.log(response)
-  //     setStores(response.data)
-  // }
+  var location = react_router_dom_1.useLocation();
+  var keyword = location.search;
+
+  var _a = react_1.useState([]),
+      stores = _a[0],
+      setStores = _a[1];
+
+  var message_noResult = null;
+  react_1.useEffect(function () {
+    getStores();
+  }, []);
+
+  var getStores = function getStores() {
+    axios_1["default"].get('/api/search_store' + keyword).then(function (res) {
+      setStores(res.data);
+    });
+  };
+
+  if (stores[0] === undefined) {
+    message_noResult = react_1["default"].createElement("p", null, "\u8A72\u5F53\u3059\u308B\u5E97\u8217\u304C\u3042\u308A\u307E\u305B\u3093\u3002");
+  }
+
   return react_1["default"].createElement("div", {
     className: "p-search"
   }, react_1["default"].createElement("div", {
@@ -21762,10 +21868,11 @@ var Search = function Search() {
     className: "p-search__container"
   }, react_1["default"].createElement(Search_sidebar_1["default"], null), react_1["default"].createElement("div", {
     className: "p-search__container__content"
-  }, react_1["default"].createElement(Store_pickup_1["default"], {
-    PickupInfo: testInfo
-  }), react_1["default"].createElement("div", {
-    className: "p-search__container__content__list"
+  }, react_1["default"].createElement("div", {
+    className: "p-search__container__content__list",
+    onClick: function onClick() {
+      return console.log(stores, stores[0]);
+    }
   }, react_1["default"].createElement("div", {
     className: "p-search__container__content__list__order--pc"
   }, react_1["default"].createElement("a", null, "\u304A\u3059\u3059\u3081\u9806"), react_1["default"].createElement("a", null, "\u8A55\u4FA1\u9806"), react_1["default"].createElement("a", null, "\u53E3\u30B3\u30DF\u6570\u9806"), react_1["default"].createElement("a", null, "\u30A2\u30AF\u30BB\u30B9\u6570\u9806")), react_1["default"].createElement("div", {
@@ -21778,8 +21885,8 @@ var Search = function Search() {
     value: ""
   }, "\u53E3\u30B3\u30DF\u6570\u9806"), react_1["default"].createElement("option", {
     value: ""
-  }, "\u30A2\u30AF\u30BB\u30B9\u6570\u9806"))), react_1["default"].createElement(StoreList_1["default"], {
-    StoreInfo: testInfo
+  }, "\u30A2\u30AF\u30BB\u30B9\u6570\u9806"))), message_noResult, react_1["default"].createElement(StoreList_1["default"], {
+    StoreInfo: stores
   })))));
 };
 
@@ -21808,17 +21915,16 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-
 var Search_sidebar_1 = __importDefault(__webpack_require__(/*! ../../molecules/search/Search_sidebar */ "./resources/ts/components/molecules/search/Search_sidebar.tsx"));
+
+var BtnBack_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/BtnBack */ "./resources/ts/components/atoms/buttons/BtnBack.tsx"));
 
 function Search_input_mobile() {
   return react_1["default"].createElement("div", {
     className: "p-search-input-mobile"
-  }, react_1["default"].createElement(react_router_dom_1.Link, {
-    to: '/search',
-    className: "p-search-input-mobile__back"
-  }, "\u691C\u7D22\u753B\u9762\u306B\u623B\u308B"), react_1["default"].createElement(Search_sidebar_1["default"], null));
+  }, react_1["default"].createElement("div", {
+    className: "p-search-input-mobile__btn"
+  }, react_1["default"].createElement(BtnBack_1["default"], null)), react_1["default"].createElement(Search_sidebar_1["default"], null));
 }
 
 exports.default = Search_input_mobile;
@@ -22223,9 +22329,7 @@ var UserEdit = function UserEdit(_a) {
       onSubmit: handleSubmit(onSubmit)
     }, react_1["default"].createElement("div", {
       className: "p-userEdit__container__btn"
-    }, react_1["default"].createElement(BtnBack_1["default"], {
-      URL: "/user"
-    })), react_1["default"].createElement("h2", null, "\u30E6\u30FC\u30B6\u30FC\u60C5\u5831\u7DE8\u96C6"), react_1["default"].createElement("label", {
+    }, react_1["default"].createElement(BtnBack_1["default"], null)), react_1["default"].createElement("h2", null, "\u30E6\u30FC\u30B6\u30FC\u60C5\u5831\u7DE8\u96C6"), react_1["default"].createElement("label", {
       htmlFor: "user_name",
       className: "a-label-required"
     }, "\u30E6\u30FC\u30B6\u30FC\u540D"), react_1["default"].createElement("input", {
@@ -22409,40 +22513,6 @@ exports.default = bread_kinds;
 
 /***/ }),
 
-/***/ "./resources/ts/info/Days.ts":
-/*!***********************************!*\
-  !*** ./resources/ts/info/Days.ts ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var Days =
-/** @class */
-function () {
-  function Days() {
-    this.days = [{
-      name: "今日",
-      id: "day_1"
-    }, {
-      name: "明日",
-      id: "day_2"
-    }];
-  }
-
-  return Days;
-}();
-
-var days = new Days();
-exports.default = days;
-
-/***/ }),
-
 /***/ "./resources/ts/info/Districts.ts":
 /*!****************************************!*\
   !*** ./resources/ts/info/Districts.ts ***!
@@ -22489,43 +22559,6 @@ function () {
 
 var districts = new Districts();
 exports.default = districts;
-
-/***/ }),
-
-/***/ "./resources/ts/info/Hours.ts":
-/*!************************************!*\
-  !*** ./resources/ts/info/Hours.ts ***!
-  \************************************/
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var Hours =
-/** @class */
-function () {
-  function Hours() {
-    this.hours = [{
-      name: "現在営業中",
-      id: "hours_1"
-    }, {
-      name: "朝9時までにオープン",
-      id: "hours_2"
-    }, {
-      name: "19時以降も営業",
-      id: "hours_3"
-    }];
-  }
-
-  return Hours;
-}();
-
-var hours = new Hours();
-exports.default = hours;
 
 /***/ }),
 

@@ -1,0 +1,41 @@
+.m-top-section {
+    ul {
+        display: flex;
+        align-content: flex-start;
+        flex-wrap: wrap;
+        margin-top: 5px;
+
+        & > li {
+            display: inline-block;
+            border: 2.2px solid $brown;
+            border-radius: 4px;
+            margin: 3px 2px;
+            height: 2.5rem;
+            width: 7.5rem;
+
+            @include bp-600up {
+                margin: 3px 5px;
+            }
+
+            & > a {
+                display: block;
+                height: 100%;
+                width: 100%;
+                color: $brown;
+                line-height: 2.3rem;
+                text-align: center;
+                font-weight: 550;
+                font-size: 0.8rem;
+                cursor: pointer;
+            }
+
+            &:hover {
+                background-color: $brown;
+
+                & > a {
+                    color: $white;
+                }
+            }
+        }
+    }
+}

@@ -4,8 +4,13 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: $lightBrown;
-    padding: $mp-lg $mp-xs $mp-xs $mp-xs;
+    background-color: $lightestBrown;
+    margin-top: $header-height;
+    padding: 0 $mp-xs $mp-xs $mp-xs;
+
+    &__btn {
+        margin-top: $mp-xxs;
+    }
 
     &__back {
         display: inline-block;

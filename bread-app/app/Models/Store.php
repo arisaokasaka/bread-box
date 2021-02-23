@@ -17,23 +17,86 @@ class Store extends Model
      * @var array
      */
 
-    public function all_stores() {
-        return $this->newQuery()->select("*")->get();
+
+    /**
+     * 店舗検索
+     *
+     * @param $keyword
+     * @return $query
+     */
+    public function find_keyword($keyword){
+        $query = $this
+        ->newQuery()
+        ->leftjoin('users', 'stores.user_uuid', '=', 'users.uuid');
+
+        if($keyword){
+            $query
+            ->leftjoin('store_menus', 'stores.user_uuid', '=', 'store_menus.store_uuid')
+            ->where('stores.message', 'like', '%' .$keyword. '%')
+            ->orWhere('store_menus.bread_name', 'like', '%' .$keyword. '%')
+            ->orWhere('store_menus.bread_kind', 'like', '%' .$keyword. '%')
+            ->orWhere('store_menus.bread_detail', 'like', '%' .$keyword. '%')
+            ->orWhere('store_menus.advantage', 'like', '%' .$keyword. '%')
+            ->orWhere('store_menus.spirit', 'like', '%' .$keyword. '%')
+            ->orWhere('users.name', 'like', '%' .$keyword. '%')
+            ->orWhere('users.address', 'like', '%' .$keyword. '%')
+            ->select([
+                'users.name',
+                'users.address',
+                'stores.user_uuid',
+                'stores.business_day',
+                'stores.business_memo',
+                'stores.message',
+            ])
+            ->get();
+        }else{
+            $query
+            ->select([
+                'users.name',
+                'users.address',
+                'stores.user_uuid',
+                'stores.business_day',
+                'stores.business_memo',
+                'stores.message',
+            ]);
+        }
+        return $query->get();
     }
 
-    public function find_keyword(string $keyword){
-        return $this
+    public function search_by_district($district) {
+        $query_district = $this
         ->newQuery()
-        ->join('store_menus', 'stores.uuid', '=', 'store_menus.stores_uuid')
-        ->select(['stores.uuid AS stores_uuid', 'stores.name AS stores_name'])
-        ->where('stores.name', 'like', '%' . $keyword. '%')
-        ->orWhere('stores.message', 'like', '%' .$keyword. '%')
-        ->orWhere('store_menus.bread_name', 'like', '%' .$keyword. '%')
-        ->orWhere('store_menus.bread_kind', 'like', '%' .$keyword. '%')
-        ->orWhere('store_menus.bread_detail', 'like', '%' .$keyword. '%')
-        ->orWhere('store_menus.advantage', 'like', '%' .$keyword. '%')
-        ->orWhere('store_menus.spirit', 'like', '%' .$keyword. '%')
+        ->leftjoin('users', 'stores.user_uuid', '=', 'users.uuid')
+        ->where('users.address', 'like', '%' .$district. '%')
+        ->select([
+            'users.name',
+            'users.address',
+            'stores.user_uuid',
+            'stores.business_day',
+            'stores.business_memo',
+            'stores.message',
+        ])
         ->get();
+        return $query_district;
+    }
+
+    public function search_by_bread($bread_kind) {
+        $query_bread = $this
+        ->newQuery()
+        ->leftjoin('users', 'stores.user_uuid', '=', 'users.uuid')
+        ->leftjoin('store_menus', 'stores.user_uuid', '=', 'store_menus.store_uuid')
+        ->where('store_menus.bread_kind', 'like', '%' .$keyword. '%')
+        ->select([
+            'users.name',
+            'users.address',
+            'stores.user_uuid',
+            'stores.business_day',
+            'stores.business_memo',
+            'stores.message',
+        ])
+        ->get();
+
+        return $query_bread;
     }
 
     /**

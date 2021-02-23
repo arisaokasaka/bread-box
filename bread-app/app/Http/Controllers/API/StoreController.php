@@ -9,19 +9,95 @@ use App\Models\Store;
 use App\Http\Requests\StoreRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Database\Eloquent\Collection;
 
 class StoreController extends Controller
 {
-    public function index_store() {
-       
-        Log::info(Auth::user());
-        $info = new Store();
-        return $info->all_stores();
-    }
+    
+    /**
+     * 店舗検索
+     *
+     * @param Request $request
+     * @return $get_info
+     */
+    const storage_path = 'public/store/';
+    const storage_thumbnail = '/thumbnail.jpg';
+    const storage_menu = '/menu/item_';
+    public function search_store(Request $request) {
+        Log::info($request);
+        $store = new Store();
+        $keyword = $request->input('key');
+        $district = $request->input('di');
+        $bread_kind = $request->input('br');
+        $district && $array_district = explode('&', $district);
+        $bread_kind && $array_bread_kind = explode('&', $district);
+        $result = [];
+        $get_info = [];
+        $check_uuid = [];
+        
+        if($keyword){
+            $keyword = str_replace('　', ' ', $keyword);
+            $keyword = str_replace('%', ' ', $keyword);
+            $array_keyword = explode(' ', $keyword);
+            
+            foreach($array_keyword as $word){
+                $get_info = $store->find_keyword($word);
+            
+                if($get_info) {
+                    foreach($get_info as $el){
+                        if(!(in_array($el->user_uuid, $check_uuid))) {
+                            array_push($check_uuid, $el->user_uuid);
+                            array_push($result, $el);
+                        }
+                    }
+                }
+            }
+        }else if($district){
+            if($bread_kind){
+                foreach($array_district as $el){
+                    $get_info = $store->search_by_district($el);
+                    foreach($array_bread_kind as $el){
+                        $get_info = $store->search_by_bread($el);
+                        if($get_info) {
+                            foreach($get_info as $el){
+                                if(!(in_array($el->user_uuid, $check_uuid))) {
+                                    array_push($check_uuid, $el->user_uuid);
+                                    array_push($result, $el);
+                                }
+                            }
+                        }
+                    }
+                }
+            }else{
+                foreach($array_district as $el){
+                    $result = $store->search_by_district($el);
+                }
+            }
+        }else if($bread_kind){
+            foreach($array_bread_kind as $el){
+                $get_info = $store->search_by_bread($el);
+                
+                if($get_info) {
+                    foreach($get_info as $el){
+                        if(!(in_array($el->user_uuid, $check_uuid))) {
+                            array_push($check_uuid, $el->user_uuid);
+                            array_push($result, $el);
+                        }
+                    }
+                }
+            }
+        }else{
+            $result = $store->find_keyword("");
+        }
 
-    public function search_store() {
-        $info = new Store();
-        return $info->find_keyword('');
+        foreach($result as $store) {
+            $store['thumbnail'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_thumbnail);
+            $store['menu1'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_menu . '1.jpg');
+            $store['menu2'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_menu . '2.jpg');
+            $store['menu3'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_menu . '3.jpg');
+        }
+        
+        return $result;
     }
 
     /**

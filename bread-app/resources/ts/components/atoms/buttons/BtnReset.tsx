@@ -6,6 +6,7 @@ const BtnReset: React.FC = () =>  {
             className="a-btn-reset"
             value="リセットする"
             type="reset"
+            readOnly
         />
     )
 }
