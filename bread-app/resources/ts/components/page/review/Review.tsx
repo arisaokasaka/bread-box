@@ -95,9 +95,7 @@ const Review : React.FC<ReviewProps> = ({ReviewInfo, StoreInfo}) => {
                     </div>
                 </main>
                 <aside>
-                    <Store_Pickup
-                        PickupInfo = {testPickInfo}
-                    />
+                    <Store_Pickup />
                 </aside>
             </div>
         </div>

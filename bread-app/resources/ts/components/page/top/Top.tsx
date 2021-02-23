@@ -79,9 +79,7 @@ function Top() {
                 sectionTitle="営業日から探す"
                 sectionContent={days.days}
                 /> */}
-                <Store_pickup 
-                    PickupInfo={testPickInfo}
-                />
+                <Store_pickup />
                 <StoreRanking
                     RankingInfo={testPickInfo}
                 />
