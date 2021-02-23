@@ -119,6 +119,26 @@ class Store extends Model
     }
 
     /**
+     * 店舗ランキング（星の点数順）
+     *
+     * @param integer $count
+     * @return $query
+     */
+    public function store_ranking(int $count) {
+        $query = $this
+        ->newQuery()
+        ->leftjoin('reviews', 'stores.user_uuid', '=', 'reviews.stores_uuid')
+        ->leftjoin('users', 'stores.user_uuid', '=', 'users.uuid')
+        ->orderBy('reviews.star', 'asc')
+        ->take($count)
+        ->select([
+            'users.name',
+            'stores.user_uuid',
+        ]);
+        return $query->get();
+    }
+
+    /**
      * 【作成】店舗レコード作成（店舗の新規登録時に実行）
      *
      * @param $store_user_uuid
