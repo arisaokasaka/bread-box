@@ -124,6 +124,25 @@ class StoreController extends Controller
     }
 
     /**
+     * ピックアップ店舗（ランダム）
+     *
+     * @param Request $request
+     * @return $get_info
+     */
+    public function store_pickup(Request $request) {
+        $store = new Store();
+        $count = $request->input('count');
+        $get_info = $store->store_pickup($count);
+        Log::info($get_info);
+        
+        foreach($get_info as $store){
+            $store['thumbnail'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_thumbnail);
+        }
+            
+        return $get_info;
+    }
+
+    /**
      * 【更新】店舗基本情報
      *
      * @param Request $request

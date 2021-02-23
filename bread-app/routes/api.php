@@ -43,6 +43,7 @@ Route::post('/update_homepage', 'Api\StoreController@update_homepage');
 Route::post('/update_sns', 'Api\StoreController@update_sns');
 Route::post('/update_businessDay', 'Api\StoreController@update_businessDay');
 Route::post('/save_storeImages', 'Api\StoreController@save_storeImages');
+Route::post('/store_pickup', 'Api\StoreController@store_pickup');
 
 //Store_menuController
 Route::post('/create_store_menu', 'Api\StoreMenuController@create_store_menu');
