@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 type Props = {
     key?: string;
@@ -7,14 +8,20 @@ type Props = {
 }
 
 const Top_section: React.FC<Props> = ({sectionTitle, sectionContent}) => (
-    <div>
+    <div className = "m-top-section">
         <h2>{sectionTitle}</h2>
         <ul>
             {sectionContent.map(
                 (el)=>{
                     return (
                     <li key={'section_' + el.id}>
-                        <input type="text" value={el.name} readOnly/>
+                        <Link to={{
+                            pathname: '/search/',
+                            search: '?key=' + el.name
+                            }}
+                        >
+                        {el.name}
+                        </Link>
                     </li>);
                 })}
         </ul>
