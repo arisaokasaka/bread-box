@@ -15452,6 +15452,10 @@ var Searchbar = function Searchbar(_a) {
     Setkeyword(e.target.value);
   };
 
+  var onClick_deleteValue = function onClick_deleteValue() {
+    Setkeyword('');
+  };
+
   return react_1["default"].createElement("div", {
     className: "a-bar-search"
   }, react_1["default"].createElement("input", {
@@ -15460,9 +15464,17 @@ var Searchbar = function Searchbar(_a) {
     value: keyword,
     onChange: onChangeKeyword
   }), text && react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/search/" + keyword
+    to: {
+      pathname: '/search/',
+      search: '?key=' + keyword
+    },
+    onClick: onClick_deleteValue
   }, react_1["default"].createElement("span", null, "\u691C\u7D22")), text === null && react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/search"
+    to: {
+      pathname: '/search/',
+      search: '?key=' + keyword
+    },
+    onClick: onClick_deleteValue
   }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
     icon: free_solid_svg_icons_1.faSearch
   })));
@@ -15793,7 +15805,8 @@ var BtnReset = function BtnReset() {
   return react_1["default"].createElement("input", {
     className: "a-btn-reset",
     value: "\u30EA\u30BB\u30C3\u30C8\u3059\u308B",
-    type: "reset"
+    type: "reset",
+    readOnly: true
   });
 };
 
@@ -19904,7 +19917,7 @@ var StoreList = function StoreList(_a) {
   }, StoreInfo.map(function (el) {
     return react_1["default"].createElement("div", {
       className: "m-store-list__item",
-      key: el.uuid
+      key: "storeList_" + el.user_uuid
     }, react_1["default"].createElement("div", {
       className: "m-store-list__item--pc",
       onClick: function onClick() {
@@ -20217,10 +20230,12 @@ var Top_section = function Top_section(_a) {
   var sectionTitle = _a.sectionTitle,
       sectionContent = _a.sectionContent;
   return react_1["default"].createElement("div", null, react_1["default"].createElement("h2", null, sectionTitle), react_1["default"].createElement("ul", null, sectionContent.map(function (el) {
-    return react_1["default"].createElement("li", null, react_1["default"].createElement("input", {
+    return react_1["default"].createElement("li", {
+      key: 'section_' + el.id
+    }, react_1["default"].createElement("input", {
       type: "text",
-      key: el.key + el.id,
-      value: el.name
+      value: el.name,
+      readOnly: true
     }));
   })));
 };
@@ -21751,16 +21766,9 @@ var Search_sidebar_1 = __importDefault(__webpack_require__(/*! ../../molecules/s
 var StoreList_1 = __importDefault(__webpack_require__(/*! ../../molecules/store/StoreList */ "./resources/ts/components/molecules/store/StoreList.tsx"));
 
 var Search = function Search() {
-  // const [users, setUsers] = useState<any[]>([]);
-  // useEffect(() => {
-  //     getUsers()
-  // },[])
-  // const getUsers = async () => {
-  //     const response = await axios.get('/api/user');
-  //     console.log(123)
-  //     console.log(response)
-  //     setUsers(response.data.users)
-  // }
+  var location = react_router_dom_1.useLocation();
+  var keyword = location.search;
+
   var _a = react_1.useState([]),
       stores = _a[0],
       setStores = _a[1];
@@ -21770,15 +21778,11 @@ var Search = function Search() {
   }, []);
 
   var getStores = function getStores() {
-    axios_1["default"].post('/api/search_store', {
-      keyword: ''
-    }).then(function (res) {
+    axios_1["default"].get('/api/search_store' + keyword).then(function (res) {
       setStores(res.data);
-      console.log(res.data);
     });
   };
 
-  console.log(stores);
   return react_1["default"].createElement("div", {
     className: "p-search"
   }, react_1["default"].createElement("div", {
