@@ -95,7 +95,6 @@ const Modal_editSpirit: React.FC<infoProps> = ({SpiritInfo, btnName, funcType, m
 
             switch(funcType){
                 case 'create':
-                    console.log('switch')
                     createSpirit(formData, image.image);
                 break;
                 case 'edit':

@@ -16791,7 +16791,6 @@ var Modal_editSpirit = function Modal_editSpirit(_a) {
 
       switch (funcType) {
         case 'create':
-          console.log('switch');
           createSpirit(formData, image.image);
           break;
 
@@ -22337,6 +22336,22 @@ exports.default = Top;
 "use strict";
 
 
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
 var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
   if (k2 === undefined) k2 = k;
   Object.defineProperty(o, k2, {
@@ -22405,10 +22420,18 @@ var UserEdit = function UserEdit() {
       info = _b[0],
       setInfo = _b[1];
 
+  var _c = react_1.useState({
+    image: null,
+    image_size: 0
+  }),
+      image = _c[0],
+      setImage = _c[1];
+
+  var errorMessage_imageSize;
   var userInfo = info;
   react_1.useEffect(function () {
     index_user();
-  }, []);
+  }, []); // ユーザー情報取得
 
   var index_user = function index_user() {
     axios_1["default"].post("/api/index_user", {
@@ -22416,15 +22439,45 @@ var UserEdit = function UserEdit() {
     }).then(function (res) {
       setInfo(res.data[0]);
     })["catch"](function (err) {});
-  };
+  }; // 送信機能
 
-  var update_user = function update_user(data) {
+
+  var onSubmit = function onSubmit(data) {
+    if (image.image_size <= 3000000) {
+      var formData = new FormData();
+
+      for (var el in data) {
+        formData.append(el, data[el]);
+      }
+
+      update_user(formData, image.image);
+    } else {
+      alert('ファイルの上限サイズ3MBを超えています。圧縮するか、別の画像を選択してください。');
+    }
+  }; // ユーザー情報更新
+
+
+  var update_user = function update_user(data, file) {
+    data.append('image', file);
     axios_1["default"].post("/api/update_user", data).then(function (res) {
       alert('更新しました。');
     })["catch"](function (err) {
       alert('更新に失敗しました。');
     });
-  };
+  }; // 画像ファイル取得
+
+
+  var onChangeImage = function onChangeImage(e) {
+    setImage(__assign(__assign({}, image), {
+      image: e.target.files[0],
+      image_size: e.target.files[0].size
+    }));
+  }; // ファイルサイズが3MBを超えていた場合のエラーメッセージ
+
+
+  if (image.image_size > 3000000) {
+    errorMessage_imageSize = react_1["default"].createElement("p", null, "\u30D5\u30A1\u30A4\u30EB\u306E\u4E0A\u9650\u30B5\u30A4\u30BA3MB\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002\u5727\u7E2E\u3059\u308B\u304B\u3001\u5225\u306E\u753B\u50CF\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002");
+  }
 
   return react_1["default"].createElement("div", {
     className: "p-userEdit"
@@ -22432,7 +22485,7 @@ var UserEdit = function UserEdit() {
     className: "p-userEdit__container"
   }, react_1["default"].createElement("form", {
     className: "p-userEdit__container__form",
-    onSubmit: handleSubmit(update_user)
+    onSubmit: handleSubmit(onSubmit)
   }, react_1["default"].createElement("div", {
     className: "p-userEdit__container__btn"
   }, react_1["default"].createElement(BtnBack_1["default"], null)), react_1["default"].createElement("h2", null, "\u30E6\u30FC\u30B6\u30FC\u60C5\u5831\u7DE8\u96C6"), react_1["default"].createElement("input", {
@@ -22470,7 +22523,13 @@ var UserEdit = function UserEdit() {
     id: "user_address",
     defaultValue: userInfo.address,
     ref: register
-  }), react_1["default"].createElement("input", {
+  }), react_1["default"].createElement("label", {
+    htmlFor: "user_address"
+  }, "\u30D7\u30ED\u30D5\u30A3\u30FC\u30EB\u753B\u50CF"), react_1["default"].createElement("input", {
+    type: "file",
+    name: "image",
+    onChange: onChangeImage
+  }), errorMessage_imageSize, react_1["default"].createElement("input", {
     type: "submit",
     value: "\u66F4\u65B0\u3059\u308B"
   }), react_1["default"].createElement("div", {
