@@ -1,14 +1,16 @@
-import React,{useEffect, useState} from 'react';
+import React,{useEffect, useState, useContext} from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { UserAuthContext } from '../../contexts/UserAuthContext';
 
 type TextProps = ({
     text: any;
 })
 
 const Searchbar: React.FC<TextProps> = ({text}) => {
-    const [keyword, Setkeyword] = useState('');
+    const { state } = useContext(UserAuthContext);
+    const [ keyword, Setkeyword ] = useState('');
     const onChangeKeyword = e => {
         Setkeyword(e.target.value);
     }
@@ -26,7 +28,7 @@ const Searchbar: React.FC<TextProps> = ({text}) => {
             {text && 
                 <Link to={{
                     pathname: '/search/',
-                    search: '?key=' + keyword
+                    search: '?key=' + keyword + '&id=' + state.uuid
                     }}
                     onClick = {onClick_deleteValue}
                 >
@@ -35,7 +37,7 @@ const Searchbar: React.FC<TextProps> = ({text}) => {
             {text === null &&
                 <Link to={{
                     pathname: '/search/',
-                    search: '?key=' + keyword
+                    search: '?key=' + keyword + '&id=' + state.uuid
                     }}
                     onClick = {onClick_deleteValue}
                 >

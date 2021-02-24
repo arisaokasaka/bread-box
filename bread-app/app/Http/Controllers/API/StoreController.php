@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use App\Models\Store;
+use App\Models\User;
 use App\Http\Requests\StoreRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
@@ -25,14 +26,21 @@ class StoreController extends Controller
     const storage_menu = '/menu/item_';
     public function search_store(Request $request) {
         $store = new Store();
+        $user = new User();
         $keyword = $request->input('key');
         $district = $request->input('di');
         $bread_kind = $request->input('br');
+        $user_uuid = $request->input('id');
         $district && $array_district = explode('&', $district);
         $bread_kind && $array_bread_kind = explode('&', $district);
         $result = [];
         $get_info = [];
         $check_uuid = [];
+        $check_user_uuid = $user_uuid !== 'null' && $user_uuid;
+        if($check_user_uuid) {
+            $user_uuid && $favorite_info = $user->index_favorite($user_uuid);
+            $favorite_info && $favorite_list = json_decode($favorite_info[0]->favorite);    
+        }
         
         if($keyword){
             $keyword = str_replace('　', ' ', $keyword);
@@ -94,8 +102,17 @@ class StoreController extends Controller
             $store['menu1'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_menu . '1.jpg');
             $store['menu2'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_menu . '2.jpg');
             $store['menu3'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_menu . '3.jpg');
+            
+            if($check_user_uuid) {
+                if($favorite_list){
+                    foreach($favorite_list as $favorite){
+                        if($store['user_uuid']===$favorite){
+                            $store['favorite_checked'] = true;
+                        }
+                    }
+                }    
+            }
         }
-        
         return $result;
     }
 

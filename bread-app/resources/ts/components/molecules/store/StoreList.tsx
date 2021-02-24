@@ -15,15 +15,15 @@ const StoreList: React.FC<StoreProps> = ({StoreInfo}) => {
 
     return(
         <div className ="m-store-list">
-            {StoreInfo.map((el)=>{
+            {StoreInfo.map((el, index)=>{
                 return(
                     el &&
                     <div className ="m-store-list__item" key={"storeList_" + el.user_uuid}>
                         <div className ="m-store-list__item--pc" onClick={()=>history.push("/store/" + el.user_uuid)}>
                             <div className ="m-store-list__item--pc__images__main">
                                 {el.thumbnail ? 
-                                 <img src={"/storage/store/" + el.user_uuid + "/thumbnail.jpg"} alt="パンのメイン画像"/> 
-                                 : <img src="/images/no_image.jpg" alt="パンのメイン画像"/>}
+                                <img src={"/storage/store/" + el.user_uuid + "/thumbnail.jpg"} alt="パンのメイン画像"/> 
+                                : <img src="/images/no_image.jpg" alt="パンのメイン画像"/>}
                             </div>
                             <div className ="m-store-list__item--pc__images__sub">
                                 {el.menu1 &&
@@ -38,6 +38,8 @@ const StoreList: React.FC<StoreProps> = ({StoreInfo}) => {
                             <div className ="m-store-list__item__container__buttons">
                                 <Btn_favorite 
                                     store_uuid={el.user_uuid}
+                                    favorite_checked = {el.favorite_checked}
+                                    index = {index}
                                 />
                                 <Btn_interested />
                             </div>

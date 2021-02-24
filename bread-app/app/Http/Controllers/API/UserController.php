@@ -120,10 +120,10 @@ class UserController extends Controller
         if($store_list){
             foreach($store_list as $store_uuid){
                 $get_info = $user->get_storeInfo($store_uuid);
+                $get_info['favorite_checked'] = true;
                 array_push($result, $get_info);
             }
         }
-        
         return $result;
     }
 }
