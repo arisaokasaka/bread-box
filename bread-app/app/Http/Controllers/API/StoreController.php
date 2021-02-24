@@ -24,7 +24,6 @@ class StoreController extends Controller
     const storage_thumbnail = '/thumbnail.jpg';
     const storage_menu = '/menu/item_';
     public function search_store(Request $request) {
-        Log::info($request);
         $store = new Store();
         $keyword = $request->input('key');
         $district = $request->input('di');
