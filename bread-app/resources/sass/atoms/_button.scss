@@ -28,25 +28,75 @@
     }
 }
 
-//お気に入りボタン
+// お気に入りボタン
 .a-btn-favorite {
-    @include btn-rounded($color: $pink, $background-color: $white);
-    margin-right: 0.5rem;
-    cursor: pointer;
+    margin: 0 1px;
 
-    & > span {
-        font-weight: bolder;
+    & > input[type="checkbox"] {
+        display: none;
 
-        @include bp-960up {
-            font-size: 0.8rem;
+        & + label {
+            position: relative;
+
+            @include btn-circle(
+                $color: $textGray,
+                $border-color: $textGray,
+                $background-color: $white,
+                $hover-color: $textGray,
+                $hover-background-color: $lightPink
+            );
+
+            & > svg {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            &:hover {
+                &::after {
+                    content: "お気に入りに登録する";
+                    position: absolute;
+                    top: 40px;
+                    color: $white;
+                    display: block;
+                    width: 5rem;
+                    padding: 2px 2px;
+                    font-size: 0.5rem;
+                    background-color: $brown;
+                    border-radius: 2px;
+                }
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 30px;
+                    right: 10px;
+                    color: $brown;
+                    border: 6px solid transparent;
+                    border-top: 6px solid $brown;
+                    margin-left: -15px;
+                    transform: rotateZ(180deg);
+                }
+            }
         }
 
-        &:nth-child(2) {
-            display: none;
+        &:checked + label {
+            color: $pink;
+            border-color: $pink;
 
-            @include bp-960up {
-                display: inline;
-                margin-left: 2px;
+            &:hover {
+                color: $pink;
+                &::after {
+                    content: "お気に入りから外す";
+                    background-color: $darkGray;
+                }
+
+                &::before {
+                    content: "";
+                    color: $darkGray;
+                    border-top: 6px solid $darkGray;
+                }
             }
         }
     }
@@ -54,23 +104,73 @@
 
 //行ってみたいボタン
 .a-btn-interested {
-    @include btn-rounded($color: $green, $background-color: $white);
-    margin-right: 0.5rem;
-    cursor: pointer;
+    margin: 0 1px;
+    & > input[type="checkbox"] {
+        display: none;
 
-    & > span {
-        font-weight: bolder;
+        & + label {
+            position: relative;
 
-        &:nth-child(1) {
-            display: inline-block;
+            @include btn-circle(
+                $color: $textGray,
+                $border-color: $textGray,
+                $background-color: $white,
+                $hover-color: $textGray,
+                $hover-background-color: $lightGreen
+            );
+
+            & > svg {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            &:hover {
+                &::after {
+                    content: "行ってみたいに登録する";
+                    position: absolute;
+                    top: 40px;
+                    color: $white;
+                    display: block;
+                    width: 5rem;
+                    padding: 2px 2px;
+                    font-size: 0.5rem;
+                    background-color: $brown;
+                    border-radius: 2px;
+                }
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 30px;
+                    right: 10px;
+                    color: $brown;
+                    border: 6px solid transparent;
+                    border-top: 6px solid $brown;
+                    margin-left: -15px;
+                    transform: rotateZ(180deg);
+                }
+            }
         }
 
-        &:nth-child(2) {
-            display: none;
+        &:checked + label {
+            color: $green;
+            border-color: $green;
 
-            @include bp-960up {
-                display: inline;
-                margin-left: 2px;
+            &:hover {
+                color: $green;
+
+                &::after {
+                    content: "行ってみたいから外す";
+                    background-color: $darkGray;
+                }
+
+                &::before {
+                    content: "";
+                    color: $darkGray;
+                    border-top: 6px solid $darkGray;
+                }
             }
         }
     }

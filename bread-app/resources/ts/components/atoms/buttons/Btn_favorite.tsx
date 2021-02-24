@@ -1,20 +1,24 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { UserAuthContext } from '../../../contexts/UserAuthContext';
 import axios from 'axios';
 
 type InfoProps = ({
-    store_uuid: string;
+    store_uuid: string
+    favorite_checked?: any
 })
 
-const Btn_favorite: React.FC<InfoProps> = ({store_uuid}) => {
+const Btn_favorite: React.FC<InfoProps> = ({store_uuid, favorite_checked}) => {
     const { state } = useContext(UserAuthContext);
+    const history = useHistory();
     let BtnFavorite: any;
+    if(!favorite_checked){
+        favorite_checked = false
+    }
 
     const update_favorite = () => {
-        console.log('update_favorite');
         let data = new FormData;
         data.append('uuid', state.uuid);
         data.append('store_uuid', store_uuid)
@@ -26,19 +30,19 @@ const Btn_favorite: React.FC<InfoProps> = ({store_uuid}) => {
 
     if(state.uuid && state.auth==="user"){
         BtnFavorite = (
-        <button className = "a-btn-favorite" onClick={update_favorite}>
-            <span><FontAwesomeIcon icon={faHeart}/></span>
-            <span>お気に入り</span>
-        </button>
+            <div className="a-btn-favorite">
+                <input type="checkbox" id={"checkfv_"+store_uuid} defaultChecked={favorite_checked} onClick={update_favorite}/>
+                <label htmlFor={"check_"+store_uuid}><FontAwesomeIcon icon={faHeart}/></label>
+            </div>
         );
     }else if(state.uuid && state.auth==="store"){
         BtnFavorite = null;
     }else{
         BtnFavorite = (
-            <Link to="/login_user" className = "a-btn-favorite">
-                <span><FontAwesomeIcon icon={faHeart}/></span>
-                <span>お気に入り</span>
-            </Link>
+            <div className = "a-btn-favorite" onClick={()=>history.push("/login_user")}>
+                <input type="checkbox" id={"checkfv_"+store_uuid}/>
+                <label htmlFor={"check_"+store_uuid}><FontAwesomeIcon icon={faHeart}/></label>
+            </div>
         );
     }
 
