@@ -15398,8 +15398,11 @@ var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome
 
 var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
 
+var UserAuthContext_1 = __webpack_require__(/*! ../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
+
 var Searchbar = function Searchbar(_a) {
   var text = _a.text;
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
 
   var _b = react_1.useState(''),
       keyword = _b[0],
@@ -15423,13 +15426,13 @@ var Searchbar = function Searchbar(_a) {
   }), text && react_1["default"].createElement(react_router_dom_1.Link, {
     to: {
       pathname: '/search/',
-      search: '?key=' + keyword
+      search: '?key=' + keyword + '&id=' + state.uuid
     },
     onClick: onClick_deleteValue
   }, react_1["default"].createElement("span", null, "\u691C\u7D22")), text === null && react_1["default"].createElement(react_router_dom_1.Link, {
     to: {
       pathname: '/search/',
-      search: '?key=' + keyword
+      search: '?key=' + keyword + '&id=' + state.uuid
     },
     onClick: onClick_deleteValue
   }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
@@ -15986,6 +15989,8 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
@@ -15994,37 +15999,54 @@ var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
-var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
-
 var Btn_favorite = function Btn_favorite(_a) {
-  var store_uuid = _a.store_uuid;
+  var store_uuid = _a.store_uuid,
+      favorite_checked = _a.favorite_checked,
+      index = _a.index;
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
+  var history = react_router_dom_1.useHistory();
   var BtnFavorite;
 
+  if (!favorite_checked) {
+    favorite_checked = false;
+  }
+
   var update_favorite = function update_favorite() {
-    console.log('update_favorite');
     var data = new FormData();
     data.append('uuid', state.uuid);
     data.append('store_uuid', store_uuid);
-    axios_1["default"].post('/api/update_favorite', data).then()["catch"]();
+    axios_1["default"].post('/api/update_favorite', data);
   };
 
   if (state.uuid && state.auth === "user") {
-    BtnFavorite = react_1["default"].createElement("button", {
-      className: "a-btn-favorite",
+    BtnFavorite = react_1["default"].createElement("div", {
+      className: "a-btn-favorite"
+    }, react_1["default"].createElement("input", {
+      type: "checkbox",
+      id: "BtnFavorite_" + index,
+      defaultChecked: favorite_checked,
       onClick: update_favorite
-    }, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    }), react_1["default"].createElement("label", {
+      htmlFor: "BtnFavorite_" + index
+    }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
       icon: free_solid_svg_icons_1.faHeart
-    })), react_1["default"].createElement("span", null, "\u304A\u6C17\u306B\u5165\u308A"));
+    })));
   } else if (state.uuid && state.auth === "store") {
     BtnFavorite = null;
   } else {
-    BtnFavorite = react_1["default"].createElement(react_router_dom_1.Link, {
-      to: "/login_user",
-      className: "a-btn-favorite"
-    }, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    BtnFavorite = react_1["default"].createElement("div", {
+      className: "a-btn-favorite",
+      onClick: function onClick() {
+        return history.push("/login_user");
+      }
+    }, react_1["default"].createElement("input", {
+      type: "checkbox",
+      id: "BtnFavorite_" + index
+    }), react_1["default"].createElement("label", {
+      htmlFor: "BtnFavorite_" + index
+    }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
       icon: free_solid_svg_icons_1.faHeart
-    })), react_1["default"].createElement("span", null, "\u304A\u6C17\u306B\u5165\u308A"));
+    })));
   }
 
   return react_1["default"].createElement("div", null, BtnFavorite);
@@ -16141,23 +16163,37 @@ var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContex
 
 function Btn_interested() {
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
+  var history = react_router_dom_1.useHistory();
   var BtnInterested;
 
   if (state.uuid && state.auth === "user") {
-    BtnInterested = react_1["default"].createElement("button", {
+    BtnInterested = react_1["default"].createElement("div", {
       className: "a-btn-interested"
-    }, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    }, react_1["default"].createElement("input", {
+      type: "checkbox",
+      id: "checkin_" + "store_uuid",
+      defaultChecked: false
+    }), react_1["default"].createElement("label", {
+      htmlFor: "checkin_" + "store_uuid"
+    }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
       icon: free_solid_svg_icons_1.faFlag
-    })), react_1["default"].createElement("span", null, "\u884C\u3063\u3066\u307F\u305F\u3044"));
+    })));
   } else if (state.uuid && state.auth === "store") {
     BtnInterested = null;
   } else {
-    BtnInterested = react_1["default"].createElement(react_router_dom_1.Link, {
-      to: "/login_user",
-      className: "a-btn-interested"
-    }, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    BtnInterested = react_1["default"].createElement("div", {
+      className: "a-btn-interested",
+      onClick: function onClick() {
+        return history.push("/login_user");
+      }
+    }, react_1["default"].createElement("input", {
+      type: "checkbox",
+      id: "checkin_" + "store_uuid"
+    }), react_1["default"].createElement("label", {
+      htmlFor: "checkin_" + "store_uuid"
+    }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
       icon: free_solid_svg_icons_1.faFlag
-    })), react_1["default"].createElement("span", null, "\u884C\u3063\u3066\u307F\u305F\u3044"));
+    })));
   }
 
   return react_1["default"].createElement("div", null, BtnInterested);
@@ -17669,11 +17705,11 @@ var Store_pickup = function Store_pickup() {
     className: "m-store-pickup__title"
   }, "\u30D4\u30C3\u30AF\u30A2\u30C3\u30D7"), react_1["default"].createElement("div", {
     className: "m-store-pickup__list"
-  }, storeInfo.map(function (el) {
+  }, storeInfo.map(function (el, index) {
     return react_1["default"].createElement(react_router_dom_1.Link, {
       to: "/store/" + el.user_uuid,
       className: "m-store-pickup__list__item",
-      key: "pickup_" + el.id
+      key: "pickup_" + index
     }, el.thumbnail ? react_1["default"].createElement("img", {
       src: "/storage/store/" + el.user_uuid + "/thumbnail.jpg",
       alt: "\u5E97\u8217\u753B\u50CF"
@@ -20053,7 +20089,7 @@ var StoreList = function StoreList(_a) {
   var history = react_router_dom_1.useHistory();
   return react_1["default"].createElement("div", {
     className: "m-store-list"
-  }, StoreInfo.map(function (el) {
+  }, StoreInfo.map(function (el, index) {
     return el && react_1["default"].createElement("div", {
       className: "m-store-list__item",
       key: "storeList_" + el.user_uuid
@@ -20086,7 +20122,9 @@ var StoreList = function StoreList(_a) {
     }, react_1["default"].createElement("div", {
       className: "m-store-list__item__container__buttons"
     }, react_1["default"].createElement(Btn_favorite_1["default"], {
-      store_uuid: el.user_uuid
+      store_uuid: el.user_uuid,
+      favorite_checked: el.favorite_checked,
+      index: index
     }), react_1["default"].createElement(Btn_interested_1["default"], null)), react_1["default"].createElement("div", {
       className: "m-store-list__item__container__name",
       onClick: function onClick() {
@@ -20384,11 +20422,11 @@ var StorRanking = function StorRanking() {
     className: "m-store-ranking__title"
   }, "\u30E9\u30F3\u30AD\u30F3\u30B0"), react_1["default"].createElement("div", {
     className: "m-store-ranking__list"
-  }, storeInfo.map(function (el) {
+  }, storeInfo.map(function (el, index) {
     return react_1["default"].createElement(react_router_dom_1.Link, {
       to: "/store/" + el.user_uuid,
       className: "m-store-ranking__list__item",
-      key: "ranking_" + el.id
+      key: "ranking_" + index
     }, el.thumbnail ? react_1["default"].createElement("img", {
       src: "/storage/store/" + el.user_uuid + "/thumbnail.jpg",
       alt: "\u5E97\u8217\u753B\u50CF"
@@ -20412,23 +20450,54 @@ exports.default = StorRanking;
 "use strict";
 
 
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
 };
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
 var Top_section = function Top_section(_a) {
   var sectionTitle = _a.sectionTitle,
       sectionContent = _a.sectionContent;
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
   return react_1["default"].createElement("div", {
     className: "m-top-section"
   }, react_1["default"].createElement("h2", null, sectionTitle), react_1["default"].createElement("ul", null, sectionContent.map(function (el) {
@@ -20437,7 +20506,7 @@ var Top_section = function Top_section(_a) {
     }, react_1["default"].createElement(react_router_dom_1.Link, {
       to: {
         pathname: '/search/',
-        search: '?key=' + el.name
+        search: '?key=' + el.name + '&id=' + state.uuid
       }
     }, el.name));
   })));
