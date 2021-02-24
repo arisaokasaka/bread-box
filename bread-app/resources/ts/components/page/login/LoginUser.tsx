@@ -30,6 +30,7 @@ const LoginUser = () =>  {
                 history.push("/search");
             })
             .catch(err => {
+                alert('ログイン出来ません。');
             });
         })
         .catch(err => {

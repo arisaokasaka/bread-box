@@ -16791,7 +16791,6 @@ var Modal_editSpirit = function Modal_editSpirit(_a) {
 
       switch (funcType) {
         case 'create':
-          console.log('switch');
           createSpirit(formData, image.image);
           break;
 
@@ -21034,7 +21033,9 @@ var LoginUser = function LoginUser() {
           payload: res.data.user.uuid
         });
         history.push("/search");
-      })["catch"](function (err) {});
+      })["catch"](function (err) {
+        alert('ログイン出来ません。');
+      });
     })["catch"](function (err) {});
   };
 
@@ -22335,6 +22336,56 @@ exports.default = Top;
 "use strict";
 
 
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -22345,85 +22396,147 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
 
+var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
+
 var BtnBack_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/BtnBack */ "./resources/ts/components/atoms/buttons/BtnBack.tsx"));
 
-var testUserInfo = [{
-  id: 123456,
-  uuid: 123456,
-  name: 'ariari',
-  email: 'ariari@so',
-  address: '765432'
-}];
+var UserEdit = function UserEdit() {
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
 
-var UserEdit = function UserEdit(_a) {
-  var UserInfo = _a.UserInfo;
-  UserInfo = testUserInfo;
+  var _a = react_hook_form_1.useForm(),
+      register = _a.register,
+      handleSubmit = _a.handleSubmit,
+      errors = _a.errors;
 
-  var _b = react_hook_form_1.useForm(),
-      register = _b.register,
-      handleSubmit = _b.handleSubmit,
-      errors = _b.errors,
-      getValues = _b.getValues;
+  var _b = react_1.useState({}),
+      info = _b[0],
+      setInfo = _b[1];
+
+  var _c = react_1.useState({
+    image: null,
+    image_size: 0
+  }),
+      image = _c[0],
+      setImage = _c[1];
+
+  var errorMessage_imageSize;
+  var userInfo = info;
+  react_1.useEffect(function () {
+    index_user();
+  }, []); // ユーザー情報取得
+
+  var index_user = function index_user() {
+    axios_1["default"].post("/api/index_user", {
+      uuid: state.uuid
+    }).then(function (res) {
+      setInfo(res.data[0]);
+    })["catch"](function (err) {});
+  }; // 送信機能
+
 
   var onSubmit = function onSubmit(data) {
-    console.log(data);
-  };
+    if (image.image_size <= 3000000) {
+      var formData = new FormData();
+
+      for (var el in data) {
+        formData.append(el, data[el]);
+      }
+
+      update_user(formData, image.image);
+    } else {
+      alert('ファイルの上限サイズ3MBを超えています。圧縮するか、別の画像を選択してください。');
+    }
+  }; // ユーザー情報更新
+
+
+  var update_user = function update_user(data, file) {
+    data.append('image', file);
+    axios_1["default"].post("/api/update_user", data).then(function (res) {
+      alert('更新しました。');
+    })["catch"](function (err) {
+      alert('更新に失敗しました。');
+    });
+  }; // 画像ファイル取得
+
+
+  var onChangeImage = function onChangeImage(e) {
+    setImage(__assign(__assign({}, image), {
+      image: e.target.files[0],
+      image_size: e.target.files[0].size
+    }));
+  }; // ファイルサイズが3MBを超えていた場合のエラーメッセージ
+
+
+  if (image.image_size > 3000000) {
+    errorMessage_imageSize = react_1["default"].createElement("p", null, "\u30D5\u30A1\u30A4\u30EB\u306E\u4E0A\u9650\u30B5\u30A4\u30BA3MB\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002\u5727\u7E2E\u3059\u308B\u304B\u3001\u5225\u306E\u753B\u50CF\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002");
+  }
 
   return react_1["default"].createElement("div", {
     className: "p-userEdit"
-  }, UserInfo.map(function (el) {
-    return react_1["default"].createElement("div", {
-      className: "p-userEdit__container"
-    }, react_1["default"].createElement("form", {
-      className: "p-userEdit__container__form",
-      onSubmit: handleSubmit(onSubmit)
-    }, react_1["default"].createElement("div", {
-      className: "p-userEdit__container__btn"
-    }, react_1["default"].createElement(BtnBack_1["default"], null)), react_1["default"].createElement("h2", null, "\u30E6\u30FC\u30B6\u30FC\u60C5\u5831\u7DE8\u96C6"), react_1["default"].createElement("label", {
-      htmlFor: "user_name",
-      className: "a-label-required"
-    }, "\u30E6\u30FC\u30B6\u30FC\u540D"), react_1["default"].createElement("input", {
-      type: "text",
-      id: "user_name",
-      name: "name",
-      value: el.name,
-      ref: register({
-        required: true
-      })
-    }), errors.name && react_1["default"].createElement("p", null, "\u30E6\u30FC\u30B6\u30FC\u540D\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
-      htmlFor: "user_email",
-      className: "a-label-required"
-    }, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9"), react_1["default"].createElement("input", {
-      type: "email",
-      name: "email",
-      id: "user_email",
-      value: el.email,
-      ref: register({
-        required: true
-      })
-    }), errors.email && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
-      htmlFor: "user_address"
-    }, "\u4F4F\u6240"), react_1["default"].createElement("input", {
-      type: "text",
-      name: "address",
-      id: "user_address",
-      value: el.address,
-      ref: register
-    }), react_1["default"].createElement("input", {
-      type: "submit",
-      value: "\u66F4\u65B0\u3059\u308B"
-    }), react_1["default"].createElement("div", {
-      className: "p-userEdit__container__form__links"
-    }, react_1["default"].createElement(react_router_dom_1.Link, {
-      to: "/password_user"
-    }, "\u30D1\u30B9\u30EF\u30FC\u30C9\u3092\u518D\u8A2D\u5B9A\u3059\u308B\u5834\u5408"))));
-  }));
+  }, react_1["default"].createElement("div", {
+    className: "p-userEdit__container"
+  }, react_1["default"].createElement("form", {
+    className: "p-userEdit__container__form",
+    onSubmit: handleSubmit(onSubmit)
+  }, react_1["default"].createElement("div", {
+    className: "p-userEdit__container__btn"
+  }, react_1["default"].createElement(BtnBack_1["default"], null)), react_1["default"].createElement("h2", null, "\u30E6\u30FC\u30B6\u30FC\u60C5\u5831\u7DE8\u96C6"), react_1["default"].createElement("input", {
+    type: "hidden",
+    name: "uuid",
+    value: state.uuid,
+    ref: register
+  }), react_1["default"].createElement("label", {
+    htmlFor: "user_name",
+    className: "a-label-required"
+  }, "\u30E6\u30FC\u30B6\u30FC\u540D"), react_1["default"].createElement("input", {
+    type: "text",
+    id: "user_name",
+    name: "name",
+    defaultValue: userInfo.name,
+    ref: register({
+      required: true
+    })
+  }), errors.name && react_1["default"].createElement("p", null, "\u30E6\u30FC\u30B6\u30FC\u540D\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
+    htmlFor: "user_email",
+    className: "a-label-required"
+  }, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9"), react_1["default"].createElement("input", {
+    type: "email",
+    name: "email",
+    id: "user_email",
+    defaultValue: userInfo.email,
+    ref: register({
+      required: true
+    })
+  }), errors.email && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
+    htmlFor: "user_address"
+  }, "\u4F4F\u6240"), react_1["default"].createElement("input", {
+    type: "text",
+    name: "address",
+    id: "user_address",
+    defaultValue: userInfo.address,
+    ref: register
+  }), react_1["default"].createElement("label", {
+    htmlFor: "user_address"
+  }, "\u30D7\u30ED\u30D5\u30A3\u30FC\u30EB\u753B\u50CF"), react_1["default"].createElement("input", {
+    type: "file",
+    name: "image",
+    onChange: onChangeImage
+  }), errorMessage_imageSize, react_1["default"].createElement("input", {
+    type: "submit",
+    value: "\u66F4\u65B0\u3059\u308B"
+  }), react_1["default"].createElement("div", {
+    className: "p-userEdit__container__form__links"
+  }, react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/password_user"
+  }, "\u30D1\u30B9\u30EF\u30FC\u30C9\u3092\u518D\u8A2D\u5B9A\u3059\u308B\u5834\u5408")))));
 };
 
 exports.default = UserEdit;

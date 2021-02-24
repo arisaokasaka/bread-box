@@ -3216,7 +3216,7 @@ label.a-label-required__red::after {
 
 .p-userEdit__container__form > label {
   position: relative;
-  margin-top: 10px;
+  margin-top: 15px;
   font-size: 0.9rem;
   font-weight: 550;
 }
@@ -3234,12 +3234,18 @@ label.a-label-required__red::after {
   color: #fafafa;
   font-size: 0.9rem;
   letter-spacing: 2px;
-  margin-top: 40px;
+  margin-top: 30px;
   cursor: pointer;
 }
 
 .p-userEdit__container__form > input[type="submit"]:hover {
   background-color: #493020;
+}
+
+.p-userEdit__container__form > input[type="file"] {
+  border: none;
+  padding: 0;
+  font-size: 0.8rem;
 }
 
 .p-userEdit__container__form__links {

@@ -54,6 +54,12 @@ class User extends Authenticatable
         ]);
     }
 
+    /**
+     * ユーザー新規登録
+     *
+     * @param [type] $user_info
+     * @return void
+     */
     public function create_user($user_info){
         $this->uuid = Str::uuid();
         $this->name = $user_info['name'];
@@ -62,5 +68,38 @@ class User extends Authenticatable
         $this->address = $user_info['address'];
         if($user_info['type_user']) $this->type_user = $user_info['type_user'];
         $this->save();
+    }
+
+    /**
+     * ユーザー情報更新
+     *
+     * @param object $user_info
+     * @return void
+     */
+    public function update_user(object $request) {
+        $this
+        ->where('uuid', '=', $request['uuid'])
+        ->update([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'address' => $request['address'],
+        ]);
+    }
+
+    /**
+     * ユーザー情報取得
+     *
+     * @param string $user_uuid
+     * @return $query->get();
+     */
+    public function index_user(string $user_uuid) {
+        $query = $this
+        ->where('uuid', '=', $user_uuid)
+        ->select([
+            'name',
+            'email',
+            'address',
+        ]);
+        return $query->get();
     }
 }

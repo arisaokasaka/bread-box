@@ -24,7 +24,7 @@
 
             & > label {
                 position: relative;
-                margin-top: 10px;
+                margin-top: 15px;
                 font-size: 0.9rem;
                 font-weight: 550;
             }
@@ -41,12 +41,18 @@
                     color: $white;
                     font-size: 0.9rem;
                     letter-spacing: 2px;
-                    margin-top: $mp-sm;
+                    margin-top: 30px;
                     cursor: pointer;
 
                     &:hover {
                         background-color: $darkestBrown;
                     }
+                }
+
+                &[type="file"] {
+                    border: none;
+                    padding: 0;
+                    font-size: 0.8rem;
                 }
             }
 
