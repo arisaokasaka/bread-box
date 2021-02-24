@@ -127,4 +127,26 @@ class User extends Authenticatable
         ->where('uuid', '=', $user_uuid)
         ->update(['favorite' => $favorite]);
     }
+
+    /**
+     * 店舗UUIDから、店舗情報取得
+     *
+     * @param string $request
+     * @return void
+     */
+    public function get_storeInfo(string $request){
+        return $this
+        ->newQuery()
+        ->join('stores', 'users.uuid', '=', 'stores.user_uuid')
+        ->where('stores.user_uuid', '=', $request)
+        ->select([
+            'users.name',
+            'users.address',
+            'stores.user_uuid',
+            'stores.business_day',
+            'stores.business_memo',
+            'stores.message',
+        ])
+        ->first();
+    }
 }

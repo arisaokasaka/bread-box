@@ -103,4 +103,27 @@ class UserController extends Controller
         }
         $user->update_favorite($user_uuid, $json_store);
     }
+
+    /**
+     * お気に入り済店舗情報を取得
+     *
+     * @param Request $request
+     * @return $user->index_favorite_list($user_uuid)
+     */
+    public function index_favorite_list(Request $request) {
+        $user = new User();
+        $user_uuid = $request->input('uuid');
+        $get_info = $user->index_favorite($user_uuid);
+        $store_list = json_decode($get_info[0]->favorite);
+        $result = [];
+
+        if($store_list){
+            foreach($store_list as $store_uuid){
+                $get_info = $user->get_storeInfo($store_uuid);
+                array_push($result, $get_info);
+            }
+        }
+        
+        return $result;
+    }
 }
