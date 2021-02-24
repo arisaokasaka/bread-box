@@ -31,7 +31,9 @@ Route::post('/tokens/create', function (Request $request) {
 
 //UserContoller
 Route::post('/create_user', 'Api\UserController@create_user');
+Route::post('/update_user', 'Api\UserController@update_user');
 Route::post('/update_basicInfo_usersTable', 'Api\UserController@update_basicInfo_usersTable');
+Route::post('/index_user', 'Api\UserController@index_user');
 
 //StoreController
 Route::post('/create_store', 'Api\StoreController@create_store');

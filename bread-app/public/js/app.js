@@ -21034,7 +21034,9 @@ var LoginUser = function LoginUser() {
           payload: res.data.user.uuid
         });
         history.push("/search");
-      })["catch"](function (err) {});
+      })["catch"](function (err) {
+        alert('ログイン出来ません。');
+      });
     })["catch"](function (err) {});
   };
 
@@ -22335,6 +22337,40 @@ exports.default = Top;
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -22345,85 +22381,103 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
 
+var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
+
 var BtnBack_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/BtnBack */ "./resources/ts/components/atoms/buttons/BtnBack.tsx"));
 
-var testUserInfo = [{
-  id: 123456,
-  uuid: 123456,
-  name: 'ariari',
-  email: 'ariari@so',
-  address: '765432'
-}];
+var UserEdit = function UserEdit() {
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
 
-var UserEdit = function UserEdit(_a) {
-  var UserInfo = _a.UserInfo;
-  UserInfo = testUserInfo;
+  var _a = react_hook_form_1.useForm(),
+      register = _a.register,
+      handleSubmit = _a.handleSubmit,
+      errors = _a.errors;
 
-  var _b = react_hook_form_1.useForm(),
-      register = _b.register,
-      handleSubmit = _b.handleSubmit,
-      errors = _b.errors,
-      getValues = _b.getValues;
+  var _b = react_1.useState({}),
+      info = _b[0],
+      setInfo = _b[1];
 
-  var onSubmit = function onSubmit(data) {
-    console.log(data);
+  var userInfo = info;
+  react_1.useEffect(function () {
+    index_user();
+  }, []);
+
+  var index_user = function index_user() {
+    axios_1["default"].post("/api/index_user", {
+      uuid: state.uuid
+    }).then(function (res) {
+      setInfo(res.data[0]);
+    })["catch"](function (err) {});
+  };
+
+  var update_user = function update_user(data) {
+    axios_1["default"].post("/api/update_user", data).then(function (res) {
+      alert('更新しました。');
+    })["catch"](function (err) {
+      alert('更新に失敗しました。');
+    });
   };
 
   return react_1["default"].createElement("div", {
     className: "p-userEdit"
-  }, UserInfo.map(function (el) {
-    return react_1["default"].createElement("div", {
-      className: "p-userEdit__container"
-    }, react_1["default"].createElement("form", {
-      className: "p-userEdit__container__form",
-      onSubmit: handleSubmit(onSubmit)
-    }, react_1["default"].createElement("div", {
-      className: "p-userEdit__container__btn"
-    }, react_1["default"].createElement(BtnBack_1["default"], null)), react_1["default"].createElement("h2", null, "\u30E6\u30FC\u30B6\u30FC\u60C5\u5831\u7DE8\u96C6"), react_1["default"].createElement("label", {
-      htmlFor: "user_name",
-      className: "a-label-required"
-    }, "\u30E6\u30FC\u30B6\u30FC\u540D"), react_1["default"].createElement("input", {
-      type: "text",
-      id: "user_name",
-      name: "name",
-      value: el.name,
-      ref: register({
-        required: true
-      })
-    }), errors.name && react_1["default"].createElement("p", null, "\u30E6\u30FC\u30B6\u30FC\u540D\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
-      htmlFor: "user_email",
-      className: "a-label-required"
-    }, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9"), react_1["default"].createElement("input", {
-      type: "email",
-      name: "email",
-      id: "user_email",
-      value: el.email,
-      ref: register({
-        required: true
-      })
-    }), errors.email && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
-      htmlFor: "user_address"
-    }, "\u4F4F\u6240"), react_1["default"].createElement("input", {
-      type: "text",
-      name: "address",
-      id: "user_address",
-      value: el.address,
-      ref: register
-    }), react_1["default"].createElement("input", {
-      type: "submit",
-      value: "\u66F4\u65B0\u3059\u308B"
-    }), react_1["default"].createElement("div", {
-      className: "p-userEdit__container__form__links"
-    }, react_1["default"].createElement(react_router_dom_1.Link, {
-      to: "/password_user"
-    }, "\u30D1\u30B9\u30EF\u30FC\u30C9\u3092\u518D\u8A2D\u5B9A\u3059\u308B\u5834\u5408"))));
-  }));
+  }, react_1["default"].createElement("div", {
+    className: "p-userEdit__container"
+  }, react_1["default"].createElement("form", {
+    className: "p-userEdit__container__form",
+    onSubmit: handleSubmit(update_user)
+  }, react_1["default"].createElement("div", {
+    className: "p-userEdit__container__btn"
+  }, react_1["default"].createElement(BtnBack_1["default"], null)), react_1["default"].createElement("h2", null, "\u30E6\u30FC\u30B6\u30FC\u60C5\u5831\u7DE8\u96C6"), react_1["default"].createElement("input", {
+    type: "hidden",
+    name: "uuid",
+    value: state.uuid,
+    ref: register
+  }), react_1["default"].createElement("label", {
+    htmlFor: "user_name",
+    className: "a-label-required"
+  }, "\u30E6\u30FC\u30B6\u30FC\u540D"), react_1["default"].createElement("input", {
+    type: "text",
+    id: "user_name",
+    name: "name",
+    defaultValue: userInfo.name,
+    ref: register({
+      required: true
+    })
+  }), errors.name && react_1["default"].createElement("p", null, "\u30E6\u30FC\u30B6\u30FC\u540D\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
+    htmlFor: "user_email",
+    className: "a-label-required"
+  }, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9"), react_1["default"].createElement("input", {
+    type: "email",
+    name: "email",
+    id: "user_email",
+    defaultValue: userInfo.email,
+    ref: register({
+      required: true
+    })
+  }), errors.email && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
+    htmlFor: "user_address"
+  }, "\u4F4F\u6240"), react_1["default"].createElement("input", {
+    type: "text",
+    name: "address",
+    id: "user_address",
+    defaultValue: userInfo.address,
+    ref: register
+  }), react_1["default"].createElement("input", {
+    type: "submit",
+    value: "\u66F4\u65B0\u3059\u308B"
+  }), react_1["default"].createElement("div", {
+    className: "p-userEdit__container__form__links"
+  }, react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/password_user"
+  }, "\u30D1\u30B9\u30EF\u30FC\u30C9\u3092\u518D\u8A2D\u5B9A\u3059\u308B\u5834\u5408")))));
 };
 
 exports.default = UserEdit;
