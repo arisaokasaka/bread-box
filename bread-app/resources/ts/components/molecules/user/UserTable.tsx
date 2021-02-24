@@ -1,39 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import UserTable_favorite from './UserTable_favorite';
 import UserTable_interested from './UserTable_interested';
 
 type UserProps = ({
-    UserInfo?: any;
+    UserInfo: any;
 });
-
-const testInfoFavorite = [
-    {
-        name: 'sarasapan',
-        address: 'dsdsdsdsdsdsd',
-        business_day: 'sasa',
-        busines_memo: '定休日！！！',
-        message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
-        sns: {twitter: 'twitter', instagram: 'sssss'},
-        star: 3.3,
-    },
-    {
-        name: 'さらさ',
-        address: 'dsdsdsdsdsdsd',
-        business_day: 'sasa',
-        busines_memo: '定休日！！！',
-        message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
-        sns: {twitter: 'twitter', instagram: 'sssss'},
-        star: 5.0,
-    },{
-        name: 'ぱんな',
-        address: 'dsdsdsdsdsdsd',
-        business_day: 'sasa',
-        busines_memo: '定休日！！！',
-        message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
-        sns: {twitter: 'twitter', instagram: 'sssss'},
-        star: 4.0
-    }
-]
 
 const testInfoInterested = [
     {
@@ -55,10 +26,9 @@ const testInfoInterested = [
     }
 ]
 
-
 const UserTable: React.FC<UserProps> = ({UserInfo}) => {
-    const [Table, setTable] = useState('favorite');
-    
+    const [ Table, setTable ] = useState('favorite');
+
     const TabFavorite = {
         class: "m-user-table__tab--favorite",
         table: "favorite",
@@ -114,7 +84,7 @@ const UserTable: React.FC<UserProps> = ({UserInfo}) => {
     const CurrentTable = (table) => {
         switch(table){
         case 'favorite':
-            return <UserTable_favorite StoreInfo = {testInfoFavorite}/>
+            return <UserTable_favorite/>
             break;
         case 'interested':
             return <UserTable_interested StoreInfo = {testInfoInterested}/>

@@ -13,7 +13,9 @@ const StoreBasicInfo: React.FC<StoreInfoProps> = ({storeInfo}) => {
     return(
         <div className = "m-store-basicInfo">
             <div className = "m-store-basicInfo__btn">
-                <Btn_favorite />
+                <Btn_favorite 
+                    store_uuid={storeInfo.user_uuid}
+                />
                 <Btn_interested />
                 <BtnStoreEdit />
             </div>

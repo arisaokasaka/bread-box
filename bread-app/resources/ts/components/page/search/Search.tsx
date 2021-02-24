@@ -37,7 +37,7 @@ const Search: React.FC = () => {
                 <Search_sidebar />
                 <div className="p-search__container__content">
                     <Store_pickup />
-                    <div className="p-search__container__content__list" onClick = {()=> console.log(stores, stores[0])}>
+                    <div className="p-search__container__content__list">
                         <div className = "p-search__container__content__list__order--pc">
                             <a>おすすめ順</a>
                             <a>評価順</a>

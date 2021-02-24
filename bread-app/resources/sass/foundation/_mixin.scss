@@ -58,7 +58,7 @@
     width: 2rem;
     color: $color;
     background-color: $background-color;
-    border: 2px solid $color;
+    border: 1px solid $color;
     border-radius: 50%;
     font-size: 0.9rem;
     padding: auto;
@@ -73,21 +73,23 @@
     }
 }
 
-@mixin btn-always-rounded(
+@mixin btn-circle(
     $color,
     $border-color,
     $background-color,
     $hover-color,
     $hover-background-color
 ) {
-    height: 1.8rem;
+    display: block;
+    height: 2rem;
+    width: 2rem;
     color: $color;
     background-color: $background-color;
-    border: 2px solid $border-color;
+    border: 1px solid $border-color;
     font-size: 0.9rem;
-    border-radius: 1rem;
-    padding: 2px 1.2rem;
-    letter-spacing: 1px;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
     cursor: pointer;
 
     &:hover {

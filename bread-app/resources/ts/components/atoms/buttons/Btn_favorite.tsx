@@ -1,27 +1,47 @@
-import React, {useContext} from 'react'
-import {Link} from 'react-router-dom';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faHeart} from '@fortawesome/free-solid-svg-icons';
+import React, { useContext } from 'react'
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { UserAuthContext } from '../../../contexts/UserAuthContext';
 
-export default function Btn_favorite() {
+type InfoProps = ({
+    store_uuid: string
+    index?: any
+    favorite_checked?: any
+})
+
+const Btn_favorite: React.FC<InfoProps> = ({store_uuid, favorite_checked, index}) => {
     const { state } = useContext(UserAuthContext);
+    const history = useHistory();
     let BtnFavorite: any;
+
+    if(!favorite_checked){
+        favorite_checked = false
+    }
+
+    const update_favorite = () => {
+        let data = new FormData;
+        data.append('uuid', state.uuid);
+        data.append('store_uuid', store_uuid);
+        axios.post('/api/update_favorite', data);
+    }
+
     if(state.uuid && state.auth==="user"){
         BtnFavorite = (
-        <button className = "a-btn-favorite">
-            <span><FontAwesomeIcon icon={faHeart}/></span>
-            <span>お気に入り</span>
-        </button>
+            <div className="a-btn-favorite">
+                <input type="checkbox" id={"BtnFavorite_" + index} defaultChecked={favorite_checked} onClick={update_favorite}/>
+                <label htmlFor={"BtnFavorite_" + index}><FontAwesomeIcon icon={faHeart}/></label>
+            </div>
         );
     }else if(state.uuid && state.auth==="store"){
         BtnFavorite = null;
     }else{
         BtnFavorite = (
-            <Link to="/login_user" className = "a-btn-favorite">
-                <span><FontAwesomeIcon icon={faHeart}/></span>
-                <span>お気に入り</span>
-            </Link>
+            <div className = "a-btn-favorite" onClick={()=>history.push("/login_user")}>
+                <input type="checkbox" id={"BtnFavorite_" + index}/>
+                <label htmlFor={"BtnFavorite_" + index}><FontAwesomeIcon icon={faHeart}/></label>
+            </div>
         );
     }
 
@@ -31,3 +51,5 @@ export default function Btn_favorite() {
         </div>
     )
 }
+
+export default Btn_favorite;

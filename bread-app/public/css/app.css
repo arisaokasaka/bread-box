@@ -181,97 +181,163 @@ h2 {
 }
 
 .a-btn-favorite {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 2rem;
-  width: 2rem;
-  color: #e45e5e;
-  background-color: #fafafa;
-  border: 2px solid #e45e5e;
-  border-radius: 50%;
-  font-size: 0.9rem;
-  padding: auto;
-  cursor: pointer;
-  margin-right: 0.5rem;
-  cursor: pointer;
+  margin: 0 1px;
 }
 
-@media screen and (min-width: 960px) {
-  .a-btn-favorite {
-    width: auto;
-    height: 1.8rem;
-    font-size: 0.8rem;
-    border-radius: 20px;
-    padding: 2px 10px;
-  }
-}
-
-.a-btn-favorite > span {
-  font-weight: bolder;
-}
-
-@media screen and (min-width: 960px) {
-  .a-btn-favorite > span {
-    font-size: 0.8rem;
-  }
-}
-
-.a-btn-favorite > span:nth-child(2) {
+.a-btn-favorite > input[type="checkbox"] {
   display: none;
 }
 
-@media screen and (min-width: 960px) {
-  .a-btn-favorite > span:nth-child(2) {
-    display: inline;
-    margin-left: 2px;
-  }
+.a-btn-favorite > input[type="checkbox"] + label {
+  position: relative;
+  display: block;
+  height: 2rem;
+  width: 2rem;
+  color: #8d8c8c;
+  background-color: #fafafa;
+  border: 1px solid #8d8c8c;
+  font-size: 0.9rem;
+  border-radius: 50%;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.a-btn-favorite > input[type="checkbox"] + label:hover {
+  background-color: #ffe9e9;
+  color: #8d8c8c;
+}
+
+.a-btn-favorite > input[type="checkbox"] + label > svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.a-btn-favorite > input[type="checkbox"] + label:hover::after {
+  content: "お気に入りに登録する";
+  position: absolute;
+  top: 40px;
+  color: #fafafa;
+  display: block;
+  width: 5rem;
+  padding: 2px 2px;
+  font-size: 0.5rem;
+  background-color: #c47d2c;
+  border-radius: 2px;
+}
+
+.a-btn-favorite > input[type="checkbox"] + label:hover::before {
+  content: "";
+  position: absolute;
+  top: 30px;
+  right: 10px;
+  color: #c47d2c;
+  border: 6px solid transparent;
+  border-top: 6px solid #c47d2c;
+  margin-left: -15px;
+  transform: rotateZ(180deg);
+}
+
+.a-btn-favorite > input[type="checkbox"]:checked + label {
+  color: #e45e5e;
+  border-color: #e45e5e;
+}
+
+.a-btn-favorite > input[type="checkbox"]:checked + label:hover {
+  color: #e45e5e;
+}
+
+.a-btn-favorite > input[type="checkbox"]:checked + label:hover::after {
+  content: "お気に入りから外す";
+  background-color: #757575;
+}
+
+.a-btn-favorite > input[type="checkbox"]:checked + label:hover::before {
+  content: "";
+  color: #757575;
+  border-top: 6px solid #757575;
 }
 
 .a-btn-interested {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 2rem;
-  width: 2rem;
-  color: #108b10;
-  background-color: #fafafa;
-  border: 2px solid #108b10;
-  border-radius: 50%;
-  font-size: 0.9rem;
-  padding: auto;
-  cursor: pointer;
-  margin-right: 0.5rem;
-  cursor: pointer;
+  margin: 0 1px;
 }
 
-@media screen and (min-width: 960px) {
-  .a-btn-interested {
-    width: auto;
-    height: 1.8rem;
-    font-size: 0.8rem;
-    border-radius: 20px;
-    padding: 2px 10px;
-  }
-}
-
-.a-btn-interested > span {
-  font-weight: bolder;
-}
-
-.a-btn-interested > span:nth-child(1) {
-  display: inline-block;
-}
-
-.a-btn-interested > span:nth-child(2) {
+.a-btn-interested > input[type="checkbox"] {
   display: none;
 }
 
-@media screen and (min-width: 960px) {
-  .a-btn-interested > span:nth-child(2) {
-    display: inline;
-    margin-left: 2px;
-  }
+.a-btn-interested > input[type="checkbox"] + label {
+  position: relative;
+  display: block;
+  height: 2rem;
+  width: 2rem;
+  color: #8d8c8c;
+  background-color: #fafafa;
+  border: 1px solid #8d8c8c;
+  font-size: 0.9rem;
+  border-radius: 50%;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.a-btn-interested > input[type="checkbox"] + label:hover {
+  background-color: #e7fee7;
+  color: #8d8c8c;
+}
+
+.a-btn-interested > input[type="checkbox"] + label > svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.a-btn-interested > input[type="checkbox"] + label:hover::after {
+  content: "行ってみたいに登録する";
+  position: absolute;
+  top: 40px;
+  color: #fafafa;
+  display: block;
+  width: 5rem;
+  padding: 2px 2px;
+  font-size: 0.5rem;
+  background-color: #c47d2c;
+  border-radius: 2px;
+}
+
+.a-btn-interested > input[type="checkbox"] + label:hover::before {
+  content: "";
+  position: absolute;
+  top: 30px;
+  right: 10px;
+  color: #c47d2c;
+  border: 6px solid transparent;
+  border-top: 6px solid #c47d2c;
+  margin-left: -15px;
+  transform: rotateZ(180deg);
+}
+
+.a-btn-interested > input[type="checkbox"]:checked + label {
+  color: #108b10;
+  border-color: #108b10;
+}
+
+.a-btn-interested > input[type="checkbox"]:checked + label:hover {
+  color: #108b10;
+}
+
+.a-btn-interested > input[type="checkbox"]:checked + label:hover::after {
+  content: "行ってみたいから外す";
+  background-color: #757575;
+}
+
+.a-btn-interested > input[type="checkbox"]:checked + label:hover::before {
+  content: "";
+  color: #757575;
+  border-top: 6px solid #757575;
 }
 
 .a-btn-storeEdit {
@@ -282,7 +348,7 @@ h2 {
   width: 2rem;
   color: #757575;
   background-color: #faf8f5;
-  border: 2px solid #757575;
+  border: 1px solid #757575;
   border-radius: 50%;
   font-size: 0.9rem;
   padding: auto;
@@ -1821,7 +1887,6 @@ label.a-label-required__red::after {
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 20px;
-  cursor: pointer;
 }
 
 @media screen and (min-width: 960px) {
@@ -1831,10 +1896,6 @@ label.a-label-required__red::after {
     -moz-column-gap: 1rem;
          column-gap: 1rem;
   }
-}
-
-.m-store-list__item:hover h2.hover-colorChange {
-  color: #c47d2c;
 }
 
 .m-store-list__item--pc {
@@ -1851,6 +1912,7 @@ label.a-label-required__red::after {
     height: 195px;
     width: 195px;
     margin-bottom: 5px;
+    cursor: pointer;
   }
   .m-store-list__item--pc__images__main > img {
     width: 100%;
@@ -1863,6 +1925,7 @@ label.a-label-required__red::after {
     grid-template-columns: 1fr 1fr 1fr;
     -moz-column-gap: 5px;
          column-gap: 5px;
+    cursor: pointer;
   }
   .m-store-list__item--pc__images__sub > img {
     height: 62px;
@@ -1884,6 +1947,7 @@ label.a-label-required__red::after {
 .m-store-list__item--mobile__images > img {
   width: 100%;
   height: 100%;
+  max-height: 100px;
   -o-object-fit: cover;
      object-fit: cover;
 }
@@ -1906,17 +1970,24 @@ label.a-label-required__red::after {
 
 .m-store-list__item__container__name {
   color: #555555;
+  cursor: pointer;
+}
+
+.m-store-list__item__container__name:hover .hover-colorChange {
+  color: #c47d2c;
 }
 
 .m-store-list__item__container__access {
   font-size: 0.7rem;
   color: #555555;
+  cursor: pointer;
 }
 
 .m-store-list__item__container__explanation {
   color: #c47d2c;
   font-size: 0.8rem;
   margin: 8px 0;
+  cursor: pointer;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
