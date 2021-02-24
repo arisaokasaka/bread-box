@@ -34,6 +34,8 @@ Route::post('/create_user', 'Api\UserController@create_user');
 Route::post('/update_user', 'Api\UserController@update_user');
 Route::post('/update_basicInfo_usersTable', 'Api\UserController@update_basicInfo_usersTable');
 Route::post('/index_user', 'Api\UserController@index_user');
+Route::post('/update_favorite', 'Api\UserController@update_favorite');
+Route::post('/index_favorite', 'Api\UserController@index_favorite');
 
 //StoreController
 Route::post('/create_store', 'Api\StoreController@create_store');

@@ -23,7 +23,12 @@ class UserController extends Controller
         $user->create_user($request);
     }
 
-    // 更新：店舗基本情報
+    /**
+     *　店舗基本情報更新
+     *
+     * @param Request $request
+     * @return void
+     */
     public function update_basicInfo_usersTable(Request $request){
         $user = new User();
         $user->update_basicInfo_usersTable($request);
@@ -53,12 +58,49 @@ class UserController extends Controller
      * ユーザー情報取得
      *
      * @param Request $request
-     * @return void
+     * @return $user->index_user($user_uuid)
      */
     public function index_user(Request $request) {
         $user_uuid = $request->input('uuid');
         $user = new User();
         return $user->index_user($user_uuid);
     }
-    
+
+
+    /**
+     * お気に入り情報更新
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function update_favorite(Request $request) {
+        $user = new User();
+        $user_uuid = $request->input('uuid');
+        $store_uuid = $request->input('store_uuid');
+        $get_info = $user->index_favorite($user_uuid);
+        $favorite_info = $get_info[0]->favorite;
+
+        if($favorite_info) {
+            $store_list = json_decode($favorite_info);
+            $key = array_search($store_uuid, $store_list);
+            
+            if($key!== false) {
+                array_splice($store_list, $key, 1);
+            }else{
+                array_push($store_list, $store_uuid);
+            }
+
+            if(empty($store_list)){
+                $json_store = null;
+            }else{
+                $json_store = json_encode($store_list);
+            }
+
+        }else{
+            $array_store = [];
+            array_push($array_store, $store_uuid);
+            $json_store = json_encode($array_store);
+        }
+        $user->update_favorite($user_uuid, $json_store);
+    }
 }

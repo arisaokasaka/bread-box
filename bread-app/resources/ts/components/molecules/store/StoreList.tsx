@@ -35,7 +35,9 @@ const StoreList: React.FC<StoreProps> = ({StoreInfo}) => {
                         </div>
                         <div className ="m-store-list__item__container">
                             <div className ="m-store-list__item__container__buttons">
-                                <Btn_favorite />
+                                <Btn_favorite 
+                                    store_uuid={el.user_uuid}
+                                />
                                 <Btn_interested />
                             </div>
                             <div className ="m-store-list__item__container__name" onClick={()=>history.push("/store/" + el.user_uuid)}>

@@ -102,4 +102,29 @@ class User extends Authenticatable
         ]);
         return $query->get();
     }
+
+    /**
+     * お気に入り店舗情報取得
+     *
+     * @param string $user_uuid
+     * @return void
+     */
+    public function index_favorite(string $user_uuid) {
+        $query = $this
+        ->where('uuid', '=', $user_uuid)
+        ->select('favorite');
+        return $query->get();
+    }
+
+    /**
+     * お気に入り更新機能
+     *
+     * @param [type] $request
+     * @return void
+     */
+    public function update_favorite($user_uuid, $favorite) {
+        $query = $this
+        ->where('uuid', '=', $user_uuid)
+        ->update(['favorite' => $favorite]);
+    }
 }
