@@ -45,4 +45,20 @@ class Review extends Model
         ])
         ->get();
     }
+
+    /**
+     * スコアのみ取得
+     *
+     * @param string $store_uuid
+     * @return void
+     */
+    public function get_star(string $store_uuid) {
+        return $this
+        ->newQuery()
+        ->where('store_uuid', '=', $store_uuid)
+        ->select([
+            'star',
+        ])
+        ->get();
+    }
 }

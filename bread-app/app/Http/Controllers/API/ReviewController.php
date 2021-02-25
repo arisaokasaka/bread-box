@@ -27,10 +27,37 @@ class ReviewController extends Controller
      * @return void
      */
     public function index_review(Request $request) {
-        Log::info($request);
         $review = new Review;
         $store_uuid = $request->input('store_uuid');
-        Log::info($review->index_review($store_uuid));
         return $review->index_review($store_uuid);
+    }
+
+    /**
+     * 星のスコアをカウント
+     *
+     * @param Request $request
+     * @return $scoreInfo
+     */
+    public function get_score(Request $request) {
+        $score_total = 0;
+        $count = 0;
+        $review = new Review;
+        $store_uuid = $request->input('store_uuid');
+        $star_list = $review->get_star($store_uuid);
+        
+        if(count($star_list)!==0){
+            foreach($star_list as $item) {
+                $score_total = $score_total + $item['star'];
+                $count = $count + 1;
+            }
+            $score = $score_total/$count;
+            $scoreInfo['score'] = $score;
+            $scoreInfo['count'] = $count;
+        }else{
+            $scoreInfo['score'] = 0;
+            $scoreInfo['count'] = 0;
+        }
+
+        return $scoreInfo;
     }
 }
