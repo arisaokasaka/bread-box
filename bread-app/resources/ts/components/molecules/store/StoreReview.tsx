@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Score from '../../atoms/Score';
+import ScoreUser from '../../atoms/ScoreUser';
 import ModalCreateReview from '../../atoms/modal/Modal_review';
 
 type ReviewProps = ({
@@ -51,9 +51,8 @@ const StoreReview: React.FC<ReviewProps> = ({store_uuid}) => {
                     <div className ="m-review__item" key={"review_"+index}>
                         <img src="/images/croissant.jpg" alt="投稿者のアイコン"/>
                         <div className ="m-review__item__content">
-                            <Score
-                                score= {el.star}
-                                store_uuid = {el.store_uuid}
+                            <ScoreUser
+                                score={el.star}
                             />
                             <p>{el.comment}</p>
                         </div>
