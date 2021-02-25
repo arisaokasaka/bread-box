@@ -17,9 +17,7 @@ const UserPage:any = ({UserInfo}) => {
     return(
         <div className = "p-user">
             <div className = "p-user__container">
-                <UserTable
-                    UserInfo = {UserInfo}
-                />
+                <UserTable />
                 <UserProf
                     UserInfo = {UserInfo}
                 />
