@@ -63,3 +63,4 @@ Route::post('/update_spirit', 'Api\StoreMenuController@update_spirit');
 
 // ReviewController
 Route::post('/create_review', 'Api\ReviewController@create_review');
+Route::post('/index_review', 'Api\ReviewController@index_review');

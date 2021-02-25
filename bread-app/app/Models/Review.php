@@ -16,7 +16,7 @@ class Review extends Model
      * @param object $request
      * @return void
      */
-    public function create_review(object $request){
+    public function create_review(object $request) {
         $this->uuid = Str::uuid();
         $this->user_uuid = $request['user_uuid'];
         $this->store_uuid = $request['store_uuid'];
@@ -24,5 +24,25 @@ class Review extends Model
         $this->comment = $request['comment'];
         $this->reply = $request['reply'];
         $this->save();
+    }
+
+    /**
+     * レビュー情報取得
+     *
+     * @param string $store_uuid
+     * @return void
+     */
+    public function index_review(string $store_uuid) {
+        return $this
+        ->newQuery()
+        ->where('store_uuid', '=', $store_uuid)
+        ->select([
+            'user_uuid',
+            'store_uuid',
+            'star',
+            'comment',
+            'reply'
+        ])
+        ->get();
     }
 }
