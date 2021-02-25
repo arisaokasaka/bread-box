@@ -99,6 +99,8 @@ class User extends Authenticatable
             'name',
             'email',
             'address',
+            'favorite',
+            'interested'
         ]);
         return $query->get();
     }

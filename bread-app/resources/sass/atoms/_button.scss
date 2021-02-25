@@ -334,8 +334,7 @@
     line-height: 2rem;
     font-size: 0.8rem;
     background-color: $lightestBrown;
-    border: 2px solid $brown;
-    text-align: center;
+    border: 1px solid $brown;
     font-weight: 500;
     border-radius: 50%;
     color: $brown;
@@ -346,13 +345,14 @@
         height: 1.8rem;
         line-height: 1.8rem;
         border-radius: 20px;
-        font-size: 0.7rem;
+        font-size: 0.8rem;
     }
 
     & > span {
         display: none;
         @include bp-600up {
             display: block;
+            text-align: left;
         }
     }
 
@@ -366,14 +366,16 @@
 .a-btn-logout {
     display: flex;
     justify-content: flex-end;
+    text-decoration: underline;
+    margin-top: $mp-xxs;
 
-    @include bp-960up {
+    @include bp-600up {
         justify-content: unset;
         margin-top: $mp-xs;
     }
 
     & > a {
-        font-size: 0.8rem;
+        font-size: 0.6rem;
         color: $darkGray;
         padding: 0 3px;
         cursor: pointer;

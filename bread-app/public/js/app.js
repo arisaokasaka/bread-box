@@ -15520,7 +15520,7 @@ function BtnEditUser() {
     className: "a-btn-edit-user"
   }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
     icon: free_solid_svg_icons_1.faPen
-  }), react_1["default"].createElement("span", null, "\xA0\xA0\u7DE8\u96C6"));
+  }), react_1["default"].createElement("span", null, "\xA0\u7DE8\u96C6"));
 }
 
 exports.default = BtnEditUser;
@@ -20572,6 +20572,40 @@ exports.default = Top_section;
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -20582,7 +20616,9 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
 var BtnEditUser_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/BtnEditUser */ "./resources/ts/components/atoms/buttons/BtnEditUser.tsx"));
 
@@ -20592,31 +20628,78 @@ var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome
 
 var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
 
-var UserProf = function UserProf(_a) {
-  var UserInfo = _a.UserInfo;
+var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
+
+var UserProf = function UserProf() {
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
+
+  var _a = react_1.useState({}),
+      info = _a[0],
+      setInfo = _a[1];
+
+  var userInfo;
+  var favorite_count = 0;
+  var interested_count = 0;
+  react_1.useEffect(function () {
+    index_user();
+  }, []); // ユーザー情報取得
+
+  var index_user = function index_user() {
+    axios_1["default"].post("/api/index_user", {
+      uuid: state.uuid
+    }).then(function (res) {
+      setInfo(res.data[0]);
+    })["catch"](function (err) {});
+  };
+
+  if (info) {
+    userInfo = info;
+
+    if (userInfo.favorite) {
+      var favorite_list = JSON.parse(userInfo.favorite);
+      favorite_list ? favorite_count = favorite_list.length : favorite_count = 0;
+    } else {
+      favorite_count = 0;
+    }
+
+    if (userInfo.interested) {
+      var interested_list = JSON.parse(userInfo.interested);
+      interested_list ? interested_count = interested_list.length : interested_count = 0;
+    } else {
+      interested_count = 0;
+    }
+  }
+
   return react_1["default"].createElement("div", {
     className: "m-user-prof"
-  }, UserInfo.map(function (el) {
-    return react_1["default"].createElement("div", {
-      className: "m-user-prof__container",
-      key: el.uuid
-    }, react_1["default"].createElement("div", {
-      className: "m-user-prof__container__btn"
-    }, react_1["default"].createElement(BtnEditUser_1["default"], null)), react_1["default"].createElement("div", {
-      className: "m-user-prof__container__content"
-    }, react_1["default"].createElement("img", {
-      src: "/images/croissant.jpg",
-      alt: "\u30D7\u30ED\u30D5\u30A3\u30FC\u30EB\u753B\u50CF"
-    }), react_1["default"].createElement("div", {
-      className: "m-user-prof__container__content__text"
-    }, react_1["default"].createElement("h3", null, el.name), react_1["default"].createElement("p", null, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-      icon: free_solid_svg_icons_1.faHeart
-    })), "\u304A\u6C17\u306B\u5165\u308A"), react_1["default"].createElement("p", null, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-      icon: free_solid_svg_icons_1.faFlag
-    })), "\u884C\u3063\u3066\u307F\u305F\u3044"), react_1["default"].createElement("p", null, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-      icon: free_solid_svg_icons_1.faCommentDots
-    })), "\u30EC\u30D3\u30E5\u30FC\u6570"), react_1["default"].createElement(BtnLogout_1["default"], null))));
-  }));
+  }, react_1["default"].createElement("div", {
+    className: "m-user-prof__container",
+    key: userInfo.uuid
+  }, react_1["default"].createElement("div", {
+    className: "m-user-prof__container__btn"
+  }, react_1["default"].createElement(BtnEditUser_1["default"], null)), react_1["default"].createElement("div", {
+    className: "m-user-prof__container__content"
+  }, userInfo.profile ? react_1["default"].createElement("img", {
+    src: "/storage/user/" + state.uuid + "/profile.jpg",
+    alt: "\u30D7\u30ED\u30D5\u30A3\u30FC\u30EB\u753B\u50CF"
+  }) : react_1["default"].createElement("img", {
+    src: "/images/no_image.jpg",
+    alt: "\u30D7\u30ED\u30D5\u30A3\u30FC\u30EB\u753B\u50CF"
+  }), react_1["default"].createElement("div", {
+    className: "m-user-prof__container__content__text"
+  }, react_1["default"].createElement("h3", null, userInfo.name), react_1["default"].createElement("div", {
+    className: "m-user-prof__container__content__text__item"
+  }, react_1["default"].createElement("p", null, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faHeart
+  })), "\u304A\u6C17\u306B\u5165\u308A"), react_1["default"].createElement("p", null, favorite_count)), react_1["default"].createElement("div", {
+    className: "m-user-prof__container__content__text__item"
+  }, react_1["default"].createElement("p", null, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faFlag
+  })), "\u884C\u3063\u3066\u307F\u305F\u3044"), react_1["default"].createElement("p", null, interested_count)), react_1["default"].createElement("div", {
+    className: "m-user-prof__container__content__text__item"
+  }, react_1["default"].createElement("p", null, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faCommentDots
+  })), "\u30EC\u30D3\u30E5\u30FC\u6570"), react_1["default"].createElement("p", null)), react_1["default"].createElement(BtnLogout_1["default"], null)))));
 };
 
 exports.default = UserProf;
@@ -22769,26 +22852,12 @@ var UserTable_1 = __importDefault(__webpack_require__(/*! ../../molecules/user/U
 
 var UserProf_1 = __importDefault(__webpack_require__(/*! ../../molecules/user/UserProf */ "./resources/ts/components/molecules/user/UserProf.tsx"));
 
-var testInfo = [{
-  uuid: '234567890-',
-  name: 'ありんこ',
-  email: 'email@email',
-  password: 'ariari',
-  address: '呉服町駅',
-  favorite: {},
-  interested: {}
-}];
-
-var UserPage = function UserPage(_a) {
-  var UserInfo = _a.UserInfo;
-  UserInfo = testInfo;
+var UserPage = function UserPage() {
   return react_1["default"].createElement("div", {
     className: "p-user"
   }, react_1["default"].createElement("div", {
     className: "p-user__container"
-  }, react_1["default"].createElement(UserTable_1["default"], null), react_1["default"].createElement(UserProf_1["default"], {
-    UserInfo: UserInfo
-  })));
+  }, react_1["default"].createElement(UserTable_1["default"], null), react_1["default"].createElement(UserProf_1["default"], null)));
 };
 
 exports.default = UserPage;

@@ -63,7 +63,9 @@ class UserController extends Controller
     public function index_user(Request $request) {
         $user_uuid = $request->input('uuid');
         $user = new User();
-        return $user->index_user($user_uuid);
+        $get_info = $user->index_user($user_uuid);
+        $get_info['profile'] = Storage::exists("public/user/" . $user_uuid . "profile.jpg");
+        return $get_info;
     }
 
     /**

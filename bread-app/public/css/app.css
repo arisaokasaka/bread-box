@@ -533,8 +533,7 @@ h2 {
   line-height: 2rem;
   font-size: 0.8rem;
   background-color: #faf8f5;
-  border: 2px solid #c47d2c;
-  text-align: center;
+  border: 1px solid #c47d2c;
   font-weight: 500;
   border-radius: 50%;
   color: #c47d2c;
@@ -547,7 +546,7 @@ h2 {
     height: 1.8rem;
     line-height: 1.8rem;
     border-radius: 20px;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -558,6 +557,7 @@ h2 {
 @media screen and (min-width: 600px) {
   .a-btn-edit-user > span {
     display: block;
+    text-align: left;
   }
 }
 
@@ -569,9 +569,11 @@ h2 {
 .a-btn-logout {
   display: flex;
   justify-content: flex-end;
+  text-decoration: underline;
+  margin-top: 10px;
 }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 600px) {
   .a-btn-logout {
     justify-content: unset;
     margin-top: 20px;
@@ -579,7 +581,7 @@ h2 {
 }
 
 .a-btn-logout > a {
-  font-size: 0.8rem;
+  font-size: 0.6rem;
   color: #757575;
   padding: 0 3px;
   cursor: pointer;
@@ -2163,22 +2165,24 @@ label.a-label-required__red::after {
 }
 
 .m-user-prof {
-  max-height: 415px;
-  border: 3px solid #fae6c9;
+  max-height: 380px;
+  border: 1px solid #fae6c9;
   border-radius: 5px;
   margin-bottom: 20px;
-  padding: 10px 20px 20px 20px;
+  padding: 10px;
+  background-color: #fafafa;
 }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 480px) {
   .m-user-prof {
-    margin: 0;
-    padding: 0;
+    padding: 10px 20px;
   }
 }
 
-.m-user-prof__container {
-  margin: 10px;
+@media screen and (min-width: 600px) {
+  .m-user-prof {
+    padding: 10px;
+  }
 }
 
 .m-user-prof__container__btn {
@@ -2193,7 +2197,7 @@ label.a-label-required__red::after {
        column-gap: 1rem;
 }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 600px) {
   .m-user-prof__container__content {
     grid-template-columns: auto;
     row-gap: 20px;
@@ -2209,32 +2213,62 @@ label.a-label-required__red::after {
      object-fit: cover;
 }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 600px) {
   .m-user-prof__container__content > img {
-    height: 170px;
-    width: 170px;
+    height: 134px;
+    width: 134px;
   }
 }
 
-.m-user-prof__container__content__text > p {
+@media screen and (min-width: 960px) {
+  .m-user-prof__container__content > img {
+    height: 154px;
+    width: 154px;
+  }
+}
+
+.m-user-prof__container__content__text__item {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+}
+
+@media screen and (min-width: 600px) {
+  .m-user-prof__container__content__text__item {
+    grid-template-columns: 70% 30%;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .m-user-prof__container__content__text__item {
+    grid-template-columns: 80% 20%;
+  }
+}
+
+.m-user-prof__container__content__text__item:nth-of-type(1) span {
+  color: #e45e5e;
+}
+
+.m-user-prof__container__content__text__item:nth-of-type(2) span {
+  color: #108b10;
+}
+
+.m-user-prof__container__content__text__item:nth-of-type(3) span {
+  color: #8d8c8c;
+}
+
+.m-user-prof__container__content__text__item > p {
   font-size: 0.8rem;
   line-height: 1.5rem;
 }
 
-.m-user-prof__container__content__text > p > span {
+.m-user-prof__container__content__text__item > p > span {
   margin-right: 0.2rem;
 }
 
-.m-user-prof__container__content__text > p:nth-of-type(1) > span {
-  color: #e45e5e;
-}
-
-.m-user-prof__container__content__text > p:nth-of-type(2) > span {
-  color: #108b10;
-}
-
-.m-user-prof__container__content__text > p:nth-of-type(3) > span {
-  color: #8d8c8c;
+@media screen and (min-width: 600px) {
+  .m-user-prof__container__content__text__item > p:nth-child(2) {
+    text-align: center;
+  }
 }
 
 .m-review-list__item {
@@ -3125,12 +3159,18 @@ label.a-label-required__red::after {
   }
 }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 600px) {
   .p-user__container {
     display: grid;
-    grid-template-columns: 1fr 200px;
+    grid-template-columns: 1fr 160px;
     -moz-column-gap: 10px;
          column-gap: 10px;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .p-user__container {
+    grid-template-columns: 1fr 180px;
   }
 }
 

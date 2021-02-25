@@ -6,10 +6,14 @@
         display: flex;
         flex-direction: column-reverse;
 
-        @include bp-960up {
+        @include bp-600up {
             display: grid;
-            grid-template-columns: 1fr 200px;
+            grid-template-columns: 1fr 160px;
             column-gap: 10px;
+        }
+
+        @include bp-960up {
+            grid-template-columns: 1fr 180px;
         }
     }
 }
