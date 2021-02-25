@@ -196,7 +196,7 @@ class StoreController extends Controller
         foreach($get_info as $store){
             $store['thumbnail'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_thumbnail);
         }
-            
+        
         return $get_info;
     }
     

@@ -20679,8 +20679,11 @@ var UserProf = function UserProf() {
     className: "m-user-prof__container__btn"
   }, react_1["default"].createElement(BtnEditUser_1["default"], null)), react_1["default"].createElement("div", {
     className: "m-user-prof__container__content"
-  }, react_1["default"].createElement("img", {
-    src: "/images/croissant.jpg",
+  }, userInfo.profile ? react_1["default"].createElement("img", {
+    src: "/storage/user/" + state.uuid + "/profile.jpg",
+    alt: "\u30D7\u30ED\u30D5\u30A3\u30FC\u30EB\u753B\u50CF"
+  }) : react_1["default"].createElement("img", {
+    src: "/images/no_image.jpg",
     alt: "\u30D7\u30ED\u30D5\u30A3\u30FC\u30EB\u753B\u50CF"
   }), react_1["default"].createElement("div", {
     className: "m-user-prof__container__content__text"
