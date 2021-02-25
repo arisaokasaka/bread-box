@@ -16000,15 +16000,22 @@ var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg
 var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
 var Btn_favorite = function Btn_favorite(_a) {
-  var store_uuid = _a.store_uuid,
+  var allInfo = _a.allInfo,
+      store_uuid = _a.store_uuid,
       favorite_checked = _a.favorite_checked,
       index = _a.index;
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
   var history = react_router_dom_1.useHistory();
   var BtnFavorite;
+  var info;
 
-  if (!favorite_checked) {
-    favorite_checked = false;
+  if (allInfo) {
+    info = allInfo;
+    favorite_checked = info.favorite_checked;
+  } else {
+    if (!favorite_checked) {
+      favorite_checked = false;
+    }
   }
 
   var update_favorite = function update_favorite() {
@@ -16147,11 +16154,19 @@ var __importStar = this && this.__importStar || function (mod) {
   return result;
 };
 
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
@@ -16161,20 +16176,42 @@ var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
-function Btn_interested() {
+var Btn_interested = function Btn_interested(_a) {
+  var store_uuid = _a.store_uuid,
+      allInfo = _a.allInfo,
+      interested_checked = _a.interested_checked,
+      index = _a.index;
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
   var history = react_router_dom_1.useHistory();
   var BtnInterested;
+  var info;
+
+  if (allInfo) {
+    info = allInfo;
+    interested_checked = info.interested_checked;
+  } else {
+    if (!interested_checked) {
+      interested_checked = false;
+    }
+  }
+
+  var update_interested = function update_interested() {
+    var data = new FormData();
+    data.append('uuid', state.uuid);
+    data.append('store_uuid', store_uuid);
+    axios_1["default"].post('/api/update_interested', data);
+  };
 
   if (state.uuid && state.auth === "user") {
     BtnInterested = react_1["default"].createElement("div", {
       className: "a-btn-interested"
     }, react_1["default"].createElement("input", {
       type: "checkbox",
-      id: "checkin_" + "store_uuid",
-      defaultChecked: false
+      id: "BtnInterested_" + index,
+      defaultChecked: interested_checked,
+      onClick: update_interested
     }), react_1["default"].createElement("label", {
-      htmlFor: "checkin_" + "store_uuid"
+      htmlFor: "BtnInterested_" + index
     }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
       icon: free_solid_svg_icons_1.faFlag
     })));
@@ -16188,16 +16225,16 @@ function Btn_interested() {
       }
     }, react_1["default"].createElement("input", {
       type: "checkbox",
-      id: "checkin_" + "store_uuid"
+      id: "BtnInterested_" + index
     }), react_1["default"].createElement("label", {
-      htmlFor: "checkin_" + "store_uuid"
+      htmlFor: "BtnInterested_" + index
     }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
       icon: free_solid_svg_icons_1.faFlag
     })));
   }
 
   return react_1["default"].createElement("div", null, BtnInterested);
-}
+};
 
 exports.default = Btn_interested;
 
@@ -19885,8 +19922,14 @@ var StoreBasicInfo = function StoreBasicInfo(_a) {
   }, react_1["default"].createElement("div", {
     className: "m-store-basicInfo__btn"
   }, react_1["default"].createElement(Btn_favorite_1["default"], {
+    allInfo: storeInfo,
+    index: 1,
     store_uuid: storeInfo.user_uuid
-  }), react_1["default"].createElement(Btn_interested_1["default"], null), react_1["default"].createElement(BtnStoreEdit_1["default"], null)), react_1["default"].createElement("div", {
+  }), react_1["default"].createElement(Btn_interested_1["default"], {
+    allInfo: storeInfo,
+    index: 1,
+    store_uuid: storeInfo.user_uuid
+  }), react_1["default"].createElement(BtnStoreEdit_1["default"], null)), react_1["default"].createElement("div", {
     key: "basicInfo_" + storeInfo.id,
     className: "m-store-basicInfo__container"
   }, react_1["default"].createElement("h2", {
@@ -20125,7 +20168,11 @@ var StoreList = function StoreList(_a) {
       store_uuid: el.user_uuid,
       favorite_checked: el.favorite_checked,
       index: index
-    }), react_1["default"].createElement(Btn_interested_1["default"], null)), react_1["default"].createElement("div", {
+    }), react_1["default"].createElement(Btn_interested_1["default"], {
+      store_uuid: el.user_uuid,
+      interested_checked: el.interested_checked,
+      index: index
+    })), react_1["default"].createElement("div", {
       className: "m-store-list__item__container__name",
       onClick: function onClick() {
         return history.push("/store/" + el.user_uuid);
@@ -20635,36 +20682,10 @@ var UserTable_favorite_1 = __importDefault(__webpack_require__(/*! ./UserTable_f
 
 var UserTable_interested_1 = __importDefault(__webpack_require__(/*! ./UserTable_interested */ "./resources/ts/components/molecules/user/UserTable_interested.tsx"));
 
-var testInfoInterested = [{
-  name: 'りりり',
-  address: 'dsdsdsdsdsdsd',
-  business_day: 'sasa',
-  busines_memo: '定休日！！！',
-  message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
-  sns: {
-    twitter: 'twitter',
-    instagram: 'sssss'
-  },
-  star: 3.3
-}, {
-  name: 'ぱんちゃん',
-  address: 'dsdsdsdsdsdsd',
-  business_day: 'sasa',
-  busines_memo: '定休日！！！',
-  message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
-  sns: {
-    twitter: 'twitter',
-    instagram: 'sssss'
-  },
-  star: 4.0
-}];
-
-var UserTable = function UserTable(_a) {
-  var UserInfo = _a.UserInfo;
-
-  var _b = react_1.useState('favorite'),
-      Table = _b[0],
-      setTable = _b[1];
+var UserTable = function UserTable() {
+  var _a = react_1.useState('favorite'),
+      Table = _a[0],
+      setTable = _a[1];
 
   var TabFavorite = {
     "class": "m-user-table__tab--favorite",
@@ -20727,9 +20748,7 @@ var UserTable = function UserTable(_a) {
         break;
 
       case 'interested':
-        return react_1["default"].createElement(UserTable_interested_1["default"], {
-          StoreInfo: testInfoInterested
-        });
+        return react_1["default"].createElement(UserTable_interested_1["default"], null);
         break;
 
       case 'stamp':
@@ -20864,6 +20883,40 @@ exports.default = UserTable_favorite;
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -20874,17 +20927,45 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
 var StoreList_1 = __importDefault(__webpack_require__(/*! ../store/StoreList */ "./resources/ts/components/molecules/store/StoreList.tsx"));
 
-var UserTable_interested = function UserTable_interested(_a) {
-  var StoreInfo = _a.StoreInfo;
-  return react_1["default"].createElement("div", {
-    className: "m-userTable-interested"
-  }, react_1["default"].createElement(StoreList_1["default"], {
-    StoreInfo: StoreInfo
-  }));
+var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
+
+var UserTable_interested = function UserTable_interested() {
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
+
+  var _a = react_1.useState([]),
+      interested = _a[0],
+      setInterested = _a[1];
+
+  var content;
+  react_1.useEffect(function () {
+    index_interested();
+  }, []);
+
+  var index_interested = function index_interested() {
+    axios_1["default"].post('/api/index_interested_list', {
+      uuid: state.uuid
+    }).then(function (res) {
+      setInterested(res.data);
+    })["catch"]();
+  };
+
+  if (interested[0] === undefined) {
+    content = react_1["default"].createElement("p", null, "\u884C\u3063\u3066\u307F\u305F\u3044\u5E97\u8217\u306F\u307E\u3060\u3042\u308A\u307E\u305B\u3093\u3002");
+  } else {
+    content = react_1["default"].createElement("div", {
+      className: "m-userTable-interested"
+    }, react_1["default"].createElement(StoreList_1["default"], {
+      StoreInfo: interested
+    }));
+  }
+
+  return content;
 };
 
 exports.default = UserTable_interested;
@@ -22317,8 +22398,11 @@ var StoreContents_1 = __importDefault(__webpack_require__(/*! ../../molecules/st
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
+var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
+
 var StorePage = function StorePage() {
   var user_uuid = react_router_dom_1.useParams().user_uuid;
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
 
   var _a = react_1.useState({}),
       storeInfo = _a[0],
@@ -22335,8 +22419,11 @@ var StorePage = function StorePage() {
 
   var getStoreInfo = function getStoreInfo() {
     axios_1["default"].post("/api/index_storeInfo", {
-      user_uuid: user_uuid
+      store_uuid: user_uuid,
+      user_uuid: state.uuid,
+      user_type: state.auth
     }).then(function (res) {
+      console.log(res.data);
       setStoreInfo(res.data);
     })["catch"](function (err) {});
   }; // メニュー情報取得
@@ -22699,9 +22786,7 @@ var UserPage = function UserPage(_a) {
     className: "p-user"
   }, react_1["default"].createElement("div", {
     className: "p-user__container"
-  }, react_1["default"].createElement(UserTable_1["default"], {
-    UserInfo: UserInfo
-  }), react_1["default"].createElement(UserProf_1["default"], {
+  }, react_1["default"].createElement(UserTable_1["default"], null), react_1["default"].createElement(UserProf_1["default"], {
     UserInfo: UserInfo
   })));
 };

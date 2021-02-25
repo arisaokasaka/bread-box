@@ -3,7 +3,7 @@ import axios from 'axios';
 import StoreBasicInfo from '../../molecules/store/StoreBasicInfo';
 import StoreSubInfo from '../../molecules/store/StoreSubinfo';
 import StoreContents from '../../molecules/store/StoreContents';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { UserAuthContext } from '../../../contexts/UserAuthContext';
 
 const StorePage: React.FC = () => {
