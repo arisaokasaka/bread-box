@@ -104,7 +104,7 @@ class User extends Authenticatable
     }
 
     /**
-     * お気に入り店舗情報取得
+     * 「お気に入り」登録済の店舗リストを取得
      *
      * @param string $user_uuid
      * @return void
@@ -119,13 +119,40 @@ class User extends Authenticatable
     /**
      * お気に入り更新機能
      *
-     * @param [type] $request
+     * @param string $user_uuid
+     * @param [type] $favorite
      * @return void
      */
     public function update_favorite($user_uuid, $favorite) {
         $query = $this
         ->where('uuid', '=', $user_uuid)
         ->update(['favorite' => $favorite]);
+    }
+
+    /**
+     * 「行ってみたい」登録済の店舗リストを取得
+     *
+     * @param string $user_uuid
+     * @return void
+     */
+    public function index_interested(string $user_uuid) {
+        $query = $this
+        ->where('uuid', '=', $user_uuid)
+        ->select('interested');
+        return $query->get();
+    }
+
+    /**
+     * 行ってみたい更新機能
+     *
+     * @param string $user_uuid
+     * @param [type] $interested
+     * @return void
+     */
+    public function update_interested(string $user_uuid, $interested) {
+        $query = $this
+        ->where('uuid', '=', $user_uuid)
+        ->update(['interested' => $interested]);
     }
 
     /**

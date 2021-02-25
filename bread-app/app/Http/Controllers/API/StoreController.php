@@ -38,8 +38,12 @@ class StoreController extends Controller
         $check_uuid = [];
         $check_user_uuid = $user_uuid !== 'null' && $user_uuid;
         if($check_user_uuid) {
-            $user_uuid && $favorite_info = $user->index_favorite($user_uuid);
-            $favorite_info && $favorite_list = json_decode($favorite_info[0]->favorite);    
+            if($user_uuid) {
+                $favorite_info = $user->index_favorite($user_uuid);
+                $favorite_info && $favorite_list = json_decode($favorite_info[0]->favorite);
+                $interested_info = $user->index_interested($user_uuid);
+                $interested_info && $interested_list = json_decode($interested_info[0]->interested);
+            }
         }
         
         if($keyword){
@@ -110,7 +114,15 @@ class StoreController extends Controller
                             $store['favorite_checked'] = true;
                         }
                     }
-                }    
+                }
+
+                if($interested_list){
+                    foreach($interested_list as $interested){
+                        if($store['user_uuid']===$interested){
+                            $store['interested_checked'] = true;
+                        }
+                    }
+                }
             }
         }
         return $result;
@@ -134,9 +146,40 @@ class StoreController extends Controller
      * @return void
      */
     public function index_storeInfo(Request $request){
+        Log::info($request);
         $store = new Store();
-        $get_info = $store->index_storeInfo($request->input('user_uuid'));
-        return $get_info;
+        $user_type = $request->input('user_type');
+        $storeInfo = $store->index_storeInfo($request->input('store_uuid'));
+    
+        if($user_type==="user"){
+            $user = new User();
+            $user_uuid = $request->input('user_uuid');
+
+            if($user_uuid) {
+                $favorite_info = $user->index_favorite($user_uuid);
+                $favorite_info && $favorite_list = json_decode($favorite_info[0]->favorite);
+                $interested_info = $user->index_interested($user_uuid);
+                $interested_info && $interested_list = json_decode($interested_info[0]->interested);
+
+                if($favorite_list){
+                    foreach($favorite_list as $favorite){
+                        if($storeInfo['user_uuid']===$favorite){
+                            $storeInfo['favorite_checked'] = true;
+                        }
+                    }
+                }
+
+                if($interested_list){
+                    foreach($interested_list as $interested){
+                        if($storeInfo['user_uuid']===$interested){
+                            $storeInfo['interested_checked'] = true;
+                        }
+                    }
+                }
+            }
+        }
+        Log::info($storeInfo);
+        return $storeInfo;
     }
 
     /**
@@ -251,5 +294,16 @@ class StoreController extends Controller
             $fileName = 'thumbnail.jpg';
             Storage::putFileAs($path, $file_thumbnail, $fileName, 'public');
         }
+    }
+
+    /**
+     * ログインユーザーのUUID取得
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function get_uuid (Request $request) {
+        $uuid = $request->input('uuid');
+        return $uuid;
     }
 }

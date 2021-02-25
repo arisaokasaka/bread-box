@@ -41,7 +41,11 @@ const StoreList: React.FC<StoreProps> = ({StoreInfo}) => {
                                     favorite_checked = {el.favorite_checked}
                                     index = {index}
                                 />
-                                <Btn_interested />
+                                <Btn_interested
+                                    store_uuid={el.user_uuid}
+                                    interested_checked = {el.interested_checked}
+                                    index = {index}
+                                />
                             </div>
                             <div className ="m-store-list__item__container__name" onClick={()=>history.push("/store/" + el.user_uuid)}>
                                 <h2 className ="hover-colorChange">{el.name}</h2>

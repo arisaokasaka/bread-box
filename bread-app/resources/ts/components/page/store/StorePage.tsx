@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import StoreBasicInfo from '../../molecules/store/StoreBasicInfo';
 import StoreSubInfo from '../../molecules/store/StoreSubinfo';
 import StoreContents from '../../molecules/store/StoreContents';
 import { useParams } from 'react-router-dom';
+import { UserAuthContext } from '../../../contexts/UserAuthContext';
 
 const StorePage: React.FC = () => {
     let { user_uuid } = useParams();
+    const { state } = useContext(UserAuthContext);
     const [ storeInfo, setStoreInfo ] = useState({})
     const [ menuInfo, setMenuInfo ] = useState([]);
 
@@ -18,9 +20,12 @@ const StorePage: React.FC = () => {
     // 店舗情報取得
     const getStoreInfo = () => {
         axios.post("/api/index_storeInfo", {
-            user_uuid: user_uuid
+            store_uuid: user_uuid,
+            user_uuid: state.uuid,
+            user_type: state.auth
         })
         .then(res => {
+            console.log(res.data)
             setStoreInfo(res.data)
         })
         .catch(err => {

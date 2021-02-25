@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react';
+import axios from 'axios';
 import Btn_favorite from '../../atoms/buttons/Btn_favorite';
 import Btn_interested from '../../atoms/buttons/Btn_interested';
 import BtnStoreEdit from '../../atoms/buttons/BtnStoreEdit';
@@ -13,10 +14,16 @@ const StoreBasicInfo: React.FC<StoreInfoProps> = ({storeInfo}) => {
     return(
         <div className = "m-store-basicInfo">
             <div className = "m-store-basicInfo__btn">
-                <Btn_favorite 
+                <Btn_favorite
+                    allInfo = {storeInfo}
+                    index={1}
                     store_uuid={storeInfo.user_uuid}
                 />
-                <Btn_interested />
+                <Btn_interested 
+                    allInfo = {storeInfo}
+                    index={1}
+                    store_uuid={storeInfo.user_uuid}
+                />
                 <BtnStoreEdit />
             </div>
             <div key={"basicInfo_" + storeInfo.id} className = "m-store-basicInfo__container">
