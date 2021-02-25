@@ -114,12 +114,23 @@ class UserController extends Controller
         $user_uuid = $request->input('uuid');
         $get_info = $user->index_favorite($user_uuid);
         $store_list = json_decode($get_info[0]->favorite);
+        $interested_info = $user->index_interested($user_uuid);
+        $interested_info && $interested_list = json_decode($interested_info[0]->interested);
         $result = [];
 
         if($store_list){
             foreach($store_list as $store_uuid){
                 $get_info = $user->get_storeInfo($store_uuid);
                 $get_info['favorite_checked'] = true;
+
+                if($interested_list){
+                    foreach($interested_list as $interested){
+                        if($get_info['user_uuid']===$interested){
+                            $get_info['interested_checked'] = true;
+                        }
+                    }
+                }
+
                 array_push($result, $get_info);
             }
         }
@@ -160,6 +171,7 @@ class UserController extends Controller
             array_push($array_store, $store_uuid);
             $json_store = json_encode($array_store);
         }
+
         $user->update_interested($user_uuid, $json_store);
     }
 
@@ -174,15 +186,27 @@ class UserController extends Controller
         $user_uuid = $request->input('uuid');
         $get_info = $user->index_interested($user_uuid);
         $store_list = json_decode($get_info[0]->interested);
+        $favorite_info = $user->index_favorite($user_uuid);
+        $favorite_info && $favorite_list = json_decode($favorite_info[0]->favorite);
         $result = [];
 
         if($store_list){
             foreach($store_list as $store_uuid){
                 $get_info = $user->get_storeInfo($store_uuid);
                 $get_info['interested_checked'] = true;
+
+                if($favorite_list){
+                    foreach($favorite_list as $favorite){
+                        if($get_info['user_uuid']===$favorite){
+                            $get_info['favorite_checked'] = true;
+                        }
+                    }
+                }
+
                 array_push($result, $get_info);
             }
         }
+        
         return $result;
     }
 }
