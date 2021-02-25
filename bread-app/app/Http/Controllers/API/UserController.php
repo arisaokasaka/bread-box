@@ -66,7 +66,6 @@ class UserController extends Controller
         return $user->index_user($user_uuid);
     }
 
-
     /**
      * お気に入り情報更新
      *
@@ -84,7 +83,7 @@ class UserController extends Controller
             $store_list = json_decode($favorite_info);
             $key = array_search($store_uuid, $store_list);
             
-            if($key!== false) {
+            if($key !== false) {
                 array_splice($store_list, $key, 1);
             }else{
                 array_push($store_list, $store_uuid);
@@ -121,6 +120,66 @@ class UserController extends Controller
             foreach($store_list as $store_uuid){
                 $get_info = $user->get_storeInfo($store_uuid);
                 $get_info['favorite_checked'] = true;
+                array_push($result, $get_info);
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * 行ってみたいリストの情報更新
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function update_interested(Request $request) {
+        $user = new User();
+        $user_uuid = $request->input('uuid');
+        $store_uuid = $request->input('store_uuid');
+        $get_info = $user->index_interested($user_uuid);
+        $interested_info = $get_info[0]->interested;
+
+        if($interested_info) {
+            $store_list = json_decode($interested_info);
+            $key = array_search($store_uuid, $store_list);
+            
+            if($key !== false) {
+                array_splice($store_list, $key, 1);
+            }else{
+                array_push($store_list, $store_uuid);
+            }
+
+            if(empty($store_list)){
+                $json_store = null;
+            }else{
+                $json_store = json_encode($store_list);
+            }
+
+        }else{
+            $array_store = [];
+            array_push($array_store, $store_uuid);
+            $json_store = json_encode($array_store);
+        }
+        $user->update_interested($user_uuid, $json_store);
+    }
+
+    /**
+     * 行ってみたいリストの店舗情報を取得
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function index_interested_list(Request $request) {
+        $user = new User();
+        $user_uuid = $request->input('uuid');
+        $get_info = $user->index_interested($user_uuid);
+        $store_list = json_decode($get_info[0]->interested);
+        $result = [];
+
+        if($store_list){
+            foreach($store_list as $store_uuid){
+                $get_info = $user->get_storeInfo($store_uuid);
+                $get_info['interested_checked'] = true;
                 array_push($result, $get_info);
             }
         }

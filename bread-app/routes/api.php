@@ -36,6 +36,8 @@ Route::post('/update_basicInfo_usersTable', 'Api\UserController@update_basicInfo
 Route::post('/index_user', 'Api\UserController@index_user');
 Route::post('/update_favorite', 'Api\UserController@update_favorite');
 Route::post('/index_favorite_list', 'Api\UserController@index_favorite_list');
+Route::post('/update_interested', 'Api\UserController@update_interested');
+Route::post('/index_interested_list', 'Api\UserController@index_interested_list');
 
 //StoreController
 Route::post('/create_store', 'Api\StoreController@create_store');
@@ -49,6 +51,7 @@ Route::post('/update_businessDay', 'Api\StoreController@update_businessDay');
 Route::post('/save_storeImages', 'Api\StoreController@save_storeImages');
 Route::post('/store_pickup', 'Api\StoreController@store_pickup');
 Route::post('/store_ranking', 'Api\StoreController@store_ranking');
+Route::post('/get_uuid', 'Api\StoreController@get_uuid');
 
 //Store_menuController
 Route::post('/create_store_menu', 'Api\StoreMenuController@create_store_menu');

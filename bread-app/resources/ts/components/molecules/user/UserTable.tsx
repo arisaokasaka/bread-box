@@ -2,31 +2,7 @@ import React, { useState } from 'react';
 import UserTable_favorite from './UserTable_favorite';
 import UserTable_interested from './UserTable_interested';
 
-type UserProps = ({
-    UserInfo: any;
-});
-
-const testInfoInterested = [
-    {
-        name: 'りりり',
-        address: 'dsdsdsdsdsdsd',
-        business_day: 'sasa',
-        busines_memo: '定休日！！！',
-        message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
-        sns: {twitter: 'twitter', instagram: 'sssss'},
-        star: 3.3,
-    },{
-        name: 'ぱんちゃん',
-        address: 'dsdsdsdsdsdsd',
-        business_day: 'sasa',
-        busines_memo: '定休日！！！',
-        message: 'おいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいしおいし',
-        sns: {twitter: 'twitter', instagram: 'sssss'},
-        star: 4.0
-    }
-]
-
-const UserTable: React.FC<UserProps> = ({UserInfo}) => {
+const UserTable: React.FC = () => {
     const [ Table, setTable ] = useState('favorite');
 
     const TabFavorite = {
@@ -87,7 +63,7 @@ const UserTable: React.FC<UserProps> = ({UserInfo}) => {
             return <UserTable_favorite/>
             break;
         case 'interested':
-            return <UserTable_interested StoreInfo = {testInfoInterested}/>
+            return <UserTable_interested/>
             break;
         case 'stamp':
             return <h2>stamp</h2>
