@@ -163,6 +163,7 @@ class Store extends Model
             'users.name',
             'users.email',
             'users.address',
+            'stores.user_uuid',
             'stores.tel',
             'stores.business_day',
             'stores.business_memo',

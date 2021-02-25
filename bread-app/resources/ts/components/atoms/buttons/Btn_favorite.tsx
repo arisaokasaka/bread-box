@@ -7,17 +7,24 @@ import { UserAuthContext } from '../../../contexts/UserAuthContext';
 
 type InfoProps = ({
     store_uuid: string
+    allInfo?: any;
     index?: any
     favorite_checked?: any
 })
 
-const Btn_favorite: React.FC<InfoProps> = ({store_uuid, favorite_checked, index}) => {
+const Btn_favorite: React.FC<InfoProps> = ({allInfo, store_uuid, favorite_checked, index}) => {
     const { state } = useContext(UserAuthContext);
     const history = useHistory();
     let BtnFavorite: any;
-
-    if(!favorite_checked){
-        favorite_checked = false
+    let info: any;
+    
+    if(allInfo){
+        info = allInfo
+        favorite_checked = info.favorite_checked
+    }else{
+        if(!favorite_checked){
+            favorite_checked = false
+        }
     }
 
     const update_favorite = () => {
