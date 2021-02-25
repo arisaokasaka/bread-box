@@ -127,7 +127,7 @@ class Store extends Model
     public function store_ranking(int $count) {
         $query = $this
         ->newQuery()
-        ->leftjoin('reviews', 'stores.user_uuid', '=', 'reviews.stores_uuid')
+        ->leftjoin('reviews', 'stores.user_uuid', '=', 'reviews.store_uuid')
         ->leftjoin('users', 'stores.user_uuid', '=', 'users.uuid')
         ->orderBy('reviews.star', 'asc')
         ->take($count)
