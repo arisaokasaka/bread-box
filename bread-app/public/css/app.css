@@ -604,13 +604,13 @@ h2 {
 .a-btn-modal-review {
   display: inline-block;
   width: 8.5rem;
-  height: 25px;
-  line-height: 25px;
+  height: 30px;
+  line-height: 30px;
   font-size: 0.7rem;
   background-color: #7c4920;
   text-align: center;
   border: none;
-  border-radius: 2px;
+  border-radius: 15px;
   font-weight: 450;
   color: #fafafa;
   cursor: pointer;
@@ -1075,13 +1075,23 @@ label.a-label-required__red::after {
 }
 
 .ReactModal__Content .m-modal-review__form > label {
-  margin-top: 10px;
-  font-weight: 450;
+  color: #67491b;
+  margin-top: 20px;
+  font-weight: 550;
 }
 
 .ReactModal__Content .m-modal-review__form > p {
   font-size: 0.7rem;
-  color: #67491b;
+}
+
+.ReactModal__Content .m-modal-review__form > select {
+  outline: none;
+  border: 1px solid #8d8c8c;
+  border-radius: 2px;
+}
+
+.ReactModal__Content .m-modal-review__form > select:focus {
+  box-shadow: 0 0 6px 0 #c47d2c;
 }
 
 .ReactModal__Content .m-modal-review__form > input {
@@ -1095,20 +1105,34 @@ label.a-label-required__red::after {
   background-color: #7c4920;
   font-weight: 450;
   letter-spacing: 2px;
+  height: 2rem;
+  cursor: pointer;
 }
 
 .ReactModal__Content .m-modal-review__form > input[type="submit"]:hover {
   background-color: #493020;
 }
 
-.ReactModal__Content .m-modal-review__form > textarea {
+@media screen and (min-width: 600px) {
+  .ReactModal__Content .m-modal-review__form > input[type="submit"] {
+    margin-top: 20px;
+  }
+}
+
+.ReactModal__Content .m-modal-review__form textarea#comment {
+  border: 1px solid #8d8c8c;
   border-radius: 2px;
   height: 100px;
+  width: 250px;
+}
+
+.ReactModal__Content .m-modal-review__form textarea#comment:focus {
+  box-shadow: 0 0 6px 0 #c47d2c;
 }
 
 @media screen and (min-width: 600px) {
-  .ReactModal__Content .m-modal-review__form > textarea {
-    width: 15rem;
+  .ReactModal__Content .m-modal-review__form textarea#comment {
+    width: 20rem;
   }
 }
 
@@ -1362,6 +1386,12 @@ label.a-label-required__red::after {
 @media screen and (min-width: 600px) {
   .m-store-ranking__list__item > img {
     height: 130px;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .m-store-ranking__list__item > img {
+    height: 150px;
   }
 }
 
@@ -1809,6 +1839,15 @@ label.a-label-required__red::after {
   min-height: 6rem;
 }
 
+.m-store-pickup__title {
+  color: #67491b;
+}
+
+.m-store-pickup__title > svg {
+  margin-right: 6px;
+  transform: rotate(45deg);
+}
+
 .m-store-pickup__list {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1844,6 +1883,16 @@ label.a-label-required__red::after {
 }
 
 @media screen and (min-width: 960px) {
+  .m-store-pickup__list__item > img {
+    height: 150px;
+  }
+}
+
+.p-top .m-store-pickup__title > svg {
+  display: none;
+}
+
+@media screen and (min-width: 960px) {
   .p-top .m-store-pickup {
     margin-top: 20px;
   }
@@ -1867,6 +1916,10 @@ label.a-label-required__red::after {
 
 .p-search .m-store-pickup {
   display: none;
+}
+
+.p-search .m-store-pickup__title {
+  font-size: 1.1rem;
 }
 
 @media screen and (min-width: 600px) {
@@ -2271,11 +2324,24 @@ label.a-label-required__red::after {
   }
 }
 
+.m-review-list__count > p {
+  font-size: 0.9rem;
+}
+
+.m-review-list__count > p > span {
+  font-size: 1rem;
+  font-weight: 550;
+  margin: 0 2px;
+}
+
 .m-review-list__item {
   display: grid;
   grid-template-columns: 40px 1fr;
   background-color: #fafafa;
   padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  border: 1px #c9c9c9 solid;
 }
 
 .m-review-list__item > img {
@@ -3205,9 +3271,15 @@ label.a-label-required__red::after {
 
 @media screen and (min-width: 600px) {
   .p-review__container {
-    grid-template-columns: 1fr 25%;
-    -moz-column-gap: 20px;
-         column-gap: 20px;
+    grid-template-columns: 1fr 170px;
+    -moz-column-gap: 25px;
+         column-gap: 25px;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .p-review__container {
+    grid-template-columns: 1fr 200px;
   }
 }
 
@@ -3216,14 +3288,11 @@ label.a-label-required__red::after {
 }
 
 .p-review__container__table {
-  background-color: #fae6c9;
-  padding: 20px;
   margin: 20px 0;
 }
 
 .p-review__container > aside {
   border-radius: 2px;
-  padding: 10px;
 }
 
 .p-store-edit {

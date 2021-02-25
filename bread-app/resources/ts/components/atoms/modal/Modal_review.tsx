@@ -55,7 +55,6 @@ const ModalCreateReview: React.FC<StoreInfoProps> = ({store_uuid}) =>{
         )
     }
     
-
     return(
         <div className = "m-modal-review">
             <div>
@@ -76,7 +75,8 @@ const ModalCreateReview: React.FC<StoreInfoProps> = ({store_uuid}) =>{
                         
                         <label htmlFor="star" className="a-label-required">5段階で評価してください。</label>
                         <p>5が最も高い評価となります。</p>
-                        <select name="star" id="star" ref={register({required: true})}>    
+                        <select name="star" id="star" ref={register({required: true})}> 
+                            <option hidden>選択してください</option>
                             <option value="5">5</option>
                             <option value="4">4</option>
                             <option value="3">3</option>
@@ -86,7 +86,7 @@ const ModalCreateReview: React.FC<StoreInfoProps> = ({store_uuid}) =>{
                         {errors.name && <p>評価は必須です。</p>}
 
                         <label htmlFor="comment" className="a-label-required">コメント</label>
-                        <textarea name="comment" id="comment" ref={register}/>
+                        <textarea name="comment" id="comment" placeholder="[任意]レビューや感想を記入してください。" ref={register}/>
                         
                         <input type="submit" value="投稿する"/>
                     </form>

@@ -10,6 +10,7 @@ const ReviewList: React.FC<ReviewProps> = ({store_uuid}) => {
     const [ review, setReview ] = useState([]);
     let review_list: any = [];
     let review_count: number = 0;
+    let message_no_review: any = null;
 
     useEffect(()=>{
         getReviewInfo();
@@ -18,6 +19,10 @@ const ReviewList: React.FC<ReviewProps> = ({store_uuid}) => {
     if(review){
         review_list = review;
         review_count = review_list.length;
+    }
+
+    if(review_count===0){
+        message_no_review = <p>まだレビューがありません。</p>
     }
     
     const getReviewInfo = () => {
@@ -31,10 +36,13 @@ const ReviewList: React.FC<ReviewProps> = ({store_uuid}) => {
 
     return (
         <div className ="m-review-list">
-            <h4>{review_count}件</h4>
-            {review_list.map((el)=>{
+            <div className ="m-review-list__count">
+                <p>全<span>{review_count}</span>件</p>
+            </div>
+            {message_no_review}
+            {review_list.map((el, index)=>{
                 return(
-                    <div className ="m-review-list__item" key={el.uuid}>
+                    <div className ="m-review-list__item" key={"review_"+index}>
                         <img src="/images/croissant.jpg" alt="投稿者のアイコン"/>
                         <div className ="m-review-list__item__content">
                             <Score

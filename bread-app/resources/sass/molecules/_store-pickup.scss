@@ -1,4 +1,12 @@
 .m-store-pickup {
+    &__title {
+        color: $font-color-brown;
+        & > svg {
+            margin-right: 6px;
+            transform: rotate(45deg);
+        }
+    }
+
     &__list {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -25,6 +33,10 @@
                 @include bp-600up {
                     height: 130px;
                 }
+
+                @include bp-960up {
+                    height: 150px;
+                }
             }
         }
     }
@@ -33,6 +45,12 @@
 //トップページの場合
 .p-top {
     .m-store-pickup {
+        &__title {
+            & > svg {
+                display: none;
+            }
+        }
+
         @include bp-960up {
             margin-top: $mp-xs;
         }
@@ -63,6 +81,10 @@
 .p-search {
     .m-store-pickup {
         display: none;
+
+        &__title {
+            font-size: 1.1rem;
+        }
 
         @include bp-600up {
             display: block;

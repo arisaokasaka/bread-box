@@ -1,9 +1,24 @@
 .m-review-list {
+    &__count {
+        & > p {
+            font-size: 0.9rem;
+
+            & > span {
+                font-size: 1rem;
+                font-weight: 550;
+                margin: 0 2px;
+            }
+        }
+    }
+
     &__item {
         display: grid;
         grid-template-columns: 40px 1fr;
         background-color: $white;
         padding: $mp-xxs;
+        margin-bottom: 5px;
+        border-radius: $base-radius;
+        border: 1px $lightestGray solid;
 
         & > img {
             height: 30px;

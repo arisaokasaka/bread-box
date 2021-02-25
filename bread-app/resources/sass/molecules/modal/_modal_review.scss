@@ -17,13 +17,23 @@
             font-size: 0.9rem;
 
             & > label {
-                margin-top: $mp-xxs;
-                font-weight: 450;
+                color: $font-color-brown;
+                margin-top: $mp-xs;
+                font-weight: 550;
             }
 
             & > p {
                 font-size: 0.7rem;
-                color: $font-color-brown;
+            }
+
+            & > select {
+                outline: none;
+                border: 1px solid $textGray;
+                border-radius: $sm-radius;
+
+                &:focus {
+                    @include focusShadow;
+                }
             }
 
             & > input {
@@ -36,19 +46,31 @@
                     background-color: $darkBrown;
                     font-weight: 450;
                     letter-spacing: 2px;
+                    height: 2rem;
+                    cursor: pointer;
 
                     &:hover {
                         background-color: $darkestBrown;
                     }
+
+                    @include bp-600up {
+                        margin-top: $mp-xs;
+                    }
                 }
             }
 
-            & > textarea {
+            & textarea#comment {
+                border: 1px solid $textGray;
                 border-radius: $sm-radius;
                 height: 100px;
+                width: 250px;
+
+                &:focus {
+                    @include focusShadow;
+                }
 
                 @include bp-600up {
-                    width: 15rem;
+                    width: 20rem;
                 }
             }
         }

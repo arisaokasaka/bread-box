@@ -6,8 +6,12 @@
         display: grid;
 
         @include bp-600up {
-            grid-template-columns: 1fr 25%;
-            column-gap: $mp-xs;
+            grid-template-columns: 1fr 170px;
+            column-gap: 25px;
+        }
+
+        @include bp-960up {
+            grid-template-columns: 1fr 200px;
         }
 
         &__info {
@@ -15,14 +19,11 @@
         }
 
         &__table {
-            background-color: $lightBrown;
-            padding: $mp-xs;
             margin: $mp-xs 0;
         }
 
         & > aside {
             border-radius: $sm-radius;
-            padding: $mp-xxs;
         }
     }
 }
