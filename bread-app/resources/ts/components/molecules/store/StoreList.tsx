@@ -67,8 +67,7 @@ const StoreList: React.FC<StoreProps> = ({StoreInfo}) => {
                                 Week = {Week.week}
                             />
                             <Score
-                                score = {el.star}
-                                store_uuid = {el.user_uuid}
+                                scoreInfo = {el.scoreInfo}
                             />
                         </div>
                     </div>

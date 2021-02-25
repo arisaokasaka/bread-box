@@ -27,7 +27,7 @@ const Score: React.FC<ScoreProps> = ({scoreInfo}) => {
                         </div>
                         <span className="a-score__container__result__stars__frame">☆☆☆☆☆</span>
                     </div>
-                    <h3>{score===0 && ''}</h3>
+                    <h3>{score===0 ? '' : score}</h3>
                 </div>
                 <p className ="a-score__container__comment">
                     <FontAwesomeIcon icon={faCommentDots}/>
