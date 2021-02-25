@@ -1,4 +1,4 @@
-//モバイルメニュー
+// モバイルメニュー
 .c-btn-menu-mobile {
     background-color: transparent;
     margin-right: 2rem;
@@ -30,7 +30,7 @@
 
 // お気に入りボタン
 .a-btn-favorite {
-    margin: 0 1px;
+    margin: 0 2px;
 
     & > input[type="checkbox"] {
         display: none;
@@ -102,9 +102,9 @@
     }
 }
 
-//行ってみたいボタン
+// 行ってみたいボタン
 .a-btn-interested {
-    margin: 0 1px;
+    margin: 0 2px;
     & > input[type="checkbox"] {
         display: none;
 
@@ -176,7 +176,7 @@
     }
 }
 
-//店舗編集ボタン
+// 店舗編集ボタン
 .a-btn-storeEdit {
     @include btn-rounded($color: $darkGray, $background-color: $lightestBrown);
     margin-right: 0.5rem;
@@ -205,7 +205,7 @@
     }
 }
 
-//条件変更ボタン
+// 条件変更ボタン
 .a-btn-modificate {
     display: flex;
     justify-content: flex-end;
@@ -240,7 +240,7 @@
     }
 }
 
-//ホームページへのボタンとSNSへのボタン
+// ホームページへのボタンとSNSへのボタン
 .a-btn-modal-sns,
 .a-btn-homepage > a {
     display: inline-block;
@@ -273,7 +273,7 @@
     }
 }
 
-//ログイン・検索・マイページボタン（アイコン）
+// ログイン・検索・マイページボタン（アイコン）
 .a-btn-search_icon,
 .a-btn-logIn,
 .a-btn-mypage {
@@ -309,7 +309,7 @@
     }
 }
 
-//マイページボタン補足スタイル
+// マイページボタン補足スタイル
 .l-navbar__container--pc__content__nav--loggedin {
     .a-btn-mypage {
         @include bp-960up {
@@ -324,7 +324,7 @@
     }
 }
 
-//ユーザーマイページの編集ボタン
+// ユーザーマイページの編集ボタン
 .a-btn-edit-user {
     display: flex;
     justify-content: center;
@@ -362,7 +362,7 @@
     }
 }
 
-//ユーザーマイページのログアウトボタン
+// ユーザーマイページのログアウトボタン
 .a-btn-logout {
     display: flex;
     justify-content: flex-end;
@@ -382,7 +382,7 @@
     }
 }
 
-//店舗ページのログアウトボタン
+// 店舗ページのログアウトボタン
 .m-store-edit-table__nav__others {
     .a-btn-logout {
         display: static;
@@ -399,7 +399,7 @@
     }
 }
 
-//レビューモーダルのボタン
+// レビューモーダルのボタン
 .a-btn-modal-review {
     display: inline-block;
     width: 8.5rem;
@@ -419,7 +419,7 @@
     }
 }
 
-//戻るボタン
+// 戻るボタン
 .a-btn-back {
     display: flex;
     flex-direction: column;
@@ -441,7 +441,7 @@
     }
 }
 
-//保存ボタン
+// 保存ボタン
 .a-btnSave {
     @include bg_GradationBrown;
     position: relative;
@@ -457,7 +457,7 @@
     }
 }
 
-//メニュー編集ボタン
+// メニュー編集ボタン
 .a-btn-editMenu {
     @include bg_GradationBrown;
     position: relative;
@@ -480,7 +480,7 @@
     }
 }
 
-//削除ボタン
+// 削除ボタン
 .a-btn-deleteMenu {
     background: linear-gradient(
         180deg,

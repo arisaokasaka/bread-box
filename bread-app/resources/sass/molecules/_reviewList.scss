@@ -1,7 +1,13 @@
-.m-review-list {
+.m-review {
+    &__btn {
+        display: flex;
+        justify-content: flex-end;
+    }
+
     &__count {
         & > p {
             font-size: 0.9rem;
+            margin-bottom: 5px;
 
             & > span {
                 font-size: 1rem;
@@ -18,7 +24,6 @@
         padding: $mp-xxs;
         margin-bottom: 5px;
         border-radius: $base-radius;
-        border: 1px $lightestGray solid;
 
         & > img {
             height: 30px;
