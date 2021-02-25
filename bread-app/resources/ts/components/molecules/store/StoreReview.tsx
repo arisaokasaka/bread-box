@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Score from '../atoms/Score';
+import Score from '../../atoms/Score';
+import ModalCreateReview from '../../atoms/modal/Modal_review';
 
 type ReviewProps = ({
     store_uuid: string
 })
 
-const ReviewList: React.FC<ReviewProps> = ({store_uuid}) => {
+const StoreReview: React.FC<ReviewProps> = ({store_uuid}) => {
     const [ review, setReview ] = useState([]);
     let review_list: any = [];
     let review_count: number = 0;
@@ -35,16 +36,21 @@ const ReviewList: React.FC<ReviewProps> = ({store_uuid}) => {
     }
 
     return (
-        <div className ="m-review-list">
-            <div className ="m-review-list__count">
+        <div className ="m-review">
+            <div className="m-review__btn">
+                <ModalCreateReview
+                    store_uuid={store_uuid}
+                />
+            </div>
+            <div className ="m-review__count">
                 <p>全<span>{review_count}</span>件</p>
             </div>
             {message_no_review}
             {review_list.map((el, index)=>{
                 return(
-                    <div className ="m-review-list__item" key={"review_"+index}>
+                    <div className ="m-review__item" key={"review_"+index}>
                         <img src="/images/croissant.jpg" alt="投稿者のアイコン"/>
-                        <div className ="m-review-list__item__content">
+                        <div className ="m-review__item__content">
                             <Score
                                 score= {el.star}
                                 store_uuid = {el.store_uuid}
@@ -58,4 +64,4 @@ const ReviewList: React.FC<ReviewProps> = ({store_uuid}) => {
     )
 }
 
-export default ReviewList;
+export default StoreReview;

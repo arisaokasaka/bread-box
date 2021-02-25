@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import StoreMenu from './StoreMenu';
 import StoreSpirit from './StoreSpirit';
+import StoreReview from './StoreReview';
 
 type InfoProps = ({
     menuInfo : Array<any>
+    store_uuid: string
 })
 
-const StoreContents: React.FC<InfoProps> = ({menuInfo}) => {
+const StoreContents: React.FC<InfoProps> = ({menuInfo, store_uuid}) => {
     const [table, setTable] = useState('menu');
     
     const SectionMenu = {
@@ -16,11 +18,11 @@ const StoreContents: React.FC<InfoProps> = ({menuInfo}) => {
         function: handleMenu,
     }
     
-    const SectionStamp = {
+    const SectionReview = {
         class: "m-store-contents__tab--stamp",
-        table: "stamp",
-        value: "スタンプカード",
-        function: handleStamp,
+        table: "review",
+        value: "口コミ",
+        function: handleReview,
     }
     
     const SectionSpirit = {
@@ -34,8 +36,8 @@ const StoreContents: React.FC<InfoProps> = ({menuInfo}) => {
         setTable('menu');
     }
 
-    function handleStamp(){
-        setTable('stamp');
+    function handleReview(){
+        setTable('review');
     }
 
     function handleSpirit(){
@@ -55,11 +57,11 @@ const StoreContents: React.FC<InfoProps> = ({menuInfo}) => {
         case 'menu':
             return <StoreMenu Menu = {menuInfo}/>
             break;
-        case 'stamp':
-            return <h2>stamp</h2>
-            break;
         case 'spirit':
             return <StoreSpirit Spirit = {menuInfo}/>
+            break;
+        case 'review':
+            return <StoreReview store_uuid={store_uuid}/>
             break;
         }
     }
@@ -68,8 +70,8 @@ const StoreContents: React.FC<InfoProps> = ({menuInfo}) => {
         <div className = "m-store-contents">
             <div className = "m-store-contents__tab">
                 {StoreTab(SectionMenu)}
-                {StoreTab(SectionStamp)}
                 {StoreTab(SectionSpirit)}
+                {StoreTab(SectionReview)}
             </div>
             <div className = "m-store-contents__container">
                 <div className = "m-store-contents__container__table">

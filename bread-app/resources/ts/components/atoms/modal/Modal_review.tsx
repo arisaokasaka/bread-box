@@ -30,10 +30,10 @@ const ModalCreateReview: React.FC<StoreInfoProps> = ({store_uuid}) =>{
         axios.post("/api/create_review", data)
         .then(res => {
             setModal(false);
-            alert('レビューを投稿しました。')
+            alert('口コミを投稿しました。')
         })
         .catch(err => {
-            alert('レビューの投稿に失敗しました。')
+            alert('口コミの投稿に失敗しました。')
         });
     }
 
@@ -42,7 +42,7 @@ const ModalCreateReview: React.FC<StoreInfoProps> = ({store_uuid}) =>{
     if(state.uuid && state.auth==="user"){
         btnReview = (
             <button onClick={()=>setModal(true)} className = "a-btn-modal-review">
-                <FontAwesomeIcon icon={faPen}/>&nbsp;&nbsp;レビューを書く
+                <FontAwesomeIcon icon={faPen}/>&nbsp;口コミを投稿する
             </button>
         )
     }else if(state.uuid && state.auth==="store"){
@@ -50,7 +50,7 @@ const ModalCreateReview: React.FC<StoreInfoProps> = ({store_uuid}) =>{
     }else{
         btnReview = (
             <Link to="login_user" className = "a-btn-modal-review">
-                <FontAwesomeIcon icon={faPen}/>&nbsp;&nbsp;レビューを書く
+                <FontAwesomeIcon icon={faPen}/>&nbsp;口コミを投稿する
             </Link>
         )
     }

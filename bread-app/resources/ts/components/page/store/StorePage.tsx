@@ -25,7 +25,6 @@ const StorePage: React.FC = () => {
             user_type: state.auth
         })
         .then(res => {
-            console.log(res.data)
             setStoreInfo(res.data)
         })
         .catch(err => {
@@ -60,6 +59,7 @@ const StorePage: React.FC = () => {
                             />
                             <StoreContents
                                 menuInfo = {menuInfo}
+                                store_uuid = {user_uuid}
                             />
                         </div> 
                         <StoreSubInfo
