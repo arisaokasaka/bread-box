@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\UploadedFile;
@@ -130,6 +131,22 @@ class UserController extends Controller
                         if($get_info['user_uuid']===$interested){
                             $get_info['interested_checked'] = true;
                         }
+
+                        $review = new Review;
+                        $count = 0;
+                        $score_total = 0;
+                        $star_list = $review->get_star($get_info['user_uuid']);
+                        
+                        if(count($star_list)!==0){
+                            foreach($star_list as $item) {
+                                $score_total = $score_total + $item['star'];
+                                $count = $count + 1;
+                            }
+                            $score = $score_total/$count;
+                            $get_info['scoreInfo'] = array( 'score' => $score, 'count' => $count);
+                        }else{
+                            $get_info['scoreInfo'] = array( 'score' => 0, 'count' => 0);
+                        }
                     }
                 }
 
@@ -202,9 +219,24 @@ class UserController extends Controller
                         if($get_info['user_uuid']===$favorite){
                             $get_info['favorite_checked'] = true;
                         }
+
+                        $review = new Review;
+                        $count = 0;
+                        $score_total = 0;
+                        $star_list = $review->get_star($get_info['user_uuid']);
+
+                        if(count($star_list)!==0){
+                            foreach($star_list as $item) {
+                                $score_total = $score_total + $item['star'];
+                                $count = $count + 1;
+                            }
+                            $score = $score_total/$count;
+                            $get_info['scoreInfo'] = array( 'score' => $score, 'count' => $count);
+                        }else{
+                            $get_info['scoreInfo'] = array( 'score' => 0, 'count' => 0);
+                        }
                     }
                 }
-
                 array_push($result, $get_info);
             }
         }
