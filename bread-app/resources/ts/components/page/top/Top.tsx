@@ -30,11 +30,6 @@ const Top: React.FC = () => {
                 sectionTitle="パンの種類から探す"
                 sectionContent={bread_kinds.bread_kinds}
                 />
-                {/* <Top_section 
-                key="day"
-                sectionTitle="営業日から探す"
-                sectionContent={days.days}
-                /> */}
                 <Store_pickup />
                 <StoreRanking />
             </main>
