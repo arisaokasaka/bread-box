@@ -15,7 +15,8 @@ const StoreSubInfo: React.FC<StoreInfoProps> = ({storeInfo}) => (
             <div className = "m-store-subInfo__container__item">
                 {storeInfo.star &&
                     <Score
-                        ScoreStar = {storeInfo.star}
+                        score = {storeInfo.star}
+                        store_uuid = {storeInfo.user_uuid}
                     />
                 }
             </div>

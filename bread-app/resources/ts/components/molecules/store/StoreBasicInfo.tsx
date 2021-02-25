@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import Btn_favorite from '../../atoms/buttons/Btn_favorite';
 import Btn_interested from '../../atoms/buttons/Btn_interested';
 import BtnStoreEdit from '../../atoms/buttons/BtnStoreEdit';
@@ -32,7 +31,8 @@ const StoreBasicInfo: React.FC<StoreInfoProps> = ({storeInfo}) => {
                 <p className = "m-store-basicInfo__message">{storeInfo.message}</p>
                 {/* レビューページ用のスコア */}
                 <Score
-                    ScoreStar={storeInfo.star}
+                    score={storeInfo.star}
+                    store_uuid={storeInfo.user_uuid}
                 />
             </div>
             {/* モバイル用のsubInfo */}
