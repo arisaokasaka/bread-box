@@ -12,6 +12,7 @@ const UserProf: React.FC = () => {
     let userInfo: any;
     let favorite_count: number = 0;
     let interested_count: number = 0;
+    let review_count: number = 0;
 
     useEffect(()=>{
         index_user();
@@ -29,6 +30,10 @@ const UserProf: React.FC = () => {
 
     if(info){
         userInfo = info;
+
+        if(userInfo.review_count){
+            review_count = userInfo.review_count;
+        }
 
         if(userInfo.favorite){
             let favorite_list = JSON.parse(userInfo.favorite);
@@ -74,8 +79,8 @@ const UserProf: React.FC = () => {
                             <p>{interested_count}</p>
                         </div>
                         <div className = "m-user-prof__container__content__text__item">
-                            <p><span><FontAwesomeIcon icon={faCommentDots}/></span>レビュー数</p>
-                            <p></p>
+                            <p><span><FontAwesomeIcon icon={faCommentDots}/></span>口コミ数</p>
+                            <p>{review_count}</p>
                         </div>
                         <BtnLogout/>
                     </div>

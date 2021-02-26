@@ -27,7 +27,7 @@ class Review extends Model
     }
 
     /**
-     * レビュー情報取得
+     * レビュー情報取得(store_uuidより)
      *
      * @param string $store_uuid
      * @return void
@@ -44,6 +44,23 @@ class Review extends Model
             'comment',
             'reply',
             'created_at'
+        ])
+        ->get();
+    }
+
+
+    /**
+     * レビュー情報カウント(user_uuidより)
+     *
+     * @param string $user_uuid
+     * @return void
+     */
+    public function count_review(string $user_uuid) {
+        return $this
+        ->newQuery()
+        ->where('user_uuid', '=', $user_uuid)
+        ->select([
+            'uuid',
         ])
         ->get();
     }
