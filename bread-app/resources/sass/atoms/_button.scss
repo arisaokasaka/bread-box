@@ -273,6 +273,29 @@
     }
 }
 
+// レビュー返信ボタン
+.a-btn-modal-reviw-reply {
+    height: 1.4rem;
+    padding: 0 6px;
+    color: $darkBrown;
+    background-color: $white;
+    border: 1px solid $darkBrown;
+    border-radius: 15px;
+    font-size: 0.7rem;
+    font-weight: 550;
+    cursor: pointer;
+
+    & > svg {
+        margin-right: 3px;
+        font-size: 0.7rem;
+    }
+
+    &:hover {
+        background-color: $darkBrown;
+        color: $white;
+    }
+}
+
 // ログイン・検索・マイページボタン（アイコン）
 .a-btn-search_icon,
 .a-btn-logIn,

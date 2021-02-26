@@ -37,5 +37,31 @@
                 font-size: 0.8rem;
             }
         }
+
+        &__reply {
+            grid-column-start: 2;
+            grid-column-end: 4;
+            margin-top: 7px;
+            border-left: 1px solid $lightGray;
+            padding-left: 5px;
+
+            & > p {
+                &:nth-child(1) {
+                    font-size: 0.75rem;
+                    font-weight: 550;
+                }
+
+                &:nth-child(2) {
+                    font-size: 0.75rem;
+                }
+            }
+        }
+
+        &__btn {
+            grid-column-start: 1;
+            grid-column-end: 4;
+            display: flex;
+            justify-content: flex-end;
+        }
     }
 }
