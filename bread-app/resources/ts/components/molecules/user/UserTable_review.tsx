@@ -33,6 +33,13 @@ const UserTable_review: React.FC = () => {
 
     const delete_review = (review_uuid, index) => {
         toggleDialogue(index);
+        axios.post("/api/delete_review", {review_uuid: review_uuid})
+        .then(res => {
+            alert('削除しました。')
+        })
+        .catch(err => {
+            alert('削除に失敗しました。')
+        });
     }
 
     const toggleDialogue = (index) => {

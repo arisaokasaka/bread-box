@@ -21813,6 +21813,13 @@ var UserTable_review = function UserTable_review() {
 
   var delete_review = function delete_review(review_uuid, index) {
     toggleDialogue(index);
+    axios_1["default"].post("/api/delete_review", {
+      review_uuid: review_uuid
+    }).then(function (res) {
+      alert('削除しました。');
+    })["catch"](function (err) {
+      alert('削除に失敗しました。');
+    });
   };
 
   var toggleDialogue = function toggleDialogue(index) {

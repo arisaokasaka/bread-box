@@ -87,6 +87,19 @@ class Review extends Model
     }
 
     /**
+     * レビューレコード削除
+     *
+     * @param string $review_uuid
+     * @return void
+     */
+    public function delete_review(string $review_uuid) {
+        return $this
+        ->newQuery()
+        ->where('uuid', '=', $review_uuid)
+        ->delete();
+    }
+
+    /**
      * スコアのみ取得
      *
      * @param string $store_uuid

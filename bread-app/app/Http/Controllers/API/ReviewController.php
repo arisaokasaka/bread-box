@@ -65,6 +65,18 @@ class ReviewController extends Controller
     }
 
     /**
+     * レビューレコード削除
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function delete_review(Request $request) {
+        $review = new Review;
+        $review_uuid = $request->input('review_uuid');
+        $review->delete_review($review_uuid);
+    }
+
+    /**
      * 星のスコアをカウント
      *
      * @param Request $request
