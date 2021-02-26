@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import ScoreUser from '../../atoms/ScoreUser';
 import ModalCreateReview from '../../atoms/modal/Modal_review';
+import ModalReviewReply from '../../atoms/modal/Modal_review_reply';
+import { UserAuthContext } from '../../../contexts/UserAuthContext';
 
 type ReviewProps = ({
     store_uuid: string
@@ -9,6 +11,7 @@ type ReviewProps = ({
 
 const StoreReview: React.FC<ReviewProps> = ({store_uuid}) => {
     const [ review, setReview ] = useState([]);
+    const { state } = useContext(UserAuthContext);
     let review_list: any = [];
     let review_count: number = 0;
     let message_no_review: any = null;
@@ -49,13 +52,27 @@ const StoreReview: React.FC<ReviewProps> = ({store_uuid}) => {
             {review_list.map((el, index)=>{
                 return(
                     <div className ="m-review__item" key={"review_"+index}>
-                        <img src="/images/croissant.jpg" alt="投稿者のアイコン"/>
+                        {el.image_profile ? 
+                        <img src={"/storage/user/"+el.user_uuid+"/profile.jpg"} alt="投稿者のアイコン"/>
+                        : <img src="/images/no_image_user.jpg" alt="投稿者のアイコン"/>}
                         <div className ="m-review__item__content">
                             <ScoreUser
                                 score={el.star}
                             />
                             <p>{el.comment}</p>
                         </div>
+                        {el.reply ?
+                            <div className ="m-review__item__reply">
+                                <p>オーナーからの返信</p>
+                                <p>{el.reply}</p>
+                            </div>
+                        : state.uuid===el.store_uuid && 
+                            <div className="m-review__item__btn">
+                                <ModalReviewReply
+                                    review_uuid={el.uuid}
+                                />
+                            </div>
+                        }
                     </div>
                 )
             })}

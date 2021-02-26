@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class ReviewController extends Controller
 {
@@ -29,7 +30,14 @@ class ReviewController extends Controller
     public function index_review(Request $request) {
         $review = new Review;
         $store_uuid = $request->input('store_uuid');
-        return $review->index_review($store_uuid);
+        $review_list = $review->index_review($store_uuid);
+        
+        foreach($review_list as $review_item){
+            $user_uuid = $review_item['user_uuid'];
+            $review_item['image_profile'] = Storage::exists("public/user/" . $user_uuid . "/profile.jpg");
+        }
+
+        return $review_list;
     }
 
     /**
