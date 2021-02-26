@@ -1,5 +1,6 @@
 .ReactModal__Content {
-    .m-modal-review-reply {
+    .m-modal-review-reply,
+    .m-modal-review-reply-edit {
         &__btn--close {
             display: flex;
             justify-content: flex-end;

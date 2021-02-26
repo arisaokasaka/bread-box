@@ -36,14 +36,18 @@
             & > p {
                 font-size: 0.8rem;
             }
+
+            & > span {
+                font-size: 0.6rem;
+                margin-bottom: 7px;
+            }
         }
 
         &__reply {
             grid-column-start: 2;
             grid-column-end: 4;
-            margin-top: 7px;
+            padding: 2px 5px 0 5px;
             border-left: 1px solid $lightGray;
-            padding-left: 5px;
 
             & > p {
                 &:nth-child(1) {
@@ -54,6 +58,11 @@
                 &:nth-child(2) {
                     font-size: 0.75rem;
                 }
+            }
+
+            &__btn--edit {
+                position: relative;
+                height: 1rem;
             }
         }
 

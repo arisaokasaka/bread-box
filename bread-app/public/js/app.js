@@ -15319,10 +15319,7 @@ var Score = function Score(_a) {
   }
 
   return react_1["default"].createElement("div", {
-    className: "a-score",
-    onClick: function onClick() {
-      return console.log(scoreInfo);
-    }
+    className: "a-score"
   }, react_1["default"].createElement("div", {
     className: "a-score__container"
   }, react_1["default"].createElement("div", {
@@ -17386,6 +17383,151 @@ var ModalReviewReply = function ModalReviewReply(_a) {
   }), errors.reply && react_1["default"].createElement("p", null, "\u8FD4\u4FE1\u5185\u5BB9\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("input", {
     type: "submit",
     value: "\u8FD4\u4FE1\u3092\u6295\u7A3F\u3059\u308B"
+  }))));
+};
+
+exports.default = ModalReviewReply;
+
+/***/ }),
+
+/***/ "./resources/ts/components/atoms/modal/Modal_review_reply_edit.tsx":
+/*!*************************************************************************!*\
+  !*** ./resources/ts/components/atoms/modal/Modal_review_reply_edit.tsx ***!
+  \*************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+
+var react_modal_1 = __importDefault(__webpack_require__(/*! react-modal */ "./node_modules/react-modal/lib/index.js"));
+
+var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
+
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
+var ModalReviewReply = function ModalReviewReply(_a) {
+  var reply = _a.reply,
+      review_uuid = _a.review_uuid;
+
+  var _b = react_1.useState(false),
+      isModalOpen = _b[0],
+      setModal = _b[1];
+
+  var _c = react_hook_form_1.useForm(),
+      register = _c.register,
+      handleSubmit = _c.handleSubmit,
+      errors = _c.errors;
+
+  var customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)'
+    }
+  };
+
+  var onSubmit = function onSubmit(data) {
+    axios_1["default"].post("/api/register_reply", data).then(function (res) {
+      setModal(false);
+      alert('返信を修正しました。');
+    })["catch"](function (err) {
+      alert('返信の修正に失敗しました。');
+    });
+  };
+
+  return react_1["default"].createElement("div", {
+    className: "m-modal-review-reply-edit"
+  }, react_1["default"].createElement("button", {
+    className: "a-btn-modal-reviw-reply-edit",
+    onClick: function onClick() {
+      return setModal(true);
+    }
+  }, "\u4FEE\u6B63\u3059\u308B"), react_1["default"].createElement(react_modal_1["default"], {
+    isOpen: isModalOpen,
+    onRequestClose: function onRequestClose() {
+      return setModal(false);
+    },
+    style: customStyles,
+    ariaHideApp: false
+  }, react_1["default"].createElement("div", {
+    className: "m-modal-review-reply-edit__btn--close"
+  }, react_1["default"].createElement("button", {
+    onClick: function onClick() {
+      return setModal(false);
+    }
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faTimes
+  }))), react_1["default"].createElement("form", {
+    className: "m-modal-review-reply-edit__form",
+    onSubmit: handleSubmit(onSubmit)
+  }, react_1["default"].createElement("input", {
+    type: "hidden",
+    name: "review_uuid",
+    value: review_uuid,
+    ref: register
+  }), react_1["default"].createElement("textarea", {
+    name: "reply",
+    placeholder: "\u53E3\u30B3\u30DF\u3078\u306E\u8FD4\u4FE1\u3092\u8A18\u5165\u3057\u3066\u304F\u3060\u3055\u3044\u3002",
+    defaultValue: reply,
+    ref: register({
+      required: true
+    })
+  }), errors.reply && react_1["default"].createElement("p", null, "\u8FD4\u4FE1\u5185\u5BB9\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("input", {
+    type: "submit",
+    value: "\u8FD4\u4FE1\u3092\u4FEE\u6B63\u3059\u308B"
   }))));
 };
 
@@ -20510,6 +20652,8 @@ var Modal_review_1 = __importDefault(__webpack_require__(/*! ../../atoms/modal/M
 
 var Modal_review_reply_1 = __importDefault(__webpack_require__(/*! ../../atoms/modal/Modal_review_reply */ "./resources/ts/components/atoms/modal/Modal_review_reply.tsx"));
 
+var Modal_review_reply_edit_1 = __importDefault(__webpack_require__(/*! ../../atoms/modal/Modal_review_reply_edit */ "./resources/ts/components/atoms/modal/Modal_review_reply_edit.tsx"));
+
 var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
 var StoreReview = function StoreReview(_a) {
@@ -20542,6 +20686,19 @@ var StoreReview = function StoreReview(_a) {
     }).then(function (res) {
       setReview(res.data);
     })["catch"](function (err) {});
+  }; // 返信を削除
+
+
+  var delete_review_reply = function delete_review_reply(review_uuid) {
+    if (window.confirm('返信を削除します。よろしいですか？')) {
+      axios_1["default"].post("/api/delete_reply", {
+        review_uuid: review_uuid
+      }).then(function (res) {
+        alert('返信を削除しました。');
+      })["catch"](function (err) {
+        alert('削除に失敗しました。');
+      });
+    }
   };
 
   return react_1["default"].createElement("div", {
@@ -20566,9 +20723,19 @@ var StoreReview = function StoreReview(_a) {
       className: "m-review__item__content"
     }, react_1["default"].createElement(ScoreUser_1["default"], {
       score: el.star
-    }), react_1["default"].createElement("p", null, el.comment)), el.reply ? react_1["default"].createElement("div", {
+    }), el.comment && react_1["default"].createElement("p", null, el.comment), react_1["default"].createElement("span", null, "\u6295\u7A3F\u8005:\xA0", el.user_name), react_1["default"].createElement("span", null, "\xA0/\xA0"), react_1["default"].createElement("span", null, "\u6295\u7A3F\u65E5:\xA0", el.created_at.slice(0, 10))), el.reply ? react_1["default"].createElement("div", {
       className: "m-review__item__reply"
-    }, react_1["default"].createElement("p", null, "\u30AA\u30FC\u30CA\u30FC\u304B\u3089\u306E\u8FD4\u4FE1"), react_1["default"].createElement("p", null, el.reply)) : state.uuid === el.store_uuid && react_1["default"].createElement("div", {
+    }, react_1["default"].createElement("p", null, "\u30AA\u30FC\u30CA\u30FC\u304B\u3089\u306E\u8FD4\u4FE1"), react_1["default"].createElement("p", null, el.reply), state.uuid === el.store_uuid && react_1["default"].createElement("div", {
+      className: "m-review__item__reply__btn--edit"
+    }, react_1["default"].createElement(Modal_review_reply_edit_1["default"], {
+      review_uuid: el.uuid,
+      reply: el.reply
+    }), react_1["default"].createElement("button", {
+      className: "a-btn-delete-reply",
+      onClick: function onClick() {
+        return delete_review_reply(el.uuid);
+      }
+    }, "\u524A\u9664\u3059\u308B"))) : state.uuid === el.store_uuid && react_1["default"].createElement("div", {
       className: "m-review__item__btn"
     }, react_1["default"].createElement(Modal_review_reply_1["default"], {
       review_uuid: el.uuid

@@ -467,28 +467,6 @@ h2 {
   }
 }
 
-.a-btn-modal-reviw-reply {
-  height: 1.4rem;
-  padding: 0 6px;
-  color: #7c4920;
-  background-color: #fafafa;
-  border: 1px solid #7c4920;
-  border-radius: 15px;
-  font-size: 0.7rem;
-  font-weight: 550;
-  cursor: pointer;
-}
-
-.a-btn-modal-reviw-reply > svg {
-  margin-right: 3px;
-  font-size: 0.7rem;
-}
-
-.a-btn-modal-reviw-reply:hover {
-  background-color: #7c4920;
-  color: #fafafa;
-}
-
 .a-btn-search_icon,
 .a-btn-logIn,
 .a-btn-mypage {
@@ -737,6 +715,48 @@ h2 {
 
 .a-btn-reset:hover {
   opacity: 0.8;
+}
+
+.a-btn-modal-reviw-reply {
+  height: 1.5rem;
+  padding: 0 7px;
+  color: #8d8c8c;
+  background-color: #fafafa;
+  border: 1px solid #8d8c8c;
+  border-radius: 15px;
+  font-size: 0.7rem;
+  font-weight: 550;
+  cursor: pointer;
+}
+
+.a-btn-modal-reviw-reply > svg {
+  margin-right: 3px;
+  font-size: 0.7rem;
+}
+
+.a-btn-modal-reviw-reply:hover {
+  background-color: #757575;
+  color: #fafafa;
+}
+
+.a-btn-delete-reply,
+.a-btn-modal-reviw-reply-edit {
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  font-size: 0.6rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.a-btn-modal-reviw-reply-edit {
+  left: -6px;
+  bottom: 0px;
+}
+
+.a-btn-delete-reply {
+  left: 42px;
+  bottom: 0px;
 }
 
 .a-score__container {
@@ -1152,34 +1172,40 @@ label.a-label-required__red::after {
   }
 }
 
-.ReactModal__Content .m-modal-review-reply__btn--close {
+.ReactModal__Content .m-modal-review-reply__btn--close,
+.ReactModal__Content .m-modal-review-reply-edit__btn--close {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 10px;
 }
 
-.ReactModal__Content .m-modal-review-reply__btn--close > button {
+.ReactModal__Content .m-modal-review-reply__btn--close > button,
+.ReactModal__Content .m-modal-review-reply-edit__btn--close > button {
   background-color: transparent;
   border: none;
   cursor: pointer;
 }
 
-.ReactModal__Content .m-modal-review-reply__form {
+.ReactModal__Content .m-modal-review-reply__form,
+.ReactModal__Content .m-modal-review-reply-edit__form {
   display: flex;
   flex-direction: column;
   font-size: 0.9rem;
 }
 
-.ReactModal__Content .m-modal-review-reply__form > p {
+.ReactModal__Content .m-modal-review-reply__form > p,
+.ReactModal__Content .m-modal-review-reply-edit__form > p {
   font-size: 0.7rem;
 }
 
-.ReactModal__Content .m-modal-review-reply__form > input {
+.ReactModal__Content .m-modal-review-reply__form > input,
+.ReactModal__Content .m-modal-review-reply-edit__form > input {
   border-radius: 2px;
   margin-top: 2px;
 }
 
-.ReactModal__Content .m-modal-review-reply__form > input[type="submit"] {
+.ReactModal__Content .m-modal-review-reply__form > input[type="submit"],
+.ReactModal__Content .m-modal-review-reply-edit__form > input[type="submit"] {
   background: linear-gradient(0deg, #61391a 0%, #7c4920 100%);
   margin-top: 10px;
   color: #fafafa;
@@ -1189,29 +1215,34 @@ label.a-label-required__red::after {
   cursor: pointer;
 }
 
-.ReactModal__Content .m-modal-review-reply__form > input[type="submit"]:hover {
+.ReactModal__Content .m-modal-review-reply__form > input[type="submit"]:hover,
+.ReactModal__Content .m-modal-review-reply-edit__form > input[type="submit"]:hover {
   opacity: 0.9;
 }
 
 @media screen and (min-width: 600px) {
-  .ReactModal__Content .m-modal-review-reply__form > input[type="submit"] {
+  .ReactModal__Content .m-modal-review-reply__form > input[type="submit"],
+  .ReactModal__Content .m-modal-review-reply-edit__form > input[type="submit"] {
     margin-top: 20px;
   }
 }
 
-.ReactModal__Content .m-modal-review-reply__form textarea {
+.ReactModal__Content .m-modal-review-reply__form textarea,
+.ReactModal__Content .m-modal-review-reply-edit__form textarea {
   border: 1px solid #8d8c8c;
   border-radius: 2px;
   height: 120px;
   width: 250px;
 }
 
-.ReactModal__Content .m-modal-review-reply__form textarea:focus {
+.ReactModal__Content .m-modal-review-reply__form textarea:focus,
+.ReactModal__Content .m-modal-review-reply-edit__form textarea:focus {
   box-shadow: 0 0 6px 0 #c47d2c;
 }
 
 @media screen and (min-width: 600px) {
-  .ReactModal__Content .m-modal-review-reply__form textarea {
+  .ReactModal__Content .m-modal-review-reply__form textarea,
+  .ReactModal__Content .m-modal-review-reply-edit__form textarea {
     width: 20rem;
   }
 }
@@ -2442,12 +2473,16 @@ label.a-label-required__red::after {
   font-size: 0.8rem;
 }
 
+.m-review__item__content > span {
+  font-size: 0.6rem;
+  margin-bottom: 7px;
+}
+
 .m-review__item__reply {
   grid-column-start: 2;
   grid-column-end: 4;
-  margin-top: 7px;
+  padding: 2px 5px 0 5px;
   border-left: 1px solid #a5a5a5;
-  padding-left: 5px;
 }
 
 .m-review__item__reply > p:nth-child(1) {
@@ -2457,6 +2492,11 @@ label.a-label-required__red::after {
 
 .m-review__item__reply > p:nth-child(2) {
   font-size: 0.75rem;
+}
+
+.m-review__item__reply__btn--edit {
+  position: relative;
+  height: 1rem;
 }
 
 .m-review__item__btn {

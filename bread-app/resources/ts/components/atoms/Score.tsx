@@ -18,7 +18,7 @@ const Score: React.FC<ScoreProps> = ({scoreInfo}) => {
     }
     
     return (
-        <div className ="a-score" onClick={()=>console.log(scoreInfo)}>
+        <div className ="a-score">
             <div className ="a-score__container">
                 <div className ="a-score__container__result">
                     <div className="a-score__container__result__stars">
