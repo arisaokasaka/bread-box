@@ -64,8 +64,11 @@ class UserController extends Controller
     public function index_user(Request $request) {
         $user_uuid = $request->input('uuid');
         $user = new User();
+        $review = new Review();
+        $review_list = $review->count_review($user_uuid);
         $get_info = $user->index_user($user_uuid);
-        $get_info['profile'] = Storage::exists("public/user/" . $user_uuid . "profile.jpg");
+        $get_info[0]['profile'] = Storage::exists("public/user/" . $user_uuid . "/profile.jpg");
+        $get_info[0]['review_count'] = count($review->count_review($user_uuid));
         return $get_info;
     }
 
@@ -125,28 +128,28 @@ class UserController extends Controller
             foreach($store_list as $store_uuid){
                 $get_info = $user->get_storeInfo($store_uuid);
                 $get_info['favorite_checked'] = true;
+                $get_info['thumbnail'] = Storage::exists("public/store/" . $store_uuid . "/thumbnail.jpg");
+                $review = new Review;
+                $count = 0;
+                $score_total = 0;
+                $star_list = $review->get_star($get_info['user_uuid']);
+                
+                if(count($star_list)!==0){
+                    foreach($star_list as $item) {
+                        $score_total = $score_total + $item['star'];
+                        $count = $count + 1;
+                    }
+                    $score = $score_total/$count;
+                    $get_info['scoreInfo'] = array( 'score' => $score, 'count' => $count);
+                }else{
+                    $get_info['scoreInfo'] = array( 'score' => 0, 'count' => 0);
+                }
 
                 if($interested_list){
                     foreach($interested_list as $interested){
                         if($get_info['user_uuid']===$interested){
                             $get_info['interested_checked'] = true;
-                        }
-
-                        $review = new Review;
-                        $count = 0;
-                        $score_total = 0;
-                        $star_list = $review->get_star($get_info['user_uuid']);
-                        
-                        if(count($star_list)!==0){
-                            foreach($star_list as $item) {
-                                $score_total = $score_total + $item['star'];
-                                $count = $count + 1;
-                            }
-                            $score = $score_total/$count;
-                            $get_info['scoreInfo'] = array( 'score' => $score, 'count' => $count);
-                        }else{
-                            $get_info['scoreInfo'] = array( 'score' => 0, 'count' => 0);
-                        }
+                        }                        
                     }
                 }
 
@@ -213,34 +216,33 @@ class UserController extends Controller
             foreach($store_list as $store_uuid){
                 $get_info = $user->get_storeInfo($store_uuid);
                 $get_info['interested_checked'] = true;
+                $get_info['thumbnail'] = Storage::exists("public/store/" . $store_uuid . "/thumbnail.jpg");
+                $review = new Review;
+                $count = 0;
+                $score_total = 0;
+                $star_list = $review->get_star($get_info['user_uuid']);
+
+                if(count($star_list)!==0){
+                    foreach($star_list as $item) {
+                        $score_total = $score_total + $item['star'];
+                        $count = $count + 1;
+                    }
+                    $score = $score_total/$count;
+                    $get_info['scoreInfo'] = array( 'score' => $score, 'count' => $count);
+                }else{
+                    $get_info['scoreInfo'] = array( 'score' => 0, 'count' => 0);
+                }
 
                 if($favorite_list){
                     foreach($favorite_list as $favorite){
                         if($get_info['user_uuid']===$favorite){
                             $get_info['favorite_checked'] = true;
                         }
-
-                        $review = new Review;
-                        $count = 0;
-                        $score_total = 0;
-                        $star_list = $review->get_star($get_info['user_uuid']);
-
-                        if(count($star_list)!==0){
-                            foreach($star_list as $item) {
-                                $score_total = $score_total + $item['star'];
-                                $count = $count + 1;
-                            }
-                            $score = $score_total/$count;
-                            $get_info['scoreInfo'] = array( 'score' => $score, 'count' => $count);
-                        }else{
-                            $get_info['scoreInfo'] = array( 'score' => 0, 'count' => 0);
-                        }
                     }
                 }
                 array_push($result, $get_info);
             }
         }
-        
         return $result;
     }
 }
