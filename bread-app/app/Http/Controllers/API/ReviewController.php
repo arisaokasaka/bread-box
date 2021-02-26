@@ -36,7 +36,7 @@ class ReviewController extends Controller
             $user_uuid = $review_item['user_uuid'];
             $review_item['image_profile'] = Storage::exists("public/user/" . $user_uuid . "/profile.jpg");
         }
-
+        
         return $review_list;
     }
 
@@ -67,5 +67,16 @@ class ReviewController extends Controller
         }
 
         return $scoreInfo;
+    }
+
+    /**
+     * 返信を登録
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function register_reply(Request $request) {
+        $review = new Review;
+        $review->register_reply($request);
     }
 }

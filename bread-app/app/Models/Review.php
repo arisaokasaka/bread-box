@@ -37,6 +37,7 @@ class Review extends Model
         ->newQuery()
         ->where('store_uuid', '=', $store_uuid)
         ->select([
+            'uuid',
             'user_uuid',
             'store_uuid',
             'star',
@@ -60,5 +61,19 @@ class Review extends Model
             'star',
         ])
         ->get();
+    }
+
+    /**
+     * 返信を登録
+     *
+     * @param [type] $request
+     * @return void
+     */
+    public function register_reply($request) {
+        return $this
+        ->where('uuid', '=', $request['review_uuid'])
+        ->update([
+            'reply' => $request['reply'],
+        ]);
     }
 }

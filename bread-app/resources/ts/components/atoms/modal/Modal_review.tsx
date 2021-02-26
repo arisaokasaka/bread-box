@@ -1,6 +1,6 @@
 import React,{useState, useContext} from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { UserAuthContext } from '../../../contexts/UserAuthContext';
 import Modal from 'react-modal';
 import { useForm } from 'react-hook-form';
@@ -13,6 +13,7 @@ type StoreInfoProps = ({
 
 const ModalCreateReview: React.FC<StoreInfoProps> = ({store_uuid}) =>{
     const { state } = useContext(UserAuthContext);
+    const history = useHistory();
     const [ isModalOpen, setModal ] = useState(false);
     const { register, handleSubmit, errors } = useForm();
     const customStyles = {
@@ -49,9 +50,9 @@ const ModalCreateReview: React.FC<StoreInfoProps> = ({store_uuid}) =>{
         btnReview = null;
     }else{
         btnReview = (
-            <Link to="login_user" className = "a-btn-modal-review">
+            <button onClick={()=>history.push("/login_user")} className = "a-btn-modal-review">
                 <FontAwesomeIcon icon={faPen}/>&nbsp;口コミを投稿する
-            </Link>
+            </button>
         )
     }
     
@@ -83,7 +84,7 @@ const ModalCreateReview: React.FC<StoreInfoProps> = ({store_uuid}) =>{
                             <option value="2">2</option>
                             <option value="1">1</option>
                         </select>
-                        {errors.name && <p>評価は必須です。</p>}
+                        {errors.star && <p>評価は必須です。</p>}
 
                         <label htmlFor="comment" className="a-label-required">コメント</label>
                         <textarea name="comment" id="comment" placeholder="[任意]レビューや感想を記入してください。" ref={register}/>

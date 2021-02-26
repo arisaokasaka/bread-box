@@ -65,3 +65,4 @@ Route::post('/update_spirit', 'Api\StoreMenuController@update_spirit');
 Route::post('/create_review', 'Api\ReviewController@create_review');
 Route::post('/index_review', 'Api\ReviewController@index_review');
 Route::post('/get_score', 'Api\ReviewController@get_score');
+Route::post('/register_reply', 'Api\ReviewController@register_reply');

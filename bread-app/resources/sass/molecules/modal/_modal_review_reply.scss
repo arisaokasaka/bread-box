@@ -1,0 +1,63 @@
+.ReactModal__Content {
+    .m-modal-review-reply {
+        &__btn--close {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: $mp-xxs;
+
+            & > button {
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+            }
+        }
+
+        &__form {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.9rem;
+
+            & > p {
+                font-size: 0.7rem;
+            }
+
+            & > input {
+                border-radius: $sm-radius;
+                margin-top: 2px;
+
+                &[type="submit"] {
+                    @include bg_GradationBrown;
+                    margin-top: $mp-xxs;
+                    color: $white;
+                    font-weight: 450;
+                    letter-spacing: 2px;
+                    height: 2rem;
+                    cursor: pointer;
+
+                    &:hover {
+                        opacity: 0.9;
+                    }
+
+                    @include bp-600up {
+                        margin-top: $mp-xs;
+                    }
+                }
+            }
+
+            & textarea {
+                border: 1px solid $textGray;
+                border-radius: $sm-radius;
+                height: 120px;
+                width: 250px;
+
+                &:focus {
+                    @include focusShadow;
+                }
+
+                @include bp-600up {
+                    width: 20rem;
+                }
+            }
+        }
+    }
+}
