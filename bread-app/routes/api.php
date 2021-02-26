@@ -67,3 +67,4 @@ Route::post('/index_review', 'Api\ReviewController@index_review');
 Route::post('/get_score', 'Api\ReviewController@get_score');
 Route::post('/register_reply', 'Api\ReviewController@register_reply');
 Route::post('/delete_reply', 'Api\ReviewController@delete_reply');
+Route::post('/index_review_by_user', 'Api\ReviewController@index_review_by_user');

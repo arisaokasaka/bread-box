@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import UserTable_favorite from './UserTable_favorite';
 import UserTable_interested from './UserTable_interested';
+import UserTable_review from './UserTable_review';
 
 const UserTable: React.FC = () => {
     const [ Table, setTable ] = useState('favorite');
@@ -19,19 +20,19 @@ const UserTable: React.FC = () => {
         function: handleInterested,
     }
     
-    const TabReviewed = {
-        class: "m-user-table__tab--reviewed",
-        table: "reviewed",
-        value: "レビュー",
+    const TabReview = {
+        class: "m-user-table__tab--review",
+        table: "review",
+        value: "口コミ",
         function: handleReview,
     }
 
-    const TabStamp = {
-        class: "m-user-table__tab--stamp",
-        table: "stamp",
-        value: "スタンプ",
-        function: handleStamp,
-    }
+    // const TabStamp = {
+    //     class: "m-user-table__tab--stamp",
+    //     table: "stamp",
+    //     value: "スタンプ",
+    //     function: handleStamp,
+    // }
 
     function handleFavorite(){
         setTable('favorite');
@@ -41,12 +42,12 @@ const UserTable: React.FC = () => {
         setTable('interested');
     }
 
-    function handleStamp(){
-        setTable('stamp');
-    }
+    // function handleStamp(){
+    //     setTable('stamp');
+    // }
 
     function handleReview(){
-        setTable('reviewed')
+        setTable('review')
     }
 
     const Tab = (tab) => {
@@ -61,16 +62,10 @@ const UserTable: React.FC = () => {
         switch(table){
         case 'favorite':
             return <UserTable_favorite/>
-            break;
         case 'interested':
             return <UserTable_interested/>
-            break;
-        case 'stamp':
-            return <h2>stamp</h2>
-            break;
-        case 'reviewed':
-        return <h2>review</h2>
-        break;
+        case 'review':
+            return <UserTable_review/>
         }
     }
 
@@ -79,8 +74,8 @@ const UserTable: React.FC = () => {
             <div className = "m-user-table__tab">
                 {Tab(TabFavorite)}
                 {Tab(TabInterested)}
-                {Tab(TabStamp)}
-                {Tab(TabReviewed)}
+                {/* {Tab(TabStamp)} */}
+                {Tab(TabReview)}
             </div>
             <div className = "m-user-table__container">
                 <div className = "m-user-table__container__content">

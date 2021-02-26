@@ -48,6 +48,27 @@ class Review extends Model
         ->get();
     }
 
+    /**
+     * レビュー情報取得(user_uuidより)
+     *
+     * @param string $user_uuid
+     * @return void
+     */
+    public function index_review_by_user(string $user_uuid) {
+        return $this
+        ->newQuery()
+        ->where('user_uuid', '=', $user_uuid)
+        ->select([
+            'uuid',
+            'user_uuid',
+            'store_uuid',
+            'star',
+            'comment',
+            'reply',
+            'created_at'
+        ])
+        ->get();
+    }
 
     /**
      * レビュー情報カウント(user_uuidより)

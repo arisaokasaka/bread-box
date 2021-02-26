@@ -23,9 +23,9 @@ class ReviewController extends Controller
     }
 
     /**
-     * レビュー情報取得
+     * レビュー情報取得(store_uuidより)
      *
-     * @param string $store_uuid
+     * @param Request $request
      * @return void
      */
     public function index_review(Request $request) {
@@ -39,6 +39,27 @@ class ReviewController extends Controller
             $user_name =  $user->get_name($user_uuid);
             $review_item['image_profile'] = Storage::exists("public/user/" . $user_uuid . "/profile.jpg");
             $review_item['user_name'] = $user_name[0]->name;
+        }
+        return $review_list;
+    }
+
+    /**
+     * レビュー情報取得(user_uuidより)
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function index_review_by_user(Request $request) {
+        $review = new Review;
+        $user = new User;
+        $user_uuid = $request->input('user_uuid');
+        $review_list = $review->index_review_by_user($user_uuid);
+        
+        foreach($review_list as $review_item){
+            $store_uuid = $review_item['store_uuid'];
+            $store_name =  $user->get_name($store_uuid);
+            $review_item['thumbnail'] = Storage::exists("public/store/" . $store_uuid . "/thumbnail.jpg");
+            $review_item['store_name'] = $store_name[0]->name;
         }
         return $review_list;
     }
