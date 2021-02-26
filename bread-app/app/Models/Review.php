@@ -42,7 +42,8 @@ class Review extends Model
             'store_uuid',
             'star',
             'comment',
-            'reply'
+            'reply',
+            'created_at'
         ])
         ->get();
     }
@@ -76,4 +77,16 @@ class Review extends Model
             'reply' => $request['reply'],
         ]);
     }
+
+    /**
+     * 返信を削除
+     *
+     * @param 
+     * @return void
+     */
+    public function delete_reply($review_uuid) {
+        return $this
+        ->where('uuid', '=', $review_uuid)
+        ->update(['reply' => null]);
+    }   
 }

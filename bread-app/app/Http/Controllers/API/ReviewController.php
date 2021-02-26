@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Review;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -29,14 +30,16 @@ class ReviewController extends Controller
      */
     public function index_review(Request $request) {
         $review = new Review;
+        $user = new User;
         $store_uuid = $request->input('store_uuid');
         $review_list = $review->index_review($store_uuid);
         
         foreach($review_list as $review_item){
             $user_uuid = $review_item['user_uuid'];
+            $user_name =  $user->get_name($user_uuid);
             $review_item['image_profile'] = Storage::exists("public/user/" . $user_uuid . "/profile.jpg");
+            $review_item['user_name'] = $user_name[0]->name;
         }
-        
         return $review_list;
     }
 
@@ -78,5 +81,17 @@ class ReviewController extends Controller
     public function register_reply(Request $request) {
         $review = new Review;
         $review->register_reply($request);
+    }
+
+    /**
+     * 返信を削除
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function delete_reply(Request $request) {
+        $review = new Review;
+        $review_uuid = $request['review_uuid'];
+        $review->delete_reply($review_uuid);
     }
 }
