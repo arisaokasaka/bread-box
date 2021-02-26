@@ -27,7 +27,7 @@ const ModalReviewEdit_user: React.FC<ReviewInfoProps> = ({comment, review_uuid, 
     }
     
     const onSubmit = (data) => {
-        axios.post("/api/register_reply", data)
+        axios.post("/api/update_review", data)
         .then(res => {
             setModal(false);
             alert('口コミを修正しました。')
@@ -65,7 +65,7 @@ const ModalReviewEdit_user: React.FC<ReviewInfoProps> = ({comment, review_uuid, 
                 </div>
                 
                 <form className="m-modal-reviewEdit-user__form" onSubmit={handleSubmit(onSubmit)}>
-                    <input type="hidden" name="review_uuid" value={review_uuid} ref={register}/>
+                    <input type="hidden" name="uuid" value={review_uuid} ref={register}/>
                     
                     <label htmlFor="star" className="a-label-required">5段階で評価してください。</label>
                     <p>5が最も高い評価となります。</p>

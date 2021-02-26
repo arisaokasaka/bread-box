@@ -17337,7 +17337,7 @@ var ModalReviewEdit_user = function ModalReviewEdit_user(_a) {
   };
 
   var onSubmit = function onSubmit(data) {
-    axios_1["default"].post("/api/register_reply", data).then(function (res) {
+    axios_1["default"].post("/api/update_review", data).then(function (res) {
       setModal(false);
       alert('口コミを修正しました。');
     })["catch"](function (err) {
@@ -17387,7 +17387,7 @@ var ModalReviewEdit_user = function ModalReviewEdit_user(_a) {
     onSubmit: handleSubmit(onSubmit)
   }, react_1["default"].createElement("input", {
     type: "hidden",
-    name: "review_uuid",
+    name: "uuid",
     value: review_uuid,
     ref: register
   }), react_1["default"].createElement("label", {

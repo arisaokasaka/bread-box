@@ -127,4 +127,15 @@ class ReviewController extends Controller
         $review_uuid = $request['review_uuid'];
         $review->delete_reply($review_uuid);
     }
+
+    /**
+     * ユーザーによるレビュー更新
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function update_review(Request $request) {
+        $review = new Review;
+        $review->update_review($request);
+    }
 }

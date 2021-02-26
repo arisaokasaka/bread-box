@@ -139,5 +139,20 @@ class Review extends Model
         return $this
         ->where('uuid', '=', $review_uuid)
         ->update(['reply' => null]);
-    }   
+    }
+
+    /**
+     * ユーザーによるレビュー編集
+     *
+     * @param object $request
+     * @return void
+     */
+    public function update_review(object $request) {
+        return $this
+        ->where('uuid', '=', $request['uuid'])
+        ->update([
+            'comment' => $request['comment'],
+            'star' => $request['star'],
+        ]);
+    }
 }
