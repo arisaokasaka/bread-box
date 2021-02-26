@@ -17245,6 +17245,192 @@ exports.default = ModalCreateReview;
 
 /***/ }),
 
+/***/ "./resources/ts/components/atoms/modal/Modal_review_edit_user.tsx":
+/*!************************************************************************!*\
+  !*** ./resources/ts/components/atoms/modal/Modal_review_edit_user.tsx ***!
+  \************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+
+var react_modal_1 = __importDefault(__webpack_require__(/*! react-modal */ "./node_modules/react-modal/lib/index.js"));
+
+var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
+
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
+var ModalReviewEdit_user = function ModalReviewEdit_user(_a) {
+  var comment = _a.comment,
+      review_uuid = _a.review_uuid,
+      star = _a.star,
+      index = _a.index;
+
+  var _b = react_1.useState(false),
+      isModalOpen = _b[0],
+      setModal = _b[1];
+
+  var _c = react_hook_form_1.useForm(),
+      register = _c.register,
+      handleSubmit = _c.handleSubmit,
+      errors = _c.errors;
+
+  var customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)'
+    }
+  };
+
+  var onSubmit = function onSubmit(data) {
+    axios_1["default"].post("/api/register_reply", data).then(function (res) {
+      setModal(false);
+      alert('口コミを修正しました。');
+    })["catch"](function (err) {
+      alert('口コミの修正に失敗しました。');
+    });
+  };
+
+  if (!comment) {
+    comment = '';
+  }
+
+  var toggleDialogue = function toggleDialogue(index) {
+    setModal(true);
+    var classInfo = document.getElementsByClassName("review_" + index)[0];
+
+    if (classInfo.className.includes('active')) {
+      classInfo.classList.remove('active');
+    } else {
+      classInfo.className += ' active';
+    }
+  };
+
+  return react_1["default"].createElement("div", {
+    className: "m-modal-reviewEdit-user"
+  }, react_1["default"].createElement("button", {
+    className: "m-modal-reviewEdit-user__btn--edit",
+    onClick: function onClick() {
+      return toggleDialogue(index);
+    }
+  }, "\u7DE8\u96C6"), react_1["default"].createElement(react_modal_1["default"], {
+    isOpen: isModalOpen,
+    onRequestClose: function onRequestClose() {
+      return setModal(false);
+    },
+    style: customStyles,
+    ariaHideApp: false
+  }, react_1["default"].createElement("div", {
+    className: "m-modal-reviewEdit-user__btn--close"
+  }, react_1["default"].createElement("button", {
+    onClick: function onClick() {
+      return setModal(false);
+    }
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faTimes
+  }))), react_1["default"].createElement("form", {
+    className: "m-modal-reviewEdit-user__form",
+    onSubmit: handleSubmit(onSubmit)
+  }, react_1["default"].createElement("input", {
+    type: "hidden",
+    name: "review_uuid",
+    value: review_uuid,
+    ref: register
+  }), react_1["default"].createElement("label", {
+    htmlFor: "star",
+    className: "a-label-required"
+  }, "5\u6BB5\u968E\u3067\u8A55\u4FA1\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("p", null, "5\u304C\u6700\u3082\u9AD8\u3044\u8A55\u4FA1\u3068\u306A\u308A\u307E\u3059\u3002"), react_1["default"].createElement("select", {
+    name: "star",
+    id: "star",
+    defaultValue: star,
+    ref: register({
+      required: true
+    })
+  }, react_1["default"].createElement("option", {
+    hidden: true
+  }, "\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"), react_1["default"].createElement("option", {
+    value: "5"
+  }, "5"), react_1["default"].createElement("option", {
+    value: "4"
+  }, "4"), react_1["default"].createElement("option", {
+    value: "3"
+  }, "3"), react_1["default"].createElement("option", {
+    value: "2"
+  }, "2"), react_1["default"].createElement("option", {
+    value: "1"
+  }, "1")), errors.star && react_1["default"].createElement("p", null, "\u8A55\u4FA1\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
+    htmlFor: "comment",
+    className: "a-label-required"
+  }, "\u30B3\u30E1\u30F3\u30C8"), react_1["default"].createElement("textarea", {
+    name: "comment",
+    id: "comment",
+    defaultValue: comment,
+    placeholder: "[\u4EFB\u610F]\u30EC\u30D3\u30E5\u30FC\u3084\u611F\u60F3\u3092\u8A18\u5165\u3057\u3066\u304F\u3060\u3055\u3044\u3002",
+    ref: register
+  }), react_1["default"].createElement("input", {
+    type: "submit",
+    value: "\u66F4\u65B0\u3059\u308B"
+  }))));
+};
+
+exports.default = ModalReviewEdit_user;
+
+/***/ }),
+
 /***/ "./resources/ts/components/atoms/modal/Modal_review_reply.tsx":
 /*!********************************************************************!*\
   !*** ./resources/ts/components/atoms/modal/Modal_review_reply.tsx ***!
@@ -21118,6 +21304,7 @@ var UserProf = function UserProf() {
   var userInfo;
   var favorite_count = 0;
   var interested_count = 0;
+  var review_count = 0;
   react_1.useEffect(function () {
     index_user();
   }, []); // ユーザー情報取得
@@ -21132,6 +21319,10 @@ var UserProf = function UserProf() {
 
   if (info) {
     userInfo = info;
+
+    if (userInfo.review_count) {
+      review_count = userInfo.review_count;
+    }
 
     if (userInfo.favorite) {
       var favorite_list = JSON.parse(userInfo.favorite);
@@ -21177,7 +21368,7 @@ var UserProf = function UserProf() {
     className: "m-user-prof__container__content__text__item"
   }, react_1["default"].createElement("p", null, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
     icon: free_solid_svg_icons_1.faCommentDots
-  })), "\u30EC\u30D3\u30E5\u30FC\u6570"), react_1["default"].createElement("p", null)), react_1["default"].createElement(BtnLogout_1["default"], null)))));
+  })), "\u53E3\u30B3\u30DF\u6570"), react_1["default"].createElement("p", null, review_count)), react_1["default"].createElement(BtnLogout_1["default"], null)))));
 };
 
 exports.default = UserProf;
@@ -21243,6 +21434,8 @@ var UserTable_favorite_1 = __importDefault(__webpack_require__(/*! ./UserTable_f
 
 var UserTable_interested_1 = __importDefault(__webpack_require__(/*! ./UserTable_interested */ "./resources/ts/components/molecules/user/UserTable_interested.tsx"));
 
+var UserTable_review_1 = __importDefault(__webpack_require__(/*! ./UserTable_review */ "./resources/ts/components/molecules/user/UserTable_review.tsx"));
+
 var UserTable = function UserTable() {
   var _a = react_1.useState('favorite'),
       Table = _a[0],
@@ -21260,18 +21453,17 @@ var UserTable = function UserTable() {
     value: "行ってみたい",
     "function": handleInterested
   };
-  var TabReviewed = {
-    "class": "m-user-table__tab--reviewed",
-    table: "reviewed",
-    value: "レビュー",
+  var TabReview = {
+    "class": "m-user-table__tab--review",
+    table: "review",
+    value: "口コミ",
     "function": handleReview
-  };
-  var TabStamp = {
-    "class": "m-user-table__tab--stamp",
-    table: "stamp",
-    value: "スタンプ",
-    "function": handleStamp
-  };
+  }; // const TabStamp = {
+  //     class: "m-user-table__tab--stamp",
+  //     table: "stamp",
+  //     value: "スタンプ",
+  //     function: handleStamp,
+  // }
 
   function handleFavorite() {
     setTable('favorite');
@@ -21279,14 +21471,13 @@ var UserTable = function UserTable() {
 
   function handleInterested() {
     setTable('interested');
-  }
+  } // function handleStamp(){
+  //     setTable('stamp');
+  // }
 
-  function handleStamp() {
-    setTable('stamp');
-  }
 
   function handleReview() {
-    setTable('reviewed');
+    setTable('review');
   }
 
   var Tab = function Tab(tab) {
@@ -21306,19 +21497,12 @@ var UserTable = function UserTable() {
     switch (table) {
       case 'favorite':
         return react_1["default"].createElement(UserTable_favorite_1["default"], null);
-        break;
 
       case 'interested':
         return react_1["default"].createElement(UserTable_interested_1["default"], null);
-        break;
 
-      case 'stamp':
-        return react_1["default"].createElement("h2", null, "stamp");
-        break;
-
-      case 'reviewed':
-        return react_1["default"].createElement("h2", null, "review");
-        break;
+      case 'review':
+        return react_1["default"].createElement(UserTable_review_1["default"], null);
     }
   };
 
@@ -21326,7 +21510,7 @@ var UserTable = function UserTable() {
     className: "m-user-table"
   }, react_1["default"].createElement("div", {
     className: "m-user-table__tab"
-  }, Tab(TabFavorite), Tab(TabInterested), Tab(TabStamp), Tab(TabReviewed)), react_1["default"].createElement("div", {
+  }, Tab(TabFavorite), Tab(TabInterested), Tab(TabReview)), react_1["default"].createElement("div", {
     className: "m-user-table__container"
   }, react_1["default"].createElement("div", {
     className: "m-user-table__container__content"
@@ -21530,6 +21714,172 @@ var UserTable_interested = function UserTable_interested() {
 };
 
 exports.default = UserTable_interested;
+
+/***/ }),
+
+/***/ "./resources/ts/components/molecules/user/UserTable_review.tsx":
+/*!*********************************************************************!*\
+  !*** ./resources/ts/components/molecules/user/UserTable_review.tsx ***!
+  \*********************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
+
+var Modal_review_edit_user_1 = __importDefault(__webpack_require__(/*! ../../atoms/modal/Modal_review_edit_user */ "./resources/ts/components/atoms/modal/Modal_review_edit_user.tsx"));
+
+var ScoreUser_1 = __importDefault(__webpack_require__(/*! ../../atoms/ScoreUser */ "./resources/ts/components/atoms/ScoreUser.tsx"));
+
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
+var UserTable_review = function UserTable_review() {
+  var _a = react_1.useState([]),
+      review = _a[0],
+      setReview = _a[1];
+
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
+  var review_list = [];
+  var review_count = 0;
+  react_1.useEffect(function () {
+    getUserReview();
+  }, []);
+
+  if (review) {
+    review_list = review;
+    review_count = review_list.length;
+  }
+
+  var getUserReview = function getUserReview() {
+    axios_1["default"].post("/api/index_review_by_user", {
+      user_uuid: state.uuid
+    }).then(function (res) {
+      setReview(res.data);
+    })["catch"](function (err) {});
+  };
+
+  var delete_review = function delete_review(review_uuid, index) {
+    toggleDialogue(index);
+  };
+
+  var toggleDialogue = function toggleDialogue(index) {
+    var classInfo = document.getElementsByClassName("review_" + index)[0];
+
+    if (classInfo.className.includes('active')) {
+      classInfo.classList.remove('active');
+    } else {
+      classInfo.className += ' active';
+    }
+  };
+
+  return react_1["default"].createElement("div", {
+    className: "m-userTable-review"
+  }, react_1["default"].createElement("div", {
+    className: "m-userTable-review__count"
+  }, react_1["default"].createElement("p", null, "\u6295\u7A3F\u3057\u305F\u53E3\u30B3\u30DF\xA0\xA0\u5168", react_1["default"].createElement("span", null, review_count), "\u4EF6")), review_list.map(function (el, index) {
+    return react_1["default"].createElement("div", {
+      className: "m-userTable-review__item",
+      key: "review_" + index
+    }, react_1["default"].createElement("div", {
+      className: "m-userTable-review__item__buttons"
+    }, react_1["default"].createElement("button", {
+      className: "m-userTable-review__item__buttons__ellipsis",
+      onClick: function onClick() {
+        return toggleDialogue(index);
+      }
+    }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+      icon: free_solid_svg_icons_1.faEllipsisV
+    })), react_1["default"].createElement("div", {
+      className: "m-userTable-review__item__buttons__dialogue review_" + index
+    }, react_1["default"].createElement("div", {
+      className: "m-userTable-review__item__buttons__dialogue__overlay",
+      onClick: function onClick() {
+        return toggleDialogue(index);
+      }
+    }), react_1["default"].createElement(Modal_review_edit_user_1["default"], {
+      review_uuid: el.uuid,
+      comment: el.comment,
+      star: el.star,
+      index: index
+    }), react_1["default"].createElement("button", {
+      className: "m-userTable-review__item__buttons__dialogue__btn--delete",
+      onClick: function onClick() {
+        return delete_review(el.uuid, index);
+      }
+    }, "\u524A\u9664"))), react_1["default"].createElement("div", {
+      className: "m-userTable-review__item__container"
+    }, el.thumbnail ? react_1["default"].createElement("img", {
+      src: "/storage/store/" + el.store_uuid + "/thumbnail.jpg",
+      alt: "\u5E97\u8217\u306E\u30B5\u30E0\u30CD\u30A4\u30EB"
+    }) : react_1["default"].createElement("img", {
+      src: "/images/no_image.jpg",
+      alt: "\u5E97\u8217\u306E\u30B5\u30E0\u30CD\u30A4\u30EB"
+    }), react_1["default"].createElement("div", {
+      className: "m-userTable-review__item__container__content"
+    }, react_1["default"].createElement(react_router_dom_1.Link, {
+      to: "/store/" + el.store_uuid
+    }, el.store_name), react_1["default"].createElement(ScoreUser_1["default"], {
+      score: el.star
+    }), el.comment && react_1["default"].createElement("p", null, el.comment), react_1["default"].createElement("span", null, "\u6295\u7A3F\u65E5:\xA0", el.created_at.slice(0, 10))), el.reply && react_1["default"].createElement("div", {
+      className: "m-userTable-review__item__container__reply"
+    }, react_1["default"].createElement("p", null, "\u30AA\u30FC\u30CA\u30FC\u304B\u3089\u306E\u8FD4\u4FE1"), react_1["default"].createElement("p", null, el.reply))));
+  }));
+};
+
+exports.default = UserTable_review;
 
 /***/ }),
 

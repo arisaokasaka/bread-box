@@ -1,5 +1,8 @@
 .ReactModal__Content {
-    .m-modal-review {
+    .m-modal-review,
+    .m-modal-reviewEdit-user {
+        z-index: 500;
+
         &__btn--close {
             display: flex;
             justify-content: flex-end;

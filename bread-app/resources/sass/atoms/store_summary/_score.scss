@@ -88,7 +88,7 @@
 }
 
 // ユーザーページのユーザーテーブル
-.m-userTable-review__item__content {
+.m-userTable-review__item__container__content {
     .a-score {
         &__container {
             &__result {
@@ -101,7 +101,7 @@
                 }
 
                 & > h3 {
-                    font-size: 15px;
+                    font-size: 14px;
                     margin-left: 4px;
                 }
             }

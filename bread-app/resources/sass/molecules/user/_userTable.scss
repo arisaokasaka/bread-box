@@ -43,6 +43,10 @@
 
     &__container {
         background-color: $lightBrown;
-        padding: $mp-xs;
+        padding: $mp-xxs;
+
+        @include bp-600up {
+            padding: $mp-xs;
+        }
     }
 }
