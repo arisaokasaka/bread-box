@@ -1,11 +1,10 @@
 .ReactModal__Content {
-    .m-modal-review,
-    .m-modal-reviewEdit-user {
-        z-index: 500;
-
+    .m-modal-review-reply,
+    .m-modal-review-reply-edit {
         &__btn--close {
             display: flex;
             justify-content: flex-end;
+            margin-bottom: $mp-xxs;
 
             & > button {
                 background-color: transparent;
@@ -19,24 +18,8 @@
             flex-direction: column;
             font-size: 0.9rem;
 
-            & > label {
-                color: $font-color-brown;
-                margin-top: $mp-xs;
-                font-weight: 550;
-            }
-
             & > p {
                 font-size: 0.7rem;
-            }
-
-            & > select {
-                outline: none;
-                border: 1px solid $textGray;
-                border-radius: $sm-radius;
-
-                &:focus {
-                    @include focusShadow;
-                }
             }
 
             & > input {
@@ -44,16 +27,16 @@
                 margin-top: 2px;
 
                 &[type="submit"] {
+                    @include bg_GradationBrown;
                     margin-top: $mp-xxs;
                     color: $white;
-                    background-color: $darkBrown;
                     font-weight: 450;
                     letter-spacing: 2px;
                     height: 2rem;
                     cursor: pointer;
 
                     &:hover {
-                        background-color: $darkestBrown;
+                        opacity: 0.9;
                     }
 
                     @include bp-600up {
@@ -62,10 +45,10 @@
                 }
             }
 
-            & textarea#comment {
+            & textarea {
                 border: 1px solid $textGray;
                 border-radius: $sm-radius;
-                height: 100px;
+                height: 120px;
                 width: 250px;
 
                 &:focus {

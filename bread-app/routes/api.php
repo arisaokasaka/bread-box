@@ -15,11 +15,11 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-//UserLoginController
+// UserLoginController
 Route::post('/login', 'Api\Auth\UserLoginController@login')->name('login');
 Route::get('/logout', 'Api\Auth\UserLoginController@logout')->name('logout');
 
-//Auth
+// Auth
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -29,7 +29,7 @@ Route::post('/tokens/create', function (Request $request) {
     return ['token' => $token->plainTextToken];
 });
 
-//UserContoller
+// UserContoller
 Route::post('/create_user', 'Api\UserController@create_user');
 Route::post('/update_user', 'Api\UserController@update_user');
 Route::post('/update_basicInfo_usersTable', 'Api\UserController@update_basicInfo_usersTable');
@@ -39,7 +39,7 @@ Route::post('/index_favorite_list', 'Api\UserController@index_favorite_list');
 Route::post('/update_interested', 'Api\UserController@update_interested');
 Route::post('/index_interested_list', 'Api\UserController@index_interested_list');
 
-//StoreController
+// StoreController
 Route::post('/create_store', 'Api\StoreController@create_store');
 Route::get('/search_store', 'Api\StoreController@search_store');
 Route::post('/index_storeInfo', 'Api\StoreController@index_storeInfo');
@@ -53,10 +53,20 @@ Route::post('/store_pickup', 'Api\StoreController@store_pickup');
 Route::post('/store_ranking', 'Api\StoreController@store_ranking');
 Route::post('/get_uuid', 'Api\StoreController@get_uuid');
 
-//Store_menuController
+// Store_menuController
 Route::post('/create_store_menu', 'Api\StoreMenuController@create_store_menu');
 Route::post('/index_menuInfo', 'Api\StoreMenuController@index_menuInfo');
 Route::post('/delete_menu', 'Api\StoreMenuController@delete_menu');
 Route::post('/update_menu_type_1', 'Api\StoreMenuController@update_menu_type_1');
 Route::post('/create_spirit', 'Api\StoreMenuController@create_spirit');
 Route::post('/update_spirit', 'Api\StoreMenuController@update_spirit');
+
+// ReviewController
+Route::post('/create_review', 'Api\ReviewController@create_review');
+Route::post('/index_review', 'Api\ReviewController@index_review');
+Route::post('/get_score', 'Api\ReviewController@get_score');
+Route::post('/register_reply', 'Api\ReviewController@register_reply');
+Route::post('/delete_reply', 'Api\ReviewController@delete_reply');
+Route::post('/index_review_by_user', 'Api\ReviewController@index_review_by_user');
+Route::post('/delete_review', 'Api\ReviewController@delete_review');
+Route::post('/update_review', 'Api\ReviewController@update_review');

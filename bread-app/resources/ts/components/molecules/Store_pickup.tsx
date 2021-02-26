@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faThumbtack } from '@fortawesome/free-solid-svg-icons';
 
 const Store_pickup: React.FC = () => {
     const [ info, setInfo ] = useState([]);
@@ -22,7 +24,7 @@ const Store_pickup: React.FC = () => {
 
     return(
         <div className="m-store-pickup">
-            <h2 className="m-store-pickup__title">ピックアップ</h2>
+            <h2 className="m-store-pickup__title"><FontAwesomeIcon icon={faThumbtack}/>ピックアップ</h2>
             <div className="m-store-pickup__list">
                 {storeInfo.map((el, index)=>{
                     return(

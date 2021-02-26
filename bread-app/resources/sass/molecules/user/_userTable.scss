@@ -10,7 +10,7 @@
         }
 
         & > a {
-            width: 25%;
+            width: 33.33%;
             height: 35px;
             line-height: 35px;
             background-color: transparent;
@@ -43,6 +43,10 @@
 
     &__container {
         background-color: $lightBrown;
-        padding: $mp-xs;
+        padding: $mp-xxs;
+
+        @include bp-600up {
+            padding: $mp-xs;
+        }
     }
 }

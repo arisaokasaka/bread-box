@@ -178,4 +178,20 @@ class User extends Authenticatable
         ])
         ->first();
     }
+
+    /**
+     * UUIDから名前取得
+     *
+     * @param string $user_uuid
+     * @return void
+     */
+    public function get_name(string $user_uuid){
+        return $this
+        ->newQuery()
+        ->where('uuid', '=', $user_uuid)
+        ->select([
+            'name',
+        ])
+        ->get();
+    }
 }

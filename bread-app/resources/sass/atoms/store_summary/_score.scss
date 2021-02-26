@@ -44,11 +44,6 @@
                 margin-left: 2px;
                 color: $darkGray;
                 font-weight: 600;
-                text-decoration: underline $darkGray;
-
-                &:hover {
-                    color: $brown;
-                }
             }
         }
     }
@@ -92,10 +87,24 @@
     }
 }
 
-.p-review {
-    .m-store-basicInfo__container {
-        .a-score {
-            display: block;
+// ユーザーページのユーザーテーブル
+.m-userTable-review__item__container__content {
+    .a-score {
+        &__container {
+            &__result {
+                &__stars {
+                    width: 65px;
+
+                    & span {
+                        font-size: 15px;
+                    }
+                }
+
+                & > h3 {
+                    font-size: 14px;
+                    margin-left: 4px;
+                }
+            }
         }
     }
 }

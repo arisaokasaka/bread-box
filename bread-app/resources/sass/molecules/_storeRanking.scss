@@ -33,6 +33,10 @@
                 @include bp-600up {
                     height: 130px;
                 }
+
+                @include bp-960up {
+                    height: 150px;
+                }
             }
         }
     }

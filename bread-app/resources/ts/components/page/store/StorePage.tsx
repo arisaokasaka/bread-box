@@ -9,12 +9,14 @@ import { UserAuthContext } from '../../../contexts/UserAuthContext';
 const StorePage: React.FC = () => {
     let { user_uuid } = useParams();
     const { state } = useContext(UserAuthContext);
-    const [ storeInfo, setStoreInfo ] = useState({})
+    const [ storeInfo, setStoreInfo ] = useState({});
     const [ menuInfo, setMenuInfo ] = useState([]);
+    const [ scoreInfo, setScoreInfo ] = useState([]);
 
     useEffect(() => {
         getStoreInfo();
         getMenuInfo();
+        getScore();
     },[]);
 
     // 店舗情報取得
@@ -25,7 +27,6 @@ const StorePage: React.FC = () => {
             user_type: state.auth
         })
         .then(res => {
-            console.log(res.data)
             setStoreInfo(res.data)
         })
         .catch(err => {
@@ -43,6 +44,18 @@ const StorePage: React.FC = () => {
         .catch(err => {
         });
     }
+    
+    const getScore = () => {
+        axios.post("/api/get_score", {
+            store_uuid: user_uuid
+        })
+        .then(res => {
+            setScoreInfo(res.data)
+        })
+        .catch(err => {
+        });
+    }
+
 
     return (
         <div className = "p-store">
@@ -57,13 +70,16 @@ const StorePage: React.FC = () => {
                         <div className = "p-store__container__content__main">
                             <StoreBasicInfo
                                 storeInfo = {storeInfo}
+                                scoreInfo = {scoreInfo}
                             />
                             <StoreContents
                                 menuInfo = {menuInfo}
+                                store_uuid = {user_uuid}
                             />
                         </div> 
                         <StoreSubInfo
                             storeInfo = {storeInfo}
+                            scoreInfo = {scoreInfo}
                         />
                     </div>
             </div>

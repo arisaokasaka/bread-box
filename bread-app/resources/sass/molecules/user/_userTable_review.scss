@@ -1,0 +1,155 @@
+.m-userTable-review {
+    &__count {
+        & > p {
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+
+            & > span {
+                font-size: 0.9rem;
+                font-weight: 550;
+                margin: 0 2px;
+            }
+        }
+    }
+
+    &__item {
+        position: relative;
+        background-color: $white;
+        padding: $mp-xxs;
+        margin-bottom: 5px;
+
+        &__buttons {
+            position: absolute;
+            top: 6px;
+            right: 10px;
+
+            &__ellipsis {
+                margin: 0 2px;
+                position: relative;
+                font-size: 0.9rem;
+
+                @include btn-circle(
+                    $color: $darkGray,
+                    $border-color: transparent,
+                    $background-color: $white,
+                    $hover-color: $darkGray,
+                    $hover-background-color: $lightBrown
+                );
+
+                & > svg {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+            }
+
+            &__dialogue {
+                display: none;
+                position: absolute;
+                top: 10px;
+                right: 5px;
+                width: 80px;
+                height: 62px;
+                padding: 5px 0;
+                box-shadow: 1px 1px 3px 0 $lightGray;
+                background-color: $white;
+                border-radius: $sm-radius;
+                z-index: 100;
+
+                &__overlay {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: transparent;
+                    z-index: -100;
+                }
+
+                &__btn--delete,
+                .m-modal-reviewEdit-user__btn--edit {
+                    height: 26px;
+                    width: 100%;
+                    background-color: $white;
+                    border: none;
+                    font-size: 0.8rem;
+                    color: $black;
+                    z-index: 200;
+                    letter-spacing: 1px;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: $lightBrown;
+                    }
+                }
+
+                &.active {
+                    display: block;
+                }
+            }
+        }
+
+        &__container {
+            display: grid;
+            grid-template-columns: 40px 1fr;
+            border-radius: $base-radius;
+
+            & > img {
+                height: 30px;
+                width: 30px;
+                object-fit: cover;
+                object-position: center;
+            }
+
+            &__content {
+                & > a {
+                    font-weight: 550;
+                    color: $black;
+                    line-height: 30px;
+                    vertical-align: text-bottom;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 1;
+                    overflow: hidden;
+                    margin-bottom: 2px;
+
+                    &:hover {
+                        color: $brown;
+                    }
+                }
+
+                & > p {
+                    font-size: 0.7rem;
+                }
+
+                & > span {
+                    font-size: 0.5rem;
+                }
+            }
+
+            &__reply {
+                grid-column-start: 2;
+                grid-column-end: 4;
+                padding: 2px 5px 0 5px;
+                border-left: 1px solid $lightGray;
+
+                & > p {
+                    &:nth-child(1) {
+                        font-size: 0.75rem;
+                        font-weight: 550;
+                    }
+
+                    &:nth-child(2) {
+                        font-size: 0.75rem;
+                    }
+                }
+
+                &__btn--edit {
+                    position: relative;
+                    height: 1rem;
+                }
+            }
+        }
+    }
+}

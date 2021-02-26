@@ -181,7 +181,7 @@ h2 {
 }
 
 .a-btn-favorite {
-  margin: 0 1px;
+  margin: 0 2px;
 }
 
 .a-btn-favorite > input[type="checkbox"] {
@@ -261,7 +261,7 @@ h2 {
 }
 
 .a-btn-interested {
-  margin: 0 1px;
+  margin: 0 2px;
 }
 
 .a-btn-interested > input[type="checkbox"] {
@@ -604,13 +604,13 @@ h2 {
 .a-btn-modal-review {
   display: inline-block;
   width: 8.5rem;
-  height: 25px;
-  line-height: 25px;
+  height: 30px;
+  line-height: 30px;
   font-size: 0.7rem;
   background-color: #7c4920;
   text-align: center;
   border: none;
-  border-radius: 2px;
+  border-radius: 15px;
   font-weight: 450;
   color: #fafafa;
   cursor: pointer;
@@ -717,6 +717,48 @@ h2 {
   opacity: 0.8;
 }
 
+.a-btn-modal-reviw-reply {
+  height: 1.5rem;
+  padding: 0 7px;
+  color: #8d8c8c;
+  background-color: #fafafa;
+  border: 1px solid #8d8c8c;
+  border-radius: 15px;
+  font-size: 0.7rem;
+  font-weight: 550;
+  cursor: pointer;
+}
+
+.a-btn-modal-reviw-reply > svg {
+  margin-right: 3px;
+  font-size: 0.7rem;
+}
+
+.a-btn-modal-reviw-reply:hover {
+  background-color: #757575;
+  color: #fafafa;
+}
+
+.a-btn-delete-reply,
+.a-btn-modal-reviw-reply-edit {
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  font-size: 0.6rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.a-btn-modal-reviw-reply-edit {
+  left: -6px;
+  bottom: 0px;
+}
+
+.a-btn-delete-reply {
+  left: 42px;
+  bottom: 0px;
+}
+
 .a-score__container {
   display: flex;
   align-items: center;
@@ -764,12 +806,6 @@ h2 {
   margin-left: 2px;
   color: #757575;
   font-weight: 600;
-  -webkit-text-decoration: underline #757575;
-          text-decoration: underline #757575;
-}
-
-.a-score__container__comment > a:hover {
-  color: #c47d2c;
 }
 
 .p-store .a-score {
@@ -809,8 +845,17 @@ h2 {
   display: none;
 }
 
-.p-review .m-store-basicInfo__container .a-score {
-  display: block;
+.m-userTable-review__item__container__content .a-score__container__result__stars {
+  width: 65px;
+}
+
+.m-userTable-review__item__container__content .a-score__container__result__stars span {
+  font-size: 15px;
+}
+
+.m-userTable-review__item__container__content .a-score__container__result > h3 {
+  font-size: 14px;
+  margin-left: 4px;
 }
 
 .a-schedule > span {
@@ -1057,58 +1102,176 @@ label.a-label-required__red::after {
   background-color: #8f8f8f;
 }
 
-.ReactModal__Content .m-modal-review__btn--close {
+.ReactModal__Content .m-modal-review,
+.ReactModal__Content .m-modal-reviewEdit-user {
+  z-index: 500;
+}
+
+.ReactModal__Content .m-modal-review__btn--close,
+.ReactModal__Content .m-modal-reviewEdit-user__btn--close {
   display: flex;
   justify-content: flex-end;
 }
 
-.ReactModal__Content .m-modal-review__btn--close > button {
+.ReactModal__Content .m-modal-review__btn--close > button,
+.ReactModal__Content .m-modal-reviewEdit-user__btn--close > button {
   background-color: transparent;
   border: none;
   cursor: pointer;
 }
 
-.ReactModal__Content .m-modal-review__form {
+.ReactModal__Content .m-modal-review__form,
+.ReactModal__Content .m-modal-reviewEdit-user__form {
   display: flex;
   flex-direction: column;
   font-size: 0.9rem;
 }
 
-.ReactModal__Content .m-modal-review__form > label {
-  margin-top: 10px;
-  font-weight: 450;
-}
-
-.ReactModal__Content .m-modal-review__form > p {
-  font-size: 0.7rem;
+.ReactModal__Content .m-modal-review__form > label,
+.ReactModal__Content .m-modal-reviewEdit-user__form > label {
   color: #67491b;
+  margin-top: 20px;
+  font-weight: 550;
 }
 
-.ReactModal__Content .m-modal-review__form > input {
+.ReactModal__Content .m-modal-review__form > p,
+.ReactModal__Content .m-modal-reviewEdit-user__form > p {
+  font-size: 0.7rem;
+}
+
+.ReactModal__Content .m-modal-review__form > select,
+.ReactModal__Content .m-modal-reviewEdit-user__form > select {
+  outline: none;
+  border: 1px solid #8d8c8c;
+  border-radius: 2px;
+}
+
+.ReactModal__Content .m-modal-review__form > select:focus,
+.ReactModal__Content .m-modal-reviewEdit-user__form > select:focus {
+  box-shadow: 0 0 6px 0 #c47d2c;
+}
+
+.ReactModal__Content .m-modal-review__form > input,
+.ReactModal__Content .m-modal-reviewEdit-user__form > input {
   border-radius: 2px;
   margin-top: 2px;
 }
 
-.ReactModal__Content .m-modal-review__form > input[type="submit"] {
+.ReactModal__Content .m-modal-review__form > input[type="submit"],
+.ReactModal__Content .m-modal-reviewEdit-user__form > input[type="submit"] {
   margin-top: 10px;
   color: #fafafa;
   background-color: #7c4920;
   font-weight: 450;
   letter-spacing: 2px;
+  height: 2rem;
+  cursor: pointer;
 }
 
-.ReactModal__Content .m-modal-review__form > input[type="submit"]:hover {
+.ReactModal__Content .m-modal-review__form > input[type="submit"]:hover,
+.ReactModal__Content .m-modal-reviewEdit-user__form > input[type="submit"]:hover {
   background-color: #493020;
 }
 
-.ReactModal__Content .m-modal-review__form > textarea {
+@media screen and (min-width: 600px) {
+  .ReactModal__Content .m-modal-review__form > input[type="submit"],
+  .ReactModal__Content .m-modal-reviewEdit-user__form > input[type="submit"] {
+    margin-top: 20px;
+  }
+}
+
+.ReactModal__Content .m-modal-review__form textarea#comment,
+.ReactModal__Content .m-modal-reviewEdit-user__form textarea#comment {
+  border: 1px solid #8d8c8c;
   border-radius: 2px;
   height: 100px;
+  width: 250px;
+}
+
+.ReactModal__Content .m-modal-review__form textarea#comment:focus,
+.ReactModal__Content .m-modal-reviewEdit-user__form textarea#comment:focus {
+  box-shadow: 0 0 6px 0 #c47d2c;
 }
 
 @media screen and (min-width: 600px) {
-  .ReactModal__Content .m-modal-review__form > textarea {
-    width: 15rem;
+  .ReactModal__Content .m-modal-review__form textarea#comment,
+  .ReactModal__Content .m-modal-reviewEdit-user__form textarea#comment {
+    width: 20rem;
+  }
+}
+
+.ReactModal__Content .m-modal-review-reply__btn--close,
+.ReactModal__Content .m-modal-review-reply-edit__btn--close {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.ReactModal__Content .m-modal-review-reply__btn--close > button,
+.ReactModal__Content .m-modal-review-reply-edit__btn--close > button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.ReactModal__Content .m-modal-review-reply__form,
+.ReactModal__Content .m-modal-review-reply-edit__form {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+}
+
+.ReactModal__Content .m-modal-review-reply__form > p,
+.ReactModal__Content .m-modal-review-reply-edit__form > p {
+  font-size: 0.7rem;
+}
+
+.ReactModal__Content .m-modal-review-reply__form > input,
+.ReactModal__Content .m-modal-review-reply-edit__form > input {
+  border-radius: 2px;
+  margin-top: 2px;
+}
+
+.ReactModal__Content .m-modal-review-reply__form > input[type="submit"],
+.ReactModal__Content .m-modal-review-reply-edit__form > input[type="submit"] {
+  background: linear-gradient(0deg, #61391a 0%, #7c4920 100%);
+  margin-top: 10px;
+  color: #fafafa;
+  font-weight: 450;
+  letter-spacing: 2px;
+  height: 2rem;
+  cursor: pointer;
+}
+
+.ReactModal__Content .m-modal-review-reply__form > input[type="submit"]:hover,
+.ReactModal__Content .m-modal-review-reply-edit__form > input[type="submit"]:hover {
+  opacity: 0.9;
+}
+
+@media screen and (min-width: 600px) {
+  .ReactModal__Content .m-modal-review-reply__form > input[type="submit"],
+  .ReactModal__Content .m-modal-review-reply-edit__form > input[type="submit"] {
+    margin-top: 20px;
+  }
+}
+
+.ReactModal__Content .m-modal-review-reply__form textarea,
+.ReactModal__Content .m-modal-review-reply-edit__form textarea {
+  border: 1px solid #8d8c8c;
+  border-radius: 2px;
+  height: 120px;
+  width: 250px;
+}
+
+.ReactModal__Content .m-modal-review-reply__form textarea:focus,
+.ReactModal__Content .m-modal-review-reply-edit__form textarea:focus {
+  box-shadow: 0 0 6px 0 #c47d2c;
+}
+
+@media screen and (min-width: 600px) {
+  .ReactModal__Content .m-modal-review-reply__form textarea,
+  .ReactModal__Content .m-modal-review-reply-edit__form textarea {
+    width: 20rem;
   }
 }
 
@@ -1362,6 +1525,12 @@ label.a-label-required__red::after {
 @media screen and (min-width: 600px) {
   .m-store-ranking__list__item > img {
     height: 130px;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .m-store-ranking__list__item > img {
+    height: 150px;
   }
 }
 
@@ -1809,6 +1978,15 @@ label.a-label-required__red::after {
   min-height: 6rem;
 }
 
+.m-store-pickup__title {
+  color: #67491b;
+}
+
+.m-store-pickup__title > svg {
+  margin-right: 6px;
+  transform: rotate(45deg);
+}
+
 .m-store-pickup__list {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1844,6 +2022,16 @@ label.a-label-required__red::after {
 }
 
 @media screen and (min-width: 960px) {
+  .m-store-pickup__list__item > img {
+    height: 150px;
+  }
+}
+
+.p-top .m-store-pickup__title > svg {
+  display: none;
+}
+
+@media screen and (min-width: 960px) {
   .p-top .m-store-pickup {
     margin-top: 20px;
   }
@@ -1867,6 +2055,10 @@ label.a-label-required__red::after {
 
 .p-search .m-store-pickup {
   display: none;
+}
+
+.p-search .m-store-pickup__title {
+  font-size: 1.1rem;
 }
 
 @media screen and (min-width: 600px) {
@@ -2113,6 +2305,165 @@ label.a-label-required__red::after {
   display: grid;
 }
 
+.m-userTable-review__count > p {
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+}
+
+.m-userTable-review__count > p > span {
+  font-size: 0.9rem;
+  font-weight: 550;
+  margin: 0 2px;
+}
+
+.m-userTable-review__item {
+  position: relative;
+  background-color: #fafafa;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+.m-userTable-review__item__buttons {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+}
+
+.m-userTable-review__item__buttons__ellipsis {
+  margin: 0 2px;
+  position: relative;
+  font-size: 0.9rem;
+  display: block;
+  height: 2rem;
+  width: 2rem;
+  color: #757575;
+  background-color: #fafafa;
+  border: 1px solid transparent;
+  font-size: 0.9rem;
+  border-radius: 50%;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.m-userTable-review__item__buttons__ellipsis:hover {
+  background-color: #fae6c9;
+  color: #757575;
+}
+
+.m-userTable-review__item__buttons__ellipsis > svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.m-userTable-review__item__buttons__dialogue {
+  display: none;
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  width: 80px;
+  height: 62px;
+  padding: 5px 0;
+  box-shadow: 1px 1px 3px 0 #a5a5a5;
+  background-color: #fafafa;
+  border-radius: 2px;
+  z-index: 100;
+}
+
+.m-userTable-review__item__buttons__dialogue__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  z-index: -100;
+}
+
+.m-userTable-review__item__buttons__dialogue__btn--delete,
+.m-userTable-review__item__buttons__dialogue .m-modal-reviewEdit-user__btn--edit {
+  height: 26px;
+  width: 100%;
+  background-color: #fafafa;
+  border: none;
+  font-size: 0.8rem;
+  color: #555555;
+  z-index: 200;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.m-userTable-review__item__buttons__dialogue__btn--delete:hover,
+.m-userTable-review__item__buttons__dialogue .m-modal-reviewEdit-user__btn--edit:hover {
+  background-color: #fae6c9;
+}
+
+.m-userTable-review__item__buttons__dialogue.active {
+  display: block;
+}
+
+.m-userTable-review__item__container {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  border-radius: 5px;
+}
+
+.m-userTable-review__item__container > img {
+  height: 30px;
+  width: 30px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+
+.m-userTable-review__item__container__content > a {
+  font-weight: 550;
+  color: #555555;
+  line-height: 30px;
+  vertical-align: text-bottom;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  margin-bottom: 2px;
+}
+
+.m-userTable-review__item__container__content > a:hover {
+  color: #c47d2c;
+}
+
+.m-userTable-review__item__container__content > p {
+  font-size: 0.7rem;
+}
+
+.m-userTable-review__item__container__content > span {
+  font-size: 0.5rem;
+}
+
+.m-userTable-review__item__container__reply {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  padding: 2px 5px 0 5px;
+  border-left: 1px solid #a5a5a5;
+}
+
+.m-userTable-review__item__container__reply > p:nth-child(1) {
+  font-size: 0.75rem;
+  font-weight: 550;
+}
+
+.m-userTable-review__item__container__reply > p:nth-child(2) {
+  font-size: 0.75rem;
+}
+
+.m-userTable-review__item__container__reply__btn--edit {
+  position: relative;
+  height: 1rem;
+}
+
 .m-user-table__tab {
   display: flex;
   position: relative;
@@ -2127,7 +2478,7 @@ label.a-label-required__red::after {
 }
 
 .m-user-table__tab > a {
-  width: 25%;
+  width: 33.33%;
   height: 35px;
   line-height: 35px;
   background-color: transparent;
@@ -2161,7 +2512,13 @@ label.a-label-required__red::after {
 
 .m-user-table__container {
   background-color: #fae6c9;
-  padding: 20px;
+  padding: 10px;
+}
+
+@media screen and (min-width: 600px) {
+  .m-user-table__container {
+    padding: 20px;
+  }
 }
 
 .m-user-prof {
@@ -2271,14 +2628,32 @@ label.a-label-required__red::after {
   }
 }
 
-.m-review-list__item {
+.m-review__btn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.m-review__count > p {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
+.m-review__count > p > span {
+  font-size: 1rem;
+  font-weight: 550;
+  margin: 0 2px;
+}
+
+.m-review__item {
   display: grid;
   grid-template-columns: 40px 1fr;
   background-color: #fafafa;
   padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
 }
 
-.m-review-list__item > img {
+.m-review__item > img {
   height: 30px;
   width: 30px;
   -o-object-fit: cover;
@@ -2287,8 +2662,41 @@ label.a-label-required__red::after {
      object-position: center;
 }
 
-.m-review-list__item__content > p {
+.m-review__item__content > p {
   font-size: 0.8rem;
+}
+
+.m-review__item__content > span {
+  font-size: 0.6rem;
+  margin-bottom: 7px;
+}
+
+.m-review__item__reply {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  padding: 2px 5px 0 5px;
+  border-left: 1px solid #a5a5a5;
+}
+
+.m-review__item__reply > p:nth-child(1) {
+  font-size: 0.75rem;
+  font-weight: 550;
+}
+
+.m-review__item__reply > p:nth-child(2) {
+  font-size: 0.75rem;
+}
+
+.m-review__item__reply__btn--edit {
+  position: relative;
+  height: 1rem;
+}
+
+.m-review__item__btn {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .m-storeEdit-menuList__item {
@@ -3205,9 +3613,15 @@ label.a-label-required__red::after {
 
 @media screen and (min-width: 600px) {
   .p-review__container {
-    grid-template-columns: 1fr 25%;
-    -moz-column-gap: 20px;
-         column-gap: 20px;
+    grid-template-columns: 1fr 170px;
+    -moz-column-gap: 25px;
+         column-gap: 25px;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .p-review__container {
+    grid-template-columns: 1fr 200px;
   }
 }
 
@@ -3216,14 +3630,11 @@ label.a-label-required__red::after {
 }
 
 .p-review__container__table {
-  background-color: #fae6c9;
-  padding: 20px;
   margin: 20px 0;
 }
 
 .p-review__container > aside {
   border-radius: 2px;
-  padding: 10px;
 }
 
 .p-store-edit {

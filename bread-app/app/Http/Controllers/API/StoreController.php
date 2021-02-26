@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use App\Models\Store;
 use App\Models\User;
+use App\Models\Review;
 use App\Http\Requests\StoreRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
@@ -27,6 +28,7 @@ class StoreController extends Controller
     public function search_store(Request $request) {
         $store = new Store();
         $user = new User();
+        $review = new Review();
         $keyword = $request->input('key');
         $district = $request->input('di');
         $bread_kind = $request->input('br');
@@ -106,7 +108,11 @@ class StoreController extends Controller
             $store['menu1'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_menu . '1.jpg');
             $store['menu2'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_menu . '2.jpg');
             $store['menu3'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_menu . '3.jpg');
-            
+            $review = new Review;
+            $count = 0;
+            $score_total = 0;
+            $star_list = $review->get_star($store['user_uuid']);
+
             if($check_user_uuid) {
                 if($favorite_list){
                     foreach($favorite_list as $favorite){
@@ -123,6 +129,17 @@ class StoreController extends Controller
                         }
                     }
                 }
+            }
+            
+            if(count($star_list)!==0){
+                foreach($star_list as $item) {
+                    $score_total = $score_total + $item['star'];
+                    $count = $count + 1;
+                }
+                $score = $score_total/$count;
+                $store['scoreInfo'] = array( 'score' => $score, 'count' => $count);
+            }else{
+                $store['scoreInfo'] = array( 'score' => 0, 'count' => 0);
             }
         }
         return $result;
@@ -146,7 +163,6 @@ class StoreController extends Controller
      * @return void
      */
     public function index_storeInfo(Request $request){
-        Log::info($request);
         $store = new Store();
         $user_type = $request->input('user_type');
         $storeInfo = $store->index_storeInfo($request->input('store_uuid'));
@@ -178,7 +194,6 @@ class StoreController extends Controller
                 }
             }
         }
-        Log::info($storeInfo);
         return $storeInfo;
     }
 

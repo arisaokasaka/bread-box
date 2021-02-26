@@ -6,18 +6,17 @@ import Btn_homepage from '../../atoms/buttons/Btn_homepage';
 import ModalSNS from '../../atoms/modal/Modal_sns';
 
 type StoreInfoProps = ({
-    storeInfo: any;
+    storeInfo: any
+    scoreInfo: any
 })
 
-const StoreSubInfo: React.FC<StoreInfoProps> = ({storeInfo}) => (
+const StoreSubInfo: React.FC<StoreInfoProps> = ({storeInfo, scoreInfo}) => (
     <div className = "m-store-subInfo">
         <div className = "m-store-subInfo__container" key={"subInfo_"+storeInfo.id}>
             <div className = "m-store-subInfo__container__item">
-                {storeInfo.star &&
-                    <Score
-                        ScoreStar = {storeInfo.star}
-                    />
-                }
+                <Score
+                    scoreInfo = {scoreInfo}
+                />
             </div>
             <div className = "m-store-subInfo__container__item">
                 <Schedule

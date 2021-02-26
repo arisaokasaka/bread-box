@@ -26,7 +26,6 @@ import PasswordReset_store from './components/page/passwordReset/PasswordReset_s
 import PasswordReset_user from './components/page/passwordReset/PasswordReset_user';
 import Register_store from './components/page/register/Register_store';
 import Register_user from './components/page/register/Register_user';
-import Review from './components/page/review/Review';
 import Search from './components/page/search/Search';
 import Search_input_mobile from './components/page/search/Search_input_mobile';
 import StoreEdit from './components/page/store/StoreEdit';
@@ -67,7 +66,6 @@ const App: React.FC = () => {
                       <Route path="/password_user" component={PasswordReset_user} />
                       <Route path="/register_store" component={Register_store} />
                       <Route path="/register_user" component={Register_user} />
-                      <Route path="/review" component={Review} />
                       <Route path="/store/:user_uuid" component={StorePage} />
                       <StoreOnly path="/store_edit">
                         <StoreEdit />
