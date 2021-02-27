@@ -468,18 +468,16 @@ h2 {
 }
 
 .a-btn-search_icon,
-.a-btn-logIn,
-.a-btn-mypage {
+.a-btn-logIn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 64px;
+  width: 55px;
   height: 64px;
 }
 
 .a-btn-search_icon a,
-.a-btn-logIn a,
-.a-btn-mypage a {
+.a-btn-logIn a {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -491,37 +489,49 @@ h2 {
 }
 
 .a-btn-search_icon a > span,
-.a-btn-logIn a > span,
-.a-btn-mypage a > span {
+.a-btn-logIn a > span {
   margin-top: 4px;
   line-height: 0.5rem;
   font-size: 0.5rem;
 }
 
 .a-btn-search_icon a:hover,
-.a-btn-logIn a:hover,
-.a-btn-mypage a:hover {
+.a-btn-logIn a:hover {
   text-decoration: underline;
 }
 
 @media screen and (min-width: 960px) {
   .a-btn-search_icon,
-  .a-btn-logIn,
-  .a-btn-mypage {
+  .a-btn-logIn {
     display: none;
   }
 }
 
-@media screen and (min-width: 960px) {
-  .l-navbar__container--pc__content__nav--loggedin .a-btn-mypage {
-    display: block;
-    margin-left: 5px;
-  }
-  .l-navbar__container--pc__content__nav--loggedin .a-btn-mypage a {
-    font-size: 1.2rem;
-    height: 64px;
-    width: 64px;
-  }
+.a-btn-mypage a,
+.a-btn-storePage a,
+.a-btn-storeManage a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 55px;
+  height: 64px;
+  color: #fafafa;
+  font-size: 1.2rem;
+}
+
+.a-btn-mypage a > span,
+.a-btn-storePage a > span,
+.a-btn-storeManage a > span {
+  margin-top: 4px;
+  line-height: 0.5rem;
+  font-size: 0.5rem;
+}
+
+.a-btn-mypage a:hover,
+.a-btn-storePage a:hover,
+.a-btn-storeManage a:hover {
+  text-decoration: underline;
 }
 
 .a-btn-edit-user {
@@ -1784,6 +1794,7 @@ label.a-label-required__red::after {
 .l-navbar__container--pc__content .a-bar-search {
   position: relative;
   height: 28px;
+  margin-right: 10px;
   border: 1px solid #fafafa;
   box-sizing: unset;
   font-size: 0.7rem;
@@ -2928,8 +2939,9 @@ label.a-label-required__red::after {
     display: flex;
     align-items: center;
   }
-  .l-navbar__container--pc__content__nav--loggedin > .a-btn-mypage {
-    vertical-align: middle;
+  .l-navbar__container--pc__content__nav--loggedin {
+    display: flex;
+    align-items: center;
   }
   .l-navbar__container--pc__content__nav--loggedout ul {
     position: absolute;

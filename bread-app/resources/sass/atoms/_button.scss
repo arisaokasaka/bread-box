@@ -275,12 +275,11 @@
 
 // ログイン・検索・マイページボタン（アイコン）
 .a-btn-search_icon,
-.a-btn-logIn,
-.a-btn-mypage {
+.a-btn-logIn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: $header-height;
+    width: 55px;
     height: $header-height;
 
     a {
@@ -310,16 +309,27 @@
 }
 
 // マイページボタン補足スタイル
-.l-navbar__container--pc__content__nav--loggedin {
-    .a-btn-mypage {
-        @include bp-960up {
-            display: block;
-            margin-left: 5px;
-            a {
-                font-size: 1.2rem;
-                height: $header-height;
-                width: $header-height;
-            }
+.a-btn-mypage,
+.a-btn-storePage,
+.a-btn-storeManage {
+    a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 55px;
+        height: $header-height;
+        color: $white;
+        font-size: 1.2rem;
+
+        & > span {
+            margin-top: 4px;
+            line-height: 0.5rem;
+            font-size: 0.5rem;
+        }
+
+        &:hover {
+            text-decoration: underline;
         }
     }
 }
