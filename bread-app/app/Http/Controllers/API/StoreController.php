@@ -166,7 +166,7 @@ class StoreController extends Controller
         $store = new Store();
         $user_type = $request->input('user_type');
         $storeInfo = $store->index_storeInfo($request->input('store_uuid'));
-    
+
         if($user_type==="user"){
             $user = new User();
             $user_uuid = $request->input('user_uuid');

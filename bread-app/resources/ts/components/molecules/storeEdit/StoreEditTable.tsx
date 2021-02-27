@@ -31,7 +31,7 @@ const StoreEditTable: React.FC = () => {
     // 店舗情報取得
     const getStoreInfo = () => {
         axios.post("/api/index_storeInfo", {
-            user_uuid: state.uuid
+            store_uuid: state.uuid
         })
         .then(res => {
             console.log('storeinfo')
