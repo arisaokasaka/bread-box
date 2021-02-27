@@ -2,7 +2,6 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Btn_favorite from '../../atoms/buttons/Btn_favorite';
 import Btn_interested from '../../atoms/buttons/Btn_interested';
-import Week from '../../../info/Week';
 import Schedule from '../../atoms/Schedule';
 import Score from '../../atoms/Score';
 
@@ -62,9 +61,9 @@ const StoreList: React.FC<StoreProps> = ({StoreInfo}) => {
                                     <img src={"/storage/store/" + el.user_uuid + "/menu/item_2.jpg"} alt="パンのサブ画像"/>}
                                 </div>
                             </div>
-                            <p className ="m-store-list__item__container__explanation">{el.message}</p>
+                            {el.message && <p className ="m-store-list__item__container__explanation">{el.message}</p>}
                             <Schedule
-                                Week = {Week.week}
+                                info = {el}
                             />
                             <Score
                                 scoreInfo = {el.scoreInfo}
