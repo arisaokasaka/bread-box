@@ -15759,30 +15759,16 @@ var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
-function BtnMypage_icon() {
+var BtnMypage_icon = function BtnMypage_icon() {
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
-  var icon;
-
-  if (state.auth === "user") {
-    icon = react_1["default"].createElement(react_router_dom_1.Link, {
-      to: "/user"
-    }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-      icon: free_solid_svg_icons_1.faUserCircle
-    }), react_1["default"].createElement("span", null, "\u30DE\u30A4\u30DA\u30FC\u30B8"));
-  } else if (state.auth === "store") {
-    icon = react_1["default"].createElement(react_router_dom_1.Link, {
-      to: "/store_edit"
-    }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-      icon: free_solid_svg_icons_1.faUserCircle
-    }), react_1["default"].createElement("span", null, "\u30DE\u30A4\u30DA\u30FC\u30B8"));
-  } else {
-    icon = null;
-  }
-
   return react_1["default"].createElement("div", {
     className: "a-btn-mypage"
-  }, icon);
-}
+  }, state.auth === "user" && react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/user"
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faUserCircle
+  }), react_1["default"].createElement("span", null, "\u30DE\u30A4\u30DA\u30FC\u30B8")));
+};
 
 exports.default = BtnMypage_icon;
 
@@ -15977,6 +15963,150 @@ function BtnStoreEdit() {
 }
 
 exports.default = BtnStoreEdit;
+
+/***/ }),
+
+/***/ "./resources/ts/components/atoms/buttons/BtnStoreManage.tsx":
+/*!******************************************************************!*\
+  !*** ./resources/ts/components/atoms/buttons/BtnStoreManage.tsx ***!
+  \******************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
+var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
+
+var BtnStoreManage = function BtnStoreManage() {
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
+  return react_1["default"].createElement("div", {
+    className: "a-btn-storeManage"
+  }, state.auth === "store" && react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/store_edit"
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faCog
+  }), react_1["default"].createElement("span", null, "\u7BA1\u7406\u753B\u9762")));
+};
+
+exports.default = BtnStoreManage;
+
+/***/ }),
+
+/***/ "./resources/ts/components/atoms/buttons/BtnStorePage.tsx":
+/*!****************************************************************!*\
+  !*** ./resources/ts/components/atoms/buttons/BtnStorePage.tsx ***!
+  \****************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
+var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
+
+var BtnStorePage = function BtnStorePage() {
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
+  return react_1["default"].createElement("div", {
+    className: "a-btn-storePage"
+  }, state.auth === "store" && react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/store/" + state.uuid
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faStore
+  }), react_1["default"].createElement("span", null, "\u5E97\u8217\u30DA\u30FC\u30B8")));
+};
+
+exports.default = BtnStorePage;
 
 /***/ }),
 
@@ -17927,6 +18057,10 @@ var BtnMypage_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnMy
 
 var BtnLogin_icon_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnLogin_icon */ "./resources/ts/components/atoms/buttons/BtnLogin_icon.tsx"));
 
+var BtnStorePage_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnStorePage */ "./resources/ts/components/atoms/buttons/BtnStorePage.tsx"));
+
+var BtnStoreManage_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnStoreManage */ "./resources/ts/components/atoms/buttons/BtnStoreManage.tsx"));
+
 var Logo_1 = __importDefault(__webpack_require__(/*! ../atoms/Logo */ "./resources/ts/components/atoms/Logo.tsx"));
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
@@ -17968,10 +18102,10 @@ function NavBar() {
   if (state.uuid) {
     navPC = react_1["default"].createElement("nav", {
       className: "l-navbar__container--pc__content__nav--loggedin"
-    }, react_1["default"].createElement(BtnMypage_1["default"], null));
+    }, react_1["default"].createElement(BtnMypage_1["default"], null), react_1["default"].createElement(BtnStorePage_1["default"], null), react_1["default"].createElement(BtnStoreManage_1["default"], null));
     navMobile = react_1["default"].createElement("nav", {
       className: "l-navbar__container--mobile__nav"
-    }, react_1["default"].createElement(BtnSearch_icon_1["default"], null), react_1["default"].createElement(BtnMypage_1["default"], null));
+    }, react_1["default"].createElement(BtnSearch_icon_1["default"], null), react_1["default"].createElement(BtnMypage_1["default"], null), react_1["default"].createElement(BtnStorePage_1["default"], null), react_1["default"].createElement(BtnStoreManage_1["default"], null));
   } else {
     navPC = react_1["default"].createElement("nav", {
       className: "l-navbar__container--pc__content__nav--loggedout"

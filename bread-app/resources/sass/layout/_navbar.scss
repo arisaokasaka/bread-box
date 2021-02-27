@@ -31,11 +31,12 @@
                     align-items: center;
                     &__nav {
                         &--loggedin {
-                            & > .a-btn-mypage {
-                                vertical-align: middle;
-                            }
+                            display: flex;
+                            align-items: center;
+                            // & > .a-btn-mypage {
+                            //     vertical-align: middle;
+                            // }
                         }
-
                         &--loggedout {
                             ul {
                                 position: absolute;

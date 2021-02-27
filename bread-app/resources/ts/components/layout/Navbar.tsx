@@ -5,6 +5,8 @@ import Searchbar from '../atoms/Searchbar'
 import BtnSearch_icon from '../atoms/buttons/BtnSearch_icon';
 import BtnMypage_icon from '../atoms/buttons/BtnMypage';
 import BtnLogin_icon from '../atoms/buttons/BtnLogin_icon';
+import BtnStorePage from '../atoms/buttons/BtnStorePage';
+import BtnStoreManage from '../atoms/buttons/BtnStoreManage';
 import Logo from '../atoms/Logo';
 import { UserAuthContext } from '../../contexts/UserAuthContext';
 
@@ -44,13 +46,16 @@ function NavBar() {
         navPC = (
             <nav className="l-navbar__container--pc__content__nav--loggedin">
                 <BtnMypage_icon/>
+                <BtnStorePage/>
+                <BtnStoreManage/>
             </nav>
         );
         navMobile = (
             <nav className="l-navbar__container--mobile__nav">
-                <BtnSearch_icon
-                />
+                <BtnSearch_icon/>
                 <BtnMypage_icon/>
+                <BtnStorePage/>
+                <BtnStoreManage/>
             </nav>
         );
     }else{
