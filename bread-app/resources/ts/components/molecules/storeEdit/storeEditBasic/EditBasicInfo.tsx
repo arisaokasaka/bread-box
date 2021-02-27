@@ -23,12 +23,13 @@ const EditBasicInfo: React.FC = () => {
     }
     
     //送信時の動作
-    const onSubmit = async (data) => {
+    const onSubmit = (data) => {
         data['user_uuid'] = state.uuid;
         updateBasicInfo_storesTable(data);
         updateBasicInfo_usersTable(data);
         getStoreInfo();
     }
+
     // アップデート機能（storesテーブル）
     const updateBasicInfo_storesTable = (data) => {
         axios.post("/api/update_basicInfo_storesTable", data)
@@ -50,10 +51,9 @@ const EditBasicInfo: React.FC = () => {
     // 店舗情報取得＆更新
     const getStoreInfo = () => {
         axios.post("/api/index_storeInfo", {
-            user_uuid: state.uuid
+            store_uuid: state.uuid
         })
         .then(res => {
-            console.log('storeinfo')
             dispatch({
                 type: 'inputStoreInfo',
                 payload: res.data,
