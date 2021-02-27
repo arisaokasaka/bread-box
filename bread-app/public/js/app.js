@@ -15253,6 +15253,40 @@ exports.default = Logo;
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -15263,18 +15297,98 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var Week_1 = __importDefault(__webpack_require__(/*! ../../info/Week */ "./resources/ts/info/Week.ts"));
+
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
 
 var Schedule = function Schedule(_a) {
-  var Week = _a.Week;
+  var info = _a.info;
+  var Week = Week_1["default"].week;
+
+  var _b = react_1.useState(false),
+      isHoursOpen = _b[0],
+      setHours = _b[1];
+
+  var className_btn = "a-schedule__btn";
+  var week_circles = null;
+  var business_hours = null;
+  var schedule = {
+    monday: '',
+    tuesday: '',
+    wednesday: '',
+    thursday: '',
+    friday: '',
+    saturday: '',
+    sunday: ''
+  };
+
+  if (info.business_day) {
+    schedule = JSON.parse(info.business_day);
+    week_circles = react_1["default"].createElement("div", {
+      className: "a-schedule__days"
+    }, Week.map(function (el) {
+      var check = false;
+
+      if (schedule[el.id]) {
+        check = true;
+      }
+
+      return react_1["default"].createElement("div", {
+        className: "a-schedule__days__item",
+        key: el["class"]
+      }, react_1["default"].createElement("input", {
+        type: "checkbox",
+        id: el.id + "_exist",
+        checked: check,
+        readOnly: true
+      }), react_1["default"].createElement("label", {
+        htmlFor: el.id + "_exist"
+      }, el.text));
+    }));
+    business_hours = react_1["default"].createElement("div", {
+      className: "a-schedule__hours"
+    }, Week.map(function (el) {
+      var business_hour = '';
+
+      if (schedule[el.id]) {
+        var open_time = schedule[el.id][0];
+        var close_time = schedule[el.id][1];
+        business_hour = open_time + "~" + close_time;
+        return react_1["default"].createElement("div", {
+          className: "a-schedule__hours__item",
+          key: el["class"]
+        }, react_1["default"].createElement("label", null, el.name), react_1["default"].createElement("span", null, business_hour));
+      }
+    }));
+  }
+
+  var toggleHoursOpen = function toggleHoursOpen() {
+    if (isHoursOpen) {
+      setHours(false);
+    } else {
+      setHours(true);
+    }
+  }; // ボタンの矢印の向きを変更
+
+
+  if (isHoursOpen) {
+    className_btn = "a-schedule__btn active";
+  } else {
+    className_btn = "a-schedule__btn";
+  }
+
   return react_1["default"].createElement("div", {
     className: "a-schedule"
-  }, Week.map(function (el) {
-    return react_1["default"].createElement("span", {
-      className: el["class"],
-      key: el["class"]
-    }, react_1["default"].createElement("span", null, el.text));
-  }));
+  }, week_circles, week_circles && react_1["default"].createElement("button", {
+    onClick: toggleHoursOpen,
+    className: className_btn
+  }, "\u55B6\u696D\u6642\u9593\u3092\u898B\u308B", react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faChevronRight
+  })), isHoursOpen && business_hours);
 };
 
 exports.default = Schedule;
@@ -19713,7 +19827,12 @@ var EditSNS = function EditSNS() {
       stateInfo = _b.stateInfo,
       dispatch = _b.dispatch;
 
-  var snsSubmitted;
+  var snsSubmitted = {
+    instagram: '',
+    twitter: '',
+    facebook: '',
+    other: ''
+  };
   var defaultData; // StoreInfo.snsにデータがあれば、defaultDataにそのデータを設定・defaultValueに反映
 
   if (stateInfo.storeInfo.sns) {
@@ -19729,7 +19848,8 @@ var EditSNS = function EditSNS() {
 
 
   var onSubmit = function onSubmit(data) {
-    //snsをまとめたobject作成し、objectを送信
+    console.log(data); //snsをまとめたobject作成し、objectを送信
+
     snsSubmitted['instagram'] = data['instagram'];
     snsSubmitted['twitter'] = data['twitter'];
     snsSubmitted['facebook'] = data['facebook'];
@@ -20609,8 +20729,6 @@ var Btn_favorite_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons
 
 var Btn_interested_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/Btn_interested */ "./resources/ts/components/atoms/buttons/Btn_interested.tsx"));
 
-var Week_1 = __importDefault(__webpack_require__(/*! ../../../info/Week */ "./resources/ts/info/Week.ts"));
-
 var Schedule_1 = __importDefault(__webpack_require__(/*! ../../atoms/Schedule */ "./resources/ts/components/atoms/Schedule.tsx"));
 
 var Score_1 = __importDefault(__webpack_require__(/*! ../../atoms/Score */ "./resources/ts/components/atoms/Score.tsx"));
@@ -20688,10 +20806,10 @@ var StoreList = function StoreList(_a) {
     }), el.menu2 && react_1["default"].createElement("img", {
       src: "/storage/store/" + el.user_uuid + "/menu/item_2.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
-    }))), react_1["default"].createElement("p", {
+    }))), el.message && react_1["default"].createElement("p", {
       className: "m-store-list__item__container__explanation"
     }, el.message), react_1["default"].createElement(Schedule_1["default"], {
-      Week: Week_1["default"].week
+      info: el
     }), react_1["default"].createElement(Score_1["default"], {
       scoreInfo: el.scoreInfo
     })));
@@ -20996,8 +21114,6 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 
 var Score_1 = __importDefault(__webpack_require__(/*! ../../atoms/Score */ "./resources/ts/components/atoms/Score.tsx"));
 
-var Week_1 = __importDefault(__webpack_require__(/*! ../../../info/Week */ "./resources/ts/info/Week.ts"));
-
 var Schedule_1 = __importDefault(__webpack_require__(/*! ../../atoms/Schedule */ "./resources/ts/components/atoms/Schedule.tsx"));
 
 var Btn_homepage_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/Btn_homepage */ "./resources/ts/components/atoms/buttons/Btn_homepage.tsx"));
@@ -21018,9 +21134,9 @@ var StoreSubInfo = function StoreSubInfo(_a) {
     scoreInfo: scoreInfo
   })), react_1["default"].createElement("div", {
     className: "m-store-subInfo__container__item"
-  }, react_1["default"].createElement(Schedule_1["default"], {
-    Week: Week_1["default"].week
-  }), react_1["default"].createElement("p", null, storeInfo.business_memo)), react_1["default"].createElement("div", {
+  }, storeInfo.business_memo && react_1["default"].createElement("p", null, storeInfo.business_memo), react_1["default"].createElement(Schedule_1["default"], {
+    info: storeInfo
+  })), react_1["default"].createElement("div", {
     className: "m-store-subInfo__container__item__btns"
   }, storeInfo.url && react_1["default"].createElement(Btn_homepage_1["default"], {
     url: storeInfo.url

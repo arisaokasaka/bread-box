@@ -9,7 +9,12 @@ const EditSNS: React.FC = () => {
     const { register, handleSubmit } = useForm();
     const { state } = useContext(UserAuthContext);
     const { stateInfo, dispatch } = useContext(StoreInfoContext);
-    let snsSubmitted: object;
+    let snsSubmitted: object = {
+        instagram: '',
+        twitter: '',
+        facebook: '',
+        other: ''
+    };
     let defaultData: any;
 
     // StoreInfo.snsにデータがあれば、defaultDataにそのデータを設定・defaultValueに反映
@@ -26,6 +31,7 @@ const EditSNS: React.FC = () => {
 
     // SNS情報の送信
     const onSubmit = (data) => {        
+        console.log(data)
         //snsをまとめたobject作成し、objectを送信
         snsSubmitted['instagram'] = data['instagram'];
         snsSubmitted['twitter'] = data['twitter'];
