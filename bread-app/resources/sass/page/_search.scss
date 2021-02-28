@@ -12,44 +12,56 @@
                 flex-basis: 75%;
             }
 
-            &__list {
-                background-color: $lightBrown;
-                border-radius: $base-radius;
-                padding: $mp-xxs $mp-xs;
+            &__tab {
+                display: flex;
+                position: relative;
+                height: 35px;
+                width: 100%;
                 margin-top: $mp-xs;
 
-                &__order--mobile {
-                    display: flex;
-                    justify-content: flex-end;
-                    margin-bottom: 0.5rem;
-
-                    @include bp-600up {
-                        display: none;
-                    }
-
-                    & > select {
-                        color: $font-color-brown;
-                        border-color: $font-color-brown;
-                        border-radius: $base-radius;
-                        font-size: 0.8rem;
-                        outline: none;
-                    }
+                @include bp-600up {
+                    height: 42px;
                 }
 
-                &__order--pc {
-                    display: none;
+                & > input {
+                    width: 33.33%;
+                    height: 35px;
+                    line-height: 35px;
+                    background-color: transparent;
+                    font-size: 0.7rem;
+                    text-align: center;
+                    color: $darkGray;
+                    font-weight: 550;
+                    letter-spacing: 0.5px;
+                    cursor: pointer;
 
                     @include bp-600up {
-                        display: flex;
-                        justify-content: flex-end;
+                        height: 42px;
+                        line-height: 42px;
+                        font-size: 0.8rem;
                     }
 
-                    & > a {
-                        color: $brown;
-                        margin: 0 0 0.5rem 1rem;
-                        font-size: 0.8rem;
-                        cursor: pointer;
+                    &:hover {
+                        background-color: $lighterBrown;
                     }
+
+                    &.selected {
+                        background-color: $lightBrown;
+                        color: $font-color-brown;
+
+                        &:hover {
+                            background-color: $lightBrown;
+                        }
+                    }
+                }
+            }
+
+            &__list {
+                background-color: $lightBrown;
+                padding: $mp-xxs;
+
+                @include bp-600up {
+                    padding: $mp-xs;
                 }
             }
         }

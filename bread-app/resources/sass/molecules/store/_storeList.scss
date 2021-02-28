@@ -7,7 +7,7 @@
         background-color: $white;
         padding: $mp-xxs;
         border-radius: 5px;
-        margin-bottom: $mp-xs;
+        margin-bottom: $mp-xxs;
 
         @include bp-960up {
             display: grid;

@@ -13,6 +13,7 @@ const Search: React.FC = () => {
     const [ stores, setStores ] = useState([]);
     const [ sort, setSort ] = useState('default')
     let message_noResult: any = null;
+    let className_btnSort: string = ""
 
     useEffect(()=>{
         getStores()
@@ -29,6 +30,7 @@ const Search: React.FC = () => {
         message_noResult = <p>該当する店舗がありません。</p>
     }
 
+    // 並び替え
     const changeSorting = (sort_type) => {
         let newArray: any;
         switch (sort_type) {
@@ -56,10 +58,10 @@ const Search: React.FC = () => {
             break;
             case 'default':
                 newArray = stores.sort((el1, el2) => {
-                    if (el1['user_uuid'] < el2['user_uuid']) {
+                    if (el1['user_uuid'] > el2['user_uuid']) {
                         return 1;
                     }
-                    if (el1['user_uuid'] > el2['user_uuid']) {
+                    if (el1['user_uuid'] < el2['user_uuid']) {
                         return -1;
                     }
                     return 0;
@@ -68,6 +70,27 @@ const Search: React.FC = () => {
         }
         setSort(sort_type);
         setStores(newArray);
+    }
+
+    // 並び替えボタンのタブ
+    const Tab = (sort_name) => {
+        let className = "p-search__container__content__tab" + sort_name;
+        let input_value: string = "";
+        switch(sort_name){
+            case 'default':
+                input_value = "標準"
+                break;
+            case 'score_descend':
+                input_value = "評価が高い順"
+                break;
+            case 'review_descend':
+                input_value = "口コミ数順"
+                break;
+        }
+        if(sort === sort_name){
+            className += ' selected';
+        }
+        return <input className={className} value={input_value} onClick={()=>changeSorting(sort_name)} readOnly/>
     }
 
     return (
@@ -79,19 +102,12 @@ const Search: React.FC = () => {
                 <Search_sidebar />
                 <div className="p-search__container__content">
                     <Store_pickup />
+                    <div className="p-search__container__content__tab">
+                        {Tab('default')}
+                        {Tab('score_descend')}
+                        {Tab('review_descend')}
+                    </div>
                     <div className="p-search__container__content__list">
-                        <div className = "p-search__container__content__list__order--pc">
-                            <button onClick={()=>changeSorting('default')}>標準</button>
-                            <button onClick={()=>changeSorting('score_descend')}>評価順</button>
-                            <button onClick={()=>changeSorting('review_descend')}>口コミ数順</button>
-                        </div>
-                        <div className = "p-search__container__content__list__order--mobile">
-                            <select onChange={(e)=>changeSorting(e.target.value)}>
-                                <option value="default">標準</option>
-                                <option value="score_descend">評価順</option>
-                                <option value="review_descend">口コミ数順</option>
-                            </select>
-                        </div>
                         {message_noResult}
                         <StoreList
                             storeList = {stores}
