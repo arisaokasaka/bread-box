@@ -127,22 +127,22 @@ const StoreReview: React.FC<ReviewProps> = ({store_uuid}) => {
 
     return (
         <div className ="m-review">
-            <div className="m-review__btn">
+            <div className ="m-review__heading">
+                <div className ="m-review__heading__former">
+                    <p>全<span>{review_count}</span>件</p>
+                    <div className="m-review__heading__former__order a-sort-selection">
+                        <select onChange={(e)=>changeSorting(e.target.value)}>
+                            <option value="star_from_high">評価が高い順</option>
+                            <option value="star_from_low">評価が低い順</option>
+                            <option value="date_from_old">投稿順</option>
+                            <option value="date_from_new">新しい順</option>
+                            <option value="default">標準</option>
+                        </select>
+                    </div>
+                </div>
                 <ModalCreateReview
                     store_uuid={store_uuid}
                 />
-            </div>
-            <div className ="m-review__count">
-                <p>全<span>{review_count}</span>件</p>
-            </div>
-            <div className="m-review__order">
-                <select onChange={(e)=>changeSorting(e.target.value)}>
-                    <option value="default">標準</option>
-                    <option value="date_from_new">新着順</option>
-                    <option value="star_from_high">評価が高い順</option>
-                    <option value="star_from_low">評価が低い順</option>
-                    <option value="date_from_old">投稿順</option>
-                </select>
             </div>
             {message_no_review}
             {review_list

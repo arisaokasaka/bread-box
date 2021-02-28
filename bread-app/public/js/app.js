@@ -21150,28 +21150,28 @@ var StoreReview = function StoreReview(_a) {
   return react_1["default"].createElement("div", {
     className: "m-review"
   }, react_1["default"].createElement("div", {
-    className: "m-review__btn"
-  }, react_1["default"].createElement(Modal_review_1["default"], {
-    store_uuid: store_uuid
-  })), react_1["default"].createElement("div", {
-    className: "m-review__count"
-  }, react_1["default"].createElement("p", null, "\u5168", react_1["default"].createElement("span", null, review_count), "\u4EF6")), react_1["default"].createElement("div", {
-    className: "m-review__order"
+    className: "m-review__heading"
+  }, react_1["default"].createElement("div", {
+    className: "m-review__heading__former"
+  }, react_1["default"].createElement("p", null, "\u5168", react_1["default"].createElement("span", null, review_count), "\u4EF6"), react_1["default"].createElement("div", {
+    className: "m-review__heading__former__order a-sort-selection"
   }, react_1["default"].createElement("select", {
     onChange: function onChange(e) {
       return changeSorting(e.target.value);
     }
   }, react_1["default"].createElement("option", {
-    value: "default"
-  }, "\u6A19\u6E96"), react_1["default"].createElement("option", {
-    value: "date_from_new"
-  }, "\u65B0\u7740\u9806"), react_1["default"].createElement("option", {
     value: "star_from_high"
   }, "\u8A55\u4FA1\u304C\u9AD8\u3044\u9806"), react_1["default"].createElement("option", {
     value: "star_from_low"
   }, "\u8A55\u4FA1\u304C\u4F4E\u3044\u9806"), react_1["default"].createElement("option", {
     value: "date_from_old"
-  }, "\u6295\u7A3F\u9806"))), message_no_review, review_list.slice(offset, offset + perPage).map(function (el, index) {
+  }, "\u6295\u7A3F\u9806"), react_1["default"].createElement("option", {
+    value: "date_from_new"
+  }, "\u65B0\u3057\u3044\u9806"), react_1["default"].createElement("option", {
+    value: "default"
+  }, "\u6A19\u6E96")))), react_1["default"].createElement(Modal_review_1["default"], {
+    store_uuid: store_uuid
+  })), message_no_review, review_list.slice(offset, offset + perPage).map(function (el, index) {
     return react_1["default"].createElement("div", {
       className: "m-review__item",
       key: "review_" + sort + index
@@ -21745,12 +21745,7 @@ var UserTable = function UserTable() {
     table: "review",
     value: "口コミ",
     "function": handleReview
-  }; // const TabStamp = {
-  //     class: "m-user-table__tab--stamp",
-  //     table: "stamp",
-  //     value: "スタンプ",
-  //     function: handleStamp,
-  // }
+  };
 
   function handleFavorite() {
     setTable('favorite');
@@ -21758,10 +21753,7 @@ var UserTable = function UserTable() {
 
   function handleInterested() {
     setTable('interested');
-  } // function handleStamp(){
-  //     setTable('stamp');
-  // }
-
+  }
 
   function handleReview() {
     setTable('review');
@@ -21876,7 +21868,7 @@ var UserTable_favorite = function UserTable_favorite() {
       favorite = _a[0],
       setFavorite = _a[1];
 
-  var _b = react_1.useState('default'),
+  var _b = react_1.useState('score_descend'),
       sort = _b[0],
       setSort = _b[1];
 
@@ -21891,6 +21883,8 @@ var UserTable_favorite = function UserTable_favorite() {
       setFavorite(res.data);
     })["catch"]();
   };
+
+  console.log(favorite);
 
   var changeSorting = function changeSorting(sort_type) {
     var newArray;
@@ -21926,11 +21920,11 @@ var UserTable_favorite = function UserTable_favorite() {
 
       case 'default':
         newArray = favorite.sort(function (el1, el2) {
-          if (el1['user_uuid'] < el2['user_uuid']) {
+          if (el1['user_uuid'] > el2['user_uuid']) {
             return 1;
           }
 
-          if (el1['user_uuid'] > el2['user_uuid']) {
+          if (el1['user_uuid'] < el2['user_uuid']) {
             return -1;
           }
 
@@ -21946,32 +21940,18 @@ var UserTable_favorite = function UserTable_favorite() {
   return react_1["default"].createElement("div", {
     className: "m-userTable-favorite"
   }, react_1["default"].createElement("div", {
-    className: "m-userTable-favorite__order--pc"
-  }, react_1["default"].createElement("button", {
-    onClick: function onClick() {
-      return changeSorting('default');
-    }
-  }, "\u6A19\u6E96"), react_1["default"].createElement("button", {
-    onClick: function onClick() {
-      return changeSorting('score_descend');
-    }
-  }, "\u8A55\u4FA1\u9806"), react_1["default"].createElement("button", {
-    onClick: function onClick() {
-      return changeSorting('review_descend');
-    }
-  }, "\u53E3\u30B3\u30DF\u6570\u9806")), react_1["default"].createElement("div", {
-    className: "m-userTable-favorite__order--mobile"
+    className: "m-userTable-favorite__order a-sort-selection"
   }, react_1["default"].createElement("select", {
     onChange: function onChange(e) {
       return changeSorting(e.target.value);
     }
   }, react_1["default"].createElement("option", {
-    value: "default"
-  }, "\u6A19\u6E96"), react_1["default"].createElement("option", {
     value: "score_descend"
-  }, "\u8A55\u4FA1\u9806"), react_1["default"].createElement("option", {
+  }, "\u8A55\u4FA1\u304C\u9AD8\u3044\u9806"), react_1["default"].createElement("option", {
     value: "review_descend"
-  }, "\u53E3\u30B3\u30DF\u6570\u9806"))), favorite[0] === undefined ? react_1["default"].createElement("p", null, "\u304A\u6C17\u306B\u5165\u308A\u5E97\u8217\u306F\u307E\u3060\u3042\u308A\u307E\u305B\u3093\u3002") : react_1["default"].createElement(StoreList_1["default"], {
+  }, "\u53E3\u30B3\u30DF\u6570\u9806"), react_1["default"].createElement("option", {
+    value: "default"
+  }, "\u6A19\u6E96"))), favorite[0] === undefined ? react_1["default"].createElement("p", null, "\u304A\u6C17\u306B\u5165\u308A\u5E97\u8217\u306F\u307E\u3060\u3042\u308A\u307E\u305B\u3093\u3002") : react_1["default"].createElement(StoreList_1["default"], {
     storeList: favorite,
     sortType: sort
   }));
@@ -22049,7 +22029,7 @@ var UserTable_interested = function UserTable_interested() {
       interested = _a[0],
       setInterested = _a[1];
 
-  var _b = react_1.useState('default'),
+  var _b = react_1.useState('score_descend'),
       sort = _b[0],
       setSort = _b[1];
 
@@ -22099,11 +22079,11 @@ var UserTable_interested = function UserTable_interested() {
 
       case 'default':
         newArray = interested.sort(function (el1, el2) {
-          if (el1['user_uuid'] < el2['user_uuid']) {
+          if (el1['user_uuid'] > el2['user_uuid']) {
             return 1;
           }
 
-          if (el1['user_uuid'] > el2['user_uuid']) {
+          if (el1['user_uuid'] < el2['user_uuid']) {
             return -1;
           }
 
@@ -22119,32 +22099,18 @@ var UserTable_interested = function UserTable_interested() {
   return react_1["default"].createElement("div", {
     className: "m-userTable-interested"
   }, react_1["default"].createElement("div", {
-    className: "m-userTable-interested__order--pc"
-  }, react_1["default"].createElement("button", {
-    onClick: function onClick() {
-      return changeSorting('default');
-    }
-  }, "\u6A19\u6E96"), react_1["default"].createElement("button", {
-    onClick: function onClick() {
-      return changeSorting('score_descend');
-    }
-  }, "\u30B9\u30B3\u30A2\u9806"), react_1["default"].createElement("button", {
-    onClick: function onClick() {
-      return changeSorting('review_descend');
-    }
-  }, "\u53E3\u30B3\u30DF\u6570\u9806")), react_1["default"].createElement("div", {
-    className: "m-userTable-interested__order--mobile"
+    className: "m-userTable-interested__order a-sort-selection"
   }, react_1["default"].createElement("select", {
     onChange: function onChange(e) {
       return changeSorting(e.target.value);
     }
   }, react_1["default"].createElement("option", {
-    value: "default"
-  }, "\u6A19\u6E96"), react_1["default"].createElement("option", {
     value: "score_descend"
-  }, "\u30B9\u30B3\u30A2\u9806"), react_1["default"].createElement("option", {
+  }, "\u8A55\u4FA1\u304C\u9AD8\u3044\u9806"), react_1["default"].createElement("option", {
     value: "review_descend"
-  }, "\u53E3\u30B3\u30DF\u6570\u9806"))), interested[0] === undefined ? react_1["default"].createElement("p", null, "\u884C\u3063\u3066\u307F\u305F\u3044\u5E97\u8217\u306F\u307E\u3060\u3042\u308A\u307E\u305B\u3093\u3002") : react_1["default"].createElement(StoreList_1["default"], {
+  }, "\u53E3\u30B3\u30DF\u6570\u9806"), react_1["default"].createElement("option", {
+    value: "default"
+  }, "\u6A19\u6E96"))), interested[0] === undefined ? react_1["default"].createElement("p", null, "\u884C\u3063\u3066\u307F\u305F\u3044\u5E97\u8217\u306F\u307E\u3060\u3042\u308A\u307E\u305B\u3093\u3002") : react_1["default"].createElement(StoreList_1["default"], {
     storeList: interested,
     sortType: sort
   }));
@@ -22356,42 +22322,24 @@ var UserTable_review = function UserTable_review() {
   return react_1["default"].createElement("div", {
     className: "m-userTable-review"
   }, react_1["default"].createElement("div", {
-    className: "m-userTable-review__order"
+    className: "m-userTable-review__heading"
   }, react_1["default"].createElement("div", {
-    className: "m-userTable-review__order--pc"
-  }, react_1["default"].createElement("button", {
-    onClick: function onClick() {
-      return changeSorting('default');
-    }
-  }, "\u6A19\u6E96"), react_1["default"].createElement("button", {
-    onClick: function onClick() {
-      return changeSorting('star');
-    }
-  }, "\u30B9\u30B3\u30A2\u9806"), react_1["default"].createElement("button", {
-    onClick: function onClick() {
-      return changeSorting('date_from_new');
-    }
-  }, "\u65B0\u7740\u9806"), react_1["default"].createElement("button", {
-    onClick: function onClick() {
-      return changeSorting('date_from_old');
-    }
-  }, "\u6295\u7A3F\u9806")), react_1["default"].createElement("div", {
-    className: "m-userTable-review__order--mobile"
+    className: "m-userTable-review__heading__count"
+  }, react_1["default"].createElement("p", null, "\u6295\u7A3F\u4EF6\u6570\xA0\u5168", react_1["default"].createElement("span", null, review_count), "\u4EF6")), react_1["default"].createElement("div", {
+    className: "m-userTable-review__heading__order a-sort-selection"
   }, react_1["default"].createElement("select", {
     onChange: function onChange(e) {
       return changeSorting(e.target.value);
     }
   }, react_1["default"].createElement("option", {
-    value: "default"
-  }, "\u6A19\u6E96"), react_1["default"].createElement("option", {
     value: "star"
-  }, "\u30B9\u30B3\u30A2\u9806"), react_1["default"].createElement("option", {
+  }, "\u8A55\u4FA1\u304C\u9AD8\u3044\u9806"), react_1["default"].createElement("option", {
     value: "date_from_new"
-  }, "\u65B0\u7740\u9806"), react_1["default"].createElement("option", {
+  }, "\u65B0\u3057\u3044\u9806"), react_1["default"].createElement("option", {
     value: "date_from_old"
-  }, "\u6295\u7A3F\u9806")))), react_1["default"].createElement("div", {
-    className: "m-userTable-review__count"
-  }, react_1["default"].createElement("p", null, "\u6295\u7A3F\u3057\u305F\u53E3\u30B3\u30DF\xA0\xA0\u5168", react_1["default"].createElement("span", null, review_count), "\u4EF6")), review_list.slice(offset, offset + perPage).map(function (el, index) {
+  }, "\u6295\u7A3F\u9806"), react_1["default"].createElement("option", {
+    value: "default"
+  }, "\u6A19\u6E96")))), review_list.slice(offset, offset + perPage).map(function (el, index) {
     return react_1["default"].createElement("div", {
       className: "m-userTable-review__item",
       key: "review_" + sort + index
@@ -23518,6 +23466,7 @@ var Search = function Search() {
       setSort = _b[1];
 
   var message_noResult = null;
+  var className_btnSort = "";
   react_1.useEffect(function () {
     getStores();
   }, []);
@@ -23530,7 +23479,8 @@ var Search = function Search() {
 
   if (stores[0] === undefined) {
     message_noResult = react_1["default"].createElement("p", null, "\u8A72\u5F53\u3059\u308B\u5E97\u8217\u304C\u3042\u308A\u307E\u305B\u3093\u3002");
-  }
+  } // 並び替え
+
 
   var changeSorting = function changeSorting(sort_type) {
     var newArray;
@@ -23566,11 +23516,11 @@ var Search = function Search() {
 
       case 'default':
         newArray = stores.sort(function (el1, el2) {
-          if (el1['user_uuid'] < el2['user_uuid']) {
+          if (el1['user_uuid'] > el2['user_uuid']) {
             return 1;
           }
 
-          if (el1['user_uuid'] > el2['user_uuid']) {
+          if (el1['user_uuid'] < el2['user_uuid']) {
             return -1;
           }
 
@@ -23581,6 +23531,39 @@ var Search = function Search() {
 
     setSort(sort_type);
     setStores(newArray);
+  }; // 並び替えボタンのタブ
+
+
+  var Tab = function Tab(sort_name) {
+    var className = "p-search__container__content__tab" + sort_name;
+    var input_value = "";
+
+    switch (sort_name) {
+      case 'default':
+        input_value = "標準";
+        break;
+
+      case 'score_descend':
+        input_value = "評価が高い順";
+        break;
+
+      case 'review_descend':
+        input_value = "口コミ数順";
+        break;
+    }
+
+    if (sort === sort_name) {
+      className += ' selected';
+    }
+
+    return react_1["default"].createElement("input", {
+      className: className,
+      value: input_value,
+      onClick: function onClick() {
+        return changeSorting(sort_name);
+      },
+      readOnly: true
+    });
   };
 
   return react_1["default"].createElement("div", {
@@ -23596,34 +23579,10 @@ var Search = function Search() {
   }, react_1["default"].createElement(Search_sidebar_1["default"], null), react_1["default"].createElement("div", {
     className: "p-search__container__content"
   }, react_1["default"].createElement(Store_pickup_1["default"], null), react_1["default"].createElement("div", {
+    className: "p-search__container__content__tab"
+  }, Tab('default'), Tab('score_descend'), Tab('review_descend')), react_1["default"].createElement("div", {
     className: "p-search__container__content__list"
-  }, react_1["default"].createElement("div", {
-    className: "p-search__container__content__list__order--pc"
-  }, react_1["default"].createElement("button", {
-    onClick: function onClick() {
-      return changeSorting('default');
-    }
-  }, "\u6A19\u6E96"), react_1["default"].createElement("button", {
-    onClick: function onClick() {
-      return changeSorting('score_descend');
-    }
-  }, "\u8A55\u4FA1\u9806"), react_1["default"].createElement("button", {
-    onClick: function onClick() {
-      return changeSorting('review_descend');
-    }
-  }, "\u53E3\u30B3\u30DF\u6570\u9806")), react_1["default"].createElement("div", {
-    className: "p-search__container__content__list__order--mobile"
-  }, react_1["default"].createElement("select", {
-    onChange: function onChange(e) {
-      return changeSorting(e.target.value);
-    }
-  }, react_1["default"].createElement("option", {
-    value: "default"
-  }, "\u6A19\u6E96"), react_1["default"].createElement("option", {
-    value: "score_descend"
-  }, "\u8A55\u4FA1\u9806"), react_1["default"].createElement("option", {
-    value: "review_descend"
-  }, "\u53E3\u30B3\u30DF\u6570\u9806"))), message_noResult, react_1["default"].createElement(StoreList_1["default"], {
+  }, message_noResult, react_1["default"].createElement(StoreList_1["default"], {
     storeList: stores,
     sortType: sort
   })))));
