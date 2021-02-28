@@ -1002,6 +1002,54 @@ label.a-label-required__red::after {
   }
 }
 
+.a-pagination {
+  display: flex;
+  margin: 0 auto;
+}
+
+.a-pagination > li {
+  margin: 0 12px;
+}
+
+.a-pagination > li > a {
+  position: relative;
+  font-size: 0.8rem;
+  width: 24px;
+  height: 24px;
+  outline: none;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.a-pagination > li > a::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -100;
+}
+
+.a-pagination > li > a:hover::before {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.a-pagination > li.active > a::before {
+  background-color: #fafafa;
+}
+
+.a-pagination__previous > a, .a-pagination__next > a {
+  font-size: 0.7rem;
+}
+
+.a-pagination__disabled {
+  display: none;
+}
+
 .m-storeForm {
   display: flex;
   flex-direction: column;

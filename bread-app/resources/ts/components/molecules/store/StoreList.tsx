@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Btn_favorite from '../../atoms/buttons/Btn_favorite';
 import Btn_interested from '../../atoms/buttons/Btn_interested';
 import Schedule from '../../atoms/Schedule';
 import Score from '../../atoms/Score';
+import ReactPaginate from 'react-paginate';
 
 type StoreProps = ({
     StoreInfo: Array<any>;
@@ -11,10 +12,19 @@ type StoreProps = ({
 
 const StoreList: React.FC<StoreProps> = ({StoreInfo}) => {
     const history = useHistory();
+    const [ offset, setOffset ] = useState(0);
+    const perPage = 10;
+
+    const handlePageChange = (data) => {
+        let page_number = data['selected'];
+        setOffset(page_number*perPage);
+    }
 
     return(
         <div className ="m-store-list">
-            {StoreInfo.map((el, index)=>{
+            {StoreInfo
+            .slice(offset, offset + perPage)
+            .map((el, index)=>{
                 return(
                     el &&
                     <div className ="m-store-list__item" key={"storeList_" + el.user_uuid}>
@@ -72,6 +82,20 @@ const StoreList: React.FC<StoreProps> = ({StoreInfo}) => {
                     </div>
                 );
             })}
+            <ReactPaginate
+                previousLabel={'<'}
+                nextLabel={'>'}
+                breakLabel={'...'}
+                pageCount={Math.ceil(StoreInfo.length/perPage)}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={4}
+                onPageChange={handlePageChange}
+                containerClassName={'a-pagination'}
+                activeClassName={'active'}
+                previousClassName={'a-pagination__previous'}
+                nextClassName={'a-pagination__next'}
+                disabledClassName={'a-pagination__disabled'}
+            />
         </div>
     )
 }
