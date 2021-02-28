@@ -117,25 +117,19 @@ const UserTable_review: React.FC = () => {
 
     return (
         <div className ="m-userTable-review">
-            <div className="m-userTable-review__order">
-                <div className = "m-userTable-review__order--pc">
-                    <button onClick={()=>changeSorting('default')}>標準</button>
-                    <button onClick={()=>changeSorting('star')}>スコア順</button>
-                    <button onClick={()=>changeSorting('date_from_new')}>新着順</button>
-                    <button onClick={()=>changeSorting('date_from_old')}>投稿順</button>
+            <div className="m-userTable-review__heading">
+                <div className ="m-userTable-review__heading__count">
+                    <p>投稿件数&nbsp;全<span>{review_count}</span>件</p>
                 </div>
-                <div className = "m-userTable-review__order--mobile">
+                
+                <div className="m-userTable-review__heading__order a-sort-selection">
                     <select onChange={(e)=>changeSorting(e.target.value)}>
-                        <option value="default">標準</option>
-                        <option value="star">スコア順</option>
-                        <option value="date_from_new">新着順</option>
+                        <option value="star">評価が高い順</option>
+                        <option value="date_from_new">新しい順</option>
                         <option value="date_from_old">投稿順</option>
+                        <option value="default">標準</option>
                     </select>
                 </div>
-            </div>
-
-            <div className ="m-userTable-review__count">
-                <p>投稿した口コミ&nbsp;&nbsp;全<span>{review_count}</span>件</p>
             </div>
 
             {review_list

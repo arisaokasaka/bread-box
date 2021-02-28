@@ -1,14 +1,25 @@
 .m-userTable-review {
-    &__count {
-        & > p {
-            font-size: 0.8rem;
-            margin-bottom: 5px;
+    &__heading {
+        display: flex;
+        justify-content: space-between;
 
-            & > span {
+        &__count {
+            & > p {
                 font-size: 0.9rem;
-                font-weight: 550;
-                margin: 0 2px;
+                margin-bottom: 5px;
+
+                & > span {
+                    font-size: 1rem;
+                    font-weight: 550;
+                    margin: 0 2px;
+                }
             }
+        }
+
+        &__order {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: $mp-xxs;
         }
     }
 

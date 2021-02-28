@@ -5,7 +5,7 @@
         height: 35px;
         width: 100%;
 
-        @include bp-600up {
+        @include bp-480up {
             height: 42px;
         }
 
@@ -20,7 +20,7 @@
             font-weight: 550;
             cursor: pointer;
 
-            @include bp-600up {
+            @include bp-480up {
                 font-size: 0.8rem;
                 height: 42px;
                 line-height: 42px;
