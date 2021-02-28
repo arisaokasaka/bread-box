@@ -21972,14 +21972,21 @@ var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome
 
 var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
 
+var react_paginate_1 = __importDefault(__webpack_require__(/*! react-paginate */ "./node_modules/react-paginate/dist/react-paginate.js"));
+
 var UserTable_review = function UserTable_review() {
   var _a = react_1.useState([]),
       review = _a[0],
       setReview = _a[1];
 
+  var _b = react_1.useState(0),
+      offset = _b[0],
+      setOffset = _b[1];
+
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
   var review_list = [];
   var review_count = 0;
+  var perPage = 10;
   react_1.useEffect(function () {
     getUserReview();
   }, []);
@@ -22018,11 +22025,16 @@ var UserTable_review = function UserTable_review() {
     }
   };
 
+  var handlePageChange = function handlePageChange(data) {
+    var page_number = data['selected'];
+    setOffset(page_number * perPage);
+  };
+
   return react_1["default"].createElement("div", {
     className: "m-userTable-review"
   }, react_1["default"].createElement("div", {
     className: "m-userTable-review__count"
-  }, react_1["default"].createElement("p", null, "\u6295\u7A3F\u3057\u305F\u53E3\u30B3\u30DF\xA0\xA0\u5168", react_1["default"].createElement("span", null, review_count), "\u4EF6")), review_list.map(function (el, index) {
+  }, react_1["default"].createElement("p", null, "\u6295\u7A3F\u3057\u305F\u53E3\u30B3\u30DF\xA0\xA0\u5168", react_1["default"].createElement("span", null, review_count), "\u4EF6")), review_list.slice(offset, offset + perPage).map(function (el, index) {
     return react_1["default"].createElement("div", {
       className: "m-userTable-review__item",
       key: "review_" + index
@@ -22069,6 +22081,19 @@ var UserTable_review = function UserTable_review() {
     }), el.comment && react_1["default"].createElement("p", null, el.comment), react_1["default"].createElement("span", null, "\u6295\u7A3F\u65E5:\xA0", el.created_at.slice(0, 10))), el.reply && react_1["default"].createElement("div", {
       className: "m-userTable-review__item__container__reply"
     }, react_1["default"].createElement("p", null, "\u30AA\u30FC\u30CA\u30FC\u304B\u3089\u306E\u8FD4\u4FE1"), react_1["default"].createElement("p", null, el.reply))));
+  }), react_1["default"].createElement(react_paginate_1["default"], {
+    previousLabel: '<',
+    nextLabel: '>',
+    breakLabel: '...',
+    pageCount: Math.ceil(review_list.length / perPage),
+    marginPagesDisplayed: 2,
+    pageRangeDisplayed: 4,
+    onPageChange: handlePageChange,
+    containerClassName: 'a-pagination',
+    activeClassName: 'active',
+    previousClassName: 'a-pagination__previous',
+    nextClassName: 'a-pagination__next',
+    disabledClassName: 'a-pagination__disabled'
   }));
 };
 
