@@ -2,6 +2,12 @@
     display: flex;
     flex-direction: column;
 
+    &__order {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: $mp-xxs;
+    }
+
     & > .m-store-summary {
         display: grid;
     }

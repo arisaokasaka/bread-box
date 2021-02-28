@@ -6,7 +6,7 @@ import { UserAuthContext } from '../../../contexts/UserAuthContext';
 const UserTable_favorite = () => {
     const { state } = useContext(UserAuthContext);
     const [ favorite, setFavorite ] = useState([]);
-    const [ sort, setSort ] = useState('default');
+    const [ sort, setSort ] = useState('score_descend');
     
     useEffect(()=>{
         index_favorite();
@@ -19,6 +19,7 @@ const UserTable_favorite = () => {
         })
         .catch()
     }
+    console.log(favorite)
 
     const changeSorting = (sort_type) => {
         let newArray: any;
@@ -47,10 +48,10 @@ const UserTable_favorite = () => {
             break;
             case 'default':
                 newArray = favorite.sort((el1, el2) => {
-                    if (el1['user_uuid'] < el2['user_uuid']) {
+                    if (el1['user_uuid'] > el2['user_uuid']) {
                         return 1;
                     }
-                    if (el1['user_uuid'] > el2['user_uuid']) {
+                    if (el1['user_uuid'] < el2['user_uuid']) {
                         return -1;
                     }
                     return 0;
@@ -63,16 +64,11 @@ const UserTable_favorite = () => {
 
     return (
         <div className = "m-userTable-favorite">
-            <div className = "m-userTable-favorite__order--pc">
-                <button onClick={()=>changeSorting('default')}>標準</button>
-                <button onClick={()=>changeSorting('score_descend')}>評価順</button>
-                <button onClick={()=>changeSorting('review_descend')}>口コミ数順</button>
-            </div>
-            <div className = "m-userTable-favorite__order--mobile">
+            <div className = "m-userTable-favorite__order a-sort-selection">
                 <select onChange={(e)=>changeSorting(e.target.value)}>
-                    <option value="default">標準</option>
-                    <option value="score_descend">評価順</option>
+                    <option value="score_descend">評価が高い順</option>
                     <option value="review_descend">口コミ数順</option>
+                    <option value="default">標準</option>
                 </select>
             </div>
             {favorite[0]===undefined ? <p>お気に入り店舗はまだありません。</p>
