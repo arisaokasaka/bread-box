@@ -21018,6 +21018,10 @@ var StoreReview = function StoreReview(_a) {
       offset = _c[0],
       setOffset = _c[1];
 
+  var _d = react_1.useState('default'),
+      sort = _d[0],
+      setSort = _d[1];
+
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
   var review_list = [];
   var review_count = 0;
@@ -21061,6 +21065,86 @@ var StoreReview = function StoreReview(_a) {
         alert('削除に失敗しました。');
       });
     }
+  }; // 並び替え
+
+
+  var changeSorting = function changeSorting(sort_type) {
+    var newArray;
+
+    switch (sort_type) {
+      case 'star_from_high':
+        newArray = review.sort(function (el1, el2) {
+          if (el1['star'] < el2['star']) {
+            return 1;
+          }
+
+          if (el1['star'] > el2['star']) {
+            return -1;
+          }
+
+          return 0;
+        });
+        break;
+
+      case 'star_from_low':
+        newArray = review.sort(function (el1, el2) {
+          if (el1['star'] < el2['star']) {
+            return 1;
+          }
+
+          if (el1['star'] > el2['star']) {
+            return -1;
+          }
+
+          return 0;
+        });
+        break;
+
+      case 'date_from_new':
+        newArray = review.sort(function (el1, el2) {
+          if (el1['created_at'] < el2['created_at']) {
+            return 1;
+          }
+
+          if (el1['created_at'] > el2['created_at']) {
+            return -1;
+          }
+
+          return 0;
+        });
+        break;
+
+      case 'date_from_old':
+        newArray = review.sort(function (el1, el2) {
+          if (el1['created_at'] > el2['created_at']) {
+            return 1;
+          }
+
+          if (el1['created_at'] < el2['created_at']) {
+            return -1;
+          }
+
+          return 0;
+        });
+        break;
+
+      case 'default':
+        newArray = review.sort(function (el1, el2) {
+          if (el1['uuid'] < el2['uuid']) {
+            return 1;
+          }
+
+          if (el1['uuid'] > el2['uuid']) {
+            return -1;
+          }
+
+          return 0;
+        });
+        break;
+    }
+
+    setSort(sort_type);
+    setReview(newArray);
   };
 
   return react_1["default"].createElement("div", {
@@ -21071,10 +21155,26 @@ var StoreReview = function StoreReview(_a) {
     store_uuid: store_uuid
   })), react_1["default"].createElement("div", {
     className: "m-review__count"
-  }, react_1["default"].createElement("p", null, "\u5168", react_1["default"].createElement("span", null, review_count), "\u4EF6")), message_no_review, review_list.slice(offset, offset + perPage).map(function (el, index) {
+  }, react_1["default"].createElement("p", null, "\u5168", react_1["default"].createElement("span", null, review_count), "\u4EF6")), react_1["default"].createElement("div", {
+    className: "m-review__order"
+  }, react_1["default"].createElement("select", {
+    onChange: function onChange(e) {
+      return changeSorting(e.target.value);
+    }
+  }, react_1["default"].createElement("option", {
+    value: "default"
+  }, "\u6A19\u6E96"), react_1["default"].createElement("option", {
+    value: "date_from_new"
+  }, "\u65B0\u7740\u9806"), react_1["default"].createElement("option", {
+    value: "star_from_high"
+  }, "\u8A55\u4FA1\u304C\u9AD8\u3044\u9806"), react_1["default"].createElement("option", {
+    value: "star_from_low"
+  }, "\u8A55\u4FA1\u304C\u4F4E\u3044\u9806"), react_1["default"].createElement("option", {
+    value: "date_from_old"
+  }, "\u6295\u7A3F\u9806"))), message_no_review, review_list.slice(offset, offset + perPage).map(function (el, index) {
     return react_1["default"].createElement("div", {
       className: "m-review__item",
-      key: "review_" + index
+      key: "review_" + sort + index
     }, el.image_profile ? react_1["default"].createElement("img", {
       src: "/storage/user/" + el.user_uuid + "/profile.jpg",
       alt: "\u6295\u7A3F\u8005\u306E\u30A2\u30A4\u30B3\u30F3"
