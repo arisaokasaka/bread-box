@@ -6,7 +6,7 @@ import { UserAuthContext } from '../../../contexts/UserAuthContext';
 const UserTable_interested: React.FC = () => {
     const { state } = useContext(UserAuthContext);
     const [ interested, setInterested ] = useState([]);
-    let content: any;
+    const [ sort, setSort ] = useState('default');
 
     useEffect(()=>{
         index_interested();
@@ -20,19 +20,68 @@ const UserTable_interested: React.FC = () => {
         .catch()
     }
 
-    if(interested[0]===undefined) {
-        content = <p>行ってみたい店舗はまだありません。</p>
-    }else{
-        content = (
-            <div className = "m-userTable-interested">
-                <StoreList
-                    StoreInfo = {interested}
-                />
-            </div>
-        );
+    const changeSorting = (sort_type) => {
+        let newArray: any;
+        switch (sort_type) {
+            case 'score_descend':
+                newArray = interested.sort((el1, el2) => {
+                    if (el1['scoreInfo']['score'] < el2['scoreInfo']['score']) {
+                        return 1;
+                    }
+                    if (el1['scoreInfo']['score'] > el2['scoreInfo']['score']) {
+                        return -1;
+                    }
+                    return 0;
+                });
+            break;
+            case 'review_descend':
+                newArray = interested.sort((el1, el2) => {
+                    if (el1['scoreInfo']['count'] < el2['scoreInfo']['count']) {
+                        return 1;
+                    }
+                    if (el1['scoreInfo']['count'] > el2['scoreInfo']['count']) {
+                        return -1;
+                    }
+                    return 0;
+                })
+            break;
+            case 'default':
+                newArray = interested.sort((el1, el2) => {
+                    if (el1['user_uuid'] < el2['user_uuid']) {
+                        return 1;
+                    }
+                    if (el1['user_uuid'] > el2['user_uuid']) {
+                        return -1;
+                    }
+                    return 0;
+                })
+            break;
+        }
+        setSort(sort_type);
+        setInterested(newArray);
     }
 
-    return content;
+    return (
+        <div className = "m-userTable-interested">
+            <div className = "m-userTable-interested__order--pc">
+                <button onClick={()=>changeSorting('default')}>標準</button>
+                <button onClick={()=>changeSorting('score_descend')}>スコア順</button>
+                <button onClick={()=>changeSorting('review_descend')}>口コミ数順</button>
+            </div>
+            <div className = "m-userTable-interested__order--mobile">
+                <select onChange={(e)=>changeSorting(e.target.value)}>
+                    <option value="default">標準</option>
+                    <option value="score_descend">スコア順</option>
+                    <option value="review_descend">口コミ数順</option>
+                </select>
+            </div>
+            {interested[0]===undefined ? <p>行ってみたい店舗はまだありません。</p>
+            :<StoreList
+                storeList = {interested}
+                sortType = {sort}
+            />}
+        </div>
+    );
 }
 
 export default UserTable_interested;
