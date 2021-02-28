@@ -6,7 +6,7 @@ import { UserAuthContext } from '../../../contexts/UserAuthContext';
 const UserTable_interested: React.FC = () => {
     const { state } = useContext(UserAuthContext);
     const [ interested, setInterested ] = useState([]);
-    const [ sort, setSort ] = useState('default');
+    const [ sort, setSort ] = useState('score_descend');
 
     useEffect(()=>{
         index_interested();
@@ -47,10 +47,10 @@ const UserTable_interested: React.FC = () => {
             break;
             case 'default':
                 newArray = interested.sort((el1, el2) => {
-                    if (el1['user_uuid'] < el2['user_uuid']) {
+                    if (el1['user_uuid'] > el2['user_uuid']) {
                         return 1;
                     }
-                    if (el1['user_uuid'] > el2['user_uuid']) {
+                    if (el1['user_uuid'] < el2['user_uuid']) {
                         return -1;
                     }
                     return 0;
@@ -63,16 +63,11 @@ const UserTable_interested: React.FC = () => {
 
     return (
         <div className = "m-userTable-interested">
-            <div className = "m-userTable-interested__order--pc">
-                <button onClick={()=>changeSorting('default')}>標準</button>
-                <button onClick={()=>changeSorting('score_descend')}>スコア順</button>
-                <button onClick={()=>changeSorting('review_descend')}>口コミ数順</button>
-            </div>
-            <div className = "m-userTable-interested__order--mobile">
+            <div className = "m-userTable-interested__order a-sort-selection">
                 <select onChange={(e)=>changeSorting(e.target.value)}>
-                    <option value="default">標準</option>
-                    <option value="score_descend">スコア順</option>
+                    <option value="score_descend">評価が高い順</option>
                     <option value="review_descend">口コミ数順</option>
+                    <option value="default">標準</option>
                 </select>
             </div>
             {interested[0]===undefined ? <p>行ってみたい店舗はまだありません。</p>
