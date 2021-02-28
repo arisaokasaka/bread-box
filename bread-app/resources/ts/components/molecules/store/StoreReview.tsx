@@ -5,6 +5,7 @@ import ModalCreateReview from '../../atoms/modal/Modal_review';
 import ModalReviewReply from '../../atoms/modal/Modal_review_reply';
 import ModalReviewReplyEdit from '../../atoms/modal/Modal_review_reply_edit';
 import { UserAuthContext } from '../../../contexts/UserAuthContext';
+import ReactPaginate from 'react-paginate';
 
 type ReviewProps = ({
     store_uuid: string
@@ -12,10 +13,17 @@ type ReviewProps = ({
 
 const StoreReview: React.FC<ReviewProps> = ({store_uuid}) => {
     const [ review, setReview ] = useState([]);
+    const [ offset, setOffset ] = useState(0);
     const { state } = useContext(UserAuthContext);
     let review_list: any = [];
     let review_count: number = 0;
     let message_no_review: any = null;
+    const perPage = 10;
+
+    const handlePageChange = (data) => {
+        let page_number = data['selected'];
+        setOffset(page_number*perPage);
+    }
 
     useEffect(()=>{
         getReviewInfo();
@@ -63,7 +71,9 @@ const StoreReview: React.FC<ReviewProps> = ({store_uuid}) => {
                 <p>全<span>{review_count}</span>件</p>
             </div>
             {message_no_review}
-            {review_list.map((el, index)=>{
+            {review_list
+            .slice(offset, offset + perPage)
+            .map((el, index)=>{
                 return(
                     <div className ="m-review__item" key={"review_"+index}>
                         {el.image_profile ? 
@@ -102,6 +112,20 @@ const StoreReview: React.FC<ReviewProps> = ({store_uuid}) => {
                     </div>
                 )
             })}
+            <ReactPaginate
+                previousLabel={'<'}
+                nextLabel={'>'}
+                breakLabel={'...'}
+                pageCount={Math.ceil(review_list.length/perPage)}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={4}
+                onPageChange={handlePageChange}
+                containerClassName={'a-pagination'}
+                activeClassName={'active'}
+                previousClassName={'a-pagination__previous'}
+                nextClassName={'a-pagination__next'}
+                disabledClassName={'a-pagination__disabled'}
+            />
         </div>
     )
 }

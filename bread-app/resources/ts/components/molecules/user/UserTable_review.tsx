@@ -6,12 +6,15 @@ import ModalReviewEdit_user from '../../atoms/modal/Modal_review_edit_user';
 import ScoreUser from '../../atoms/ScoreUser';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
+import ReactPaginate from 'react-paginate';
 
 const UserTable_review: React.FC = () => {
     const [ review, setReview ] = useState([]);
+    const [ offset, setOffset ] = useState(0);
     const { state } = useContext(UserAuthContext);
     let review_list: any = [];
     let review_count: number = 0;
+    const perPage = 10;
     
     useEffect(()=>{
         getUserReview();
@@ -51,12 +54,19 @@ const UserTable_review: React.FC = () => {
         }
     }
 
+    const handlePageChange = (data) => {
+        let page_number = data['selected'];
+        setOffset(page_number*perPage);
+    }
+
     return (
         <div className ="m-userTable-review">
             <div className ="m-userTable-review__count">
                 <p>投稿した口コミ&nbsp;&nbsp;全<span>{review_count}</span>件</p>
             </div>
-            {review_list.map((el, index)=>{
+            {review_list
+            .slice(offset, offset + perPage)
+            .map((el, index)=>{
                 return(
                     <div className ="m-userTable-review__item" key={"review_"+index}>
                         <div className="m-userTable-review__item__buttons">
@@ -99,6 +109,20 @@ const UserTable_review: React.FC = () => {
                     </div>
                 )
             })}
+            <ReactPaginate
+                previousLabel={'<'}
+                nextLabel={'>'}
+                breakLabel={'...'}
+                pageCount={Math.ceil(review_list.length/perPage)}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={4}
+                onPageChange={handlePageChange}
+                containerClassName={'a-pagination'}
+                activeClassName={'active'}
+                previousClassName={'a-pagination__previous'}
+                nextClassName={'a-pagination__next'}
+                disabledClassName={'a-pagination__disabled'}
+            />
         </div>
     )
 }
