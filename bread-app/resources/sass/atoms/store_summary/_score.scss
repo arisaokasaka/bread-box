@@ -81,9 +81,30 @@
     }
 }
 
-.m-store-basicInfo__container {
-    .a-score {
-        display: none;
+// 店舗ページのPC表示切り替え
+.p-store__container__content {
+    .m-store-subInfo__container__item {
+        .a-score {
+            display: none;
+            @include bp-960up {
+                display: block;
+            }
+        }
+    }
+}
+
+// 店舗ページのモバイル表示切り替え
+.p-store__container__content__main {
+    .m-store-basicInfo {
+        .m-store-subInfo__container__item {
+            // 基本情報
+            .a-score {
+                display: block;
+                @include bp-960up {
+                    display: none;
+                }
+            }
+        }
     }
 }
 

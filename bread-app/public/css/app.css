@@ -851,8 +851,24 @@ h2 {
   }
 }
 
-.m-store-basicInfo__container .a-score {
+.p-store__container__content .m-store-subInfo__container__item .a-score {
   display: none;
+}
+
+@media screen and (min-width: 960px) {
+  .p-store__container__content .m-store-subInfo__container__item .a-score {
+    display: block;
+  }
+}
+
+.p-store__container__content__main .m-store-basicInfo .m-store-subInfo__container__item .a-score {
+  display: block;
+}
+
+@media screen and (min-width: 960px) {
+  .p-store__container__content__main .m-store-basicInfo .m-store-subInfo__container__item .a-score {
+    display: none;
+  }
 }
 
 .m-userTable-review__item__container__content .a-score__container__result__stars {
@@ -1005,6 +1021,9 @@ label.a-label-required__red::after {
 .a-pagination {
   display: flex;
   margin: 0 auto;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 .a-pagination > li {

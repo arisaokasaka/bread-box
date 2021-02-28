@@ -21004,6 +21004,8 @@ var Modal_review_reply_edit_1 = __importDefault(__webpack_require__(/*! ../../at
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
+var react_paginate_1 = __importDefault(__webpack_require__(/*! react-paginate */ "./node_modules/react-paginate/dist/react-paginate.js"));
+
 var StoreReview = function StoreReview(_a) {
   var store_uuid = _a.store_uuid;
 
@@ -21011,10 +21013,21 @@ var StoreReview = function StoreReview(_a) {
       review = _b[0],
       setReview = _b[1];
 
+  var _c = react_1.useState(0),
+      offset = _c[0],
+      setOffset = _c[1];
+
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
   var review_list = [];
   var review_count = 0;
   var message_no_review = null;
+  var perPage = 10;
+
+  var handlePageChange = function handlePageChange(data) {
+    var page_number = data['selected'];
+    setOffset(page_number * perPage);
+  };
+
   react_1.useEffect(function () {
     getReviewInfo();
   }, []);
@@ -21057,7 +21070,7 @@ var StoreReview = function StoreReview(_a) {
     store_uuid: store_uuid
   })), react_1["default"].createElement("div", {
     className: "m-review__count"
-  }, react_1["default"].createElement("p", null, "\u5168", react_1["default"].createElement("span", null, review_count), "\u4EF6")), message_no_review, review_list.map(function (el, index) {
+  }, react_1["default"].createElement("p", null, "\u5168", react_1["default"].createElement("span", null, review_count), "\u4EF6")), message_no_review, review_list.slice(offset, offset + perPage).map(function (el, index) {
     return react_1["default"].createElement("div", {
       className: "m-review__item",
       key: "review_" + index
@@ -21088,6 +21101,19 @@ var StoreReview = function StoreReview(_a) {
     }, react_1["default"].createElement(Modal_review_reply_1["default"], {
       review_uuid: el.uuid
     })));
+  }), react_1["default"].createElement(react_paginate_1["default"], {
+    previousLabel: '<',
+    nextLabel: '>',
+    breakLabel: '...',
+    pageCount: Math.ceil(review_list.length / perPage),
+    marginPagesDisplayed: 2,
+    pageRangeDisplayed: 4,
+    onPageChange: handlePageChange,
+    containerClassName: 'a-pagination',
+    activeClassName: 'active',
+    previousClassName: 'a-pagination__previous',
+    nextClassName: 'a-pagination__next',
+    disabledClassName: 'a-pagination__disabled'
   }));
 };
 
