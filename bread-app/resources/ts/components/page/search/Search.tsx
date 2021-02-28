@@ -11,6 +11,7 @@ const Search: React.FC = () => {
     const location = useLocation();
     const keyword = location.search;
     const [ stores, setStores ] = useState([]);
+    const [ sort, setSort ] = useState('default')
     let message_noResult: any = null;
 
     useEffect(()=>{
@@ -28,10 +29,51 @@ const Search: React.FC = () => {
         message_noResult = <p>該当する店舗がありません。</p>
     }
 
+    const changeSorting = (sort_type) => {
+        let newArray: any;
+        switch (sort_type) {
+            case 'score_descend':
+                newArray = stores.sort((el1, el2) => {
+                    if (el1['scoreInfo']['score'] < el2['scoreInfo']['score']) {
+                        return 1;
+                    }
+                    if (el1['scoreInfo']['score'] > el2['scoreInfo']['score']) {
+                        return -1;
+                    }
+                    return 0;
+                });
+            break;
+            case 'review_descend':
+                newArray = stores.sort((el1, el2) => {
+                    if (el1['scoreInfo']['count'] < el2['scoreInfo']['count']) {
+                        return 1;
+                    }
+                    if (el1['scoreInfo']['count'] > el2['scoreInfo']['count']) {
+                        return -1;
+                    }
+                    return 0;
+                })
+            break;
+            case 'default':
+                newArray = stores.sort((el1, el2) => {
+                    if (el1['user_uuid'] < el2['user_uuid']) {
+                        return 1;
+                    }
+                    if (el1['user_uuid'] > el2['user_uuid']) {
+                        return -1;
+                    }
+                    return 0;
+                })
+            break;
+        }
+        setSort(sort_type);
+        setStores(newArray);
+    }
+
     return (
         <div className="p-search">
             <div className="a-btn-modificate">
-                <Link to='/search_mobile'><span><FontAwesomeIcon icon={faEdit}/>&nbsp;条件変更</span></Link>
+                <Link to='/search_mobile'><span><FontAwesomeIcon icon={faEdit}/>&nbsp;検索条件変更</span></Link>
             </div>
             <div className = "p-search__container">
                 <Search_sidebar />
@@ -39,22 +81,21 @@ const Search: React.FC = () => {
                     <Store_pickup />
                     <div className="p-search__container__content__list">
                         <div className = "p-search__container__content__list__order--pc">
-                            <a>おすすめ順</a>
-                            <a>評価順</a>
-                            <a>口コミ数順</a>
-                            <a>アクセス数順</a>
+                            <button onClick={()=>changeSorting('default')}>標準</button>
+                            <button onClick={()=>changeSorting('score_descend')}>評価順</button>
+                            <button onClick={()=>changeSorting('review_descend')}>口コミ数順</button>
                         </div>
                         <div className = "p-search__container__content__list__order--mobile">
-                            <select>
-                                <option value="">おすすめ順</option>
-                                <option value="">評価順</option>
-                                <option value="">口コミ数順</option>
-                                <option value="">アクセス数順</option>
+                            <select onChange={(e)=>changeSorting(e.target.value)}>
+                                <option value="default">標準</option>
+                                <option value="score_descend">評価順</option>
+                                <option value="review_descend">口コミ数順</option>
                             </select>
                         </div>
                         {message_noResult}
                         <StoreList
-                            StoreInfo = {stores}
+                            storeList = {stores}
+                            sortType = {sort}
                         />
                     </div>
                 </div>

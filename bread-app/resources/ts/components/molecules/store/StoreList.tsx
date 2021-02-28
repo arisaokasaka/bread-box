@@ -7,14 +7,15 @@ import Score from '../../atoms/Score';
 import ReactPaginate from 'react-paginate';
 
 type StoreProps = ({
-    StoreInfo: Array<any>;
+    storeList: any;
+    sortType: string;
 });
 
-const StoreList: React.FC<StoreProps> = ({StoreInfo}) => {
+const StoreList: React.FC<StoreProps> = ({storeList, sortType}) => {
     const history = useHistory();
     const [ offset, setOffset ] = useState(0);
     const perPage = 10;
-
+    
     const handlePageChange = (data) => {
         let page_number = data['selected'];
         setOffset(page_number*perPage);
@@ -22,12 +23,12 @@ const StoreList: React.FC<StoreProps> = ({StoreInfo}) => {
 
     return(
         <div className ="m-store-list">
-            {StoreInfo
+            {storeList
             .slice(offset, offset + perPage)
             .map((el, index)=>{
                 return(
                     el &&
-                    <div className ="m-store-list__item" key={"storeList_" + el.user_uuid}>
+                    <div className ="m-store-list__item" key={sortType + "_" + index}>
                         <div className ="m-store-list__item--pc" onClick={()=>history.push("/store/" + el.user_uuid)}>
                             <div className ="m-store-list__item--pc__images__main">
                                 {el.thumbnail ? 
@@ -86,7 +87,7 @@ const StoreList: React.FC<StoreProps> = ({StoreInfo}) => {
                 previousLabel={'<'}
                 nextLabel={'>'}
                 breakLabel={'...'}
-                pageCount={Math.ceil(StoreInfo.length/perPage)}
+                pageCount={Math.ceil(storeList.length/perPage)}
                 marginPagesDisplayed={2}
                 pageRangeDisplayed={4}
                 onPageChange={handlePageChange}
