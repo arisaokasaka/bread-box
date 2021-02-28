@@ -27,26 +27,15 @@ const UserTable: React.FC = () => {
         function: handleReview,
     }
 
-    // const TabStamp = {
-    //     class: "m-user-table__tab--stamp",
-    //     table: "stamp",
-    //     value: "スタンプ",
-    //     function: handleStamp,
-    // }
-
-    function handleFavorite(){
+    function handleFavorite() {
         setTable('favorite');
     }
 
-    function handleInterested(){
+    function handleInterested() {
         setTable('interested');
     }
 
-    // function handleStamp(){
-    //     setTable('stamp');
-    // }
-
-    function handleReview(){
+    function handleReview() {
         setTable('review')
     }
 
@@ -74,7 +63,6 @@ const UserTable: React.FC = () => {
             <div className = "m-user-table__tab">
                 {Tab(TabFavorite)}
                 {Tab(TabInterested)}
-                {/* {Tab(TabStamp)} */}
                 {Tab(TabReview)}
             </div>
             <div className = "m-user-table__container">

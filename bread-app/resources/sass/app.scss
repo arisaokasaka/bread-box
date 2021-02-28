@@ -19,6 +19,7 @@
 @import "./atoms/labelRequired";
 @import "./atoms/labelYen";
 @import "./atoms/pagination";
+@import "./atoms/sort_selection";
 
 //molecules
 @import "./molecules/storeForm";
@@ -41,11 +42,12 @@
 @import "./molecules/store/storeList";
 @import "./molecules/store/store_basicInfo";
 @import "./molecules/store/store_subInfo";
+@import "./molecules/store/store_review";
 @import "./molecules/user/userTable_favorite";
+@import "./molecules/user/userTable_interested";
 @import "./molecules/user/userTable_review";
 @import "./molecules/user/userTable";
 @import "./molecules/user/userProf";
-@import "./molecules/reviewList";
 @import "./molecules/storeEDit/storeEdit_menuList";
 @import "./molecules/storeEDit/storeEditTable_spirit";
 @import "./molecules/storeEDit/storeEditTable_basic";

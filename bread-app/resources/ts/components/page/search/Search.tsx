@@ -11,7 +11,9 @@ const Search: React.FC = () => {
     const location = useLocation();
     const keyword = location.search;
     const [ stores, setStores ] = useState([]);
+    const [ sort, setSort ] = useState('default')
     let message_noResult: any = null;
+    let className_btnSort: string = ""
 
     useEffect(()=>{
         getStores()
@@ -28,33 +30,88 @@ const Search: React.FC = () => {
         message_noResult = <p>該当する店舗がありません。</p>
     }
 
+    // 並び替え
+    const changeSorting = (sort_type) => {
+        let newArray: any;
+        switch (sort_type) {
+            case 'score_descend':
+                newArray = stores.sort((el1, el2) => {
+                    if (el1['scoreInfo']['score'] < el2['scoreInfo']['score']) {
+                        return 1;
+                    }
+                    if (el1['scoreInfo']['score'] > el2['scoreInfo']['score']) {
+                        return -1;
+                    }
+                    return 0;
+                });
+            break;
+            case 'review_descend':
+                newArray = stores.sort((el1, el2) => {
+                    if (el1['scoreInfo']['count'] < el2['scoreInfo']['count']) {
+                        return 1;
+                    }
+                    if (el1['scoreInfo']['count'] > el2['scoreInfo']['count']) {
+                        return -1;
+                    }
+                    return 0;
+                })
+            break;
+            case 'default':
+                newArray = stores.sort((el1, el2) => {
+                    if (el1['user_uuid'] > el2['user_uuid']) {
+                        return 1;
+                    }
+                    if (el1['user_uuid'] < el2['user_uuid']) {
+                        return -1;
+                    }
+                    return 0;
+                })
+            break;
+        }
+        setSort(sort_type);
+        setStores(newArray);
+    }
+
+    // 並び替えボタンのタブ
+    const Tab = (sort_name) => {
+        let className = "p-search__container__content__tab" + sort_name;
+        let input_value: string = "";
+        switch(sort_name){
+            case 'default':
+                input_value = "標準"
+                break;
+            case 'score_descend':
+                input_value = "評価が高い順"
+                break;
+            case 'review_descend':
+                input_value = "口コミ数順"
+                break;
+        }
+        if(sort === sort_name){
+            className += ' selected';
+        }
+        return <input className={className} value={input_value} onClick={()=>changeSorting(sort_name)} readOnly/>
+    }
+
     return (
         <div className="p-search">
             <div className="a-btn-modificate">
-                <Link to='/search_mobile'><span><FontAwesomeIcon icon={faEdit}/>&nbsp;条件変更</span></Link>
+                <Link to='/search_mobile'><span><FontAwesomeIcon icon={faEdit}/>&nbsp;検索条件変更</span></Link>
             </div>
             <div className = "p-search__container">
                 <Search_sidebar />
                 <div className="p-search__container__content">
                     <Store_pickup />
+                    <div className="p-search__container__content__tab">
+                        {Tab('default')}
+                        {Tab('score_descend')}
+                        {Tab('review_descend')}
+                    </div>
                     <div className="p-search__container__content__list">
-                        <div className = "p-search__container__content__list__order--pc">
-                            <a>おすすめ順</a>
-                            <a>評価順</a>
-                            <a>口コミ数順</a>
-                            <a>アクセス数順</a>
-                        </div>
-                        <div className = "p-search__container__content__list__order--mobile">
-                            <select>
-                                <option value="">おすすめ順</option>
-                                <option value="">評価順</option>
-                                <option value="">口コミ数順</option>
-                                <option value="">アクセス数順</option>
-                            </select>
-                        </div>
                         {message_noResult}
                         <StoreList
-                            StoreInfo = {stores}
+                            storeList = {stores}
+                            sortType = {sort}
                         />
                     </div>
                 </div>

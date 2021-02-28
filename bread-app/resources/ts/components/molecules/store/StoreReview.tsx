@@ -14,6 +14,7 @@ type ReviewProps = ({
 const StoreReview: React.FC<ReviewProps> = ({store_uuid}) => {
     const [ review, setReview ] = useState([]);
     const [ offset, setOffset ] = useState(0);
+    const [ sort, setSort ] = useState('default');
     const { state } = useContext(UserAuthContext);
     let review_list: any = [];
     let review_count: number = 0;
@@ -60,22 +61,95 @@ const StoreReview: React.FC<ReviewProps> = ({store_uuid}) => {
         }
     }
 
+    // 並び替え
+    const changeSorting = (sort_type) => {
+        let newArray: any;
+        switch (sort_type) {
+            case 'star_from_high':
+                newArray = review.sort((el1, el2) => {
+                    if (el1['star'] < el2['star']) {
+                        return 1;
+                    }
+                    if (el1['star'] > el2['star']) {
+                        return -1;
+                    }
+                    return 0;
+                });
+            break;
+            case 'star_from_low':
+                newArray = review.sort((el1, el2) => {
+                    if (el1['star'] < el2['star']) {
+                        return 1;
+                    }
+                    if (el1['star'] > el2['star']) {
+                        return -1;
+                    }
+                    return 0;
+                });
+            break;
+            case 'date_from_new':
+                newArray = review.sort((el1, el2) => {
+                    if (el1['created_at'] < el2['created_at']) {
+                        return 1;
+                    }
+                    if (el1['created_at'] > el2['created_at']) {
+                        return -1;
+                    }
+                    return 0;
+                })
+            break;
+            case 'date_from_old':
+                newArray = review.sort((el1, el2) => {
+                    if (el1['created_at'] > el2['created_at']) {
+                        return 1;
+                    }
+                    if (el1['created_at'] < el2['created_at']) {
+                        return -1;
+                    }
+                    return 0;
+                })
+            break;
+            case 'default':
+                newArray = review.sort((el1, el2) => {
+                    if (el1['uuid'] < el2['uuid']) {
+                        return 1;
+                    }
+                    if (el1['uuid'] > el2['uuid']) {
+                        return -1;
+                    }
+                    return 0;
+                })
+            break;
+        }
+        setSort(sort_type);
+        setReview(newArray);
+    }
+
     return (
         <div className ="m-review">
-            <div className="m-review__btn">
+            <div className ="m-review__heading">
+                <div className ="m-review__heading__former">
+                    <p>全<span>{review_count}</span>件</p>
+                    <div className="m-review__heading__former__order a-sort-selection">
+                        <select onChange={(e)=>changeSorting(e.target.value)}>
+                            <option value="star_from_high">評価が高い順</option>
+                            <option value="star_from_low">評価が低い順</option>
+                            <option value="date_from_old">投稿順</option>
+                            <option value="date_from_new">新しい順</option>
+                            <option value="default">標準</option>
+                        </select>
+                    </div>
+                </div>
                 <ModalCreateReview
                     store_uuid={store_uuid}
                 />
-            </div>
-            <div className ="m-review__count">
-                <p>全<span>{review_count}</span>件</p>
             </div>
             {message_no_review}
             {review_list
             .slice(offset, offset + perPage)
             .map((el, index)=>{
                 return(
-                    <div className ="m-review__item" key={"review_"+index}>
+                    <div className ="m-review__item" key={"review_" + sort + index}>
                         {el.image_profile ? 
                         <img src={"/storage/user/"+el.user_uuid+"/profile.jpg"} alt="投稿者のアイコン"/>
                         : <img src="/images/no_image_user.jpg" alt="投稿者のアイコン"/>}
