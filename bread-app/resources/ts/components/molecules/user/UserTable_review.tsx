@@ -11,6 +11,7 @@ import ReactPaginate from 'react-paginate';
 const UserTable_review: React.FC = () => {
     const [ review, setReview ] = useState([]);
     const [ offset, setOffset ] = useState(0);
+    const [ sort, setSort ] = useState('default');
     const { state } = useContext(UserAuthContext);
     let review_list: any = [];
     let review_count: number = 0;
@@ -24,7 +25,7 @@ const UserTable_review: React.FC = () => {
         review_list = review;
         review_count = review_list.length;
     }
-
+    
     const getUserReview = () => {
         axios.post("/api/index_review_by_user", {user_uuid: state.uuid})
         .then(res => {
@@ -45,6 +46,7 @@ const UserTable_review: React.FC = () => {
         });
     }
 
+    // 編集・削除機能のダイアログ表示
     const toggleDialogue = (index) => {
         let classInfo = document.getElementsByClassName("review_"+index)[0];
         if(classInfo.className.includes('active')){
@@ -54,21 +56,93 @@ const UserTable_review: React.FC = () => {
         }
     }
 
+    // ページネーション
     const handlePageChange = (data) => {
         let page_number = data['selected'];
         setOffset(page_number*perPage);
     }
 
+    // 並び替え
+    const changeSorting = (sort_type) => {
+        let newArray: any;
+        switch (sort_type) {
+            case 'star':
+                newArray = review.sort((el1, el2) => {
+                    if (el1['star'] < el2['star']) {
+                        return 1;
+                    }
+                    if (el1['star'] > el2['star']) {
+                        return -1;
+                    }
+                    return 0;
+                });
+            break;
+            case 'date_from_new':
+                newArray = review.sort((el1, el2) => {
+                    if (el1['created_at'] < el2['created_at']) {
+                        return 1;
+                    }
+                    if (el1['created_at'] > el2['created_at']) {
+                        return -1;
+                    }
+                    return 0;
+                })
+            break;
+            case 'date_from_old':
+                newArray = review.sort((el1, el2) => {
+                    if (el1['created_at'] > el2['created_at']) {
+                        return 1;
+                    }
+                    if (el1['created_at'] < el2['created_at']) {
+                        return -1;
+                    }
+                    return 0;
+                })
+            break;
+            case 'default':
+                newArray = review.sort((el1, el2) => {
+                    if (el1['uuid'] < el2['uuid']) {
+                        return 1;
+                    }
+                    if (el1['uuid'] > el2['uuid']) {
+                        return -1;
+                    }
+                    return 0;
+                })
+            break;
+        }
+        setSort(sort_type);
+        setReview(newArray);
+    }
+
     return (
         <div className ="m-userTable-review">
+            <div className="m-userTable-review__order">
+                <div className = "m-userTable-review__order--pc">
+                    <button onClick={()=>changeSorting('default')}>標準</button>
+                    <button onClick={()=>changeSorting('star')}>スコア順</button>
+                    <button onClick={()=>changeSorting('date_from_new')}>新着順</button>
+                    <button onClick={()=>changeSorting('date_from_old')}>投稿順</button>
+                </div>
+                <div className = "m-userTable-review__order--mobile">
+                    <select onChange={(e)=>changeSorting(e.target.value)}>
+                        <option value="default">標準</option>
+                        <option value="star">スコア順</option>
+                        <option value="date_from_new">新着順</option>
+                        <option value="date_from_old">投稿順</option>
+                    </select>
+                </div>
+            </div>
+
             <div className ="m-userTable-review__count">
                 <p>投稿した口コミ&nbsp;&nbsp;全<span>{review_count}</span>件</p>
             </div>
+
             {review_list
             .slice(offset, offset + perPage)
             .map((el, index)=>{
                 return(
-                    <div className ="m-userTable-review__item" key={"review_"+index}>
+                    <div className ="m-userTable-review__item" key={"review_"+ sort +index}>
                         <div className="m-userTable-review__item__buttons">
                             <button className="m-userTable-review__item__buttons__ellipsis" onClick={()=>toggleDialogue(index)}>
                                 <FontAwesomeIcon icon={faEllipsisV}/>
@@ -109,6 +183,7 @@ const UserTable_review: React.FC = () => {
                     </div>
                 )
             })}
+
             <ReactPaginate
                 previousLabel={'<'}
                 nextLabel={'>'}
