@@ -38,7 +38,7 @@ export default function Register_store() {
         axios.post('/api/create_user', data)
         .then(res => {
             login();
-            history.push("/store");
+            history.push("/store_edit");
         })
         .catch(errors => {
             if(errors.response.status === 422){
@@ -94,7 +94,7 @@ export default function Register_store() {
                 </div>
                 <form className="p-register-store__container__form m-storeForm" name="form_storeRegister" onSubmit={handleSubmit(onSubmit)}>
                     <input type='hidden' name='_token' value={csrf} />
-                    <div className = "p-register-store__container__form__item m-storeForm__item">
+                    <div className = "p-register-store__container__form__item m-storeForm__item first">
                         <label htmlFor="store_name" className="a-label-required__red">店舗名</label>
                         <div className = "p-register-store__container__form__item__input m-storeForm__item__input">
                             <input type="text" id="store_name" name="name" ref={ register({required: true})} />

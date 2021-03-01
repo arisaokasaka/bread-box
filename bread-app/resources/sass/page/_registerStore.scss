@@ -1,5 +1,7 @@
 .p-register-store {
-    @include marginContent;
+    margin-top: $header-height;
+    padding-top: $mp-sm;
+    padding-bottom: $mp-lg;
 
     &__container {
         position: relative;
@@ -10,8 +12,8 @@
         &__links {
             & > span {
                 position: absolute;
-                color: $textGray;
-                font-size: 0.7rem;
+                color: $darkGray;
+                font-size: 0.8rem;
                 padding-top: 5px;
 
                 @include bp-600up {
@@ -22,11 +24,11 @@
                 & > a {
                     padding: 0 3px;
                     margin-top: 2px;
-                    font-size: 0.7rem;
+                    font-size: 0.8rem;
                     font-weight: 550;
                     text-align: center;
-                    color: $textGray;
-                    text-decoration: underline $textGray;
+                    color: $darkGray;
+                    text-decoration: underline $darkGray;
                 }
             }
         }
@@ -42,6 +44,12 @@
 
             @include bp-600up {
                 margin-top: $mp-xs;
+            }
+
+            &__item {
+                &.first {
+                    border-top: 0.3px solid $lightGray;
+                }
             }
 
             &__input--submit {
