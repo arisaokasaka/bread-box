@@ -37,7 +37,8 @@
     &__footer {
         display: flex;
         background-color: $lightBrown;
-        padding: $mp-xs 0;
+        padding-top: $mp-xs;
+        padding-bottom: $mp-sm;
 
         a {
             @include content-width;

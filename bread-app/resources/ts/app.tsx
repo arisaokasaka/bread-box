@@ -33,6 +33,7 @@ import StorePage from './components/page/store/StorePage';
 import Top from './components/page/top/Top';
 import UserPage from './components/page/user/UserPage';
 import UserEdit from './components/page/user/UserEdit'; 
+import Footer from './components/layout/Footer';
 
 //RouteAuth
 import StoreOnly from './routeAuth/StoreOnly';
@@ -50,35 +51,35 @@ declare global {
 
 const App: React.FC = () => {
   const [state, dispatch] = useReducer(UserAuthReducer, initialState);
-    return (
+  
+  return (
     <UserAuthContext.Provider value={{ state, dispatch }}>
       <Router>
-          <div>
-              <NavBar />
-              <div id="global-container">
-                  <Switch>
-                      <Route path="/" exact component={Top} />
-                      <Route path="/search" component={Search} />
-                      <Route path="/search_mobile" component={Search_input_mobile} />
-                      <Route path="/login_store" component={LoginStore} />
-                      <Route path="/login_user" component={LoginUser} />
-                      <Route path="/password_store" component={PasswordReset_store} />
-                      <Route path="/password_user" component={PasswordReset_user} />
-                      <Route path="/register_store" component={Register_store} />
-                      <Route path="/register_user" component={Register_user} />
-                      <Route path="/store/:user_uuid" component={StorePage} />
-                      <StoreOnly path="/store_edit">
-                        <StoreEdit />
-                      </StoreOnly>
-                      <UserOnly path="/user">
-                        <UserPage />
-                      </UserOnly> 
-                      <UserOnly path="/user_edit">
-                        <UserEdit />
-                      </UserOnly>
-                  </Switch>
-              </div>
-          </div>
+        <div id="global-container">
+          <NavBar />
+            <Switch>
+                <Route path="/" exact component={Top} />
+                <Route path="/search" component={Search} />
+                <Route path="/search_mobile" component={Search_input_mobile} />
+                <Route path="/login_store" component={LoginStore} />
+                <Route path="/login_user" component={LoginUser} />
+                <Route path="/password_store" component={PasswordReset_store} />
+                <Route path="/password_user" component={PasswordReset_user} />
+                <Route path="/register_store" component={Register_store} />
+                <Route path="/register_user" component={Register_user} />
+                <Route path="/store/:user_uuid" component={StorePage} />
+                <StoreOnly path="/store_edit">
+                  <StoreEdit />
+                </StoreOnly>
+                <UserOnly path="/user">
+                  <UserPage />
+                </UserOnly> 
+                <UserOnly path="/user_edit">
+                  <UserEdit />
+                </UserOnly>
+            </Switch>
+          <Footer/>
+        </div>
       </Router>
     </UserAuthContext.Provider>
   )

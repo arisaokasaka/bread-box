@@ -15141,7 +15141,9 @@ var Top_1 = __importDefault(__webpack_require__(/*! ./components/page/top/Top */
 
 var UserPage_1 = __importDefault(__webpack_require__(/*! ./components/page/user/UserPage */ "./resources/ts/components/page/user/UserPage.tsx"));
 
-var UserEdit_1 = __importDefault(__webpack_require__(/*! ./components/page/user/UserEdit */ "./resources/ts/components/page/user/UserEdit.tsx")); //RouteAuth
+var UserEdit_1 = __importDefault(__webpack_require__(/*! ./components/page/user/UserEdit */ "./resources/ts/components/page/user/UserEdit.tsx"));
+
+var Footer_1 = __importDefault(__webpack_require__(/*! ./components/layout/Footer */ "./resources/ts/components/layout/Footer.tsx")); //RouteAuth
 
 
 var StoreOnly_1 = __importDefault(__webpack_require__(/*! ./routeAuth/StoreOnly */ "./resources/ts/routeAuth/StoreOnly.tsx"));
@@ -15158,9 +15160,9 @@ var App = function App() {
       state: state,
       dispatch: dispatch
     }
-  }, react_1["default"].createElement(react_router_dom_1.BrowserRouter, null, react_1["default"].createElement("div", null, react_1["default"].createElement(Navbar_1["default"], null), react_1["default"].createElement("div", {
+  }, react_1["default"].createElement(react_router_dom_1.BrowserRouter, null, react_1["default"].createElement("div", {
     id: "global-container"
-  }, react_1["default"].createElement(react_router_dom_1.Switch, null, react_1["default"].createElement(react_router_dom_1.Route, {
+  }, react_1["default"].createElement(Navbar_1["default"], null), react_1["default"].createElement(react_router_dom_1.Switch, null, react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/",
     exact: true,
     component: Top_1["default"]
@@ -15197,7 +15199,7 @@ var App = function App() {
     path: "/user"
   }, react_1["default"].createElement(UserPage_1["default"], null)), react_1["default"].createElement(UserOnly_1["default"], {
     path: "/user_edit"
-  }, react_1["default"].createElement(UserEdit_1["default"], null)))))));
+  }, react_1["default"].createElement(UserEdit_1["default"], null))), react_1["default"].createElement(Footer_1["default"], null))));
 };
 
 if (document.getElementById('app')) {
@@ -18103,6 +18105,37 @@ var ModalSNS = function ModalSNS(_a) {
 };
 
 exports.default = ModalSNS;
+
+/***/ }),
+
+/***/ "./resources/ts/components/layout/Footer.tsx":
+/*!***************************************************!*\
+  !*** ./resources/ts/components/layout/Footer.tsx ***!
+  \***************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var Footer = function Footer() {
+  return react_1["default"].createElement("div", {
+    className: "l-footer"
+  }, react_1["default"].createElement("span", null, "\xA9\xA0Bread Box"));
+};
+
+exports.default = Footer;
 
 /***/ }),
 

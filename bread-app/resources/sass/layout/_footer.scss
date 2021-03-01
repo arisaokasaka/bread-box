@@ -1,0 +1,15 @@
+.l-footer {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2.5rem;
+
+    & > span {
+        color: $black;
+        font-size: 0.5rem;
+    }
+}

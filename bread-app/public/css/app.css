@@ -86,6 +86,10 @@ body {
   background-color: #faf8f5;
 }
 
+#global-container {
+  position: relative;
+}
+
 ul {
   padding: 0;
 }
@@ -3228,6 +3232,22 @@ label.a-label-required__red::after {
   display: flex;
 }
 
+.l-footer {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.5rem;
+}
+
+.l-footer > span {
+  color: #555555;
+  font-size: 0.5rem;
+}
+
 .p-register-store {
   margin: auto;
   margin-top: 100px;
@@ -3584,7 +3604,8 @@ label.a-label-required__red::after {
 .p-top__footer {
   display: flex;
   background-color: #fae6c9;
-  padding: 20px 0;
+  padding-top: 20px;
+  padding-bottom: 40px;
 }
 
 .p-top__footer a {
