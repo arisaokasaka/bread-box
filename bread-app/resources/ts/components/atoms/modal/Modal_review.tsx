@@ -43,7 +43,7 @@ const ModalCreateReview: React.FC<StoreInfoProps> = ({store_uuid}) =>{
     if(state.uuid && state.auth==="user"){
         btnReview = (
             <button onClick={()=>setModal(true)} className = "a-btn-modal-review">
-                <FontAwesomeIcon icon={faPen}/>&nbsp;口コミを投稿する
+                <FontAwesomeIcon icon={faPen}/>&nbsp;口コミを投稿
             </button>
         )
     }else if(state.uuid && state.auth==="store"){
@@ -51,7 +51,7 @@ const ModalCreateReview: React.FC<StoreInfoProps> = ({store_uuid}) =>{
     }else{
         btnReview = (
             <button onClick={()=>history.push("/login_user")} className = "a-btn-modal-review">
-                <FontAwesomeIcon icon={faPen}/>&nbsp;口コミを投稿する
+                <FontAwesomeIcon icon={faPen}/>&nbsp;口コミを投稿
             </button>
         )
     }
@@ -74,7 +74,7 @@ const ModalCreateReview: React.FC<StoreInfoProps> = ({store_uuid}) =>{
                         <input type="hidden" name="user_uuid" value={state.uuid} ref={register}/>
                         <input type="hidden" name="store_uuid" value={store_uuid} ref={register} />
                         
-                        <label htmlFor="star" className="a-label-required">5段階で評価してください。</label>
+                        <label htmlFor="star" className="a-label-required__red--fitContent">5段階で評価してください。</label>
                         <p>5が最も高い評価となります。</p>
                         <select name="star" id="star" ref={register({required: true})}> 
                             <option hidden>選択してください</option>
@@ -86,7 +86,7 @@ const ModalCreateReview: React.FC<StoreInfoProps> = ({store_uuid}) =>{
                         </select>
                         {errors.star && <p>評価は必須です。</p>}
 
-                        <label htmlFor="comment" className="a-label-required">コメント</label>
+                        <label htmlFor="comment">コメント</label>
                         <textarea name="comment" id="comment" placeholder="[任意]レビューや感想を記入してください。" ref={register}/>
                         
                         <input type="submit" value="投稿する"/>

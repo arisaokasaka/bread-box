@@ -45,11 +45,11 @@ export default function Register_user() {
                 <form className="p-register-user__container__form" onSubmit={handleSubmit(onSubmit)}>
                     <h2>新規ユーザー登録</h2>
 
-                    <label htmlFor="user_name" className="a-label-required__red--user">ユーザー名</label>
+                    <label htmlFor="user_name" className="a-label-required__red--fitContent">ユーザー名</label>
                     <input type="text" id="user_name" name="name" ref={ register({required: true})} />
                     {errors.name && <p>ユーザー名は必須です。</p>}
 
-                    <label htmlFor="user_email" className="a-label-required__red--user">メールアドレス</label>
+                    <label htmlFor="user_email" className="a-label-required__red--fitContent">メールアドレス</label>
                     <input type="email" name="email" id="user_email" ref={register({required: true})}/>
                     {errors.email && <p>メールアドレスは必須です。</p>}
                     {emailErrorMessage(emailError)}
@@ -57,12 +57,12 @@ export default function Register_user() {
                     <label htmlFor="user_address">住所</label>
                     <input type="text" name="address" id="user_address" ref={register}/>
                     
-                    <label htmlFor="user_password" className="a-label-required__red--user">パスワード</label>
+                    <label htmlFor="user_password" className="a-label-required__red--fitContent">パスワード</label>
                     <input type="password" name="password" id="user_password" ref={register({required: true, pattern: /[a-zA-Z0-9]{8,16}/})}/>
                     {errors.password && errors.password.type === "required" && (<p>パスワードは必須です。</p>)}
                     {errors.password && errors.password.type === "pattern" && (<p>8~16文字の半角英数字で指定してください。</p>)}
 
-                    <label htmlFor="user_password-check" className="a-label-required__red--user">パスワード(確認用)</label>
+                    <label htmlFor="user_password-check" className="a-label-required__red--fitContent">パスワード(確認用)</label>
                     <input type="password" name="password_check" id="user_password-check" ref={register({required: true})}/>
                     {errors.password_check && errors.password_check.type === "required" && (<p>パスワード(確認用)は必須です。</p>)}
                     {PasswordErrorMessage(getValues('password'),getValues('password_check'))}

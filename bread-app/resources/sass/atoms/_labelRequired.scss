@@ -1,19 +1,6 @@
 label {
     position: relative;
 
-    &.a-label-required {
-        &::before {
-            content: "必須";
-            position: absolute;
-            top: 3.5px;
-            left: -2rem;
-            background-color: $darkBrown;
-            color: white;
-            font-size: 0.6rem;
-            padding: 1px 3px;
-        }
-    }
-
     &.a-label-required__red {
         &::after {
             content: "[必須]";
@@ -30,7 +17,7 @@ label {
         }
     }
 
-    &.a-label-required__red--user {
+    &.a-label-required__red--fitContent {
         &::after {
             content: "[必須]";
             position: absolute;

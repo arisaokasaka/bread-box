@@ -67,7 +67,7 @@ const ModalReviewEdit_user: React.FC<ReviewInfoProps> = ({comment, review_uuid, 
                 <form className="m-modal-reviewEdit-user__form" onSubmit={handleSubmit(onSubmit)}>
                     <input type="hidden" name="uuid" value={review_uuid} ref={register}/>
                     
-                    <label htmlFor="star" className="a-label-required">5段階で評価してください。</label>
+                    <label htmlFor="star" className="a-label-required__red--fitContent">5段階で評価してください。</label>
                     <p>5が最も高い評価となります。</p>
                     <select name="star" id="star" defaultValue={star} ref={register({required: true})}> 
                         <option hidden>選択してください</option>
@@ -79,7 +79,7 @@ const ModalReviewEdit_user: React.FC<ReviewInfoProps> = ({comment, review_uuid, 
                     </select>
                     {errors.star && <p>評価は必須です。</p>}
 
-                    <label htmlFor="comment" className="a-label-required">コメント</label>
+                    <label htmlFor="comment">コメント</label>
                     <textarea name="comment" id="comment" defaultValue={comment} placeholder="[任意]レビューや感想を記入してください。" ref={register}/>
                     
                     <input type="submit" value="更新する"/>
