@@ -1,4 +1,54 @@
-//PC検索画面のサイドバー
+.m-search-sidebar {
+    &__btn {
+        display: inline-block;
+        width: 100%;
+        padding: 5px 0;
+        background-color: $darkBrown;
+        color: $white;
+        border-radius: 25px;
+        border: none;
+        text-align: center;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $darkestBrown;
+        }
+    }
+
+    &__item {
+        margin-bottom: $mp-xs;
+
+        & > h4 {
+            font-size: 1rem;
+            font-weight: bolder;
+            color: $font-color-brown;
+
+            & > svg {
+                margin-right: 4px;
+                font-size: 1.05rem;
+            }
+        }
+
+        & > ul {
+            display: grid;
+            margin-top: $mp-xxs;
+        }
+
+        & > input[type="text"] {
+            width: 100%;
+            height: 2rem;
+            line-height: 2rem;
+            margin-top: $mp-xxs;
+            border-radius: 25px;
+
+            &:focus {
+                @include focusShadow;
+            }
+        }
+    }
+}
+
+//PC検索画面の調整
 .p-search__container {
     .m-search-sidebar {
         display: none;
@@ -11,21 +61,8 @@
             border-radius: $base-radius;
 
             &__btn {
-                display: inline-block;
-                width: 100%;
-                padding: 5px 0;
                 margin-bottom: $mp-xxs;
-                background-color: $darkBrown;
-                color: $white;
                 font-size: 0.9rem;
-                border-radius: 25px;
-                border: none;
-                text-align: center;
-                cursor: pointer;
-
-                &:hover {
-                    background-color: $darkestBrown;
-                }
             }
 
             @include bp-960up {
@@ -33,90 +70,89 @@
             }
 
             &__item {
-                margin-bottom: $mp-xs;
-
                 & > h4 {
-                    font-size: 1rem;
-                    font-weight: bolder;
-                    color: $font-color-brown;
                     border-bottom: 2px solid $font-color-brown;
                     padding: 0 2px;
+
+                    & > svg {
+                        display: none;
+                    }
                 }
 
                 & > ul {
-                    display: grid;
-                    margin-top: $mp-xxs;
-
                     & > li {
                         font-size: 0.9rem;
                         height: 1.5rem;
-                        input {
+                        input,
+                        label {
                             cursor: pointer;
                         }
                     }
                 }
 
                 & > input[type="text"] {
-                    width: 100%;
-                    height: 2rem;
-                    line-height: 2rem;
-                    margin-top: $mp-xxs;
                     border: 1px solid $textGray;
-                    border-radius: $sm-radius;
+                    padding-left: 10px;
                     font-size: 0.9rem;
-                    padding: 0 3px;
                 }
             }
         }
     }
 }
 
-//モバイル検索ページ
+//モバイル検索ページの調整
 .p-search-input-mobile {
     .m-search-sidebar {
         margin: 0;
         padding: $mp-xxs;
 
         &__btn {
-            display: inline-block;
-            width: 100%;
-            padding: 5px 0;
-            margin-bottom: $mp-xxs;
-            background-color: $darkBrown;
-            color: $white;
-            font-size: 0.9rem;
-            border-radius: 25px;
-            border: none;
-            text-align: center;
-            cursor: pointer;
-
-            &:hover {
-                background-color: $darkestBrown;
-            }
+            margin: $mp-xxs 0;
+            font-size: 1rem;
+            height: 2rem;
         }
 
         &__item {
-            margin-bottom: $mp-xs;
-
-            h4 {
-                font-size: 1prem;
-                font-weight: bolder;
-                color: $font-color-brown;
-            }
-
+            margin-bottom: 30px;
             ul {
                 grid-template-columns: 1fr 1fr;
-                margin: 3px 0 0 0;
+                row-gap: 8px;
+                column-gap: 15px;
 
                 li {
                     display: block;
-                    font-size: 1em;
-                    margin: 0 5px 5px 0;
+                    font-size: 1rem;
 
                     input {
-                        cursor: pointer;
+                        display: none;
+
+                        & + label {
+                            position: relative;
+                            display: inline-block;
+                            background-color: $white;
+                            width: 100%;
+                            height: 2rem;
+                            line-height: 2rem;
+                            color: $gray;
+                            border: 1px solid $gray;
+                            border-radius: 25px;
+                            text-align: center;
+                            cursor: pointer;
+                        }
+
+                        &:checked + label {
+                            color: $brown;
+                            background-color: $lightBrown;
+                            border-color: $brown;
+                        }
                     }
                 }
+            }
+
+            & > input[type="text"] {
+                border: 1px solid $gray;
+                font-size: 0.9rem;
+                padding-left: 12px;
             }
         }
     }

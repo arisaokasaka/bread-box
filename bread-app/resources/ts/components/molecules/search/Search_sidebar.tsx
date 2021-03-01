@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import districts from '../../../info/Districts';
 import bread_kinds from '../../../info/Bread_kinds';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMapMarkedAlt, faBreadSlice, faSearch, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 
 const Search_sidebar: React.FC = () => {
     const [ condition, setCondition ] = useState({
@@ -40,11 +42,11 @@ const Search_sidebar: React.FC = () => {
     return (
         <div className="m-search-sidebar">
             <div className="m-search-sidebar__item">
-                <h4>キーワードから探す</h4>
+                <h4><FontAwesomeIcon icon={faSearch}/>キーワードから探す</h4>
                 <input type="text" placeholder="例:あんパン、店名"/>
             </div>
             <div className="m-search-sidebar__item">
-                <h4>エリアから探す</h4>
+                <h4><FontAwesomeIcon icon={faMapMarkerAlt}/>エリアから探す</h4>
                 <ul>
                     {districts.districts.map((el)=>{
                         return (
@@ -57,7 +59,7 @@ const Search_sidebar: React.FC = () => {
                 </ul>
             </div>
             <div className="m-search-sidebar__item">
-                <h4>パンの種類から探す</h4>
+                <h4><FontAwesomeIcon icon={faBreadSlice}/>パンの種類から探す</h4>
                 <ul>
                     {bread_kinds.bread_kinds.map((el)=>{
                         return (

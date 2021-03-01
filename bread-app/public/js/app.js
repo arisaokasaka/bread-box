@@ -18623,6 +18623,10 @@ var Districts_1 = __importDefault(__webpack_require__(/*! ../../../info/District
 
 var Bread_kinds_1 = __importDefault(__webpack_require__(/*! ../../../info/Bread_kinds */ "./resources/ts/info/Bread_kinds.ts"));
 
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
 var Search_sidebar = function Search_sidebar() {
   var _a = react_1.useState({
     district: '',
@@ -18663,12 +18667,16 @@ var Search_sidebar = function Search_sidebar() {
     className: "m-search-sidebar"
   }, react_1["default"].createElement("div", {
     className: "m-search-sidebar__item"
-  }, react_1["default"].createElement("h4", null, "\u30AD\u30FC\u30EF\u30FC\u30C9\u304B\u3089\u63A2\u3059"), react_1["default"].createElement("input", {
+  }, react_1["default"].createElement("h4", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faSearch
+  }), "\u30AD\u30FC\u30EF\u30FC\u30C9\u304B\u3089\u63A2\u3059"), react_1["default"].createElement("input", {
     type: "text",
     placeholder: "\u4F8B:\u3042\u3093\u30D1\u30F3\u3001\u5E97\u540D"
   })), react_1["default"].createElement("div", {
     className: "m-search-sidebar__item"
-  }, react_1["default"].createElement("h4", null, "\u30A8\u30EA\u30A2\u304B\u3089\u63A2\u3059"), react_1["default"].createElement("ul", null, Districts_1["default"].districts.map(function (el) {
+  }, react_1["default"].createElement("h4", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faMapMarkerAlt
+  }), "\u30A8\u30EA\u30A2\u304B\u3089\u63A2\u3059"), react_1["default"].createElement("ul", null, Districts_1["default"].districts.map(function (el) {
     return react_1["default"].createElement("li", {
       key: "sidebar" + el.id
     }, react_1["default"].createElement("input", {
@@ -18683,7 +18691,9 @@ var Search_sidebar = function Search_sidebar() {
     }, el.name));
   }))), react_1["default"].createElement("div", {
     className: "m-search-sidebar__item"
-  }, react_1["default"].createElement("h4", null, "\u30D1\u30F3\u306E\u7A2E\u985E\u304B\u3089\u63A2\u3059"), react_1["default"].createElement("ul", null, Bread_kinds_1["default"].bread_kinds.map(function (el) {
+  }, react_1["default"].createElement("h4", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faBreadSlice
+  }), "\u30D1\u30F3\u306E\u7A2E\u985E\u304B\u3089\u63A2\u3059"), react_1["default"].createElement("ul", null, Bread_kinds_1["default"].bread_kinds.map(function (el) {
     return react_1["default"].createElement("li", {
       key: "sidebar" + el.id
     }, react_1["default"].createElement("input", {
