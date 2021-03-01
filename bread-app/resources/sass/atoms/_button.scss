@@ -404,7 +404,7 @@
 // レビューモーダルのボタン
 .a-btn-modal-review {
     display: inline-block;
-    width: 8.5rem;
+    width: 7rem;
     height: 2rem;
     line-height: 2rem;
     font-size: 0.7rem;
@@ -461,6 +461,10 @@
 
     &:hover {
         opacity: 0.88;
+    }
+
+    &.full {
+        width: 100%;
     }
 }
 
