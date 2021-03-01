@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import Search_sidebar from '../../molecules/search/Search_sidebar';
 import Store_pickup from '../../molecules/Store_pickup';
 import StoreList from '../../molecules/store/StoreList';
@@ -94,7 +94,7 @@ const Search: React.FC = () => {
     }
 
     return (
-        <div className="p-search">
+        <div className="p-search" id="search_top">
             <div className="a-btn-modificate">
                 <Link to='/search_mobile'><span><FontAwesomeIcon icon={faEdit}/>&nbsp;検索条件変更</span></Link>
             </div>
@@ -115,6 +115,9 @@ const Search: React.FC = () => {
                         />
                     </div>
                 </div>
+            </div>
+            <div className="p-search__pageup">
+                <a href="#search_top"><FontAwesomeIcon icon={faChevronUp}/></a>
             </div>
         </div>
     );

@@ -398,7 +398,6 @@ h2 {
 .a-btn-modificate {
   display: flex;
   justify-content: flex-end;
-  margin-top: 10px;
 }
 
 .a-btn-modificate a {
@@ -406,15 +405,9 @@ h2 {
   justify-content: center;
   align-items: center;
   background-color: #7c4920;
-  width: 130px;
+  width: 150px;
   height: 2rem;
   border-radius: 20px;
-}
-
-@media screen and (min-width: 480px) {
-  .a-btn-modificate a {
-    width: 200px;
-  }
 }
 
 .a-btn-modificate a:hover {
@@ -423,7 +416,7 @@ h2 {
 
 .a-btn-modificate a span {
   color: #fafafa;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   font-size: 0.8rem;
 }
 
@@ -3642,9 +3635,7 @@ label.a-label-required__red::after {
 .p-search {
   margin: 0 auto;
   width: 90%;
-  margin: auto;
-  margin-top: 100px;
-  margin-bottom: 70px;
+  padding-top: 79px;
 }
 
 @media screen and (min-width: 480px) {
@@ -3666,6 +3657,11 @@ label.a-label-required__red::after {
   }
 }
 
+.p-search__container {
+  margin-top: 15px;
+  padding-bottom: 80px;
+}
+
 @media screen and (min-width: 600px) {
   .p-search__container {
     display: flex;
@@ -3683,12 +3679,12 @@ label.a-label-required__red::after {
   position: relative;
   height: 35px;
   width: 100%;
-  margin-top: 20px;
 }
 
 @media screen and (min-width: 600px) {
   .p-search__container__content__tab {
     height: 42px;
+    margin-top: 5px;
   }
 }
 
@@ -3734,6 +3730,65 @@ label.a-label-required__red::after {
 @media screen and (min-width: 600px) {
   .p-search__container__content__list {
     padding: 20px;
+  }
+}
+
+.p-search__pageup {
+  position: fixed;
+  left: 25px;
+  bottom: 40px;
+}
+
+@media screen and (min-width: 600px) {
+  .p-search__pageup {
+    left: auto;
+    right: 5vw;
+    bottom: 50px;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .p-search__pageup {
+    left: auto;
+    right: 11vw;
+  }
+}
+
+.p-search__pageup > a {
+  position: relative;
+  color: #fafafa;
+  font-size: 1rem;
+  z-index: 100;
+}
+
+@media screen and (min-width: 960px) {
+  .p-search__pageup > a {
+    font-size: 1.5rem;
+  }
+}
+
+.p-search__pageup > a:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 2rem;
+  height: 2rem;
+  background-color: #c9c9c9;
+  border-radius: 50%;
+  z-index: -100;
+}
+
+.p-search__pageup > a:before:hover {
+  background-color: #c47d2c;
+}
+
+@media screen and (min-width: 960px) {
+  .p-search__pageup > a:before {
+    width: 2.5rem;
+    height: 2.5rem;
   }
 }
 

@@ -23602,7 +23602,8 @@ var Search = function Search() {
   };
 
   return react_1["default"].createElement("div", {
-    className: "p-search"
+    className: "p-search",
+    id: "search_top"
   }, react_1["default"].createElement("div", {
     className: "a-btn-modificate"
   }, react_1["default"].createElement(react_router_dom_1.Link, {
@@ -23620,7 +23621,13 @@ var Search = function Search() {
   }, message_noResult, react_1["default"].createElement(StoreList_1["default"], {
     storeList: stores,
     sortType: sort
-  })))));
+  })))), react_1["default"].createElement("div", {
+    className: "p-search__pageup"
+  }, react_1["default"].createElement("a", {
+    href: "#search_top"
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faChevronUp
+  }))));
 };
 
 exports.default = Search;

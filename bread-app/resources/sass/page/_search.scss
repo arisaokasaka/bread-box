@@ -1,8 +1,10 @@
 .p-search {
     @include content-width;
-    @include marginContent;
+    padding-top: 79px;
 
     &__container {
+        margin-top: 15px;
+        padding-bottom: $mp-md;
         @include bp-600up {
             display: flex;
         }
@@ -17,10 +19,10 @@
                 position: relative;
                 height: 35px;
                 width: 100%;
-                margin-top: $mp-xs;
 
                 @include bp-600up {
                     height: 42px;
+                    margin-top: 5px;
                 }
 
                 & > input {
@@ -62,6 +64,57 @@
 
                 @include bp-600up {
                     padding: $mp-xs;
+                }
+            }
+        }
+    }
+
+    &__pageup {
+        position: fixed;
+        left: 25px;
+        bottom: 40px;
+
+        @include bp-600up {
+            left: auto;
+            right: 5vw;
+            bottom: 50px;
+        }
+
+        @include bp-960up {
+            left: auto;
+            right: 11vw;
+        }
+
+        & > a {
+            position: relative;
+            color: $white;
+            font-size: 1rem;
+            z-index: 100;
+
+            @include bp-960up {
+                font-size: 1.5rem;
+            }
+
+            &:before {
+                content: "";
+                display: block;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 2rem;
+                height: 2rem;
+                background-color: $lightestGray;
+                border-radius: 50%;
+                z-index: -100;
+
+                &:hover {
+                    background-color: $brown;
+                }
+
+                @include bp-960up {
+                    width: 2.5rem;
+                    height: 2.5rem;
                 }
             }
         }
