@@ -20,11 +20,11 @@
 @import "./atoms/labelYen";
 @import "./atoms/pagination";
 @import "./atoms/sort_selection";
+@import "./atoms/link_sns";
 
 //molecules
 @import "./molecules/storeForm";
 @import "./molecules/modal/reactModal";
-@import "./molecules/modal/modal-sns";
 @import "./molecules/modal/modal_review";
 @import "./molecules/modal/modal_review_reply";
 @import "./molecules/modal/modal_editSpirit";
@@ -40,6 +40,7 @@
 @import "./molecules/store/store_contents";
 @import "./molecules/store-pickup";
 @import "./molecules/store/storeList";
+@import "./molecules/store/store_sidebar";
 @import "./molecules/store/store_basicInfo";
 @import "./molecules/store/store_subInfo";
 @import "./molecules/store/store_review";

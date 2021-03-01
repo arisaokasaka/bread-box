@@ -1,0 +1,74 @@
+.m-sns-btns {
+    width: 100%;
+
+    &__list {
+        display: flex;
+        margin: 0 5px 0 0;
+
+        @include bp-960up {
+            display: grid;
+            grid-template-columns: 42px 42px 42px 42px;
+            margin: 0;
+        }
+
+        &__btn {
+            margin-right: 5px;
+
+            @include bp-960up {
+                margin: 0 auto;
+            }
+
+            & > a {
+                display: block;
+                color: $white;
+                position: relative;
+                height: 2rem;
+                width: 2rem;
+                border-radius: 50%;
+
+                & > svg {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+            }
+
+            &.instagram {
+                & > a {
+                    background-color: $color-instagram;
+                    &:hover {
+                        background-color: $color-instagram_hover;
+                    }
+                }
+            }
+
+            &.facebook {
+                & > a {
+                    background-color: $color-facebook;
+                    &:hover {
+                        background-color: $color-facebook_hover;
+                    }
+                }
+            }
+
+            &.twitter {
+                & > a {
+                    background-color: $color-twitter;
+                    &:hover {
+                        background-color: $color-twitter_hover;
+                    }
+                }
+            }
+
+            &.other {
+                & > a {
+                    background-color: $color-other;
+                    &:hover {
+                        background-color: $color-other_hover;
+                    }
+                }
+            }
+        }
+    }
+}

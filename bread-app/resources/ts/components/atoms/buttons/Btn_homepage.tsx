@@ -18,7 +18,7 @@ const Btn_homepage: React.FC<HomepageProps> = ({url}) => {
             {url && 
                 <a key={url} onClick={handleClick}>
                     <FontAwesomeIcon icon={faPaperPlane}/>
-                    &nbsp;&nbsp;ホームページ
+                    &nbsp;ホームページを見る
                 </a>
             }
         </div>
