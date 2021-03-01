@@ -79,11 +79,11 @@ const UserEdit: React.FC = () => {
                     <h2>ユーザー情報編集</h2>
                     <input type="hidden" name="uuid" value={state.uuid} ref={register}/>
 
-                    <label htmlFor="user_name" className="a-label-required">ユーザー名</label>
+                    <label htmlFor="user_name" className="a-label-required__red--user">ユーザー名</label>
                     <input type="text" id="user_name" name="name" defaultValue={userInfo.name} ref={register({required: true})} />
                     {errors.name && <p>ユーザー名は必須です。</p>}
 
-                    <label htmlFor="user_email" className="a-label-required">メールアドレス</label>
+                    <label htmlFor="user_email" className="a-label-required__red--user">メールアドレス</label>
                     <input type="email" name="email" id="user_email" defaultValue={userInfo.email} ref={register({required: true})}/>
                     {errors.email && <p>メールアドレスは必須です。</p>}
                     
