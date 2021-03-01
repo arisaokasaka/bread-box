@@ -2,7 +2,7 @@ import React from 'react';
 import Btn_favorite from '../../atoms/buttons/Btn_favorite';
 import Btn_interested from '../../atoms/buttons/Btn_interested';
 import BtnStoreEdit from '../../atoms/buttons/BtnStoreEdit';
-import StoreSubInfo from './StoreSubinfo';
+import StoreSubInfo_mobile from './StoreSubinfo_mobile';
 
 type StoreInfoProps = ({
     storeInfo : any
@@ -25,13 +25,13 @@ const StoreBasicInfo: React.FC<StoreInfoProps> = ({storeInfo, scoreInfo}) => {
                 />
                 <BtnStoreEdit />
             </div>
-            <div key={"basicInfo_" + storeInfo.id} className = "m-store-basicInfo__container">
+            <div className = "m-store-basicInfo__container">
                 <h2 className = "m-store-basicInfo__name">{storeInfo.name}</h2>
                 <p className = "m-store-basicInfo__address">{storeInfo.address}</p>
                 <p className = "m-store-basicInfo__message">{storeInfo.message}</p>
             </div>
             {/* モバイル用のsubInfo */}
-            <StoreSubInfo
+            <StoreSubInfo_mobile
                 storeInfo = {storeInfo}
                 scoreInfo = {scoreInfo}
             />

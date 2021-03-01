@@ -235,39 +235,36 @@
     }
 }
 
-// ホームページへのボタンとSNSへのボタン
-.a-btn-modal-sns,
-.a-btn-homepage > a {
-    display: inline-block;
-    width: 7rem;
-    height: 25px;
-    line-height: 25px;
-    font-size: 0.7rem;
-    background-color: $darkBrown;
-    text-align: center;
-    vertical-align: center;
-    border-radius: 2px;
-    font-weight: 450;
-    color: $white;
-    cursor: pointer;
-
-    &:hover {
-        background-color: $darkestBrown;
-    }
+// ホームページへのボタン
+.a-btn-homepage {
+    margin-right: 5px;
 
     @include bp-960up {
-        width: 168px;
+        margin: $mp-xxs 0 0 0;
+    }
+
+    & > a {
+        display: inline-block;
+        width: 8.5rem;
+        height: 2rem;
+        line-height: 2rem;
+        font-size: 0.7rem;
+        background-color: $darkBrown;
+        text-align: center;
+        border-radius: 25px;
+        color: $white;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $darkestBrown;
+        }
+
+        @include bp-960up {
+            margin: 0;
+            width: 168px;
+        }
     }
 }
-
-.a-btn-modal-sns {
-    border: none;
-
-    @include bp-960up {
-        margin-top: 2px;
-    }
-}
-
 // ログイン・検索・マイページボタン（アイコン）
 .a-btn-search_icon,
 .a-btn-logIn {
@@ -408,8 +405,8 @@
 .a-btn-modal-review {
     display: inline-block;
     width: 8.5rem;
-    height: 30px;
-    line-height: 30px;
+    height: 2rem;
+    line-height: 2rem;
     font-size: 0.7rem;
     background-color: $darkBrown;
     text-align: center;
