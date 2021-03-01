@@ -15589,7 +15589,9 @@ var Searchbar = function Searchbar(_a) {
       search: '?key=' + keyword + '&id=' + state.uuid
     },
     onClick: onClick_deleteValue
-  }, react_1["default"].createElement("span", null, "\u691C\u7D22")), text === null && react_1["default"].createElement(react_router_dom_1.Link, {
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faSearch
+  }), react_1["default"].createElement("span", null, "\u691C\u7D22")), text === null && react_1["default"].createElement(react_router_dom_1.Link, {
     to: {
       pathname: '/search/',
       search: '?key=' + keyword + '&id=' + state.uuid
