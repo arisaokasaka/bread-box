@@ -23,10 +23,10 @@ const StoreMenu: React.FC<MenuProps> = ({Menu}) => {
                 <div className = "m-menu__card" key={"menu_"+el.id}>
                     <img src={"/storage/store/" + el.store_uuid + "/menu/item_" + el.bread_order + ".jpg"} alt="メニュー画像"/>
                     <h4>{el.bread_name}</h4>
-                    <span>
-                        <p className = "m-menu__card__kind">{el.bread_kind}</p>
-                        <p className = "m-menu__card__price">{el.bread_price}円</p>
-                    </span>
+                    <div className="m-menu__card__labels">
+                        <span className = "m-menu__card__labels__kind">{el.bread_kind}</span>
+                        <span className = "m-menu__card__labels__price">{el.bread_price}円</span>
+                    </div>
                     <p className = "m-menu__card__detail">{el.bread_detail}</p>
                 </div>
             ))}

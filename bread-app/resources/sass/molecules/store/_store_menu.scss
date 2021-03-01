@@ -24,29 +24,30 @@
             object-position: center;
         }
 
-        h4 {
+        & > h4 {
             margin-top: 5px;
             font-size: 0.9rem;
             font-weight: 450;
         }
 
-        p {
+        & > p {
             margin-top: 3px;
             font-size: 0.7rem;
         }
 
-        & span {
-            display: grid;
+        &__labels {
+            display: flex;
+            flex-wrap: wrap;
+            font-size: 0.7rem;
+            line-height: 1.2rem;
 
-            @include bp-480up {
-                display: flex;
-                align-items: center;
+            &__kind {
+                background-color: $brown;
+                border-radius: $sm-radius;
+                color: $white;
+                margin-right: 5px;
+                padding: 0 3px;
             }
-        }
-
-        &__kind {
-            @include btn-square;
-            margin-right: 5px;
         }
     }
 }
