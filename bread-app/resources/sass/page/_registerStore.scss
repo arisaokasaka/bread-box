@@ -48,12 +48,14 @@
 
             &__item {
                 &.first {
-                    border-top: 0.3px solid $lightGray;
+                    @include bp-600up {
+                        border-top: 0.3px solid $lightGray;
+                    }
                 }
             }
 
             &__input--submit {
-                width: 70%;
+                width: 100%;
                 height: 2rem;
                 background-color: $darkBrown;
                 color: $white;

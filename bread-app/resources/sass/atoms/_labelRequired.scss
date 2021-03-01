@@ -1,4 +1,6 @@
 label {
+    position: relative;
+
     &.a-label-required {
         &::before {
             content: "必須";
@@ -19,11 +21,27 @@ label {
             color: $color-error;
             font-size: 0.7rem;
             padding-left: 4px;
+            font-weight: normal;
 
             @include bp-600up {
                 top: 0;
                 right: 8px;
             }
+        }
+    }
+
+    &.a-label-required__red--user {
+        &::after {
+            content: "[必須]";
+            position: absolute;
+            display: block;
+            color: $color-error;
+            font-size: 0.7rem;
+            padding-left: 5px;
+            font-weight: normal;
+            top: 50%;
+            right: -37px;
+            transform: translateY(-51%);
         }
     }
 }

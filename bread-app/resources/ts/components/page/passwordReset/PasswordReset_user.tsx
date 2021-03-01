@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
-import {useForm} from 'react-hook-form';
+import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 export default function PasswordReset_user() {
     const { register, handleSubmit, errors, getValues } = useForm();
-    const [emailError, SetEmailError] = useState(false);
+    const [ emailError, SetEmailError ] = useState(false);
   
     const onSubmit = (data) => {
     //     SetEmailError(false);
@@ -34,12 +34,12 @@ export default function PasswordReset_user() {
                     <input type="email" name="email" id="user_email" ref={register({required: true})}/>
                     {errors.email && <p>メールアドレスは必須です。</p>}
                 
-                    <input type="submit" value="再設定メールを送信"/>
+                    <input className="round" type="submit" value="再設定メールを送信"/>
                 </form>
 
                 <div className = "p-password-reset-user__container__links">
-                    <Link to="/login_user">ログインはこちら</Link>
-                    <Link to="/">トップページへ戻る</Link>
+                    <span>ログインは<Link to="/login_user">こちら</Link></span>
+                    <span>トップページへ<Link to="/">もどる</Link></span>
                 </div>
             </div>
         </div>

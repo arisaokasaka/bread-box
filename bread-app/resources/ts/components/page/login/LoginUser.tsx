@@ -1,13 +1,13 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
-import {Link, useHistory} from 'react-router-dom';
-import {useForm} from 'react-hook-form';
+import { Link, useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { UserAuthContext } from '../../../contexts/UserAuthContext';
 
-const LoginUser = () =>  {  
+const LoginUser: React.FC = () =>  {  
     const { dispatch } = useContext(UserAuthContext);
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [ email, setEmail ] = useState("");
+    const [ password, setPassword ] = useState("");
     const { register, handleSubmit, errors } = useForm();
     const history = new useHistory();
     
@@ -27,7 +27,7 @@ const LoginUser = () =>  {
                     type: 'setUser',
                     payload: res.data.user.uuid,
                 });
-                history.push("/search");
+                history.push("/user");
             })
             .catch(err => {
                 alert('ログイン出来ません。');
@@ -52,7 +52,7 @@ const LoginUser = () =>  {
                     <label htmlFor="user_password">パスワード</label>
                     <input type="password" name="password" id="user_password" onChange={e => setPassword(e.target.value)} ref={register({required: true, pattern: /[a-zA-Z0-9]{8,16}/})}/>
                     
-                    <input type="submit" value="ログインする"/>
+                    <input className="round" type="submit" value="ログインする"/>
                 </form>
 
                 <div className = "p-login-user__container__links">

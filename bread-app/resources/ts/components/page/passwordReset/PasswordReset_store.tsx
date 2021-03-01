@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
-import {useForm} from 'react-hook-form';
+import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 export default function PasswordReset_store() {
     const { register, handleSubmit, errors, getValues } = useForm();
-    const [emailError, SetEmailError] = useState(false);
+    const [ emailError, SetEmailError ] = useState(false);
   
     const onSubmit = (data) => {
     //     SetEmailError(false);
@@ -38,8 +38,8 @@ export default function PasswordReset_store() {
                 </form>
 
                 <div className = "p-password-reset-store__container__links">
-                    <Link to="/login_store">ログインはこちら</Link>
-                    <Link to="/">トップページへ戻る</Link>
+                    <span>既に登録済ですか？&nbsp;<Link to="/login_store">ログイン</Link></span>
+                    <span>トップページへ<Link to="/">もどる</Link></span>
                 </div>
             </div>
         </div>
