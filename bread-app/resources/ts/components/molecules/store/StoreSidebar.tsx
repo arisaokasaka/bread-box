@@ -34,7 +34,7 @@ const StoreSidebar: React.FC<StoreInfoProps> = ({storeInfo, scoreInfo}) => {
                     />
                 </div>
                 }
-                {storeInfo.sns || storeInfo.url &&
+                {storeInfo.sns || storeInfo.url ?
                     <div className="m-store-sidebar__container__item">
                         {storeInfo.sns &&
                             <div className="m-store-sidebar__container__item__sns">
@@ -51,6 +51,7 @@ const StoreSidebar: React.FC<StoreInfoProps> = ({storeInfo, scoreInfo}) => {
                             </div>
                         }
                     </div>
+                : null
                 }
             </div>
         </div>
