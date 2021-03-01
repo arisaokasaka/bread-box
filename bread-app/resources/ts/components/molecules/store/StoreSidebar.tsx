@@ -34,22 +34,24 @@ const StoreSidebar: React.FC<StoreInfoProps> = ({storeInfo, scoreInfo}) => {
                     />
                 </div>
                 }
-                <div className="m-store-sidebar__container__item">
-                    <div className="m-store-sidebar__container__item__sns">
+                {storeInfo.sns || storeInfo.url &&
+                    <div className="m-store-sidebar__container__item">
                         {storeInfo.sns &&
-                            <LinkSNS
-                                sns = {storeInfo.sns}
-                            />
+                            <div className="m-store-sidebar__container__item__sns">
+                                <LinkSNS
+                                    sns = {storeInfo.sns}
+                                />
+                            </div>
                         }
-                    </div>
-                    <div className="m-store-sidebar__container__item__homepage">
                         {storeInfo.url &&
-                            <Btn_homepage
-                                url = {storeInfo.url}
-                            />
+                            <div className="m-store-sidebar__container__item__homepage">
+                                <Btn_homepage
+                                    url = {storeInfo.url}
+                                />
+                            </div>
                         }
                     </div>
-                </div>
+                }
             </div>
         </div>
 );
