@@ -6,7 +6,7 @@ import { StoreInfoContext } from '../../../../contexts/StoreInfoContext';
 import BtnSave from '../../../atoms/buttons/BtnSave';
 
 const EditBasicInfo: React.FC = () => {
-    const { register, handleSubmit, errors} = useForm();
+    const { register, handleSubmit, errors } = useForm();
     const { state } = useContext(UserAuthContext);
     const { stateInfo, dispatch } = useContext(StoreInfoContext);
     
@@ -66,7 +66,7 @@ const EditBasicInfo: React.FC = () => {
     return(
         <div className = "m-storeEdit-basic">
             <div className = "m-storeEdit-basic__container">
-                <h3 onClick = {()=> console.log(stateInfo, stateInfo.storeInfo, stateInfo.menuInfo)}>基本情報編集</h3>
+                <h3>基本情報編集</h3>
                 <form className="m-storeEdit-basic__container__form m-storeForm" onSubmit={handleSubmit(onSubmit)}>
                     <div className="m-storeEdit-basic__container__form__item m-storeForm__item">
                         <label htmlFor="store_name" className="a-label-required__red">店舗名</label>
@@ -110,6 +110,7 @@ const EditBasicInfo: React.FC = () => {
                         <BtnSave
                             InputType={"submit"}
                             OnClickFunction={null}
+                            className={"full"}
                         />
                     </div>
                 </form>

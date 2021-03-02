@@ -96,7 +96,12 @@
 
     &__btn {
         display: flex;
-        justify-content: flex-end;
-        margin: $mp-xs 1.5rem 0 0;
+        justify-content: center;
+        margin-top: $mp-xs;
+
+        @include bp-960up {
+            justify-content: flex-end;
+            margin-right: 1.5rem;
+        }
     }
 }

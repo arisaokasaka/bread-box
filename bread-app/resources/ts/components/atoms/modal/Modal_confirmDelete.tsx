@@ -58,8 +58,8 @@ const Modal_confirmDelete: React.FC<MenuInfoProps> = ({menu}) =>{
     return(
         <div className="m-modalConfirmDelete">
             <button className="a-btn-deleteMenu" onClick={()=>setModal(true)} >
-                <FontAwesomeIcon icon={faTrash}/>
-                削除する
+                <span><FontAwesomeIcon icon={faTrash}/></span>
+                <span>削除する</span>
             </button>
             <Modal
                 isOpen={modalIsOpen}

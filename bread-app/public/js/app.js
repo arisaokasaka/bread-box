@@ -15208,6 +15208,71 @@ if (document.getElementById('app')) {
 
 /***/ }),
 
+/***/ "./resources/ts/components/atoms/Link_sns.tsx":
+/*!****************************************************!*\
+  !*** ./resources/ts/components/atoms/Link_sns.tsx ***!
+  \****************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
+var free_brands_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-brands-svg-icons */ "./node_modules/@fortawesome/free-brands-svg-icons/index.es.js");
+
+var LinkSNS = function LinkSNS(_a) {
+  var sns = _a.sns;
+  var snsInfo = JSON.parse(sns);
+  return react_1["default"].createElement("div", {
+    className: "m-sns-btns"
+  }, snsInfo && react_1["default"].createElement("ul", {
+    className: "m-sns-btns__list"
+  }, snsInfo.instagram && react_1["default"].createElement("li", {
+    className: "m-sns-btns__list__btn instagram"
+  }, react_1["default"].createElement("a", {
+    href: snsInfo.instagram
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_brands_svg_icons_1.faInstagram
+  }))), snsInfo.facebook && react_1["default"].createElement("li", {
+    className: "m-sns-btns__list__btn facebook"
+  }, react_1["default"].createElement("a", {
+    href: snsInfo.facebook
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_brands_svg_icons_1.faFacebookF
+  }))), snsInfo.twitter && react_1["default"].createElement("li", {
+    className: "m-sns-btns__list__btn twitter"
+  }, react_1["default"].createElement("a", {
+    href: snsInfo.twitter
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_brands_svg_icons_1.faTwitter
+  }))), snsInfo.other && react_1["default"].createElement("li", {
+    className: "m-sns-btns__list__btn other"
+  }, react_1["default"].createElement("a", {
+    href: snsInfo.other
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faLink
+  })))));
+};
+
+exports.default = LinkSNS;
+
+/***/ }),
+
 /***/ "./resources/ts/components/atoms/Logo.tsx":
 /*!************************************************!*\
   !*** ./resources/ts/components/atoms/Logo.tsx ***!
@@ -15453,7 +15518,9 @@ var Score = function Score(_a) {
     className: "a-score__container__comment"
   }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
     icon: free_solid_svg_icons_1.faCommentDots
-  }), react_1["default"].createElement("a", null, count, "\u4EF6"))));
+  }), react_1["default"].createElement("span", {
+    className: "a-score__container__comment__label"
+  }, "\u53E3\u30B3\u30DF\u6570"), react_1["default"].createElement("a", null, count), "\u4EF6")));
 };
 
 exports.default = Score;
@@ -15949,9 +16016,10 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 
 var BtnSave = function BtnSave(_a) {
   var InputType = _a.InputType,
-      OnClickFunction = _a.OnClickFunction;
+      OnClickFunction = _a.OnClickFunction,
+      className = _a.className;
   return react_1["default"].createElement("input", {
-    className: "a-btnSave",
+    className: "a-btnSave " + className,
     value: "\u4FDD\u5B58\u3059\u308B",
     type: InputType,
     onClick: function onClick() {
@@ -16398,7 +16466,7 @@ var Btn_homepage = function Btn_homepage(_a) {
     onClick: handleClick
   }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
     icon: free_solid_svg_icons_1.faPaperPlane
-  }), "\xA0\xA0\u30DB\u30FC\u30E0\u30DA\u30FC\u30B8"));
+  }), "\xA0\u30DB\u30FC\u30E0\u30DA\u30FC\u30B8\u3092\u898B\u308B"));
 };
 
 exports.default = Btn_homepage;
@@ -16656,9 +16724,9 @@ var Modal_confirmDelete = function Modal_confirmDelete(_a) {
     onClick: function onClick() {
       return setModal(true);
     }
-  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+  }, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
     icon: free_solid_svg_icons_1.faTrash
-  }), "\u524A\u9664\u3059\u308B"), react_1["default"].createElement(react_modal_1["default"], {
+  })), react_1["default"].createElement("span", null, "\u524A\u9664\u3059\u308B")), react_1["default"].createElement(react_modal_1["default"], {
     isOpen: modalIsOpen,
     onRequestClose: function onRequestClose() {
       return setModal(false);
@@ -16878,9 +16946,9 @@ var Modal_editMenu = function Modal_editMenu(_a) {
       return setModal(true);
     },
     className: "a-btn-editMenu"
-  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+  }, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
     icon: free_solid_svg_icons_1.faPen
-  }), "\u7DE8\u96C6\u3059\u308B"), react_1["default"].createElement(react_modal_1["default"], {
+  })), react_1["default"].createElement("span", null, "\u7DE8\u96C6\u3059\u308B")), react_1["default"].createElement(react_modal_1["default"], {
     isOpen: modalIsOpen,
     onRequestClose: function onRequestClose() {
       return setModal(false);
@@ -16980,7 +17048,8 @@ var Modal_editMenu = function Modal_editMenu(_a) {
     className: "m-storeEdit-menuCreate__container__form__btn m-storeForm__btn"
   }, react_1["default"].createElement(BtnSave_1["default"], {
     InputType: "submit",
-    OnClickFunction: null
+    OnClickFunction: null,
+    className: "full"
   })))));
 };
 
@@ -17265,7 +17334,7 @@ var Modal_editSpirit = function Modal_editSpirit(_a) {
     className: "m-modalEditSpirit__form__item"
   }, react_1["default"].createElement("label", {
     htmlFor: "img_spirit",
-    className: "a-label-required"
+    className: "a-label-required__red--fitContent"
   }, "\u753B\u50CF\u3092\u9078\u629E"), funcType === 'edit' && react_1["default"].createElement("span", null, "\u65B0\u3057\u3044\u753B\u50CF\u306B\u5909\u3048\u308B\u5834\u5408\u306E\u307F\u3001\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("input", {
     type: "file",
     accept: "image/*",
@@ -17275,7 +17344,7 @@ var Modal_editSpirit = function Modal_editSpirit(_a) {
     className: "m-modalEditSpirit__form__item"
   }, react_1["default"].createElement("label", {
     htmlFor: "content",
-    className: "a-label-required"
+    className: "a-label-required__red--fitContent"
   }, "\u5185\u5BB9"), react_1["default"].createElement("textarea", {
     name: "content",
     placeholder: placeText,
@@ -17288,7 +17357,8 @@ var Modal_editSpirit = function Modal_editSpirit(_a) {
     className: "m-modalEditSpirit__form__btn"
   }, react_1["default"].createElement(BtnSave_1["default"], {
     InputType: "submit",
-    OnClickFunction: null
+    OnClickFunction: null,
+    className: "full"
   })))));
 };
 
@@ -17410,7 +17480,7 @@ var ModalCreateReview = function ModalCreateReview(_a) {
       className: "a-btn-modal-review"
     }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
       icon: free_solid_svg_icons_1.faPen
-    }), "\xA0\u53E3\u30B3\u30DF\u3092\u6295\u7A3F\u3059\u308B");
+    }), "\xA0\u53E3\u30B3\u30DF\u3092\u6295\u7A3F");
   } else if (state.uuid && state.auth === "store") {
     btnReview = null;
   } else {
@@ -17421,7 +17491,7 @@ var ModalCreateReview = function ModalCreateReview(_a) {
       className: "a-btn-modal-review"
     }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
       icon: free_solid_svg_icons_1.faPen
-    }), "\xA0\u53E3\u30B3\u30DF\u3092\u6295\u7A3F\u3059\u308B");
+    }), "\xA0\u53E3\u30B3\u30DF\u3092\u6295\u7A3F");
   }
 
   return react_1["default"].createElement("div", {
@@ -17456,7 +17526,7 @@ var ModalCreateReview = function ModalCreateReview(_a) {
     ref: register
   }), react_1["default"].createElement("label", {
     htmlFor: "star",
-    className: "a-label-required"
+    className: "a-label-required__red--fitContent"
   }, "5\u6BB5\u968E\u3067\u8A55\u4FA1\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("p", null, "5\u304C\u6700\u3082\u9AD8\u3044\u8A55\u4FA1\u3068\u306A\u308A\u307E\u3059\u3002"), react_1["default"].createElement("select", {
     name: "star",
     id: "star",
@@ -17476,8 +17546,7 @@ var ModalCreateReview = function ModalCreateReview(_a) {
   }, "2"), react_1["default"].createElement("option", {
     value: "1"
   }, "1")), errors.star && react_1["default"].createElement("p", null, "\u8A55\u4FA1\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
-    htmlFor: "comment",
-    className: "a-label-required"
+    htmlFor: "comment"
   }, "\u30B3\u30E1\u30F3\u30C8"), react_1["default"].createElement("textarea", {
     name: "comment",
     id: "comment",
@@ -17640,7 +17709,7 @@ var ModalReviewEdit_user = function ModalReviewEdit_user(_a) {
     ref: register
   }), react_1["default"].createElement("label", {
     htmlFor: "star",
-    className: "a-label-required"
+    className: "a-label-required__red--fitContent"
   }, "5\u6BB5\u968E\u3067\u8A55\u4FA1\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("p", null, "5\u304C\u6700\u3082\u9AD8\u3044\u8A55\u4FA1\u3068\u306A\u308A\u307E\u3059\u3002"), react_1["default"].createElement("select", {
     name: "star",
     id: "star",
@@ -17661,8 +17730,7 @@ var ModalReviewEdit_user = function ModalReviewEdit_user(_a) {
   }, "2"), react_1["default"].createElement("option", {
     value: "1"
   }, "1")), errors.star && react_1["default"].createElement("p", null, "\u8A55\u4FA1\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
-    htmlFor: "comment",
-    className: "a-label-required"
+    htmlFor: "comment"
   }, "\u30B3\u30E1\u30F3\u30C8"), react_1["default"].createElement("textarea", {
     name: "comment",
     id: "comment",
@@ -17966,145 +18034,6 @@ var ModalReviewReply = function ModalReviewReply(_a) {
 };
 
 exports.default = ModalReviewReply;
-
-/***/ }),
-
-/***/ "./resources/ts/components/atoms/modal/Modal_sns.tsx":
-/*!***********************************************************!*\
-  !*** ./resources/ts/components/atoms/modal/Modal_sns.tsx ***!
-  \***********************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  Object.defineProperty(o, k2, {
-    enumerable: true,
-    get: function get() {
-      return m[k];
-    }
-  });
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
-
-  __setModuleDefault(result, mod);
-
-  return result;
-};
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var react_modal_1 = __importDefault(__webpack_require__(/*! react-modal */ "./node_modules/react-modal/lib/index.js"));
-
-var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
-
-var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-
-var free_brands_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-brands-svg-icons */ "./node_modules/@fortawesome/free-brands-svg-icons/index.es.js");
-
-var ModalSNS = function ModalSNS(_a) {
-  var sns = _a.sns;
-
-  var _b = react_1.useState(false),
-      isModelOpen = _b[0],
-      setModal = _b[1];
-
-  var snsInfo = JSON.parse(sns);
-  var customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)'
-    }
-  };
-  return react_1["default"].createElement("div", {
-    className: "m-modal-sns",
-    onClick: function onClick() {
-      return console.log(snsInfo);
-    }
-  }, snsInfo && react_1["default"].createElement("div", {
-    key: "sns_" + snsInfo.id
-  }, react_1["default"].createElement("button", {
-    onClick: function onClick() {
-      return setModal(true);
-    },
-    className: "a-btn-modal-sns"
-  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-    icon: free_solid_svg_icons_1.faLink
-  }), "\xA0\xA0\uFF33\uFF2E\uFF33"), react_1["default"].createElement(react_modal_1["default"], {
-    isOpen: isModelOpen,
-    onRequestClose: function onRequestClose() {
-      return setModal(false);
-    },
-    style: customStyles,
-    ariaHideApp: false
-  }, react_1["default"].createElement("div", {
-    className: "m-modal-sns__btn--close"
-  }, react_1["default"].createElement("button", {
-    onClick: function onClick() {
-      return setModal(false);
-    }
-  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-    icon: free_solid_svg_icons_1.faTimes
-  }))), react_1["default"].createElement("div", {
-    className: "m-modal-sns__links"
-  }, react_1["default"].createElement("ul", null, snsInfo.instagram && react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
-    href: snsInfo.instagram,
-    className: "m-modal-sns__links__item instagram"
-  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-    icon: free_brands_svg_icons_1.faInstagram
-  }), "\xA0\xA0Instagram")), snsInfo.facebook && react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
-    href: snsInfo.facebook,
-    className: "m-modal-sns__links__item facebook"
-  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-    icon: free_brands_svg_icons_1.faFacebook
-  }), "\xA0\xA0Facebook")), snsInfo.twitter && react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
-    href: snsInfo.twitter,
-    className: "m-modal-sns__links__item twitter"
-  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-    icon: free_brands_svg_icons_1.faTwitter
-  }), "\xA0\xA0Twitter")), snsInfo.other && react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
-    href: snsInfo.other,
-    className: "m-modal-sns__links__item other"
-  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-    icon: free_solid_svg_icons_1.faStar
-  }), "\xA0\xA0\u305D\u306E\u4ED6")))))));
-};
-
-exports.default = ModalSNS;
 
 /***/ }),
 
@@ -18773,6 +18702,8 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
 var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
 var MenuCreate_1 = __importDefault(__webpack_require__(/*! ./storeEditMenu/MenuCreate */ "./resources/ts/components/molecules/storeEdit/storeEditMenu/MenuCreate.tsx"));
@@ -18815,6 +18746,10 @@ var StoreEditTable = function StoreEditTable() {
       Table = _a[0],
       setTable = _a[1];
 
+  var _b = react_1.useState(''),
+      className_active = _b[0],
+      setClassName_Active = _b[1];
+
   react_1.useEffect(function () {
     getStoreInfo();
     getMenuInfo();
@@ -18845,20 +18780,20 @@ var StoreEditTable = function StoreEditTable() {
   }; //サイドメニューのタブ一覧
 
 
-  var Tab = function Tab(tab) {
-    var TabClassName = tab.category + "_" + tab.tableName;
+  var Menu = function Menu(menu) {
+    var MenuClassName = menu.category + "_" + menu.tableName;
 
-    if (Table === tab.tableName) {
-      TabClassName += ' selected';
+    if (Table === menu.tableName) {
+      MenuClassName += ' selected';
     }
 
     return react_1["default"].createElement("span", {
-      className: TabClassName,
-      key: TabClassName,
+      className: MenuClassName,
+      key: MenuClassName,
       onClick: function onClick() {
-        return setTable(tab.tableName);
+        return setTable(menu.tableName);
       }
-    }, react_1["default"].createElement("a", null, tab.label), react_1["default"].createElement("a", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    }, react_1["default"].createElement("a", null, menu.label), react_1["default"].createElement("a", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
       icon: free_solid_svg_icons_1.faChevronRight
     })));
   };
@@ -18894,44 +18829,80 @@ var StoreEditTable = function StoreEditTable() {
 
       case 'spiritAdvantage':
         return react_1["default"].createElement(StoreEditTable_advantage_1["default"], null);
-
-      case 'stampAdd':
-        return react_1["default"].createElement("h2", null, "stamp");
     }
   };
 
   return react_1["default"].createElement("div", {
     className: "m-store-edit-table"
+  }, react_1["default"].createElement("div", {
+    className: "m-store-edit-table__btn-menuMobile",
+    onClick: function onClick() {
+      return setClassName_Active('active');
+    }
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faBars
+  }), react_1["default"].createElement("span", null, "\u7BA1\u7406\u30E1\u30CB\u30E5\u30FC")), react_1["default"].createElement("div", {
+    className: "m-store-edit-table__nav--mobile " + className_active
   }, react_1["default"].createElement("nav", {
-    className: "m-store-edit-table__nav"
+    className: "m-store-edit-table__nav--mobile__content store_edit_nav",
+    onClick: function onClick() {
+      return setClassName_Active('');
+    }
   }, react_1["default"].createElement("ul", null, react_1["default"].createElement("li", {
-    className: "m-store-edit-table__nav__basic"
+    className: "m-store-edit-table__nav--mobile__content__close"
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faTimes
+  }), "\u9589\u3058\u308B"), react_1["default"].createElement("li", {
+    className: "m-store-edit-table__nav--mobile__content__basic"
   }, react_1["default"].createElement("label", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-    icon: free_solid_svg_icons_1.faChevronCircleDown
+    icon: free_solid_svg_icons_1.faSlidersH
   }), "\u5E97\u8217\u60C5\u5831\u306E\u7DE8\u96C6"), StoreEditMenus_1.StoreEditNav_basic.map(function (arr) {
-    return Tab(arr);
+    return Menu(arr);
   })), react_1["default"].createElement("li", {
-    className: "m-store-edit-table__nav__menu"
+    className: "m-store-edit-table__nav--mobile__content__menu"
   }, react_1["default"].createElement("label", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-    icon: free_solid_svg_icons_1.faChevronCircleDown
+    icon: free_solid_svg_icons_1.faBreadSlice
   }), "\u30E1\u30CB\u30E5\u30FC\u306E\u8FFD\u52A0\u30FB\u7DE8\u96C6"), StoreEditMenus_1.StoreEditNav_menu.map(function (arr) {
-    return Tab(arr);
+    return Menu(arr);
   })), react_1["default"].createElement("li", {
-    className: "m-store-edit-table__nav__spirit"
+    className: "m-store-edit-table__nav--mobile__content__spirit"
   }, react_1["default"].createElement("label", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-    icon: free_solid_svg_icons_1.faChevronCircleDown
+    icon: free_solid_svg_icons_1.faHeart
   }), "\u3053\u3060\u308F\u308A\u30FB\u601D\u3044\u306E\u7DE8\u96C6"), StoreEditMenus_1.StoreEditNav_spirit.map(function (arr) {
-    return Tab(arr);
+    return Menu(arr);
   })), react_1["default"].createElement("li", {
-    className: "m-store-edit-table__nav__stamp"
+    className: "m-store-edit-table__nav--mobile__content__others"
+  }, react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/password_store"
+  }, "\u30D1\u30B9\u30EF\u30FC\u30C9\u306E\u518D\u8A2D\u5B9A"), react_1["default"].createElement(BtnLogout_1["default"], null))))), react_1["default"].createElement("nav", {
+    className: "m-store-edit-table__nav--pc store_edit_nav"
+  }, react_1["default"].createElement("ul", null, react_1["default"].createElement("li", {
+    className: "m-store-edit-table__nav--pc__basic"
   }, react_1["default"].createElement("label", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-    icon: free_solid_svg_icons_1.faChevronCircleDown
-  }), "\u30B9\u30BF\u30F3\u30D7\u30AB\u30FC\u30C9\u306E\u7DE8\u96C6"), StoreEditMenus_1.StoreEditNav_stamp.map(function (arr) {
-    return Tab(arr);
+    icon: free_solid_svg_icons_1.faSlidersH
+  }), "\u5E97\u8217\u60C5\u5831\u306E\u7DE8\u96C6"), StoreEditMenus_1.StoreEditNav_basic.map(function (arr) {
+    return Menu(arr);
   })), react_1["default"].createElement("li", {
-    className: "m-store-edit-table__nav__others"
-  }, react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u306E\u518D\u8A2D\u5B9A"), react_1["default"].createElement(BtnLogout_1["default"], null)))), react_1["default"].createElement("div", {
-    className: "m-store-edit-table__container"
+    className: "m-store-edit-table__nav--pc__menu"
+  }, react_1["default"].createElement("label", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faBreadSlice
+  }), "\u30E1\u30CB\u30E5\u30FC\u306E\u8FFD\u52A0\u30FB\u7DE8\u96C6"), StoreEditMenus_1.StoreEditNav_menu.map(function (arr) {
+    return Menu(arr);
+  })), react_1["default"].createElement("li", {
+    className: "m-store-edit-table__nav--pc__spirit"
+  }, react_1["default"].createElement("label", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faHeart
+  }), "\u3053\u3060\u308F\u308A\u30FB\u601D\u3044\u306E\u7DE8\u96C6"), StoreEditMenus_1.StoreEditNav_spirit.map(function (arr) {
+    return Menu(arr);
+  })), react_1["default"].createElement("li", {
+    className: "m-store-edit-table__nav--pc__others"
+  }, react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/password_store"
+  }, "\u30D1\u30B9\u30EF\u30FC\u30C9\u306E\u518D\u8A2D\u5B9A"), react_1["default"].createElement(BtnLogout_1["default"], null)))), react_1["default"].createElement("div", {
+    className: "m-store-edit-table__container",
+    onClick: function onClick() {
+      return setClassName_Active('');
+    }
   }, react_1["default"].createElement("div", {
     className: "m-store-edit-table__container__content"
   }, CurrentTable(Table))));
@@ -19064,11 +19035,7 @@ var EditBasicInfo = function EditBasicInfo() {
     className: "m-storeEdit-basic"
   }, react_1["default"].createElement("div", {
     className: "m-storeEdit-basic__container"
-  }, react_1["default"].createElement("h3", {
-    onClick: function onClick() {
-      return console.log(stateInfo, stateInfo.storeInfo, stateInfo.menuInfo);
-    }
-  }, "\u57FA\u672C\u60C5\u5831\u7DE8\u96C6"), react_1["default"].createElement("form", {
+  }, react_1["default"].createElement("h3", null, "\u57FA\u672C\u60C5\u5831\u7DE8\u96C6"), react_1["default"].createElement("form", {
     className: "m-storeEdit-basic__container__form m-storeForm",
     onSubmit: handleSubmit(onSubmit)
   }, react_1["default"].createElement("div", {
@@ -19147,7 +19114,8 @@ var EditBasicInfo = function EditBasicInfo() {
     className: "m-storeEdit-basic__container__form__btn m-storeForm__btn"
   }, react_1["default"].createElement(BtnSave_1["default"], {
     InputType: "submit",
-    OnClickFunction: null
+    OnClickFunction: null,
+    className: "full"
   })))));
 };
 
@@ -19319,7 +19287,8 @@ var EditBusinessDays = function EditBusinessDays() {
     className: "m-storeEdit-businessDay__container__form__btn m-storeForm__btn"
   }, react_1["default"].createElement(BtnSave_1["default"], {
     InputType: "submit",
-    OnClickFunction: null
+    OnClickFunction: null,
+    className: "full"
   })))));
 };
 
@@ -19457,7 +19426,8 @@ var EditBusinessMemo = function EditBusinessMemo() {
     className: "m-storeEdit-businessMemo__container__form__btn m-storeForm__btn"
   }, react_1["default"].createElement(BtnSave_1["default"], {
     InputType: "submit",
-    OnClickFunction: null
+    OnClickFunction: null,
+    className: "full"
   })))));
 };
 
@@ -19599,7 +19569,8 @@ var EditHomepage = function EditHomepage() {
     className: "m-storeEdit-homepage__container__form__btn m-storeForm__btn"
   }, react_1["default"].createElement(BtnSave_1["default"], {
     InputType: "submit",
-    OnClickFunction: null
+    OnClickFunction: null,
+    className: "full"
   })))));
 };
 
@@ -19788,7 +19759,8 @@ var EditImage = function EditImage() {
     className: "m-storeEdit-image__container__form__btn m-storeForm__btn"
   }, react_1["default"].createElement(BtnSave_1["default"], {
     InputType: "submit",
-    OnClickFunction: null
+    OnClickFunction: null,
+    className: "full"
   })))));
 };
 
@@ -20383,7 +20355,7 @@ var StoreEditTable_advantage = function StoreEditTable_advantage() {
   var time_current;
   var funcType = 'create';
   var btnName = '追加する';
-  var content = react_1["default"].createElement("p", null, "\u307E\u3060\u767B\u9332\u3055\u308C\u3066\u3044\u307E\u305B\u3093\u3002\u53F3\u4E0A\u306E\u30DC\u30BF\u30F3\u3088\u308A\u8FFD\u52A0\u3057\u3066\u304F\u3060\u3055\u3044\u3002"); // メニュー情報があるか判断
+  var content = react_1["default"].createElement("p", null, "\u307E\u3060\u767B\u9332\u3055\u308C\u3066\u3044\u307E\u305B\u3093\u3002\u8FFD\u52A0\u3059\u308B\u30DC\u30BF\u30F3\u3088\u308A\u8FFD\u52A0\u3057\u3066\u304F\u3060\u3055\u3044\u3002"); // メニュー情報があるか判断
 
   if (stateInfo.menuInfo) {
     stateInfo.menuInfo.map(function (el) {
@@ -20493,7 +20465,7 @@ var StoreEditTable_spirit = function StoreEditTable_spirit() {
   var time_current;
   var funcType = 'create';
   var btnName = '追加する';
-  var content = react_1["default"].createElement("p", null, "\u307E\u3060\u767B\u9332\u3055\u308C\u3066\u3044\u307E\u305B\u3093\u3002\u53F3\u4E0A\u306E\u30DC\u30BF\u30F3\u3088\u308A\u8FFD\u52A0\u3057\u3066\u304F\u3060\u3055\u3044\u3002"); // メニュー情報があるか判断
+  var content = react_1["default"].createElement("p", null, "\u307E\u3060\u767B\u9332\u3055\u308C\u3066\u3044\u307E\u305B\u3093\u3002\u8FFD\u52A0\u3059\u308B\u30DC\u30BF\u30F3\u3088\u308A\u8FFD\u52A0\u3057\u3066\u304F\u3060\u3055\u3044\u3002"); // メニュー情報があるか判断
 
   if (stateInfo.menuInfo) {
     stateInfo.menuInfo.map(function (el) {
@@ -20561,7 +20533,7 @@ var Btn_interested_1 = __importDefault(__webpack_require__(/*! ../../atoms/butto
 
 var BtnStoreEdit_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/BtnStoreEdit */ "./resources/ts/components/atoms/buttons/BtnStoreEdit.tsx"));
 
-var StoreSubinfo_1 = __importDefault(__webpack_require__(/*! ./StoreSubinfo */ "./resources/ts/components/molecules/store/StoreSubinfo.tsx"));
+var StoreSubinfo_mobile_1 = __importDefault(__webpack_require__(/*! ./StoreSubinfo_mobile */ "./resources/ts/components/molecules/store/StoreSubinfo_mobile.tsx"));
 
 var StoreBasicInfo = function StoreBasicInfo(_a) {
   var storeInfo = _a.storeInfo,
@@ -20579,7 +20551,6 @@ var StoreBasicInfo = function StoreBasicInfo(_a) {
     index: 1,
     store_uuid: storeInfo.user_uuid
   }), react_1["default"].createElement(BtnStoreEdit_1["default"], null)), react_1["default"].createElement("div", {
-    key: "basicInfo_" + storeInfo.id,
     className: "m-store-basicInfo__container"
   }, react_1["default"].createElement("h2", {
     className: "m-store-basicInfo__name"
@@ -20587,7 +20558,7 @@ var StoreBasicInfo = function StoreBasicInfo(_a) {
     className: "m-store-basicInfo__address"
   }, storeInfo.address), react_1["default"].createElement("p", {
     className: "m-store-basicInfo__message"
-  }, storeInfo.message)), react_1["default"].createElement(StoreSubinfo_1["default"], {
+  }, storeInfo.message)), react_1["default"].createElement(StoreSubinfo_mobile_1["default"], {
     storeInfo: storeInfo,
     scoreInfo: scoreInfo
   }));
@@ -20969,10 +20940,12 @@ var StoreMenu = function StoreMenu(_a) {
     }, react_1["default"].createElement("img", {
       src: "/storage/store/" + el.store_uuid + "/menu/item_" + el.bread_order + ".jpg",
       alt: "\u30E1\u30CB\u30E5\u30FC\u753B\u50CF"
-    }), react_1["default"].createElement("h4", null, el.bread_name), react_1["default"].createElement("span", null, react_1["default"].createElement("p", {
-      className: "m-menu__card__kind"
-    }, el.bread_kind), react_1["default"].createElement("p", {
-      className: "m-menu__card__price"
+    }), react_1["default"].createElement("h4", null, el.bread_name), react_1["default"].createElement("div", {
+      className: "m-menu__card__labels"
+    }, react_1["default"].createElement("span", {
+      className: "m-menu__card__labels__kind"
+    }, el.bread_kind), react_1["default"].createElement("span", {
+      className: "m-menu__card__labels__price"
     }, el.bread_price, "\u5186")), react_1["default"].createElement("p", {
       className: "m-menu__card__detail"
     }, el.bread_detail));
@@ -21267,6 +21240,81 @@ exports.default = StoreReview;
 
 /***/ }),
 
+/***/ "./resources/ts/components/molecules/store/StoreSidebar.tsx":
+/*!******************************************************************!*\
+  !*** ./resources/ts/components/molecules/store/StoreSidebar.tsx ***!
+  \******************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var Score_1 = __importDefault(__webpack_require__(/*! ../../atoms/Score */ "./resources/ts/components/atoms/Score.tsx"));
+
+var Schedule_1 = __importDefault(__webpack_require__(/*! ../../atoms/Schedule */ "./resources/ts/components/atoms/Schedule.tsx"));
+
+var Btn_homepage_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/Btn_homepage */ "./resources/ts/components/atoms/buttons/Btn_homepage.tsx"));
+
+var Link_sns_1 = __importDefault(__webpack_require__(/*! ../../atoms/Link_sns */ "./resources/ts/components/atoms/Link_sns.tsx"));
+
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
+var StoreSidebar = function StoreSidebar(_a) {
+  var storeInfo = _a.storeInfo,
+      scoreInfo = _a.scoreInfo;
+  return react_1["default"].createElement("div", {
+    className: "m-store-sidebar"
+  }, react_1["default"].createElement("div", {
+    className: "m-store-sidebar__container"
+  }, react_1["default"].createElement("div", {
+    className: "m-store-sidebar__container__item"
+  }, react_1["default"].createElement(Score_1["default"], {
+    scoreInfo: scoreInfo
+  })), storeInfo.business_memo && react_1["default"].createElement("div", {
+    className: "m-store-sidebar__container__item"
+  }, react_1["default"].createElement("label", {
+    className: "m-store-sidebar__container__item__title"
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faBell
+  }), "\u304A\u77E5\u3089\u305B"), react_1["default"].createElement("p", null, storeInfo.business_memo)), storeInfo.business_day && react_1["default"].createElement("div", {
+    className: "m-store-sidebar__container__item"
+  }, react_1["default"].createElement("label", {
+    className: "m-store-sidebar__container__item__title"
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faCalendar
+  }), "\u55B6\u696D\u65E5"), react_1["default"].createElement(Schedule_1["default"], {
+    info: storeInfo
+  })), storeInfo.sns || storeInfo.url ? react_1["default"].createElement("div", {
+    className: "m-store-sidebar__container__item"
+  }, storeInfo.sns && react_1["default"].createElement("div", {
+    className: "m-store-sidebar__container__item__sns"
+  }, react_1["default"].createElement(Link_sns_1["default"], {
+    sns: storeInfo.sns
+  })), storeInfo.url && react_1["default"].createElement("div", {
+    className: "m-store-sidebar__container__item__homepage"
+  }, react_1["default"].createElement(Btn_homepage_1["default"], {
+    url: storeInfo.url
+  }))) : null));
+};
+
+exports.default = StoreSidebar;
+
+/***/ }),
+
 /***/ "./resources/ts/components/molecules/store/StoreSpirit.tsx":
 /*!*****************************************************************!*\
   !*** ./resources/ts/components/molecules/store/StoreSpirit.tsx ***!
@@ -21324,10 +21372,10 @@ exports.default = StoreSpirit;
 
 /***/ }),
 
-/***/ "./resources/ts/components/molecules/store/StoreSubinfo.tsx":
-/*!******************************************************************!*\
-  !*** ./resources/ts/components/molecules/store/StoreSubinfo.tsx ***!
-  \******************************************************************/
+/***/ "./resources/ts/components/molecules/store/StoreSubinfo_mobile.tsx":
+/*!*************************************************************************!*\
+  !*** ./resources/ts/components/molecules/store/StoreSubinfo_mobile.tsx ***!
+  \*************************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -21351,34 +21399,47 @@ var Schedule_1 = __importDefault(__webpack_require__(/*! ../../atoms/Schedule */
 
 var Btn_homepage_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/Btn_homepage */ "./resources/ts/components/atoms/buttons/Btn_homepage.tsx"));
 
-var Modal_sns_1 = __importDefault(__webpack_require__(/*! ../../atoms/modal/Modal_sns */ "./resources/ts/components/atoms/modal/Modal_sns.tsx"));
+var Link_sns_1 = __importDefault(__webpack_require__(/*! ../../atoms/Link_sns */ "./resources/ts/components/atoms/Link_sns.tsx"));
 
-var StoreSubInfo = function StoreSubInfo(_a) {
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
+var StoreSubInfo_mobile = function StoreSubInfo_mobile(_a) {
   var storeInfo = _a.storeInfo,
       scoreInfo = _a.scoreInfo;
   return react_1["default"].createElement("div", {
-    className: "m-store-subInfo"
+    className: "m-store-subInfo-mobile"
   }, react_1["default"].createElement("div", {
-    className: "m-store-subInfo__container",
-    key: "subInfo_" + storeInfo.id
+    className: "m-store-subInfo-mobile__container"
   }, react_1["default"].createElement("div", {
-    className: "m-store-subInfo__container__item"
+    className: "m-store-subInfo-mobile__container__item"
   }, react_1["default"].createElement(Score_1["default"], {
     scoreInfo: scoreInfo
-  })), react_1["default"].createElement("div", {
-    className: "m-store-subInfo__container__item"
-  }, storeInfo.business_memo && react_1["default"].createElement("p", null, storeInfo.business_memo), react_1["default"].createElement(Schedule_1["default"], {
+  })), storeInfo.business_memo && react_1["default"].createElement("div", {
+    className: "m-store-subInfo-mobile__container__item"
+  }, react_1["default"].createElement("label", {
+    className: "m-store-subInfo-mobile__container__item__title"
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faBell
+  }), "\u304A\u77E5\u3089\u305B"), react_1["default"].createElement("p", null, storeInfo.business_memo)), storeInfo.business_day && react_1["default"].createElement("div", {
+    className: "m-store-subInfo-mobile__container__item"
+  }, react_1["default"].createElement("label", {
+    className: "m-store-subInfo-mobile__container__item__title"
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faCalendar
+  }), "\u55B6\u696D\u65E5"), react_1["default"].createElement(Schedule_1["default"], {
     info: storeInfo
   })), react_1["default"].createElement("div", {
-    className: "m-store-subInfo__container__item__btns"
+    className: "m-store-subInfo-mobile__container__item btns_external"
   }, storeInfo.url && react_1["default"].createElement(Btn_homepage_1["default"], {
     url: storeInfo.url
-  }), storeInfo.sns && react_1["default"].createElement(Modal_sns_1["default"], {
+  }), storeInfo.sns && react_1["default"].createElement(Link_sns_1["default"], {
     sns: storeInfo.sns
   }))));
 };
 
-exports.default = StoreSubInfo;
+exports.default = StoreSubInfo_mobile;
 
 /***/ }),
 
@@ -22709,7 +22770,7 @@ var LoginUser = function LoginUser() {
           type: 'setUser',
           payload: res.data.user.uuid
         });
-        history.push("/search");
+        history.push("/user");
       })["catch"](function (err) {
         alert('ログイン出来ません。');
       });
@@ -22754,6 +22815,7 @@ var LoginUser = function LoginUser() {
       pattern: /[a-zA-Z0-9]{8,16}/
     })
   }), react_1["default"].createElement("input", {
+    className: "round",
     type: "submit",
     value: "\u30ED\u30B0\u30A4\u30F3\u3059\u308B"
   })), react_1["default"].createElement("div", {
@@ -22869,11 +22931,11 @@ function PasswordReset_store() {
     value: "\u518D\u8A2D\u5B9A\u30E1\u30FC\u30EB\u3092\u9001\u4FE1"
   })), react_1["default"].createElement("div", {
     className: "p-password-reset-store__container__links"
-  }, react_1["default"].createElement(react_router_dom_1.Link, {
+  }, react_1["default"].createElement("span", null, "\u65E2\u306B\u767B\u9332\u6E08\u3067\u3059\u304B\uFF1F\xA0", react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/login_store"
-  }, "\u30ED\u30B0\u30A4\u30F3\u306F\u3053\u3061\u3089"), react_1["default"].createElement(react_router_dom_1.Link, {
+  }, "\u30ED\u30B0\u30A4\u30F3")), react_1["default"].createElement("span", null, "\u30C8\u30C3\u30D7\u30DA\u30FC\u30B8\u3078", react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/"
-  }, "\u30C8\u30C3\u30D7\u30DA\u30FC\u30B8\u3078\u623B\u308B"))));
+  }, "\u3082\u3069\u308B")))));
 }
 
 exports.default = PasswordReset_store;
@@ -22976,15 +23038,16 @@ function PasswordReset_user() {
       required: true
     })
   }), errors.email && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("input", {
+    className: "round",
     type: "submit",
     value: "\u518D\u8A2D\u5B9A\u30E1\u30FC\u30EB\u3092\u9001\u4FE1"
   })), react_1["default"].createElement("div", {
     className: "p-password-reset-user__container__links"
-  }, react_1["default"].createElement(react_router_dom_1.Link, {
+  }, react_1["default"].createElement("span", null, "\u30ED\u30B0\u30A4\u30F3\u306F", react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/login_user"
-  }, "\u30ED\u30B0\u30A4\u30F3\u306F\u3053\u3061\u3089"), react_1["default"].createElement(react_router_dom_1.Link, {
+  }, "\u3053\u3061\u3089")), react_1["default"].createElement("span", null, "\u30C8\u30C3\u30D7\u30DA\u30FC\u30B8\u3078", react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/"
-  }, "\u30C8\u30C3\u30D7\u30DA\u30FC\u30B8\u3078\u623B\u308B"))));
+  }, "\u3082\u3069\u308B")))));
 }
 
 exports.default = PasswordReset_user;
@@ -23104,7 +23167,7 @@ function Register_store() {
     data['type_user'] = 'store';
     axios_1["default"].post('/api/create_user', data).then(function (res) {
       login();
-      history.push("/store");
+      history.push("/store_edit");
     })["catch"](function (errors) {
       if (errors.response.status === 422) {
         SetEmailError(true);
@@ -23159,7 +23222,7 @@ function Register_store() {
     name: '_token',
     value: csrf
   }), react_1["default"].createElement("div", {
-    className: "p-register-store__container__form__item m-storeForm__item"
+    className: "p-register-store__container__form__item m-storeForm__item first"
   }, react_1["default"].createElement("label", {
     htmlFor: "store_name",
     className: "a-label-required__red"
@@ -23347,11 +23410,8 @@ function Register_user() {
     SetEmailError(false);
     console.log(data);
     axios_1["default"].post('/api/create_user', data).then(function (res) {
-      console.log(res);
       history.push("/search");
     })["catch"](function (errors) {
-      console.log(errors);
-
       if (errors.response.status === 422) {
         SetEmailError(true);
       }
@@ -23367,7 +23427,7 @@ function Register_user() {
     onSubmit: handleSubmit(onSubmit)
   }, react_1["default"].createElement("h2", null, "\u65B0\u898F\u30E6\u30FC\u30B6\u30FC\u767B\u9332"), react_1["default"].createElement("label", {
     htmlFor: "user_name",
-    className: "a-label-required"
+    className: "a-label-required__red--fitContent"
   }, "\u30E6\u30FC\u30B6\u30FC\u540D"), react_1["default"].createElement("input", {
     type: "text",
     id: "user_name",
@@ -23377,7 +23437,7 @@ function Register_user() {
     })
   }), errors.name && react_1["default"].createElement("p", null, "\u30E6\u30FC\u30B6\u30FC\u540D\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
     htmlFor: "user_email",
-    className: "a-label-required"
+    className: "a-label-required__red--fitContent"
   }, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9"), react_1["default"].createElement("input", {
     type: "email",
     name: "email",
@@ -23394,7 +23454,7 @@ function Register_user() {
     ref: register
   }), react_1["default"].createElement("label", {
     htmlFor: "user_password",
-    className: "a-label-required"
+    className: "a-label-required__red--fitContent"
   }, "\u30D1\u30B9\u30EF\u30FC\u30C9"), react_1["default"].createElement("input", {
     type: "password",
     name: "password",
@@ -23405,7 +23465,7 @@ function Register_user() {
     })
   }), errors.password && errors.password.type === "required" && react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u306F\u5FC5\u9808\u3067\u3059\u3002"), errors.password && errors.password.type === "pattern" && react_1["default"].createElement("p", null, "8~16\u6587\u5B57\u306E\u534A\u89D2\u82F1\u6570\u5B57\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("label", {
     htmlFor: "user_password-check",
-    className: "a-label-required"
+    className: "a-label-required__red--fitContent"
   }, "\u30D1\u30B9\u30EF\u30FC\u30C9(\u78BA\u8A8D\u7528)"), react_1["default"].createElement("input", {
     type: "password",
     name: "password_check",
@@ -23414,15 +23474,14 @@ function Register_user() {
       required: true
     })
   }), errors.password_check && errors.password_check.type === "required" && react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9(\u78BA\u8A8D\u7528)\u306F\u5FC5\u9808\u3067\u3059\u3002"), PasswordErrorMessage(getValues('password'), getValues('password_check')), react_1["default"].createElement("input", {
+    className: "round",
     type: "submit",
     value: "\u767B\u9332\u3059\u308B"
   })), react_1["default"].createElement("div", {
     className: "p-register-user__container__links"
-  }, react_1["default"].createElement("span", null, "\u30ED\u30B0\u30A4\u30F3\u306F", react_1["default"].createElement(react_router_dom_1.Link, {
+  }, react_1["default"].createElement("span", null, "\u65E2\u306B\u3054\u767B\u9332\u6E08\u3067\u3059\u304B\uFF1F\xA0", react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/login_user"
-  }, "\u3053\u3061\u3089")), react_1["default"].createElement("span", null, "\u30C8\u30C3\u30D7\u30DA\u30FC\u30B8\u306F", react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/"
-  }, "\u3053\u3061\u3089")))));
+  }, "\u30ED\u30B0\u30A4\u30F3")))));
 }
 
 exports.default = Register_user;
@@ -23832,7 +23891,7 @@ var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/a
 
 var StoreBasicInfo_1 = __importDefault(__webpack_require__(/*! ../../molecules/store/StoreBasicInfo */ "./resources/ts/components/molecules/store/StoreBasicInfo.tsx"));
 
-var StoreSubinfo_1 = __importDefault(__webpack_require__(/*! ../../molecules/store/StoreSubinfo */ "./resources/ts/components/molecules/store/StoreSubinfo.tsx"));
+var StoreSidebar_1 = __importDefault(__webpack_require__(/*! ../../molecules/store/StoreSidebar */ "./resources/ts/components/molecules/store/StoreSidebar.tsx"));
 
 var StoreContents_1 = __importDefault(__webpack_require__(/*! ../../molecules/store/StoreContents */ "./resources/ts/components/molecules/store/StoreContents.tsx"));
 
@@ -23908,7 +23967,7 @@ var StorePage = function StorePage() {
   }), react_1["default"].createElement(StoreContents_1["default"], {
     menuInfo: menuInfo,
     store_uuid: user_uuid
-  })), react_1["default"].createElement(StoreSubinfo_1["default"], {
+  })), react_1["default"].createElement(StoreSidebar_1["default"], {
     storeInfo: storeInfo,
     scoreInfo: scoreInfo
   }))));
@@ -24151,7 +24210,7 @@ var UserEdit = function UserEdit() {
     ref: register
   }), react_1["default"].createElement("label", {
     htmlFor: "user_name",
-    className: "a-label-required"
+    className: "a-label-required__red--fitContent"
   }, "\u30E6\u30FC\u30B6\u30FC\u540D"), react_1["default"].createElement("input", {
     type: "text",
     id: "user_name",
@@ -24162,7 +24221,7 @@ var UserEdit = function UserEdit() {
     })
   }), errors.name && react_1["default"].createElement("p", null, "\u30E6\u30FC\u30B6\u30FC\u540D\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("label", {
     htmlFor: "user_email",
-    className: "a-label-required"
+    className: "a-label-required__red--fitContent"
   }, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9"), react_1["default"].createElement("input", {
     type: "email",
     name: "email",

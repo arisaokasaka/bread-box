@@ -1,54 +1,95 @@
 .m-store-edit-table {
     display: grid;
-    grid-template-columns: 200px 1fr;
-    column-gap: 1rem;
+    position: relative;
 
-    h3 {
-        color: $font-color-brown;
-        margin-bottom: $mp-xxs;
+    @include bp-960up {
+        grid-template-columns: 200px 1fr;
+        column-gap: 1rem;
     }
 
-    &__nav {
+    &__btn-menuMobile {
+        position: absolute;
+        top: -50px;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 2.5rem;
+        width: 4rem;
+        color: $font-color-brown;
+        cursor: pointer;
+
+        & > svg {
+            font-size: 1.2rem;
+        }
+
+        & > span {
+            margin-top: 2px;
+            font-size: 0.5rem;
+            text-align: center;
+        }
+
+        &:hover {
+            & > span {
+                text-decoration: underline;
+            }
+        }
+
+        @include bp-960up {
+            display: none;
+        }
+    }
+
+    .store_edit_nav {
         & > ul {
             margin: 0;
 
             & > li {
                 &:last-child {
-                    margin-top: $mp-xs;
+                    margin-top: $mp-xxs;
+                }
+
+                & label,
+                & span {
+                    height: 2.3rem;
                 }
 
                 & > label {
                     @include bg_GradationBrown;
-                    display: block;
+                    display: inline-block;
+                    line-height: 2.3rem;
                     color: $white;
                     font-weight: 500;
                     font-size: 0.8rem;
                     width: 100%;
-                    padding: 2px 5px;
+                    padding-left: 8px;
 
                     & > svg {
-                        margin-right: 3px;
-                        font-size: 0.7rem;
+                        margin-right: 5px;
                     }
                 }
 
-                & span {
+                & > span {
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
                     width: 100%;
-                    border: 0.1px solid $lightGray;
+                    border-bottom: 0.1px solid $lightGray;
                     border-top: none;
                     border-radius: none;
                     background-color: $white;
                     cursor: pointer;
 
+                    &:hover {
+                        background-color: $lighterBrown;
+                    }
+
                     & > a {
                         &:nth-child(1) {
-                            padding: 3px 0 2px 3px;
+                            padding: 3px 0 2px 8px;
                             font-size: 0.8rem;
                             color: $black;
-                            background-color: $white;
                         }
 
                         &:nth-child(2) {
@@ -68,11 +109,113 @@
                     }
                 }
 
-                & > p {
+                & > a {
                     margin-top: 3px;
                     font-size: 0.7rem;
                     text-decoration: underline;
+                    color: $font-color-brown;
                     cursor: pointer;
+                }
+            }
+        }
+    }
+
+    &__nav--pc {
+        display: none;
+
+        & > ul {
+            & > li {
+                & > span {
+                    border-right: 0.1px solid $lightGray;
+                    border-left: 0.1px solid $lightGray;
+                }
+            }
+        }
+
+        @include bp-960up {
+            display: block;
+        }
+    }
+
+    &__nav--mobile {
+        background-color: $white;
+        width: 200px;
+        position: fixed;
+        top: $header-height;
+        right: 0;
+        bottom: 0;
+        box-shadow: 0px -6px 13px 0 rgba(145, 145, 145, 0.6);
+        z-index: 600;
+        transform: translateX(110%);
+        transition: transform 0.3s ease;
+
+        &.active {
+            transform: translateX(0);
+        }
+
+        &__content {
+            & > ul {
+                & > li {
+                    &:first-child {
+                        height: 2.3rem;
+                        line-height: 2.3rem;
+                        font-weight: 500;
+                        font-size: 0.8rem;
+                        padding-left: 8px;
+                        cursor: pointer;
+
+                        & > svg {
+                            margin-right: 5px;
+                        }
+                    }
+
+                    &:last-child {
+                        padding-left: $mp-xxs;
+                    }
+
+                    & > span {
+                        border-left: none;
+                        border-right: none;
+
+                        & a {
+                            & > svg {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        @include bp-960up {
+            display: none;
+        }
+    }
+
+    &__container {
+        &__select {
+            font-size: 0.9rem;
+            margin: $mp-xxs 0;
+            color: $font-color-brown;
+            border: 1px solid $font-color-brown;
+            border-radius: $sm-radius;
+            font-weight: 550;
+            outline: none;
+            cursor: pointer;
+
+            @include bp-960up {
+                display: none;
+            }
+        }
+
+        &__content {
+            h3 {
+                display: none;
+
+                @include bp-960up {
+                    display: block;
+                    color: $font-color-brown;
+                    margin-bottom: $mp-xxs;
                 }
             }
         }

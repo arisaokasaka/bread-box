@@ -93,6 +93,7 @@ const EditBusinessDays: React.FC = () => {
                         <BtnSave
                             InputType={"submit"}
                             OnClickFunction={null}
+                            className={"full"}
                         />
                     </div>
                 </form>

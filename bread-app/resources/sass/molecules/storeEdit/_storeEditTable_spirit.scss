@@ -1,7 +1,19 @@
 .m-storeEdit-spirit {
+    display: flex;
+    flex-flow: column-reverse;
+
+    @include bp-960up {
+        display: block;
+    }
+
     &__title {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
+        margin-top: $mp-xs;
+
+        @include bp-960up {
+            justify-content: space-between;
+        }
     }
 
     &__container {

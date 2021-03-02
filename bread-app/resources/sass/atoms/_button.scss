@@ -384,12 +384,28 @@
     }
 }
 
-// 店舗ページのログアウトボタン
-.m-store-edit-table__nav__others {
+// 店舗ページのログアウトボタン(モバイル)
+.m-store-edit-table__nav--mobile__content__others {
     .a-btn-logout {
-        display: static;
+        justify-content: flex-start;
         margin: 0;
-        margin-top: 3px;
+        margin-top: 8px;
+
+        & > a {
+            color: $black;
+            padding: 0;
+            font-size: 0.7rem;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+}
+
+// 店舗ページのログアウトボタン(PC)
+.m-store-edit-table__nav--pc__others {
+    .a-btn-logout {
+        justify-content: unset;
+        margin-top: 8px;
 
         & > a {
             color: $black;
@@ -465,25 +481,50 @@
 
     &.full {
         width: 100%;
+        max-width: 510px;
+
+        @include bp-600up {
+            width: 18rem;
+        }
+
+        @include bp-960up {
+            width: 7rem;
+        }
     }
 }
 
 // メニュー編集ボタン
 .a-btn-editMenu {
-    @include bg_GradationBrown;
+    display: flex;
+    align-items: center;
     position: relative;
     color: $white;
     font-weight: 500;
     font-size: 0.8rem;
     border: none;
     border-radius: $sm-radius;
-    width: 5rem;
+    width: 1.6rem;
     height: 1.6rem;
     cursor: pointer;
+    @include bg_GradationBrown;
 
-    & > svg {
-        margin-right: 5px;
-        font-size: 0.7rem;
+    @include bp-960up {
+        width: 5rem;
+    }
+
+    & > span {
+        & > svg {
+            font-size: 0.7rem;
+        }
+
+        &:nth-child(2) {
+            display: none;
+            margin-left: 5px;
+
+            @include bp-960up {
+                display: block;
+            }
+        }
     }
 
     &:hover {
@@ -493,6 +534,8 @@
 
 // 削除ボタン
 .a-btn-deleteMenu {
+    display: flex;
+    align-items: center;
     background: linear-gradient(
         180deg,
         rgb(238, 238, 238) 0%,
@@ -504,13 +547,29 @@
     font-size: 0.8rem;
     border: none;
     border-radius: $sm-radius;
-    width: 5rem;
+    width: 1.6rem;
     height: 1.6rem;
+    margin-left: 5px;
     cursor: pointer;
 
-    & > svg {
-        margin-right: 5px;
-        font-size: 0.7rem;
+    @include bp-960up {
+        width: 5rem;
+    }
+
+    & > span {
+        & > svg {
+            font-size: 0.7rem;
+            margin-left: 1.5px;
+        }
+
+        &:nth-child(2) {
+            display: none;
+            margin-left: 5px;
+
+            @include bp-960up {
+                display: block;
+            }
+        }
     }
 
     &:hover {

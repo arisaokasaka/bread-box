@@ -11,7 +11,7 @@ const StoreEditTable_advantage: React.FC = () => {
     let time_current: string;
     let funcType: string = 'create';
     let btnName: string = '追加する';
-    let content: any　= <p>まだ登録されていません。右上のボタンより追加してください。</p>;
+    let content: any　= <p>まだ登録されていません。追加するボタンより追加してください。</p>;
     
     // メニュー情報があるか判断
     if(stateInfo.menuInfo){
