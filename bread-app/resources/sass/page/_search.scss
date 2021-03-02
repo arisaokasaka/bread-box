@@ -5,12 +5,17 @@
     &__container {
         margin-top: 15px;
         padding-bottom: $mp-md;
+
         @include bp-600up {
             display: flex;
         }
 
         &__content {
+            display: flex;
+            flex-direction: column;
+
             @include bp-600up {
+                display: block;
                 flex-basis: 75%;
             }
 
@@ -19,6 +24,7 @@
                 position: relative;
                 height: 35px;
                 width: 100%;
+                order: 0;
 
                 @include bp-600up {
                     height: 42px;
@@ -61,6 +67,7 @@
             &__list {
                 background-color: $lightBrown;
                 padding: $mp-xxs;
+                order: 1;
 
                 @include bp-600up {
                     padding: $mp-xs;
