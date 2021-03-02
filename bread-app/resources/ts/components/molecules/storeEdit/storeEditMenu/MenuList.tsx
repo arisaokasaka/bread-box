@@ -39,10 +39,13 @@ const MenuList: React.FC = () => {
                             />
                         </div>
                         <div className = "m-storeEdit-menuList__item__content">
-                            <img
-                                src={"storage/store/" + state.uuid + "/menu/item_" + el.bread_order + ".jpg?" + time_current}
-                                alt="パンの画像"
-                            />
+                            {el.image_menu ?
+                                <img
+                                    src={"storage/store/" + state.uuid + "/menu/item_" + el.bread_order + ".jpg?" + time_current}
+                                    alt="パンの画像"
+                                />
+                            : <img src="/images/no_image_menu_1.png"/>
+                            }
                             <div className = "m-storeEdit-menuList__item__content__text">
                                 <h4>{el.bread_name}</h4>
                                 {el.bread_price && <span>{el.bread_price}円</span>}<a>{el.bread_kind}</a>

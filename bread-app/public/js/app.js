@@ -17032,19 +17032,25 @@ var StoreList = function StoreList(_a) {
       src: "/storage/store/" + el.user_uuid + "/thumbnail.jpg",
       alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
     }) : react_1["default"].createElement("img", {
-      src: "/images/no_image.jpg",
+      src: "/images/no_image_thumbnail.png",
       alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
-    })), react_1["default"].createElement("div", {
+    })), el.menu1 && react_1["default"].createElement("div", {
       className: "m-store-list__item--pc__images__sub"
-    }, el.menu1 && react_1["default"].createElement("img", {
+    }, react_1["default"].createElement("img", {
       src: "/storage/store/" + el.user_uuid + "/menu/item_1.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
-    }), el.menu2 && react_1["default"].createElement("img", {
+    }), el.menu2 ? react_1["default"].createElement("img", {
       src: "/storage/store/" + el.user_uuid + "/menu/item_2.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
-    }), el.menu3 && react_1["default"].createElement("img", {
+    }) : react_1["default"].createElement("img", {
+      src: "/images/no_image_menu_1.png",
+      alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
+    }), el.menu3 ? react_1["default"].createElement("img", {
       src: "/storage/store/" + el.user_uuid + "/menu/item_3.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
+    }) : react_1["default"].createElement("img", {
+      src: "/images/no_image_menu_2.png",
+      alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
     }))), react_1["default"].createElement("div", {
       className: "m-store-list__item__container"
     }, react_1["default"].createElement("div", {
@@ -17077,13 +17083,19 @@ var StoreList = function StoreList(_a) {
       src: "/storage/store/" + el.user_uuid + "/thumbnail.jpg",
       alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
     }) : react_1["default"].createElement("img", {
-      src: "/images/no_image.jpg",
+      src: "/images/no_image_thumbnail.png",
       alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
-    }), el.menu1 && react_1["default"].createElement("img", {
+    }), el.menu1 ? react_1["default"].createElement("img", {
       src: "/storage/store/" + el.user_uuid + "/menu/item_1.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
-    }), el.menu2 && react_1["default"].createElement("img", {
+    }) : react_1["default"].createElement("img", {
+      src: "/images/no_image_menu_1.png",
+      alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
+    }), el.menu2 ? react_1["default"].createElement("img", {
       src: "/storage/store/" + el.user_uuid + "/menu/item_2.jpg",
+      alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
+    }) : react_1["default"].createElement("img", {
+      src: "/images/no_image_menu_2.png",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
     }))), el.message && react_1["default"].createElement("p", {
       className: "m-store-list__item__container__explanation"
@@ -17210,7 +17222,7 @@ var Store_pickup = function Store_pickup() {
       src: "/storage/store/" + el.user_uuid + "/thumbnail.jpg",
       alt: "\u5E97\u8217\u753B\u50CF"
     }) : react_1["default"].createElement("img", {
-      src: "/images/no_image.jpg",
+      src: "/images/no_image_thumbnail.png",
       alt: "\u5E97\u8217\u753B\u50CF"
     }), react_1["default"].createElement("p", null, el.name));
   })));
@@ -17486,11 +17498,14 @@ var Modal_editMenu = function Modal_editMenu(_a) {
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
   var dispatch = react_1.useContext(StoreInfoContext_1.StoreInfoContext).dispatch;
 
-  var _e = react_hook_form_1.useForm(),
-      register = _e.register,
-      handleSubmit = _e.handleSubmit,
-      errors = _e.errors,
-      getValues = _e.getValues;
+  var _e = react_1.useState(0),
+      textarea_count = _e[0],
+      setTextarea_count = _e[1];
+
+  var _f = react_hook_form_1.useForm(),
+      register = _f.register,
+      handleSubmit = _f.handleSubmit,
+      errors = _f.errors;
 
   var customStyles = {
     content: {
@@ -17650,8 +17665,14 @@ var Modal_editMenu = function Modal_editMenu(_a) {
     name: "bread_detail",
     id: "bread_detail",
     defaultValue: menu.bread_detail,
-    ref: register
-  }))), react_1["default"].createElement("div", {
+    placeholder: "50\u6587\u5B57\u4EE5\u5185\u3067\u30D1\u30F3\u306E\u8AAC\u660E\u3092\u8A18\u5165\u3057\u3066\u304F\u3060\u3055\u3044\u3002",
+    ref: register({
+      maxLength: 50
+    }),
+    onChange: function onChange(e) {
+      setTextarea_count(e.target.value.length);
+    }
+  }), textarea_count > 50 && react_1["default"].createElement("p", null, "50\u6587\u5B57\u4EE5\u5185\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
     className: "m-storeEdit-menuCreate__container__form__item m-storeForm__item"
   }, react_1["default"].createElement("label", {
     htmlFor: "bread_img"
@@ -17769,26 +17790,30 @@ var Modal_editSpirit = function Modal_editSpirit(_a) {
       menuType = _a.menuType;
   var placeText;
   var defaultContent;
-  var errorMessage_imageSize = null;
+  var spirit_uuid = '';
 
-  var _b = react_hook_form_1.useForm(),
-      register = _b.register,
-      handleSubmit = _b.handleSubmit,
-      errors = _b.errors;
+  var _b = react_1.useState(0),
+      textarea_count = _b[0],
+      setTextarea_count = _b[1];
+
+  var _c = react_hook_form_1.useForm(),
+      register = _c.register,
+      handleSubmit = _c.handleSubmit,
+      errors = _c.errors;
 
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
   var dispatch = react_1.useContext(StoreInfoContext_1.StoreInfoContext).dispatch;
 
-  var _c = react_1.useState(false),
-      modalIsOpen = _c[0],
-      setModal = _c[1];
+  var _d = react_1.useState(false),
+      modalIsOpen = _d[0],
+      setModal = _d[1];
 
-  var _d = react_1.useState({
+  var _e = react_1.useState({
     image: null,
     image_size: 0
   }),
-      image = _d[0],
-      setImage = _d[1];
+      image = _e[0],
+      setImage = _e[1];
 
   var customStyles = {
     content: {
@@ -17807,8 +17832,10 @@ var Modal_editSpirit = function Modal_editSpirit(_a) {
 
       if (SpiritInfo === undefined || null) {
         defaultContent = '';
+        spirit_uuid = '';
       } else {
         defaultContent = SpiritInfo.advantage;
+        spirit_uuid = SpiritInfo.uuid;
       }
 
       break;
@@ -17818,8 +17845,10 @@ var Modal_editSpirit = function Modal_editSpirit(_a) {
 
       if (SpiritInfo === undefined || null) {
         defaultContent = '';
+        spirit_uuid = '';
       } else {
         defaultContent = SpiritInfo.spirit;
+        spirit_uuid = SpiritInfo.uuid;
       }
 
       break;
@@ -17834,12 +17863,7 @@ var Modal_editSpirit = function Modal_editSpirit(_a) {
       image: e.target.files[0],
       image_size: e.target.files[0].size
     }));
-  }; // ファイルサイズによるエラーメッセージ
-
-
-  if (image.image_size > 3000000) {
-    errorMessage_imageSize = react_1["default"].createElement("p", null, "\u30D5\u30A1\u30A4\u30EB\u306E\u4E0A\u9650\u30B5\u30A4\u30BA3MB\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002\u5727\u7E2E\u3059\u308B\u304B\u3001\u5225\u306E\u753B\u50CF\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002");
-  } // 送信時
+  }; // 送信時
 
 
   var onSubmit = function onSubmit(data) {
@@ -17948,17 +17972,21 @@ var Modal_editSpirit = function Modal_editSpirit(_a) {
     name: "menu_type",
     value: menuType,
     ref: register
+  }), react_1["default"].createElement("input", {
+    type: "hidden",
+    name: "uuid",
+    value: spirit_uuid,
+    ref: register
   }), react_1["default"].createElement("div", {
     className: "m-modalEditSpirit__form__item"
   }, react_1["default"].createElement("label", {
-    htmlFor: "img_spirit",
-    className: "a-label-required__red--fitContent"
+    htmlFor: "img_spirit"
   }, "\u753B\u50CF\u3092\u9078\u629E"), funcType === 'edit' && react_1["default"].createElement("span", null, "\u65B0\u3057\u3044\u753B\u50CF\u306B\u5909\u3048\u308B\u5834\u5408\u306E\u307F\u3001\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("input", {
     type: "file",
     accept: "image/*",
     name: "img_spirit",
     onChange: onChangeImage
-  }), errorMessage_imageSize), react_1["default"].createElement("div", {
+  }), image.image_size > 3000000 && react_1["default"].createElement("p", null, "\u30D5\u30A1\u30A4\u30EB\u306E\u4E0A\u9650\u30B5\u30A4\u30BA3MB\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002\u5727\u7E2E\u3059\u308B\u304B\u3001\u5225\u306E\u753B\u50CF\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002")), react_1["default"].createElement("div", {
     className: "m-modalEditSpirit__form__item"
   }, react_1["default"].createElement("label", {
     htmlFor: "content",
@@ -17967,11 +17995,14 @@ var Modal_editSpirit = function Modal_editSpirit(_a) {
     name: "content",
     placeholder: placeText,
     defaultValue: defaultContent,
-    rows: 6,
     ref: register({
-      required: true
-    })
-  }), errors.content && react_1["default"].createElement("p", null, "\u5185\u5BB9\u306F\u5FC5\u9808\u3067\u3059\u3002")), react_1["default"].createElement("div", {
+      required: true,
+      maxLength: 255
+    }),
+    onChange: function onChange(e) {
+      setTextarea_count(e.target.value.length);
+    }
+  }), errors.content && react_1["default"].createElement("p", null, "\u5185\u5BB9\u306F\u5FC5\u9808\u3067\u3059\u3002"), textarea_count > 255 && react_1["default"].createElement("p", null, "255\u6587\u5B57\u4EE5\u5185\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002")), react_1["default"].createElement("div", {
     className: "m-modalEditSpirit__form__btn"
   }, react_1["default"].createElement(BtnSave_1["default"], {
     InputType: "submit",
@@ -18255,10 +18286,14 @@ var ModalReviewEdit_user = function ModalReviewEdit_user(_a) {
       isModalOpen = _b[0],
       setModal = _b[1];
 
-  var _c = react_hook_form_1.useForm(),
-      register = _c.register,
-      handleSubmit = _c.handleSubmit,
-      errors = _c.errors;
+  var _c = react_1.useState(0),
+      textarea_count = _c[0],
+      setTextarea_count = _c[1];
+
+  var _d = react_hook_form_1.useForm(),
+      register = _d.register,
+      handleSubmit = _d.handleSubmit,
+      errors = _d.errors;
 
   var customStyles = {
     content: {
@@ -18336,8 +18371,6 @@ var ModalReviewEdit_user = function ModalReviewEdit_user(_a) {
       required: true
     })
   }, react_1["default"].createElement("option", {
-    hidden: true
-  }, "\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"), react_1["default"].createElement("option", {
     value: "5"
   }, "5"), react_1["default"].createElement("option", {
     value: "4"
@@ -18354,8 +18387,13 @@ var ModalReviewEdit_user = function ModalReviewEdit_user(_a) {
     id: "comment",
     defaultValue: comment,
     placeholder: "[\u4EFB\u610F]\u30EC\u30D3\u30E5\u30FC\u3084\u611F\u60F3\u3092\u8A18\u5165\u3057\u3066\u304F\u3060\u3055\u3044\u3002",
-    ref: register
-  }), react_1["default"].createElement("input", {
+    ref: register({
+      maxLength: 255
+    }),
+    onChange: function onChange(e) {
+      setTextarea_count(e.target.value.length);
+    }
+  }), textarea_count > 255 && react_1["default"].createElement("p", null, "255\u6587\u5B57\u4EE5\u5185\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("input", {
     type: "submit",
     value: "\u66F4\u65B0\u3059\u308B"
   }))));
@@ -19169,6 +19207,10 @@ var EditBasicInfo = function EditBasicInfo() {
       stateInfo = _b.stateInfo,
       dispatch = _b.dispatch;
 
+  var _c = react_1.useState(0),
+      textarea_count = _c[0],
+      setTextarea_count = _c[1];
+
   var StoreInfo = {
     name: '',
     address: '',
@@ -19289,8 +19331,13 @@ var EditBasicInfo = function EditBasicInfo() {
     name: "message",
     id: "store_message",
     defaultValue: StoreInfo.message,
-    ref: register
-  }))), react_1["default"].createElement("div", {
+    ref: register({
+      maxLength: 255
+    }),
+    onChange: function onChange(e) {
+      setTextarea_count(e.target.value.length);
+    }
+  }), textarea_count > 255 && react_1["default"].createElement("p", null, "255\u6587\u5B57\u4EE5\u5185\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
     className: "m-storeEdit-basic__container__form__btn m-storeForm__btn"
   }, react_1["default"].createElement(BtnSave_1["default"], {
     InputType: "submit",
@@ -19542,16 +19589,20 @@ var StoreInfoContext_1 = __webpack_require__(/*! ../../../../contexts/StoreInfoC
 var BtnSave_1 = __importDefault(__webpack_require__(/*! ../../../atoms/buttons/BtnSave */ "./resources/ts/components/atoms/buttons/BtnSave.tsx"));
 
 var EditBusinessMemo = function EditBusinessMemo() {
-  var _a = react_hook_form_1.useForm(),
-      register = _a.register,
-      handleSubmit = _a.handleSubmit,
-      errors = _a.errors;
+  var _a = react_1.useState(0),
+      textarea_count = _a[0],
+      setTextarea_count = _a[1];
+
+  var _b = react_hook_form_1.useForm(),
+      register = _b.register,
+      handleSubmit = _b.handleSubmit,
+      errors = _b.errors;
 
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
 
-  var _b = react_1.useContext(StoreInfoContext_1.StoreInfoContext),
-      stateInfo = _b.stateInfo,
-      dispatch = _b.dispatch;
+  var _c = react_1.useContext(StoreInfoContext_1.StoreInfoContext),
+      stateInfo = _c.stateInfo,
+      dispatch = _c.dispatch;
 
   var StoreInfo = {
     business_memo: ''
@@ -19600,9 +19651,13 @@ var EditBusinessMemo = function EditBusinessMemo() {
     name: "business_memo",
     defaultValue: StoreInfo.business_memo,
     ref: register({
-      required: true
-    })
-  }), errors.business_memo && react_1["default"].createElement("p", null, "\u304A\u77E5\u3089\u305B\u5185\u5BB9\u3092\u8A18\u5165\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
+      required: true,
+      maxLength: 255
+    }),
+    onChange: function onChange(e) {
+      setTextarea_count(e.target.value.length);
+    }
+  }), errors.business_memo && react_1["default"].createElement("p", null, "\u304A\u77E5\u3089\u305B\u5185\u5BB9\u3092\u8A18\u5165\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), textarea_count > 255 && react_1["default"].createElement("p", null, "255\u6587\u5B57\u4EE5\u5185\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
     className: "m-storeEdit-businessMemo__container__form__btn m-storeForm__btn"
   }, react_1["default"].createElement(BtnSave_1["default"], {
     InputType: "submit",
@@ -19838,8 +19893,6 @@ var UserAuthContext_1 = __webpack_require__(/*! ../../../../contexts/UserAuthCon
 var BtnSave_1 = __importDefault(__webpack_require__(/*! ../../../atoms/buttons/BtnSave */ "./resources/ts/components/atoms/buttons/BtnSave.tsx"));
 
 var EditImage = function EditImage() {
-  var errorMessage_fileSize_header = null;
-  var errorMessage_fileSize_thumbnail = null;
   var handleSubmit = react_hook_form_1.useForm().handleSubmit;
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
 
@@ -19865,16 +19918,7 @@ var EditImage = function EditImage() {
       thumbnail: e.target.files[0],
       thumbnail_size: e.target.files[0].size
     }));
-  }; // ファイルサイズによるエラーメッセージ
-
-
-  if (images.header_size > 3000000) {
-    errorMessage_fileSize_header = react_1["default"].createElement("p", null, "\u30D5\u30A1\u30A4\u30EB\u306E\u4E0A\u9650\u30B5\u30A4\u30BA3MB\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002\u5727\u7E2E\u3059\u308B\u304B\u3001\u5225\u306E\u753B\u50CF\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002");
-  }
-
-  if (images.thumbnail_size > 3000000) {
-    errorMessage_fileSize_thumbnail = react_1["default"].createElement("p", null, "\u30D5\u30A1\u30A4\u30EB\u306E\u4E0A\u9650\u30B5\u30A4\u30BA3MB\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002\u5727\u7E2E\u3059\u308B\u304B\u3001\u5225\u306E\u753B\u50CF\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002");
-  } // 送信時の機能
+  }; // 送信時の機能
 
 
   var onSubmit = function onSubmit() {
@@ -19922,7 +19966,7 @@ var EditImage = function EditImage() {
     onChange: function onChange(e) {
       return onChangeHeader(e);
     }
-  }), errorMessage_fileSize_header)), react_1["default"].createElement("div", {
+  }), images.header_size > 3000000 && react_1["default"].createElement("p", null, "\u30D5\u30A1\u30A4\u30EB\u306E\u4E0A\u9650\u30B5\u30A4\u30BA3MB\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002\u5727\u7E2E\u3059\u308B\u304B\u3001\u5225\u306E\u753B\u50CF\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
     className: "m-storeForm__item"
   }, react_1["default"].createElement("label", {
     htmlFor: "store_url"
@@ -19935,7 +19979,7 @@ var EditImage = function EditImage() {
     onChange: function onChange(e) {
       return onChangeThumbnail(e);
     }
-  }), errorMessage_fileSize_thumbnail)), react_1["default"].createElement("div", {
+  }), images.thumbnail_size > 3000000 && react_1["default"].createElement("p", null, "\u30D5\u30A1\u30A4\u30EB\u306E\u4E0A\u9650\u30B5\u30A4\u30BA3MB\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002\u5727\u7E2E\u3059\u308B\u304B\u3001\u5225\u306E\u753B\u50CF\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
     className: "m-storeEdit-image__container__form__btn m-storeForm__btn"
   }, react_1["default"].createElement(BtnSave_1["default"], {
     InputType: "submit",
@@ -20219,7 +20263,10 @@ var MenuCreate = function MenuCreate() {
       fileSize = _c[0],
       setFileSize = _c[1];
 
-  var error_fileSize = null; // 送信機能
+  var _d = react_1.useState(0),
+      textarea_count = _d[0],
+      setTextarea_count = _d[1]; // 送信機能
+
 
   var onSubmit = function onSubmit(data) {
     if (fileSize <= 3000000) {
@@ -20235,12 +20282,7 @@ var MenuCreate = function MenuCreate() {
   var onChangeFile = function onChangeFile(e) {
     setFile(e.target.files[0]);
     setFileSize(e.target.files[0].size);
-  }; // ファイルサイズが3MBを超えていた場合のエラーメッセージ
-
-
-  if (fileSize > 3000000) {
-    error_fileSize = react_1["default"].createElement("p", null, "\u30D5\u30A1\u30A4\u30EB\u306E\u4E0A\u9650\u30B5\u30A4\u30BA3MB\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002\u5727\u7E2E\u3059\u308B\u304B\u3001\u5225\u306E\u753B\u50CF\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002");
-  } // store_menusテーブルにレコード作成
+  }; // store_menusテーブルにレコード作成
 
 
   var createMenu = function createMenu(data, fileSubmitted) {
@@ -20334,8 +20376,14 @@ var MenuCreate = function MenuCreate() {
   }, react_1["default"].createElement("textarea", {
     name: "bread_detail",
     id: "bread_detail",
-    ref: register
-  }))), react_1["default"].createElement("div", {
+    placeholder: "50\u6587\u5B57\u4EE5\u5185\u3067\u30D1\u30F3\u306E\u8AAC\u660E\u3092\u8A18\u5165\u3057\u3066\u304F\u3060\u3055\u3044\u3002",
+    ref: register({
+      maxLength: 50
+    }),
+    onChange: function onChange(e) {
+      setTextarea_count(e.target.value.length);
+    }
+  }), textarea_count > 50 && react_1["default"].createElement("p", null, "50\u6587\u5B57\u4EE5\u5185\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
     className: "m-storeEdit-menuCreate__container__form__item m-storeForm__item"
   }, react_1["default"].createElement("label", {
     htmlFor: "bread_img"
@@ -20347,7 +20395,7 @@ var MenuCreate = function MenuCreate() {
     onChange: function onChange(e) {
       return onChangeFile(e);
     }
-  }), error_fileSize)), react_1["default"].createElement("div", {
+  }), fileSize > 3000000 && react_1["default"].createElement("p", null, "\u30D5\u30A1\u30A4\u30EB\u306E\u4E0A\u9650\u30B5\u30A4\u30BA3MB\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002\u5727\u7E2E\u3059\u308B\u304B\u3001\u5225\u306E\u753B\u50CF\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
     className: "m-storeEdit-menuCreate__container__form__btn m-storeForm__btn"
   }, react_1["default"].createElement(BtnReset_1["default"], null), react_1["default"].createElement(BtnSave_1["default"], {
     InputType: "submit",
@@ -20453,9 +20501,11 @@ var MenuList = function MenuList() {
       menu: el
     })), react_1["default"].createElement("div", {
       className: "m-storeEdit-menuList__item__content"
-    }, react_1["default"].createElement("img", {
+    }, el.image_menu ? react_1["default"].createElement("img", {
       src: "storage/store/" + state.uuid + "/menu/item_" + el.bread_order + ".jpg?" + time_current,
       alt: "\u30D1\u30F3\u306E\u753B\u50CF"
+    }) : react_1["default"].createElement("img", {
+      src: "/images/no_image_menu_1.png"
     }), react_1["default"].createElement("div", {
       className: "m-storeEdit-menuList__item__content__text"
     }, react_1["default"].createElement("h4", null, el.bread_name), el.bread_price && react_1["default"].createElement("span", null, el.bread_price, "\u5186"), react_1["default"].createElement("a", null, el.bread_kind), react_1["default"].createElement("p", null, el.bread_detail))));
@@ -20550,10 +20600,10 @@ var StoreEditTable_advantage = function StoreEditTable_advantage() {
           className: "m-storeEdit-spirit__container"
         }, react_1["default"].createElement("div", {
           className: "m-storeEdit-spirit__container__item"
-        }, react_1["default"].createElement("label", null, "\u767B\u9332\u753B\u50CF"), react_1["default"].createElement("img", {
+        }, react_1["default"].createElement("label", null, "\u767B\u9332\u753B\u50CF"), el.image_advantage ? react_1["default"].createElement("img", {
           src: "storage/store/" + state.uuid + "/menu/advantage.jpg?" + time_current,
           alt: "\u3053\u3060\u308F\u308A\u306E\u5199\u771F"
-        })), react_1["default"].createElement("div", {
+        }) : react_1["default"].createElement("p", null, "\u307E\u3060\u767B\u9332\u3055\u308C\u3066\u3044\u307E\u305B\u3093\u3002")), react_1["default"].createElement("div", {
           className: "m-storeEdit-spirit__container__item"
         }, react_1["default"].createElement("label", null, "\u5185\u5BB9"), react_1["default"].createElement("p", null, el.advantage)));
       }
@@ -20660,10 +20710,10 @@ var StoreEditTable_spirit = function StoreEditTable_spirit() {
           className: "m-storeEdit-spirit__container"
         }, react_1["default"].createElement("div", {
           className: "m-storeEdit-spirit__container__item"
-        }, react_1["default"].createElement("label", null, "\u767B\u9332\u753B\u50CF"), react_1["default"].createElement("img", {
+        }, react_1["default"].createElement("label", null, "\u767B\u9332\u753B\u50CF"), el.image_spirit ? react_1["default"].createElement("img", {
           src: "storage/store/" + state.uuid + "/menu/spirit.jpg?" + time_current,
           alt: "\u601D\u3044\u304C\u4F1D\u308F\u308B\u5199\u771F"
-        })), react_1["default"].createElement("div", {
+        }) : react_1["default"].createElement("p", null, "\u307E\u3060\u767B\u9332\u3055\u308C\u3066\u3044\u307E\u305B\u3093\u3002")), react_1["default"].createElement("div", {
           className: "m-storeEdit-spirit__container__item"
         }, react_1["default"].createElement("label", null, "\u5185\u5BB9"), react_1["default"].createElement("p", null, el.spirit)));
       }
@@ -20937,14 +20987,16 @@ var StoreMenu = function StoreMenu(_a) {
     return el.menu_type === 1 && react_1["default"].createElement("div", {
       className: "m-menu__card",
       key: "menu_" + el.id
-    }, react_1["default"].createElement("img", {
+    }, el.image_menu ? react_1["default"].createElement("img", {
       src: "/storage/store/" + el.store_uuid + "/menu/item_" + el.bread_order + ".jpg",
       alt: "\u30E1\u30CB\u30E5\u30FC\u753B\u50CF"
+    }) : react_1["default"].createElement("img", {
+      src: "/images/no_image_menu_1.png"
     }), react_1["default"].createElement("h4", null, el.bread_name), react_1["default"].createElement("div", {
       className: "m-menu__card__labels"
     }, react_1["default"].createElement("span", {
       className: "m-menu__card__labels__kind"
-    }, el.bread_kind), react_1["default"].createElement("span", {
+    }, el.bread_kind), el.bread_price && react_1["default"].createElement("span", {
       className: "m-menu__card__labels__price"
     }, el.bread_price, "\u5186")), react_1["default"].createElement("p", {
       className: "m-menu__card__detail"
@@ -21197,7 +21249,7 @@ var StoreReview = function StoreReview(_a) {
       src: "/storage/user/" + el.user_uuid + "/profile.jpg",
       alt: "\u6295\u7A3F\u8005\u306E\u30A2\u30A4\u30B3\u30F3"
     }) : react_1["default"].createElement("img", {
-      src: "/images/no_image_user.jpg",
+      src: "/images/no_image_user.png",
       alt: "\u6295\u7A3F\u8005\u306E\u30A2\u30A4\u30B3\u30F3"
     }), react_1["default"].createElement("div", {
       className: "m-review__item__content"
@@ -21352,19 +21404,23 @@ var StoreSpirit = function StoreSpirit(_a) {
       key: "spirit_" + el.id
     }, el.menu_type === 2 && react_1["default"].createElement("div", {
       className: "m-spirit__container__section"
-    }, react_1["default"].createElement("h3", null, "\u304A\u5E97\u306E\u3053\u3060\u308F\u308A"), react_1["default"].createElement("div", {
+    }, react_1["default"].createElement("h3", null, "\u304A\u5E97\u306E\u3053\u3060\u308F\u308A"), el.image_advantage ? react_1["default"].createElement("div", {
       className: "m-spirit__container__section__content"
-    }, react_1["default"].createElement("img", {
+    }, el.image_advantage && react_1["default"].createElement("img", {
       src: "/storage/store/" + el.store_uuid + "/menu/advantage.jpg",
       alt: "\u3053\u3060\u308F\u308A\u306E\u5199\u771F"
-    }), react_1["default"].createElement("p", null, el.advantage))), el.menu_type === 3 && react_1["default"].createElement("div", {
+    }), react_1["default"].createElement("p", null, el.advantage)) : react_1["default"].createElement("div", {
+      className: "m-spirit__container__section__content noImage"
+    }, react_1["default"].createElement("p", null, el.advantage))), el.menu_type === 3 && react_1["default"].createElement("div", {
       className: "m-spirit__container__section"
-    }, react_1["default"].createElement("h3", null, "\u304A\u5E97\u306E\u601D\u3044"), react_1["default"].createElement("div", {
+    }, react_1["default"].createElement("h3", null, "\u304A\u5E97\u306E\u601D\u3044"), el.image_spirit ? react_1["default"].createElement("div", {
       className: "m-spirit__container__section__content"
-    }, react_1["default"].createElement("img", {
+    }, el.image_spirit && react_1["default"].createElement("img", {
       src: "/storage/store/" + el.store_uuid + "/menu/spirit.jpg",
       alt: "\u601D\u3044\u304C\u4F1D\u308F\u308B\u5199\u771F"
-    }), react_1["default"].createElement("p", null, el.spirit))));
+    }), react_1["default"].createElement("p", null, el.spirit)) : react_1["default"].createElement("div", {
+      className: "m-spirit__container__section__content noImage"
+    }, react_1["default"].createElement("p", null, el.spirit))));
   }));
 };
 
@@ -21745,7 +21801,7 @@ var UserProf = function UserProf() {
     src: "/storage/user/" + state.uuid + "/profile.jpg",
     alt: "\u30D7\u30ED\u30D5\u30A3\u30FC\u30EB\u753B\u50CF"
   }) : react_1["default"].createElement("img", {
-    src: "/images/no_image.jpg",
+    src: "/images/no_image_user.png",
     alt: "\u30D7\u30ED\u30D5\u30A3\u30FC\u30EB\u753B\u50CF"
   }), react_1["default"].createElement("div", {
     className: "m-user-prof__container__content__text"
@@ -22481,7 +22537,7 @@ var UserTable_review = function UserTable_review() {
       src: "/storage/store/" + el.store_uuid + "/thumbnail.jpg",
       alt: "\u5E97\u8217\u306E\u30B5\u30E0\u30CD\u30A4\u30EB"
     }) : react_1["default"].createElement("img", {
-      src: "/images/no_image.jpg",
+      src: "/images/no_image_thumbnail.png",
       alt: "\u5E97\u8217\u306E\u30B5\u30E0\u30CD\u30A4\u30EB"
     }), react_1["default"].createElement("div", {
       className: "m-userTable-review__item__container__content"
@@ -23954,9 +24010,12 @@ var StorePage = function StorePage() {
     className: "p-store__container"
   }, react_1["default"].createElement("div", {
     className: "p-store__container__img"
-  }, react_1["default"].createElement("img", {
+  }, storeInfo['header'] ? react_1["default"].createElement("img", {
     src: "/storage/store/" + user_uuid + "/header.jpg",
     alt: "\u30C8\u30C3\u30D7\u753B\u50CF"
+  }) : react_1["default"].createElement("img", {
+    src: "/images/no_image_header.png",
+    alt: "\u5E97\u8217\u30D8\u30C3\u30C0\u30FC"
   })), react_1["default"].createElement("div", {
     className: "p-store__container__content"
   }, react_1["default"].createElement("div", {

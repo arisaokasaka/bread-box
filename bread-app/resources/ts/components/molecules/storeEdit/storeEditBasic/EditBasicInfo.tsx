@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { UserAuthContext } from '../../../../contexts/UserAuthContext';
@@ -8,8 +8,8 @@ import BtnSave from '../../../atoms/buttons/BtnSave';
 const EditBasicInfo: React.FC = () => {
     const { register, handleSubmit, errors } = useForm();
     const { state } = useContext(UserAuthContext);
-    const { stateInfo, dispatch } = useContext(StoreInfoContext);
-    
+    const { stateInfo, dispatch } = useContext(StoreInfoContext);    
+    const [ textarea_count, setTextarea_count ] = useState(0);
     let StoreInfo = {
         name: '',
         address: '',
@@ -21,7 +21,7 @@ const EditBasicInfo: React.FC = () => {
     if(stateInfo.storeInfo){
         StoreInfo = stateInfo.storeInfo;
     }
-    
+
     //送信時の動作
     const onSubmit = (data) => {
         data['user_uuid'] = state.uuid;
@@ -103,7 +103,13 @@ const EditBasicInfo: React.FC = () => {
                         <label htmlFor="store_message">店舗説明</label>
                         <div className="m-storeEdit-basic__container__form__item__input m-storeForm__item__input">
                             <span>お店のページの最初に表示される部分です。</span>
-                            <textarea name="message" id="store_message" defaultValue={StoreInfo.message} ref={ register} />
+                            <textarea name="message"
+                                id="store_message"
+                                defaultValue={StoreInfo.message}
+                                ref={register({maxLength: 255})}
+                                onChange={(e)=>{setTextarea_count(e.target.value.length)}}
+                            />
+                            {textarea_count > 255 && <p>255文字以内で入力してください。</p>}
                         </div>
                     </div>
                     <div className="m-storeEdit-basic__container__form__btn m-storeForm__btn">

@@ -5,8 +5,6 @@ import { UserAuthContext } from '../../../../contexts/UserAuthContext';
 import BtnSave from '../../../atoms/buttons/BtnSave';
 
 const EditImage: React.FC = () => {
-    let errorMessage_fileSize_header: any = null;
-    let errorMessage_fileSize_thumbnail: any = null;
     const { handleSubmit } = useForm();
     const { state } = useContext(UserAuthContext);
     const [ images, setImages ] = useState({
@@ -31,15 +29,6 @@ const EditImage: React.FC = () => {
             thumbnail: e.target.files[0],
             thumbnail_size: e.target.files[0].size
         })
-    }
-
-    // ファイルサイズによるエラーメッセージ
-    if(images.header_size > 3000000){
-        errorMessage_fileSize_header = <p>ファイルの上限サイズ3MBを超えています。圧縮するか、別の画像を選択してください。</p>
-    }
-
-    if(images.thumbnail_size > 3000000){
-        errorMessage_fileSize_thumbnail = <p>ファイルの上限サイズ3MBを超えています。圧縮するか、別の画像を選択してください。</p>
     }
 
     // 送信時の機能
@@ -80,7 +69,7 @@ const EditImage: React.FC = () => {
                         <div className="m-storeForm__item__input">
                             <span>店舗ページの上部に表示される画像です。</span>
                             <input type="file" name="img_header" accept="image/*" onChange={(e)=>onChangeHeader(e)}/>
-                            {errorMessage_fileSize_header}
+                            {images.header_size > 3000000 && <p>ファイルの上限サイズ3MBを超えています。圧縮するか、別の画像を選択してください。</p>}
                         </div>
                     </div>
                     <div className="m-storeForm__item">
@@ -88,7 +77,7 @@ const EditImage: React.FC = () => {
                         <div className="m-storeForm__item__input">
                             <span>検索ページのトップに表示される画像です。</span>
                             <input type="file" name="img_thumbnail" accept="image/*" onChange={(e)=>onChangeThumbnail(e)}/>
-                            {errorMessage_fileSize_thumbnail}
+                            {images.thumbnail_size > 3000000 && <p>ファイルの上限サイズ3MBを超えています。圧縮するか、別の画像を選択してください。</p>}
                         </div>
                     </div>
                     <div className="m-storeEdit-image__container__form__btn m-storeForm__btn">

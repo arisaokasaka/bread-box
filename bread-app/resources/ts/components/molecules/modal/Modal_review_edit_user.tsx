@@ -14,6 +14,7 @@ type ReviewInfoProps = ({
 
 const ModalReviewEdit_user: React.FC<ReviewInfoProps> = ({comment, review_uuid, star, index}) =>{
     const [ isModalOpen, setModal ] = useState(false);
+    const [ textarea_count, setTextarea_count ] = useState(0);
     const { register, handleSubmit, errors } = useForm();
     const customStyles = {
         content : {
@@ -70,7 +71,6 @@ const ModalReviewEdit_user: React.FC<ReviewInfoProps> = ({comment, review_uuid, 
                     <label htmlFor="star" className="a-label-required__red--fitContent">5段階で評価してください。</label>
                     <p>5が最も高い評価となります。</p>
                     <select name="star" id="star" defaultValue={star} ref={register({required: true})}> 
-                        <option hidden>選択してください</option>
                         <option value="5">5</option>
                         <option value="4">4</option>
                         <option value="3">3</option>
@@ -80,8 +80,16 @@ const ModalReviewEdit_user: React.FC<ReviewInfoProps> = ({comment, review_uuid, 
                     {errors.star && <p>評価は必須です。</p>}
 
                     <label htmlFor="comment">コメント</label>
-                    <textarea name="comment" id="comment" defaultValue={comment} placeholder="[任意]レビューや感想を記入してください。" ref={register}/>
-                    
+                    <textarea
+                        name="comment"
+                        id="comment"
+                        defaultValue={comment}
+                        placeholder="[任意]レビューや感想を記入してください。"
+                        ref={register({maxLength: 255})}
+                        onChange={(e)=>{setTextarea_count(e.target.value.length)}}
+                    />
+                    {textarea_count > 255 && <p>255文字以内で入力してください。</p>}
+
                     <input type="submit" value="更新する"/>
                 </form>
             </Modal>

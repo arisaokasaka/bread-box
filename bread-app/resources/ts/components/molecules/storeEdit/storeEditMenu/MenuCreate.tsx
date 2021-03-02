@@ -13,7 +13,7 @@ const MenuCreate: React.FC = () =>  {
     const { dispatch } = useContext(StoreInfoContext);
     const [ file, setFile ] = useState(null);
     const [ fileSize, setFileSize ] = useState(0);
-    let error_fileSize: any = null;
+    const [ textarea_count, setTextarea_count ] = useState(0);
 
     // 送信機能
     const onSubmit = (data) => {
@@ -30,13 +30,6 @@ const MenuCreate: React.FC = () =>  {
     const onChangeFile = (e) => {
         setFile(e.target.files[0]);
         setFileSize(e.target.files[0].size);
-    }
-
-    // ファイルサイズが3MBを超えていた場合のエラーメッセージ
-    if(fileSize > 3000000){
-        error_fileSize = (
-            <p>ファイルの上限サイズ3MBを超えています。圧縮するか、別の画像を選択してください。</p>
-        );
     }
 
     // store_menusテーブルにレコード作成
@@ -92,7 +85,7 @@ const MenuCreate: React.FC = () =>  {
                         <div className="m-storeForm__item__input">
                             <select name="bread_kind" id="bread_kind" ref={register({required: true})}>
                                 {bread_kinds.bread_kinds.map((bread)=>(
-                                    <option value={bread.name} key = {bread.id}>{bread.name}</option>
+                                    <option value={bread.name} key={bread.id}>{bread.name}</option>
                                 ))}
                             </select>
                             {errors.bread_kind && <p>パンの種類は必須です。</p>}
@@ -107,14 +100,21 @@ const MenuCreate: React.FC = () =>  {
                     <div className="m-storeEdit-menuCreate__container__form__item m-storeForm__item">
                         <label htmlFor="bread_detail">詳細・説明</label>
                         <div className="m-storeForm__item__input">
-                            <textarea name="bread_detail" id="bread_detail" ref={register}/>
+                            <textarea
+                                name="bread_detail"
+                                id="bread_detail"
+                                placeholder="50文字以内でパンの説明を記入してください。"
+                                ref={register({maxLength: 50})}
+                                onChange={(e)=>{setTextarea_count(e.target.value.length)}}
+                            />
+                            {textarea_count > 50 && <p>50文字以内で入力してください。</p>}
                         </div>
                     </div>
                     <div className="m-storeEdit-menuCreate__container__form__item m-storeForm__item">
                         <label htmlFor="bread_img">画像アップロード</label>
                         <div className="m-storeForm__item__input">
                             <input type="file" accept="image/*" onChange={(e)=>onChangeFile(e)}/>
-                            {error_fileSize}
+                            {fileSize > 3000000 && <p>ファイルの上限サイズ3MBを超えています。圧縮するか、別の画像を選択してください。</p>}
                         </div>
                     </div>
                     <div className="m-storeEdit-menuCreate__container__form__btn m-storeForm__btn">

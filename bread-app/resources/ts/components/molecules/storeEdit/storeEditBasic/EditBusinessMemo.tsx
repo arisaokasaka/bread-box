@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { UserAuthContext } from '../../../../contexts/UserAuthContext';
@@ -6,6 +6,7 @@ import { StoreInfoContext } from '../../../../contexts/StoreInfoContext';
 import BtnSave from '../../../atoms/buttons/BtnSave';
 
 const EditBusinessMemo: React.FC = () => {
+    const [ textarea_count, setTextarea_count ] = useState(0);
     const { register, handleSubmit, errors} = useForm();
     const { state } = useContext(UserAuthContext);
     const { stateInfo, dispatch } = useContext(StoreInfoContext);
@@ -56,8 +57,14 @@ const EditBusinessMemo: React.FC = () => {
                         <label>お知らせ内容</label>
                         <div className="m-storeForm__item__input">
                             <span>【記載例】<br/>定休日：第3水曜日<br/>営業時間：月～水 9時～19時 / 木～土 8時～13時</span>
-                            <textarea name="business_memo" defaultValue={StoreInfo.business_memo} ref={register({required: true})} />
+                            <textarea
+                                name="business_memo"
+                                defaultValue={StoreInfo.business_memo}
+                                ref={register({required: true, maxLength: 255})}
+                                onChange={(e)=>{setTextarea_count(e.target.value.length)}}
+                            />
                             {errors.business_memo && <p>お知らせ内容を記入してください。</p>}
+                            {textarea_count > 255 && <p>255文字以内で入力してください。</p>}
                         </div>
                     </div>
                     <div className="m-storeEdit-businessMemo__container__form__btn m-storeForm__btn">

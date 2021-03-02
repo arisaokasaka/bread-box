@@ -97,8 +97,7 @@ class StoreMenu extends Model
      */
     public function update_spirit(object $request){
         return $this
-        ->where('store_uuid', '=', $request['store_uuid'])
-        ->where('menu_type', '=', $request['menu_type'])
+        ->where('uuid', '=', $request['uuid'])
         ->update([
             'advantage' => $request['advantage'],
             'spirit' => $request['spirit']
