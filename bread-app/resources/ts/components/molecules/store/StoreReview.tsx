@@ -152,7 +152,7 @@ const StoreReview: React.FC<ReviewProps> = ({store_uuid}) => {
                     <div className ="m-review__item" key={"review_" + sort + index}>
                         {el.image_profile ? 
                         <img src={"/storage/user/"+el.user_uuid+"/profile.jpg"} alt="投稿者のアイコン"/>
-                        : <img src="/images/no_image_user.jpg" alt="投稿者のアイコン"/>}
+                        : <img src="/images/no_image_user.png" alt="投稿者のアイコン"/>}
                         <div className ="m-review__item__content">
                             <ScoreUser
                                 score={el.star}
