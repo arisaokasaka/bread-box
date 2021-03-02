@@ -1,5 +1,7 @@
 .p-user {
-    @include marginContent;
+    margin-top: $header-height;
+    padding-top: $mp-xs;
+    padding-bottom: $mp-md;
 
     &__container {
         @include content-width;

@@ -33,16 +33,19 @@ const StoreList: React.FC<StoreProps> = ({storeList, sortType}) => {
                             <div className ="m-store-list__item--pc__images__main">
                                 {el.thumbnail ? 
                                 <img src={"/storage/store/" + el.user_uuid + "/thumbnail.jpg"} alt="パンのメイン画像"/> 
-                                : <img src="/images/no_image.jpg" alt="パンのメイン画像"/>}
+                                : <img src="/images/no_image_thumbnail.png" alt="パンのメイン画像"/>}
                             </div>
-                            <div className ="m-store-list__item--pc__images__sub">
-                                {el.menu1 &&
-                                 <img src={"/storage/store/" + el.user_uuid + "/menu/item_1.jpg"} alt="パンのサブ画像"/>}
-                                {el.menu2 &&
-                                <img src={"/storage/store/" + el.user_uuid + "/menu/item_2.jpg"} alt="パンのサブ画像"/>}
-                                {el.menu3 &&
-                                <img src={"/storage/store/" + el.user_uuid + "/menu/item_3.jpg"} alt="パンのサブ画像"/>}
-                            </div>
+                            {el.menu1 &&
+                                <div className ="m-store-list__item--pc__images__sub">
+                                    <img src={"/storage/store/" + el.user_uuid + "/menu/item_1.jpg"} alt="パンのサブ画像"/>
+                                    {el.menu2 ?
+                                    <img src={"/storage/store/" + el.user_uuid + "/menu/item_2.jpg"} alt="パンのサブ画像"/>
+                                    : <img src="/images/no_image_menu_1.png" alt="パンのメイン画像"/>}
+                                    {el.menu3 ?
+                                    <img src={"/storage/store/" + el.user_uuid + "/menu/item_3.jpg"} alt="パンのサブ画像"/>
+                                    : <img src="/images/no_image_menu_2.png" alt="パンのメイン画像"/>}
+                                </div>
+                            }
                         </div>
                         <div className ="m-store-list__item__container">
                             <div className ="m-store-list__item__container__buttons">
@@ -65,11 +68,14 @@ const StoreList: React.FC<StoreProps> = ({storeList, sortType}) => {
                                 <div className ="m-store-list__item--mobile__images">
                                     {el.thumbnail ? 
                                     <img src={"/storage/store/" + el.user_uuid + "/thumbnail.jpg"} alt="パンのメイン画像"/> 
-                                    : <img src="/images/no_image.jpg" alt="パンのメイン画像"/>}
-                                    {el.menu1 &&
-                                    <img src={"/storage/store/" + el.user_uuid + "/menu/item_1.jpg"} alt="パンのサブ画像"/>}
-                                    {el.menu2 &&
-                                    <img src={"/storage/store/" + el.user_uuid + "/menu/item_2.jpg"} alt="パンのサブ画像"/>}
+                                    : <img src="/images/no_image_thumbnail.png" alt="パンのメイン画像"/>}
+                                    {el.menu1 ?
+                                    <img src={"/storage/store/" + el.user_uuid + "/menu/item_1.jpg"} alt="パンのサブ画像"/>
+                                    : <img src="/images/no_image_menu_1.png" alt="パンのサブ画像"/>}
+                                    {el.menu2 ?
+                                    <img src={"/storage/store/" + el.user_uuid + "/menu/item_2.jpg"} alt="パンのサブ画像"/>
+                                    : <img src="/images/no_image_menu_2.png" alt="パンのサブ画像"/>}
+
                                 </div>
                             </div>
                             {el.message && <p className ="m-store-list__item__container__explanation">{el.message}</p>}

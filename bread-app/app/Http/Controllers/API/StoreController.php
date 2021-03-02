@@ -24,6 +24,7 @@ class StoreController extends Controller
      */
     const storage_path = 'public/store/';
     const storage_thumbnail = '/thumbnail.jpg';
+    const storage_header = '/header.jpg';
     const storage_menu = '/menu/item_';
     public function search_store(Request $request) {
         $store = new Store();
@@ -166,6 +167,7 @@ class StoreController extends Controller
         $store = new Store();
         $user_type = $request->input('user_type');
         $storeInfo = $store->index_storeInfo($request->input('store_uuid'));
+        $storeInfo['header'] = Storage::exists(self::storage_path . $request->input('store_uuid') . self::storage_header);
 
         if($user_type==="user"){
             $user = new User();

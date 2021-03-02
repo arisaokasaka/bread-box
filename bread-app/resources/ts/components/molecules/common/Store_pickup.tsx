@@ -31,7 +31,7 @@ const Store_pickup: React.FC = () => {
                         <Link to={"/store/"+el.user_uuid} className="m-store-pickup__list__item" key={"pickup_"+index}>
                             {el.thumbnail ? 
                             <img src={"/storage/store/" + el.user_uuid + "/thumbnail.jpg"} alt="店舗画像"/> 
-                            : <img src="/images/no_image.jpg" alt="店舗画像"/>}
+                            : <img src="/images/no_image_thumbnail.png" alt="店舗画像"/>}
                             <p>{el.name}</p>
                         </Link>
                     );

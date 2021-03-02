@@ -67,7 +67,7 @@ const UserProf: React.FC = () => {
                 <div className = "m-user-prof__container__content">
                     {userInfo.profile ? 
                     <img src={"/storage/user/"+state.uuid+"/profile.jpg"} alt="プロフィール画像"/>
-                    : <img src="/images/no_image.jpg" alt="プロフィール画像"/>}
+                    : <img src="/images/no_image_user.png" alt="プロフィール画像"/>}
                     <div className = "m-user-prof__container__content__text">
                         <h3>{userInfo.name}</h3>
                         <div className = "m-user-prof__container__content__text__item">
