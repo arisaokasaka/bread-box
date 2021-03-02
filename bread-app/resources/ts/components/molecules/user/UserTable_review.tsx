@@ -157,7 +157,7 @@ const UserTable_review: React.FC = () => {
                         <div className ="m-userTable-review__item__container">
                             {el.thumbnail ? 
                             <img src={"/storage/store/"+el.store_uuid+"/thumbnail.jpg"} alt="店舗のサムネイル"/>
-                            : <img src="/images/no_image.jpg" alt="店舗のサムネイル"/>}
+                            : <img src="/images/no_image_thumbnail.png" alt="店舗のサムネイル"/>}
                             <div className ="m-userTable-review__item__container__content">
                                 <Link to={"/store/"+el.store_uuid}>{el.store_name}</Link>
                                 <ScoreUser
