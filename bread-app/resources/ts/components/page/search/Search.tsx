@@ -4,8 +4,8 @@ import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import Search_sidebar from '../../molecules/search/Search_sidebar';
-import Store_pickup from '../../molecules/Store_pickup';
-import StoreList from '../../molecules/store/StoreList';
+import Store_pickup from '../../molecules/common/Store_pickup';
+import StoreList from '../../molecules/common/StoreList';
 
 const Search: React.FC = () => {
     const location = useLocation();

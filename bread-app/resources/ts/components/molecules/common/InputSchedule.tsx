@@ -1,5 +1,5 @@
 import React from 'react';
-import week from '../../info/Week';
+import week from '../../../info/Week';
 
 type DefaultProps = ({
     Info: any;

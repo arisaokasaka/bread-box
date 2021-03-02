@@ -16602,10 +16602,628 @@ exports.default = Btn_interested;
 
 /***/ }),
 
-/***/ "./resources/ts/components/atoms/modal/Modal_confirmDelete.tsx":
-/*!*********************************************************************!*\
-  !*** ./resources/ts/components/atoms/modal/Modal_confirmDelete.tsx ***!
-  \*********************************************************************/
+/***/ "./resources/ts/components/layout/Footer.tsx":
+/*!***************************************************!*\
+  !*** ./resources/ts/components/layout/Footer.tsx ***!
+  \***************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var Footer = function Footer() {
+  return react_1["default"].createElement("div", {
+    className: "l-footer"
+  }, react_1["default"].createElement("span", null, "\xA9\xA0Bread Box"));
+};
+
+exports.default = Footer;
+
+/***/ }),
+
+/***/ "./resources/ts/components/layout/Navbar.tsx":
+/*!***************************************************!*\
+  !*** ./resources/ts/components/layout/Navbar.tsx ***!
+  \***************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+
+var Searchbar_1 = __importDefault(__webpack_require__(/*! ../atoms/Searchbar */ "./resources/ts/components/atoms/Searchbar.tsx"));
+
+var BtnSearch_icon_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnSearch_icon */ "./resources/ts/components/atoms/buttons/BtnSearch_icon.tsx"));
+
+var BtnMypage_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnMypage */ "./resources/ts/components/atoms/buttons/BtnMypage.tsx"));
+
+var BtnLogin_icon_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnLogin_icon */ "./resources/ts/components/atoms/buttons/BtnLogin_icon.tsx"));
+
+var BtnStorePage_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnStorePage */ "./resources/ts/components/atoms/buttons/BtnStorePage.tsx"));
+
+var BtnStoreManage_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnStoreManage */ "./resources/ts/components/atoms/buttons/BtnStoreManage.tsx"));
+
+var Logo_1 = __importDefault(__webpack_require__(/*! ../atoms/Logo */ "./resources/ts/components/atoms/Logo.tsx"));
+
+var UserAuthContext_1 = __webpack_require__(/*! ../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
+
+function NavBar() {
+  var _a = react_1.useContext(UserAuthContext_1.UserAuthContext),
+      state = _a.state,
+      dispatch = _a.dispatch;
+
+  react_1.useEffect(function () {
+    console.log('effect-navbar');
+    getUser();
+  }, []); //認証ユーザー取得
+
+  var getUser = function getUser() {
+    axios_1["default"].get("/api/user").then(function (res) {
+      console.log('[getUser]ログイン済み');
+      console.log(res.data);
+
+      if (res.data.type_user === 'user') {
+        dispatch({
+          type: 'setUser',
+          payload: res.data.uuid
+        });
+      } else if (res.data.type_user === 'store') {
+        dispatch({
+          type: 'setStore',
+          payload: res.data.uuid
+        });
+      }
+    })["catch"](function (err) {
+      console.log('[getUser]ログインしてません');
+    });
+  };
+
+  var navPC;
+  var navMobile;
+
+  if (state.uuid) {
+    navPC = react_1["default"].createElement("nav", {
+      className: "l-navbar__container--pc__content__nav--loggedin"
+    }, react_1["default"].createElement(BtnMypage_1["default"], null), react_1["default"].createElement(BtnStorePage_1["default"], null), react_1["default"].createElement(BtnStoreManage_1["default"], null));
+    navMobile = react_1["default"].createElement("nav", {
+      className: "l-navbar__container--mobile__nav"
+    }, react_1["default"].createElement(BtnSearch_icon_1["default"], null), react_1["default"].createElement(BtnMypage_1["default"], null), react_1["default"].createElement(BtnStorePage_1["default"], null), react_1["default"].createElement(BtnStoreManage_1["default"], null));
+  } else {
+    navPC = react_1["default"].createElement("nav", {
+      className: "l-navbar__container--pc__content__nav--loggedout"
+    }, react_1["default"].createElement("ul", null, react_1["default"].createElement("li", null, react_1["default"].createElement(react_router_dom_1.Link, {
+      to: "/register_user"
+    }, "\u7121\u6599\u4F1A\u54E1\u767B\u9332")), react_1["default"].createElement("li", null, react_1["default"].createElement(react_router_dom_1.Link, {
+      to: "/login_user"
+    }, "\u30ED\u30B0\u30A4\u30F3"))));
+    navMobile = react_1["default"].createElement("nav", {
+      className: "l-navbar__container--mobile__nav"
+    }, react_1["default"].createElement(BtnSearch_icon_1["default"], null), react_1["default"].createElement(BtnLogin_icon_1["default"], null));
+  }
+
+  return react_1["default"].createElement("div", {
+    className: "l-navbar"
+  }, react_1["default"].createElement("div", {
+    className: "l-navbar__container--pc"
+  }, react_1["default"].createElement(Logo_1["default"], null), react_1["default"].createElement("div", {
+    className: "l-navbar__container--pc__content"
+  }, react_1["default"].createElement(Searchbar_1["default"], {
+    text: null
+  }), react_1["default"].createElement("div", {
+    className: "l-navbar__container--pc__content__nav"
+  }, navPC))), react_1["default"].createElement("div", {
+    className: "l-navbar__container--mobile"
+  }, react_1["default"].createElement(Logo_1["default"], null), navMobile));
+}
+
+exports.default = NavBar;
+
+/***/ }),
+
+/***/ "./resources/ts/components/molecules/common/InputSchedule.tsx":
+/*!********************************************************************!*\
+  !*** ./resources/ts/components/molecules/common/InputSchedule.tsx ***!
+  \********************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var Week_1 = __importDefault(__webpack_require__(/*! ../../../info/Week */ "./resources/ts/info/Week.ts"));
+
+var InputSchedule = function InputSchedule(_a) {
+  var Info = _a.Info;
+  var Week = Week_1["default"].week;
+  var defaultData = {
+    monday: '',
+    tuesday: '',
+    wednesday: '',
+    thursday: '',
+    friday: '',
+    saturday: '',
+    sunday: ''
+  }; // 営業日・営業時間情報のJSONをObjectに変換
+
+  if (Info.business_day) {
+    defaultData = JSON.parse(Info.business_day);
+  } // 既に保存されている営業時間を挿入する
+
+
+  var defaultHour = function defaultHour(day, _int) {
+    switch (day) {
+      case 'monday':
+        if (defaultData.monday) {
+          return defaultData.monday[_int];
+        }
+
+        break;
+
+      case 'tuesday':
+        if (defaultData.tuesday) {
+          return defaultData.tuesday[_int];
+        }
+
+        break;
+
+      case 'wednesday':
+        if (defaultData.wednesday) {
+          return defaultData.wednesday[_int];
+        }
+
+        break;
+
+      case 'thursday':
+        if (defaultData.thursday) {
+          return defaultData.thursday[_int];
+        }
+
+        break;
+
+      case 'friday':
+        if (defaultData.friday) {
+          return defaultData.friday[_int];
+        }
+
+        break;
+
+      case 'saturday':
+        if (defaultData.saturday) {
+          return defaultData.saturday[_int];
+        }
+
+        break;
+
+      case 'sunday':
+        if (defaultData.sunday) {
+          return defaultData.sunday[_int];
+        }
+
+        break;
+    }
+  }; // 営業時間の表示・非表示切り替え（activeクラスで管理）
+
+
+  var toggleClass = function toggleClass(targetClass) {
+    var classInfo = document.getElementsByClassName(targetClass)[0];
+
+    if (classInfo.className.includes('active')) {
+      classInfo.classList.remove('active');
+    } else {
+      classInfo.className += ' active';
+    }
+  };
+
+  return react_1["default"].createElement("div", {
+    className: "m-inputSchedule__week"
+  }, Week.map(function (day) {
+    // 既に営業時間が入力されていた場合、デフォルトで営業時間表示（activeクラス付与）
+    var defaultActiveClass;
+
+    if (defaultData[day.id]) {
+      defaultActiveClass = " active";
+    } else {
+      defaultActiveClass = "";
+    }
+
+    return react_1["default"].createElement("div", {
+      className: "m-inputSchedule__week__day",
+      key: day.id + "__schedule"
+    }, react_1["default"].createElement("div", {
+      className: "m-inputSchedule__week__day__heading"
+    }, react_1["default"].createElement("input", {
+      type: "checkbox",
+      id: day.id + "_checked",
+      defaultChecked: defaultData[day.id] ? true : false
+    }), react_1["default"].createElement("label", {
+      htmlFor: day.id + "_checked",
+      onClick: function onClick() {
+        return toggleClass(day["class"]);
+      }
+    }, day.name)), react_1["default"].createElement("div", {
+      className: "m-inputSchedule__week__day__hours " + day["class"] + defaultActiveClass
+    }, react_1["default"].createElement("input", {
+      type: "time",
+      name: day.id + "_open",
+      className: day.id + "_open",
+      defaultValue: defaultHour(day.id, 0)
+    }), react_1["default"].createElement("span", null, "\xA0\uFF5E\xA0"), react_1["default"].createElement("input", {
+      type: "time",
+      name: day.id + "_close",
+      className: day.id + "_close",
+      defaultValue: defaultHour(day.id, 1)
+    })));
+  }));
+};
+
+exports.default = InputSchedule;
+
+/***/ }),
+
+/***/ "./resources/ts/components/molecules/common/StoreList.tsx":
+/*!****************************************************************!*\
+  !*** ./resources/ts/components/molecules/common/StoreList.tsx ***!
+  \****************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var Btn_favorite_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/Btn_favorite */ "./resources/ts/components/atoms/buttons/Btn_favorite.tsx"));
+
+var Btn_interested_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/Btn_interested */ "./resources/ts/components/atoms/buttons/Btn_interested.tsx"));
+
+var Schedule_1 = __importDefault(__webpack_require__(/*! ../../atoms/Schedule */ "./resources/ts/components/atoms/Schedule.tsx"));
+
+var Score_1 = __importDefault(__webpack_require__(/*! ../../atoms/Score */ "./resources/ts/components/atoms/Score.tsx"));
+
+var react_paginate_1 = __importDefault(__webpack_require__(/*! react-paginate */ "./node_modules/react-paginate/dist/react-paginate.js"));
+
+var StoreList = function StoreList(_a) {
+  var storeList = _a.storeList,
+      sortType = _a.sortType;
+  var history = react_router_dom_1.useHistory();
+
+  var _b = react_1.useState(0),
+      offset = _b[0],
+      setOffset = _b[1];
+
+  var perPage = 10;
+
+  var handlePageChange = function handlePageChange(data) {
+    var page_number = data['selected'];
+    setOffset(page_number * perPage);
+  };
+
+  return react_1["default"].createElement("div", {
+    className: "m-store-list"
+  }, storeList.slice(offset, offset + perPage).map(function (el, index) {
+    return el && react_1["default"].createElement("div", {
+      className: "m-store-list__item",
+      key: sortType + "_" + index
+    }, react_1["default"].createElement("div", {
+      className: "m-store-list__item--pc",
+      onClick: function onClick() {
+        return history.push("/store/" + el.user_uuid);
+      }
+    }, react_1["default"].createElement("div", {
+      className: "m-store-list__item--pc__images__main"
+    }, el.thumbnail ? react_1["default"].createElement("img", {
+      src: "/storage/store/" + el.user_uuid + "/thumbnail.jpg",
+      alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
+    }) : react_1["default"].createElement("img", {
+      src: "/images/no_image.jpg",
+      alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
+    })), react_1["default"].createElement("div", {
+      className: "m-store-list__item--pc__images__sub"
+    }, el.menu1 && react_1["default"].createElement("img", {
+      src: "/storage/store/" + el.user_uuid + "/menu/item_1.jpg",
+      alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
+    }), el.menu2 && react_1["default"].createElement("img", {
+      src: "/storage/store/" + el.user_uuid + "/menu/item_2.jpg",
+      alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
+    }), el.menu3 && react_1["default"].createElement("img", {
+      src: "/storage/store/" + el.user_uuid + "/menu/item_3.jpg",
+      alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
+    }))), react_1["default"].createElement("div", {
+      className: "m-store-list__item__container"
+    }, react_1["default"].createElement("div", {
+      className: "m-store-list__item__container__buttons"
+    }, react_1["default"].createElement(Btn_favorite_1["default"], {
+      store_uuid: el.user_uuid,
+      favorite_checked: el.favorite_checked,
+      index: index
+    }), react_1["default"].createElement(Btn_interested_1["default"], {
+      store_uuid: el.user_uuid,
+      interested_checked: el.interested_checked,
+      index: index
+    })), react_1["default"].createElement("div", {
+      className: "m-store-list__item__container__name",
+      onClick: function onClick() {
+        return history.push("/store/" + el.user_uuid);
+      }
+    }, react_1["default"].createElement("h2", {
+      className: "hover-colorChange"
+    }, el.name)), react_1["default"].createElement("p", {
+      className: "m-store-list__item__container__access"
+    }, el.address), react_1["default"].createElement("div", {
+      className: "m-store-list__item--mobile",
+      onClick: function onClick() {
+        return history.push("/store/" + el.user_uuid);
+      }
+    }, react_1["default"].createElement("div", {
+      className: "m-store-list__item--mobile__images"
+    }, el.thumbnail ? react_1["default"].createElement("img", {
+      src: "/storage/store/" + el.user_uuid + "/thumbnail.jpg",
+      alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
+    }) : react_1["default"].createElement("img", {
+      src: "/images/no_image.jpg",
+      alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
+    }), el.menu1 && react_1["default"].createElement("img", {
+      src: "/storage/store/" + el.user_uuid + "/menu/item_1.jpg",
+      alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
+    }), el.menu2 && react_1["default"].createElement("img", {
+      src: "/storage/store/" + el.user_uuid + "/menu/item_2.jpg",
+      alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
+    }))), el.message && react_1["default"].createElement("p", {
+      className: "m-store-list__item__container__explanation"
+    }, el.message), react_1["default"].createElement(Schedule_1["default"], {
+      info: el
+    }), react_1["default"].createElement(Score_1["default"], {
+      scoreInfo: el.scoreInfo
+    })));
+  }), react_1["default"].createElement(react_paginate_1["default"], {
+    previousLabel: '<',
+    nextLabel: '>',
+    breakLabel: '...',
+    pageCount: Math.ceil(storeList.length / perPage),
+    marginPagesDisplayed: 2,
+    pageRangeDisplayed: 4,
+    onPageChange: handlePageChange,
+    containerClassName: 'a-pagination',
+    activeClassName: 'active',
+    previousClassName: 'a-pagination__previous',
+    nextClassName: 'a-pagination__next',
+    disabledClassName: 'a-pagination__disabled'
+  }));
+};
+
+exports.default = StoreList;
+
+/***/ }),
+
+/***/ "./resources/ts/components/molecules/common/Store_pickup.tsx":
+/*!*******************************************************************!*\
+  !*** ./resources/ts/components/molecules/common/Store_pickup.tsx ***!
+  \*******************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
+var Store_pickup = function Store_pickup() {
+  var _a = react_1.useState([]),
+      info = _a[0],
+      setInfo = _a[1];
+
+  var storeInfo = info;
+  react_1.useEffect(function () {
+    getStore();
+  }, []);
+
+  var getStore = function getStore() {
+    axios_1["default"].post('/api/store_pickup', {
+      count: 4
+    }).then(function (res) {
+      setInfo(res.data);
+    })["catch"]();
+  };
+
+  return react_1["default"].createElement("div", {
+    className: "m-store-pickup"
+  }, react_1["default"].createElement("h2", {
+    className: "m-store-pickup__title"
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faThumbtack
+  }), "\u30D4\u30C3\u30AF\u30A2\u30C3\u30D7"), react_1["default"].createElement("div", {
+    className: "m-store-pickup__list"
+  }, storeInfo.map(function (el, index) {
+    return react_1["default"].createElement(react_router_dom_1.Link, {
+      to: "/store/" + el.user_uuid,
+      className: "m-store-pickup__list__item",
+      key: "pickup_" + index
+    }, el.thumbnail ? react_1["default"].createElement("img", {
+      src: "/storage/store/" + el.user_uuid + "/thumbnail.jpg",
+      alt: "\u5E97\u8217\u753B\u50CF"
+    }) : react_1["default"].createElement("img", {
+      src: "/images/no_image.jpg",
+      alt: "\u5E97\u8217\u753B\u50CF"
+    }), react_1["default"].createElement("p", null, el.name));
+  })));
+};
+
+exports.default = Store_pickup;
+
+/***/ }),
+
+/***/ "./resources/ts/components/molecules/modal/Modal_confirmDelete.tsx":
+/*!*************************************************************************!*\
+  !*** ./resources/ts/components/molecules/modal/Modal_confirmDelete.tsx ***!
+  \*************************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -16776,10 +17394,10 @@ exports.default = Modal_confirmDelete;
 
 /***/ }),
 
-/***/ "./resources/ts/components/atoms/modal/Modal_editMenu.tsx":
-/*!****************************************************************!*\
-  !*** ./resources/ts/components/atoms/modal/Modal_editMenu.tsx ***!
-  \****************************************************************/
+/***/ "./resources/ts/components/molecules/modal/Modal_editMenu.tsx":
+/*!********************************************************************!*\
+  !*** ./resources/ts/components/molecules/modal/Modal_editMenu.tsx ***!
+  \********************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -17057,10 +17675,10 @@ exports.default = Modal_editMenu;
 
 /***/ }),
 
-/***/ "./resources/ts/components/atoms/modal/Modal_editSpirit.tsx":
-/*!******************************************************************!*\
-  !*** ./resources/ts/components/atoms/modal/Modal_editSpirit.tsx ***!
-  \******************************************************************/
+/***/ "./resources/ts/components/molecules/modal/Modal_editSpirit.tsx":
+/*!**********************************************************************!*\
+  !*** ./resources/ts/components/molecules/modal/Modal_editSpirit.tsx ***!
+  \**********************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -17366,10 +17984,10 @@ exports.default = Modal_editSpirit;
 
 /***/ }),
 
-/***/ "./resources/ts/components/atoms/modal/Modal_review.tsx":
-/*!**************************************************************!*\
-  !*** ./resources/ts/components/atoms/modal/Modal_review.tsx ***!
-  \**************************************************************/
+/***/ "./resources/ts/components/molecules/modal/Modal_review.tsx":
+/*!******************************************************************!*\
+  !*** ./resources/ts/components/molecules/modal/Modal_review.tsx ***!
+  \******************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -17562,10 +18180,10 @@ exports.default = ModalCreateReview;
 
 /***/ }),
 
-/***/ "./resources/ts/components/atoms/modal/Modal_review_edit_user.tsx":
-/*!************************************************************************!*\
-  !*** ./resources/ts/components/atoms/modal/Modal_review_edit_user.tsx ***!
-  \************************************************************************/
+/***/ "./resources/ts/components/molecules/modal/Modal_review_edit_user.tsx":
+/*!****************************************************************************!*\
+  !*** ./resources/ts/components/molecules/modal/Modal_review_edit_user.tsx ***!
+  \****************************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -17747,10 +18365,10 @@ exports.default = ModalReviewEdit_user;
 
 /***/ }),
 
-/***/ "./resources/ts/components/atoms/modal/Modal_review_reply.tsx":
-/*!********************************************************************!*\
-  !*** ./resources/ts/components/atoms/modal/Modal_review_reply.tsx ***!
-  \********************************************************************/
+/***/ "./resources/ts/components/molecules/modal/Modal_review_reply.tsx":
+/*!************************************************************************!*\
+  !*** ./resources/ts/components/molecules/modal/Modal_review_reply.tsx ***!
+  \************************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -17892,10 +18510,10 @@ exports.default = ModalReviewReply;
 
 /***/ }),
 
-/***/ "./resources/ts/components/atoms/modal/Modal_review_reply_edit.tsx":
-/*!*************************************************************************!*\
-  !*** ./resources/ts/components/atoms/modal/Modal_review_reply_edit.tsx ***!
-  \*************************************************************************/
+/***/ "./resources/ts/components/molecules/modal/Modal_review_reply_edit.tsx":
+/*!*****************************************************************************!*\
+  !*** ./resources/ts/components/molecules/modal/Modal_review_reply_edit.tsx ***!
+  \*****************************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -18034,444 +18652,6 @@ var ModalReviewReply = function ModalReviewReply(_a) {
 };
 
 exports.default = ModalReviewReply;
-
-/***/ }),
-
-/***/ "./resources/ts/components/layout/Footer.tsx":
-/*!***************************************************!*\
-  !*** ./resources/ts/components/layout/Footer.tsx ***!
-  \***************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var Footer = function Footer() {
-  return react_1["default"].createElement("div", {
-    className: "l-footer"
-  }, react_1["default"].createElement("span", null, "\xA9\xA0Bread Box"));
-};
-
-exports.default = Footer;
-
-/***/ }),
-
-/***/ "./resources/ts/components/layout/Navbar.tsx":
-/*!***************************************************!*\
-  !*** ./resources/ts/components/layout/Navbar.tsx ***!
-  \***************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  Object.defineProperty(o, k2, {
-    enumerable: true,
-    get: function get() {
-      return m[k];
-    }
-  });
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
-
-  __setModuleDefault(result, mod);
-
-  return result;
-};
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-
-var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
-
-var Searchbar_1 = __importDefault(__webpack_require__(/*! ../atoms/Searchbar */ "./resources/ts/components/atoms/Searchbar.tsx"));
-
-var BtnSearch_icon_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnSearch_icon */ "./resources/ts/components/atoms/buttons/BtnSearch_icon.tsx"));
-
-var BtnMypage_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnMypage */ "./resources/ts/components/atoms/buttons/BtnMypage.tsx"));
-
-var BtnLogin_icon_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnLogin_icon */ "./resources/ts/components/atoms/buttons/BtnLogin_icon.tsx"));
-
-var BtnStorePage_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnStorePage */ "./resources/ts/components/atoms/buttons/BtnStorePage.tsx"));
-
-var BtnStoreManage_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnStoreManage */ "./resources/ts/components/atoms/buttons/BtnStoreManage.tsx"));
-
-var Logo_1 = __importDefault(__webpack_require__(/*! ../atoms/Logo */ "./resources/ts/components/atoms/Logo.tsx"));
-
-var UserAuthContext_1 = __webpack_require__(/*! ../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
-
-function NavBar() {
-  var _a = react_1.useContext(UserAuthContext_1.UserAuthContext),
-      state = _a.state,
-      dispatch = _a.dispatch;
-
-  react_1.useEffect(function () {
-    console.log('effect-navbar');
-    getUser();
-  }, []); //認証ユーザー取得
-
-  var getUser = function getUser() {
-    axios_1["default"].get("/api/user").then(function (res) {
-      console.log('[getUser]ログイン済み');
-      console.log(res.data);
-
-      if (res.data.type_user === 'user') {
-        dispatch({
-          type: 'setUser',
-          payload: res.data.uuid
-        });
-      } else if (res.data.type_user === 'store') {
-        dispatch({
-          type: 'setStore',
-          payload: res.data.uuid
-        });
-      }
-    })["catch"](function (err) {
-      console.log('[getUser]ログインしてません');
-    });
-  };
-
-  var navPC;
-  var navMobile;
-
-  if (state.uuid) {
-    navPC = react_1["default"].createElement("nav", {
-      className: "l-navbar__container--pc__content__nav--loggedin"
-    }, react_1["default"].createElement(BtnMypage_1["default"], null), react_1["default"].createElement(BtnStorePage_1["default"], null), react_1["default"].createElement(BtnStoreManage_1["default"], null));
-    navMobile = react_1["default"].createElement("nav", {
-      className: "l-navbar__container--mobile__nav"
-    }, react_1["default"].createElement(BtnSearch_icon_1["default"], null), react_1["default"].createElement(BtnMypage_1["default"], null), react_1["default"].createElement(BtnStorePage_1["default"], null), react_1["default"].createElement(BtnStoreManage_1["default"], null));
-  } else {
-    navPC = react_1["default"].createElement("nav", {
-      className: "l-navbar__container--pc__content__nav--loggedout"
-    }, react_1["default"].createElement("ul", null, react_1["default"].createElement("li", null, react_1["default"].createElement(react_router_dom_1.Link, {
-      to: "/register_user"
-    }, "\u7121\u6599\u4F1A\u54E1\u767B\u9332")), react_1["default"].createElement("li", null, react_1["default"].createElement(react_router_dom_1.Link, {
-      to: "/login_user"
-    }, "\u30ED\u30B0\u30A4\u30F3"))));
-    navMobile = react_1["default"].createElement("nav", {
-      className: "l-navbar__container--mobile__nav"
-    }, react_1["default"].createElement(BtnSearch_icon_1["default"], null), react_1["default"].createElement(BtnLogin_icon_1["default"], null));
-  }
-
-  return react_1["default"].createElement("div", {
-    className: "l-navbar"
-  }, react_1["default"].createElement("div", {
-    className: "l-navbar__container--pc"
-  }, react_1["default"].createElement(Logo_1["default"], null), react_1["default"].createElement("div", {
-    className: "l-navbar__container--pc__content"
-  }, react_1["default"].createElement(Searchbar_1["default"], {
-    text: null
-  }), react_1["default"].createElement("div", {
-    className: "l-navbar__container--pc__content__nav"
-  }, navPC))), react_1["default"].createElement("div", {
-    className: "l-navbar__container--mobile"
-  }, react_1["default"].createElement(Logo_1["default"], null), navMobile));
-}
-
-exports.default = NavBar;
-
-/***/ }),
-
-/***/ "./resources/ts/components/molecules/InputSchedule.tsx":
-/*!*************************************************************!*\
-  !*** ./resources/ts/components/molecules/InputSchedule.tsx ***!
-  \*************************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var Week_1 = __importDefault(__webpack_require__(/*! ../../info/Week */ "./resources/ts/info/Week.ts"));
-
-var InputSchedule = function InputSchedule(_a) {
-  var Info = _a.Info;
-  var Week = Week_1["default"].week;
-  var defaultData = {
-    monday: '',
-    tuesday: '',
-    wednesday: '',
-    thursday: '',
-    friday: '',
-    saturday: '',
-    sunday: ''
-  }; // 営業日・営業時間情報のJSONをObjectに変換
-
-  if (Info.business_day) {
-    defaultData = JSON.parse(Info.business_day);
-  } // 既に保存されている営業時間を挿入する
-
-
-  var defaultHour = function defaultHour(day, _int) {
-    switch (day) {
-      case 'monday':
-        if (defaultData.monday) {
-          return defaultData.monday[_int];
-        }
-
-        break;
-
-      case 'tuesday':
-        if (defaultData.tuesday) {
-          return defaultData.tuesday[_int];
-        }
-
-        break;
-
-      case 'wednesday':
-        if (defaultData.wednesday) {
-          return defaultData.wednesday[_int];
-        }
-
-        break;
-
-      case 'thursday':
-        if (defaultData.thursday) {
-          return defaultData.thursday[_int];
-        }
-
-        break;
-
-      case 'friday':
-        if (defaultData.friday) {
-          return defaultData.friday[_int];
-        }
-
-        break;
-
-      case 'saturday':
-        if (defaultData.saturday) {
-          return defaultData.saturday[_int];
-        }
-
-        break;
-
-      case 'sunday':
-        if (defaultData.sunday) {
-          return defaultData.sunday[_int];
-        }
-
-        break;
-    }
-  }; // 営業時間の表示・非表示切り替え（activeクラスで管理）
-
-
-  var toggleClass = function toggleClass(targetClass) {
-    var classInfo = document.getElementsByClassName(targetClass)[0];
-
-    if (classInfo.className.includes('active')) {
-      classInfo.classList.remove('active');
-    } else {
-      classInfo.className += ' active';
-    }
-  };
-
-  return react_1["default"].createElement("div", {
-    className: "m-inputSchedule__week"
-  }, Week.map(function (day) {
-    // 既に営業時間が入力されていた場合、デフォルトで営業時間表示（activeクラス付与）
-    var defaultActiveClass;
-
-    if (defaultData[day.id]) {
-      defaultActiveClass = " active";
-    } else {
-      defaultActiveClass = "";
-    }
-
-    return react_1["default"].createElement("div", {
-      className: "m-inputSchedule__week__day",
-      key: day.id + "__schedule"
-    }, react_1["default"].createElement("div", {
-      className: "m-inputSchedule__week__day__heading"
-    }, react_1["default"].createElement("input", {
-      type: "checkbox",
-      id: day.id + "_checked",
-      defaultChecked: defaultData[day.id] ? true : false
-    }), react_1["default"].createElement("label", {
-      htmlFor: day.id + "_checked",
-      onClick: function onClick() {
-        return toggleClass(day["class"]);
-      }
-    }, day.name)), react_1["default"].createElement("div", {
-      className: "m-inputSchedule__week__day__hours " + day["class"] + defaultActiveClass
-    }, react_1["default"].createElement("input", {
-      type: "time",
-      name: day.id + "_open",
-      className: day.id + "_open",
-      defaultValue: defaultHour(day.id, 0)
-    }), react_1["default"].createElement("span", null, "\xA0\uFF5E\xA0"), react_1["default"].createElement("input", {
-      type: "time",
-      name: day.id + "_close",
-      className: day.id + "_close",
-      defaultValue: defaultHour(day.id, 1)
-    })));
-  }));
-};
-
-exports.default = InputSchedule;
-
-/***/ }),
-
-/***/ "./resources/ts/components/molecules/Store_pickup.tsx":
-/*!************************************************************!*\
-  !*** ./resources/ts/components/molecules/Store_pickup.tsx ***!
-  \************************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  Object.defineProperty(o, k2, {
-    enumerable: true,
-    get: function get() {
-      return m[k];
-    }
-  });
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
-
-  __setModuleDefault(result, mod);
-
-  return result;
-};
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
-
-var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-
-var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
-
-var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-
-var Store_pickup = function Store_pickup() {
-  var _a = react_1.useState([]),
-      info = _a[0],
-      setInfo = _a[1];
-
-  var storeInfo = info;
-  react_1.useEffect(function () {
-    getStore();
-  }, []);
-
-  var getStore = function getStore() {
-    axios_1["default"].post('/api/store_pickup', {
-      count: 4
-    }).then(function (res) {
-      setInfo(res.data);
-    })["catch"]();
-  };
-
-  return react_1["default"].createElement("div", {
-    className: "m-store-pickup"
-  }, react_1["default"].createElement("h2", {
-    className: "m-store-pickup__title"
-  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
-    icon: free_solid_svg_icons_1.faThumbtack
-  }), "\u30D4\u30C3\u30AF\u30A2\u30C3\u30D7"), react_1["default"].createElement("div", {
-    className: "m-store-pickup__list"
-  }, storeInfo.map(function (el, index) {
-    return react_1["default"].createElement(react_router_dom_1.Link, {
-      to: "/store/" + el.user_uuid,
-      className: "m-store-pickup__list__item",
-      key: "pickup_" + index
-    }, el.thumbnail ? react_1["default"].createElement("img", {
-      src: "/storage/store/" + el.user_uuid + "/thumbnail.jpg",
-      alt: "\u5E97\u8217\u753B\u50CF"
-    }) : react_1["default"].createElement("img", {
-      src: "/images/no_image.jpg",
-      alt: "\u5E97\u8217\u753B\u50CF"
-    }), react_1["default"].createElement("p", null, el.name));
-  })));
-};
-
-exports.default = Store_pickup;
 
 /***/ }),
 
@@ -19186,7 +19366,7 @@ var UserAuthContext_1 = __webpack_require__(/*! ../../../../contexts/UserAuthCon
 
 var StoreInfoContext_1 = __webpack_require__(/*! ../../../../contexts/StoreInfoContext */ "./resources/ts/contexts/StoreInfoContext.ts");
 
-var InputSchedule_1 = __importDefault(__webpack_require__(/*! ../../InputSchedule */ "./resources/ts/components/molecules/InputSchedule.tsx"));
+var InputSchedule_1 = __importDefault(__webpack_require__(/*! ../../common/InputSchedule */ "./resources/ts/components/molecules/common/InputSchedule.tsx"));
 
 var BtnSave_1 = __importDefault(__webpack_require__(/*! ../../../atoms/buttons/BtnSave */ "./resources/ts/components/atoms/buttons/BtnSave.tsx"));
 
@@ -20234,9 +20414,9 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var Modal_editMenu_1 = __importDefault(__webpack_require__(/*! ../../../atoms/modal/Modal_editMenu */ "./resources/ts/components/atoms/modal/Modal_editMenu.tsx"));
+var Modal_editMenu_1 = __importDefault(__webpack_require__(/*! ../../../molecules/modal/Modal_editMenu */ "./resources/ts/components/molecules/modal/Modal_editMenu.tsx"));
 
-var Modal_confirmDelete_1 = __importDefault(__webpack_require__(/*! ../../../atoms/modal/Modal_confirmDelete */ "./resources/ts/components/atoms/modal/Modal_confirmDelete.tsx"));
+var Modal_confirmDelete_1 = __importDefault(__webpack_require__(/*! ../../../molecules/modal/Modal_confirmDelete */ "./resources/ts/components/molecules/modal/Modal_confirmDelete.tsx"));
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
@@ -20341,7 +20521,7 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var Modal_editSpirit_1 = __importDefault(__webpack_require__(/*! ../../../atoms/modal/Modal_editSpirit */ "./resources/ts/components/atoms/modal/Modal_editSpirit.tsx"));
+var Modal_editSpirit_1 = __importDefault(__webpack_require__(/*! ../../../molecules/modal/Modal_editSpirit */ "./resources/ts/components/molecules/modal/Modal_editSpirit.tsx"));
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
@@ -20451,7 +20631,7 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var Modal_editSpirit_1 = __importDefault(__webpack_require__(/*! ../../../atoms/modal/Modal_editSpirit */ "./resources/ts/components/atoms/modal/Modal_editSpirit.tsx"));
+var Modal_editSpirit_1 = __importDefault(__webpack_require__(/*! ../../../molecules/modal/Modal_editSpirit */ "./resources/ts/components/molecules/modal/Modal_editSpirit.tsx"));
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
@@ -20718,186 +20898,6 @@ exports.default = StoreContents;
 
 /***/ }),
 
-/***/ "./resources/ts/components/molecules/store/StoreList.tsx":
-/*!***************************************************************!*\
-  !*** ./resources/ts/components/molecules/store/StoreList.tsx ***!
-  \***************************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  Object.defineProperty(o, k2, {
-    enumerable: true,
-    get: function get() {
-      return m[k];
-    }
-  });
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
-
-  __setModuleDefault(result, mod);
-
-  return result;
-};
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-
-var Btn_favorite_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/Btn_favorite */ "./resources/ts/components/atoms/buttons/Btn_favorite.tsx"));
-
-var Btn_interested_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/Btn_interested */ "./resources/ts/components/atoms/buttons/Btn_interested.tsx"));
-
-var Schedule_1 = __importDefault(__webpack_require__(/*! ../../atoms/Schedule */ "./resources/ts/components/atoms/Schedule.tsx"));
-
-var Score_1 = __importDefault(__webpack_require__(/*! ../../atoms/Score */ "./resources/ts/components/atoms/Score.tsx"));
-
-var react_paginate_1 = __importDefault(__webpack_require__(/*! react-paginate */ "./node_modules/react-paginate/dist/react-paginate.js"));
-
-var StoreList = function StoreList(_a) {
-  var storeList = _a.storeList,
-      sortType = _a.sortType;
-  var history = react_router_dom_1.useHistory();
-
-  var _b = react_1.useState(0),
-      offset = _b[0],
-      setOffset = _b[1];
-
-  var perPage = 10;
-
-  var handlePageChange = function handlePageChange(data) {
-    var page_number = data['selected'];
-    setOffset(page_number * perPage);
-  };
-
-  return react_1["default"].createElement("div", {
-    className: "m-store-list"
-  }, storeList.slice(offset, offset + perPage).map(function (el, index) {
-    return el && react_1["default"].createElement("div", {
-      className: "m-store-list__item",
-      key: sortType + "_" + index
-    }, react_1["default"].createElement("div", {
-      className: "m-store-list__item--pc",
-      onClick: function onClick() {
-        return history.push("/store/" + el.user_uuid);
-      }
-    }, react_1["default"].createElement("div", {
-      className: "m-store-list__item--pc__images__main"
-    }, el.thumbnail ? react_1["default"].createElement("img", {
-      src: "/storage/store/" + el.user_uuid + "/thumbnail.jpg",
-      alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
-    }) : react_1["default"].createElement("img", {
-      src: "/images/no_image.jpg",
-      alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
-    })), react_1["default"].createElement("div", {
-      className: "m-store-list__item--pc__images__sub"
-    }, el.menu1 && react_1["default"].createElement("img", {
-      src: "/storage/store/" + el.user_uuid + "/menu/item_1.jpg",
-      alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
-    }), el.menu2 && react_1["default"].createElement("img", {
-      src: "/storage/store/" + el.user_uuid + "/menu/item_2.jpg",
-      alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
-    }), el.menu3 && react_1["default"].createElement("img", {
-      src: "/storage/store/" + el.user_uuid + "/menu/item_3.jpg",
-      alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
-    }))), react_1["default"].createElement("div", {
-      className: "m-store-list__item__container"
-    }, react_1["default"].createElement("div", {
-      className: "m-store-list__item__container__buttons"
-    }, react_1["default"].createElement(Btn_favorite_1["default"], {
-      store_uuid: el.user_uuid,
-      favorite_checked: el.favorite_checked,
-      index: index
-    }), react_1["default"].createElement(Btn_interested_1["default"], {
-      store_uuid: el.user_uuid,
-      interested_checked: el.interested_checked,
-      index: index
-    })), react_1["default"].createElement("div", {
-      className: "m-store-list__item__container__name",
-      onClick: function onClick() {
-        return history.push("/store/" + el.user_uuid);
-      }
-    }, react_1["default"].createElement("h2", {
-      className: "hover-colorChange"
-    }, el.name)), react_1["default"].createElement("p", {
-      className: "m-store-list__item__container__access"
-    }, el.address), react_1["default"].createElement("div", {
-      className: "m-store-list__item--mobile",
-      onClick: function onClick() {
-        return history.push("/store/" + el.user_uuid);
-      }
-    }, react_1["default"].createElement("div", {
-      className: "m-store-list__item--mobile__images"
-    }, el.thumbnail ? react_1["default"].createElement("img", {
-      src: "/storage/store/" + el.user_uuid + "/thumbnail.jpg",
-      alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
-    }) : react_1["default"].createElement("img", {
-      src: "/images/no_image.jpg",
-      alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
-    }), el.menu1 && react_1["default"].createElement("img", {
-      src: "/storage/store/" + el.user_uuid + "/menu/item_1.jpg",
-      alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
-    }), el.menu2 && react_1["default"].createElement("img", {
-      src: "/storage/store/" + el.user_uuid + "/menu/item_2.jpg",
-      alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
-    }))), el.message && react_1["default"].createElement("p", {
-      className: "m-store-list__item__container__explanation"
-    }, el.message), react_1["default"].createElement(Schedule_1["default"], {
-      info: el
-    }), react_1["default"].createElement(Score_1["default"], {
-      scoreInfo: el.scoreInfo
-    })));
-  }), react_1["default"].createElement(react_paginate_1["default"], {
-    previousLabel: '<',
-    nextLabel: '>',
-    breakLabel: '...',
-    pageCount: Math.ceil(storeList.length / perPage),
-    marginPagesDisplayed: 2,
-    pageRangeDisplayed: 4,
-    onPageChange: handlePageChange,
-    containerClassName: 'a-pagination',
-    activeClassName: 'active',
-    previousClassName: 'a-pagination__previous',
-    nextClassName: 'a-pagination__next',
-    disabledClassName: 'a-pagination__disabled'
-  }));
-};
-
-exports.default = StoreList;
-
-/***/ }),
-
 /***/ "./resources/ts/components/molecules/store/StoreMenu.tsx":
 /*!***************************************************************!*\
   !*** ./resources/ts/components/molecules/store/StoreMenu.tsx ***!
@@ -21015,11 +21015,11 @@ var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/a
 
 var ScoreUser_1 = __importDefault(__webpack_require__(/*! ../../atoms/ScoreUser */ "./resources/ts/components/atoms/ScoreUser.tsx"));
 
-var Modal_review_1 = __importDefault(__webpack_require__(/*! ../../atoms/modal/Modal_review */ "./resources/ts/components/atoms/modal/Modal_review.tsx"));
+var Modal_review_1 = __importDefault(__webpack_require__(/*! ../../molecules/modal/Modal_review */ "./resources/ts/components/molecules/modal/Modal_review.tsx"));
 
-var Modal_review_reply_1 = __importDefault(__webpack_require__(/*! ../../atoms/modal/Modal_review_reply */ "./resources/ts/components/atoms/modal/Modal_review_reply.tsx"));
+var Modal_review_reply_1 = __importDefault(__webpack_require__(/*! ../../molecules/modal/Modal_review_reply */ "./resources/ts/components/molecules/modal/Modal_review_reply.tsx"));
 
-var Modal_review_reply_edit_1 = __importDefault(__webpack_require__(/*! ../../atoms/modal/Modal_review_reply_edit */ "./resources/ts/components/atoms/modal/Modal_review_reply_edit.tsx"));
+var Modal_review_reply_edit_1 = __importDefault(__webpack_require__(/*! ../../molecules/modal/Modal_review_reply_edit */ "./resources/ts/components/molecules/modal/Modal_review_reply_edit.tsx"));
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
@@ -21963,7 +21963,7 @@ var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/reac
 
 var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
-var StoreList_1 = __importDefault(__webpack_require__(/*! ../store/StoreList */ "./resources/ts/components/molecules/store/StoreList.tsx"));
+var StoreList_1 = __importDefault(__webpack_require__(/*! ../common/StoreList */ "./resources/ts/components/molecules/common/StoreList.tsx"));
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
@@ -22124,7 +22124,7 @@ var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/reac
 
 var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
-var StoreList_1 = __importDefault(__webpack_require__(/*! ../store/StoreList */ "./resources/ts/components/molecules/store/StoreList.tsx"));
+var StoreList_1 = __importDefault(__webpack_require__(/*! ../common/StoreList */ "./resources/ts/components/molecules/common/StoreList.tsx"));
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
@@ -22287,7 +22287,7 @@ var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_mod
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
-var Modal_review_edit_user_1 = __importDefault(__webpack_require__(/*! ../../atoms/modal/Modal_review_edit_user */ "./resources/ts/components/atoms/modal/Modal_review_edit_user.tsx"));
+var Modal_review_edit_user_1 = __importDefault(__webpack_require__(/*! ../../molecules/modal/Modal_review_edit_user */ "./resources/ts/components/molecules/modal/Modal_review_edit_user.tsx"));
 
 var ScoreUser_1 = __importDefault(__webpack_require__(/*! ../../atoms/ScoreUser */ "./resources/ts/components/atoms/ScoreUser.tsx"));
 
@@ -23553,9 +23553,9 @@ var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg
 
 var Search_sidebar_1 = __importDefault(__webpack_require__(/*! ../../molecules/search/Search_sidebar */ "./resources/ts/components/molecules/search/Search_sidebar.tsx"));
 
-var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../../molecules/Store_pickup */ "./resources/ts/components/molecules/Store_pickup.tsx"));
+var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../../molecules/common/Store_pickup */ "./resources/ts/components/molecules/common/Store_pickup.tsx"));
 
-var StoreList_1 = __importDefault(__webpack_require__(/*! ../../molecules/store/StoreList */ "./resources/ts/components/molecules/store/StoreList.tsx"));
+var StoreList_1 = __importDefault(__webpack_require__(/*! ../../molecules/common/StoreList */ "./resources/ts/components/molecules/common/StoreList.tsx"));
 
 var Search = function Search() {
   var location = react_router_dom_1.useLocation();
@@ -24008,7 +24008,7 @@ var Searchbar_1 = __importDefault(__webpack_require__(/*! ../../atoms/Searchbar 
 
 var top_section_1 = __importDefault(__webpack_require__(/*! ../../molecules/top/top_section */ "./resources/ts/components/molecules/top/top_section.tsx"));
 
-var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../../molecules/Store_pickup */ "./resources/ts/components/molecules/Store_pickup.tsx"));
+var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../../molecules/common/Store_pickup */ "./resources/ts/components/molecules/common/Store_pickup.tsx"));
 
 var StoreRanking_1 = __importDefault(__webpack_require__(/*! ../../molecules/top/StoreRanking */ "./resources/ts/components/molecules/top/StoreRanking.tsx"));
 
@@ -26187,12 +26187,9 @@ var index = react__WEBPACK_IMPORTED_MODULE_0__.createContext || createReactConte
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
   \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
+throw new Error("Module build failed (from ./node_modules/mini-css-extract-plugin/dist/loader.js):\nModuleBuildError: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):\nSassError: File to import not found or unreadable: ./molecules/store/storeList.\n        on line 42 of C:\\Users\\panna\\Documents\\bread-box\\bread-app\\resources\\sass\\app.scss\n>> @import \"./molecules/store/storeList\";\r\n   ^\n\n    at processResult (C:\\Users\\panna\\Documents\\bread-box\\bread-app\\node_modules\\webpack\\lib\\NormalModule.js:597:19)\n    at C:\\Users\\panna\\Documents\\bread-box\\bread-app\\node_modules\\webpack\\lib\\NormalModule.js:691:5\n    at C:\\Users\\panna\\Documents\\bread-box\\bread-app\\node_modules\\loader-runner\\lib\\LoaderRunner.js:399:11\n    at C:\\Users\\panna\\Documents\\bread-box\\bread-app\\node_modules\\loader-runner\\lib\\LoaderRunner.js:251:18\n    at context.callback (C:\\Users\\panna\\Documents\\bread-box\\bread-app\\node_modules\\loader-runner\\lib\\LoaderRunner.js:124:13)\n    at Object.callback (C:\\Users\\panna\\Documents\\bread-box\\bread-app\\node_modules\\sass-loader\\dist\\index.js:73:7)\n    at Object.done [as callback] (C:\\Users\\panna\\Documents\\bread-box\\bread-app\\node_modules\\neo-async\\async.js:8069:18)\n    at options.error (C:\\Users\\panna\\Documents\\bread-box\\bread-app\\node_modules\\node-sass\\lib\\index.js:294:32)");
 
 /***/ }),
 
@@ -61188,12 +61185,6 @@ module.exports = warning;
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = __webpack_modules__;
-/******/ 	
-/******/ 	// the startup function
-/******/ 	// It's empty as some runtime module handles the default behavior
-/******/ 	__webpack_require__.x = x => {}
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
@@ -61247,98 +61238,11 @@ module.exports = warning;
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/jsonp chunk loading */
-/******/ 	(() => {
-/******/ 		// no baseURI
-/******/ 		
-/******/ 		// object to store loaded and loading chunks
-/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
-/******/ 		// Promise = chunk loading, 0 = chunk loaded
-/******/ 		var installedChunks = {
-/******/ 			"/js/app": 0
-/******/ 		};
-/******/ 		
-/******/ 		var deferredModules = [
-/******/ 			["./resources/ts/app.tsx"],
-/******/ 			["./resources/sass/app.scss"]
-/******/ 		];
-/******/ 		// no chunk on demand loading
-/******/ 		
-/******/ 		// no prefetching
-/******/ 		
-/******/ 		// no preloaded
-/******/ 		
-/******/ 		// no HMR
-/******/ 		
-/******/ 		// no HMR manifest
-/******/ 		
-/******/ 		var checkDeferredModules = x => {};
-/******/ 		
-/******/ 		// install a JSONP callback for chunk loading
-/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
-/******/ 			var [chunkIds, moreModules, runtime, executeModules] = data;
-/******/ 			// add "moreModules" to the modules object,
-/******/ 			// then flag all "chunkIds" as loaded and fire callback
-/******/ 			var moduleId, chunkId, i = 0, resolves = [];
-/******/ 			for(;i < chunkIds.length; i++) {
-/******/ 				chunkId = chunkIds[i];
-/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
-/******/ 					resolves.push(installedChunks[chunkId][0]);
-/******/ 				}
-/******/ 				installedChunks[chunkId] = 0;
-/******/ 			}
-/******/ 			for(moduleId in moreModules) {
-/******/ 				if(__webpack_require__.o(moreModules, moduleId)) {
-/******/ 					__webpack_require__.m[moduleId] = moreModules[moduleId];
-/******/ 				}
-/******/ 			}
-/******/ 			if(runtime) runtime(__webpack_require__);
-/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
-/******/ 			while(resolves.length) {
-/******/ 				resolves.shift()();
-/******/ 			}
-/******/ 		
-/******/ 			// add entry modules from loaded chunk to deferred list
-/******/ 			if(executeModules) deferredModules.push.apply(deferredModules, executeModules);
-/******/ 		
-/******/ 			// run deferred modules when all chunks ready
-/******/ 			return checkDeferredModules();
-/******/ 		}
-/******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunk"] = self["webpackChunk"] || [];
-/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
-/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
-/******/ 		
-/******/ 		function checkDeferredModulesImpl() {
-/******/ 			var result;
-/******/ 			for(var i = 0; i < deferredModules.length; i++) {
-/******/ 				var deferredModule = deferredModules[i];
-/******/ 				var fulfilled = true;
-/******/ 				for(var j = 1; j < deferredModule.length; j++) {
-/******/ 					var depId = deferredModule[j];
-/******/ 					if(installedChunks[depId] !== 0) fulfilled = false;
-/******/ 				}
-/******/ 				if(fulfilled) {
-/******/ 					deferredModules.splice(i--, 1);
-/******/ 					result = __webpack_require__(__webpack_require__.s = deferredModule[0]);
-/******/ 				}
-/******/ 			}
-/******/ 			if(deferredModules.length === 0) {
-/******/ 				__webpack_require__.x();
-/******/ 				__webpack_require__.x = x => {};
-/******/ 			}
-/******/ 			return result;
-/******/ 		}
-/******/ 		var startup = __webpack_require__.x;
-/******/ 		__webpack_require__.x = () => {
-/******/ 			// reset startup function so it can be called again when more startup code is added
-/******/ 			__webpack_require__.x = startup || (x => {});
-/******/ 			return (checkDeferredModules = checkDeferredModulesImpl)();
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /************************************************************************/
-/******/ 	// run startup
-/******/ 	return __webpack_require__.x();
+/******/ 	// startup
+/******/ 	// Load entry module
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	__webpack_require__("./resources/ts/app.tsx");
+/******/ 	__webpack_require__("./resources/sass/app.scss");
 /******/ })()
 ;

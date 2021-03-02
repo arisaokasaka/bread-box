@@ -4,7 +4,7 @@ import districts from '../../../info/Districts';
 import bread_kinds from '../../../info/Bread_kinds';
 import Searchbar from '../../atoms/Searchbar';
 import Top_section from '../../molecules/top/top_section';
-import Store_pickup from '../../molecules/Store_pickup';
+import Store_pickup from '../../molecules/common/Store_pickup';
 import StoreRanking from '../../molecules/top/StoreRanking';
 
 const Top: React.FC = () => {

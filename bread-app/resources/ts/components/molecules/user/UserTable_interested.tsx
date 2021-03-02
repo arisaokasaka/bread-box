@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
-import StoreList from '../store/StoreList';
+import StoreList from '../common/StoreList';
 import { UserAuthContext } from '../../../contexts/UserAuthContext';
 
 const UserTable_interested: React.FC = () => {

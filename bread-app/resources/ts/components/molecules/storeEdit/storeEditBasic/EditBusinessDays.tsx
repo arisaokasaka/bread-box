@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { UserAuthContext } from '../../../../contexts/UserAuthContext';
 import { StoreInfoContext } from '../../../../contexts/StoreInfoContext';
-import InputSchedule from '../../InputSchedule';
+import InputSchedule from '../../common/InputSchedule';
 import BtnSave from '../../../atoms/buttons/BtnSave';
 import week from '../../../../info/Week';
 

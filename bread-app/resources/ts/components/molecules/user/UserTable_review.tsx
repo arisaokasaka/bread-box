@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { UserAuthContext } from '../../../contexts/UserAuthContext';
-import ModalReviewEdit_user from '../../atoms/modal/Modal_review_edit_user';
+import ModalReviewEdit_user from '../../molecules/modal/Modal_review_edit_user';
 import ScoreUser from '../../atoms/ScoreUser';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";

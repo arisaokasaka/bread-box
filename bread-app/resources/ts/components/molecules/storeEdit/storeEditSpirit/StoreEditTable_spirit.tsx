@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import Modal_editSpirit from '../../../atoms/modal/Modal_editSpirit';
+import Modal_editSpirit from '../../../molecules/modal/Modal_editSpirit';
 import { UserAuthContext } from '../../../../contexts/UserAuthContext';
 import { StoreInfoContext } from '../../../../contexts/StoreInfoContext';
 
