@@ -18,6 +18,7 @@ type infoProps = ({
 const Modal_editSpirit: React.FC<infoProps> = ({SpiritInfo, btnName, funcType, menuType}) =>{
     let placeText: string;
     let defaultContent: string;
+    let spirit_uuid: string = '';
     const [ textarea_count, setTextarea_count ] = useState(0);
     const { register, handleSubmit, errors } = useForm();
     const { state } = useContext(UserAuthContext);
@@ -44,16 +45,20 @@ const Modal_editSpirit: React.FC<infoProps> = ({SpiritInfo, btnName, funcType, m
             placeText = 'お店のこだわりポイントを記載してください。';
             if(SpiritInfo === undefined || null){
                 defaultContent = '';
+                spirit_uuid = '';
             }else{
                 defaultContent = SpiritInfo.advantage;
+                spirit_uuid = SpiritInfo.uuid;
             }
             break;
         case 3: 
             placeText = 'お店やパンに込められている思いを教えてください。';
             if(SpiritInfo === undefined || null){
                 defaultContent = '';
+                spirit_uuid = '';
             }else{
                 defaultContent = SpiritInfo.spirit;
+                spirit_uuid = SpiritInfo.uuid;
             }
             break;
         default:
@@ -163,6 +168,7 @@ const Modal_editSpirit: React.FC<infoProps> = ({SpiritInfo, btnName, funcType, m
                 <form className="m-modalEditSpirit__form" onSubmit={handleSubmit(onSubmit)}>
                     <input type="hidden" name="funcType" value={funcType} ref={register}/>
                     <input type="hidden" name="menu_type" value={menuType} ref={register}/>
+                    <input type="hidden" name="uuid" value={spirit_uuid} ref={register}/>
                     <div className="m-modalEditSpirit__form__item">
                         <label htmlFor="img_spirit">画像を選択</label>
                         {funcType === 'edit' && <span>新しい画像に変える場合のみ、選択してください。</span>}
