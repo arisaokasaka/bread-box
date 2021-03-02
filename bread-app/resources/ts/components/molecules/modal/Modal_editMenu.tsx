@@ -1,4 +1,4 @@
-import React,{useState, useContext} from 'react';
+import React ,{ useState, useContext } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
 import { useForm } from 'react-hook-form';
@@ -20,7 +20,8 @@ const Modal_editMenu: React.FC<MenuInfoProps> = ({menu}) =>{
     const [ fileSize, setFileSize ] = useState(0);
     const { state } = useContext(UserAuthContext);
     const { dispatch } = useContext(StoreInfoContext);
-    const { register, handleSubmit, errors, getValues } = useForm();
+    const [ textarea_count, setTextarea_count ] = useState(0);
+    const { register, handleSubmit, errors } = useForm();
     const customStyles = {
         content : {
             top: '50%',
@@ -112,7 +113,7 @@ const Modal_editMenu: React.FC<MenuInfoProps> = ({menu}) =>{
                     <div className="m-storeEdit-menuCreate__container__form__item m-storeForm__item">
                         <label htmlFor="bread_name" className="a-label-required__red">メニュー名</label>
                         <div className="m-storeForm__item__input">
-                            <input type="text" id="bread_name" name="bread_name" defaultValue={menu.bread_name} ref={ register({required: true})} />
+                            <input type="text" id="bread_name" name="bread_name" defaultValue={menu.bread_name} ref={register({required: true})} />
                             {errors.bread_name && <p>メニュー名は必須です。</p>}
                         </div>
                     </div>
@@ -136,7 +137,15 @@ const Modal_editMenu: React.FC<MenuInfoProps> = ({menu}) =>{
                     <div className="m-storeEdit-menuCreate__container__form__item m-storeForm__item">
                         <label htmlFor="bread_detail">詳細・説明</label>
                         <div className="m-storeForm__item__input">
-                            <textarea name="bread_detail" id="bread_detail" defaultValue={menu.bread_detail} ref={register}/>
+                            <textarea
+                                name="bread_detail"
+                                id="bread_detail"
+                                defaultValue={menu.bread_detail}
+                                placeholder="50文字以内でパンの説明を記入してください。"
+                                ref={register({maxLength: 50})}
+                                onChange={(e)=>{setTextarea_count(e.target.value.length)}}
+                            />
+                            {textarea_count > 50 && <p>50文字以内で入力してください。</p>}
                         </div>
                     </div>
                     <div className="m-storeEdit-menuCreate__container__form__item m-storeForm__item">

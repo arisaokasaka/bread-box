@@ -18,7 +18,7 @@ type infoProps = ({
 const Modal_editSpirit: React.FC<infoProps> = ({SpiritInfo, btnName, funcType, menuType}) =>{
     let placeText: string;
     let defaultContent: string;
-    let errorMessage_imageSize: any = null;
+    const [ textarea_count, setTextarea_count ] = useState(0);
     const { register, handleSubmit, errors } = useForm();
     const { state } = useContext(UserAuthContext);
     const { dispatch } = useContext(StoreInfoContext);
@@ -69,11 +69,6 @@ const Modal_editSpirit: React.FC<infoProps> = ({SpiritInfo, btnName, funcType, m
         })
     }
     
-    // ファイルサイズによるエラーメッセージ
-    if(image.image_size > 3000000){
-        errorMessage_imageSize = <p>ファイルの上限サイズ3MBを超えています。圧縮するか、別の画像を選択してください。</p>
-    }
-
     // 送信時
     const onSubmit = (data) => {
         if(image.image_size <= 3000000){
@@ -169,7 +164,7 @@ const Modal_editSpirit: React.FC<infoProps> = ({SpiritInfo, btnName, funcType, m
                     <input type="hidden" name="funcType" value={funcType} ref={register}/>
                     <input type="hidden" name="menu_type" value={menuType} ref={register}/>
                     <div className="m-modalEditSpirit__form__item">
-                        <label htmlFor="img_spirit" className="a-label-required__red--fitContent">画像を選択</label>
+                        <label htmlFor="img_spirit">画像を選択</label>
                         {funcType === 'edit' && <span>新しい画像に変える場合のみ、選択してください。</span>}
                         <input
                             type="file"
@@ -177,7 +172,7 @@ const Modal_editSpirit: React.FC<infoProps> = ({SpiritInfo, btnName, funcType, m
                             name="img_spirit"
                             onChange={onChangeImage}
                         />
-                        {errorMessage_imageSize}
+                        {image.image_size > 3000000 && <p>ファイルの上限サイズ3MBを超えています。圧縮するか、別の画像を選択してください。</p>}
                     </div>
                     
                     <div className="m-modalEditSpirit__form__item">
@@ -186,10 +181,11 @@ const Modal_editSpirit: React.FC<infoProps> = ({SpiritInfo, btnName, funcType, m
                             name="content"
                             placeholder={placeText}
                             defaultValue={defaultContent}
-                            rows={6}
-                            ref={register({required: true})}
+                            ref={register({required: true, maxLength: 255})}
+                            onChange={(e)=>{setTextarea_count(e.target.value.length)}}
                         />
                         {errors.content && <p>内容は必須です。</p>}
+                        {textarea_count > 255 && <p>255文字以内で入力してください。</p>}
                     </div>
                     <div className="m-modalEditSpirit__form__btn">
                         <BtnSave
