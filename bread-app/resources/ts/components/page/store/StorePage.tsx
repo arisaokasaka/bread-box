@@ -61,10 +61,13 @@ const StorePage: React.FC = () => {
         <div className = "p-store">
             <div className = "p-store__container">
                 <div className = "p-store__container__img">
-                    <img
+                    {storeInfo['header'] ?
+                        <img
                         src={"/storage/store/" + user_uuid + "/header.jpg"}
                         alt="トップ画像"
-                    />
+                        />
+                        : <img src="/images/no_image_header.png" alt="店舗ヘッダー"/>
+                    }
                 </div>
                 <div className = "p-store__container__content">
                     <div className = "p-store__container__content__main">
