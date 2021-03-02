@@ -14,8 +14,8 @@
 //atoms
 @import "./atoms/logo";
 @import "./atoms/button";
-@import "./atoms/store_summary/score";
-@import "./atoms//store_summary/schedule";
+@import "./atoms/score";
+@import "./atoms/schedule";
 @import "./atoms/labelRequired";
 @import "./atoms/labelYen";
 @import "./atoms/pagination";
@@ -23,23 +23,22 @@
 @import "./atoms/link_sns";
 
 //molecules
-@import "./molecules/storeForm";
 @import "./molecules/modal/reactModal";
 @import "./molecules/modal/modal_review";
 @import "./molecules/modal/modal_review_reply";
 @import "./molecules/modal/modal_editSpirit";
 @import "./molecules/modal/modal_editMenu";
 @import "./molecules/modal/modal_confirmDelete";
-@import "./molecules/topSection";
-@import "./molecules/storeRanking";
-@import "./molecules/inputSchedule";
-@import "./molecules/search_sidebar";
-@import "./molecules/search_bar";
+@import "./molecules/top/topSection";
+@import "./molecules/top/storeRanking";
+@import "./molecules/search/search_sidebar";
+@import "./molecules/search/search_bar";
 @import "./molecules/store/store_menu";
 @import "./molecules/store/store_spirit";
 @import "./molecules/store/store_contents";
-@import "./molecules/store-pickup";
-@import "./molecules/store/storeList";
+@import "./molecules/common/store-pickup";
+@import "./molecules/common/storeList";
+@import "./molecules/store/inputSchedule";
 @import "./molecules/store/store_sidebar";
 @import "./molecules/store/store_basicInfo";
 @import "./molecules/store/store_subInfo";
@@ -49,10 +48,11 @@
 @import "./molecules/user/userTable_review";
 @import "./molecules/user/userTable";
 @import "./molecules/user/userProf";
-@import "./molecules/storeEDit/storeEdit_menuList";
-@import "./molecules/storeEDit/storeEditTable_spirit";
-@import "./molecules/storeEDit/storeEditTable_basic";
-@import "./molecules/storeEDit/storeEditTable";
+@import "./molecules/storeEdit/storeEdit_menuList";
+@import "./molecules/storeEdit/storeEditTable_spirit";
+@import "./molecules/storeEdit/storeEditTable_basic";
+@import "./molecules/storeEdit/storeEditTable";
+@import "./molecules/storeEdit/storeForm";
 
 //layout
 @import "./layout/navbar";
