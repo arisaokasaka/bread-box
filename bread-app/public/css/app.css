@@ -2586,6 +2586,7 @@ label.a-label-required__red--fitContent::after {
   font-size: 0.8rem;
   color: #67491b;
   margin-top: 10px;
+  line-height: 1.3rem;
 }
 
 .m-store-subInfo-mobile__container__item {
@@ -2678,6 +2679,7 @@ label.a-label-required__red--fitContent::after {
 .m-review__item__reply {
   grid-column-start: 2;
   grid-column-end: 4;
+  margin-top: 5px;
   padding: 2px 5px 0 5px;
   border-left: 1px solid #a5a5a5;
 }
