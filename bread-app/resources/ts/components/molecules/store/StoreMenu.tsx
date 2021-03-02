@@ -21,11 +21,12 @@ const StoreMenu: React.FC<MenuProps> = ({Menu}) => {
             {Menu.map((el)=>(
                 el.menu_type === 1 &&
                 <div className = "m-menu__card" key={"menu_"+el.id}>
-                    <img src={"/storage/store/" + el.store_uuid + "/menu/item_" + el.bread_order + ".jpg"} alt="メニュー画像"/>
+                    {el.image_menu ? <img src={"/storage/store/" + el.store_uuid + "/menu/item_" + el.bread_order + ".jpg"} alt="メニュー画像"/>
+                    : <img src="/images/no_image_menu_1.png"/>}
                     <h4>{el.bread_name}</h4>
                     <div className="m-menu__card__labels">
                         <span className = "m-menu__card__labels__kind">{el.bread_kind}</span>
-                        <span className = "m-menu__card__labels__price">{el.bread_price}円</span>
+                        {el.bread_price && <span className = "m-menu__card__labels__price">{el.bread_price}円</span>}
                     </div>
                     <p className = "m-menu__card__detail">{el.bread_detail}</p>
                 </div>

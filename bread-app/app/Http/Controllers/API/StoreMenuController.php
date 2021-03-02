@@ -36,10 +36,12 @@ class StoreMenuController extends Controller
 
         // 画像ファイルをStorageに保存
         $store_uuid = $request->input('store_uuid');
-        $path = '/public/store/' . $store_uuid . '/menu';
         $fileSave = $request->file('bread_img');
-        $fileName = 'item_' . $bread_number . '.jpg';
-        Storage::putFileAs($path, $fileSave, $fileName, 'public');
+        if($fileSave) {
+            $path = '/public/store/' . $store_uuid . '/menu';
+            $fileName = 'item_' . $bread_number . '.jpg';
+            Storage::putFileAs($path, $fileSave, $fileName, 'public');
+        }
         
         // 以下、後ほど修正したい(安全に拡張子を変更する)。
         // $fileExtension = $fileContent->getClientOriginalExtension();
@@ -96,6 +98,9 @@ class StoreMenuController extends Controller
     public function index_menuInfo(Request $request){
         $store_menu = new StoreMenu();
         $get_info = $store_menu->index_menuInfo($request->input('store_uuid'));
+        foreach($get_info as $menu){
+            $menu['image_menu'] = Storage::exists("/public/store/" . $menu->store_uuid . "/menu/item_" . $menu->bread_order . ".jpg");
+        }
         return $get_info;
     }
 
