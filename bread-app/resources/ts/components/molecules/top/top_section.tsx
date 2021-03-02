@@ -20,7 +20,7 @@ const Top_section: React.FC<Props> = ({sectionTitle, sectionContent}) => {
                         return (
                         <li key={'section_' + el.id}>
                             <Link to={{
-                                pathname: '/search/',
+                                pathname: '/search',
                                 search: '?key=' + el.name + '&id=' + state.uuid
                                 }}
                             >
