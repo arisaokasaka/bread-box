@@ -1,5 +1,6 @@
 .p-store-edit {
-    padding: $mp-md 0;
+    padding-top: $mp-md;
+    padding-bottom: $mp-sm;
 
     &__container {
         @include content-width;

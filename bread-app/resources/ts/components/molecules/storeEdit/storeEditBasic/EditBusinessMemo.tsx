@@ -64,6 +64,7 @@ const EditBusinessMemo: React.FC = () => {
                         <BtnSave
                             InputType={"submit"}
                             OnClickFunction={null}
+                            className={"full"}
                         />
                     </div>
                 </form>

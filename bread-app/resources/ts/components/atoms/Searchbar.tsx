@@ -32,7 +32,7 @@ const Searchbar: React.FC<TextProps> = ({text}) => {
                     }}
                     onClick = {onClick_deleteValue}
                 >
-                    <span>検索</span>
+                    <FontAwesomeIcon icon={faSearch}/><span>検索</span>
                 </Link>}
             {text === null &&
                 <Link to={{

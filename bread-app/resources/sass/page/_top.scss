@@ -26,7 +26,7 @@
 
         h2 {
             color: $font-color-brown;
-            margin-top: $mp-xs;
+            margin-top: 30px;
 
             @include bp-960up {
                 margin-top: $mp-sm;
@@ -37,16 +37,14 @@
     &__footer {
         display: flex;
         background-color: $lightBrown;
-        padding: $mp-xs 0;
+        padding-top: $mp-xs;
+        padding-bottom: $mp-sm;
 
         a {
             @include content-width;
             color: $font-color-brown;
             font-size: 0.8rem;
-
-            @include bp-600up {
-                text-align: center;
-            }
+            text-align: center;
 
             &:hover {
                 font-weight: 600;

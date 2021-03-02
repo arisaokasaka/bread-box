@@ -33,14 +33,11 @@
                         &--loggedin {
                             display: flex;
                             align-items: center;
-                            // & > .a-btn-mypage {
-                            //     vertical-align: middle;
-                            // }
                         }
                         &--loggedout {
                             ul {
                                 position: absolute;
-                                top: 0;
+                                top: 1px;
                                 right: 0;
                                 margin: 0;
                                 display: flex;

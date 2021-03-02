@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import MenuCreate from './storeEditMenu/MenuCreate';
 import MenuList from './storeEditMenu/MenuList';
@@ -10,18 +11,18 @@ import StoreEditTable_spirit from './storeEditSpirit/StoreEditTable_spirit';
 import StoreEditTable_advantage from './storeEditSpirit/StoreEditTable_advantage';
 import EditBasicInfo from './storeEditBasic/EditBasicInfo';
 import EditImage from './storeEditBasic/EditImage';
-import { StoreEditNav_menu, StoreEditNav_basic, StoreEditNav_spirit, StoreEditNav_stamp } from '../../../info/StoreEditMenus';
+import { StoreEditNav_menu, StoreEditNav_basic, StoreEditNav_spirit } from '../../../info/StoreEditMenus';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight, faChevronCircleDown } from '@fortawesome/free-solid-svg-icons';
+import { faSlidersH, faBreadSlice, faChevronRight, faHeart, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import BtnLogout from '../../atoms/buttons/BtnLogout';
 import { StoreInfoContext } from '../../../contexts/StoreInfoContext';
 import { UserAuthContext } from '../../../contexts/UserAuthContext';
-
 
 const StoreEditTable: React.FC = () => {
     const { state } = useContext(UserAuthContext);
     const { dispatch } = useContext(StoreInfoContext);
     const [ Table, setTable ] = useState('basicInfo');
+    const [ className_active, setClassName_Active] = useState('')
 
     useEffect(() => {
         getStoreInfo();
@@ -60,18 +61,18 @@ const StoreEditTable: React.FC = () => {
     }
 
     //サイドメニューのタブ一覧
-    const Tab = (tab) => {
-        let TabClassName = tab.category + "_" + tab.tableName;
-        if(Table === tab.tableName){
-            TabClassName += ' selected';
+    const Menu = (menu) => {
+        let MenuClassName = menu.category + "_" + menu.tableName;
+        if(Table === menu.tableName){
+            MenuClassName += ' selected';
         }
         return (
             <span 
-                className={TabClassName} 
-                key = {TabClassName}
-                onClick = {() => setTable(tab.tableName)}
+                className={MenuClassName} 
+                key = {MenuClassName}
+                onClick = {() => setTable(menu.tableName)}
             >
-                <a>{tab.label}</a>
+                <a>{menu.label}</a>
                 <a><FontAwesomeIcon icon={faChevronRight} /></a>
             </span>
         );
@@ -99,38 +100,62 @@ const StoreEditTable: React.FC = () => {
                 return <StoreEditTable_spirit />
             case 'spiritAdvantage':
                 return <StoreEditTable_advantage />
-            case 'stampAdd':
-                return <h2>stamp</h2>
         }
     }
 
     return (
         <div className = "m-store-edit-table">
-            <nav className = "m-store-edit-table__nav">
+            <div className="m-store-edit-table__btn-menuMobile" onClick={()=>setClassName_Active('active')}>
+                <FontAwesomeIcon icon={faBars}/>
+                <span>管理メニュー</span>
+            </div>
+            <div className = {"m-store-edit-table__nav--mobile " + className_active}>
+                <nav className = "m-store-edit-table__nav--mobile__content store_edit_nav" onClick={()=>setClassName_Active('')}>
+                    <ul>
+                        <li className="m-store-edit-table__nav--mobile__content__close">
+                            <FontAwesomeIcon icon={faTimes}/>
+                            閉じる
+                        </li>
+                        <li className = "m-store-edit-table__nav--mobile__content__basic">
+                            <label><FontAwesomeIcon icon={faSlidersH}/>店舗情報の編集</label>
+                            {StoreEditNav_basic.map((arr)=>Menu(arr))}
+                        </li>
+                        <li className = "m-store-edit-table__nav--mobile__content__menu">
+                            <label><FontAwesomeIcon icon={faBreadSlice}/>メニューの追加・編集</label>
+                            {StoreEditNav_menu.map((arr)=>Menu(arr))}
+                        </li>
+                        <li className = "m-store-edit-table__nav--mobile__content__spirit">
+                            <label><FontAwesomeIcon icon={faHeart}/>こだわり・思いの編集</label>
+                            {StoreEditNav_spirit.map((arr)=>Menu(arr))}
+                        </li>
+                        <li className = "m-store-edit-table__nav--mobile__content__others">
+                            <Link to="/password_store">パスワードの再設定</Link>
+                            <BtnLogout/>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <nav className = "m-store-edit-table__nav--pc store_edit_nav">
                 <ul>
-                    <li className = "m-store-edit-table__nav__basic">
-                        <label><FontAwesomeIcon icon={faChevronCircleDown}/>店舗情報の編集</label>
-                        {StoreEditNav_basic.map((arr)=>Tab(arr))}
+                    <li className = "m-store-edit-table__nav--pc__basic">
+                        <label><FontAwesomeIcon icon={faSlidersH}/>店舗情報の編集</label>
+                        {StoreEditNav_basic.map((arr)=>Menu(arr))}
                     </li>
-                    <li className = "m-store-edit-table__nav__menu">
-                        <label><FontAwesomeIcon icon={faChevronCircleDown}/>メニューの追加・編集</label>
-                        {StoreEditNav_menu.map((arr)=>Tab(arr))}
+                    <li className = "m-store-edit-table__nav--pc__menu">
+                        <label><FontAwesomeIcon icon={faBreadSlice}/>メニューの追加・編集</label>
+                        {StoreEditNav_menu.map((arr)=>Menu(arr))}
                     </li>
-                    <li className = "m-store-edit-table__nav__spirit">
-                        <label><FontAwesomeIcon icon={faChevronCircleDown}/>こだわり・思いの編集</label>
-                        {StoreEditNav_spirit.map((arr)=>Tab(arr))}
+                    <li className = "m-store-edit-table__nav--pc__spirit">
+                        <label><FontAwesomeIcon icon={faHeart}/>こだわり・思いの編集</label>
+                        {StoreEditNav_spirit.map((arr)=>Menu(arr))}
                     </li>
-                    <li className = "m-store-edit-table__nav__stamp">
-                        <label><FontAwesomeIcon icon={faChevronCircleDown}/>スタンプカードの編集</label>
-                        {StoreEditNav_stamp.map((arr)=>Tab(arr))}
-                    </li>
-                    <li className = "m-store-edit-table__nav__others">
-                        <p>パスワードの再設定</p>
+                    <li className = "m-store-edit-table__nav--pc__others">
+                        <Link to="/password_store">パスワードの再設定</Link>
                         <BtnLogout/>
                     </li>
                 </ul>
             </nav>
-            <div className = "m-store-edit-table__container">
+            <div className = "m-store-edit-table__container" onClick={()=>setClassName_Active('')}>
                 <div className = "m-store-edit-table__container__content">
                     {CurrentTable(Table)}
                 </div>

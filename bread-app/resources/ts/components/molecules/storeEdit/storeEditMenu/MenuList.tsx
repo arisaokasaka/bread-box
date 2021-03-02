@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import Modal_editMenu from '../../../atoms/modal/Modal_editMenu';
-import Modal_confirmDelete from '../../../atoms/modal/Modal_confirmDelete';
+import Modal_editMenu from '../../../molecules/modal/Modal_editMenu';
+import Modal_confirmDelete from '../../../molecules/modal/Modal_confirmDelete';
 import { UserAuthContext } from '../../../../contexts/UserAuthContext';
 import { StoreInfoContext } from '../../../../contexts/StoreInfoContext';
 

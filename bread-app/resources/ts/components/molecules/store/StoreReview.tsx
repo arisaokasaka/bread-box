@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import ScoreUser from '../../atoms/ScoreUser';
-import ModalCreateReview from '../../atoms/modal/Modal_review';
-import ModalReviewReply from '../../atoms/modal/Modal_review_reply';
-import ModalReviewReplyEdit from '../../atoms/modal/Modal_review_reply_edit';
+import ModalCreateReview from '../../molecules/modal/Modal_review';
+import ModalReviewReply from '../../molecules/modal/Modal_review_reply';
+import ModalReviewReplyEdit from '../../molecules/modal/Modal_review_reply_edit';
 import { UserAuthContext } from '../../../contexts/UserAuthContext';
 import ReactPaginate from 'react-paginate';
 

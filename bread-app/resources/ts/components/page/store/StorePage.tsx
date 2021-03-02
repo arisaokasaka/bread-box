@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import StoreBasicInfo from '../../molecules/store/StoreBasicInfo';
-import StoreSubInfo from '../../molecules/store/StoreSubinfo';
+import StoreSidebar from '../../molecules/store/StoreSidebar';
 import StoreContents from '../../molecules/store/StoreContents';
 import { useParams } from 'react-router-dom';
 import { UserAuthContext } from '../../../contexts/UserAuthContext';
@@ -66,22 +66,22 @@ const StorePage: React.FC = () => {
                         alt="トップ画像"
                     />
                 </div>
-                    <div className = "p-store__container__content">
-                        <div className = "p-store__container__content__main">
-                            <StoreBasicInfo
-                                storeInfo = {storeInfo}
-                                scoreInfo = {scoreInfo}
-                            />
-                            <StoreContents
-                                menuInfo = {menuInfo}
-                                store_uuid = {user_uuid}
-                            />
-                        </div> 
-                        <StoreSubInfo
+                <div className = "p-store__container__content">
+                    <div className = "p-store__container__content__main">
+                        <StoreBasicInfo
                             storeInfo = {storeInfo}
                             scoreInfo = {scoreInfo}
                         />
-                    </div>
+                        <StoreContents
+                            menuInfo = {menuInfo}
+                            store_uuid = {user_uuid}
+                        />
+                    </div> 
+                    <StoreSidebar
+                        storeInfo = {storeInfo}
+                        scoreInfo = {scoreInfo}
+                    />
+                </div>
             </div>
         </div>
     )

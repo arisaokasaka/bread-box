@@ -10,12 +10,13 @@
 
     &__address {
         margin-top: 5px;
-        font-size: 0.7rem;
+        font-size: 0.8rem;
     }
 
     &__message {
         font-size: 0.8rem;
         color: $font-color-brown;
         margin-top: $mp-xxs;
+        line-height: 1.3rem;
     }
 }

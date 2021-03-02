@@ -1,5 +1,11 @@
 .p-store {
-    @include marginContent;
+    margin-top: $header-height;
+    padding-top: $mp-xxs;
+    padding-bottom: $mp-md;
+
+    @include bp-960up {
+        padding-top: $mp-xs;
+    }
 
     &__container {
         @include content-width;
@@ -25,7 +31,7 @@
             @include bp-960up {
                 display: grid;
                 grid-template-columns: 1fr 200px;
-                grid-gap: 5px;
+                grid-gap: $mp-xxs;
             }
         }
     }

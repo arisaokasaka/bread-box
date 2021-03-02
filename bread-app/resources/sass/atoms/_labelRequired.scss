@@ -1,16 +1,5 @@
 label {
-    &.a-label-required {
-        &::before {
-            content: "必須";
-            position: absolute;
-            top: 3.5px;
-            left: -2rem;
-            background-color: $darkBrown;
-            color: white;
-            font-size: 0.6rem;
-            padding: 1px 3px;
-        }
-    }
+    position: relative;
 
     &.a-label-required__red {
         &::after {
@@ -19,11 +8,27 @@ label {
             color: $color-error;
             font-size: 0.7rem;
             padding-left: 4px;
+            font-weight: normal;
 
             @include bp-600up {
                 top: 0;
                 right: 8px;
             }
+        }
+    }
+
+    &.a-label-required__red--fitContent {
+        &::after {
+            content: "[必須]";
+            position: absolute;
+            display: block;
+            color: $color-error;
+            font-size: 0.7rem;
+            padding-left: 5px;
+            font-weight: normal;
+            top: 50%;
+            right: -37px;
+            transform: translateY(-51%);
         }
     }
 }

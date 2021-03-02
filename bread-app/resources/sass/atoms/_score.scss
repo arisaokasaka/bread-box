@@ -40,6 +40,10 @@
             margin-left: 10px;
             font-size: 0.8rem;
 
+            &__label {
+                display: none;
+            }
+
             & > a {
                 margin-left: 2px;
                 color: $darkGray;
@@ -58,36 +62,68 @@
             display: flex;
             align-items: center;
 
-            @include bp-960up {
-                flex-direction: center;
-                flex-wrap: wrap;
-            }
-
             &__result {
                 display: flex;
                 align-items: center;
+
+                &__stars {
+                    width: 114px;
+
+                    & span {
+                        font-size: 25px;
+                    }
+                }
+                & > h3 {
+                    margin-left: 5px;
+                }
             }
 
             &__comment {
                 display: flex;
                 align-items: center;
-                color: $lightGray;
-
-                @include bp-960up {
-                    margin-left: 0;
-                }
+                color: $darkGray;
             }
         }
     }
 }
 
-// 店舗ページのPC表示切り替え
-.p-store__container__content {
-    .m-store-subInfo__container__item {
-        .a-score {
-            display: none;
-            @include bp-960up {
-                display: block;
+// 店舗ページのサイドバー内のスタイル
+.m-store-sidebar {
+    .a-score {
+        display: none;
+
+        @include bp-960up {
+            display: block;
+
+            &__container {
+                align-items: flex-start;
+                flex-direction: column;
+                flex-wrap: wrap;
+
+                &__result {
+                    &__stars {
+                        width: 125px;
+
+                        & span {
+                            font-size: 27px;
+                        }
+                    }
+
+                    & > h3 {
+                        font-size: 22px;
+                    }
+                }
+
+                &__comment {
+                    margin-left: 5px;
+
+                    &__label {
+                        display: block;
+                        color: $darkGray;
+                        margin-right: 3px;
+                        margin-left: 3px;
+                    }
+                }
             }
         }
     }
@@ -100,6 +136,7 @@
             // 基本情報
             .a-score {
                 display: block;
+
                 @include bp-960up {
                     display: none;
                 }

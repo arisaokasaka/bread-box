@@ -1,7 +1,16 @@
-.m-store-subInfo-mobile {
+.m-store-sidebar {
+    display: none;
+
     &__container {
         &__item {
-            margin-top: 10px;
+            margin-top: 5px;
+            padding: $mp-xxs;
+            border: 1px solid #dfbc94;
+            border-radius: $base-radius;
+
+            &:first-child {
+                margin-top: 0;
+            }
 
             & > label {
                 color: $font-color-brown;
@@ -15,17 +24,11 @@
 
             & > p {
                 color: $font-color-brown;
-                font-size: 0.7rem;
-            }
-
-            &.btns_external {
-                display: flex;
-                margin-top: 15px;
+                font-size: 0.8rem;
             }
         }
     }
-
     @include bp-960up {
-        display: none;
+        display: block;
     }
 }

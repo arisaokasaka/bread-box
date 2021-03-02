@@ -209,20 +209,15 @@
 .a-btn-modificate {
     display: flex;
     justify-content: flex-end;
-    margin-top: $mp-xxs;
 
     a {
         display: flex;
         justify-content: center;
         align-items: center;
         background-color: $darkBrown;
-        width: 130px;
+        width: 150px;
         height: 2rem;
         border-radius: 20px;
-
-        @include bp-480up {
-            width: 200px;
-        }
 
         &:hover {
             background-color: $darkestBrown;
@@ -230,7 +225,7 @@
 
         span {
             color: $white;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             font-size: 0.8rem;
         }
     }
@@ -240,39 +235,36 @@
     }
 }
 
-// ホームページへのボタンとSNSへのボタン
-.a-btn-modal-sns,
-.a-btn-homepage > a {
-    display: inline-block;
-    width: 7rem;
-    height: 25px;
-    line-height: 25px;
-    font-size: 0.7rem;
-    background-color: $darkBrown;
-    text-align: center;
-    vertical-align: center;
-    border-radius: 2px;
-    font-weight: 450;
-    color: $white;
-    cursor: pointer;
-
-    &:hover {
-        background-color: $darkestBrown;
-    }
+// ホームページへのボタン
+.a-btn-homepage {
+    margin-right: 5px;
 
     @include bp-960up {
-        width: 168px;
+        margin: $mp-xxs 0 0 0;
+    }
+
+    & > a {
+        display: inline-block;
+        width: 8.5rem;
+        height: 2rem;
+        line-height: 2rem;
+        font-size: 0.7rem;
+        background-color: $darkBrown;
+        text-align: center;
+        border-radius: 25px;
+        color: $white;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $darkestBrown;
+        }
+
+        @include bp-960up {
+            margin: 0;
+            width: 168px;
+        }
     }
 }
-
-.a-btn-modal-sns {
-    border: none;
-
-    @include bp-960up {
-        margin-top: 2px;
-    }
-}
-
 // ログイン・検索・マイページボタン（アイコン）
 .a-btn-search_icon,
 .a-btn-logIn {
@@ -392,12 +384,28 @@
     }
 }
 
-// 店舗ページのログアウトボタン
-.m-store-edit-table__nav__others {
+// 店舗ページのログアウトボタン(モバイル)
+.m-store-edit-table__nav--mobile__content__others {
     .a-btn-logout {
-        display: static;
+        justify-content: flex-start;
         margin: 0;
-        margin-top: 3px;
+        margin-top: 8px;
+
+        & > a {
+            color: $black;
+            padding: 0;
+            font-size: 0.7rem;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+}
+
+// 店舗ページのログアウトボタン(PC)
+.m-store-edit-table__nav--pc__others {
+    .a-btn-logout {
+        justify-content: unset;
+        margin-top: 8px;
 
         & > a {
             color: $black;
@@ -412,9 +420,9 @@
 // レビューモーダルのボタン
 .a-btn-modal-review {
     display: inline-block;
-    width: 8.5rem;
-    height: 30px;
-    line-height: 30px;
+    width: 7rem;
+    height: 2rem;
+    line-height: 2rem;
     font-size: 0.7rem;
     background-color: $darkBrown;
     text-align: center;
@@ -437,9 +445,10 @@
     justify-content: center;
     width: 2.5rem;
     height: 2.5rem;
-    color: $darkGray;
+    color: $black;
     font-weight: 500;
     border-radius: 50%;
+    cursor: pointer;
 
     & > svg {
         font-size: 1.2rem;
@@ -448,6 +457,10 @@
 
     & > span {
         font-size: 0.5rem;
+    }
+
+    &:hover {
+        background-color: $lightBrown;
     }
 }
 
@@ -465,24 +478,53 @@
     &:hover {
         opacity: 0.88;
     }
+
+    &.full {
+        width: 100%;
+        max-width: 510px;
+
+        @include bp-600up {
+            width: 18rem;
+        }
+
+        @include bp-960up {
+            width: 7rem;
+        }
+    }
 }
 
 // メニュー編集ボタン
 .a-btn-editMenu {
-    @include bg_GradationBrown;
+    display: flex;
+    align-items: center;
     position: relative;
     color: $white;
     font-weight: 500;
     font-size: 0.8rem;
     border: none;
     border-radius: $sm-radius;
-    width: 5rem;
+    width: 1.6rem;
     height: 1.6rem;
     cursor: pointer;
+    @include bg_GradationBrown;
 
-    & > svg {
-        margin-right: 5px;
-        font-size: 0.7rem;
+    @include bp-960up {
+        width: 5rem;
+    }
+
+    & > span {
+        & > svg {
+            font-size: 0.7rem;
+        }
+
+        &:nth-child(2) {
+            display: none;
+            margin-left: 5px;
+
+            @include bp-960up {
+                display: block;
+            }
+        }
     }
 
     &:hover {
@@ -492,6 +534,8 @@
 
 // 削除ボタン
 .a-btn-deleteMenu {
+    display: flex;
+    align-items: center;
     background: linear-gradient(
         180deg,
         rgb(238, 238, 238) 0%,
@@ -503,13 +547,29 @@
     font-size: 0.8rem;
     border: none;
     border-radius: $sm-radius;
-    width: 5rem;
+    width: 1.6rem;
     height: 1.6rem;
+    margin-left: 5px;
     cursor: pointer;
 
-    & > svg {
-        margin-right: 5px;
-        font-size: 0.7rem;
+    @include bp-960up {
+        width: 5rem;
+    }
+
+    & > span {
+        & > svg {
+            font-size: 0.7rem;
+            margin-left: 1.5px;
+        }
+
+        &:nth-child(2) {
+            display: none;
+            margin-left: 5px;
+
+            @include bp-960up {
+                display: block;
+            }
+        }
     }
 
     &:hover {

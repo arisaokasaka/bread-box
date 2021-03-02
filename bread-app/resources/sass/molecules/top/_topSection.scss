@@ -1,0 +1,61 @@
+.m-top-section {
+    ul {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: $mp-xxs;
+        row-gap: $mp-xxs;
+        margin-top: $mp-xxs;
+
+        @include bp-480up {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        @include bp-600up {
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+
+        @include bp-960up {
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        }
+
+        @include bp-1280up {
+            column-gap: normal;
+            display: flex;
+            align-content: flex-start;
+            flex-wrap: wrap;
+            margin-top: 5px;
+        }
+
+        & > li {
+            border: 2px solid $brown;
+            border-radius: 25px;
+            height: 2.7rem;
+            width: 100%;
+
+            @include bp-1280up {
+                margin: 0 10px 0 0;
+                width: 8rem;
+            }
+
+            & > a {
+                display: block;
+                height: 100%;
+                width: 100%;
+                color: $brown;
+                line-height: 2.5rem;
+                text-align: center;
+                font-weight: 550;
+                font-size: 0.95rem;
+                cursor: pointer;
+            }
+
+            &:hover {
+                background-color: $brown;
+
+                & > a {
+                    color: $white;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,159 @@
+.m-search-sidebar {
+    &__btn {
+        display: inline-block;
+        width: 100%;
+        padding: 5px 0;
+        background-color: $darkBrown;
+        color: $white;
+        border-radius: 25px;
+        border: none;
+        text-align: center;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $darkestBrown;
+        }
+    }
+
+    &__item {
+        margin-bottom: $mp-xs;
+
+        & > h4 {
+            font-size: 1rem;
+            font-weight: bolder;
+            color: $font-color-brown;
+
+            & > svg {
+                margin-right: 4px;
+                font-size: 1.05rem;
+            }
+        }
+
+        & > ul {
+            display: grid;
+            margin-top: $mp-xxs;
+        }
+
+        & > input[type="text"] {
+            width: 100%;
+            height: 2rem;
+            line-height: 2rem;
+            margin-top: $mp-xxs;
+            border-radius: 25px;
+
+            &:focus {
+                @include focusShadow;
+            }
+        }
+    }
+}
+
+//PC検索画面の調整
+.p-search__container {
+    .m-search-sidebar {
+        display: none;
+
+        @include bp-600up {
+            display: block;
+            flex-basis: 24%;
+            margin-right: $mp-xxs;
+            padding: 0 $mp-xxs;
+            border-radius: $base-radius;
+
+            &__btn {
+                margin-bottom: $mp-xxs;
+                font-size: 0.9rem;
+            }
+
+            @include bp-960up {
+                flex-basis: 20%;
+            }
+
+            &__item {
+                & > h4 {
+                    border-bottom: 2px solid $font-color-brown;
+                    padding: 0 2px;
+
+                    & > svg {
+                        display: none;
+                    }
+                }
+
+                & > ul {
+                    & > li {
+                        font-size: 0.9rem;
+                        height: 1.5rem;
+                        input,
+                        label {
+                            cursor: pointer;
+                        }
+                    }
+                }
+
+                & > input[type="text"] {
+                    border: 1px solid $textGray;
+                    padding-left: 10px;
+                    font-size: 0.9rem;
+                }
+            }
+        }
+    }
+}
+
+//モバイル検索ページの調整
+.p-search-input-mobile {
+    .m-search-sidebar {
+        margin: 0;
+        padding: $mp-xxs;
+
+        &__btn {
+            margin: $mp-xxs 0;
+            font-size: 1rem;
+            height: 2rem;
+        }
+
+        &__item {
+            margin-bottom: 30px;
+            ul {
+                grid-template-columns: 1fr 1fr;
+                row-gap: 8px;
+                column-gap: 15px;
+
+                li {
+                    display: block;
+                    font-size: 1rem;
+
+                    input {
+                        display: none;
+
+                        & + label {
+                            position: relative;
+                            display: inline-block;
+                            background-color: $white;
+                            width: 100%;
+                            height: 2rem;
+                            line-height: 2rem;
+                            color: $gray;
+                            border: 1px solid $gray;
+                            border-radius: 25px;
+                            text-align: center;
+                            cursor: pointer;
+                        }
+
+                        &:checked + label {
+                            color: $brown;
+                            background-color: $lightBrown;
+                            border-color: $brown;
+                        }
+                    }
+                }
+            }
+
+            & > input[type="text"] {
+                border: 1px solid $gray;
+                font-size: 0.9rem;
+                padding-left: 12px;
+            }
+        }
+    }
+}

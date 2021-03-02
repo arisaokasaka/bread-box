@@ -169,7 +169,7 @@ const Modal_editSpirit: React.FC<infoProps> = ({SpiritInfo, btnName, funcType, m
                     <input type="hidden" name="funcType" value={funcType} ref={register}/>
                     <input type="hidden" name="menu_type" value={menuType} ref={register}/>
                     <div className="m-modalEditSpirit__form__item">
-                        <label htmlFor="img_spirit" className="a-label-required">画像を選択</label>
+                        <label htmlFor="img_spirit" className="a-label-required__red--fitContent">画像を選択</label>
                         {funcType === 'edit' && <span>新しい画像に変える場合のみ、選択してください。</span>}
                         <input
                             type="file"
@@ -181,7 +181,7 @@ const Modal_editSpirit: React.FC<infoProps> = ({SpiritInfo, btnName, funcType, m
                     </div>
                     
                     <div className="m-modalEditSpirit__form__item">
-                        <label htmlFor="content" className="a-label-required">内容</label>
+                        <label htmlFor="content" className="a-label-required__red--fitContent">内容</label>
                         <textarea
                             name="content"
                             placeholder={placeText}
@@ -195,6 +195,7 @@ const Modal_editSpirit: React.FC<infoProps> = ({SpiritInfo, btnName, funcType, m
                         <BtnSave
                             InputType={"submit"}
                             OnClickFunction={null}
+                            className={"full"}
                         />
                     </div>
                 </form>

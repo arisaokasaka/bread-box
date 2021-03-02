@@ -94,8 +94,8 @@ const Modal_editMenu: React.FC<MenuInfoProps> = ({menu}) =>{
     return(
         <div className="m-modalEditMenu">
             <button onClick={()=>setModal(true)} className="a-btn-editMenu">
-                <FontAwesomeIcon icon={faPen}/>
-                編集する
+                <span><FontAwesomeIcon icon={faPen}/></span>
+                <span>編集する</span>
             </button>
             <Modal
                 isOpen={modalIsOpen}
@@ -151,6 +151,7 @@ const Modal_editMenu: React.FC<MenuInfoProps> = ({menu}) =>{
                         <BtnSave
                             InputType={"submit"}
                             OnClickFunction={null}
+                            className={"full"}
                         />
                     </div>
                 </form>

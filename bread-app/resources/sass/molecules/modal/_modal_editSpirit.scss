@@ -1,14 +1,32 @@
 .m-modalEditSpirit {
+    width: 100%;
+
+    @include bp-960up {
+        width: fit-content;
+    }
+
     &__btn--edit {
         @include bg_GradationBrown;
         color: $white;
         border: none;
         border-radius: $sm-radius;
         font-weight: 500;
-        font-size: 0.8rem;
-        width: 7.5rem;
+        font-size: 0.9rem;
+        width: 100%;
+        max-width: 510px;
         height: 2rem;
+        margin-top: $mp-xxs;
         cursor: pointer;
+
+        @include bp-600up {
+            display: block;
+            width: 18rem;
+            margin: 0 auto;
+        }
+
+        @include bp-960up {
+            width: 7.5rem;
+        }
 
         &:hover {
             opacity: 0.9;
@@ -40,6 +58,7 @@
             & > label {
                 font-weight: 550;
                 color: $font-color-brown;
+                width: fit-content;
             }
 
             & > span {
@@ -56,13 +75,19 @@
                 border: 0.3px solid $textGray;
                 border-radius: $sm-radius;
                 padding: 2px 3px;
+                height: 20rem;
 
                 &:focus {
                     @include focusShadow;
                 }
 
                 @include bp-600up {
-                    width: 22rem;
+                    width: 32rem;
+                    height: 12rem;
+                }
+
+                @include bp-960up {
+                    width: 40rem;
                 }
             }
 
@@ -76,7 +101,7 @@
             display: flex;
             justify-content: center;
 
-            @include bp-600up {
+            @include bp-960up {
                 justify-content: flex-end;
             }
         }

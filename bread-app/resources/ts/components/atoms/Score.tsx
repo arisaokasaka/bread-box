@@ -31,7 +31,8 @@ const Score: React.FC<ScoreProps> = ({scoreInfo}) => {
                 </div>
                 <p className ="a-score__container__comment">
                     <FontAwesomeIcon icon={faCommentDots}/>
-                    <a>{count}件</a>
+                    <span className="a-score__container__comment__label">口コミ数</span>
+                    <a>{count}</a>件
                 </p>
             </div>
         </div>
