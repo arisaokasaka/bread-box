@@ -2710,14 +2710,18 @@ label.a-label-required__red--fitContent::after {
   flex-direction: column;
 }
 
+.m-userTable-favorite > p {
+  font-size: 0.9rem;
+}
+
 .m-userTable-favorite__order {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 10px;
 }
 
-.m-userTable-favorite > .m-store-summary {
-  display: grid;
+.m-userTable-interested > p {
+  font-size: 0.9rem;
 }
 
 .m-userTable-interested__order {
@@ -3934,7 +3938,7 @@ label.a-label-required__red--fitContent::after {
 
 .p-top__hero {
   padding-top: 64px;
-  background-image: url(/images/croissant.jpg?d285ba1c470395ec7f04064426490bfd);
+  background-image: url(/images/top_cover.jpg?d285ba1c470395ec7f04064426490bfd);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 65%;
@@ -4301,9 +4305,9 @@ label.a-label-required__red--fitContent::after {
 }
 
 .p-user {
-  margin: auto;
-  margin-top: 100px;
-  margin-bottom: 70px;
+  margin-top: 64px;
+  padding-top: 20px;
+  padding-bottom: 80px;
 }
 
 .p-user__container {

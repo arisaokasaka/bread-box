@@ -17032,19 +17032,25 @@ var StoreList = function StoreList(_a) {
       src: "/storage/store/" + el.user_uuid + "/thumbnail.jpg",
       alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
     }) : react_1["default"].createElement("img", {
-      src: "/images/no_image.jpg",
+      src: "/images/no_image_thumbnail.png",
       alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
-    })), react_1["default"].createElement("div", {
+    })), el.menu1 && react_1["default"].createElement("div", {
       className: "m-store-list__item--pc__images__sub"
-    }, el.menu1 && react_1["default"].createElement("img", {
+    }, react_1["default"].createElement("img", {
       src: "/storage/store/" + el.user_uuid + "/menu/item_1.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
-    }), el.menu2 && react_1["default"].createElement("img", {
+    }), el.menu2 ? react_1["default"].createElement("img", {
       src: "/storage/store/" + el.user_uuid + "/menu/item_2.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
-    }), el.menu3 && react_1["default"].createElement("img", {
+    }) : react_1["default"].createElement("img", {
+      src: "/images/no_image_menu_1.png",
+      alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
+    }), el.menu3 ? react_1["default"].createElement("img", {
       src: "/storage/store/" + el.user_uuid + "/menu/item_3.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
+    }) : react_1["default"].createElement("img", {
+      src: "/images/no_image_menu_2.png",
+      alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
     }))), react_1["default"].createElement("div", {
       className: "m-store-list__item__container"
     }, react_1["default"].createElement("div", {
@@ -17077,13 +17083,19 @@ var StoreList = function StoreList(_a) {
       src: "/storage/store/" + el.user_uuid + "/thumbnail.jpg",
       alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
     }) : react_1["default"].createElement("img", {
-      src: "/images/no_image.jpg",
+      src: "/images/no_image_thumbnail.png",
       alt: "\u30D1\u30F3\u306E\u30E1\u30A4\u30F3\u753B\u50CF"
-    }), el.menu1 && react_1["default"].createElement("img", {
+    }), el.menu1 ? react_1["default"].createElement("img", {
       src: "/storage/store/" + el.user_uuid + "/menu/item_1.jpg",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
-    }), el.menu2 && react_1["default"].createElement("img", {
+    }) : react_1["default"].createElement("img", {
+      src: "/images/no_image_menu_1.png",
+      alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
+    }), el.menu2 ? react_1["default"].createElement("img", {
       src: "/storage/store/" + el.user_uuid + "/menu/item_2.jpg",
+      alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
+    }) : react_1["default"].createElement("img", {
+      src: "/images/no_image_menu_2.png",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
     }))), el.message && react_1["default"].createElement("p", {
       className: "m-store-list__item__container__explanation"
@@ -17210,7 +17222,7 @@ var Store_pickup = function Store_pickup() {
       src: "/storage/store/" + el.user_uuid + "/thumbnail.jpg",
       alt: "\u5E97\u8217\u753B\u50CF"
     }) : react_1["default"].createElement("img", {
-      src: "/images/no_image.jpg",
+      src: "/images/no_image_thumbnail.png",
       alt: "\u5E97\u8217\u753B\u50CF"
     }), react_1["default"].createElement("p", null, el.name));
   })));
@@ -21197,7 +21209,7 @@ var StoreReview = function StoreReview(_a) {
       src: "/storage/user/" + el.user_uuid + "/profile.jpg",
       alt: "\u6295\u7A3F\u8005\u306E\u30A2\u30A4\u30B3\u30F3"
     }) : react_1["default"].createElement("img", {
-      src: "/images/no_image_user.jpg",
+      src: "/images/no_image_user.png",
       alt: "\u6295\u7A3F\u8005\u306E\u30A2\u30A4\u30B3\u30F3"
     }), react_1["default"].createElement("div", {
       className: "m-review__item__content"
@@ -21745,7 +21757,7 @@ var UserProf = function UserProf() {
     src: "/storage/user/" + state.uuid + "/profile.jpg",
     alt: "\u30D7\u30ED\u30D5\u30A3\u30FC\u30EB\u753B\u50CF"
   }) : react_1["default"].createElement("img", {
-    src: "/images/no_image.jpg",
+    src: "/images/no_image_user.png",
     alt: "\u30D7\u30ED\u30D5\u30A3\u30FC\u30EB\u753B\u50CF"
   }), react_1["default"].createElement("div", {
     className: "m-user-prof__container__content__text"
@@ -23954,9 +23966,12 @@ var StorePage = function StorePage() {
     className: "p-store__container"
   }, react_1["default"].createElement("div", {
     className: "p-store__container__img"
-  }, react_1["default"].createElement("img", {
+  }, storeInfo['header'] ? react_1["default"].createElement("img", {
     src: "/storage/store/" + user_uuid + "/header.jpg",
     alt: "\u30C8\u30C3\u30D7\u753B\u50CF"
+  }) : react_1["default"].createElement("img", {
+    src: "/images/no_image_header.png",
+    alt: "\u5E97\u8217\u30D8\u30C3\u30C0\u30FC"
   })), react_1["default"].createElement("div", {
     className: "p-store__container__content"
   }, react_1["default"].createElement("div", {
