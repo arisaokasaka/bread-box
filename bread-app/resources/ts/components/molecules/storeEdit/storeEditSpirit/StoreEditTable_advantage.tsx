@@ -27,7 +27,9 @@ const StoreEditTable_advantage: React.FC = () => {
                     <div className = "m-storeEdit-spirit__container">
                         <div className = "m-storeEdit-spirit__container__item">
                             <label>登録画像</label>
+                            {el.image_advantage ?
                             <img src={"storage/store/" + state.uuid + "/menu/advantage.jpg?" + time_current} alt="こだわりの写真"/>
+                            : <p>まだ登録されていません。</p>}
                         </div>
                         <div className = "m-storeEdit-spirit__container__item">
                             <label>内容</label>

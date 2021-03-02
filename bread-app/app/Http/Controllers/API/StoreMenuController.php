@@ -76,15 +76,18 @@ class StoreMenuController extends Controller
             $store_uuid = $request->input('store_uuid');
             $path = '/public/store/' . $store_uuid . '/menu';
             $fileSave = $request->file('img_spirit');
-            switch($menu_type){
-                case 2:
-                    $fileName = 'advantage.jpg';
-                    Storage::putFileAs($path, $fileSave, $fileName, 'public');
-                break;
-                case 3:
-                    $fileName = 'spirit.jpg';
-                    Storage::putFileAs($path, $fileSave, $fileName, 'public');
-                break;
+
+            if($fileSave){
+                switch($menu_type){
+                    case 2:
+                        $fileName = 'advantage.jpg';
+                        Storage::putFileAs($path, $fileSave, $fileName, 'public');
+                    break;
+                    case 3:
+                        $fileName = 'spirit.jpg';
+                        Storage::putFileAs($path, $fileSave, $fileName, 'public');
+                    break;
+                }
             }
         }
     }
@@ -100,6 +103,8 @@ class StoreMenuController extends Controller
         $get_info = $store_menu->index_menuInfo($request->input('store_uuid'));
         foreach($get_info as $menu){
             $menu['image_menu'] = Storage::exists("/public/store/" . $menu->store_uuid . "/menu/item_" . $menu->bread_order . ".jpg");
+            $menu['image_advantage'] = Storage::exists("/public/store/" . $menu->store_uuid . "/menu/advantage.jpg");
+            $menu['image_spirit'] = Storage::exists("/public/store/" . $menu->store_uuid . "/menu/spirit.jpg");
         }
         return $get_info;
     }

@@ -27,7 +27,9 @@ const StoreEditTable_spirit: React.FC = () => {
                     <div className = "m-storeEdit-spirit__container">
                         <div className = "m-storeEdit-spirit__container__item">
                             <label>登録画像</label>
+                            {el.image_spirit ?
                             <img src={"storage/store/" + state.uuid + "/menu/spirit.jpg?" + time_current} alt="思いが伝わる写真"/>
+                            : <p>まだ登録されていません。</p>}
                         </div>
                         <div className = "m-storeEdit-spirit__container__item">
                             <label>内容</label>
