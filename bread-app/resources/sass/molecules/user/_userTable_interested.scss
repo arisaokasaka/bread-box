@@ -1,4 +1,8 @@
 .m-userTable-interested {
+    & > p {
+        font-size: 0.9rem;
+    }
+
     &__order {
         display: flex;
         justify-content: flex-end;
