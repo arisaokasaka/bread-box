@@ -93,9 +93,7 @@ const Search_sidebar: React.FC<Props> = ({click_function}) => {
                     })}
                 </ul>
             </div>
-            <input onClick={search_url} className="m-search-sidebar__btn" readOnly>
-                絞り込む
-            </input>
+            <input onClick={search_url} className="m-search-sidebar__btn" value="絞り込む" readOnly/>
         </div>
     )
 }

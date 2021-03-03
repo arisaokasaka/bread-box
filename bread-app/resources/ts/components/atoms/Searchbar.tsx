@@ -28,7 +28,7 @@ const Searchbar: React.FC<TextProps> = ({text}) => {
             {text && 
                 <Link to={{
                     pathname: '/search',
-                    search: '?key=' + keyword + '&id=' + state.uuid
+                    search: '?id=' + state.uuid + (keyword ? "&key=" + keyword : '')
                     }}
                     onClick = {onClick_deleteValue}
                 >
@@ -37,7 +37,7 @@ const Searchbar: React.FC<TextProps> = ({text}) => {
             {text === null &&
                 <Link to={{
                     pathname: '/search',
-                    search: '?key=' + keyword + '&id=' + state.uuid
+                    search: '?id=' + state.uuid + (keyword ? "&key=" + keyword : '')
                     }}
                     onClick = {onClick_deleteValue}
                 >

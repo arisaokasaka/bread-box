@@ -28,39 +28,47 @@ class Store extends Model
     public function find_keyword($keyword){
         $query = $this
         ->newQuery()
-        ->leftjoin('users', 'stores.user_uuid', '=', 'users.uuid');
+        ->leftjoin('users', 'stores.user_uuid', '=', 'users.uuid')
+        ->leftjoin('store_menus', 'stores.user_uuid', '=', 'store_menus.store_uuid');
 
         if($keyword){
+            $query = 
             $query
-            ->leftjoin('store_menus', 'stores.user_uuid', '=', 'store_menus.store_uuid')
-            ->where('stores.message', 'ilike', '%' .$keyword. '%')
-            ->orWhere('store_menus.bread_name', 'ilike', '%' .$keyword. '%')
-            ->orWhere('store_menus.bread_kind', 'ilike', '%' .$keyword. '%')
-            ->orWhere('store_menus.bread_detail', 'ilike', '%' .$keyword. '%')
-            ->orWhere('store_menus.advantage', 'ilike', '%' .$keyword. '%')
-            ->orWhere('store_menus.spirit', 'ilike', '%' .$keyword. '%')
-            ->orWhere('users.name', 'ilike', '%' .$keyword. '%')
-            ->orWhere('users.address', 'ilike', '%' .$keyword. '%')
+            ->where(function($query) use ($keyword) {
+                $query
+                ->orWhere('stores.message', 'ilike', '%' .$keyword. '%')
+                ->orWhere('store_menus.bread_name', 'ilike', '%' .$keyword. '%')
+                ->orWhere('store_menus.bread_kind', 'ilike', '%' .$keyword. '%')
+                ->orWhere('store_menus.bread_detail', 'ilike', '%' .$keyword. '%')
+                ->orWhere('store_menus.advantage', 'ilike', '%' .$keyword. '%')
+                ->orWhere('store_menus.spirit', 'ilike', '%' .$keyword. '%')
+                ->orWhere('users.name', 'ilike', '%' .$keyword. '%')
+                ->orWhere('users.address', 'ilike', '%' .$keyword. '%');
+            })
             ->select([
                 'users.name',
                 'users.address',
                 'stores.user_uuid',
+                'store_menus.bread_kind',
                 'stores.business_day',
                 'stores.business_memo',
                 'stores.message',
             ]);
-        }else{
+        } else {
+            $query = 
             $query
             ->select([
                 'users.name',
                 'users.address',
                 'stores.user_uuid',
+                'store_menus.bread_kind',
+
                 'stores.business_day',
                 'stores.business_memo',
                 'stores.message',
             ]);
         }
-        return $query;
+        return $query->get();
     }
 
     public function search_by_district($district) {

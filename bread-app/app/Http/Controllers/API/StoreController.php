@@ -27,21 +27,24 @@ class StoreController extends Controller
     const storage_header = '/header.jpg';
     const storage_menu = '/menu/item_';
     public function search_store(Request $request) {
-        Log::info($request);
         $store = new Store();
         $user = new User();
         $review = new Review();
+        
         $keyword = $request->input('key');
         $district = $request->input('di');
         $bread_kind = $request->input('bk');
         $user_uuid = $request->input('id');
+        
         $district && $array_district = explode('-', $district);
         $bread_kind && $array_bread_kind = explode('-', $bread_kind);
         
-        $result = [];
-        $get_info = [];
         $check_uuid = [];
         $check_user_uuid = $user_uuid !== 'null' && $user_uuid;
+        
+        $get_info = [];
+        $result = [];
+
         if($check_user_uuid) {
             if($user_uuid) {
                 $favorite_info = $user->index_favorite($user_uuid);
@@ -57,56 +60,56 @@ class StoreController extends Controller
             $array_keyword = explode(' ', $keyword);
             
             foreach($array_keyword as $word){
-                $get_info = $store->find_keyword($word);
-            
-                if($get_info) {
-                    foreach($get_info as $el){
-                        if(!(in_array($el->user_uuid, $check_uuid))) {
-                            array_push($check_uuid, $el->user_uuid);
-                            array_push($result, $el);
-                        }
-                    }
+                $tmp_get_info = $store->find_keyword($word);
+                foreach($tmp_get_info as $el) {
+                    array_push($get_info, $el);
                 }
             }
-        }else if($district){
-            if($bread_kind){
-                foreach($array_district as $el){
-                    $get_info = $store->search_by_district($el);
-                    foreach($array_bread_kind as $el){
-                        $get_info = $store->search_by_bread($el);
-                        if($get_info) {
-                            foreach($get_info as $el){
-                                if(!(in_array($el->user_uuid, $check_uuid))) {
-                                    array_push($check_uuid, $el->user_uuid);
-                                    array_push($result, $el);
-                                }
-                            }
-                        }
-                    }
-                }
-            }else{
-                foreach($array_district as $el){
-                    $result = $store->search_by_district($el);
-                }
-            }
-        }else if($bread_kind){
-            foreach($array_bread_kind as $el){
-                $get_info = $store->search_by_bread($el);
-                
-                if($get_info) {
-                    foreach($get_info as $el){
-                        if(!(in_array($el->user_uuid, $check_uuid))) {
-                            array_push($check_uuid, $el->user_uuid);
-                            array_push($result, $el);
-                        }
-                    }
-                }
-            }
-        }else{
-            $result = $store->find_keyword("")->get();
+        } else {
+            $get_info = $store->find_keyword("");
         }
 
-        foreach($result as $store) {
+        $result = $get_info;
+
+        if($district){
+            $tmp_result = [];
+            foreach($result as $el) {
+                for($i = 0; $i < count($array_district); $i++) {
+                    if($array_district[$i] === '') continue;
+                    if(strpos($el->address, $array_district[$i])) {
+                        array_push($tmp_result, $el);
+                        break;
+                    } 
+                }
+            }
+            $result = $tmp_result;
+        }
+        if($bread_kind){
+            $tmp_result = [];
+            foreach($result as $el) {
+                for($i = 0; $i < count($array_bread_kind); $i++) {
+                    if($array_bread_kind[$i] === '') continue;
+                    if($el->bread_kind === $array_bread_kind[$i]) {
+                        array_push($tmp_result, $el);
+                        break;
+                    } 
+                }
+            }
+            $result = $tmp_result;
+        } 
+
+        $real_result = [];
+
+        if($result) {
+            foreach($result as $el){
+                if(!(in_array($el->user_uuid, $check_uuid))) {
+                    array_push($check_uuid, $el->user_uuid);
+                    array_push($real_result, $el);
+                }
+            }
+        }    
+
+        foreach($real_result as $store) {
             $store['thumbnail'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_thumbnail);
             $store['menu1'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_menu . '1.jpg');
             $store['menu2'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_menu . '2.jpg');
@@ -145,7 +148,8 @@ class StoreController extends Controller
                 $store['scoreInfo'] = array( 'score' => 0, 'count' => 0);
             }
         }
-        return $result;
+
+        return $real_result;
     }
 
     /**
@@ -265,7 +269,7 @@ class StoreController extends Controller
         foreach($result as $result_el){
             $result_el['thumbnail'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_thumbnail);
         }
-        
+
         return $result;
     }
     /**
