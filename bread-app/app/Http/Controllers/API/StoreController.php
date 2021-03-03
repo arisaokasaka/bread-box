@@ -27,15 +27,17 @@ class StoreController extends Controller
     const storage_header = '/header.jpg';
     const storage_menu = '/menu/item_';
     public function search_store(Request $request) {
+        Log::info($request);
         $store = new Store();
         $user = new User();
         $review = new Review();
         $keyword = $request->input('key');
         $district = $request->input('di');
-        $bread_kind = $request->input('br');
+        $bread_kind = $request->input('bk');
         $user_uuid = $request->input('id');
-        $district && $array_district = explode('&', $district);
-        $bread_kind && $array_bread_kind = explode('&', $district);
+        $district && $array_district = explode('-', $district);
+        $bread_kind && $array_bread_kind = explode('-', $bread_kind);
+        
         $result = [];
         $get_info = [];
         $check_uuid = [];
@@ -101,7 +103,7 @@ class StoreController extends Controller
                 }
             }
         }else{
-            $result = $store->find_keyword("");
+            $result = $store->find_keyword("")->get();
         }
 
         foreach($result as $store) {
@@ -225,18 +227,47 @@ class StoreController extends Controller
      */
     public function store_ranking(Request $request) {
         $store = new Store();
+        $review = new Review();
         $count = $request->input('count');
-        $get_info = $store->store_ranking($count);
-        
-        if(!$get_info){
-            $get_info = $store->store_pickup($count);
-        }
-        foreach($get_info as $store){
-            $store['thumbnail'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_thumbnail);
-        }
-        return $get_info;
-    }
+        $store_list = $store->get_all_store_uuid();
 
+        if($store_list){
+            $store_array = [];
+            foreach($store_list as $el){
+                $star_list = $review->get_star($el->user_uuid);
+                
+                if(count($star_list)!==0){
+                    $score_total = 0;
+                    $els = 0;
+                
+                    foreach($star_list as $item) {
+                        $score_total = $score_total + $item['star'];
+                        $els = $els + 1;
+                    }
+                    $el['score'] = $score_total/$els;
+                }else{
+                    $el['score'] = 0;
+                }
+                array_push($store_array, $el);
+            }
+
+            foreach($store_array as $key => $value){
+                $sort_keys[$key] = $value['score'];
+            }
+            
+            array_multisort($sort_keys, SORT_DESC, $store_array);
+            $result = array_slice($store_array, 0, $count);
+    
+        }else{
+            $result = $store->store_pickup($count);
+        }
+        
+        foreach($result as $result_el){
+            $result_el['thumbnail'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_thumbnail);
+        }
+        
+        return $result;
+    }
     /**
      * 【更新】店舗基本情報
      *
