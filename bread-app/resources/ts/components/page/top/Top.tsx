@@ -20,12 +20,12 @@ const Top: React.FC = () => {
             </div>
             <main className="p-top__content">
                 <Top_section 
-                    key="content"
+                    kind="district"
                     sectionTitle="エリアから探す"
                     sectionContent={districts.districts}
                 />
                 <Top_section 
-                    key="kind"
+                    kind="bread_kind"
                     sectionTitle="パンの種類から探す"
                     sectionContent={bread_kinds.bread_kinds}
                 />

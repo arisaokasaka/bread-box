@@ -21688,7 +21688,8 @@ var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_mod
 var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
 var Top_section = function Top_section(_a) {
-  var sectionTitle = _a.sectionTitle,
+  var kind = _a.kind,
+      sectionTitle = _a.sectionTitle,
       sectionContent = _a.sectionContent;
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
   return react_1["default"].createElement("div", {
@@ -21696,10 +21697,15 @@ var Top_section = function Top_section(_a) {
   }, react_1["default"].createElement("h2", null, sectionTitle), react_1["default"].createElement("ul", null, sectionContent.map(function (el) {
     return react_1["default"].createElement("li", {
       key: 'section_' + el.id
-    }, react_1["default"].createElement(react_router_dom_1.Link, {
+    }, kind === "district" && react_1["default"].createElement(react_router_dom_1.Link, {
       to: {
         pathname: '/search',
-        search: '?key=' + el.name + '&id=' + state.uuid
+        search: '?id=' + state.uuid + '&di=' + el.name
+      }
+    }, el.name), kind === "bread_kind" && react_1["default"].createElement(react_router_dom_1.Link, {
+      to: {
+        pathname: '/search',
+        search: '?id=' + state.uuid + '&bk=' + el.name
       }
     }, el.name));
   })));
@@ -24121,11 +24127,11 @@ var Top = function Top() {
   }))), react_1["default"].createElement("main", {
     className: "p-top__content"
   }, react_1["default"].createElement(top_section_1["default"], {
-    key: "content",
+    kind: "district",
     sectionTitle: "\u30A8\u30EA\u30A2\u304B\u3089\u63A2\u3059",
     sectionContent: Districts_1["default"].districts
   }), react_1["default"].createElement(top_section_1["default"], {
-    key: "kind",
+    kind: "bread_kind",
     sectionTitle: "\u30D1\u30F3\u306E\u7A2E\u985E\u304B\u3089\u63A2\u3059",
     sectionContent: Bread_kinds_1["default"].bread_kinds
   }), react_1["default"].createElement(Store_pickup_1["default"], null), react_1["default"].createElement(StoreRanking_1["default"], null)), react_1["default"].createElement("footer", {

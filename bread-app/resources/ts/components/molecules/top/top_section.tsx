@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import { UserAuthContext } from '../../../contexts/UserAuthContext';
 
 type Props = {
-    key?: string;
+    kind: string;
     sectionTitle?: string;
     sectionContent? :any;
 }
 
-const Top_section: React.FC<Props> = ({sectionTitle, sectionContent}) => {
+const Top_section: React.FC<Props> = ({kind, sectionTitle, sectionContent}) => {
     const { state } = useContext(UserAuthContext);
 
     return (
@@ -19,13 +19,24 @@ const Top_section: React.FC<Props> = ({sectionTitle, sectionContent}) => {
                     (el)=>{
                         return (
                         <li key={'section_' + el.id}>
-                            <Link to={{
-                                pathname: '/search',
-                                search: '?key=' + el.name + '&id=' + state.uuid
-                                }}
-                            >
-                            {el.name}
-                            </Link>
+                            {kind==="district" &&
+                                <Link to={{
+                                    pathname: '/search',
+                                    search: '?id=' + state.uuid + '&di=' + el.name
+                                    }}
+                                >
+                                {el.name}
+                                </Link>
+                            }
+                            {kind==="bread_kind" &&
+                                <Link to={{
+                                    pathname: '/search',
+                                    search: '?id=' + state.uuid + '&bk=' + el.name
+                                    }}
+                                >
+                                {el.name}
+                                </Link>
+                            }
                         </li>);
                     })}
             </ul>

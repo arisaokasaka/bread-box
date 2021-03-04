@@ -21,6 +21,7 @@
 @import "./atoms/pagination";
 @import "./atoms/sort_selection";
 @import "./atoms/link_sns";
+@import "./atoms/search_bar";
 
 //molecules
 @import "./molecules/modal/reactModal";
@@ -32,7 +33,6 @@
 @import "./molecules/top/topSection";
 @import "./molecules/top/storeRanking";
 @import "./molecules/search/search_sidebar";
-@import "./molecules/search/search_bar";
 @import "./molecules/store/store_menu";
 @import "./molecules/store/store_spirit";
 @import "./molecules/store/store_contents";
