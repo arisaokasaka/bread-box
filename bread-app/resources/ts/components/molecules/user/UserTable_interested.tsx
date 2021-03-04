@@ -65,9 +65,9 @@ const UserTable_interested: React.FC = () => {
         <div className = "m-userTable-interested">
             <div className = "m-userTable-interested__order a-sort-selection">
                 <select onChange={(e)=>changeSorting(e.target.value)}>
+                    <option value="default">標準</option>
                     <option value="score_descend">評価が高い順</option>
                     <option value="review_descend">口コミ数順</option>
-                    <option value="default">標準</option>
                 </select>
             </div>
             {interested[0]===undefined ? <p>行ってみたい店舗はまだありません。</p>

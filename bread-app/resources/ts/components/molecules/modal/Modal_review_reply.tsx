@@ -7,9 +7,10 @@ import { faTimes, faReply } from "@fortawesome/free-solid-svg-icons";
 
 type ReviewInfoProps = ({
     review_uuid: string
+    update_function: Function
 })
 
-const ModalReviewReply: React.FC<ReviewInfoProps> = ({review_uuid}) =>{
+const ModalReviewReply: React.FC<ReviewInfoProps> = ({review_uuid, update_function}) =>{
     const [ isModalOpen, setModal ] = useState(false);
     const { register, handleSubmit, errors } = useForm();
     const customStyles = {
@@ -28,6 +29,7 @@ const ModalReviewReply: React.FC<ReviewInfoProps> = ({review_uuid}) =>{
         .then(res => {
             setModal(false);
             alert('返信しました。')
+            update_function();
         })
         .catch(err => {
             alert('返信に失敗しました。')

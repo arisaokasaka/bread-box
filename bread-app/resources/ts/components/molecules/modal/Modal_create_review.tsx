@@ -8,10 +8,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faPen } from "@fortawesome/free-solid-svg-icons";
 
 type StoreInfoProps = ({
-    store_uuid: string
+    store_uuid: string,
+    update_function: Function
 })
 
-const ModalCreateReview: React.FC<StoreInfoProps> = ({store_uuid}) =>{
+const ModalCreateReview: React.FC<StoreInfoProps> = ({store_uuid, update_function}) =>{
     const { state } = useContext(UserAuthContext);
     const history = useHistory();
     const [ isModalOpen, setModal ] = useState(false);
@@ -32,6 +33,7 @@ const ModalCreateReview: React.FC<StoreInfoProps> = ({store_uuid}) =>{
         .then(res => {
             setModal(false);
             alert('口コミを投稿しました。')
+            update_function();
         })
         .catch(err => {
             alert('口コミの投稿に失敗しました。')

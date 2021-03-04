@@ -40,6 +40,7 @@ const UserTable_review: React.FC = () => {
         axios.post("/api/delete_review", {review_uuid: review_uuid})
         .then(res => {
             alert('削除しました。')
+            getUserReview();
         })
         .catch(err => {
             alert('削除に失敗しました。')
@@ -124,10 +125,10 @@ const UserTable_review: React.FC = () => {
                 
                 <div className="m-userTable-review__heading__order a-sort-selection">
                     <select onChange={(e)=>changeSorting(e.target.value)}>
+                        <option value="default">標準</option>
                         <option value="star">評価が高い順</option>
                         <option value="date_from_new">新しい順</option>
                         <option value="date_from_old">投稿順</option>
-                        <option value="default">標準</option>
                     </select>
                 </div>
             </div>
@@ -148,6 +149,7 @@ const UserTable_review: React.FC = () => {
                                     comment = {el.comment}
                                     star = {el.star}
                                     index = {index}
+                                    update_function = {getUserReview}
                                 />
                                 <button className="m-userTable-review__item__buttons__dialogue__btn--delete" onClick={()=>delete_review(el.uuid, index)}>
                                     削除

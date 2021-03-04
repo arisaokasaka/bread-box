@@ -66,9 +66,9 @@ const UserTable_favorite = () => {
         <div className = "m-userTable-favorite">
             <div className = "m-userTable-favorite__order a-sort-selection">
                 <select onChange={(e)=>changeSorting(e.target.value)}>
+                    <option value="default">標準</option>
                     <option value="score_descend">評価が高い順</option>
                     <option value="review_descend">口コミ数順</option>
-                    <option value="default">標準</option>
                 </select>
             </div>
             {favorite[0]===undefined ? <p>お気に入り店舗はまだありません。</p>
