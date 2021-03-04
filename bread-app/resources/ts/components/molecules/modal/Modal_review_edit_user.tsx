@@ -10,9 +10,10 @@ type ReviewInfoProps = ({
     review_uuid: string
     star: number
     index?: number
+    update_function: Function
 })
 
-const ModalReviewEdit_user: React.FC<ReviewInfoProps> = ({comment, review_uuid, star, index}) =>{
+const ModalReviewEdit_user: React.FC<ReviewInfoProps> = ({comment, review_uuid, star, index, update_function}) =>{
     const [ isModalOpen, setModal ] = useState(false);
     const [ textarea_count, setTextarea_count ] = useState(0);
     const { register, handleSubmit, errors } = useForm();
@@ -32,6 +33,7 @@ const ModalReviewEdit_user: React.FC<ReviewInfoProps> = ({comment, review_uuid, 
         .then(res => {
             setModal(false);
             alert('口コミを修正しました。')
+            update_function();
         })
         .catch(err => {
             alert('口コミの修正に失敗しました。')

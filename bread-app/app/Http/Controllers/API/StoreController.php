@@ -267,7 +267,7 @@ class StoreController extends Controller
         }
         
         foreach($result as $result_el){
-            $result_el['thumbnail'] = Storage::exists(self::storage_path . $store->user_uuid . self::storage_thumbnail);
+            $result_el['thumbnail'] = Storage::exists(self::storage_path . $result_el['user_uuid'] . self::storage_thumbnail);
         }
 
         return $result;

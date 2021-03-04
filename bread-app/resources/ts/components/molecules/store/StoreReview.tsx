@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import ScoreUser from '../../atoms/ScoreUser';
-import ModalCreateReview from '../../molecules/modal/Modal_review';
+import ModalCreateReview from '../modal/Modal_create_review';
 import ModalReviewReply from '../../molecules/modal/Modal_review_reply';
 import ModalReviewReplyEdit from '../../molecules/modal/Modal_review_reply_edit';
 import { UserAuthContext } from '../../../contexts/UserAuthContext';
@@ -132,16 +132,17 @@ const StoreReview: React.FC<ReviewProps> = ({store_uuid}) => {
                     <p>全<span>{review_count}</span>件</p>
                     <div className="m-review__heading__former__order a-sort-selection">
                         <select onChange={(e)=>changeSorting(e.target.value)}>
+                            <option value="default">標準</option>
                             <option value="star_from_high">評価が高い順</option>
                             <option value="star_from_low">評価が低い順</option>
                             <option value="date_from_old">投稿順</option>
                             <option value="date_from_new">新しい順</option>
-                            <option value="default">標準</option>
                         </select>
                     </div>
                 </div>
                 <ModalCreateReview
                     store_uuid={store_uuid}
+                    update_function={getReviewInfo}
                 />
             </div>
             {message_no_review}
@@ -171,6 +172,7 @@ const StoreReview: React.FC<ReviewProps> = ({store_uuid}) => {
                                         <ModalReviewReplyEdit
                                             review_uuid={el.uuid}
                                             reply={el.reply}
+                                            update_function={getReviewInfo}
                                         />
                                         <button className="a-btn-delete-reply" onClick={()=>delete_review_reply(el.uuid)}>削除する</button>
                                     </div>
@@ -180,6 +182,7 @@ const StoreReview: React.FC<ReviewProps> = ({store_uuid}) => {
                             <div className="m-review__item__btn">
                                 <ModalReviewReply
                                     review_uuid={el.uuid}
+                                    update_function={getReviewInfo}
                                 />
                             </div>
                         }
