@@ -65,7 +65,8 @@ const Search_sidebar: React.FC<Props> = ({click_function}) => {
                     type="text"
                     placeholder="例:あんパン、店名"
                     value={keyword}
-                    onChange = {onChangeKeyword}/>
+                    onChange = {onChangeKeyword}
+                />
             </div>
             <div className="m-search-sidebar__item">
                 <h4><FontAwesomeIcon icon={faMapMarkerAlt}/>エリアから探す</h4>
