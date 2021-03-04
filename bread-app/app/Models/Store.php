@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class Store extends Model
 {
@@ -27,34 +28,41 @@ class Store extends Model
     public function find_keyword($keyword){
         $query = $this
         ->newQuery()
-        ->leftjoin('users', 'stores.user_uuid', '=', 'users.uuid');
+        ->leftjoin('users', 'stores.user_uuid', '=', 'users.uuid')
+        ->leftjoin('store_menus', 'stores.user_uuid', '=', 'store_menus.store_uuid');
 
         if($keyword){
+            $query = 
             $query
-            ->leftjoin('store_menus', 'stores.user_uuid', '=', 'store_menus.store_uuid')
-            ->where('stores.message', 'like', '%' .$keyword. '%')
-            ->orWhere('store_menus.bread_name', 'like', '%' .$keyword. '%')
-            ->orWhere('store_menus.bread_kind', 'like', '%' .$keyword. '%')
-            ->orWhere('store_menus.bread_detail', 'like', '%' .$keyword. '%')
-            ->orWhere('store_menus.advantage', 'like', '%' .$keyword. '%')
-            ->orWhere('store_menus.spirit', 'like', '%' .$keyword. '%')
-            ->orWhere('users.name', 'like', '%' .$keyword. '%')
-            ->orWhere('users.address', 'like', '%' .$keyword. '%')
+            ->where(function($query) use ($keyword) {
+                $query
+                ->orWhere('stores.message', 'ilike', '%' .$keyword. '%')
+                ->orWhere('store_menus.bread_name', 'ilike', '%' .$keyword. '%')
+                ->orWhere('store_menus.bread_kind', 'ilike', '%' .$keyword. '%')
+                ->orWhere('store_menus.bread_detail', 'ilike', '%' .$keyword. '%')
+                ->orWhere('store_menus.advantage', 'ilike', '%' .$keyword. '%')
+                ->orWhere('store_menus.spirit', 'ilike', '%' .$keyword. '%')
+                ->orWhere('users.name', 'ilike', '%' .$keyword. '%')
+                ->orWhere('users.address', 'ilike', '%' .$keyword. '%');
+            })
             ->select([
                 'users.name',
                 'users.address',
                 'stores.user_uuid',
+                'store_menus.bread_kind',
                 'stores.business_day',
                 'stores.business_memo',
                 'stores.message',
-            ])
-            ->get();
-        }else{
+            ]);
+        } else {
+            $query = 
             $query
             ->select([
                 'users.name',
                 'users.address',
                 'stores.user_uuid',
+                'store_menus.bread_kind',
+
                 'stores.business_day',
                 'stores.business_memo',
                 'stores.message',
@@ -67,7 +75,7 @@ class Store extends Model
         $query_district = $this
         ->newQuery()
         ->leftjoin('users', 'stores.user_uuid', '=', 'users.uuid')
-        ->where('users.address', 'like', '%' .$district. '%')
+        ->where('users.address', 'ilike', '%' .$district. '%')
         ->select([
             'users.name',
             'users.address',
@@ -85,7 +93,7 @@ class Store extends Model
         ->newQuery()
         ->leftjoin('users', 'stores.user_uuid', '=', 'users.uuid')
         ->leftjoin('store_menus', 'stores.user_uuid', '=', 'store_menus.store_uuid')
-        ->where('store_menus.bread_kind', 'like', '%' .$keyword. '%')
+        ->where('store_menus.bread_kind', 'ilike', '%' .$keyword. '%')
         ->select([
             'users.name',
             'users.address',
@@ -97,6 +105,19 @@ class Store extends Model
         ->get();
 
         return $query_bread;
+    }
+
+    /**
+     * 全ての店舗のUUIDを取得
+     *
+     * @return void
+     */
+    public function get_all_store_uuid() {
+        return $this
+        ->newQuery()
+        ->leftjoin('users', 'stores.user_uuid', '=', 'users.uuid')
+        ->select(['stores.user_uuid', 'users.name'])
+        ->get();
     }
 
     /**

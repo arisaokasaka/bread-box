@@ -1,4 +1,4 @@
-import React,{useEffect, useState, useContext} from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -27,8 +27,8 @@ const Searchbar: React.FC<TextProps> = ({text}) => {
             />
             {text && 
                 <Link to={{
-                    pathname: '/search/',
-                    search: '?key=' + keyword + '&id=' + state.uuid
+                    pathname: '/search',
+                    search: '?id=' + state.uuid + (keyword ? "&key=" + keyword : '')
                     }}
                     onClick = {onClick_deleteValue}
                 >
@@ -36,8 +36,8 @@ const Searchbar: React.FC<TextProps> = ({text}) => {
                 </Link>}
             {text === null &&
                 <Link to={{
-                    pathname: '/search/',
-                    search: '?key=' + keyword + '&id=' + state.uuid
+                    pathname: '/search',
+                    search: '?id=' + state.uuid + (keyword ? "&key=" + keyword : '')
                     }}
                     onClick = {onClick_deleteValue}
                 >

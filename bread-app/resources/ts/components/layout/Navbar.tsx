@@ -1,5 +1,5 @@
-import React, {useContext, useEffect} from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Searchbar from '../atoms/Searchbar'
 import BtnSearch_icon from '../atoms/buttons/BtnSearch_icon';
@@ -12,9 +12,9 @@ import { UserAuthContext } from '../../contexts/UserAuthContext';
 
 function NavBar() {
     const { state, dispatch } = useContext(UserAuthContext);
+    const location = useLocation();
 
     useEffect(() => {
-        console.log('effect-navbar')
         getUser();
     },[]
     );
@@ -93,9 +93,8 @@ function NavBar() {
             <div className="l-navbar__container--pc">
                 <Logo/>
                 <div className="l-navbar__container--pc__content">
-                    <Searchbar
-                        text = {null}
-                    />
+                    {(location.pathname === "/search" || location.pathname === "/") ? null
+                    :<Searchbar text = {null}/>}
                     <div className="l-navbar__container--pc__content__nav">
                         {navPC}
                     </div>

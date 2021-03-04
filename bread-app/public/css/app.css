@@ -4121,7 +4121,7 @@ label.a-label-required__red--fitContent::after {
 @media screen and (min-width: 600px) {
   .p-search__container__content__tab {
     height: 42px;
-    margin-top: 5px;
+    margin-top: 15px;
   }
 }
 

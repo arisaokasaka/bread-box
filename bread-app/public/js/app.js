@@ -15654,16 +15654,16 @@ var Searchbar = function Searchbar(_a) {
     onChange: onChangeKeyword
   }), text && react_1["default"].createElement(react_router_dom_1.Link, {
     to: {
-      pathname: '/search/',
-      search: '?key=' + keyword + '&id=' + state.uuid
+      pathname: '/search',
+      search: '?id=' + state.uuid + (keyword ? "&key=" + keyword : '')
     },
     onClick: onClick_deleteValue
   }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
     icon: free_solid_svg_icons_1.faSearch
   }), react_1["default"].createElement("span", null, "\u691C\u7D22")), text === null && react_1["default"].createElement(react_router_dom_1.Link, {
     to: {
-      pathname: '/search/',
-      search: '?key=' + keyword + '&id=' + state.uuid
+      pathname: '/search',
+      search: '?id=' + state.uuid + (keyword ? "&key=" + keyword : '')
     },
     onClick: onClick_deleteValue
   }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
@@ -16713,8 +16713,8 @@ function NavBar() {
       state = _a.state,
       dispatch = _a.dispatch;
 
+  var location = react_router_dom_1.useLocation();
   react_1.useEffect(function () {
-    console.log('effect-navbar');
     getUser();
   }, []); //認証ユーザー取得
 
@@ -16768,7 +16768,7 @@ function NavBar() {
     className: "l-navbar__container--pc"
   }, react_1["default"].createElement(Logo_1["default"], null), react_1["default"].createElement("div", {
     className: "l-navbar__container--pc__content"
-  }, react_1["default"].createElement(Searchbar_1["default"], {
+  }, location.pathname === "/search" || location.pathname === "/" ? null : react_1["default"].createElement(Searchbar_1["default"], {
     text: null
   }), react_1["default"].createElement("div", {
     className: "l-navbar__container--pc__content__nav"
@@ -18764,8 +18764,6 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-
 var Districts_1 = __importDefault(__webpack_require__(/*! ../../../info/Districts */ "./resources/ts/info/Districts.ts"));
 
 var Bread_kinds_1 = __importDefault(__webpack_require__(/*! ../../../info/Bread_kinds */ "./resources/ts/info/Bread_kinds.ts"));
@@ -18774,21 +18772,44 @@ var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome
 
 var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
 
-var Search_sidebar = function Search_sidebar() {
-  var _a = react_1.useState({
+var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var Search_sidebar = function Search_sidebar(_a) {
+  var click_function = _a.click_function;
+  var history = react_router_dom_1.useHistory();
+
+  var _b = react_1.useState(''),
+      keyword = _b[0],
+      Setkeyword = _b[1];
+
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
+
+  var _c = react_1.useState({
     district: '',
     bread_kind: ''
   }),
-      condition = _a[0],
-      setCondition = _a[1];
+      condition = _c[0],
+      setCondition = _c[1];
+
+  var search_url = function search_url() {
+    var url = '/search?id=' + state.uuid + (keyword ? "&key=" + keyword : '') + (condition.district ? "&di=" + condition.district : '') + (condition.bread_kind ? "&bk=" + condition.bread_kind : '');
+    history.push(url);
+    click_function();
+  };
+
+  var onChangeKeyword = function onChangeKeyword(e) {
+    Setkeyword(e.target.value);
+  };
 
   var sum_district = function sum_district() {
-    var info = '&di=';
+    var info = '';
     Districts_1["default"].districts.map(function (el) {
       var checkbox = document.getElementById(el.id);
 
       if (checkbox.checked) {
-        info = info + checkbox.value + '|';
+        info = info + checkbox.value + '-';
       }
     });
     setCondition(__assign(__assign({}, condition), {
@@ -18797,12 +18818,12 @@ var Search_sidebar = function Search_sidebar() {
   };
 
   var sum_bread_kind = function sum_bread_kind() {
-    var info = '&br=';
+    var info = '';
     Bread_kinds_1["default"].bread_kinds.map(function (el) {
       var checkbox = document.getElementById(el.id);
 
       if (checkbox.checked) {
-        info = info + checkbox.value + '|';
+        info = info + checkbox.value + '-';
       }
     });
     setCondition(__assign(__assign({}, condition), {
@@ -18818,7 +18839,9 @@ var Search_sidebar = function Search_sidebar() {
     icon: free_solid_svg_icons_1.faSearch
   }), "\u30AD\u30FC\u30EF\u30FC\u30C9\u304B\u3089\u63A2\u3059"), react_1["default"].createElement("input", {
     type: "text",
-    placeholder: "\u4F8B:\u3042\u3093\u30D1\u30F3\u3001\u5E97\u540D"
+    placeholder: "\u4F8B:\u3042\u3093\u30D1\u30F3\u3001\u5E97\u540D",
+    value: keyword,
+    onChange: onChangeKeyword
   })), react_1["default"].createElement("div", {
     className: "m-search-sidebar__item"
   }, react_1["default"].createElement("h4", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
@@ -18852,13 +18875,12 @@ var Search_sidebar = function Search_sidebar() {
     }), react_1["default"].createElement("label", {
       htmlFor: el.id
     }, el.name));
-  }))), react_1["default"].createElement(react_router_dom_1.Link, {
-    to: {
-      pathname: '/search/',
-      search: condition.district + condition.bread_kind
-    },
-    className: "m-search-sidebar__btn"
-  }, "\u7D5E\u308A\u8FBC\u3080"));
+  }))), react_1["default"].createElement("input", {
+    onClick: search_url,
+    className: "m-search-sidebar__btn",
+    value: "\u7D5E\u308A\u8FBC\u3080",
+    readOnly: true
+  }));
 };
 
 exports.default = Search_sidebar;
@@ -21665,7 +21687,7 @@ var Top_section = function Top_section(_a) {
       key: 'section_' + el.id
     }, react_1["default"].createElement(react_router_dom_1.Link, {
       to: {
-        pathname: '/search/',
+        pathname: '/search',
         search: '?key=' + el.name + '&id=' + state.uuid
       }
     }, el.name));
@@ -23615,6 +23637,7 @@ var StoreList_1 = __importDefault(__webpack_require__(/*! ../../molecules/common
 
 var Search = function Search() {
   var location = react_router_dom_1.useLocation();
+  var history = react_router_dom_1.useHistory();
   var keyword = location.search;
 
   var _a = react_1.useState([]),
@@ -23632,7 +23655,7 @@ var Search = function Search() {
   }, []);
 
   var getStores = function getStores() {
-    axios_1["default"].get('/api/search_store' + keyword).then(function (res) {
+    axios_1["default"].get('/api/search_store' + history['location']['search']).then(function (res) {
       setStores(res.data);
     });
   };
@@ -23737,7 +23760,9 @@ var Search = function Search() {
     icon: free_solid_svg_icons_1.faEdit
   }), "\xA0\u691C\u7D22\u6761\u4EF6\u5909\u66F4"))), react_1["default"].createElement("div", {
     className: "p-search__container"
-  }, react_1["default"].createElement(Search_sidebar_1["default"], null), react_1["default"].createElement("div", {
+  }, react_1["default"].createElement(Search_sidebar_1["default"], {
+    click_function: getStores
+  }), react_1["default"].createElement("div", {
     className: "p-search__container__content"
   }, react_1["default"].createElement(Store_pickup_1["default"], null), react_1["default"].createElement("div", {
     className: "p-search__container__content__tab"

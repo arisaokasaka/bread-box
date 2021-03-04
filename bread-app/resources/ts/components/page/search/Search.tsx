@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faChevronUp } from "@fortawesome/free-solid-svg-icons";
@@ -9,6 +9,7 @@ import StoreList from '../../molecules/common/StoreList';
 
 const Search: React.FC = () => {
     const location = useLocation();
+    const history = useHistory();
     const keyword = location.search;
     const [ stores, setStores ] = useState([]);
     const [ sort, setSort ] = useState('default')
@@ -20,10 +21,10 @@ const Search: React.FC = () => {
     },[])
 
     const getStores = () => {
-        axios.get('/api/search_store'+ keyword)
+        axios.get('/api/search_store'+ history['location']['search'])
         .then(res => {
             setStores(res.data)
-        })
+        })    
     }
 
     if(stores[0] === undefined){
@@ -99,7 +100,9 @@ const Search: React.FC = () => {
                 <Link to='/search_mobile'><span><FontAwesomeIcon icon={faEdit}/>&nbsp;検索条件変更</span></Link>
             </div>
             <div className = "p-search__container">
-                <Search_sidebar />
+                <Search_sidebar
+                    click_function = {getStores}
+                />
                 <div className="p-search__container__content">
                     <Store_pickup />
                     <div className="p-search__container__content__tab">
