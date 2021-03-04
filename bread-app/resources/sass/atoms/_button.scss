@@ -265,9 +265,11 @@
         }
     }
 }
+
 // ログイン・検索・マイページボタン（アイコン）
 .a-btn-search_icon,
-.a-btn-logIn {
+.a-btn-logIn,
+.a-btn-register {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -285,7 +287,7 @@
         font-size: 1.2rem;
 
         & > span {
-            margin-top: 4px;
+            margin-top: 6px;
             line-height: 0.5rem;
             font-size: 0.5rem;
         }
@@ -293,10 +295,6 @@
         &:hover {
             text-decoration: underline;
         }
-    }
-
-    @include bp-960up {
-        display: none;
     }
 }
 
