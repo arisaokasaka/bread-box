@@ -5,12 +5,13 @@ import Searchbar from '../atoms/Searchbar'
 import BtnSearch_icon from '../atoms/buttons/BtnSearch_icon';
 import BtnMypage_icon from '../atoms/buttons/BtnMypage';
 import BtnLogin_icon from '../atoms/buttons/BtnLogin_icon';
+import BtnRegister from '../atoms/buttons/BtnRegister';
 import BtnStorePage from '../atoms/buttons/BtnStorePage';
 import BtnStoreManage from '../atoms/buttons/BtnStoreManage';
 import Logo from '../atoms/Logo';
 import { UserAuthContext } from '../../contexts/UserAuthContext';
 
-function NavBar() {
+const NavBar: React.FC = () => {
     const { state, dispatch } = useContext(UserAuthContext);
     const location = useLocation();
 
@@ -60,23 +61,32 @@ function NavBar() {
         );
     }else{
         navPC = (
-            <nav className="l-navbar__container--pc__content__nav--loggedout">
-                <ul>
-                    <li>
-                        <Link to="/register_user">
-                            無料会員登録
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/login_user">
-                            ログイン
-                        </Link>
-                    </li>
-                    {/* <Link to="">
-                        <li>ゲスト</li>
-                    </Link> */}
-                </ul>
-            </nav>
+            <div className="l-navbar__container--pc__content">
+                {(location.pathname === "/search" || location.pathname === "/") ? 
+                    <nav className="l-navbar__container--pc__content__nav--loggedout__icon">
+                        <BtnRegister/>
+                        <BtnLogin_icon/>
+                    </nav>
+                :
+                    <nav className="l-navbar__container--pc__content__nav--loggedout">
+                        <ul>
+                            <li>
+                                <Link to="/register_user">
+                                    無料会員登録
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/login_user">
+                                    ログイン
+                                </Link>
+                            </li>
+                            {/* <Link to="">
+                                <li>ゲスト</li>
+                            </Link> */}
+                        </ul>
+                    </nav>
+                }
+            </div>
         );
 
         navMobile = (
@@ -87,17 +97,13 @@ function NavBar() {
         );
     }
 
-
     return (
         <div className="l-navbar">
             <div className="l-navbar__container--pc">
                 <Logo/>
                 <div className="l-navbar__container--pc__content">
-                    {(location.pathname === "/search" || location.pathname === "/") ? null
-                    :<Searchbar text = {null}/>}
-                    <div className="l-navbar__container--pc__content__nav">
-                        {navPC}
-                    </div>
+                    {(location.pathname === "/search" || location.pathname === "/") ? null : <Searchbar text={null}/>}
+                    {navPC}
                 </div>
             </div>
             <div className="l-navbar__container--mobile">

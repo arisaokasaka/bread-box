@@ -15959,6 +15959,47 @@ exports.default = BtnMypage_icon;
 
 /***/ }),
 
+/***/ "./resources/ts/components/atoms/buttons/BtnRegister.tsx":
+/*!***************************************************************!*\
+  !*** ./resources/ts/components/atoms/buttons/BtnRegister.tsx ***!
+  \***************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
+var BtnRegister = function BtnRegister() {
+  return react_1["default"].createElement("div", {
+    className: "a-btn-register"
+  }, react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/register_user"
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faUserPlus
+  }), react_1["default"].createElement("span", null, "\u4F1A\u54E1\u767B\u9332")));
+};
+
+exports.default = BtnRegister;
+
+/***/ }),
+
 /***/ "./resources/ts/components/atoms/buttons/BtnReset.tsx":
 /*!************************************************************!*\
   !*** ./resources/ts/components/atoms/buttons/BtnReset.tsx ***!
@@ -16700,6 +16741,8 @@ var BtnMypage_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnMy
 
 var BtnLogin_icon_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnLogin_icon */ "./resources/ts/components/atoms/buttons/BtnLogin_icon.tsx"));
 
+var BtnRegister_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnRegister */ "./resources/ts/components/atoms/buttons/BtnRegister.tsx"));
+
 var BtnStorePage_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnStorePage */ "./resources/ts/components/atoms/buttons/BtnStorePage.tsx"));
 
 var BtnStoreManage_1 = __importDefault(__webpack_require__(/*! ../atoms/buttons/BtnStoreManage */ "./resources/ts/components/atoms/buttons/BtnStoreManage.tsx"));
@@ -16708,7 +16751,7 @@ var Logo_1 = __importDefault(__webpack_require__(/*! ../atoms/Logo */ "./resourc
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
-function NavBar() {
+var NavBar = function NavBar() {
   var _a = react_1.useContext(UserAuthContext_1.UserAuthContext),
       state = _a.state,
       dispatch = _a.dispatch;
@@ -16750,13 +16793,17 @@ function NavBar() {
       className: "l-navbar__container--mobile__nav"
     }, react_1["default"].createElement(BtnSearch_icon_1["default"], null), react_1["default"].createElement(BtnMypage_1["default"], null), react_1["default"].createElement(BtnStorePage_1["default"], null), react_1["default"].createElement(BtnStoreManage_1["default"], null));
   } else {
-    navPC = react_1["default"].createElement("nav", {
+    navPC = react_1["default"].createElement("div", {
+      className: "l-navbar__container--pc__content"
+    }, location.pathname === "/search" || location.pathname === "/" ? react_1["default"].createElement("nav", {
+      className: "l-navbar__container--pc__content__nav--loggedout__icon"
+    }, react_1["default"].createElement(BtnRegister_1["default"], null), react_1["default"].createElement(BtnLogin_icon_1["default"], null)) : react_1["default"].createElement("nav", {
       className: "l-navbar__container--pc__content__nav--loggedout"
     }, react_1["default"].createElement("ul", null, react_1["default"].createElement("li", null, react_1["default"].createElement(react_router_dom_1.Link, {
       to: "/register_user"
     }, "\u7121\u6599\u4F1A\u54E1\u767B\u9332")), react_1["default"].createElement("li", null, react_1["default"].createElement(react_router_dom_1.Link, {
       to: "/login_user"
-    }, "\u30ED\u30B0\u30A4\u30F3"))));
+    }, "\u30ED\u30B0\u30A4\u30F3")))));
     navMobile = react_1["default"].createElement("nav", {
       className: "l-navbar__container--mobile__nav"
     }, react_1["default"].createElement(BtnSearch_icon_1["default"], null), react_1["default"].createElement(BtnLogin_icon_1["default"], null));
@@ -16770,12 +16817,10 @@ function NavBar() {
     className: "l-navbar__container--pc__content"
   }, location.pathname === "/search" || location.pathname === "/" ? null : react_1["default"].createElement(Searchbar_1["default"], {
     text: null
-  }), react_1["default"].createElement("div", {
-    className: "l-navbar__container--pc__content__nav"
-  }, navPC))), react_1["default"].createElement("div", {
+  }), navPC)), react_1["default"].createElement("div", {
     className: "l-navbar__container--mobile"
   }, react_1["default"].createElement(Logo_1["default"], null), navMobile));
-}
+};
 
 exports.default = NavBar;
 
