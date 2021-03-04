@@ -80,9 +80,6 @@ const NavBar: React.FC = () => {
                                     ログイン
                                 </Link>
                             </li>
-                            {/* <Link to="">
-                                <li>ゲスト</li>
-                            </Link> */}
                         </ul>
                     </nav>
                 }
