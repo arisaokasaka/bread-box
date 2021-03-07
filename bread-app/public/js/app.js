@@ -15110,8 +15110,6 @@ var UserAuthReducer_1 = __webpack_require__(/*! ./reducers/UserAuthReducer */ ".
 
 var UserAuthContext_1 = __webpack_require__(/*! ./contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts"); //bootstrap(axios)
 // import bootstrap from './bootstrap';
-//i18n
-// import './18n';
 //Components
 
 
@@ -15121,9 +15119,9 @@ var LoginStore_1 = __importDefault(__webpack_require__(/*! ./components/page/log
 
 var LoginUser_1 = __importDefault(__webpack_require__(/*! ./components/page/login/LoginUser */ "./resources/ts/components/page/login/LoginUser.tsx"));
 
-var PasswordReset_store_1 = __importDefault(__webpack_require__(/*! ./components/page/passwordReset/PasswordReset_store */ "./resources/ts/components/page/passwordReset/PasswordReset_store.tsx"));
+var ResetPassword_recreate_1 = __importDefault(__webpack_require__(/*! ./components/page/passwordReset/ResetPassword_recreate */ "./resources/ts/components/page/passwordReset/ResetPassword_recreate.tsx"));
 
-var PasswordReset_user_1 = __importDefault(__webpack_require__(/*! ./components/page/passwordReset/PasswordReset_user */ "./resources/ts/components/page/passwordReset/PasswordReset_user.tsx"));
+var ResetPassword_request_1 = __importDefault(__webpack_require__(/*! ./components/page/passwordReset/ResetPassword_request */ "./resources/ts/components/page/passwordReset/ResetPassword_request.tsx"));
 
 var Register_store_1 = __importDefault(__webpack_require__(/*! ./components/page/register/Register_store */ "./resources/ts/components/page/register/Register_store.tsx"));
 
@@ -15181,11 +15179,11 @@ var App = function App() {
     path: "/login_user",
     component: LoginUser_1["default"]
   }), react_1["default"].createElement(react_router_dom_1.Route, {
-    path: "/password_store",
-    component: PasswordReset_store_1["default"]
+    path: "/password_reset_request",
+    component: ResetPassword_request_1["default"]
   }), react_1["default"].createElement(react_router_dom_1.Route, {
-    path: "/password_user",
-    component: PasswordReset_user_1["default"]
+    path: "/password_recreate/:token",
+    component: ResetPassword_recreate_1["default"]
   }), react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/register_store",
     component: Register_store_1["default"]
@@ -23164,7 +23162,7 @@ var LoginUser = function LoginUser() {
   }, react_1["default"].createElement("span", null, "\u65B0\u898F\u767B\u9332\u306F", react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/register_user"
   }, "\u3053\u3061\u3089")), react_1["default"].createElement("span", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u3092\u5FD8\u308C\u305F\u65B9\u306F", react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/password_user"
+    to: "/password_reset_request"
   }, "\u3053\u3061\u3089")))));
 };
 
@@ -23172,14 +23170,30 @@ exports.default = LoginUser;
 
 /***/ }),
 
-/***/ "./resources/ts/components/page/passwordReset/PasswordReset_store.tsx":
-/*!****************************************************************************!*\
-  !*** ./resources/ts/components/page/passwordReset/PasswordReset_store.tsx ***!
-  \****************************************************************************/
+/***/ "./resources/ts/components/page/passwordReset/ResetPassword_recreate.tsx":
+/*!*******************************************************************************!*\
+  !*** ./resources/ts/components/page/passwordReset/ResetPassword_recreate.tsx ***!
+  \*******************************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
+
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
 
 var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
   if (k2 === undefined) k2 = k;
@@ -23215,40 +23229,83 @@ var __importStar = this && this.__importStar || function (mod) {
   return result;
 };
 
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
 
-function PasswordReset_store() {
+var Password_recreate = function Password_recreate() {
+  var token = react_router_dom_1.useParams().token;
+
   var _a = react_hook_form_1.useForm(),
       register = _a.register,
       handleSubmit = _a.handleSubmit,
       errors = _a.errors,
       getValues = _a.getValues;
 
-  var _b = react_1.useState(false),
-      emailError = _b[0],
-      SetEmailError = _b[1];
+  var history = new react_router_dom_1.useHistory();
 
-  var onSubmit = function onSubmit(data) {//     SetEmailError(false);
-    //     console.log(data);
-    //     axios.post('/api/create_store', data)
-    //     .then(res => {
-    //         console.log(res);
-    //     })
-    //     .catch(errors => {
-    //         console.log(errors.response.data.errors);
-    //         console.log(errors.response.status);
-    //         if(errors.response.status === 422){
-    //             SetEmailError(true);
-    //         }
-    //     });
+  var _b = react_1.useState(''),
+      email = _b[0],
+      setEmail = _b[1];
+
+  var _c = react_1.useState({
+    original: '',
+    check: ''
+  }),
+      password = _c[0],
+      setPassword = _c[1];
+
+  react_1.useEffect(function () {
+    checkToken_enabled();
+  }, []); // トークンが有効か確認
+
+  var checkToken_enabled = function checkToken_enabled() {
+    axios_1["default"].post('/api/check_token', {
+      'token': token
+    }).then(function (res) {
+      console.log(res);
+
+      if (res.data.email) {
+        setEmail(res.data.email);
+      } else {
+        history.push('/notfound');
+      }
+    })["catch"](function (errors) {
+      history.push('/notfound');
+    });
+  }; // パスワード変更
+
+
+  var change_password = function change_password(data) {
+    axios_1["default"].post('/api/change_password', data).then(function (res) {
+      switch (res.data.type_user) {
+        case 'user':
+          alert('パスワーを変更しました。');
+          history.push('/login_user');
+          break;
+
+        case 'store':
+          alert('パスワーを変更しました。');
+          history.push('/login_store');
+          break;
+      }
+    })["catch"](function (errors) {
+      history.push('/notfound');
+    });
   };
 
   return react_1["default"].createElement("div", {
@@ -23257,36 +23314,58 @@ function PasswordReset_store() {
     className: "p-password-reset-store__container"
   }, react_1["default"].createElement("form", {
     className: "p-password-reset-store__container__form",
-    onSubmit: handleSubmit(onSubmit)
-  }, react_1["default"].createElement("h2", null, "\u5E97\u8217\u30D1\u30B9\u30EF\u30FC\u30C9\u518D\u8A2D\u5B9A"), react_1["default"].createElement("label", {
-    htmlFor: "store_email"
-  }, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9"), react_1["default"].createElement("input", {
-    type: "email",
+    onSubmit: handleSubmit(change_password)
+  }, react_1["default"].createElement("h2", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u518D\u8A2D\u5B9A"), react_1["default"].createElement("input", {
+    type: "hidden",
     name: "email",
-    id: "store_email",
+    value: email,
+    ref: register
+  }), react_1["default"].createElement("label", {
+    htmlFor: "user_password",
+    className: "a-label-required__red--fitContent"
+  }, "\u65B0\u3057\u3044\u30D1\u30B9\u30EF\u30FC\u30C9"), react_1["default"].createElement("input", {
+    type: "password",
+    name: "password",
+    id: "user_password",
     ref: register({
-      required: true
-    })
-  }), errors.email && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F\u5FC5\u9808\u3067\u3059\u3002"), react_1["default"].createElement("input", {
+      required: true,
+      pattern: /[a-zA-Z0-9]{8,16}/
+    }),
+    onChange: function onChange(e) {
+      return setPassword(__assign(__assign({}, password), {
+        original: e.target.value
+      }));
+    }
+  }), errors.password && errors.password.type === "required" && react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u306F\u5FC5\u9808\u3067\u3059\u3002"), errors.password && errors.password.type === "pattern" && react_1["default"].createElement("p", null, "8~16\u6587\u5B57\u306E\u534A\u89D2\u82F1\u6570\u5B57\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("label", {
+    htmlFor: "user_password-check",
+    className: "a-label-required__red--fitContent"
+  }, "\u30D1\u30B9\u30EF\u30FC\u30C9(\u78BA\u8A8D\u7528)"), react_1["default"].createElement("input", {
+    type: "password",
+    name: "password_check",
+    id: "user_password-check",
+    onChange: function onChange(e) {
+      return setPassword(__assign(__assign({}, password), {
+        check: e.target.value
+      }));
+    }
+  }), errors.password_check && errors.password_check.type === "required" && react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9(\u78BA\u8A8D\u7528)\u306F\u5FC5\u9808\u3067\u3059\u3002"), password.original !== password.check && react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u304C\u4E00\u81F4\u3057\u3066\u3044\u307E\u305B\u3093\u3002"), react_1["default"].createElement("input", {
     type: "submit",
-    value: "\u518D\u8A2D\u5B9A\u30E1\u30FC\u30EB\u3092\u9001\u4FE1"
+    value: "\u78BA\u5B9A\u3059\u308B"
   })), react_1["default"].createElement("div", {
     className: "p-password-reset-store__container__links"
-  }, react_1["default"].createElement("span", null, "\u65E2\u306B\u767B\u9332\u6E08\u3067\u3059\u304B\uFF1F\xA0", react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/login_store"
-  }, "\u30ED\u30B0\u30A4\u30F3")), react_1["default"].createElement("span", null, "\u30C8\u30C3\u30D7\u30DA\u30FC\u30B8\u3078", react_1["default"].createElement(react_router_dom_1.Link, {
+  }, react_1["default"].createElement("span", null, "\u30C8\u30C3\u30D7\u30DA\u30FC\u30B8\u3078", react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/"
   }, "\u3082\u3069\u308B")))));
-}
+};
 
-exports.default = PasswordReset_store;
+exports.default = Password_recreate;
 
 /***/ }),
 
-/***/ "./resources/ts/components/page/passwordReset/PasswordReset_user.tsx":
-/*!***************************************************************************!*\
-  !*** ./resources/ts/components/page/passwordReset/PasswordReset_user.tsx ***!
-  \***************************************************************************/
+/***/ "./resources/ts/components/page/passwordReset/ResetPassword_request.tsx":
+/*!******************************************************************************!*\
+  !*** ./resources/ts/components/page/passwordReset/ResetPassword_request.tsx ***!
+  \******************************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -23326,17 +23405,25 @@ var __importStar = this && this.__importStar || function (mod) {
   return result;
 };
 
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
 
-function PasswordReset_user() {
+function Password_reset_request() {
   var _a = react_hook_form_1.useForm(),
       register = _a.register,
       handleSubmit = _a.handleSubmit,
@@ -23344,29 +23431,20 @@ function PasswordReset_user() {
       getValues = _a.getValues;
 
   var _b = react_1.useState(false),
-      emailError = _b[0],
-      SetEmailError = _b[1];
+      sentMail = _b[0],
+      setSentMail = _b[1];
 
-  var onSubmit = function onSubmit(data) {//     SetEmailError(false);
-    //     console.log(data);
-    //     axios.post('/api/create_user', data)
-    //     .then(res => {
-    //         console.log(res);
-    //     })
-    //     .catch(errors => {
-    //         console.log(errors.response.data.errors);
-    //         console.log(errors.response.status);
-    //         if(errors.response.status === 422){
-    //             SetEmailError(true);
-    //         }
-    //     });
+  var onSubmit = function onSubmit(data) {
+    axios_1["default"].post('/api/send_mail', data).then(function (res) {
+      setSentMail(true);
+    })["catch"](function (errors) {});
   };
 
   return react_1["default"].createElement("div", {
     className: "p-password-reset-user"
   }, react_1["default"].createElement("div", {
     className: "p-password-reset-user__container"
-  }, react_1["default"].createElement("form", {
+  }, sentMail ? react_1["default"].createElement("p", null, "\u518D\u8A2D\u5B9A\u30E1\u30FC\u30EB\u3092\u9001\u4FE1\u3057\u307E\u3057\u305F\u3002") : react_1["default"].createElement("form", {
     className: "p-password-reset-user__container__form",
     onSubmit: handleSubmit(onSubmit)
   }, react_1["default"].createElement("h2", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u518D\u8A2D\u5B9A"), react_1["default"].createElement("label", {
@@ -23391,7 +23469,7 @@ function PasswordReset_user() {
   }, "\u3082\u3069\u308B")))));
 }
 
-exports.default = PasswordReset_user;
+exports.default = Password_reset_request;
 
 /***/ }),
 
@@ -24615,7 +24693,7 @@ var UserEdit = function UserEdit() {
   })), react_1["default"].createElement("div", {
     className: "p-userEdit__container__links"
   }, react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/password_user"
+    to: "/password_reset_request"
   }, "\u30D1\u30B9\u30EF\u30FC\u30C9\u3092\u518D\u8A2D\u5B9A\u3059\u308B\u5834\u5408"), react_1["default"].createElement(Modal_confirmDelete_account_1["default"], null))));
 };
 
