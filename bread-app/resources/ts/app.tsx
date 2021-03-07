@@ -15,15 +15,12 @@ import axios, { AxiosStatic } from 'axios';
 //bootstrap(axios)
 // import bootstrap from './bootstrap';
 
-//i18n
-// import './18n';
-
 //Components
 import NavBar from './components/layout/Navbar';
 import LoginStore from './components/page/login/LoginStore';
 import LoginUser from './components/page/login/LoginUser';
-import PasswordReset_store from './components/page/passwordReset/PasswordReset_store';
-import PasswordReset_user from './components/page/passwordReset/PasswordReset_user';
+import ResetPassword_recreate from './components/page/passwordReset/ResetPassword_recreate';
+import ResetPassword_request from './components/page/passwordReset/ResetPassword_request';
 import Register_store from './components/page/register/Register_store';
 import Register_user from './components/page/register/Register_user';
 import Search from './components/page/search/Search';
@@ -64,8 +61,8 @@ const App: React.FC = () => {
                 <Route path="/search_mobile" component={Search_input_mobile} />
                 <Route path="/login_store" component={LoginStore} />
                 <Route path="/login_user" component={LoginUser} />
-                <Route path="/password_store" component={PasswordReset_store} />
-                <Route path="/password_user" component={PasswordReset_user} />
+                <Route path="/password_reset_request" component={ResetPassword_request} />
+                <Route path="/password_recreate/:token" component={ResetPassword_recreate} />
                 <Route path="/register_store" component={Register_store} />
                 <Route path="/register_user" component={Register_user} />
                 <Route path="/store/:user_uuid" component={StorePage} />
