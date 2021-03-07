@@ -1,0 +1,90 @@
+.m-modalConfirmDelete-account {
+    &__btn {
+        &--open {
+            border: none;
+            background-color: transparent;
+            color: $font-color-brown;
+            font-size: 0.8rem;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        &--close {
+            display: flex;
+            justify-content: flex-end;
+
+            & > button {
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &__container {
+        margin-top: $mp-xs;
+        width: 12rem;
+
+        @include bp-480up {
+            width: 17rem;
+        }
+
+        & > p {
+            text-align: center;
+        }
+
+        & > span {
+            display: inline-block;
+            font-size: 0.7rem;
+            margin-top: $mp-xxs;
+        }
+
+        &__btns {
+            display: flex;
+            justify-content: space-between;
+            margin-top: $mp-xs;
+
+            & > button {
+                width: 5.5rem;
+                height: 1.7rem;
+                line-height: 1.7rem;
+                border: none;
+                border-radius: 25px;
+                font-weight: 500;
+                font-size: 0.9rem;
+                cursor: pointer;
+
+                @include bp-480up {
+                    width: 8rem;
+                }
+
+                &:nth-child(1) {
+                    background-color: $gray;
+                    color: $white;
+
+                    &:hover {
+                        background-color: $darkGray;
+                    }
+                }
+
+                &:nth-child(2) {
+                    background-color: $darkBrown;
+                    color: $white;
+
+                    &:hover {
+                        background-color: $darkestBrown;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.m-store-edit-table__nav--pc__others,
+.m-store-edit-table__nav--mobile__content__others {
+    .m-modalConfirmDelete-account__btn--open {
+        font-size: 0.7rem;
+        margin-top: 5px;
+        text-decoration: underline;
+    }
+}

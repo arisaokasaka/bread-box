@@ -3,39 +3,31 @@ import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-function emailErrorMessage(emailError){
-    if(emailError){
-        return(<p>既に登録されているメールアドレスです。</p>);
-    }else{
-        return null;
-    }
-};
 
-function PasswordErrorMessage(original, check){
-    if(original===check){
-        return null;
-    }else{
-        return (<p>パスワードが一致していません。</p>);
-    }
-};
-
-export default function Register_user() {
+const Register_user: React.FC = () => {
     const { register, handleSubmit, errors, getValues } = useForm();
-    const [emailError, SetEmailError] = useState(false);
+    const [ emailError, SetEmailError ] = useState(false);
     const history = new useHistory();
+    const [ password, setPassword ] = useState({
+        original: '',
+        check: '',
+    });
 
     const onSubmit = (data) => {
-        SetEmailError(false);
-        console.log(data);
-        axios.post('/api/create_user', data)
-        .then(res => {
-            history.push("/search");
-        })
-        .catch(errors => {
-            if(errors.response.status === 422){
-                SetEmailError(true);
-            }
-        });
+        if(password.original === password.check){
+            SetEmailError(false);
+            axios.post('/api/create_user', data)
+            .then(res => {
+                history.push("/login_user");
+            })
+            .catch(errors => {
+                if(errors.response.status === 422){
+                    SetEmailError(true);
+                }
+            });
+        }else{
+            alert ('パスワードが一致していません。');
+        }  
     }
 
     return (
@@ -52,21 +44,21 @@ export default function Register_user() {
                     <label htmlFor="user_email" className="a-label-required__red--fitContent">メールアドレス</label>
                     <input type="email" name="email" id="user_email" ref={register({required: true})}/>
                     {errors.email && <p>メールアドレスは必須です。</p>}
-                    {emailErrorMessage(emailError)}
+                    {emailError && <p>既に登録されているメールアドレスです。</p>}
                     
                     <label htmlFor="user_address">住所</label>
                     <input type="text" name="address" id="user_address" ref={register}/>
                     
                     <label htmlFor="user_password" className="a-label-required__red--fitContent">パスワード</label>
-                    <input type="password" name="password" id="user_password" ref={register({required: true, pattern: /[a-zA-Z0-9]{8,16}/})}/>
+                    <input type="password" name="password" id="user_password" ref={register({required: true, pattern: /[a-zA-Z0-9]{8,16}/})} onChange={e=> setPassword({...password, original: e.target.value})}/>
                     {errors.password && errors.password.type === "required" && (<p>パスワードは必須です。</p>)}
                     {errors.password && errors.password.type === "pattern" && (<p>8~16文字の半角英数字で指定してください。</p>)}
 
                     <label htmlFor="user_password-check" className="a-label-required__red--fitContent">パスワード(確認用)</label>
-                    <input type="password" name="password_check" id="user_password-check" ref={register({required: true})}/>
+                    <input type="password" name="password_check" id="user_password-check" ref={register({required: true})} onChange={e=> setPassword({...password, check: e.target.value})}/>
                     {errors.password_check && errors.password_check.type === "required" && (<p>パスワード(確認用)は必須です。</p>)}
-                    {PasswordErrorMessage(getValues('password'),getValues('password_check'))}
-                    
+                    {password.original !== password.check && <p>パスワードが一致していません。</p>}
+
                     <input className="round" type="submit" value="登録する"/>
                 </form>
 
@@ -77,3 +69,5 @@ export default function Register_user() {
         </div>
     )
 }
+
+export default Register_user;

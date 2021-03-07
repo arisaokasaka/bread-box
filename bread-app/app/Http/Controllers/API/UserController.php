@@ -5,7 +5,9 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
+use App\Models\Store;
 use App\Models\Review;
+use App\Models\StoreMenu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\UploadedFile;
@@ -244,5 +246,38 @@ class UserController extends Controller
             }
         }
         return $result;
+    }
+
+    /**
+     * ユーザーアカウント削除
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function delete_user_account(Request $request) {
+        $uuid = $request->input("uuid");
+        $user = new User();
+        $review = new Review();
+
+        $user->delete_user($uuid);
+        $review->delete_review_by_user_uuid($uuid);
+    }
+
+    /**
+     * 店舗アカウント削除
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function delete_store_account(Request $request) {
+        $uuid = $request->input("uuid");$user = new User();
+        $store = new Store();
+        $review = new Review();
+        $store_menu = new StoreMenu();
+
+        $user->delete_user($uuid);
+        $store->delete_store($uuid);
+        $review->delete_review_by_store_uuid($uuid);
+        $store_menu->delete_menus_by_store_uuid($uuid);
     }
 }

@@ -594,7 +594,7 @@ h2 {
 }
 
 .m-store-edit-table__nav--mobile__content__others .a-btn-logout > a {
-  color: #555555;
+  color: #67491b;
   padding: 0;
   font-size: 0.7rem;
   text-decoration: underline;
@@ -603,11 +603,11 @@ h2 {
 
 .m-store-edit-table__nav--pc__others .a-btn-logout {
   justify-content: unset;
-  margin-top: 8px;
+  margin-top: 3px;
 }
 
 .m-store-edit-table__nav--pc__others .a-btn-logout > a {
-  color: #555555;
+  color: #67491b;
   padding: 0;
   font-size: 0.7rem;
   text-decoration: underline;
@@ -1762,6 +1762,95 @@ label.a-label-required__red--fitContent::after {
 
 .m-modalConfirmDelete__form__btns > button:nth-child(2):hover {
   opacity: 0.88;
+}
+
+.m-modalConfirmDelete-account__btn--open {
+  border: none;
+  background-color: transparent;
+  color: #67491b;
+  font-size: 0.8rem;
+  padding: 0;
+  cursor: pointer;
+}
+
+.m-modalConfirmDelete-account__btn--close {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.m-modalConfirmDelete-account__btn--close > button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.m-modalConfirmDelete-account__container {
+  margin-top: 20px;
+  width: 12rem;
+}
+
+@media screen and (min-width: 480px) {
+  .m-modalConfirmDelete-account__container {
+    width: 17rem;
+  }
+}
+
+.m-modalConfirmDelete-account__container > p {
+  text-align: center;
+}
+
+.m-modalConfirmDelete-account__container > span {
+  display: inline-block;
+  font-size: 0.7rem;
+  margin-top: 10px;
+}
+
+.m-modalConfirmDelete-account__container__btns {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.m-modalConfirmDelete-account__container__btns > button {
+  width: 5.5rem;
+  height: 1.7rem;
+  line-height: 1.7rem;
+  border: none;
+  border-radius: 25px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 480px) {
+  .m-modalConfirmDelete-account__container__btns > button {
+    width: 8rem;
+  }
+}
+
+.m-modalConfirmDelete-account__container__btns > button:nth-child(1) {
+  background-color: #797979;
+  color: #fafafa;
+}
+
+.m-modalConfirmDelete-account__container__btns > button:nth-child(1):hover {
+  background-color: #757575;
+}
+
+.m-modalConfirmDelete-account__container__btns > button:nth-child(2) {
+  background-color: #7c4920;
+  color: #fafafa;
+}
+
+.m-modalConfirmDelete-account__container__btns > button:nth-child(2):hover {
+  background-color: #493020;
+}
+
+.m-store-edit-table__nav--pc__others .m-modalConfirmDelete-account__btn--open,
+.m-store-edit-table__nav--mobile__content__others .m-modalConfirmDelete-account__btn--open {
+  font-size: 0.7rem;
+  margin-top: 5px;
+  text-decoration: underline;
 }
 
 .m-top-section ul {
@@ -4482,44 +4571,15 @@ label.a-label-required__red--fitContent::after {
 }
 
 .p-userEdit__container {
-  margin: 0 auto;
-  width: 90%;
-  margin: 0 auto;
+  width: 80%;
+  min-width: 230px;
+  max-width: 450px;
   color: #67491b;
-}
-
-@media screen and (min-width: 480px) {
-  .p-userEdit__container {
-    width: 85%;
-  }
-}
-
-@media screen and (min-width: 600px) {
-  .p-userEdit__container {
-    width: 85%;
-    max-width: 1000px;
-  }
-}
-
-@media screen and (min-width: 960px) {
-  .p-userEdit__container {
-    width: 80%;
-  }
+  margin: 0 auto;
 }
 
 .p-userEdit__container__form {
   display: grid;
-  width: 50%;
-  margin: 0 auto;
-  min-width: 230px;
-  max-width: 450px;
-}
-
-@media screen and (min-width: 600px) {
-  .p-userEdit__container__form {
-    width: 80%;
-    margin: 0 auto;
-  }
 }
 
 .p-userEdit__container__form > h2 {
@@ -4566,13 +4626,13 @@ label.a-label-required__red--fitContent::after {
   font-size: 0.8rem;
 }
 
-.p-userEdit__container__form__links {
+.p-userEdit__container__links {
   width: 100%;
   margin: 0 auto;
   margin-top: 20px;
 }
 
-.p-userEdit__container__form__links a {
+.p-userEdit__container__links a {
   display: block;
   color: #67491b;
   font-size: 0.8rem;

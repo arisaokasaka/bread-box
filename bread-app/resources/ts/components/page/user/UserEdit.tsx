@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { UserAuthContext } from '../../../contexts/UserAuthContext';
 import BtnBack from '../../atoms/buttons/BtnBack';
+import Modal_confirmDelete_account from '../../molecules/modal/Modal_confirmDelete_account';
 
 const UserEdit: React.FC = () => {
     const { state } = useContext(UserAuthContext);
@@ -95,11 +96,12 @@ const UserEdit: React.FC = () => {
                     {errorMessage_imageSize}
 
                     <input type="submit" value="更新する"/>
-
-                    <div className = "p-userEdit__container__form__links">
-                        <Link to="/password_user">パスワードを再設定する場合</Link>
-                    </div>
                 </form>
+                
+                <div className = "p-userEdit__container__links">
+                    <Link to="/password_user">パスワードを再設定する場合</Link>
+                    <Modal_confirmDelete_account />
+                </div>
             </div>
         </div>
     );

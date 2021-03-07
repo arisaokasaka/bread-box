@@ -38,6 +38,8 @@ Route::post('/update_favorite', 'Api\UserController@update_favorite');
 Route::post('/index_favorite_list', 'Api\UserController@index_favorite_list');
 Route::post('/update_interested', 'Api\UserController@update_interested');
 Route::post('/index_interested_list', 'Api\UserController@index_interested_list');
+Route::post('/delete_user_account', 'Api\UserController@delete_user_account');
+Route::post('/delete_store_account', 'Api\UserController@delete_store_account');
 
 // StoreController
 Route::post('/create_store', 'Api\StoreController@create_store');

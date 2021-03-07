@@ -19,7 +19,6 @@ const UserTable_favorite = () => {
         })
         .catch()
     }
-    console.log(favorite)
 
     const changeSorting = (sort_type) => {
         let newArray: any;

@@ -260,4 +260,17 @@ class Store extends Model
         ->where('user_uuid', '=', $request['user_uuid'])
         ->update(['business_day' => $request['business_day']]);
     }
+
+    /**
+     * 指定するuser_uuidのレコード削除
+     *
+     * @param string $request
+     * @return void
+     */
+    public function delete_store(string $request) {
+        return $this
+        ->newQuery()
+        ->where('user_uuid', '=', $request)
+        ->delete();
+    }
 }
