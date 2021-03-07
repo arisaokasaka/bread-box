@@ -99,7 +99,7 @@ const UserEdit: React.FC = () => {
                 </form>
                 
                 <div className = "p-userEdit__container__links">
-                    <Link to="/password_user">パスワードを再設定する場合</Link>
+                    <Link to="/password_reset_request">パスワードを再設定する場合</Link>
                     <Modal_confirmDelete_account />
                 </div>
             </div>

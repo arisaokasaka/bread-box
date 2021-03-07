@@ -57,7 +57,7 @@ const LoginUser: React.FC = () =>  {
 
                 <div className = "p-login-user__container__links">
                     <span>新規登録は<Link to="/register_user">こちら</Link></span>
-                    <span>パスワードを忘れた方は<Link to="/password_user">こちら</Link></span>
+                    <span>パスワードを忘れた方は<Link to="/password_reset_request">こちら</Link></span>
                 </div>
             </div>
         </div>
