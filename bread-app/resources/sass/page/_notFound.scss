@@ -1,0 +1,28 @@
+.p-notFound {
+    @include content-width;
+    margin-top: $header-height;
+    padding: 80px 0 40px 0;
+    text-align: center;
+
+    & > h2 {
+        color: $darkGray;
+        font-size: 1.5rem;
+    }
+
+    & > p {
+        margin-top: 12px;
+        font-size: 0.9rem;
+    }
+
+    & > span {
+        display: inline-block;
+        margin-top: 25px;
+        font-size: 0.7rem;
+
+        & > a {
+            color: $font-color-brown;
+            font-weight: 550;
+            text-decoration: underline;
+        }
+    }
+}

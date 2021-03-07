@@ -34,6 +34,7 @@ import Top from './components/page/top/Top';
 import UserPage from './components/page/user/UserPage';
 import UserEdit from './components/page/user/UserEdit'; 
 import Footer from './components/layout/Footer';
+import NotFound from './components/page/NotFound';
 
 //RouteAuth
 import StoreOnly from './routeAuth/StoreOnly';
@@ -77,6 +78,7 @@ const App: React.FC = () => {
                 <UserOnly path="/user_edit">
                   <UserEdit />
                 </UserOnly>
+                <Route component={NotFound}></Route>
             </Switch>
           <Footer/>
         </div>

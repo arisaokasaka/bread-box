@@ -15143,7 +15143,9 @@ var UserPage_1 = __importDefault(__webpack_require__(/*! ./components/page/user/
 
 var UserEdit_1 = __importDefault(__webpack_require__(/*! ./components/page/user/UserEdit */ "./resources/ts/components/page/user/UserEdit.tsx"));
 
-var Footer_1 = __importDefault(__webpack_require__(/*! ./components/layout/Footer */ "./resources/ts/components/layout/Footer.tsx")); //RouteAuth
+var Footer_1 = __importDefault(__webpack_require__(/*! ./components/layout/Footer */ "./resources/ts/components/layout/Footer.tsx"));
+
+var NotFound_1 = __importDefault(__webpack_require__(/*! ./components/page/NotFound */ "./resources/ts/components/page/NotFound.tsx")); //RouteAuth
 
 
 var StoreOnly_1 = __importDefault(__webpack_require__(/*! ./routeAuth/StoreOnly */ "./resources/ts/routeAuth/StoreOnly.tsx"));
@@ -15199,7 +15201,9 @@ var App = function App() {
     path: "/user"
   }, react_1["default"].createElement(UserPage_1["default"], null)), react_1["default"].createElement(UserOnly_1["default"], {
     path: "/user_edit"
-  }, react_1["default"].createElement(UserEdit_1["default"], null))), react_1["default"].createElement(Footer_1["default"], null))));
+  }, react_1["default"].createElement(UserEdit_1["default"], null)), react_1["default"].createElement(react_router_dom_1.Route, {
+    component: NotFound_1["default"]
+  })), react_1["default"].createElement(Footer_1["default"], null))));
 };
 
 if (document.getElementById('app')) {
@@ -22651,6 +22655,41 @@ var UserTable_review = function UserTable_review() {
 };
 
 exports.default = UserTable_review;
+
+/***/ }),
+
+/***/ "./resources/ts/components/page/NotFound.tsx":
+/*!***************************************************!*\
+  !*** ./resources/ts/components/page/NotFound.tsx ***!
+  \***************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var NotFound = function NotFound() {
+  return react_1["default"].createElement("div", {
+    className: "p-notFound"
+  }, react_1["default"].createElement("h2", null, "404"), react_1["default"].createElement("p", null, "\u304A\u63A2\u3057\u306E\u30DA\u30FC\u30B8\u306F\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3067\u3057\u305F\u3002"), react_1["default"].createElement("span", null, "\u30C8\u30C3\u30D7\u30DA\u30FC\u30B8\u306B", react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/"
+  }, "\u623B\u308B")));
+};
+
+exports.default = NotFound;
 
 /***/ }),
 

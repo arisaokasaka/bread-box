@@ -4579,3 +4579,52 @@ label.a-label-required__red--fitContent::after {
   margin: 3px 0;
 }
 
+.p-notFound {
+  margin: 0 auto;
+  width: 90%;
+  margin-top: 64px;
+  padding: 80px 0 40px 0;
+  text-align: center;
+}
+
+@media screen and (min-width: 480px) {
+  .p-notFound {
+    width: 85%;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .p-notFound {
+    width: 85%;
+    max-width: 1000px;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .p-notFound {
+    width: 80%;
+  }
+}
+
+.p-notFound > h2 {
+  color: #757575;
+  font-size: 1.5rem;
+}
+
+.p-notFound > p {
+  margin-top: 12px;
+  font-size: 0.9rem;
+}
+
+.p-notFound > span {
+  display: inline-block;
+  margin-top: 25px;
+  font-size: 0.7rem;
+}
+
+.p-notFound > span > a {
+  color: #67491b;
+  font-weight: 550;
+  text-decoration: underline;
+}
+
