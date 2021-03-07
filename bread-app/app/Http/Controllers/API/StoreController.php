@@ -30,7 +30,7 @@ class StoreController extends Controller
         $store = new Store();
         $user = new User();
         $review = new Review();
-        
+
         $keyword = $request->input('key');
         $district = $request->input('di');
         $bread_kind = $request->input('bk');

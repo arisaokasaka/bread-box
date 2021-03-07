@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Log;
 
 class User extends Authenticatable
 {
@@ -206,5 +207,33 @@ class User extends Authenticatable
         ->newQuery()
         ->where('uuid', '=', $uuid)
         ->delete();
+    }
+
+    /**
+     * メールアドレスからユーザー情報取得
+     *
+     * @param string $email
+     * @return void
+     */
+    public static function getUser_by_email(string $email) {
+        return User::where('email', $email)->select([
+            'uuid',
+            'name',
+            'email',
+            'type_user',
+        ])->first();
+    }
+    
+    /**
+     * パスワードのアップデート
+     *
+     * @param [type] $request
+     * @return void
+     */
+    public static function update_password($request) {
+        return User::where('email', $request->email)
+        ->update([
+            'password' => bcrypt($request->password)
+        ]);
     }
 }

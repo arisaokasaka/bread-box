@@ -72,3 +72,8 @@ Route::post('/delete_reply', 'Api\ReviewController@delete_reply');
 Route::post('/index_review_by_user', 'Api\ReviewController@index_review_by_user');
 Route::post('/delete_review', 'Api\ReviewController@delete_review');
 Route::post('/update_review', 'Api\ReviewController@update_review');
+
+// ResetPasswordController
+Route::post('/change_password', 'Api\ResetPasswordController@change_password');
+Route::post('/send_mail', 'Api\ResetPasswordController@send_mail');
+Route::post('/check_token', 'Api\ResetPasswordController@check_token');
