@@ -73,6 +73,19 @@ class StoreMenu extends Model
     }
 
     /**
+     * 【削除】指定するstore_uuidのレコードを全て削除
+     *
+     * @param string $request
+     * @return void
+     */
+    public function delete_menus_by_store_uuid(string $request){
+        return $this
+        ->newQuery()
+        ->where('store_uuid', '=', $request)
+        ->delete();
+    }
+
+    /**
      * 【更新】パンのメニュー
      *
      * @param object $request

@@ -194,4 +194,17 @@ class User extends Authenticatable
         ])
         ->get();
     }
+
+    /**
+     * レコード削除
+     *
+     * @param string $uuid
+     * @return void
+     */
+    public function delete_user(string $uuid){
+        return $this
+        ->newQuery()
+        ->where('uuid', '=', $uuid)
+        ->delete();
+    }
 }

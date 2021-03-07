@@ -98,6 +98,32 @@ class Review extends Model
         ->where('uuid', '=', $review_uuid)
         ->delete();
     }
+  
+    /**
+     * 指定するuser_uuidのレコード全削除
+     *
+     * @param string $user_uuid
+     * @return void
+     */
+    public function delete_review_by_user_uuid(string $user_uuid) {
+        return $this
+        ->newQuery()
+        ->where('user_uuid', '=', $user_uuid)
+        ->delete();
+    }
+    
+    /**
+     * 指定するstore_uuidのレコード全削除
+     *
+     * @param string $store_uuid
+     * @return void
+     */
+    public function delete_review_by_store_uuid(string $store_uuid) {
+        return $this
+        ->newQuery()
+        ->where('store_uuid', '=', $store_uuid)
+        ->delete();
+    }
 
     /**
      * スコアのみ取得
