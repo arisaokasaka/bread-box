@@ -15870,7 +15870,6 @@ function BtnLogout() {
 
   var logout = function logout() {
     axios_1["default"].get("/api/logout").then(function (res) {
-      console.log(res);
       dispatch({
         type: 'setOut'
       });
@@ -17281,10 +17280,171 @@ exports.default = Store_pickup;
 
 /***/ }),
 
-/***/ "./resources/ts/components/molecules/modal/Modal_confirmDelete.tsx":
-/*!*************************************************************************!*\
-  !*** ./resources/ts/components/molecules/modal/Modal_confirmDelete.tsx ***!
-  \*************************************************************************/
+/***/ "./resources/ts/components/molecules/modal/Modal_confirmDelete_account.tsx":
+/*!*********************************************************************************!*\
+  !*** ./resources/ts/components/molecules/modal/Modal_confirmDelete_account.tsx ***!
+  \*********************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var react_modal_1 = __importDefault(__webpack_require__(/*! react-modal */ "./node_modules/react-modal/lib/index.js"));
+
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
+var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
+
+var Modal_confirmDelete_account = function Modal_confirmDelete_account() {
+  var _a = react_1.useContext(UserAuthContext_1.UserAuthContext),
+      state = _a.state,
+      dispatch = _a.dispatch;
+
+  var _b = react_1.useState(false),
+      modalIsOpen = _b[0],
+      setModal = _b[1];
+
+  var history = react_router_dom_1.useHistory();
+  var message_fail = "アカウントの削除に失敗しました。";
+  var customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)'
+    }
+  }; //削除機能（削除するメニューのuuid送信）
+
+  var delete_account = function delete_account() {
+    if (state.auth === "user") {
+      // ユーザーの場合
+      axios_1["default"].post("/api/delete_user_account", {
+        uuid: state.uuid
+      }).then(function (res) {
+        delete_success();
+      })["catch"](function (err) {
+        alert(message_fail);
+      });
+    } else if (state.auth === "store") {
+      // 店舗の場合
+      axios_1["default"].post("/api/delete_store_account", {
+        uuid: state.uuid
+      }).then(function (res) {
+        delete_success();
+      })["catch"](function (err) {
+        alert(message_fail);
+      });
+    } else {
+      alert(message_fail);
+    }
+  };
+
+  var delete_success = function delete_success() {
+    alert('アカウントを削除しました。');
+    history.push('/');
+    dispatch({
+      type: 'setOut'
+    });
+  };
+
+  return react_1["default"].createElement("div", {
+    className: "m-modalConfirmDelete-account"
+  }, react_1["default"].createElement("button", {
+    className: "m-modalConfirmDelete-account__btn--open",
+    onClick: function onClick() {
+      return setModal(true);
+    }
+  }, "\u30A2\u30AB\u30A6\u30F3\u30C8\u3092\u524A\u9664\u3059\u308B"), react_1["default"].createElement(react_modal_1["default"], {
+    isOpen: modalIsOpen,
+    onRequestClose: function onRequestClose() {
+      return setModal(false);
+    },
+    style: customStyles,
+    ariaHideApp: false
+  }, react_1["default"].createElement("div", {
+    className: "m-modalConfirmDelete-account__btn--close"
+  }, react_1["default"].createElement("button", {
+    onClick: function onClick() {
+      return setModal(false);
+    }
+  }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faTimes
+  }))), react_1["default"].createElement("div", {
+    className: "m-modalConfirmDelete-account__container"
+  }, react_1["default"].createElement("p", null, "\u30A2\u30AB\u30A6\u30F3\u30C8\u3092\u672C\u5F53\u306B\u524A\u9664\u3057\u307E\u3059\u304B\uFF1F"), react_1["default"].createElement("span", null, "\u518D\u5EA6\u3054\u5229\u7528\u3044\u305F\u3060\u304F\u5834\u5408\u306F\u3001\u4E00\u304B\u3089\u30A2\u30AB\u30A6\u30F3\u30C8\u3092\u4F5C\u6210\u3057\u3066\u3044\u305F\u3060\u304F\u5F62\u3068\u306A\u308A\u307E\u3059\u3002"), react_1["default"].createElement("div", {
+    className: "m-modalConfirmDelete-account__container__btns"
+  }, react_1["default"].createElement("button", {
+    onClick: function onClick() {
+      return setModal(false);
+    }
+  }, "\u30AD\u30E3\u30F3\u30BB\u30EB"), react_1["default"].createElement("button", {
+    type: "submit",
+    onClick: delete_account
+  }, "\u524A\u9664\u3059\u308B")))));
+};
+
+exports.default = Modal_confirmDelete_account;
+
+/***/ }),
+
+/***/ "./resources/ts/components/molecules/modal/Modal_confirmDeletem_menu.tsx":
+/*!*******************************************************************************!*\
+  !*** ./resources/ts/components/molecules/modal/Modal_confirmDeletem_menu.tsx ***!
+  \*******************************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -17350,7 +17510,7 @@ var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContex
 
 var StoreInfoContext_1 = __webpack_require__(/*! ../../../contexts/StoreInfoContext */ "./resources/ts/contexts/StoreInfoContext.ts");
 
-var Modal_confirmDelete = function Modal_confirmDelete(_a) {
+var Modal_confirmDelete_menu = function Modal_confirmDelete_menu(_a) {
   var menu = _a.menu;
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
   var dispatch = react_1.useContext(StoreInfoContext_1.StoreInfoContext).dispatch;
@@ -17451,7 +17611,7 @@ var Modal_confirmDelete = function Modal_confirmDelete(_a) {
   }, "\u524A\u9664\u3059\u308B")))));
 };
 
-exports.default = Modal_confirmDelete;
+exports.default = Modal_confirmDelete_menu;
 
 /***/ }),
 
@@ -19031,6 +19191,8 @@ var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg
 
 var BtnLogout_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/BtnLogout */ "./resources/ts/components/atoms/buttons/BtnLogout.tsx"));
 
+var Modal_confirmDelete_account_1 = __importDefault(__webpack_require__(/*! ../modal/Modal_confirmDelete_account */ "./resources/ts/components/molecules/modal/Modal_confirmDelete_account.tsx"));
+
 var StoreInfoContext_1 = __webpack_require__(/*! ../../../contexts/StoreInfoContext */ "./resources/ts/contexts/StoreInfoContext.ts");
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
@@ -19171,7 +19333,7 @@ var StoreEditTable = function StoreEditTable() {
     className: "m-store-edit-table__nav--mobile__content__others"
   }, react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/password_store"
-  }, "\u30D1\u30B9\u30EF\u30FC\u30C9\u306E\u518D\u8A2D\u5B9A"), react_1["default"].createElement(BtnLogout_1["default"], null))))), react_1["default"].createElement("nav", {
+  }, "\u30D1\u30B9\u30EF\u30FC\u30C9\u306E\u518D\u8A2D\u5B9A"), react_1["default"].createElement(BtnLogout_1["default"], null), react_1["default"].createElement(Modal_confirmDelete_account_1["default"], null))))), react_1["default"].createElement("nav", {
     className: "m-store-edit-table__nav--pc store_edit_nav"
   }, react_1["default"].createElement("ul", null, react_1["default"].createElement("li", {
     className: "m-store-edit-table__nav--pc__basic"
@@ -19195,7 +19357,7 @@ var StoreEditTable = function StoreEditTable() {
     className: "m-store-edit-table__nav--pc__others"
   }, react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/password_store"
-  }, "\u30D1\u30B9\u30EF\u30FC\u30C9\u306E\u518D\u8A2D\u5B9A"), react_1["default"].createElement(BtnLogout_1["default"], null)))), react_1["default"].createElement("div", {
+  }, "\u30D1\u30B9\u30EF\u30FC\u30C9\u306E\u518D\u8A2D\u5B9A"), react_1["default"].createElement(BtnLogout_1["default"], null), react_1["default"].createElement(Modal_confirmDelete_account_1["default"], null)))), react_1["default"].createElement("div", {
     className: "m-store-edit-table__container",
     onClick: function onClick() {
       return setClassName_Active('');
@@ -20543,7 +20705,7 @@ var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/reac
 
 var Modal_editMenu_1 = __importDefault(__webpack_require__(/*! ../../../molecules/modal/Modal_editMenu */ "./resources/ts/components/molecules/modal/Modal_editMenu.tsx"));
 
-var Modal_confirmDelete_1 = __importDefault(__webpack_require__(/*! ../../../molecules/modal/Modal_confirmDelete */ "./resources/ts/components/molecules/modal/Modal_confirmDelete.tsx"));
+var Modal_confirmDeletem_menu_1 = __importDefault(__webpack_require__(/*! ../../modal/Modal_confirmDeletem_menu */ "./resources/ts/components/molecules/modal/Modal_confirmDeletem_menu.tsx"));
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
@@ -20576,7 +20738,7 @@ var MenuList = function MenuList() {
       className: "m-storeEdit-menuList__item__btn"
     }, react_1["default"].createElement(Modal_editMenu_1["default"], {
       menu: el
-    }), react_1["default"].createElement(Modal_confirmDelete_1["default"], {
+    }), react_1["default"].createElement(Modal_confirmDeletem_menu_1["default"], {
       menu: el
     })), react_1["default"].createElement("div", {
       className: "m-storeEdit-menuList__item__content"
@@ -22134,8 +22296,6 @@ var UserTable_favorite = function UserTable_favorite() {
     })["catch"]();
   };
 
-  console.log(favorite);
-
   var changeSorting = function changeSorting(sort_type) {
     var newArray;
 
@@ -23502,6 +23662,22 @@ exports.default = Register_store;
 "use strict";
 
 
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
 var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
   if (k2 === undefined) k2 = k;
   Object.defineProperty(o, k2, {
@@ -23554,27 +23730,7 @@ var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_mod
 
 var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
 
-function emailErrorMessage(emailError) {
-  if (emailError) {
-    return react_1["default"].createElement("p", null, "\u65E2\u306B\u767B\u9332\u3055\u308C\u3066\u3044\u308B\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u3067\u3059\u3002");
-  } else {
-    return null;
-  }
-}
-
-;
-
-function PasswordErrorMessage(original, check) {
-  if (original === check) {
-    return null;
-  } else {
-    return react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u304C\u4E00\u81F4\u3057\u3066\u3044\u307E\u305B\u3093\u3002");
-  }
-}
-
-;
-
-function Register_user() {
+var Register_user = function Register_user() {
   var _a = react_hook_form_1.useForm(),
       register = _a.register,
       handleSubmit = _a.handleSubmit,
@@ -23587,16 +23743,26 @@ function Register_user() {
 
   var history = new react_router_dom_1.useHistory();
 
+  var _c = react_1.useState({
+    original: '',
+    check: ''
+  }),
+      password = _c[0],
+      setPassword = _c[1];
+
   var onSubmit = function onSubmit(data) {
-    SetEmailError(false);
-    console.log(data);
-    axios_1["default"].post('/api/create_user', data).then(function (res) {
-      history.push("/search");
-    })["catch"](function (errors) {
-      if (errors.response.status === 422) {
-        SetEmailError(true);
-      }
-    });
+    if (password.original === password.check) {
+      SetEmailError(false);
+      axios_1["default"].post('/api/create_user', data).then(function (res) {
+        history.push("/login_user");
+      })["catch"](function (errors) {
+        if (errors.response.status === 422) {
+          SetEmailError(true);
+        }
+      });
+    } else {
+      alert('パスワードが一致していません。');
+    }
   };
 
   return react_1["default"].createElement("div", {
@@ -23626,7 +23792,7 @@ function Register_user() {
     ref: register({
       required: true
     })
-  }), errors.email && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F\u5FC5\u9808\u3067\u3059\u3002"), emailErrorMessage(emailError), react_1["default"].createElement("label", {
+  }), errors.email && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F\u5FC5\u9808\u3067\u3059\u3002"), emailError && react_1["default"].createElement("p", null, "\u65E2\u306B\u767B\u9332\u3055\u308C\u3066\u3044\u308B\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u3067\u3059\u3002"), react_1["default"].createElement("label", {
     htmlFor: "user_address"
   }, "\u4F4F\u6240"), react_1["default"].createElement("input", {
     type: "text",
@@ -23643,7 +23809,12 @@ function Register_user() {
     ref: register({
       required: true,
       pattern: /[a-zA-Z0-9]{8,16}/
-    })
+    }),
+    onChange: function onChange(e) {
+      return setPassword(__assign(__assign({}, password), {
+        original: e.target.value
+      }));
+    }
   }), errors.password && errors.password.type === "required" && react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u306F\u5FC5\u9808\u3067\u3059\u3002"), errors.password && errors.password.type === "pattern" && react_1["default"].createElement("p", null, "8~16\u6587\u5B57\u306E\u534A\u89D2\u82F1\u6570\u5B57\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("label", {
     htmlFor: "user_password-check",
     className: "a-label-required__red--fitContent"
@@ -23653,8 +23824,13 @@ function Register_user() {
     id: "user_password-check",
     ref: register({
       required: true
-    })
-  }), errors.password_check && errors.password_check.type === "required" && react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9(\u78BA\u8A8D\u7528)\u306F\u5FC5\u9808\u3067\u3059\u3002"), PasswordErrorMessage(getValues('password'), getValues('password_check')), react_1["default"].createElement("input", {
+    }),
+    onChange: function onChange(e) {
+      return setPassword(__assign(__assign({}, password), {
+        check: e.target.value
+      }));
+    }
+  }), errors.password_check && errors.password_check.type === "required" && react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9(\u78BA\u8A8D\u7528)\u306F\u5FC5\u9808\u3067\u3059\u3002"), password.original !== password.check && react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u304C\u4E00\u81F4\u3057\u3066\u3044\u307E\u305B\u3093\u3002"), react_1["default"].createElement("input", {
     className: "round",
     type: "submit",
     value: "\u767B\u9332\u3059\u308B"
@@ -23663,7 +23839,7 @@ function Register_user() {
   }, react_1["default"].createElement("span", null, "\u65E2\u306B\u3054\u767B\u9332\u6E08\u3067\u3059\u304B\uFF1F\xA0", react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/login_user"
   }, "\u30ED\u30B0\u30A4\u30F3")))));
-}
+};
 
 exports.default = Register_user;
 
@@ -24310,6 +24486,8 @@ var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContex
 
 var BtnBack_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/BtnBack */ "./resources/ts/components/atoms/buttons/BtnBack.tsx"));
 
+var Modal_confirmDelete_account_1 = __importDefault(__webpack_require__(/*! ../../molecules/modal/Modal_confirmDelete_account */ "./resources/ts/components/molecules/modal/Modal_confirmDelete_account.tsx"));
+
 var UserEdit = function UserEdit() {
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
 
@@ -24434,11 +24612,11 @@ var UserEdit = function UserEdit() {
   }), errorMessage_imageSize, react_1["default"].createElement("input", {
     type: "submit",
     value: "\u66F4\u65B0\u3059\u308B"
-  }), react_1["default"].createElement("div", {
-    className: "p-userEdit__container__form__links"
+  })), react_1["default"].createElement("div", {
+    className: "p-userEdit__container__links"
   }, react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/password_user"
-  }, "\u30D1\u30B9\u30EF\u30FC\u30C9\u3092\u518D\u8A2D\u5B9A\u3059\u308B\u5834\u5408")))));
+  }, "\u30D1\u30B9\u30EF\u30FC\u30C9\u3092\u518D\u8A2D\u5B9A\u3059\u308B\u5834\u5408"), react_1["default"].createElement(Modal_confirmDelete_account_1["default"], null))));
 };
 
 exports.default = UserEdit;

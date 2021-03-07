@@ -5,7 +5,7 @@ export type StateType = {
   
 export type ActionType = {
     type: string;
-    payload: string;
+    payload?: string;
 };
 
 export const UserAuthReducer:any = (state: StateType, action: ActionType) => {

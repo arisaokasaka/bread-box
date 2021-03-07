@@ -12,7 +12,6 @@ export default function BtnLogout() {
     axios
         .get("/api/logout")
         .then(res => {
-            console.log(res);
             dispatch({
                 type: 'setOut'
             });
