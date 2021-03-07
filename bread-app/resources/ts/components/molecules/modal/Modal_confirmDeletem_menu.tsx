@@ -11,7 +11,7 @@ type MenuInfoProps = ({
     menu: any;
 })
 
-const Modal_confirmDelete: React.FC<MenuInfoProps> = ({menu}) =>{
+const Modal_confirmDelete_menu: React.FC<MenuInfoProps> = ({menu}) =>{
     const { state } = useContext(UserAuthContext);
     const { dispatch } = useContext(StoreInfoContext);
     const [ modalIsOpen, setModal ] = useState(false);
@@ -87,4 +87,4 @@ const Modal_confirmDelete: React.FC<MenuInfoProps> = ({menu}) =>{
     );
 }
 
-export default Modal_confirmDelete;
+export default Modal_confirmDelete_menu;

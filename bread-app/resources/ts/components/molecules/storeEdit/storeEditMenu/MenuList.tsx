@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import Modal_editMenu from '../../../molecules/modal/Modal_editMenu';
-import Modal_confirmDelete from '../../../molecules/modal/Modal_confirmDelete';
+import Modal_confirmDelete_menu from '../../modal/Modal_confirmDeletem_menu';
 import { UserAuthContext } from '../../../../contexts/UserAuthContext';
 import { StoreInfoContext } from '../../../../contexts/StoreInfoContext';
 
@@ -34,7 +34,7 @@ const MenuList: React.FC = () => {
                             <Modal_editMenu
                                 menu={el}
                             />
-                            <Modal_confirmDelete
+                            <Modal_confirmDelete_menu
                                 menu={el}
                             />
                         </div>
