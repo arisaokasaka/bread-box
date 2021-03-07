@@ -15,6 +15,7 @@ import { StoreEditNav_menu, StoreEditNav_basic, StoreEditNav_spirit } from '../.
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSlidersH, faBreadSlice, faChevronRight, faHeart, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import BtnLogout from '../../atoms/buttons/BtnLogout';
+import Modal_confirmDelete_account from '../modal/Modal_confirmDelete_account';
 import { StoreInfoContext } from '../../../contexts/StoreInfoContext';
 import { UserAuthContext } from '../../../contexts/UserAuthContext';
 
@@ -131,6 +132,7 @@ const StoreEditTable: React.FC = () => {
                         <li className = "m-store-edit-table__nav--mobile__content__others">
                             <Link to="/password_store">パスワードの再設定</Link>
                             <BtnLogout/>
+                            <Modal_confirmDelete_account/>
                         </li>
                     </ul>
                 </nav>
@@ -152,6 +154,7 @@ const StoreEditTable: React.FC = () => {
                     <li className = "m-store-edit-table__nav--pc__others">
                         <Link to="/password_store">パスワードの再設定</Link>
                         <BtnLogout/>
+                        <Modal_confirmDelete_account/>
                     </li>
                 </ul>
             </nav>

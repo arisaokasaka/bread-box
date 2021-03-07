@@ -2,22 +2,14 @@
     padding: $mp-md 0;
 
     &__container {
-        @include content-width;
-        margin: 0 auto;
+        width: 80%;
+        min-width: 230px;
+        max-width: 450px;
         color: $font-color-brown;
+        margin: 0 auto;
 
         &__form {
             display: grid;
-            width: 50%;
-            margin: 0 auto;
-            min-width: 230px;
-            max-width: 450px;
-
-            @include bp-600up {
-                width: 80%;
-                margin: 0 auto;
-            }
-
             & > h2 {
                 text-align: center;
             }
@@ -59,17 +51,17 @@
                     font-size: 0.8rem;
                 }
             }
+        }
 
-            &__links {
-                width: 100%;
-                margin: 0 auto;
-                margin-top: $mp-xs;
-                a {
-                    display: block;
-                    color: $font-color-brown;
-                    font-size: 0.8rem;
-                    margin: 3px 0;
-                }
+        &__links {
+            width: 100%;
+            margin: 0 auto;
+            margin-top: $mp-xs;
+            a {
+                display: block;
+                color: $font-color-brown;
+                font-size: 0.8rem;
+                margin: 3px 0;
             }
         }
     }
