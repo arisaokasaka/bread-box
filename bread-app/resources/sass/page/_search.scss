@@ -2,6 +2,31 @@
     @include content-width;
     padding-top: 79px;
 
+    &__mobile {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: $lightestBrown;
+        margin-top: $header-height;
+        padding: 0 $mp-xs $mp-xs $mp-xs;
+        z-index: 500;
+
+        &__btn {
+            margin-top: $mp-xxs;
+        }
+
+        &__back {
+            display: inline-block;
+            margin-left: 10px;
+            color: $font-color-brown;
+            font-size: 0.8rem;
+            font-weight: bolder;
+            border-bottom: $font-color-brown 1px solid;
+        }
+    }
+
     &__container {
         margin-top: 15px;
         padding-bottom: $mp-md;
@@ -69,6 +94,10 @@
                 padding: $mp-xxs;
                 order: 1;
 
+                &__noMessage {
+                    font-size: 0.8rem;
+                }
+
                 @include bp-600up {
                     padding: $mp-xs;
                 }
@@ -111,7 +140,7 @@
                 transform: translate(-50%, -50%);
                 width: 2rem;
                 height: 2rem;
-                background-color: $lightestGray;
+                background-color: $lighterGray;
                 border-radius: 50%;
                 z-index: -100;
 

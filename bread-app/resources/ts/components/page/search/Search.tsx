@@ -6,15 +6,15 @@ import { faEdit, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import Search_sidebar from '../../molecules/search/Search_sidebar';
 import Store_pickup from '../../molecules/common/Store_pickup';
 import StoreList from '../../molecules/common/StoreList';
+import BtnBack from '../../atoms/buttons/BtnBack';
 
 const Search: React.FC = () => {
     const location = useLocation();
     const history = useHistory();
+    const [ mobileMenu, setMobileMenu ] = useState(false);
     const keyword = location.search;
     const [ stores, setStores ] = useState([]);
     const [ sort, setSort ] = useState('default')
-    let message_noResult: any = null;
-    let className_btnSort: string = ""
 
     useEffect(()=>{
         getStores()
@@ -25,10 +25,6 @@ const Search: React.FC = () => {
         .then(res => {
             setStores(res.data)
         })    
-    }
-
-    if(stores[0] === undefined){
-        message_noResult = <p>該当する店舗がありません。</p>
     }
 
     // 並び替え
@@ -96,8 +92,21 @@ const Search: React.FC = () => {
 
     return (
         <div className="p-search" id="search_top">
+            {mobileMenu && 
+                <div className="p-search__mobile">
+                    <div className="p-search__mobile__btn">
+                        <BtnBack
+                            click_function={()=>setMobileMenu(false)}
+                        />
+                    </div>
+                    <Search_sidebar
+                        click_function = {getStores}
+                        mobileMenuClose_function={()=>setMobileMenu(false)}
+                    />
+                </div>
+            }
             <div className="a-btn-modificate">
-                <Link to='/search_mobile'><span><FontAwesomeIcon icon={faEdit}/>&nbsp;検索条件変更</span></Link>
+                <button onClick={()=>setMobileMenu(true)}><span><FontAwesomeIcon icon={faEdit}/>&nbsp;検索条件変更</span></button>
             </div>
             <div className = "p-search__container">
                 <Search_sidebar
@@ -111,7 +120,7 @@ const Search: React.FC = () => {
                         {Tab('review_descend')}
                     </div>
                     <div className="p-search__container__content__list">
-                        {message_noResult}
+                    {stores[0] === undefined && <p className="p-search__container__content__list__noMessage">該当する店舗がありません。</p>}
                         <StoreList
                             storeList = {stores}
                             sortType = {sort}

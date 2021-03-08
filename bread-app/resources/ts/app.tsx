@@ -24,7 +24,6 @@ import ResetPassword_request from './components/page/passwordReset/ResetPassword
 import Register_store from './components/page/register/Register_store';
 import Register_user from './components/page/register/Register_user';
 import Search from './components/page/search/Search';
-import Search_input_mobile from './components/page/search/Search_input_mobile';
 import StoreEdit from './components/page/store/StoreEdit';
 import StorePage from './components/page/store/StorePage';
 import Top from './components/page/top/Top';
@@ -58,7 +57,6 @@ const App: React.FC = () => {
             <Switch>
                 <Route path="/" exact component={Top} />
                 <Route path="/search" component={Search} />
-                <Route path="/search_mobile" component={Search_input_mobile} />
                 <Route path="/login_store" component={LoginStore} />
                 <Route path="/login_user" component={LoginUser} />
                 <Route path="/password_reset_request" component={ResetPassword_request} />
