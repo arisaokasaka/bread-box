@@ -10,25 +10,31 @@
         color: $font-color-brown;
 
         &__links {
+            position: absolute;
+            @include bp-600up {
+                top: -1.5rem;
+                right: 0;
+            }
+
             & > span {
-                position: absolute;
+                display: block;
                 color: $darkGray;
-                font-size: 0.8rem;
-                padding-top: 5px;
+                font-size: 0.7rem;
+                padding-top: 2px;
 
                 @include bp-600up {
-                    top: -1.5rem;
-                    right: 0;
+                    text-align: end;
                 }
 
                 & > a {
                     padding: 0 3px;
                     margin-top: 2px;
-                    font-size: 0.8rem;
+                    font-size: 0.7rem;
                     font-weight: 550;
                     text-align: center;
                     color: $darkGray;
                     text-decoration: underline $darkGray;
+                    cursor: pointer;
                 }
             }
         }
@@ -40,7 +46,7 @@
         }
 
         &__form {
-            margin-top: $mp-sm;
+            margin-top: 50px;
 
             @include bp-600up {
                 margin-top: $mp-xs;

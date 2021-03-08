@@ -10,6 +10,7 @@ const LoginStore: React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const history = new useHistory();
+    let csrf:any = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
     // ログイン
     const login = () => {        
@@ -30,15 +31,35 @@ const LoginStore: React.FC = () => {
                 history.push("/store_edit");
             })
             .catch(err => {
-                console.log('[login]fail_post');
             });
         })
         .catch(err => {
-            console.log('fail_get');
         })
     }
     
-    let csrf:any = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+    const guest_login = () => {
+        axios.defaults.withCredentials = true;
+        axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+        axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+
+        axios.get("/sanctum/csrf-cookie").then(response => {
+            axios.post("/api/login", {
+                email: 'guest@store',
+                password: 'gueststore'
+            })
+            .then(res => {
+                dispatch({
+                    type: 'setStore',
+                    payload: res.data.user.uuid,
+                });
+                history.push("/store_edit");
+            })
+            .catch(err => {
+            });
+        })
+        .catch(err => {
+        })
+    }
 
     return (
         <div className = "p-login-store">
@@ -61,6 +82,7 @@ const LoginStore: React.FC = () => {
                 <div className = "p-login-store__container__links">
                     <span>新規登録は<Link to="/register_store">こちら</Link></span>
                     <span>パスワードを忘れた方は<Link to="/password_store">こちら</Link></span>
+                    <span>店舗機能を試してみますか？&nbsp;<a onClick={guest_login}>ゲストログイン</a></span>
                 </div>
             </div>
         </div>
