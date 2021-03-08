@@ -83,6 +83,31 @@ export default function Register_store() {
         .catch(errors => {
         });
     }
+
+        
+    const guest_login = () => {
+        axios.defaults.withCredentials = true;
+        axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+        axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+
+        axios.get("/sanctum/csrf-cookie").then(response => {
+            axios.post("/api/login", {
+                email: 'guest@store',
+                password: 'gueststore'
+            })
+            .then(res => {
+                dispatch({
+                    type: 'setStore',
+                    payload: res.data.user.uuid,
+                });
+                history.push("/store_edit");
+            })
+            .catch(err => {
+            });
+        })
+        .catch(err => {
+        })
+    }
    
     return (
         <div className = "p-register-store">
@@ -91,6 +116,7 @@ export default function Register_store() {
                 <p>店舗情報が最新のものであることをご確認のうえ、ご入力ください。</p>
                 <div className = "p-register-store__container__links">
                     <span>既に登録済ですか？<Link to="/login_store">店舗ログイン</Link></span>
+                    <span>店舗機能を試してみますか？&nbsp;<a onClick={guest_login}>ゲストログイン</a></span>
                 </div>
                 <form className="p-register-store__container__form m-storeForm" name="form_storeRegister" onSubmit={handleSubmit(onSubmit)}>
                     <input type='hidden' name='_token' value={csrf} />
