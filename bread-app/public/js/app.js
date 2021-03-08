@@ -15634,6 +15634,8 @@ var Searchbar = function Searchbar(_a) {
       keyword = _b[0],
       Setkeyword = _b[1];
 
+  var history = react_router_dom_1.useHistory();
+
   var onChangeKeyword = function onChangeKeyword(e) {
     Setkeyword(e.target.value);
   };
@@ -15642,13 +15644,22 @@ var Searchbar = function Searchbar(_a) {
     Setkeyword('');
   };
 
+  var pressKeyboard = function pressKeyboard(e) {
+    if (e.which === 13) {
+      history.push('/search?id=' + state.uuid + (keyword ? "&key=" + keyword : ''));
+    }
+  };
+
   return react_1["default"].createElement("div", {
     className: "a-bar-search"
   }, react_1["default"].createElement("input", {
     type: "text",
     placeholder: "\u30AD\u30FC\u30EF\u30FC\u30C9\u304B\u3089\u63A2\u3059",
     value: keyword,
-    onChange: onChangeKeyword
+    onChange: onChangeKeyword,
+    onKeyPress: function onKeyPress(e) {
+      return pressKeyboard(e);
+    }
   }), text && react_1["default"].createElement(react_router_dom_1.Link, {
     to: {
       pathname: '/search',

@@ -1345,7 +1345,7 @@ label.a-label-required__red--fitContent::after {
   position: relative;
   height: 30px;
   box-sizing: unset;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
 }
 
 .l-navbar__container--pc__content .a-bar-search input[type="text"] {
