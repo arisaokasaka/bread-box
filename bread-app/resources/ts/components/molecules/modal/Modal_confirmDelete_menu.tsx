@@ -5,15 +5,14 @@ import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { UserAuthContext } from '../../../contexts/UserAuthContext';
-import { StoreInfoContext } from '../../../contexts/StoreInfoContext';
 
 type MenuInfoProps = ({
     menu: any;
+    update_function: Function
 })
 
-const Modal_confirmDelete_menu: React.FC<MenuInfoProps> = ({menu}) =>{
+const Modal_confirmDelete_menu: React.FC<MenuInfoProps> = ({menu, update_function}) =>{
     const { state } = useContext(UserAuthContext);
-    const { dispatch } = useContext(StoreInfoContext);
     const [ modalIsOpen, setModal ] = useState(false);
     const { handleSubmit, register } = useForm();
     const customStyles = {
@@ -32,26 +31,11 @@ const Modal_confirmDelete_menu: React.FC<MenuInfoProps> = ({menu}) =>{
         axios.post("/api/delete_menu", data)
         .then(res => {
             alert('削除しました。');
-            getMenuInfo();
+            update_function();
             setModal(false);
         })
         .catch(err => {
             alert('削除に失敗しました。');
-        });
-    }
-
-    // メニュー情報取得
-    const getMenuInfo = () => {
-        axios.post("/api/index_menuInfo", {
-            store_uuid: state.uuid
-        })
-        .then(res => {
-            dispatch({
-                type: 'inputMenuInfo',
-                payload: res.data,
-            });
-        })
-        .catch(err => {
         });
     }
 

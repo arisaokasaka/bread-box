@@ -2,49 +2,28 @@ import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { UserAuthContext } from '../../../../contexts/UserAuthContext';
-import { StoreInfoContext } from '../../../../contexts/StoreInfoContext';
 import BtnSave from '../../../atoms/buttons/BtnSave';
 
-const EditBusinessMemo: React.FC = () => {
+type Props = ({
+    update_function: Function
+    storeInfo: any
+})
+
+const EditBusinessMemo: React.FC<Props> = ({update_function, storeInfo}) => {
     const [ textarea_count, setTextarea_count ] = useState(0);
     const { register, handleSubmit, errors} = useForm();
     const { state } = useContext(UserAuthContext);
-    const { stateInfo, dispatch } = useContext(StoreInfoContext);
-       
-    let StoreInfo = {
-        business_memo: '',
-    }
 
-    if(stateInfo.storeInfo){
-        StoreInfo = stateInfo.storeInfo;
-    }
-    
     // アップデート機能
     const updateBusinessMemo = (data) => {
         data['user_uuid'] = state.uuid;
         axios.post("/api/update_businessMemo", data)
         .then(res => {
-            getStoreInfo();
+            update_function();
             alert('保存しました。')
         })
         .catch(err => {
             alert('保存に失敗しました。')
-        });
-    }
-
-    // 店舗情報取得
-    const getStoreInfo = () => {
-        axios.post("/api/index_storeInfo", {
-            store_uuid: state.uuid
-        })
-        .then(res => {
-            console.log('storeinfo')
-            dispatch({
-                type: 'inputStoreInfo',
-                payload: res.data,
-            });
-        })
-        .catch(err => {
         });
     }
 
@@ -59,11 +38,10 @@ const EditBusinessMemo: React.FC = () => {
                             <span>【記載例】<br/>定休日：第3水曜日<br/>営業時間：月～水 9時～19時 / 木～土 8時～13時</span>
                             <textarea
                                 name="business_memo"
-                                defaultValue={StoreInfo.business_memo}
-                                ref={register({required: true, maxLength: 255})}
+                                defaultValue={storeInfo.business_memo}
+                                ref={register({maxLength: 255})}
                                 onChange={(e)=>{setTextarea_count(e.target.value.length)}}
                             />
-                            {errors.business_memo && <p>お知らせ内容を記入してください。</p>}
                             {textarea_count > 255 && <p>255文字以内で入力してください。</p>}
                         </div>
                     </div>

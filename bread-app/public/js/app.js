@@ -16175,23 +16175,24 @@ var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
-function BtnStoreEdit() {
+var BtnStoreEdit = function BtnStoreEdit(_a) {
+  var uuid = _a.uuid;
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
-  var BtnFavorite;
+  var BtnStoreEdit;
 
-  if (state.uuid && state.auth === "store") {
-    BtnFavorite = react_1["default"].createElement(react_router_dom_1.Link, {
+  if (state.uuid && state.uuid === uuid) {
+    BtnStoreEdit = react_1["default"].createElement(react_router_dom_1.Link, {
       to: "/store_edit",
       className: "a-btn-storeEdit"
     }, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
       icon: free_solid_svg_icons_1.faPen
     })), react_1["default"].createElement("span", null, "\u5E97\u8217\u60C5\u5831\u3092\u7DE8\u96C6\u3059\u308B"));
   } else {
-    BtnFavorite = null;
+    BtnStoreEdit = null;
   }
 
-  return react_1["default"].createElement("div", null, BtnFavorite);
-}
+  return react_1["default"].createElement("div", null, BtnStoreEdit);
+};
 
 exports.default = BtnStoreEdit;
 
@@ -17147,7 +17148,10 @@ var StoreList = function StoreList(_a) {
       src: "/images/no_image_menu_2.png",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
     }))), el.message && react_1["default"].createElement("p", {
-      className: "m-store-list__item__container__explanation"
+      className: "m-store-list__item__container__explanation",
+      onClick: function onClick() {
+        return history.push("/store/" + el.user_uuid);
+      }
     }, el.message), react_1["default"].createElement(Schedule_1["default"], {
       info: el
     }), react_1["default"].createElement(Score_1["default"], {
@@ -17442,10 +17446,10 @@ exports.default = Modal_confirmDelete_account;
 
 /***/ }),
 
-/***/ "./resources/ts/components/molecules/modal/Modal_confirmDeletem_menu.tsx":
-/*!*******************************************************************************!*\
-  !*** ./resources/ts/components/molecules/modal/Modal_confirmDeletem_menu.tsx ***!
-  \*******************************************************************************/
+/***/ "./resources/ts/components/molecules/modal/Modal_confirmDelete_menu.tsx":
+/*!******************************************************************************!*\
+  !*** ./resources/ts/components/molecules/modal/Modal_confirmDelete_menu.tsx ***!
+  \******************************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -17509,12 +17513,10 @@ var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
-var StoreInfoContext_1 = __webpack_require__(/*! ../../../contexts/StoreInfoContext */ "./resources/ts/contexts/StoreInfoContext.ts");
-
 var Modal_confirmDelete_menu = function Modal_confirmDelete_menu(_a) {
-  var menu = _a.menu;
+  var menu = _a.menu,
+      update_function = _a.update_function;
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
-  var dispatch = react_1.useContext(StoreInfoContext_1.StoreInfoContext).dispatch;
 
   var _b = react_1.useState(false),
       modalIsOpen = _b[0],
@@ -17538,23 +17540,11 @@ var Modal_confirmDelete_menu = function Modal_confirmDelete_menu(_a) {
   var onSubmit = function onSubmit(data) {
     axios_1["default"].post("/api/delete_menu", data).then(function (res) {
       alert('削除しました。');
-      getMenuInfo();
+      update_function();
       setModal(false);
     })["catch"](function (err) {
       alert('削除に失敗しました。');
     });
-  }; // メニュー情報取得
-
-
-  var getMenuInfo = function getMenuInfo() {
-    axios_1["default"].post("/api/index_menuInfo", {
-      store_uuid: state.uuid
-    }).then(function (res) {
-      dispatch({
-        type: 'inputMenuInfo',
-        payload: res.data
-      });
-    })["catch"](function (err) {});
   };
 
   return react_1["default"].createElement("div", {
@@ -17885,11 +17875,9 @@ var Bread_kinds_1 = __importDefault(__webpack_require__(/*! ../../../info/Bread_
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
-var StoreInfoContext_1 = __webpack_require__(/*! ../../../contexts/StoreInfoContext */ "./resources/ts/contexts/StoreInfoContext.ts");
-
 var Modal_editMenu = function Modal_editMenu(_a) {
-  var menu = _a.menu;
-  var error_fileSize = null;
+  var menu = _a.menu,
+      update_function = _a.update_function;
 
   var _b = react_1.useState(false),
       modalIsOpen = _b[0],
@@ -17904,7 +17892,6 @@ var Modal_editMenu = function Modal_editMenu(_a) {
       setFileSize = _d[1];
 
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
-  var dispatch = react_1.useContext(StoreInfoContext_1.StoreInfoContext).dispatch;
 
   var _e = react_1.useState(0),
       textarea_count = _e[0],
@@ -17949,7 +17936,7 @@ var Modal_editMenu = function Modal_editMenu(_a) {
       method: "post",
       data: dataSubmit
     }).then(function (res) {
-      getMenuInfo();
+      update_function();
       alert('メニューを更新しました。');
       setModal(false);
     })["catch"](function (errors) {
@@ -17961,23 +17948,6 @@ var Modal_editMenu = function Modal_editMenu(_a) {
   var onChangeFile = function onChangeFile(e) {
     setFile(e.target.files[0]);
     setFileSize(e.target.files[0].size);
-  }; // ファイルサイズが3MBを超えていた場合のエラーメッセージ
-
-
-  if (fileSize > 3000000) {
-    error_fileSize = react_1["default"].createElement("p", null, "\u30D5\u30A1\u30A4\u30EB\u306E\u4E0A\u9650\u30B5\u30A4\u30BA3MB\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002\u5727\u7E2E\u3059\u308B\u304B\u3001\u5225\u306E\u753B\u50CF\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002");
-  } // メニュー情報取得
-
-
-  var getMenuInfo = function getMenuInfo() {
-    axios_1["default"].post("/api/index_menuInfo", {
-      store_uuid: state.uuid
-    }).then(function (res) {
-      dispatch({
-        type: 'inputMenuInfo',
-        payload: res.data
-      });
-    })["catch"](function (err) {});
   };
 
   return react_1["default"].createElement("div", {
@@ -18091,7 +18061,7 @@ var Modal_editMenu = function Modal_editMenu(_a) {
     type: "file",
     accept: "image/*",
     onChange: onChangeFile
-  }), error_fileSize)), react_1["default"].createElement("div", {
+  }), fileSize > 3000000 && react_1["default"].createElement("p", null, "\u30D5\u30A1\u30A4\u30EB\u306E\u4E0A\u9650\u30B5\u30A4\u30BA3MB\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002\u5727\u7E2E\u3059\u308B\u304B\u3001\u5225\u306E\u753B\u50CF\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
     className: "m-storeEdit-menuCreate__container__form__btn m-storeForm__btn"
   }, react_1["default"].createElement(BtnSave_1["default"], {
     InputType: "submit",
@@ -18183,8 +18153,6 @@ var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modul
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
-var StoreInfoContext_1 = __webpack_require__(/*! ../../../contexts/StoreInfoContext */ "./resources/ts/contexts/StoreInfoContext.ts");
-
 var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
 
 var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
@@ -18195,7 +18163,8 @@ var Modal_editSpirit = function Modal_editSpirit(_a) {
   var SpiritInfo = _a.SpiritInfo,
       btnName = _a.btnName,
       funcType = _a.funcType,
-      menuType = _a.menuType;
+      menuType = _a.menuType,
+      update_function = _a.update_function;
   var placeText;
   var defaultContent;
   var spirit_uuid = '';
@@ -18210,7 +18179,6 @@ var Modal_editSpirit = function Modal_editSpirit(_a) {
       errors = _c.errors;
 
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
-  var dispatch = react_1.useContext(StoreInfoContext_1.StoreInfoContext).dispatch;
 
   var _d = react_1.useState(false),
       modalIsOpen = _d[0],
@@ -18311,7 +18279,7 @@ var Modal_editSpirit = function Modal_editSpirit(_a) {
   var createSpirit = function createSpirit(data, file) {
     data.append('img_spirit', file);
     axios_1["default"].post("/api/create_spirit", data).then(function (res) {
-      getMenuInfo();
+      update_function();
       alert('登録しました。');
       setModal(false);
     })["catch"](function (err) {
@@ -18323,24 +18291,12 @@ var Modal_editSpirit = function Modal_editSpirit(_a) {
   var updateSpirit = function updateSpirit(data, file) {
     data.append('img_spirit', file);
     axios_1["default"].post("/api/update_spirit", data).then(function (res) {
-      getMenuInfo();
+      update_function();
       alert('保存しました。');
       setModal(false);
     })["catch"](function (err) {
       return alert('保存に失敗しました。');
     });
-  }; // メニュー情報取得
-
-
-  var getMenuInfo = function getMenuInfo() {
-    axios_1["default"].post("/api/index_menuInfo", {
-      store_uuid: state.uuid
-    }).then(function (res) {
-      dispatch({
-        type: 'inputMenuInfo',
-        payload: res.data
-      });
-    })["catch"](function (err) {});
   };
 
   return react_1["default"].createElement("div", {
@@ -19252,13 +19208,10 @@ var BtnLogout_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/Bt
 
 var Modal_confirmDelete_account_1 = __importDefault(__webpack_require__(/*! ../modal/Modal_confirmDelete_account */ "./resources/ts/components/molecules/modal/Modal_confirmDelete_account.tsx"));
 
-var StoreInfoContext_1 = __webpack_require__(/*! ../../../contexts/StoreInfoContext */ "./resources/ts/contexts/StoreInfoContext.ts");
-
 var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
 var StoreEditTable = function StoreEditTable() {
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
-  var dispatch = react_1.useContext(StoreInfoContext_1.StoreInfoContext).dispatch;
 
   var _a = react_1.useState('basicInfo'),
       Table = _a[0],
@@ -19267,6 +19220,14 @@ var StoreEditTable = function StoreEditTable() {
   var _b = react_1.useState(''),
       className_active = _b[0],
       setClassName_Active = _b[1];
+
+  var _c = react_1.useState({}),
+      storeInfo = _c[0],
+      setStoreInfo = _c[1];
+
+  var _d = react_1.useState([]),
+      menuInfo = _d[0],
+      setMenuInfo = _d[1];
 
   react_1.useEffect(function () {
     getStoreInfo();
@@ -19277,11 +19238,7 @@ var StoreEditTable = function StoreEditTable() {
     axios_1["default"].post("/api/index_storeInfo", {
       store_uuid: state.uuid
     }).then(function (res) {
-      console.log('storeinfo');
-      dispatch({
-        type: 'inputStoreInfo',
-        payload: res.data
-      });
+      setStoreInfo(res.data);
     })["catch"](function (err) {});
   }; // メニュー情報取得
 
@@ -19290,10 +19247,7 @@ var StoreEditTable = function StoreEditTable() {
     axios_1["default"].post("/api/index_menuInfo", {
       store_uuid: state.uuid
     }).then(function (res) {
-      dispatch({
-        type: 'inputMenuInfo',
-        payload: res.data
-      });
+      setMenuInfo(res.data);
     })["catch"](function (err) {});
   }; //サイドメニューのタブ一覧
 
@@ -19319,34 +19273,63 @@ var StoreEditTable = function StoreEditTable() {
   var CurrentTable = function CurrentTable(table) {
     switch (table) {
       case 'basicInfo':
-        return react_1["default"].createElement(EditBasicInfo_1["default"], null);
+        return react_1["default"].createElement(EditBasicInfo_1["default"], {
+          update_function: getStoreInfo,
+          storeInfo: storeInfo
+        });
 
       case 'basicDays':
-        return react_1["default"].createElement(EditBusinessDays_1["default"], null);
+        return react_1["default"].createElement(EditBusinessDays_1["default"], {
+          update_function: getStoreInfo,
+          storeInfo: storeInfo
+        });
 
       case 'basicMemo':
-        return react_1["default"].createElement(EditBusinessMemo_1["default"], null);
+        return react_1["default"].createElement(EditBusinessMemo_1["default"], {
+          update_function: getStoreInfo,
+          storeInfo: storeInfo
+        });
 
       case 'basicHomepage':
-        return react_1["default"].createElement(EditHomepage_1["default"], null);
+        return react_1["default"].createElement(EditHomepage_1["default"], {
+          update_function: getStoreInfo,
+          storeInfo: storeInfo
+        });
 
       case 'basicSNS':
-        return react_1["default"].createElement(EditSNS_1["default"], null);
+        return react_1["default"].createElement(EditSNS_1["default"], {
+          update_function: getStoreInfo,
+          storeInfo: storeInfo
+        });
 
       case 'basicImage':
-        return react_1["default"].createElement(EditImage_1["default"], null);
+        return react_1["default"].createElement(EditImage_1["default"], {
+          update_function: getStoreInfo,
+          storeInfo: storeInfo
+        });
 
       case 'menuAdd':
-        return react_1["default"].createElement(MenuCreate_1["default"], null);
+        return react_1["default"].createElement(MenuCreate_1["default"], {
+          update_function: getMenuInfo
+        });
 
       case 'menuEdit':
-        return react_1["default"].createElement(MenuList_1["default"], null);
+        return react_1["default"].createElement(MenuList_1["default"], {
+          update_function: getMenuInfo,
+          menuInfo: menuInfo
+        });
 
       case 'spiritSpirit':
-        return react_1["default"].createElement(StoreEditTable_spirit_1["default"], null);
+        return react_1["default"].createElement(StoreEditTable_spirit_1["default"], {
+          update_function: getMenuInfo,
+          menuInfo: menuInfo
+        });
 
       case 'spiritAdvantage':
-        return react_1["default"].createElement(StoreEditTable_advantage_1["default"], null);
+        return react_1["default"].createElement(StoreEditTable_advantage_1["default"], {
+          update_function: getMenuInfo,
+          menuInfo: menuInfo
+        });
     }
   };
 
@@ -19491,44 +19474,30 @@ var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modul
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
-var StoreInfoContext_1 = __webpack_require__(/*! ../../../../contexts/StoreInfoContext */ "./resources/ts/contexts/StoreInfoContext.ts");
-
 var BtnSave_1 = __importDefault(__webpack_require__(/*! ../../../atoms/buttons/BtnSave */ "./resources/ts/components/atoms/buttons/BtnSave.tsx"));
 
-var EditBasicInfo = function EditBasicInfo() {
-  var _a = react_hook_form_1.useForm(),
-      register = _a.register,
-      handleSubmit = _a.handleSubmit,
-      errors = _a.errors;
+var EditBasicInfo = function EditBasicInfo(_a) {
+  var update_function = _a.update_function,
+      storeInfo = _a.storeInfo;
+
+  var _b = react_hook_form_1.useForm(),
+      register = _b.register,
+      handleSubmit = _b.handleSubmit,
+      errors = _b.errors;
 
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
 
-  var _b = react_1.useContext(StoreInfoContext_1.StoreInfoContext),
-      stateInfo = _b.stateInfo,
-      dispatch = _b.dispatch;
-
   var _c = react_1.useState(0),
       textarea_count = _c[0],
-      setTextarea_count = _c[1];
-
-  var StoreInfo = {
-    name: '',
-    address: '',
-    tel: '',
-    email: '',
-    message: ''
-  };
-
-  if (stateInfo.storeInfo) {
-    StoreInfo = stateInfo.storeInfo;
-  } //送信時の動作
+      setTextarea_count = _c[1]; //送信時の動作
 
 
   var onSubmit = function onSubmit(data) {
     data['user_uuid'] = state.uuid;
     updateBasicInfo_storesTable(data);
     updateBasicInfo_usersTable(data);
-    getStoreInfo();
+    update_function();
+    alert('保存しました。');
   }; // アップデート機能（storesテーブル）
 
 
@@ -19539,18 +19508,6 @@ var EditBasicInfo = function EditBasicInfo() {
 
   var updateBasicInfo_usersTable = function updateBasicInfo_usersTable(data) {
     axios_1["default"].post("/api/update_basicInfo_usersTable", data).then(function (res) {})["catch"](function (err) {});
-  }; // 店舗情報取得＆更新
-
-
-  var getStoreInfo = function getStoreInfo() {
-    axios_1["default"].post("/api/index_storeInfo", {
-      store_uuid: state.uuid
-    }).then(function (res) {
-      dispatch({
-        type: 'inputStoreInfo',
-        payload: res.data
-      });
-    })["catch"](function (err) {});
   };
 
   return react_1["default"].createElement("div", {
@@ -19571,7 +19528,7 @@ var EditBasicInfo = function EditBasicInfo() {
     type: "text",
     name: "name",
     id: "store_name",
-    defaultValue: StoreInfo.name,
+    defaultValue: storeInfo.name,
     ref: register({
       required: true
     })
@@ -19586,7 +19543,7 @@ var EditBasicInfo = function EditBasicInfo() {
     type: "text",
     name: "address",
     id: "store_address",
-    defaultValue: StoreInfo.address,
+    defaultValue: storeInfo.address,
     ref: register({
       required: true
     })
@@ -19601,7 +19558,7 @@ var EditBasicInfo = function EditBasicInfo() {
     type: "email",
     name: "email",
     id: "store_email",
-    defaultValue: StoreInfo.email,
+    defaultValue: storeInfo.email,
     ref: register({
       required: true
     })
@@ -19615,7 +19572,7 @@ var EditBasicInfo = function EditBasicInfo() {
     type: "tel",
     name: "tel",
     id: "store_tel",
-    defaultValue: StoreInfo.tel,
+    defaultValue: storeInfo.tel,
     ref: register({
       pattern: /[0-9]/,
       maxLength: 11,
@@ -19630,7 +19587,7 @@ var EditBasicInfo = function EditBasicInfo() {
   }, react_1["default"].createElement("span", null, "\u304A\u5E97\u306E\u30DA\u30FC\u30B8\u306E\u6700\u521D\u306B\u8868\u793A\u3055\u308C\u308B\u90E8\u5206\u3067\u3059\u3002"), react_1["default"].createElement("textarea", {
     name: "message",
     id: "store_message",
-    defaultValue: StoreInfo.message,
+    defaultValue: storeInfo.message,
     ref: register({
       maxLength: 255
     }),
@@ -19711,37 +19668,26 @@ var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modul
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
-var StoreInfoContext_1 = __webpack_require__(/*! ../../../../contexts/StoreInfoContext */ "./resources/ts/contexts/StoreInfoContext.ts");
-
 var InputSchedule_1 = __importDefault(__webpack_require__(/*! ../../common/InputSchedule */ "./resources/ts/components/molecules/common/InputSchedule.tsx"));
 
 var BtnSave_1 = __importDefault(__webpack_require__(/*! ../../../atoms/buttons/BtnSave */ "./resources/ts/components/atoms/buttons/BtnSave.tsx"));
 
 var Week_1 = __importDefault(__webpack_require__(/*! ../../../../info/Week */ "./resources/ts/info/Week.ts"));
 
-var EditBusinessDays = function EditBusinessDays() {
-  var _a = react_hook_form_1.useForm(),
-      register = _a.register,
-      handleSubmit = _a.handleSubmit,
-      errors = _a.errors;
+var EditBusinessDays = function EditBusinessDays(_a) {
+  var update_function = _a.update_function,
+      storeInfo = _a.storeInfo;
 
-  var _b = react_1.useState(false),
-      dayValidation = _b[0],
-      setDayValidation = _b[1];
+  var _b = react_hook_form_1.useForm(),
+      register = _b.register,
+      handleSubmit = _b.handleSubmit,
+      errors = _b.errors;
+
+  var _c = react_1.useState(false),
+      dayValidation = _c[0],
+      setDayValidation = _c[1];
 
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
-
-  var _c = react_1.useContext(StoreInfoContext_1.StoreInfoContext),
-      stateInfo = _c.stateInfo,
-      dispatch = _c.dispatch;
-
-  var StoreInfo = {
-    business_day: ''
-  };
-
-  if (stateInfo.storeInfo) {
-    StoreInfo = stateInfo.storeInfo;
-  }
 
   var onSubmit = function onSubmit(data) {
     var business_day = {};
@@ -19767,27 +19713,13 @@ var EditBusinessDays = function EditBusinessDays() {
       //更新データ送信
       data['user_uuid'] = state.uuid;
       data['business_day'] = JSON.stringify(business_day);
-      console.log(data);
       axios_1["default"].post("/api/update_businessDay", data).then(function (res) {
-        getStoreInfo();
+        update_function();
         alert('営業日・営業時間を保存しました。');
       })["catch"](function (err) {
         alert('営業日・営業時間の保存に失敗しました。');
       });
     }
-  }; // 店舗情報取得＆更新
-
-
-  var getStoreInfo = function getStoreInfo() {
-    axios_1["default"].post("/api/index_storeInfo", {
-      store_uuid: state.uuid
-    }).then(function (res) {
-      console.log('storeinfo');
-      dispatch({
-        type: 'inputStoreInfo',
-        payload: res.data
-      });
-    })["catch"](function (err) {});
   };
 
   return react_1["default"].createElement("div", {
@@ -19809,7 +19741,7 @@ var EditBusinessDays = function EditBusinessDays() {
     name: "business_day",
     ref: register
   }), react_1["default"].createElement("span", null, "\u55B6\u696D\u3057\u3066\u3044\u308B\u66DC\u65E5\u3092\u30C1\u30A7\u30C3\u30AF\u306E\u3046\u3048\u3001\u55B6\u696D\u6642\u9593\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement(InputSchedule_1["default"], {
-    Info: StoreInfo
+    Info: storeInfo
   }), dayValidation === true && react_1["default"].createElement("p", null, "\u958B\u5E97\u6642\u9593\u30FB\u9589\u5E97\u6642\u9593\u3069\u3061\u3089\u3082\u8A18\u5165\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
     className: "m-storeEdit-businessDay__container__form__btn m-storeForm__btn"
   }, react_1["default"].createElement(BtnSave_1["default"], {
@@ -19884,56 +19816,31 @@ var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modul
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
-var StoreInfoContext_1 = __webpack_require__(/*! ../../../../contexts/StoreInfoContext */ "./resources/ts/contexts/StoreInfoContext.ts");
-
 var BtnSave_1 = __importDefault(__webpack_require__(/*! ../../../atoms/buttons/BtnSave */ "./resources/ts/components/atoms/buttons/BtnSave.tsx"));
 
-var EditBusinessMemo = function EditBusinessMemo() {
-  var _a = react_1.useState(0),
-      textarea_count = _a[0],
-      setTextarea_count = _a[1];
+var EditBusinessMemo = function EditBusinessMemo(_a) {
+  var update_function = _a.update_function,
+      storeInfo = _a.storeInfo;
 
-  var _b = react_hook_form_1.useForm(),
-      register = _b.register,
-      handleSubmit = _b.handleSubmit,
-      errors = _b.errors;
+  var _b = react_1.useState(0),
+      textarea_count = _b[0],
+      setTextarea_count = _b[1];
 
-  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
+  var _c = react_hook_form_1.useForm(),
+      register = _c.register,
+      handleSubmit = _c.handleSubmit,
+      errors = _c.errors;
 
-  var _c = react_1.useContext(StoreInfoContext_1.StoreInfoContext),
-      stateInfo = _c.stateInfo,
-      dispatch = _c.dispatch;
-
-  var StoreInfo = {
-    business_memo: ''
-  };
-
-  if (stateInfo.storeInfo) {
-    StoreInfo = stateInfo.storeInfo;
-  } // アップデート機能
-
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state; // アップデート機能
 
   var updateBusinessMemo = function updateBusinessMemo(data) {
     data['user_uuid'] = state.uuid;
     axios_1["default"].post("/api/update_businessMemo", data).then(function (res) {
-      getStoreInfo();
+      update_function();
       alert('保存しました。');
     })["catch"](function (err) {
       alert('保存に失敗しました。');
     });
-  }; // 店舗情報取得
-
-
-  var getStoreInfo = function getStoreInfo() {
-    axios_1["default"].post("/api/index_storeInfo", {
-      store_uuid: state.uuid
-    }).then(function (res) {
-      console.log('storeinfo');
-      dispatch({
-        type: 'inputStoreInfo',
-        payload: res.data
-      });
-    })["catch"](function (err) {});
   };
 
   return react_1["default"].createElement("div", {
@@ -19949,15 +19856,14 @@ var EditBusinessMemo = function EditBusinessMemo() {
     className: "m-storeForm__item__input"
   }, react_1["default"].createElement("span", null, "\u3010\u8A18\u8F09\u4F8B\u3011", react_1["default"].createElement("br", null), "\u5B9A\u4F11\u65E5\uFF1A\u7B2C3\u6C34\u66DC\u65E5", react_1["default"].createElement("br", null), "\u55B6\u696D\u6642\u9593\uFF1A\u6708\uFF5E\u6C34 9\u6642\uFF5E19\u6642 / \u6728\uFF5E\u571F 8\u6642\uFF5E13\u6642"), react_1["default"].createElement("textarea", {
     name: "business_memo",
-    defaultValue: StoreInfo.business_memo,
+    defaultValue: storeInfo.business_memo,
     ref: register({
-      required: true,
       maxLength: 255
     }),
     onChange: function onChange(e) {
       setTextarea_count(e.target.value.length);
     }
-  }), errors.business_memo && react_1["default"].createElement("p", null, "\u304A\u77E5\u3089\u305B\u5185\u5BB9\u3092\u8A18\u5165\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), textarea_count > 255 && react_1["default"].createElement("p", null, "255\u6587\u5B57\u4EE5\u5185\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
+  }), textarea_count > 255 && react_1["default"].createElement("p", null, "255\u6587\u5B57\u4EE5\u5185\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
     className: "m-storeEdit-businessMemo__container__form__btn m-storeForm__btn"
   }, react_1["default"].createElement(BtnSave_1["default"], {
     InputType: "submit",
@@ -20031,52 +19937,27 @@ var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modul
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
-var StoreInfoContext_1 = __webpack_require__(/*! ../../../../contexts/StoreInfoContext */ "./resources/ts/contexts/StoreInfoContext.ts");
-
 var BtnSave_1 = __importDefault(__webpack_require__(/*! ../../../atoms/buttons/BtnSave */ "./resources/ts/components/atoms/buttons/BtnSave.tsx"));
 
-var EditHomepage = function EditHomepage() {
-  var _a = react_hook_form_1.useForm(),
-      register = _a.register,
-      handleSubmit = _a.handleSubmit,
-      errors = _a.errors;
+var EditHomepage = function EditHomepage(_a) {
+  var update_function = _a.update_function,
+      storeInfo = _a.storeInfo;
 
-  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
+  var _b = react_hook_form_1.useForm(),
+      register = _b.register,
+      handleSubmit = _b.handleSubmit,
+      errors = _b.errors;
 
-  var _b = react_1.useContext(StoreInfoContext_1.StoreInfoContext),
-      stateInfo = _b.stateInfo,
-      dispatch = _b.dispatch;
-
-  var StoreInfo = {
-    url: ''
-  };
-
-  if (stateInfo.storeInfo) {
-    StoreInfo = stateInfo.storeInfo;
-  } // アップデート機能
-
+  var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state; // アップデート機能
 
   var updateHomepage = function updateHomepage(data) {
     data['user_uuid'] = state.uuid;
     axios_1["default"].post("/api/update_homepage", data).then(function (res) {
-      getStoreInfo();
+      update_function();
       alert('ホームページを保存しました。');
     })["catch"](function (err) {
       alert('ホームページの保存に失敗しました。');
     });
-  }; // 店舗情報取得＆更新
-
-
-  var getStoreInfo = function getStoreInfo() {
-    axios_1["default"].post("/api/index_storeInfo", {
-      store_uuid: state.uuid
-    }).then(function (res) {
-      console.log('storeinfo');
-      dispatch({
-        type: 'inputStoreInfo',
-        payload: res.data
-      });
-    })["catch"](function (err) {});
   };
 
   return react_1["default"].createElement("div", {
@@ -20096,10 +19977,8 @@ var EditHomepage = function EditHomepage() {
     type: "url",
     id: "store_url",
     name: "url",
-    defaultValue: StoreInfo.url,
-    ref: register({
-      required: true
-    })
+    defaultValue: storeInfo.url,
+    ref: register
   }), errors.url && react_1["default"].createElement("p", null, "\u30DB\u30FC\u30E0\u30DA\u30FC\u30B8\u306EURL\u3092\u8A18\u5165\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
     className: "m-storeEdit-homepage__container__form__btn m-storeForm__btn"
   }, react_1["default"].createElement(BtnSave_1["default"], {
@@ -20192,18 +20071,20 @@ var UserAuthContext_1 = __webpack_require__(/*! ../../../../contexts/UserAuthCon
 
 var BtnSave_1 = __importDefault(__webpack_require__(/*! ../../../atoms/buttons/BtnSave */ "./resources/ts/components/atoms/buttons/BtnSave.tsx"));
 
-var EditImage = function EditImage() {
+var EditImage = function EditImage(_a) {
+  var update_function = _a.update_function,
+      storeInfo = _a.storeInfo;
   var handleSubmit = react_hook_form_1.useForm().handleSubmit;
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
 
-  var _a = react_1.useState({
+  var _b = react_1.useState({
     header: null,
     thumbnail: null,
     header_size: 0,
     thumbnail_size: 0
   }),
-      images = _a[0],
-      setImages = _a[1]; // ファイル取得
+      images = _b[0],
+      setImages = _b[1]; // ファイル取得
 
 
   var onChangeHeader = function onChangeHeader(e) {
@@ -20240,7 +20121,8 @@ var EditImage = function EditImage() {
     formData.append('img_header', header);
     formData.append('img_thumbnail', thumbnail);
     axios_1["default"].post('/api/save_storeImages', formData).then(function (res) {
-      return alert('画像を保存しました。是非店舗ページを見てみてください。');
+      alert('画像を保存しました。');
+      update_function();
     })["catch"](function (err) {
       return alert('画像の保存に失敗しました。');
     });
@@ -20259,27 +20141,37 @@ var EditImage = function EditImage() {
     htmlFor: "store_url"
   }, "\u30D8\u30C3\u30C0\u30FC\u753B\u50CF"), react_1["default"].createElement("div", {
     className: "m-storeForm__item__input"
-  }, react_1["default"].createElement("span", null, "\u5E97\u8217\u30DA\u30FC\u30B8\u306E\u4E0A\u90E8\u306B\u8868\u793A\u3055\u308C\u308B\u753B\u50CF\u3067\u3059\u3002"), react_1["default"].createElement("input", {
+  }, react_1["default"].createElement("span", null, "\u5E97\u8217\u30DA\u30FC\u30B8\u306E\u4E0A\u90E8\u306B\u8868\u793A\u3055\u308C\u308B\u753B\u50CF\u3067\u3059\u3002", storeInfo.header && "更新する場合は、新しい画像を選択してください。"), react_1["default"].createElement("input", {
     type: "file",
     name: "img_header",
     accept: "image/*",
     onChange: function onChange(e) {
       return onChangeHeader(e);
     }
-  }), images.header_size > 3000000 && react_1["default"].createElement("p", null, "\u30D5\u30A1\u30A4\u30EB\u306E\u4E0A\u9650\u30B5\u30A4\u30BA3MB\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002\u5727\u7E2E\u3059\u308B\u304B\u3001\u5225\u306E\u753B\u50CF\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
+  }), images.header_size > 3000000 && react_1["default"].createElement("p", null, "\u30D5\u30A1\u30A4\u30EB\u306E\u4E0A\u9650\u30B5\u30A4\u30BA3MB\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002\u5727\u7E2E\u3059\u308B\u304B\u3001\u5225\u306E\u753B\u50CF\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), storeInfo.header && react_1["default"].createElement("div", {
+    className: "m-storeEdit-image__container__form__item__input__image"
+  }, react_1["default"].createElement("span", null, "\u767B\u9332\u753B\u50CF"), react_1["default"].createElement("img", {
+    src: "/storage/store/" + state.uuid + "/header.jpg",
+    alt: "\u5E97\u8217\u753B\u50CF"
+  })))), react_1["default"].createElement("div", {
     className: "m-storeForm__item"
   }, react_1["default"].createElement("label", {
     htmlFor: "store_url"
   }, "\u30B5\u30E0\u30CD\u30A4\u30EB\u753B\u50CF"), react_1["default"].createElement("div", {
     className: "m-storeForm__item__input"
-  }, react_1["default"].createElement("span", null, "\u691C\u7D22\u30DA\u30FC\u30B8\u306E\u30C8\u30C3\u30D7\u306B\u8868\u793A\u3055\u308C\u308B\u753B\u50CF\u3067\u3059\u3002"), react_1["default"].createElement("input", {
+  }, react_1["default"].createElement("span", null, "\u691C\u7D22\u30DA\u30FC\u30B8\u306E\u30C8\u30C3\u30D7\u306B\u8868\u793A\u3055\u308C\u308B\u753B\u50CF\u3067\u3059\u3002", storeInfo.thumbnail && "更新する場合は、新しい画像を選択してください。"), react_1["default"].createElement("input", {
     type: "file",
     name: "img_thumbnail",
     accept: "image/*",
     onChange: function onChange(e) {
       return onChangeThumbnail(e);
     }
-  }), images.thumbnail_size > 3000000 && react_1["default"].createElement("p", null, "\u30D5\u30A1\u30A4\u30EB\u306E\u4E0A\u9650\u30B5\u30A4\u30BA3MB\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002\u5727\u7E2E\u3059\u308B\u304B\u3001\u5225\u306E\u753B\u50CF\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002"))), react_1["default"].createElement("div", {
+  }), images.thumbnail_size > 3000000 && react_1["default"].createElement("p", null, "\u30D5\u30A1\u30A4\u30EB\u306E\u4E0A\u9650\u30B5\u30A4\u30BA3MB\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002\u5727\u7E2E\u3059\u308B\u304B\u3001\u5225\u306E\u753B\u50CF\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), storeInfo.thumbnail && react_1["default"].createElement("div", {
+    className: "m-storeEdit-image__container__form__item__input__image"
+  }, react_1["default"].createElement("span", null, "\u767B\u9332\u753B\u50CF"), react_1["default"].createElement("img", {
+    src: "/storage/store/" + state.uuid + "/thumbnail.jpg",
+    alt: "\u5E97\u8217\u753B\u50CF"
+  })))), react_1["default"].createElement("div", {
     className: "m-storeEdit-image__container__form__btn m-storeForm__btn"
   }, react_1["default"].createElement(BtnSave_1["default"], {
     InputType: "submit",
@@ -20353,21 +20245,17 @@ var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modul
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
-var StoreInfoContext_1 = __webpack_require__(/*! ../../../../contexts/StoreInfoContext */ "./resources/ts/contexts/StoreInfoContext.ts");
-
 var BtnSave_1 = __importDefault(__webpack_require__(/*! ../../../atoms/buttons/BtnSave */ "./resources/ts/components/atoms/buttons/BtnSave.tsx"));
 
-var EditSNS = function EditSNS() {
-  var _a = react_hook_form_1.useForm(),
-      register = _a.register,
-      handleSubmit = _a.handleSubmit;
+var EditSNS = function EditSNS(_a) {
+  var update_function = _a.update_function,
+      storeInfo = _a.storeInfo;
+
+  var _b = react_hook_form_1.useForm(),
+      register = _b.register,
+      handleSubmit = _b.handleSubmit;
 
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
-
-  var _b = react_1.useContext(StoreInfoContext_1.StoreInfoContext),
-      stateInfo = _b.stateInfo,
-      dispatch = _b.dispatch;
-
   var snsSubmitted = {
     instagram: '',
     twitter: '',
@@ -20376,8 +20264,8 @@ var EditSNS = function EditSNS() {
   };
   var defaultData; // StoreInfo.snsにデータがあれば、defaultDataにそのデータを設定・defaultValueに反映
 
-  if (stateInfo.storeInfo.sns) {
-    defaultData = JSON.parse(stateInfo.storeInfo.sns);
+  if (storeInfo.sns) {
+    defaultData = JSON.parse(storeInfo.sns);
   } else {
     defaultData = {
       instagram: '',
@@ -20398,24 +20286,11 @@ var EditSNS = function EditSNS() {
     data['sns'] = snsSubmitted;
     data['user_uuid'] = state.uuid;
     axios_1["default"].post("/api/update_sns", data).then(function (res) {
-      getStoreInfo();
+      update_function();
       alert('保存しました。');
     })["catch"](function (err) {
       alert('保存に失敗しました。');
     });
-  }; // 店舗情報取得＆更新
-
-
-  var getStoreInfo = function getStoreInfo() {
-    axios_1["default"].post("/api/index_storeInfo", {
-      store_uuid: state.uuid
-    }).then(function (res) {
-      console.log('storeinfo');
-      dispatch({
-        type: 'inputStoreInfo',
-        payload: res.data
-      });
-    })["catch"](function (err) {});
   };
 
   return react_1["default"].createElement("div", {
@@ -20544,28 +20419,27 @@ var BtnReset_1 = __importDefault(__webpack_require__(/*! ../../../atoms/buttons/
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
-var StoreInfoContext_1 = __webpack_require__(/*! ../../../../contexts/StoreInfoContext */ "./resources/ts/contexts/StoreInfoContext.ts");
+var MenuCreate = function MenuCreate(_a) {
+  var update_function = _a.update_function;
 
-var MenuCreate = function MenuCreate() {
-  var _a = react_hook_form_1.useForm(),
-      register = _a.register,
-      handleSubmit = _a.handleSubmit,
-      errors = _a.errors;
+  var _b = react_hook_form_1.useForm(),
+      register = _b.register,
+      handleSubmit = _b.handleSubmit,
+      errors = _b.errors;
 
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
-  var dispatch = react_1.useContext(StoreInfoContext_1.StoreInfoContext).dispatch;
 
-  var _b = react_1.useState(null),
-      file = _b[0],
-      setFile = _b[1];
-
-  var _c = react_1.useState(0),
-      fileSize = _c[0],
-      setFileSize = _c[1];
+  var _c = react_1.useState(null),
+      file = _c[0],
+      setFile = _c[1];
 
   var _d = react_1.useState(0),
-      textarea_count = _d[0],
-      setTextarea_count = _d[1]; // 送信機能
+      fileSize = _d[0],
+      setFileSize = _d[1];
+
+  var _e = react_1.useState(0),
+      textarea_count = _e[0],
+      setTextarea_count = _e[1]; // 送信機能
 
 
   var onSubmit = function onSubmit(data) {
@@ -20598,23 +20472,11 @@ var MenuCreate = function MenuCreate() {
       method: "post",
       data: dataSubmit
     }).then(function (res) {
-      getMenuInfo();
+      update_function();
       alert('メニューを追加しました。追加したメニューは、メニュー一覧から確認できます。');
     })["catch"](function (errors) {
-      alert('メニューの追加に失敗しました。');
+      alert('メニューの追加に失敗しました。画像に問題がある可能性が高いです。');
     });
-  }; // メニュー情報取得
-
-
-  var getMenuInfo = function getMenuInfo() {
-    axios_1["default"].post("/api/index_menuInfo", {
-      store_uuid: state.uuid
-    }).then(function (res) {
-      dispatch({
-        type: 'inputMenuInfo',
-        payload: res.data
-      });
-    })["catch"](function (err) {});
   };
 
   return react_1["default"].createElement("div", {
@@ -20764,22 +20626,19 @@ var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/reac
 
 var Modal_editMenu_1 = __importDefault(__webpack_require__(/*! ../../../molecules/modal/Modal_editMenu */ "./resources/ts/components/molecules/modal/Modal_editMenu.tsx"));
 
-var Modal_confirmDeletem_menu_1 = __importDefault(__webpack_require__(/*! ../../modal/Modal_confirmDeletem_menu */ "./resources/ts/components/molecules/modal/Modal_confirmDeletem_menu.tsx"));
+var Modal_confirmDelete_menu_1 = __importDefault(__webpack_require__(/*! ../../modal/Modal_confirmDelete_menu */ "./resources/ts/components/molecules/modal/Modal_confirmDelete_menu.tsx"));
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
-var StoreInfoContext_1 = __webpack_require__(/*! ../../../../contexts/StoreInfoContext */ "./resources/ts/contexts/StoreInfoContext.ts");
-
-var MenuList = function MenuList() {
+var MenuList = function MenuList(_a) {
+  var menuInfo = _a.menuInfo,
+      update_function = _a.update_function;
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
-  var stateInfo = react_1.useContext(StoreInfoContext_1.StoreInfoContext).stateInfo;
   var time_current;
-  var MenuInfo;
   var content = react_1["default"].createElement("p", null, "\u307E\u3060\u767B\u9332\u3055\u308C\u3066\u3044\u307E\u305B\u3093\u3002\u30E1\u30CB\u30E5\u30FC\u8FFD\u52A0\u30DA\u30FC\u30B8\u3088\u308A\u3001\u8FFD\u52A0\u3057\u3066\u304F\u3060\u3055\u3044\u3002"); // メニュー情報があるか判断
 
-  if (stateInfo.menuInfo) {
-    MenuInfo = stateInfo.menuInfo;
-    MenuInfo.map(function (el) {
+  if (menuInfo) {
+    menuInfo.map(function (el) {
       if (el.menu_type === 1) {
         content = null;
         time_current = String(Date.now());
@@ -20789,16 +20648,18 @@ var MenuList = function MenuList() {
 
   return react_1["default"].createElement("div", {
     className: "m-storeEdit-menuList"
-  }, react_1["default"].createElement("h3", null, "\u30E1\u30CB\u30E5\u30FC\u4E00\u89A7"), content, MenuInfo.map(function (el) {
+  }, react_1["default"].createElement("h3", null, "\u30E1\u30CB\u30E5\u30FC\u4E00\u89A7"), content, menuInfo.map(function (el) {
     return el.menu_type === 1 && react_1["default"].createElement("div", {
       className: "m-storeEdit-menuList__item",
       key: el.id
     }, react_1["default"].createElement("div", {
       className: "m-storeEdit-menuList__item__btn"
     }, react_1["default"].createElement(Modal_editMenu_1["default"], {
-      menu: el
-    }), react_1["default"].createElement(Modal_confirmDeletem_menu_1["default"], {
-      menu: el
+      menu: el,
+      update_function: update_function
+    }), react_1["default"].createElement(Modal_confirmDelete_menu_1["default"], {
+      menu: el,
+      update_function: update_function
     })), react_1["default"].createElement("div", {
       className: "m-storeEdit-menuList__item__content"
     }, el.image_menu ? react_1["default"].createElement("img", {
@@ -20875,11 +20736,10 @@ var Modal_editSpirit_1 = __importDefault(__webpack_require__(/*! ../../../molecu
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
-var StoreInfoContext_1 = __webpack_require__(/*! ../../../../contexts/StoreInfoContext */ "./resources/ts/contexts/StoreInfoContext.ts");
-
-var StoreEditTable_advantage = function StoreEditTable_advantage() {
+var StoreEditTable_advantage = function StoreEditTable_advantage(_a) {
+  var menuInfo = _a.menuInfo,
+      update_function = _a.update_function;
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
-  var stateInfo = react_1.useContext(StoreInfoContext_1.StoreInfoContext).stateInfo;
   var mainContent;
   var advantageInfo;
   var time_current;
@@ -20887,8 +20747,8 @@ var StoreEditTable_advantage = function StoreEditTable_advantage() {
   var btnName = '追加する';
   var content = react_1["default"].createElement("p", null, "\u307E\u3060\u767B\u9332\u3055\u308C\u3066\u3044\u307E\u305B\u3093\u3002\u8FFD\u52A0\u3059\u308B\u30DC\u30BF\u30F3\u3088\u308A\u8FFD\u52A0\u3057\u3066\u304F\u3060\u3055\u3044\u3002"); // メニュー情報があるか判断
 
-  if (stateInfo.menuInfo) {
-    stateInfo.menuInfo.map(function (el) {
+  if (menuInfo) {
+    menuInfo.map(function (el) {
       // menu_type1：パンのメニュー, menu_type2：店のこだわり, menu_type3：店の思い
       if (el.menu_type === 2) {
         advantageInfo = el;
@@ -20918,7 +20778,8 @@ var StoreEditTable_advantage = function StoreEditTable_advantage() {
     SpiritInfo: advantageInfo,
     btnName: btnName,
     funcType: funcType,
-    menuType: 2
+    menuType: 2,
+    update_function: update_function
   })), content, mainContent);
 };
 
@@ -20985,11 +20846,10 @@ var Modal_editSpirit_1 = __importDefault(__webpack_require__(/*! ../../../molecu
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
-var StoreInfoContext_1 = __webpack_require__(/*! ../../../../contexts/StoreInfoContext */ "./resources/ts/contexts/StoreInfoContext.ts");
-
-var StoreEditTable_spirit = function StoreEditTable_spirit() {
+var StoreEditTable_spirit = function StoreEditTable_spirit(_a) {
+  var menuInfo = _a.menuInfo,
+      update_function = _a.update_function;
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
-  var stateInfo = react_1.useContext(StoreInfoContext_1.StoreInfoContext).stateInfo;
   var spiritInfo;
   var mainContent;
   var time_current;
@@ -20997,8 +20857,8 @@ var StoreEditTable_spirit = function StoreEditTable_spirit() {
   var btnName = '追加する';
   var content = react_1["default"].createElement("p", null, "\u307E\u3060\u767B\u9332\u3055\u308C\u3066\u3044\u307E\u305B\u3093\u3002\u8FFD\u52A0\u3059\u308B\u30DC\u30BF\u30F3\u3088\u308A\u8FFD\u52A0\u3057\u3066\u304F\u3060\u3055\u3044\u3002"); // メニュー情報があるか判断
 
-  if (stateInfo.menuInfo) {
-    stateInfo.menuInfo.map(function (el) {
+  if (menuInfo) {
+    menuInfo.map(function (el) {
       // menu_type1：パンのメニュー, menu_type2：店のこだわり, menu_type3：店の思い
       if (el.menu_type === 3) {
         spiritInfo = el;
@@ -21028,7 +20888,8 @@ var StoreEditTable_spirit = function StoreEditTable_spirit() {
     SpiritInfo: spiritInfo,
     btnName: btnName,
     menuType: 3,
-    funcType: funcType
+    funcType: funcType,
+    update_function: update_function
   })), content, mainContent);
 };
 
@@ -21080,7 +20941,9 @@ var StoreBasicInfo = function StoreBasicInfo(_a) {
     allInfo: storeInfo,
     index: 1,
     store_uuid: storeInfo.user_uuid
-  }), react_1["default"].createElement(BtnStoreEdit_1["default"], null)), react_1["default"].createElement("div", {
+  }), react_1["default"].createElement(BtnStoreEdit_1["default"], {
+    uuid: storeInfo.user_uuid
+  })), react_1["default"].createElement("div", {
     className: "m-store-basicInfo__container"
   }, react_1["default"].createElement("h2", {
     className: "m-store-basicInfo__name"
@@ -21575,7 +21438,7 @@ var StoreReview = function StoreReview(_a) {
       review_uuid: el.uuid,
       update_function: getReviewInfo
     })));
-  }), react_1["default"].createElement(react_paginate_1["default"], {
+  }), review_list[0] !== undefined && react_1["default"].createElement(react_paginate_1["default"], {
     previousLabel: '<',
     nextLabel: '>',
     breakLabel: '...',
@@ -22857,7 +22720,7 @@ var UserTable_review = function UserTable_review() {
     }), el.comment && react_1["default"].createElement("p", null, el.comment), react_1["default"].createElement("span", null, "\u6295\u7A3F\u65E5:\xA0", el.created_at.slice(0, 10))), el.reply && react_1["default"].createElement("div", {
       className: "m-userTable-review__item__container__reply"
     }, react_1["default"].createElement("p", null, "\u30AA\u30FC\u30CA\u30FC\u304B\u3089\u306E\u8FD4\u4FE1"), react_1["default"].createElement("p", null, el.reply))));
-  }), react_1["default"].createElement(react_paginate_1["default"], {
+  }), review_list[0] !== undefined && react_1["default"].createElement(react_paginate_1["default"], {
     previousLabel: '<',
     nextLabel: '>',
     breakLabel: '...',
@@ -24320,40 +24183,6 @@ exports.default = Search;
 "use strict";
 
 
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  Object.defineProperty(o, k2, {
-    enumerable: true,
-    get: function get() {
-      return m[k];
-    }
-  });
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
-
-  __setModuleDefault(result, mod);
-
-  return result;
-};
-
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -24364,7 +24193,7 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var StoreEditTable_1 = __importDefault(__webpack_require__(/*! ../../molecules/storeEdit/StoreEditTable */ "./resources/ts/components/molecules/storeEdit/StoreEditTable.tsx"));
 
@@ -24372,31 +24201,18 @@ var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome
 
 var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
 
-var StoreInfoReducer_1 = __webpack_require__(/*! ../../../reducers/StoreInfoReducer */ "./resources/ts/reducers/StoreInfoReducer.ts");
-
-var StoreInfoContext_1 = __webpack_require__(/*! ../../../contexts/StoreInfoContext */ "./resources/ts/contexts/StoreInfoContext.ts");
-
 var StoreEdit = function StoreEdit() {
-  var _a = react_1.useReducer(StoreInfoReducer_1.StoreInfoReducer, StoreInfoReducer_1.initialState),
-      stateInfo = _a[0],
-      dispatch = _a[1];
-
   return react_1["default"].createElement("div", {
     className: "p-store-edit"
   }, react_1["default"].createElement("div", {
     className: "p-store-edit__container"
-  }, react_1["default"].createElement(StoreInfoContext_1.StoreInfoContext.Provider, {
-    value: {
-      stateInfo: stateInfo,
-      dispatch: dispatch
-    }
   }, react_1["default"].createElement("div", {
     className: "p-store-edit__container__title"
   }, react_1["default"].createElement("h2", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
     icon: free_solid_svg_icons_1.faStore
   }), "\u5E97\u8217\u7BA1\u7406")), react_1["default"].createElement("div", {
     className: "p-store-edit__container__table"
-  }, react_1["default"].createElement(StoreEditTable_1["default"], null)))));
+  }, react_1["default"].createElement(StoreEditTable_1["default"], null))));
 };
 
 exports.default = StoreEdit;
@@ -24871,26 +24687,6 @@ exports.default = UserPage;
 
 /***/ }),
 
-/***/ "./resources/ts/contexts/StoreInfoContext.ts":
-/*!***************************************************!*\
-  !*** ./resources/ts/contexts/StoreInfoContext.ts ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports.StoreInfoContext = void 0;
-
-var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-exports.StoreInfoContext = react_1.createContext({});
-
-/***/ }),
-
 /***/ "./resources/ts/contexts/UserAuthContext.ts":
 /*!**************************************************!*\
   !*** ./resources/ts/contexts/UserAuthContext.ts ***!
@@ -25120,63 +24916,6 @@ function () {
 
 var week = new Week();
 exports.default = week;
-
-/***/ }),
-
-/***/ "./resources/ts/reducers/StoreInfoReducer.ts":
-/*!***************************************************!*\
-  !*** ./resources/ts/reducers/StoreInfoReducer.ts ***!
-  \***************************************************/
-/***/ (function(__unused_webpack_module, exports) {
-
-"use strict";
-
-
-var __assign = this && this.__assign || function () {
-  __assign = Object.assign || function (t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-      s = arguments[i];
-
-      for (var p in s) {
-        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-      }
-    }
-
-    return t;
-  };
-
-  return __assign.apply(this, arguments);
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports.initialState = exports.StoreInfoReducer = void 0;
-
-var StoreInfoReducer = function StoreInfoReducer(stateInfo, action) {
-  switch (action.type) {
-    case 'inputStoreInfo':
-      return __assign(__assign({}, stateInfo), {
-        storeInfo: action.payload
-      });
-
-    case 'inputMenuInfo':
-      return __assign(__assign({}, stateInfo), {
-        menuInfo: action.payload
-      });
-
-    default:
-      return {
-        stateInfo: stateInfo
-      };
-  }
-};
-
-exports.StoreInfoReducer = StoreInfoReducer;
-exports.initialState = {
-  storeInfo: null,
-  menuInfo: null
-};
 
 /***/ }),
 

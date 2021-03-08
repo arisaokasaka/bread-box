@@ -1,0 +1,25 @@
+.m-storeEdit-image__container__form__item__input__image {
+    background-color: $lighterBrown;
+    padding: 20px;
+    padding-top: 10px;
+    margin: 10px 0;
+
+    @include bp-600up {
+        width: fit-content;
+    }
+
+    & > span {
+        font-size: 0.8rem;
+    }
+
+    & > img {
+        width: 250px;
+        height: 150px;
+        object-fit: cover;
+        margin: 0 auto;
+
+        @include bp-600up {
+            margin: 0;
+        }
+    }
+}

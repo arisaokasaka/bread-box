@@ -2,25 +2,20 @@ import React, { useState, useContext } from 'react'
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { UserAuthContext } from '../../../../contexts/UserAuthContext';
-import { StoreInfoContext } from '../../../../contexts/StoreInfoContext';
 import InputSchedule from '../../common/InputSchedule';
 import BtnSave from '../../../atoms/buttons/BtnSave';
 import week from '../../../../info/Week';
 
-const EditBusinessDays: React.FC = () => {
+type Props = ({
+    update_function: Function
+    storeInfo: any
+})
+
+const EditBusinessDays: React.FC<Props> = ({update_function, storeInfo}) => {
     const { register, handleSubmit, errors} = useForm();
     const [ dayValidation, setDayValidation ] = useState(false);
     const { state } = useContext(UserAuthContext);
-    const { stateInfo, dispatch } = useContext(StoreInfoContext);
         
-    let StoreInfo = {
-        business_day: '',
-    }
-
-    if(stateInfo.storeInfo){
-        StoreInfo = stateInfo.storeInfo;
-    }
-    
     const onSubmit = (data) => {
         let business_day = {};
         let business_day_check = true;
@@ -45,32 +40,15 @@ const EditBusinessDays: React.FC = () => {
             //更新データ送信
             data['user_uuid'] = state.uuid;
             data['business_day'] = JSON.stringify(business_day);
-            console.log(data);
             axios.post("/api/update_businessDay", data)
             .then(res => {
-                getStoreInfo();
+                update_function();
                 alert('営業日・営業時間を保存しました。');
             })
             .catch(err => {
                 alert('営業日・営業時間の保存に失敗しました。');
             });
         }
-    }
-
-    // 店舗情報取得＆更新
-    const getStoreInfo = () => {
-        axios.post("/api/index_storeInfo", {
-            store_uuid: state.uuid
-        })
-        .then(res => {
-            console.log('storeinfo')
-            dispatch({
-                type: 'inputStoreInfo',
-                payload: res.data,
-            });
-        })
-        .catch(err => {
-        });
     }
 
     return(
@@ -84,7 +62,7 @@ const EditBusinessDays: React.FC = () => {
                             <input type="hidden" name="business_day" ref={register} />
                             <span>営業している曜日をチェックのうえ、営業時間を入力してください。</span>
                             <InputSchedule
-                                Info = {StoreInfo}
+                                Info = {storeInfo}
                             />
                             {dayValidation===true && <p>開店時間・閉店時間どちらも記入してください。</p>}
                         </div>

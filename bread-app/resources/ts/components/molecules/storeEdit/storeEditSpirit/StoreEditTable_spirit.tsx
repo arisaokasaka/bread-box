@@ -1,11 +1,14 @@
 import React, { useContext, useState } from 'react';
 import Modal_editSpirit from '../../../molecules/modal/Modal_editSpirit';
 import { UserAuthContext } from '../../../../contexts/UserAuthContext';
-import { StoreInfoContext } from '../../../../contexts/StoreInfoContext';
 
-const StoreEditTable_spirit: React.FC = () => {
+type MenuInfoProps = ({
+    menuInfo: any;
+    update_function: Function
+})
+
+const StoreEditTable_spirit: React.FC<MenuInfoProps> = ({menuInfo, update_function}) => {
     const { state } = useContext(UserAuthContext);
-    const { stateInfo } = useContext(StoreInfoContext);
     let spiritInfo: any;
     let mainContent: any;
     let time_current: string;
@@ -14,8 +17,8 @@ const StoreEditTable_spirit: React.FC = () => {
     let content: any　= <p>まだ登録されていません。追加するボタンより追加してください。</p>;
     
     // メニュー情報があるか判断
-    if(stateInfo.menuInfo){
-        stateInfo.menuInfo.map((el)=>{
+    if(menuInfo){
+        menuInfo.map((el)=>{
             // menu_type1：パンのメニュー, menu_type2：店のこだわり, menu_type3：店の思い
             if(el.menu_type === 3){
                 spiritInfo = el;
@@ -50,6 +53,7 @@ const StoreEditTable_spirit: React.FC = () => {
                     btnName = {btnName}
                     menuType = {3}
                     funcType = {funcType}
+                    update_function = {update_function}
                 />
             </div>
             {content}

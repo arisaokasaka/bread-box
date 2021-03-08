@@ -174,6 +174,7 @@ class StoreController extends Controller
         $user_type = $request->input('user_type');
         $storeInfo = $store->index_storeInfo($request->input('store_uuid'));
         $storeInfo['header'] = Storage::exists(self::storage_path . $request->input('store_uuid') . self::storage_header);
+        $storeInfo['thumbnail'] = Storage::exists(self::storage_path . $request->input('store_uuid') . self::storage_thumbnail);
 
         if($user_type==="user"){
             $user = new User();

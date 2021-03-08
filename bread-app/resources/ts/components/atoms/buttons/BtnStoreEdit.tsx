@@ -4,23 +4,29 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPen} from '@fortawesome/free-solid-svg-icons';
 import { UserAuthContext } from '../../../contexts/UserAuthContext';
 
-export default function BtnStoreEdit() {
+type Props = ({
+    uuid: string
+})
+
+const BtnStoreEdit: React.FC<Props> = ({uuid}) => {
     const { state } = useContext(UserAuthContext);
-    let BtnFavorite: any;
-    if(state.uuid && state.auth==="store"){
-        BtnFavorite = (
+    let BtnStoreEdit: any;
+    if(state.uuid && state.uuid === uuid){
+        BtnStoreEdit = (
             <Link to="/store_edit" className = "a-btn-storeEdit">
                 <span><FontAwesomeIcon icon={faPen}/></span>
                 <span>店舗情報を編集する</span>
             </Link>
         );
     }else{
-        BtnFavorite = null;
+        BtnStoreEdit = null;
     }
 
     return (
         <div>
-            {BtnFavorite}
+            {BtnStoreEdit}
         </div>
     )
 }
+
+export default BtnStoreEdit;

@@ -7,19 +7,17 @@ import { faTimes, faPen } from "@fortawesome/free-solid-svg-icons";
 import BtnSave from '../../atoms/buttons/BtnSave';
 import bread_kinds from '../../../info/Bread_kinds';
 import { UserAuthContext } from '../../../contexts/UserAuthContext';
-import { StoreInfoContext } from '../../../contexts/StoreInfoContext';
 
 type MenuInfoProps = ({
     menu: any
+    update_function: Function
 })
 
-const Modal_editMenu: React.FC<MenuInfoProps> = ({menu}) =>{
-    let error_fileSize: any = null;
+const Modal_editMenu: React.FC<MenuInfoProps> = ({menu, update_function}) =>{
     const [ modalIsOpen, setModal ] = useState(false);
     const [ file, setFile ] = useState(null);
     const [ fileSize, setFileSize ] = useState(0);
     const { state } = useContext(UserAuthContext);
-    const { dispatch } = useContext(StoreInfoContext);
     const [ textarea_count, setTextarea_count ] = useState(0);
     const { register, handleSubmit, errors } = useForm();
     const customStyles = {
@@ -55,7 +53,7 @@ const Modal_editMenu: React.FC<MenuInfoProps> = ({menu}) =>{
             data: dataSubmit,
         })
         .then(res => {
-            getMenuInfo();
+            update_function();
             alert('メニューを更新しました。');
             setModal(false);
         })
@@ -68,28 +66,6 @@ const Modal_editMenu: React.FC<MenuInfoProps> = ({menu}) =>{
     const onChangeFile = (e) => {
         setFile(e.target.files[0]);
         setFileSize(e.target.files[0].size);
-    }
-
-    // ファイルサイズが3MBを超えていた場合のエラーメッセージ
-    if(fileSize > 3000000){
-        error_fileSize = (
-            <p>ファイルの上限サイズ3MBを超えています。圧縮するか、別の画像を選択してください。</p>
-        );
-    }
-
-    // メニュー情報取得
-    const getMenuInfo = () => {
-        axios.post("/api/index_menuInfo", {
-            store_uuid: state.uuid
-        })
-        .then(res => {
-            dispatch({
-                type: 'inputMenuInfo',
-                payload: res.data,
-            });
-        })
-        .catch(err => {
-        });
     }
 
     return(
@@ -153,7 +129,7 @@ const Modal_editMenu: React.FC<MenuInfoProps> = ({menu}) =>{
                         <div className="m-storeForm__item__input">
                             <span>画像を変更したい場合のみ、アップロードしてください。</span>
                             <input name="bread_img" type="file" accept="image/*" onChange={onChangeFile}/>
-                            {error_fileSize}
+                            {fileSize > 3000000 && <p>ファイルの上限サイズ3MBを超えています。圧縮するか、別の画像を選択してください。</p>}
                         </div>
                     </div>
                     <div className="m-storeEdit-menuCreate__container__form__btn m-storeForm__btn">

@@ -3,7 +3,6 @@ import Modal from 'react-modal';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { UserAuthContext } from '../../../contexts/UserAuthContext';
-import { StoreInfoContext } from '../../../contexts/StoreInfoContext';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faPen } from "@fortawesome/free-solid-svg-icons";
 import BtnSave from "../../atoms/buttons/BtnSave";
@@ -13,16 +12,16 @@ type infoProps = ({
     btnName: string,
     funcType: string,
     menuType: number,
+    update_function: Function
 })
 
-const Modal_editSpirit: React.FC<infoProps> = ({SpiritInfo, btnName, funcType, menuType}) =>{
+const Modal_editSpirit: React.FC<infoProps> = ({SpiritInfo, btnName, funcType, menuType, update_function}) =>{
     let placeText: string;
     let defaultContent: string;
     let spirit_uuid: string = '';
     const [ textarea_count, setTextarea_count ] = useState(0);
     const { register, handleSubmit, errors } = useForm();
     const { state } = useContext(UserAuthContext);
-    const { dispatch } = useContext(StoreInfoContext);
     const [ modalIsOpen, setModal ] = useState(false);
     const [ image, setImage ] = useState({
         image: null,
@@ -110,7 +109,7 @@ const Modal_editSpirit: React.FC<infoProps> = ({SpiritInfo, btnName, funcType, m
         data.append('img_spirit', file);
         axios.post("/api/create_spirit", data)
         .then(res=>{
-            getMenuInfo();
+            update_function();
             alert('登録しました。');
             setModal(false);
         })        
@@ -124,28 +123,13 @@ const Modal_editSpirit: React.FC<infoProps> = ({SpiritInfo, btnName, funcType, m
         data.append('img_spirit', file);
         axios.post("/api/update_spirit", data)
         .then(res=>{
-            getMenuInfo();
+            update_function();
             alert('保存しました。');
             setModal(false);
         })        
         .catch(err=>
             alert('保存に失敗しました。')
         )
-    }
-
-    // メニュー情報取得
-    const getMenuInfo = () => {
-        axios.post("/api/index_menuInfo", {
-            store_uuid: state.uuid
-        })
-        .then(res => {
-            dispatch({
-                type: 'inputMenuInfo',
-                payload: res.data,
-            });
-        })
-        .catch(err => {
-        });
     }
 
     return(

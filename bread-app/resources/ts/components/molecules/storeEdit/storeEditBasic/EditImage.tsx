@@ -4,7 +4,12 @@ import { useForm } from 'react-hook-form';
 import { UserAuthContext } from '../../../../contexts/UserAuthContext';
 import BtnSave from '../../../atoms/buttons/BtnSave';
 
-const EditImage: React.FC = () => {
+type Props = ({
+    update_function: Function
+    storeInfo: any
+})
+
+const EditImage: React.FC<Props> = ({update_function, storeInfo}) => {
     const { handleSubmit } = useForm();
     const { state } = useContext(UserAuthContext);
     const [ images, setImages ] = useState({
@@ -51,9 +56,10 @@ const EditImage: React.FC = () => {
         formData.append('img_header', header);
         formData.append('img_thumbnail', thumbnail);
         axios.post('/api/save_storeImages', formData)
-        .then(res => 
-            alert('画像を保存しました。是非店舗ページを見てみてください。')
-        )
+        .then(res => {
+            alert('画像を保存しました。');
+            update_function();
+        })
         .catch(err =>
             alert('画像の保存に失敗しました。')
         )
@@ -67,17 +73,29 @@ const EditImage: React.FC = () => {
                     <div className="m-storeForm__item">
                         <label htmlFor="store_url">ヘッダー画像</label>
                         <div className="m-storeForm__item__input">
-                            <span>店舗ページの上部に表示される画像です。</span>
+                            <span>店舗ページの上部に表示される画像です。{storeInfo.header && "更新する場合は、新しい画像を選択してください。"}</span>
                             <input type="file" name="img_header" accept="image/*" onChange={(e)=>onChangeHeader(e)}/>
                             {images.header_size > 3000000 && <p>ファイルの上限サイズ3MBを超えています。圧縮するか、別の画像を選択してください。</p>}
+                            {storeInfo.header &&
+                                <div className="m-storeEdit-image__container__form__item__input__image">
+                                    <span>登録画像</span>
+                                    <img src={"/storage/store/" + state.uuid + "/header.jpg"} alt="店舗画像"/> 
+                                </div>
+                            }
                         </div>
                     </div>
                     <div className="m-storeForm__item">
                         <label htmlFor="store_url">サムネイル画像</label>
                         <div className="m-storeForm__item__input">
-                            <span>検索ページのトップに表示される画像です。</span>
+                            <span>検索ページのトップに表示される画像です。{storeInfo.thumbnail && "更新する場合は、新しい画像を選択してください。"}</span>
                             <input type="file" name="img_thumbnail" accept="image/*" onChange={(e)=>onChangeThumbnail(e)}/>
                             {images.thumbnail_size > 3000000 && <p>ファイルの上限サイズ3MBを超えています。圧縮するか、別の画像を選択してください。</p>}
+                            {storeInfo.thumbnail &&
+                                <div className="m-storeEdit-image__container__form__item__input__image">
+                                    <span>登録画像</span>
+                                    <img src={"/storage/store/" + state.uuid + "/thumbnail.jpg"} alt="店舗画像"/> 
+                                </div>
+                            }
                         </div>
                     </div>
                     <div className="m-storeEdit-image__container__form__btn m-storeForm__btn">
