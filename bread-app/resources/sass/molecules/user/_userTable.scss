@@ -9,17 +9,8 @@
             height: 42px;
         }
 
-        & > a {
-            width: 33.33%;
-            height: 35px;
-            line-height: 35px;
-            background-color: transparent;
-            font-size: 0.7rem;
-            text-align: center;
-            color: $darkGray;
-            font-weight: 550;
-            cursor: pointer;
-
+        & > button {
+            @include tab_btn(33.33%);
             @include bp-480up {
                 font-size: 0.8rem;
                 height: 42px;
@@ -37,6 +28,10 @@
                 &:hover {
                     background-color: $lightBrown;
                 }
+            }
+
+            & > svg {
+                margin-right: 3px;
             }
         }
     }

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useHistory } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faChevronUp, faCrown, faStore, faCommentDots } from "@fortawesome/free-solid-svg-icons";
 import Search_sidebar from '../../molecules/search/Search_sidebar';
 import Store_pickup from '../../molecules/common/Store_pickup';
 import StoreList from '../../molecules/common/StoreList';
@@ -72,22 +72,26 @@ const Search: React.FC = () => {
     // 並び替えボタンのタブ
     const Tab = (sort_name) => {
         let className = "p-search__container__content__tab" + sort_name;
-        let input_value: string = "";
+        let button_value: string = "";
+        let fontawesome_icon: any;
         switch(sort_name){
             case 'default':
-                input_value = "標準"
+                button_value = "標準"
+                fontawesome_icon = faStore
                 break;
             case 'score_descend':
-                input_value = "評価が高い順"
+                button_value = "評価が高い順"
+                fontawesome_icon = faCrown
                 break;
             case 'review_descend':
-                input_value = "口コミ数順"
+                button_value = "口コミ数順"
+                fontawesome_icon = faCommentDots
                 break;
         }
         if(sort === sort_name){
             className += ' selected';
         }
-        return <input className={className} value={input_value} onClick={()=>changeSorting(sort_name)} readOnly/>
+        return <button className={className} onClick={()=>changeSorting(sort_name)}><FontAwesomeIcon icon={fontawesome_icon}/>{button_value}</button>
     }
 
     return (

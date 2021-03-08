@@ -56,18 +56,8 @@
                     margin-top: 15px;
                 }
 
-                & > input {
-                    width: 33.33%;
-                    height: 35px;
-                    line-height: 35px;
-                    background-color: transparent;
-                    font-size: 0.7rem;
-                    text-align: center;
-                    color: $darkGray;
-                    font-weight: 550;
-                    letter-spacing: 0.5px;
-                    cursor: pointer;
-
+                & > button {
+                    @include tab_btn(33.33%);
                     @include bp-600up {
                         height: 42px;
                         line-height: 42px;
@@ -85,6 +75,10 @@
                         &:hover {
                             background-color: $lightBrown;
                         }
+                    }
+
+                    & > svg {
+                        margin-right: 3px;
                     }
                 }
             }
