@@ -94,6 +94,10 @@
                 padding: $mp-xxs;
                 order: 1;
 
+                &__noMessage {
+                    font-size: 0.8rem;
+                }
+
                 @include bp-600up {
                     padding: $mp-xs;
                 }
@@ -136,7 +140,7 @@
                 transform: translate(-50%, -50%);
                 width: 2rem;
                 height: 2rem;
-                background-color: $lightestGray;
+                background-color: $lighterGray;
                 border-radius: 50%;
                 z-index: -100;
 

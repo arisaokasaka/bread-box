@@ -15,8 +15,6 @@ const Search: React.FC = () => {
     const keyword = location.search;
     const [ stores, setStores ] = useState([]);
     const [ sort, setSort ] = useState('default')
-    let message_noResult: any = null;
-    let className_btnSort: string = ""
 
     useEffect(()=>{
         getStores()
@@ -27,10 +25,6 @@ const Search: React.FC = () => {
         .then(res => {
             setStores(res.data)
         })    
-    }
-
-    if(stores[0] === undefined){
-        message_noResult = <p>該当する店舗がありません。</p>
     }
 
     // 並び替え
@@ -126,7 +120,7 @@ const Search: React.FC = () => {
                         {Tab('review_descend')}
                     </div>
                     <div className="p-search__container__content__list">
-                        {message_noResult}
+                    {stores[0] === undefined && <p className="p-search__container__content__list__noMessage">該当する店舗がありません。</p>}
                         <StoreList
                             storeList = {stores}
                             sortType = {sort}

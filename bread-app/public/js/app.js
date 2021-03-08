@@ -17153,7 +17153,7 @@ var StoreList = function StoreList(_a) {
     }), react_1["default"].createElement(Score_1["default"], {
       scoreInfo: el.scoreInfo
     })));
-  }), react_1["default"].createElement(react_paginate_1["default"], {
+  }), storeList[0] !== undefined && react_1["default"].createElement(react_paginate_1["default"], {
     previousLabel: '<',
     nextLabel: '>',
     breakLabel: '...',
@@ -24073,8 +24073,6 @@ var Search = function Search() {
       sort = _c[0],
       setSort = _c[1];
 
-  var message_noResult = null;
-  var className_btnSort = "";
   react_1.useEffect(function () {
     getStores();
   }, []);
@@ -24083,11 +24081,7 @@ var Search = function Search() {
     axios_1["default"].get('/api/search_store' + history['location']['search']).then(function (res) {
       setStores(res.data);
     });
-  };
-
-  if (stores[0] === undefined) {
-    message_noResult = react_1["default"].createElement("p", null, "\u8A72\u5F53\u3059\u308B\u5E97\u8217\u304C\u3042\u308A\u307E\u305B\u3093\u3002");
-  } // 並び替え
+  }; // 並び替え
 
 
   var changeSorting = function changeSorting(sort_type) {
@@ -24208,7 +24202,9 @@ var Search = function Search() {
     className: "p-search__container__content__tab"
   }, Tab('default'), Tab('score_descend'), Tab('review_descend')), react_1["default"].createElement("div", {
     className: "p-search__container__content__list"
-  }, message_noResult, react_1["default"].createElement(StoreList_1["default"], {
+  }, stores[0] === undefined && react_1["default"].createElement("p", {
+    className: "p-search__container__content__list__noMessage"
+  }, "\u8A72\u5F53\u3059\u308B\u5E97\u8217\u304C\u3042\u308A\u307E\u305B\u3093\u3002"), react_1["default"].createElement(StoreList_1["default"], {
     storeList: stores,
     sortType: sort
   })))), react_1["default"].createElement("div", {

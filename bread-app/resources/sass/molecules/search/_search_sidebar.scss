@@ -99,17 +99,17 @@
                                 width: 100%;
                                 height: 2rem;
                                 line-height: 2rem;
-                                color: $gray;
-                                border: 1px solid $gray;
+                                color: $darkGray;
+                                border: 1px solid $darkGray;
                                 border-radius: 25px;
                                 text-align: center;
                                 cursor: pointer;
                             }
 
                             &:checked + label {
-                                color: $brown;
+                                color: $darkBrown;
                                 background-color: $lightBrown;
-                                border-color: $brown;
+                                border-color: $darkBrown;
                             }
                         }
                     }
