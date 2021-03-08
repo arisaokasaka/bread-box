@@ -3023,7 +3023,8 @@ label.a-label-required__red--fitContent::after {
   }
 }
 
-.m-user-table__tab > a {
+.m-user-table__tab > button {
+  display: inline-block;
   width: 33.33%;
   height: 35px;
   line-height: 35px;
@@ -3032,28 +3033,34 @@ label.a-label-required__red--fitContent::after {
   text-align: center;
   color: #757575;
   font-weight: 550;
+  letter-spacing: 0.5px;
+  border: none;
   cursor: pointer;
 }
 
 @media screen and (min-width: 480px) {
-  .m-user-table__tab > a {
+  .m-user-table__tab > button {
     font-size: 0.8rem;
     height: 42px;
     line-height: 42px;
   }
 }
 
-.m-user-table__tab > a:hover {
+.m-user-table__tab > button:hover {
   background-color: #fff2e1;
 }
 
-.m-user-table__tab > a.selected {
+.m-user-table__tab > button.selected {
   background-color: #fae6c9;
   color: #67491b;
 }
 
-.m-user-table__tab > a.selected:hover {
+.m-user-table__tab > button.selected:hover {
   background-color: #fae6c9;
+}
+
+.m-user-table__tab > button > svg {
+  margin-right: 3px;
 }
 
 .m-user-table__container {
@@ -4309,7 +4316,8 @@ label.a-label-required__red--fitContent::after {
   }
 }
 
-.p-search__container__content__tab > input {
+.p-search__container__content__tab > button {
+  display: inline-block;
   width: 33.33%;
   height: 35px;
   line-height: 35px;
@@ -4319,28 +4327,33 @@ label.a-label-required__red--fitContent::after {
   color: #757575;
   font-weight: 550;
   letter-spacing: 0.5px;
+  border: none;
   cursor: pointer;
 }
 
 @media screen and (min-width: 600px) {
-  .p-search__container__content__tab > input {
+  .p-search__container__content__tab > button {
     height: 42px;
     line-height: 42px;
     font-size: 0.8rem;
   }
 }
 
-.p-search__container__content__tab > input:hover {
+.p-search__container__content__tab > button:hover {
   background-color: #fff2e1;
 }
 
-.p-search__container__content__tab > input.selected {
+.p-search__container__content__tab > button.selected {
   background-color: #fae6c9;
   color: #67491b;
 }
 
-.p-search__container__content__tab > input.selected:hover {
+.p-search__container__content__tab > button.selected:hover {
   background-color: #fae6c9;
+}
+
+.p-search__container__content__tab > button > svg {
+  margin-right: 3px;
 }
 
 .p-search__container__content__list {

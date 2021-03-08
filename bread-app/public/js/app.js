@@ -22068,6 +22068,10 @@ var UserTable_interested_1 = __importDefault(__webpack_require__(/*! ./UserTable
 
 var UserTable_review_1 = __importDefault(__webpack_require__(/*! ./UserTable_review */ "./resources/ts/components/molecules/user/UserTable_review.tsx"));
 
+var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
 var UserTable = function UserTable() {
   var _a = react_1.useState('favorite'),
       Table = _a[0],
@@ -22077,18 +22081,21 @@ var UserTable = function UserTable() {
     "class": "m-user-table__tab--favorite",
     table: "favorite",
     value: "お気に入り",
+    icon: free_solid_svg_icons_1.faHeart,
     "function": handleFavorite
   };
   var TabInterested = {
     "class": "m-user-table__tab--interested",
     table: "interested",
     value: "行ってみたい",
+    icon: free_solid_svg_icons_1.faFlag,
     "function": handleInterested
   };
   var TabReview = {
     "class": "m-user-table__tab--review",
     table: "review",
     value: "口コミ",
+    icon: free_solid_svg_icons_1.faCommentDots,
     "function": handleReview
   };
 
@@ -22111,10 +22118,12 @@ var UserTable = function UserTable() {
       className += ' selected';
     }
 
-    return react_1["default"].createElement("a", {
+    return react_1["default"].createElement("button", {
       className: className,
       onClick: tab["function"]
-    }, tab.value);
+    }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+      icon: tab.icon
+    }), tab.value);
   };
 
   var CurrentTable = function CurrentTable(table) {
@@ -24103,19 +24112,23 @@ var Search = function Search() {
 
   var Tab = function Tab(sort_name) {
     var className = "p-search__container__content__tab" + sort_name;
-    var input_value = "";
+    var button_value = "";
+    var fontawesome_icon;
 
     switch (sort_name) {
       case 'default':
-        input_value = "標準";
+        button_value = "標準";
+        fontawesome_icon = free_solid_svg_icons_1.faStore;
         break;
 
       case 'score_descend':
-        input_value = "評価が高い順";
+        button_value = "評価が高い順";
+        fontawesome_icon = free_solid_svg_icons_1.faCrown;
         break;
 
       case 'review_descend':
-        input_value = "口コミ数順";
+        button_value = "口コミ数順";
+        fontawesome_icon = free_solid_svg_icons_1.faCommentDots;
         break;
     }
 
@@ -24123,14 +24136,14 @@ var Search = function Search() {
       className += ' selected';
     }
 
-    return react_1["default"].createElement("input", {
+    return react_1["default"].createElement("button", {
       className: className,
-      value: input_value,
       onClick: function onClick() {
         return changeSorting(sort_name);
-      },
-      readOnly: true
-    });
+      }
+    }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
+      icon: fontawesome_icon
+    }), button_value);
   };
 
   return react_1["default"].createElement("div", {
