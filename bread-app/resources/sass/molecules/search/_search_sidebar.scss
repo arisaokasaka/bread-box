@@ -65,111 +65,113 @@
     }
 }
 
-//PC検索画面の調整
-.p-search__container {
-    .m-search-sidebar {
-        display: none;
-
-        @include bp-600up {
-            display: block;
-            flex-basis: 24%;
-            margin-right: $mp-xxs;
-            padding: 0 $mp-xxs;
-            border-radius: $base-radius;
+.p-search {
+    //モバイル検索ページの調整
+    &__mobile {
+        .m-search-sidebar {
+            margin: 0;
+            padding: $mp-xxs;
 
             &__btn {
-                margin-bottom: $mp-xxs;
-                font-size: 0.9rem;
-            }
-
-            @include bp-960up {
-                flex-basis: 20%;
+                margin: $mp-xxs 0;
+                font-size: 1rem;
+                height: 2rem;
             }
 
             &__item {
-                & > h4 {
-                    border-bottom: 2px solid $font-color-brown;
-                    padding: 0 2px;
+                margin-bottom: 30px;
+                ul {
+                    grid-template-columns: 1fr 1fr;
+                    row-gap: 8px;
+                    column-gap: 15px;
 
-                    & > svg {
-                        display: none;
-                    }
-                }
+                    li {
+                        display: block;
+                        font-size: 1rem;
 
-                & > ul {
-                    & > li {
-                        font-size: 0.9rem;
-                        height: 1.5rem;
-                        input,
-                        label {
-                            cursor: pointer;
+                        input {
+                            display: none;
+
+                            & + label {
+                                position: relative;
+                                display: inline-block;
+                                background-color: $white;
+                                width: 100%;
+                                height: 2rem;
+                                line-height: 2rem;
+                                color: $gray;
+                                border: 1px solid $gray;
+                                border-radius: 25px;
+                                text-align: center;
+                                cursor: pointer;
+                            }
+
+                            &:checked + label {
+                                color: $brown;
+                                background-color: $lightBrown;
+                                border-color: $brown;
+                            }
                         }
                     }
                 }
 
                 & > input[type="text"] {
-                    border: 1px solid $textGray;
-                    padding-left: 10px;
+                    border: 1px solid $gray;
                     font-size: 0.9rem;
+                    padding-left: 12px;
                 }
             }
         }
     }
-}
 
-//モバイル検索ページの調整
-.p-search-input-mobile {
-    .m-search-sidebar {
-        margin: 0;
-        padding: $mp-xxs;
+    //PC検索画面の調整
+    &__container {
+        .m-search-sidebar {
+            display: none;
 
-        &__btn {
-            margin: $mp-xxs 0;
-            font-size: 1rem;
-            height: 2rem;
-        }
+            @include bp-600up {
+                display: block;
+                flex-basis: 24%;
+                margin-right: $mp-xxs;
+                padding: 0 $mp-xxs;
+                border-radius: $base-radius;
 
-        &__item {
-            margin-bottom: 30px;
-            ul {
-                grid-template-columns: 1fr 1fr;
-                row-gap: 8px;
-                column-gap: 15px;
+                &__btn {
+                    margin-bottom: $mp-xxs;
+                    font-size: 0.9rem;
+                }
 
-                li {
-                    display: block;
-                    font-size: 1rem;
+                @include bp-960up {
+                    flex-basis: 20%;
+                }
 
-                    input {
-                        display: none;
+                &__item {
+                    & > h4 {
+                        border-bottom: 2px solid $font-color-brown;
+                        padding: 0 2px;
 
-                        & + label {
-                            position: relative;
-                            display: inline-block;
-                            background-color: $white;
-                            width: 100%;
-                            height: 2rem;
-                            line-height: 2rem;
-                            color: $gray;
-                            border: 1px solid $gray;
-                            border-radius: 25px;
-                            text-align: center;
-                            cursor: pointer;
-                        }
-
-                        &:checked + label {
-                            color: $brown;
-                            background-color: $lightBrown;
-                            border-color: $brown;
+                        & > svg {
+                            display: none;
                         }
                     }
-                }
-            }
 
-            & > input[type="text"] {
-                border: 1px solid $gray;
-                font-size: 0.9rem;
-                padding-left: 12px;
+                    & > ul {
+                        & > li {
+                            font-size: 0.9rem;
+                            height: 1.5rem;
+                            input,
+                            label {
+                                cursor: pointer;
+                            }
+                        }
+                    }
+
+                    & > input[type="text"] {
+                        border: 1px solid $textGray;
+                        padding-left: 10px;
+                        font-size: 0.9rem;
+                    }
+                }
             }
         }
     }

@@ -15129,8 +15129,6 @@ var Register_user_1 = __importDefault(__webpack_require__(/*! ./components/page/
 
 var Search_1 = __importDefault(__webpack_require__(/*! ./components/page/search/Search */ "./resources/ts/components/page/search/Search.tsx"));
 
-var Search_input_mobile_1 = __importDefault(__webpack_require__(/*! ./components/page/search/Search_input_mobile */ "./resources/ts/components/page/search/Search_input_mobile.tsx"));
-
 var StoreEdit_1 = __importDefault(__webpack_require__(/*! ./components/page/store/StoreEdit */ "./resources/ts/components/page/store/StoreEdit.tsx"));
 
 var StorePage_1 = __importDefault(__webpack_require__(/*! ./components/page/store/StorePage */ "./resources/ts/components/page/store/StorePage.tsx"));
@@ -15169,9 +15167,6 @@ var App = function App() {
   }), react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/search",
     component: Search_1["default"]
-  }), react_1["default"].createElement(react_router_dom_1.Route, {
-    path: "/search_mobile",
-    component: Search_input_mobile_1["default"]
   }), react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/login_store",
     component: LoginStore_1["default"]
@@ -15704,12 +15699,20 @@ var react_fontawesome_1 = __webpack_require__(/*! @fortawesome/react-fontawesome
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
-var BtnBack = function BtnBack() {
+var BtnBack = function BtnBack(_a) {
+  var click_function = _a.click_function;
   var history = react_router_dom_1.useHistory();
+
+  var handleClick = function handleClick() {
+    if (click_function) {
+      click_function();
+    } else {
+      history.goBack();
+    }
+  };
+
   return react_1["default"].createElement("a", {
-    onClick: function onClick() {
-      return history.goBack();
-    },
+    onClick: handleClick,
     className: "a-btn-back"
   }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
     icon: free_solid_svg_icons_1.faArrowLeft
@@ -18992,7 +18995,8 @@ var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContex
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 var Search_sidebar = function Search_sidebar(_a) {
-  var click_function = _a.click_function;
+  var click_function = _a.click_function,
+      mobileMenuClose_function = _a.mobileMenuClose_function;
   var default_keyword = '';
   var search_params = decodeURI(react_router_dom_1.useLocation().search);
   var history = react_router_dom_1.useHistory();
@@ -19034,6 +19038,7 @@ var Search_sidebar = function Search_sidebar(_a) {
   var search_url = function search_url() {
     var url = '/search?id=' + state.uuid + (keyword ? "&key=" + keyword : '') + (condition.district ? "&di=" + condition.district : '') + (condition.bread_kind ? "&bk=" + condition.bread_kind : '');
     history.push(url);
+    mobileMenuClose_function && mobileMenuClose_function();
     click_function();
   };
 
@@ -19069,6 +19074,19 @@ var Search_sidebar = function Search_sidebar(_a) {
     }));
   };
 
+  var reset = function reset() {
+    Districts_1["default"].districts.map(function (el) {
+      var checkbox = document.getElementById(el.id);
+      checkbox.checked = false;
+    });
+    Bread_kinds_1["default"].bread_kinds.map(function (el) {
+      var checkbox = document.getElementById(el.id);
+      checkbox.checked = false;
+    });
+    history.push("/search?id=" + state.uuid);
+    click_function();
+  };
+
   return react_1["default"].createElement("div", {
     className: "m-search-sidebar"
   }, react_1["default"].createElement("div", {
@@ -19096,6 +19114,7 @@ var Search_sidebar = function Search_sidebar(_a) {
     }, react_1["default"].createElement("input", {
       type: "checkbox",
       id: el.id,
+      name: "checkbox_district",
       className: "m-search-sidebar__item__district",
       defaultChecked: check,
       value: el.name,
@@ -19119,6 +19138,7 @@ var Search_sidebar = function Search_sidebar(_a) {
     }, react_1["default"].createElement("input", {
       type: "checkbox",
       id: el.id,
+      name: "checkbox_bread_kind",
       className: "m-search-sidebar__item__bread",
       defaultChecked: check,
       value: el.name,
@@ -19128,8 +19148,13 @@ var Search_sidebar = function Search_sidebar(_a) {
     }, el.name));
   }))), react_1["default"].createElement("input", {
     onClick: search_url,
-    className: "m-search-sidebar__btn",
+    className: "m-search-sidebar__btn--search",
     value: "\u7D5E\u308A\u8FBC\u3080",
+    readOnly: true
+  }), react_1["default"].createElement("input", {
+    onClick: reset,
+    className: "m-search-sidebar__btn--reset",
+    value: "\u691C\u7D22\u5185\u5BB9\u3092\u30EA\u30BB\u30C3\u30C8",
     readOnly: true
   }));
 };
@@ -24028,18 +24053,25 @@ var Store_pickup_1 = __importDefault(__webpack_require__(/*! ../../molecules/com
 
 var StoreList_1 = __importDefault(__webpack_require__(/*! ../../molecules/common/StoreList */ "./resources/ts/components/molecules/common/StoreList.tsx"));
 
+var BtnBack_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/BtnBack */ "./resources/ts/components/atoms/buttons/BtnBack.tsx"));
+
 var Search = function Search() {
   var location = react_router_dom_1.useLocation();
   var history = react_router_dom_1.useHistory();
+
+  var _a = react_1.useState(false),
+      mobileMenu = _a[0],
+      setMobileMenu = _a[1];
+
   var keyword = location.search;
 
-  var _a = react_1.useState([]),
-      stores = _a[0],
-      setStores = _a[1];
+  var _b = react_1.useState([]),
+      stores = _b[0],
+      setStores = _b[1];
 
-  var _b = react_1.useState('default'),
-      sort = _b[0],
-      setSort = _b[1];
+  var _c = react_1.useState('default'),
+      sort = _c[0],
+      setSort = _c[1];
 
   var message_noResult = null;
   var className_btnSort = "";
@@ -24145,10 +24177,25 @@ var Search = function Search() {
   return react_1["default"].createElement("div", {
     className: "p-search",
     id: "search_top"
+  }, mobileMenu && react_1["default"].createElement("div", {
+    className: "p-search__mobile"
   }, react_1["default"].createElement("div", {
+    className: "p-search__mobile__btn"
+  }, react_1["default"].createElement(BtnBack_1["default"], {
+    click_function: function click_function() {
+      return setMobileMenu(false);
+    }
+  })), react_1["default"].createElement(Search_sidebar_1["default"], {
+    click_function: getStores,
+    mobileMenuClose_function: function mobileMenuClose_function() {
+      return setMobileMenu(false);
+    }
+  })), react_1["default"].createElement("div", {
     className: "a-btn-modificate"
-  }, react_1["default"].createElement(react_router_dom_1.Link, {
-    to: '/search_mobile'
+  }, react_1["default"].createElement("button", {
+    onClick: function onClick() {
+      return setMobileMenu(true);
+    }
   }, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
     icon: free_solid_svg_icons_1.faEdit
   }), "\xA0\u691C\u7D22\u6761\u4EF6\u5909\u66F4"))), react_1["default"].createElement("div", {
@@ -24174,43 +24221,6 @@ var Search = function Search() {
 };
 
 exports.default = Search;
-
-/***/ }),
-
-/***/ "./resources/ts/components/page/search/Search_input_mobile.tsx":
-/*!*********************************************************************!*\
-  !*** ./resources/ts/components/page/search/Search_input_mobile.tsx ***!
-  \*********************************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var Search_sidebar_1 = __importDefault(__webpack_require__(/*! ../../molecules/search/Search_sidebar */ "./resources/ts/components/molecules/search/Search_sidebar.tsx"));
-
-var BtnBack_1 = __importDefault(__webpack_require__(/*! ../../atoms/buttons/BtnBack */ "./resources/ts/components/atoms/buttons/BtnBack.tsx"));
-
-function Search_input_mobile() {
-  return react_1["default"].createElement("div", {
-    className: "p-search-input-mobile"
-  }, react_1["default"].createElement("div", {
-    className: "p-search-input-mobile__btn"
-  }, react_1["default"].createElement(BtnBack_1["default"], null)), react_1["default"].createElement(Search_sidebar_1["default"], null));
-}
-
-exports.default = Search_input_mobile;
 
 /***/ }),
 

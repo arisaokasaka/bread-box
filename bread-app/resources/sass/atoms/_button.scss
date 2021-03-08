@@ -210,7 +210,7 @@
     display: flex;
     justify-content: flex-end;
 
-    a {
+    & > button {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -218,6 +218,8 @@
         width: 150px;
         height: 2rem;
         border-radius: 20px;
+        border: none;
+        cursor: pointer;
 
         &:hover {
             background-color: $darkestBrown;
