@@ -6,10 +6,12 @@ import { faEdit, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import Search_sidebar from '../../molecules/search/Search_sidebar';
 import Store_pickup from '../../molecules/common/Store_pickup';
 import StoreList from '../../molecules/common/StoreList';
+import BtnBack from '../../atoms/buttons/BtnBack';
 
 const Search: React.FC = () => {
     const location = useLocation();
     const history = useHistory();
+    const [ mobileMenu, setMobileMenu ] = useState(false);
     const keyword = location.search;
     const [ stores, setStores ] = useState([]);
     const [ sort, setSort ] = useState('default')
@@ -96,8 +98,21 @@ const Search: React.FC = () => {
 
     return (
         <div className="p-search" id="search_top">
+            {mobileMenu && 
+                <div className="p-search__mobile">
+                    <div className="p-search__mobile__btn">
+                        <BtnBack
+                            click_function={()=>setMobileMenu(false)}
+                        />
+                    </div>
+                    <Search_sidebar
+                        click_function = {getStores}
+                        mobileMenuClose_function={()=>setMobileMenu(false)}
+                    />
+                </div>
+            }
             <div className="a-btn-modificate">
-                <Link to='/search_mobile'><span><FontAwesomeIcon icon={faEdit}/>&nbsp;検索条件変更</span></Link>
+                <button onClick={()=>setMobileMenu(true)}><span><FontAwesomeIcon icon={faEdit}/>&nbsp;検索条件変更</span></button>
             </div>
             <div className = "p-search__container">
                 <Search_sidebar

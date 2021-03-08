@@ -7,10 +7,11 @@ import { UserAuthContext } from '../../../contexts/UserAuthContext';
 import { useLocation, useHistory } from 'react-router-dom';
 
 type Props = ({
-    click_function?: any
+    click_function: Function
+    mobileMenuClose_function?: Function
 })
 
-const Search_sidebar: React.FC<Props> = ({click_function}) => {
+const Search_sidebar: React.FC<Props> = ({click_function, mobileMenuClose_function}) => {
     let default_keyword: string = '';
     let search_params: string = decodeURI(useLocation().search);
     const history = useHistory();
@@ -44,6 +45,7 @@ const Search_sidebar: React.FC<Props> = ({click_function}) => {
     const search_url = () => {
         let url = '/search?id=' + state.uuid + (keyword ? "&key=" + keyword : '') + (condition.district ? "&di=" + condition.district : '') + (condition.bread_kind ? "&bk=" + condition.bread_kind : '');
         history.push(url);
+        mobileMenuClose_function && mobileMenuClose_function();
         click_function();
     }
 
