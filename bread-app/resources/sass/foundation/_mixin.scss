@@ -123,3 +123,18 @@
     margin-top: $margin-top_content;
     margin-bottom: $margin-bottom_content;
 }
+
+@mixin tab_btn($width) {
+    display: inline-block;
+    width: $width;
+    height: 35px;
+    line-height: 35px;
+    background-color: transparent;
+    font-size: 0.7rem;
+    text-align: center;
+    color: $darkGray;
+    font-weight: 550;
+    letter-spacing: 0.5px;
+    border: none;
+    cursor: pointer;
+}

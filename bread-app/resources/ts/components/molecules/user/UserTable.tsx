@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import UserTable_favorite from './UserTable_favorite';
 import UserTable_interested from './UserTable_interested';
 import UserTable_review from './UserTable_review';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart, faFlag, faCommentDots } from '@fortawesome/free-solid-svg-icons';
 
 const UserTable: React.FC = () => {
     const [ Table, setTable ] = useState('favorite');
@@ -10,6 +12,7 @@ const UserTable: React.FC = () => {
         class: "m-user-table__tab--favorite",
         table: "favorite",
         value: "お気に入り",
+        icon: faHeart,
         function: handleFavorite,
     }
     
@@ -17,6 +20,7 @@ const UserTable: React.FC = () => {
         class: "m-user-table__tab--interested",
         table: "interested",
         value: "行ってみたい",
+        icon: faFlag,
         function: handleInterested,
     }
     
@@ -24,6 +28,7 @@ const UserTable: React.FC = () => {
         class: "m-user-table__tab--review",
         table: "review",
         value: "口コミ",
+        icon: faCommentDots,
         function: handleReview,
     }
 
@@ -44,7 +49,7 @@ const UserTable: React.FC = () => {
         if(Table === tab.table){
             className += ' selected';
         }
-        return <a className={className} onClick = {tab.function}>{tab.value}</a>
+        return <button className={className} onClick = {tab.function}><FontAwesomeIcon icon={tab.icon}/>{tab.value}</button>
     }
 
     const CurrentTable = (table) => {
