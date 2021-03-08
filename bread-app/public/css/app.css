@@ -3774,29 +3774,40 @@ label.a-label-required__red--fitContent::after {
   }
 }
 
-.p-register-store__container__links > span {
+.p-register-store__container__links {
   position: absolute;
+}
+
+@media screen and (min-width: 600px) {
+  .p-register-store__container__links {
+    top: -1.5rem;
+    right: 0;
+  }
+}
+
+.p-register-store__container__links > span {
+  display: block;
   color: #757575;
-  font-size: 0.8rem;
-  padding-top: 5px;
+  font-size: 0.7rem;
+  padding-top: 2px;
 }
 
 @media screen and (min-width: 600px) {
   .p-register-store__container__links > span {
-    top: -1.5rem;
-    right: 0;
+    text-align: end;
   }
 }
 
 .p-register-store__container__links > span > a {
   padding: 0 3px;
   margin-top: 2px;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 550;
   text-align: center;
   color: #757575;
   -webkit-text-decoration: underline #757575;
           text-decoration: underline #757575;
+  cursor: pointer;
 }
 
 .p-register-store__container > p {
@@ -3806,7 +3817,7 @@ label.a-label-required__red--fitContent::after {
 }
 
 .p-register-store__container__form {
-  margin-top: 40px;
+  margin-top: 50px;
 }
 
 @media screen and (min-width: 600px) {
@@ -4050,6 +4061,7 @@ label.a-label-required__red--fitContent::after {
 .p-password-reset-user__container__links > span > a {
   color: #67491b;
   font-weight: 800;
+  cursor: pointer;
 }
 
 .p-top__hero {

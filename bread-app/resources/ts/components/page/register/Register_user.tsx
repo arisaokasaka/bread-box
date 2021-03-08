@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { UserAuthContext } from '../../../contexts/UserAuthContext';
 
 
 const Register_user: React.FC = () => {
     const { register, handleSubmit, errors, getValues } = useForm();
     const [ emailError, SetEmailError ] = useState(false);
     const history = new useHistory();
+    const { dispatch } = useContext(UserAuthContext);
     const [ password, setPassword ] = useState({
         original: '',
         check: '',
@@ -28,6 +30,31 @@ const Register_user: React.FC = () => {
         }else{
             alert ('パスワードが一致していません。');
         }  
+    }
+
+    const guest_login = () => {
+        axios.defaults.withCredentials = true;
+        axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+        axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+
+        axios.get("/sanctum/csrf-cookie").then(response => {
+            axios.post("/api/login", {
+                email: 'guest@user',
+                password: 'guestuser'
+            })
+            .then(res => {
+                dispatch({
+                    type: 'setUser',
+                    payload: res.data.user.uuid,
+                });
+                history.push("/user");
+            })
+            .catch(err => {
+                alert('ログイン出来ません。');
+            });
+        })
+        .catch(err => {
+        })
     }
 
     return (
@@ -64,6 +91,7 @@ const Register_user: React.FC = () => {
 
                 <div className = "p-register-user__container__links">
                     <span>既にご登録済ですか？&nbsp;<Link to="/login_user">ログイン</Link></span>
+                    <span>ユーザー機能を試してみますか？&nbsp;<a onClick={guest_login}>ゲストログイン</a></span>
                 </div>
             </div>
         </div>

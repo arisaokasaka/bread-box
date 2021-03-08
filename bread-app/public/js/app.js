@@ -22993,7 +22993,8 @@ var LoginStore = function LoginStore() {
       password = _d[0],
       setPassword = _d[1];
 
-  var history = new react_router_dom_1.useHistory(); // ログイン
+  var history = new react_router_dom_1.useHistory();
+  var csrf = (_a = document.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('content'); // ログイン
 
   var login = function login() {
     var _a;
@@ -23011,15 +23012,30 @@ var LoginStore = function LoginStore() {
           payload: res.data.user.uuid
         });
         history.push("/store_edit");
-      })["catch"](function (err) {
-        console.log('[login]fail_post');
-      });
-    })["catch"](function (err) {
-      console.log('fail_get');
-    });
+      })["catch"](function (err) {});
+    })["catch"](function (err) {});
   };
 
-  var csrf = (_a = document.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('content');
+  var guest_login = function guest_login() {
+    var _a;
+
+    axios_1["default"].defaults.withCredentials = true;
+    axios_1["default"].defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    axios_1["default"].defaults.headers.common['X-CSRF-TOKEN'] = (_a = document.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('content');
+    axios_1["default"].get("/sanctum/csrf-cookie").then(function (response) {
+      axios_1["default"].post("/api/login", {
+        email: 'guest@store',
+        password: 'gueststore'
+      }).then(function (res) {
+        dispatch({
+          type: 'setStore',
+          payload: res.data.user.uuid
+        });
+        history.push("/store_edit");
+      })["catch"](function (err) {});
+    })["catch"](function (err) {});
+  };
+
   return react_1["default"].createElement("div", {
     className: "p-login-store"
   }, react_1["default"].createElement("div", {
@@ -23065,7 +23081,9 @@ var LoginStore = function LoginStore() {
     to: "/register_store"
   }, "\u3053\u3061\u3089")), react_1["default"].createElement("span", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u3092\u5FD8\u308C\u305F\u65B9\u306F", react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/password_store"
-  }, "\u3053\u3061\u3089")))));
+  }, "\u3053\u3061\u3089")), react_1["default"].createElement("span", null, "\u5E97\u8217\u6A5F\u80FD\u3092\u8A66\u3057\u3066\u307F\u307E\u3059\u304B\uFF1F\xA0", react_1["default"].createElement("a", {
+    onClick: guest_login
+  }, "\u30B2\u30B9\u30C8\u30ED\u30B0\u30A4\u30F3")))));
 };
 
 exports.default = LoginStore;
@@ -23177,6 +23195,28 @@ var LoginUser = function LoginUser() {
     })["catch"](function (err) {});
   };
 
+  var guest_login = function guest_login() {
+    var _a;
+
+    axios_1["default"].defaults.withCredentials = true;
+    axios_1["default"].defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    axios_1["default"].defaults.headers.common['X-CSRF-TOKEN'] = (_a = document.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('content');
+    axios_1["default"].get("/sanctum/csrf-cookie").then(function (response) {
+      axios_1["default"].post("/api/login", {
+        email: 'guest@user',
+        password: 'guestuser'
+      }).then(function (res) {
+        dispatch({
+          type: 'setUser',
+          payload: res.data.user.uuid
+        });
+        history.push("/user");
+      })["catch"](function (err) {
+        alert('ログイン出来ません。');
+      });
+    })["catch"](function (err) {});
+  };
+
   var csrf = (_a = document.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('content');
   return react_1["default"].createElement("div", {
     className: "p-login-user"
@@ -23220,11 +23260,13 @@ var LoginUser = function LoginUser() {
     value: "\u30ED\u30B0\u30A4\u30F3\u3059\u308B"
   })), react_1["default"].createElement("div", {
     className: "p-login-user__container__links"
-  }, react_1["default"].createElement("span", null, "\u65B0\u898F\u767B\u9332\u306F", react_1["default"].createElement(react_router_dom_1.Link, {
+  }, react_1["default"].createElement("span", null, "\u65B0\u898F\u767B\u9332\u306F\xA0", react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/register_user"
-  }, "\u3053\u3061\u3089")), react_1["default"].createElement("span", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u3092\u5FD8\u308C\u305F\u65B9\u306F", react_1["default"].createElement(react_router_dom_1.Link, {
+  }, "\u3053\u3061\u3089")), react_1["default"].createElement("span", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u3092\u5FD8\u308C\u305F\u65B9\u306F\xA0", react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/password_reset_request"
-  }, "\u3053\u3061\u3089")))));
+  }, "\u3053\u3061\u3089")), react_1["default"].createElement("span", null, "\u30E6\u30FC\u30B6\u30FC\u6A5F\u80FD\u3092\u8A66\u3057\u3066\u307F\u307E\u3059\u304B\uFF1F\xA0", react_1["default"].createElement("a", {
+    onClick: guest_login
+  }, "\u30B2\u30B9\u30C8\u30ED\u30B0\u30A4\u30F3")))));
 };
 
 exports.default = LoginUser;
@@ -23685,6 +23727,26 @@ function Register_store() {
     axios_1["default"].post('/api/create_store', form_data).then(function (res) {})["catch"](function (errors) {});
   };
 
+  var guest_login = function guest_login() {
+    var _a;
+
+    axios_1["default"].defaults.withCredentials = true;
+    axios_1["default"].defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    axios_1["default"].defaults.headers.common['X-CSRF-TOKEN'] = (_a = document.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('content');
+    axios_1["default"].get("/sanctum/csrf-cookie").then(function (response) {
+      axios_1["default"].post("/api/login", {
+        email: 'guest@store',
+        password: 'gueststore'
+      }).then(function (res) {
+        dispatch({
+          type: 'setStore',
+          payload: res.data.user.uuid
+        });
+        history.push("/store_edit");
+      })["catch"](function (err) {});
+    })["catch"](function (err) {});
+  };
+
   return react_1["default"].createElement("div", {
     className: "p-register-store"
   }, react_1["default"].createElement("div", {
@@ -23693,7 +23755,9 @@ function Register_store() {
     className: "p-register-store__container__links"
   }, react_1["default"].createElement("span", null, "\u65E2\u306B\u767B\u9332\u6E08\u3067\u3059\u304B\uFF1F", react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/login_store"
-  }, "\u5E97\u8217\u30ED\u30B0\u30A4\u30F3"))), react_1["default"].createElement("form", {
+  }, "\u5E97\u8217\u30ED\u30B0\u30A4\u30F3")), react_1["default"].createElement("span", null, "\u5E97\u8217\u6A5F\u80FD\u3092\u8A66\u3057\u3066\u307F\u307E\u3059\u304B\uFF1F\xA0", react_1["default"].createElement("a", {
+    onClick: guest_login
+  }, "\u30B2\u30B9\u30C8\u30ED\u30B0\u30A4\u30F3"))), react_1["default"].createElement("form", {
     className: "p-register-store__container__form m-storeForm",
     name: "form_storeRegister",
     onSubmit: handleSubmit(onSubmit)
@@ -23869,6 +23933,8 @@ var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_mod
 
 var react_hook_form_1 = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.js");
 
+var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
+
 var Register_user = function Register_user() {
   var _a = react_hook_form_1.useForm(),
       register = _a.register,
@@ -23881,6 +23947,7 @@ var Register_user = function Register_user() {
       SetEmailError = _b[1];
 
   var history = new react_router_dom_1.useHistory();
+  var dispatch = react_1.useContext(UserAuthContext_1.UserAuthContext).dispatch;
 
   var _c = react_1.useState({
     original: '',
@@ -23902,6 +23969,28 @@ var Register_user = function Register_user() {
     } else {
       alert('パスワードが一致していません。');
     }
+  };
+
+  var guest_login = function guest_login() {
+    var _a;
+
+    axios_1["default"].defaults.withCredentials = true;
+    axios_1["default"].defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    axios_1["default"].defaults.headers.common['X-CSRF-TOKEN'] = (_a = document.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('content');
+    axios_1["default"].get("/sanctum/csrf-cookie").then(function (response) {
+      axios_1["default"].post("/api/login", {
+        email: 'guest@user',
+        password: 'guestuser'
+      }).then(function (res) {
+        dispatch({
+          type: 'setUser',
+          payload: res.data.user.uuid
+        });
+        history.push("/user");
+      })["catch"](function (err) {
+        alert('ログイン出来ません。');
+      });
+    })["catch"](function (err) {});
   };
 
   return react_1["default"].createElement("div", {
@@ -23977,7 +24066,9 @@ var Register_user = function Register_user() {
     className: "p-register-user__container__links"
   }, react_1["default"].createElement("span", null, "\u65E2\u306B\u3054\u767B\u9332\u6E08\u3067\u3059\u304B\uFF1F\xA0", react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/login_user"
-  }, "\u30ED\u30B0\u30A4\u30F3")))));
+  }, "\u30ED\u30B0\u30A4\u30F3")), react_1["default"].createElement("span", null, "\u30E6\u30FC\u30B6\u30FC\u6A5F\u80FD\u3092\u8A66\u3057\u3066\u307F\u307E\u3059\u304B\uFF1F\xA0", react_1["default"].createElement("a", {
+    onClick: guest_login
+  }, "\u30B2\u30B9\u30C8\u30ED\u30B0\u30A4\u30F3")))));
 };
 
 exports.default = Register_user;
