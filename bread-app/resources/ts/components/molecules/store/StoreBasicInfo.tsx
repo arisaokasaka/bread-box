@@ -23,7 +23,9 @@ const StoreBasicInfo: React.FC<StoreInfoProps> = ({storeInfo, scoreInfo}) => {
                     index={1}
                     store_uuid={storeInfo.user_uuid}
                 />
-                <BtnStoreEdit />
+                <BtnStoreEdit
+                    uuid = {storeInfo.user_uuid}
+                />
             </div>
             <div className = "m-store-basicInfo__container">
                 <h2 className = "m-store-basicInfo__name">{storeInfo.name}</h2>

@@ -16175,23 +16175,24 @@ var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg
 
 var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContext */ "./resources/ts/contexts/UserAuthContext.ts");
 
-function BtnStoreEdit() {
+var BtnStoreEdit = function BtnStoreEdit(_a) {
+  var uuid = _a.uuid;
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
-  var BtnFavorite;
+  var BtnStoreEdit;
 
-  if (state.uuid && state.auth === "store") {
-    BtnFavorite = react_1["default"].createElement(react_router_dom_1.Link, {
+  if (state.uuid && state.uuid === uuid) {
+    BtnStoreEdit = react_1["default"].createElement(react_router_dom_1.Link, {
       to: "/store_edit",
       className: "a-btn-storeEdit"
     }, react_1["default"].createElement("span", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
       icon: free_solid_svg_icons_1.faPen
     })), react_1["default"].createElement("span", null, "\u5E97\u8217\u60C5\u5831\u3092\u7DE8\u96C6\u3059\u308B"));
   } else {
-    BtnFavorite = null;
+    BtnStoreEdit = null;
   }
 
-  return react_1["default"].createElement("div", null, BtnFavorite);
-}
+  return react_1["default"].createElement("div", null, BtnStoreEdit);
+};
 
 exports.default = BtnStoreEdit;
 
@@ -21083,7 +21084,9 @@ var StoreBasicInfo = function StoreBasicInfo(_a) {
     allInfo: storeInfo,
     index: 1,
     store_uuid: storeInfo.user_uuid
-  }), react_1["default"].createElement(BtnStoreEdit_1["default"], null)), react_1["default"].createElement("div", {
+  }), react_1["default"].createElement(BtnStoreEdit_1["default"], {
+    uuid: storeInfo.user_uuid
+  })), react_1["default"].createElement("div", {
     className: "m-store-basicInfo__container"
   }, react_1["default"].createElement("h2", {
     className: "m-store-basicInfo__name"
