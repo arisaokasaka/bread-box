@@ -17147,7 +17147,10 @@ var StoreList = function StoreList(_a) {
       src: "/images/no_image_menu_2.png",
       alt: "\u30D1\u30F3\u306E\u30B5\u30D6\u753B\u50CF"
     }))), el.message && react_1["default"].createElement("p", {
-      className: "m-store-list__item__container__explanation"
+      className: "m-store-list__item__container__explanation",
+      onClick: function onClick() {
+        return history.push("/store/" + el.user_uuid);
+      }
     }, el.message), react_1["default"].createElement(Schedule_1["default"], {
       info: el
     }), react_1["default"].createElement(Score_1["default"], {
@@ -21575,7 +21578,7 @@ var StoreReview = function StoreReview(_a) {
       review_uuid: el.uuid,
       update_function: getReviewInfo
     })));
-  }), react_1["default"].createElement(react_paginate_1["default"], {
+  }), review_list[0] !== undefined && react_1["default"].createElement(react_paginate_1["default"], {
     previousLabel: '<',
     nextLabel: '>',
     breakLabel: '...',
@@ -22857,7 +22860,7 @@ var UserTable_review = function UserTable_review() {
     }), el.comment && react_1["default"].createElement("p", null, el.comment), react_1["default"].createElement("span", null, "\u6295\u7A3F\u65E5:\xA0", el.created_at.slice(0, 10))), el.reply && react_1["default"].createElement("div", {
       className: "m-userTable-review__item__container__reply"
     }, react_1["default"].createElement("p", null, "\u30AA\u30FC\u30CA\u30FC\u304B\u3089\u306E\u8FD4\u4FE1"), react_1["default"].createElement("p", null, el.reply))));
-  }), react_1["default"].createElement(react_paginate_1["default"], {
+  }), review_list[0] !== undefined && react_1["default"].createElement(react_paginate_1["default"], {
     previousLabel: '<',
     nextLabel: '>',
     breakLabel: '...',

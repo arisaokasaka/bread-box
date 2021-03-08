@@ -189,20 +189,23 @@ const StoreReview: React.FC<ReviewProps> = ({store_uuid}) => {
                     </div>
                 )
             })}
-            <ReactPaginate
-                previousLabel={'<'}
-                nextLabel={'>'}
-                breakLabel={'...'}
-                pageCount={Math.ceil(review_list.length/perPage)}
-                marginPagesDisplayed={2}
-                pageRangeDisplayed={4}
-                onPageChange={handlePageChange}
-                containerClassName={'a-pagination'}
-                activeClassName={'active'}
-                previousClassName={'a-pagination__previous'}
-                nextClassName={'a-pagination__next'}
-                disabledClassName={'a-pagination__disabled'}
-            />
+            
+            {review_list[0] !== undefined && 
+                <ReactPaginate
+                    previousLabel={'<'}
+                    nextLabel={'>'}
+                    breakLabel={'...'}
+                    pageCount={Math.ceil(review_list.length/perPage)}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={4}
+                    onPageChange={handlePageChange}
+                    containerClassName={'a-pagination'}
+                    activeClassName={'active'}
+                    previousClassName={'a-pagination__previous'}
+                    nextClassName={'a-pagination__next'}
+                    disabledClassName={'a-pagination__disabled'}
+                />
+            }
         </div>
     )
 }
