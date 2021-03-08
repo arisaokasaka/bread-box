@@ -79,6 +79,21 @@ const Search_sidebar: React.FC<Props> = ({click_function}) => {
         })
     }
 
+    const reset = () => {
+        districts.districts.map((el)=>{
+            let checkbox = document.getElementById(el.id) as HTMLInputElement;
+            checkbox.checked = false;
+        })
+
+        bread_kinds.bread_kinds.map((el)=>{
+            let checkbox = document.getElementById(el.id) as HTMLInputElement;
+            checkbox.checked = false;
+        })
+
+        history.push("/search?id=" + state.uuid);
+        click_function();
+    }
+
     return (
         <div className="m-search-sidebar">
             <div className="m-search-sidebar__item">
@@ -100,7 +115,7 @@ const Search_sidebar: React.FC<Props> = ({click_function}) => {
                         }
                         return (
                             <li key={"sidebar"+el.id}>
-                                <input type="checkbox" id={el.id} className="m-search-sidebar__item__district" defaultChecked={check} value={el.name} onClick={sum_district}/>
+                                <input type="checkbox" id={el.id} name="checkbox_district" className="m-search-sidebar__item__district" defaultChecked={check} value={el.name} onClick={sum_district}/>
                                 <label htmlFor={el.id}>{el.name}</label>
                             </li>
                         );
@@ -117,14 +132,15 @@ const Search_sidebar: React.FC<Props> = ({click_function}) => {
                         }
                         return (
                             <li key={"sidebar"+el.id}>
-                                <input type="checkbox" id={el.id} className="m-search-sidebar__item__bread" defaultChecked={check} value={el.name} onClick={sum_bread_kind}/>
+                                <input type="checkbox" id={el.id} name="checkbox_bread_kind" className="m-search-sidebar__item__bread" defaultChecked={check} value={el.name} onClick={sum_bread_kind}/>
                                 <label htmlFor={el.id}>{el.name}</label>
                             </li>
                         );
                     })}
                 </ul>
             </div>
-            <input onClick={search_url} className="m-search-sidebar__btn" value="絞り込む" readOnly/>
+            <input onClick={search_url} className="m-search-sidebar__btn--search" value="絞り込む" readOnly/>
+            <input onClick={reset} className="m-search-sidebar__btn--reset" value="検索内容をリセット" readOnly/>
         </div>
     )
 }
