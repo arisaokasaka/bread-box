@@ -43,17 +43,6 @@ class StoreMenuController extends Controller
             Storage::putFileAs($path, $fileSave, $fileName, 'public');
         }
         
-        // 以下、後ほど修正したい(安全に拡張子を変更する)。
-        // $fileExtension = $fileContent->getClientOriginalExtension();
-        // if($fileExtension === "jpg" || $fileExtension === "jpeg"){
-        //     $fileTemp = imagecreatefromjpeg($fileContent);
-        //     $fileSave = imagePng($fileTemp);
-        //     // $newFile = new UploadedFile('image/' .Auth::id(). '.png', null, true);
-        // } else {
-        //     $fileSave = $fileContent;
-        // }
-        // $fileName = 'item_' . $bread_number . '.png';
-
         // テキストデータをDBに保存
         $store_menu = new StoreMenu();
         $store_menu->create_store_menu($request, $bread_number);
@@ -119,10 +108,12 @@ class StoreMenuController extends Controller
         $store_menu = new StoreMenu();
         $store_uuid = $request->input('store_uuid');
         $bread_order = $request->input('bread_order');
-        
+
         // Storageの画像削除
-        $deleteFile = '/public/store/' . $store_uuid . '/menu/item_' . $bread_order . '.jpg'; 
-        Storage::delete($deleteFile);
+        if(Storage::exists("/public/store/" . $store_uuid . '/menu/item_' . $bread_order . '.jpg')){
+            $deleteFile = "/public/store/" . $store_uuid . '/menu/item_' . $bread_order . '.jpg';
+            Storage::delete($deleteFile);
+        }
         
         // bread_order更新
         $select_info = $store_menu->newQuery()
@@ -138,7 +129,9 @@ class StoreMenuController extends Controller
                 $image_original = '/public/store/' . $store_uuid . '/menu/item_' . $bread_menu->bread_order . '.jpg';
                 $image_update = '/public/store/' . $store_uuid . '/menu/item_' . $bread_order_update . '.jpg';
                 StoreMenu::where('uuid', $bread_menu->uuid)->update(['bread_order' => $bread_order_update]);
-                Storage::move($image_original, $image_update);
+                if(Storage::exists($image_original)){
+                    Storage::move($image_original, $image_update);
+                }
             }
         }
 
