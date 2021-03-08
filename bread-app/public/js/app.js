@@ -18993,11 +18993,13 @@ var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_mod
 
 var Search_sidebar = function Search_sidebar(_a) {
   var click_function = _a.click_function;
+  var default_keyword = '';
+  var search_params = decodeURI(react_router_dom_1.useLocation().search);
   var history = react_router_dom_1.useHistory();
 
   var _b = react_1.useState(''),
       keyword = _b[0],
-      Setkeyword = _b[1];
+      setKeyword = _b[1];
 
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
 
@@ -19008,6 +19010,27 @@ var Search_sidebar = function Search_sidebar(_a) {
       condition = _c[0],
       setCondition = _c[1];
 
+  react_1.useEffect(function () {
+    getKeywordFromURL();
+  }, []); // キーワード検索された場合、検索バーにそのキーワードを配置
+
+  var getKeywordFromURL = function getKeywordFromURL() {
+    if (search_params.match("&key=")) {
+      var index_key_end = void 0;
+      var index_key = search_params.indexOf("&key=") + 5;
+
+      if (search_params.indexOf("&", index_key) !== -1) {
+        index_key_end = search_params.indexOf("&", index_key);
+        default_keyword = search_params.substr(index_key, index_key_end - index_key);
+      } else {
+        index_key_end = search_params.length - index_key;
+        default_keyword = search_params.substr(index_key, index_key_end + index_key);
+      }
+
+      setKeyword(default_keyword);
+    }
+  };
+
   var search_url = function search_url() {
     var url = '/search?id=' + state.uuid + (keyword ? "&key=" + keyword : '') + (condition.district ? "&di=" + condition.district : '') + (condition.bread_kind ? "&bk=" + condition.bread_kind : '');
     history.push(url);
@@ -19015,7 +19038,7 @@ var Search_sidebar = function Search_sidebar(_a) {
   };
 
   var onChangeKeyword = function onChangeKeyword(e) {
-    Setkeyword(e.target.value);
+    setKeyword(e.target.value);
   };
 
   var sum_district = function sum_district() {
@@ -19062,13 +19085,19 @@ var Search_sidebar = function Search_sidebar(_a) {
   }, react_1["default"].createElement("h4", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
     icon: free_solid_svg_icons_1.faMapMarkerAlt
   }), "\u30A8\u30EA\u30A2\u304B\u3089\u63A2\u3059"), react_1["default"].createElement("ul", null, Districts_1["default"].districts.map(function (el) {
+    var check = false;
+
+    if (search_params.match(el.name)) {
+      check = true;
+    }
+
     return react_1["default"].createElement("li", {
       key: "sidebar" + el.id
     }, react_1["default"].createElement("input", {
-      id: el.id,
-      name: el.id,
-      className: "m-search-sidebar__item__district",
       type: "checkbox",
+      id: el.id,
+      className: "m-search-sidebar__item__district",
+      defaultChecked: check,
       value: el.name,
       onClick: sum_district
     }), react_1["default"].createElement("label", {
@@ -19079,12 +19108,19 @@ var Search_sidebar = function Search_sidebar(_a) {
   }, react_1["default"].createElement("h4", null, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
     icon: free_solid_svg_icons_1.faBreadSlice
   }), "\u30D1\u30F3\u306E\u7A2E\u985E\u304B\u3089\u63A2\u3059"), react_1["default"].createElement("ul", null, Bread_kinds_1["default"].bread_kinds.map(function (el) {
+    var check = false;
+
+    if (search_params.match(el.name)) {
+      check = true;
+    }
+
     return react_1["default"].createElement("li", {
       key: "sidebar" + el.id
     }, react_1["default"].createElement("input", {
+      type: "checkbox",
       id: el.id,
       className: "m-search-sidebar__item__bread",
-      type: "checkbox",
+      defaultChecked: check,
       value: el.name,
       onClick: sum_bread_kind
     }), react_1["default"].createElement("label", {
