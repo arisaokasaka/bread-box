@@ -78,7 +78,7 @@ const StoreList: React.FC<StoreProps> = ({storeList, sortType}) => {
 
                                 </div>
                             </div>
-                            {el.message && <p className ="m-store-list__item__container__explanation">{el.message}</p>}
+                            {el.message && <p className ="m-store-list__item__container__explanation" onClick={()=>history.push("/store/" + el.user_uuid)}>{el.message}</p>}
                             <Schedule
                                 info = {el}
                             />
