@@ -2,13 +2,16 @@ import React, { useContext } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { UserAuthContext } from '../../../../contexts/UserAuthContext';
-import { StoreInfoContext } from '../../../../contexts/StoreInfoContext';
 import BtnSave from '../../../atoms/buttons/BtnSave';
 
-const EditSNS: React.FC = () => {
+type Props = ({
+    update_function: Function
+    storeInfo: any
+})
+
+const EditSNS: React.FC<Props> = ({update_function, storeInfo}) => {
     const { register, handleSubmit } = useForm();
     const { state } = useContext(UserAuthContext);
-    const { stateInfo, dispatch } = useContext(StoreInfoContext);
     let snsSubmitted: object = {
         instagram: '',
         twitter: '',
@@ -18,8 +21,8 @@ const EditSNS: React.FC = () => {
     let defaultData: any;
 
     // StoreInfo.snsにデータがあれば、defaultDataにそのデータを設定・defaultValueに反映
-    if(stateInfo.storeInfo.sns){
-        defaultData = JSON.parse(stateInfo.storeInfo.sns)
+    if(storeInfo.sns){
+        defaultData = JSON.parse(storeInfo.sns)
     }else{
         defaultData = {
             instagram: '',
@@ -42,27 +45,11 @@ const EditSNS: React.FC = () => {
         
         axios.post("/api/update_sns", data)
         .then(res => {
-            getStoreInfo();
+            update_function();
             alert('保存しました。')
         })
         .catch(err => {
             alert('保存に失敗しました。')
-        });
-    }
-
-    // 店舗情報取得＆更新
-    const getStoreInfo = () => {
-        axios.post("/api/index_storeInfo", {
-            store_uuid: state.uuid
-        })
-        .then(res => {
-            console.log('storeinfo')
-            dispatch({
-                type: 'inputStoreInfo',
-                payload: res.data,
-            });
-        })
-        .catch(err => {
         });
     }
 

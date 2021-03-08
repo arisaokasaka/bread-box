@@ -24,6 +24,7 @@ const StoreEditTable: React.FC = () => {
     const { dispatch } = useContext(StoreInfoContext);
     const [ Table, setTable ] = useState('basicInfo');
     const [ className_active, setClassName_Active] = useState('')
+    const [ storeInfo, setStoreInfo ] = useState({});
 
     useEffect(() => {
         getStoreInfo();
@@ -36,7 +37,7 @@ const StoreEditTable: React.FC = () => {
             store_uuid: state.uuid
         })
         .then(res => {
-            console.log('storeinfo')
+            setStoreInfo(res.data)
             dispatch({
                 type: 'inputStoreInfo',
                 payload: res.data,
@@ -82,17 +83,17 @@ const StoreEditTable: React.FC = () => {
     const CurrentTable = (table) => {
         switch(table){
             case 'basicInfo':
-                return <EditBasicInfo />
+                return <EditBasicInfo update_function={getStoreInfo} storeInfo={storeInfo}/>
             case 'basicDays':
-                return <EditBusinessDays />
+                return <EditBusinessDays update_function={getStoreInfo} storeInfo={storeInfo}/>
             case 'basicMemo':
-                return <EditBusinessMemo />
+                return <EditBusinessMemo update_function={getStoreInfo} storeInfo={storeInfo}/>
             case 'basicHomepage':
-                return <EditHomepage />
+                return <EditHomepage update_function={getStoreInfo} storeInfo={storeInfo}/>
             case 'basicSNS':
-                return <EditSNS />
+                return <EditSNS update_function={getStoreInfo} storeInfo={storeInfo}/>
             case 'basicImage':
-                return <EditImage />
+                return <EditImage update_function={getStoreInfo} storeInfo={storeInfo} />
             case 'menuAdd':
                 return <MenuCreate />
             case 'menuEdit':
