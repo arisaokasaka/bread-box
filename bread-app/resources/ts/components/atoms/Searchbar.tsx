@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { UserAuthContext } from '../../contexts/UserAuthContext';
@@ -11,6 +11,7 @@ type TextProps = ({
 const Searchbar: React.FC<TextProps> = ({text}) => {
     const { state } = useContext(UserAuthContext);
     const [ keyword, Setkeyword ] = useState('');
+    const history = useHistory();
     const onChangeKeyword = e => {
         Setkeyword(e.target.value);
     }
@@ -19,11 +20,18 @@ const Searchbar: React.FC<TextProps> = ({text}) => {
         Setkeyword('');
     }
 
+    const pressKeyboard = (e) => {
+        if(e.which === 13){
+            history.push('/search?id=' + state.uuid + (keyword ? "&key=" + keyword : ''))
+        }
+    }
+
     return (
         <div className="a-bar-search">
             <input type="text" placeholder="キーワードから探す"
                 value={keyword}
                 onChange = {onChangeKeyword}
+                onKeyPress={(e)=>pressKeyboard(e)}
             />
             {text && 
                 <Link to={{
