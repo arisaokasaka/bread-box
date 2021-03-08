@@ -16,15 +16,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSlidersH, faBreadSlice, faChevronRight, faHeart, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import BtnLogout from '../../atoms/buttons/BtnLogout';
 import Modal_confirmDelete_account from '../modal/Modal_confirmDelete_account';
-import { StoreInfoContext } from '../../../contexts/StoreInfoContext';
 import { UserAuthContext } from '../../../contexts/UserAuthContext';
 
 const StoreEditTable: React.FC = () => {
     const { state } = useContext(UserAuthContext);
-    const { dispatch } = useContext(StoreInfoContext);
     const [ Table, setTable ] = useState('basicInfo');
     const [ className_active, setClassName_Active] = useState('')
     const [ storeInfo, setStoreInfo ] = useState({});
+    const [ menuInfo, setMenuInfo ] = useState([]);
 
     useEffect(() => {
         getStoreInfo();
@@ -38,10 +37,6 @@ const StoreEditTable: React.FC = () => {
         })
         .then(res => {
             setStoreInfo(res.data)
-            dispatch({
-                type: 'inputStoreInfo',
-                payload: res.data,
-            });
         })
         .catch(err => {
         });
@@ -53,10 +48,7 @@ const StoreEditTable: React.FC = () => {
             store_uuid: state.uuid
         })
         .then(res => {
-            dispatch({
-                type: 'inputMenuInfo',
-                payload: res.data,
-            });
+            setMenuInfo(res.data)
         })
         .catch(err => {
         });
@@ -95,13 +87,13 @@ const StoreEditTable: React.FC = () => {
             case 'basicImage':
                 return <EditImage update_function={getStoreInfo} storeInfo={storeInfo} />
             case 'menuAdd':
-                return <MenuCreate />
+                return <MenuCreate update_function={getMenuInfo}/>
             case 'menuEdit':
-                return <MenuList />
+                return <MenuList update_function={getMenuInfo} menuInfo={menuInfo}/>
             case 'spiritSpirit':
-                return <StoreEditTable_spirit />
+                return <StoreEditTable_spirit update_function={getMenuInfo} menuInfo={menuInfo}/>
             case 'spiritAdvantage':
-                return <StoreEditTable_advantage />
+                return <StoreEditTable_advantage update_function={getMenuInfo} menuInfo={menuInfo} />
         }
     }
 

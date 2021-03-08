@@ -1,20 +1,21 @@
 import React, { useContext } from 'react'
 import Modal_editMenu from '../../../molecules/modal/Modal_editMenu';
-import Modal_confirmDelete_menu from '../../modal/Modal_confirmDeletem_menu';
+import Modal_confirmDelete_menu from '../../modal/Modal_confirmDelete_menu';
 import { UserAuthContext } from '../../../../contexts/UserAuthContext';
-import { StoreInfoContext } from '../../../../contexts/StoreInfoContext';
 
-const MenuList: React.FC = () => {
+type Props = ({
+    menuInfo: any
+    update_function: Function
+})
+
+const MenuList: React.FC<Props> = ({menuInfo, update_function}) => {
     const { state } = useContext(UserAuthContext);
-    const { stateInfo } = useContext(StoreInfoContext);
     let time_current: string;
-    let MenuInfo: any;
     let content: any = <p>まだ登録されていません。メニュー追加ページより、追加してください。</p>;
     
     // メニュー情報があるか判断
-    if(stateInfo.menuInfo){
-        MenuInfo = stateInfo.menuInfo;
-        MenuInfo.map((el)=>{
+    if(menuInfo){
+        menuInfo.map((el)=>{
             if(el.menu_type === 1){
                 content = null;
                 time_current = String(Date.now());
@@ -26,16 +27,18 @@ const MenuList: React.FC = () => {
         <div className = "m-storeEdit-menuList">
             <h3>メニュー一覧</h3>
             {content}
-            {MenuInfo.map((el)=>{
+            {menuInfo.map((el)=>{
                 return(
                     el.menu_type === 1 &&
                     <div className = "m-storeEdit-menuList__item" key = {el.id}>
                         <div className = "m-storeEdit-menuList__item__btn">
                             <Modal_editMenu
                                 menu={el}
+                                update_function={update_function}
                             />
                             <Modal_confirmDelete_menu
                                 menu={el}
+                                update_function={update_function}
                             />
                         </div>
                         <div className = "m-storeEdit-menuList__item__content">

@@ -5,12 +5,14 @@ import bread_kinds from '../../../../info/Bread_kinds';
 import BtnSave from '../../../atoms/buttons/BtnSave';
 import BtnReset from '../../../atoms/buttons/BtnReset';
 import { UserAuthContext } from '../../../../contexts/UserAuthContext';
-import { StoreInfoContext } from '../../../../contexts/StoreInfoContext';
 
-const MenuCreate: React.FC = () =>  {
+type Props = ({
+    update_function: Function
+})
+
+const MenuCreate: React.FC<Props> = ({update_function}) =>  {
     const { register, handleSubmit, errors} = useForm();
     const { state } = useContext(UserAuthContext);
-    const { dispatch } = useContext(StoreInfoContext);
     const [ file, setFile ] = useState(null);
     const [ fileSize, setFileSize ] = useState(0);
     const [ textarea_count, setTextarea_count ] = useState(0);
@@ -45,26 +47,11 @@ const MenuCreate: React.FC = () =>  {
             data: dataSubmit,
         })
         .then(res => {
-            getMenuInfo();
+            update_function();
             alert('メニューを追加しました。追加したメニューは、メニュー一覧から確認できます。');
         })
         .catch(errors => {
-            alert('メニューの追加に失敗しました。')
-        });
-    }
-
-    // メニュー情報取得
-    const getMenuInfo = () => {
-        axios.post("/api/index_menuInfo", {
-            store_uuid: state.uuid
-        })
-        .then(res => {
-            dispatch({
-                type: 'inputMenuInfo',
-                payload: res.data,
-            });
-        })
-        .catch(err => {
+            alert('メニューの追加に失敗しました。画像に問題がある可能性が高いです。')
         });
     }
 
