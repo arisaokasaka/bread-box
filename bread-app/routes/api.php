@@ -60,8 +60,7 @@ Route::post('/create_store_menu', 'Api\StoreMenuController@create_store_menu');
 Route::post('/index_menuInfo', 'Api\StoreMenuController@index_menuInfo');
 Route::post('/delete_menu', 'Api\StoreMenuController@delete_menu');
 Route::post('/update_menu_type_1', 'Api\StoreMenuController@update_menu_type_1');
-Route::post('/create_spirit', 'Api\StoreMenuController@create_spirit');
-Route::post('/update_spirit', 'Api\StoreMenuController@update_spirit');
+Route::post('/update_spirit_advantage', 'Api\StoreMenuController@update_spirit_advantage');
 
 // ReviewController
 Route::post('/create_review', 'Api\ReviewController@create_review');

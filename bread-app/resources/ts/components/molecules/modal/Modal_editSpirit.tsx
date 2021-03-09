@@ -92,22 +92,16 @@ const Modal_editSpirit: React.FC<infoProps> = ({SpiritInfo, btnName, funcType, m
                 formData.append(el, data[el])
             }
 
-            switch(funcType){
-                case 'create':
-                    createSpirit(formData, image.image);
-                break;
-                case 'edit':
-                    updateSpirit(formData, image.image);
-                break;
-            }
+            updates(formData, image.image);
+
         }else{
             alert('ファイルの上限サイズ3MBを超えています。圧縮するか、別の画像を選択してください。');
         }
     }
-    // 新規作成機能
-    const createSpirit = (data, file) => {
+
+    const updates = (data, file) => {
         data.append('img_spirit', file);
-        axios.post("/api/create_spirit", data)
+        axios.post("api/update_spirit_advantage", data)
         .then(res=>{
             update_function();
             alert('登録しました。');
@@ -115,20 +109,6 @@ const Modal_editSpirit: React.FC<infoProps> = ({SpiritInfo, btnName, funcType, m
         })        
         .catch(err=>
             alert('登録に失敗しました。')
-        )
-    }
-
-    // 更新機能
-    const updateSpirit = (data, file) => {
-        data.append('img_spirit', file);
-        axios.post("/api/update_spirit", data)
-        .then(res=>{
-            update_function();
-            alert('保存しました。');
-            setModal(false);
-        })        
-        .catch(err=>
-            alert('保存に失敗しました。')
         )
     }
 
@@ -150,7 +130,6 @@ const Modal_editSpirit: React.FC<infoProps> = ({SpiritInfo, btnName, funcType, m
                     </button>
                 </div>
                 <form className="m-modalEditSpirit__form" onSubmit={handleSubmit(onSubmit)}>
-                    <input type="hidden" name="funcType" value={funcType} ref={register}/>
                     <input type="hidden" name="menu_type" value={menuType} ref={register}/>
                     <input type="hidden" name="uuid" value={spirit_uuid} ref={register}/>
                     <div className="m-modalEditSpirit__form__item">
@@ -160,7 +139,7 @@ const Modal_editSpirit: React.FC<infoProps> = ({SpiritInfo, btnName, funcType, m
                             type="file"
                             accept="image/*"
                             name="img_spirit"
-                            onChange={onChangeImage}
+                            onChange={(e)=>onChangeImage(e)}
                         />
                         {image.image_size > 3000000 && <p>ファイルの上限サイズ3MBを超えています。圧縮するか、別の画像を選択してください。</p>}
                     </div>
