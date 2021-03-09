@@ -78,6 +78,7 @@ const StorePage: React.FC = () => {
                         <StoreContents
                             menuInfo = {menuInfo}
                             store_uuid = {user_uuid}
+                            update_score_function = {getScore}
                         />
                     </div> 
                     <StoreSidebar
