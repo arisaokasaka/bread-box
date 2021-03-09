@@ -41,7 +41,7 @@ const StoreEditTable_advantage: React.FC<MenuInfoProps> = ({menuInfo, update_fun
                     </div>
                 )
             }
-        })    
+        })
     }
     
     return(

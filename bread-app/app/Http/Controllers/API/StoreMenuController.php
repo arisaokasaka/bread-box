@@ -49,39 +49,6 @@ class StoreMenuController extends Controller
     }
 
     /**
-     * 【作成】こだわり(menu_type2, advantage), 思い(menu_type3, spirit)作成
-     *
-     * @param Request $request
-     * @return void
-     */
-    public function create_spirit(Request $request){
-        // テキストデータをDBに保存
-        $store_menu = new StoreMenu();
-        $store_menu->create_spirit($request);
-
-        // 画像をstorageに保存
-        $menu_type = $request->input('menu_type');
-        if($menu_type != null || undefined){
-            $store_uuid = $request->input('store_uuid');
-            $path = '/public/store/' . $store_uuid . '/menu';
-            $fileSave = $request->file('img_spirit');
-
-            if($fileSave){
-                switch($menu_type){
-                    case 2:
-                        $fileName = 'advantage.jpg';
-                        Storage::putFileAs($path, $fileSave, $fileName, 'public');
-                    break;
-                    case 3:
-                        $fileName = 'spirit.jpg';
-                        Storage::putFileAs($path, $fileSave, $fileName, 'public');
-                    break;
-                }
-            }
-        }
-    }
-
-    /**
      * 【取得】store_uuidが一致するメニューレコード取得
      * 
      * @param Request $request
@@ -159,33 +126,39 @@ class StoreMenuController extends Controller
     }
 
     /**
-     * 【更新】こだわり(advantage), 思い(spirit)のレコード更新
+     * こだわり(menu_type2, advantage), 思い(menu_type3, spirit)作成・更新
      *
      * @param Request $request
      * @return void
      */
-    public function update_spirit(Request $request){
-        // テキストデータ更新
+    public function update_spirit_advantage(Request $request) {
         $store_menu = new StoreMenu();
-        $store_menu->update_spirit($request);
+        $menu_type = $request->input('menu_type');
+        $store_uuid = $request->input('store_uuid');
+        $uuid = $request->input('uuid');
 
-        // 画像をstorageに保存
-        $image = $request->file('img_spirit');
-        if($image != null){
-            $menu_type = $request->input('menu_type');
-            $store_uuid = $request->input('store_uuid');
+        if($menu_type != null || undefined){
             $path = '/public/store/' . $store_uuid . '/menu';
             $fileSave = $request->file('img_spirit');
-            switch($menu_type){
-                case 2:
-                    $fileName = 'advantage.jpg';
-                    Storage::putFileAs($path, $fileSave, $fileName, 'public');
-                break;
-                case 3:
-                    $fileName = 'spirit.jpg';
-                    Storage::putFileAs($path, $fileSave, $fileName, 'public');
-                break;
+            
+            if($uuid) {
+                $store_menu->update_spirit($request);
+            } else {
+                $store_menu->create_spirit($request);
             }
-        }   
+
+            if($fileSave) {
+                switch($menu_type) {
+                    case 2: 
+                        $fileName = 'advantage.jpg';
+                        Storage::putFileAs($path, $fileSave, $fileName, 'public');
+                    break;
+                    case 3:
+                        $fileName = 'spirit.jpg';
+                        Storage::putFileAs($path, $fileSave, $fileName, 'public');
+                    break;
+                }
+            }
+        }
     }
 }
