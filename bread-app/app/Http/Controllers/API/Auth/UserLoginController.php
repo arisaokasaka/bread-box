@@ -29,7 +29,6 @@ class UserLoginController extends Controller
         $credentials = $request->only('email', 'password');
         
         if (Auth::attempt($credentials)) {
-            // Log::info($user)
             $user = Auth::user();
 
             $user->tokens()->where('name', 'token-name')->delete();
@@ -51,7 +50,6 @@ class UserLoginController extends Controller
 
     public function logout(Request $request) {   
         Auth::logout();
-        // Auth::user()->currentAccessToken()->delete();
     }
 
     /**

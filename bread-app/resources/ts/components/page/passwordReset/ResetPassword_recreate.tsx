@@ -21,7 +21,6 @@ const Password_recreate: React.FC = () => {
     const checkToken_enabled = () => {
         axios.post('/api/check_token', {'token' : token})
         .then(res => {
-            console.log(res)
             if(res.data.email){
                 setEmail(res.data.email);
             }else{

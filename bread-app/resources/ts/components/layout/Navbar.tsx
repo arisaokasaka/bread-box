@@ -23,8 +23,6 @@ const NavBar: React.FC = () => {
     //認証ユーザー取得
     const getUser = () => {
         axios.get("/api/user").then(res => {
-            console.log('[getUser]ログイン済み');
-            console.log(res.data);
             if(res.data.type_user === 'user'){
                 dispatch({
                     type: 'setUser',
@@ -37,7 +35,6 @@ const NavBar: React.FC = () => {
                 });
             }
         }).catch(err => {
-            console.log('[getUser]ログインしてません');
         })
     }
 

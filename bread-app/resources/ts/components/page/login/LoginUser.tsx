@@ -27,7 +27,6 @@ const LoginUser: React.FC = () =>  {
                     password
                 })
                 .then(res => {
-                    console.log(res)
                     if(res.data.user.type_user === "user") {
                         dispatch({
                             type: 'setUser',

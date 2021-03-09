@@ -15886,9 +15886,7 @@ function BtnLogout() {
         type: 'setOut'
       });
       history.push('/');
-    })["catch"](function (err) {
-      console.log(err);
-    });
+    })["catch"](function (err) {});
   };
 
   return react_1["default"].createElement("div", {
@@ -16779,9 +16777,6 @@ var NavBar = function NavBar() {
 
   var getUser = function getUser() {
     axios_1["default"].get("/api/user").then(function (res) {
-      console.log('[getUser]ログイン済み');
-      console.log(res.data);
-
       if (res.data.type_user === 'user') {
         dispatch({
           type: 'setUser',
@@ -16793,9 +16788,7 @@ var NavBar = function NavBar() {
           payload: res.data.uuid
         });
       }
-    })["catch"](function (err) {
-      console.log('[getUser]ログインしてません');
-    });
+    })["catch"](function (err) {});
   };
 
   var navPC;
@@ -20288,8 +20281,7 @@ var EditSNS = function EditSNS(_a) {
 
 
   var onSubmit = function onSubmit(data) {
-    console.log(data); //snsをまとめたobject作成し、objectを送信
-
+    //snsをまとめたobject作成し、objectを送信
     snsSubmitted['instagram'] = data['instagram'];
     snsSubmitted['twitter'] = data['twitter'];
     snsSubmitted['facebook'] = data['facebook'];
@@ -23096,8 +23088,6 @@ var LoginUser = function LoginUser() {
           email: email,
           password: password
         }).then(function (res) {
-          console.log(res);
-
           if (res.data.user.type_user === "user") {
             dispatch({
               type: 'setUser',
@@ -23307,8 +23297,6 @@ var Password_recreate = function Password_recreate() {
     axios_1["default"].post('/api/check_token', {
       'token': token
     }).then(function (res) {
-      console.log(res);
-
       if (res.data.email) {
         setEmail(res.data.email);
       } else {
