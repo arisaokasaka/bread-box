@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { UserAuthContext } from '../../../contexts/UserAuthContext';
 import BtnBack from '../../atoms/buttons/BtnBack';
@@ -10,6 +10,7 @@ const UserEdit: React.FC = () => {
     const { state } = useContext(UserAuthContext);
     const { register, handleSubmit, errors } = useForm();
     const [ info, setInfo ] = useState({});
+    const history = useHistory();
     const [ image, setImage ] = useState({
         image: null,
         image_size: 0
@@ -50,6 +51,7 @@ const UserEdit: React.FC = () => {
         axios.post("/api/update_user", data)
         .then(res => {
             alert('更新しました。')
+            history.push('/user')
         })
         .catch(err => {
             alert('更新に失敗しました。')

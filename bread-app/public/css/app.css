@@ -846,7 +846,7 @@ h2 {
 
 .a-score__container__result__stars {
   position: relative;
-  width: 110px;
+  width: 107px;
 }
 
 .a-score__container__result__stars span {
@@ -867,6 +867,7 @@ h2 {
 }
 
 .a-score__container__result > h3 {
+  margin-right: 3px;
   color: #555555;
   vertical-align: center;
 }
@@ -902,11 +903,11 @@ h2 {
 }
 
 .p-store .a-score__container__result__stars {
-  width: 114px;
+  width: 115px;
 }
 
 .p-store .a-score__container__result__stars span {
-  font-size: 25px;
+  font-size: 24.5px;
 }
 
 .p-store .a-score__container__result > h3 {
@@ -933,10 +934,10 @@ h2 {
     flex-wrap: wrap;
   }
   .m-store-sidebar .a-score__container__result__stars {
-    width: 125px;
+    width: 124px;
   }
   .m-store-sidebar .a-score__container__result__stars span {
-    font-size: 27px;
+    font-size: 26.5px;
   }
   .m-store-sidebar .a-score__container__result > h3 {
     font-size: 22px;
@@ -1995,6 +1996,7 @@ label.a-label-required__red--fitContent::after {
   border-radius: 25px;
   border: none;
   text-align: center;
+  font-size: 0.9rem;
   cursor: pointer;
 }
 
