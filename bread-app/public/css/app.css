@@ -4042,6 +4042,16 @@ label.a-label-required__red--fitContent::after {
   font-size: 0.7rem;
 }
 
+.p-register-user__container__form > p > a,
+.p-login-store__container__form > p > a,
+.p-login-user__container__form > p > a,
+.p-password-reset-store__container__form > p > a,
+.p-password-reset-user__container__form > p > a {
+  color: #c92222;
+  font-weight: 550;
+  text-decoration: underline;
+}
+
 .p-register-user__container__form > span,
 .p-login-store__container__form > span,
 .p-login-user__container__form > span,

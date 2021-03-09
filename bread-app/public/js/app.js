@@ -15886,9 +15886,7 @@ function BtnLogout() {
         type: 'setOut'
       });
       history.push('/');
-    })["catch"](function (err) {
-      console.log(err);
-    });
+    })["catch"](function (err) {});
   };
 
   return react_1["default"].createElement("div", {
@@ -16779,9 +16777,6 @@ var NavBar = function NavBar() {
 
   var getUser = function getUser() {
     axios_1["default"].get("/api/user").then(function (res) {
-      console.log('[getUser]ログイン済み');
-      console.log(res.data);
-
       if (res.data.type_user === 'user') {
         dispatch({
           type: 'setUser',
@@ -16793,9 +16788,7 @@ var NavBar = function NavBar() {
           payload: res.data.uuid
         });
       }
-    })["catch"](function (err) {
-      console.log('[getUser]ログインしてません');
-    });
+    })["catch"](function (err) {});
   };
 
   var navPC;
@@ -20288,8 +20281,7 @@ var EditSNS = function EditSNS(_a) {
 
 
   var onSubmit = function onSubmit(data) {
-    console.log(data); //snsをまとめたobject作成し、objectを送信
-
+    //snsをまとめたobject作成し、objectを送信
     snsSubmitted['instagram'] = data['instagram'];
     snsSubmitted['twitter'] = data['twitter'];
     snsSubmitted['facebook'] = data['facebook'];
@@ -22876,6 +22868,10 @@ var LoginStore = function LoginStore() {
       password = _d[0],
       setPassword = _d[1];
 
+  var _e = react_1.useState(false),
+      loginError = _e[0],
+      setLoginError = _e[1];
+
   var history = new react_router_dom_1.useHistory();
   var csrf = (_a = document.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('content'); // ログイン
 
@@ -22890,12 +22886,26 @@ var LoginStore = function LoginStore() {
         email: email,
         password: password
       }).then(function (res) {
-        dispatch({
-          type: 'setStore',
-          payload: res.data.user.uuid
-        });
-        history.push("/store_edit");
-      })["catch"](function (err) {});
+        if (res.data.user.type_user === "user") {
+          dispatch({
+            type: 'setUser',
+            payload: res.data.user.uuid
+          });
+          history.push("/user");
+        } else if (res.data.user.type_user === "store") {
+          dispatch({
+            type: 'setStore',
+            payload: res.data.user.uuid
+          });
+          history.push("/store_edit");
+        } else {
+          alert('何らかのエラーが発生したようです。');
+        }
+      })["catch"](function (err) {
+        if (err.toString().match('422')) {
+          setLoginError(true);
+        }
+      });
     })["catch"](function (err) {});
   };
 
@@ -22915,7 +22925,9 @@ var LoginStore = function LoginStore() {
           payload: res.data.user.uuid
         });
         history.push("/store_edit");
-      })["catch"](function (err) {});
+      })["catch"](function (err) {
+        alert('何らかのエラーが発生したようです。');
+      });
     })["catch"](function (err) {});
   };
 
@@ -22955,7 +22967,7 @@ var LoginStore = function LoginStore() {
       required: true,
       pattern: /[a-zA-Z0-9]{8,16}/
     })
-  }), react_1["default"].createElement("input", {
+  }), errors.password && errors.password.type === "required" && react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u306F\u5FC5\u9808\u3067\u3059\u3002"), errors.password && errors.password.type === "pattern" && react_1["default"].createElement("p", null, "8\u6587\u5B57\u4EE5\u4E0A16\u6587\u5B57\u4EE5\u4E0B\u306E\u534A\u89D2\u82F1\u6570\u5B57\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), loginError && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u3082\u3057\u304F\u306F\u30D1\u30B9\u30EF\u30FC\u30C9\u304C\u8AA4\u3063\u3066\u3044\u307E\u3059\u3002"), react_1["default"].createElement("input", {
     type: "submit",
     value: "\u30ED\u30B0\u30A4\u30F3\u3059\u308B"
   })), react_1["default"].createElement("div", {
@@ -23039,43 +23051,65 @@ var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContex
 var LoginUser = function LoginUser() {
   var _a;
 
-  var dispatch = react_1.useContext(UserAuthContext_1.UserAuthContext).dispatch;
-
-  var _b = react_1.useState(""),
-      email = _b[0],
-      setEmail = _b[1];
+  var _b = react_1.useContext(UserAuthContext_1.UserAuthContext),
+      state = _b.state,
+      dispatch = _b.dispatch;
 
   var _c = react_1.useState(""),
-      password = _c[0],
-      setPassword = _c[1];
+      email = _c[0],
+      setEmail = _c[1];
 
-  var _d = react_hook_form_1.useForm(),
-      register = _d.register,
-      handleSubmit = _d.handleSubmit,
-      errors = _d.errors;
+  var _d = react_1.useState(""),
+      password = _d[0],
+      setPassword = _d[1];
+
+  var _e = react_1.useState(false),
+      loginError = _e[0],
+      setLoginError = _e[1];
+
+  var _f = react_hook_form_1.useForm(),
+      register = _f.register,
+      handleSubmit = _f.handleSubmit,
+      errors = _f.errors;
 
   var history = new react_router_dom_1.useHistory(); // ログイン機能
 
   var login = function login() {
     var _a;
 
-    axios_1["default"].defaults.withCredentials = true;
-    axios_1["default"].defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-    axios_1["default"].defaults.headers.common['X-CSRF-TOKEN'] = (_a = document.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('content');
-    axios_1["default"].get("/sanctum/csrf-cookie").then(function (response) {
-      axios_1["default"].post("/api/login", {
-        email: email,
-        password: password
-      }).then(function (res) {
-        dispatch({
-          type: 'setUser',
-          payload: res.data.user.uuid
+    if (state.uuid) {
+      alert('既にログインされています。ログアウトしてから、再度ログインしてください。');
+    } else {
+      axios_1["default"].defaults.withCredentials = true;
+      axios_1["default"].defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+      axios_1["default"].defaults.headers.common['X-CSRF-TOKEN'] = (_a = document.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('content');
+      axios_1["default"].get("/sanctum/csrf-cookie").then(function (response) {
+        axios_1["default"].post("/api/login", {
+          email: email,
+          password: password
+        }).then(function (res) {
+          if (res.data.user.type_user === "user") {
+            dispatch({
+              type: 'setUser',
+              payload: res.data.user.uuid
+            });
+            history.push("/user");
+          } else if (res.data.user.type_user === "store") {
+            dispatch({
+              type: 'setStore',
+              payload: res.data.user.uuid
+            });
+            history.push("/store_edit");
+          } else {
+            alert('何らかのエラーが発生したようです。');
+          }
+        })["catch"](function (err) {
+          if (err.toString().match('422')) {
+            setLoginError(true);
+          }
         });
-        history.push("/user");
-      })["catch"](function (err) {
-        alert('ログイン出来ません。');
-      });
-    })["catch"](function (err) {});
+      })["catch"](function (err) {});
+    }
   };
 
   var guest_login = function guest_login() {
@@ -23095,7 +23129,7 @@ var LoginUser = function LoginUser() {
         });
         history.push("/user");
       })["catch"](function (err) {
-        alert('ログイン出来ません。');
+        alert('申し訳ありません。何らかの不具合が発生したようです。');
       });
     })["catch"](function (err) {});
   };
@@ -23137,7 +23171,7 @@ var LoginUser = function LoginUser() {
       required: true,
       pattern: /[a-zA-Z0-9]{8,16}/
     })
-  }), react_1["default"].createElement("input", {
+  }), errors.password && react_1["default"].createElement("p", null, "\u30D1\u30B9\u30EF\u30FC\u30C9\u306F\u5FC5\u9808\u3067\u3059\u3002"), loginError && react_1["default"].createElement("p", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u3082\u3057\u304F\u306F\u30D1\u30B9\u30EF\u30FC\u30C9\u304C\u8AA4\u3063\u3066\u3044\u307E\u3059\u3002"), react_1["default"].createElement("input", {
     className: "round",
     type: "submit",
     value: "\u30ED\u30B0\u30A4\u30F3\u3059\u308B"
@@ -23263,8 +23297,6 @@ var Password_recreate = function Password_recreate() {
     axios_1["default"].post('/api/check_token', {
       'token': token
     }).then(function (res) {
-      console.log(res);
-
       if (res.data.email) {
         setEmail(res.data.email);
       } else {

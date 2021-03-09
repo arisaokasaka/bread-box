@@ -34,7 +34,6 @@ const EditSNS: React.FC<Props> = ({update_function, storeInfo}) => {
 
     // SNS情報の送信
     const onSubmit = (data) => {        
-        console.log(data)
         //snsをまとめたobject作成し、objectを送信
         snsSubmitted['instagram'] = data['instagram'];
         snsSubmitted['twitter'] = data['twitter'];
