@@ -15242,25 +15242,33 @@ var LinkSNS = function LinkSNS(_a) {
   }, snsInfo.instagram && react_1["default"].createElement("li", {
     className: "m-sns-btns__list__btn instagram"
   }, react_1["default"].createElement("a", {
-    href: snsInfo.instagram
+    href: snsInfo.instagram,
+    target: "_blank",
+    rel: "noopener noreferrer"
   }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
     icon: free_brands_svg_icons_1.faInstagram
   }))), snsInfo.facebook && react_1["default"].createElement("li", {
     className: "m-sns-btns__list__btn facebook"
   }, react_1["default"].createElement("a", {
-    href: snsInfo.facebook
+    href: snsInfo.facebook,
+    target: "_blank",
+    rel: "noopener noreferrer"
   }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
     icon: free_brands_svg_icons_1.faFacebookF
   }))), snsInfo.twitter && react_1["default"].createElement("li", {
     className: "m-sns-btns__list__btn twitter"
   }, react_1["default"].createElement("a", {
-    href: snsInfo.twitter
+    href: snsInfo.twitter,
+    target: "_blank",
+    rel: "noopener noreferrer"
   }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
     icon: free_brands_svg_icons_1.faTwitter
   }))), snsInfo.other && react_1["default"].createElement("li", {
     className: "m-sns-btns__list__btn other"
   }, react_1["default"].createElement("a", {
-    href: snsInfo.other
+    href: snsInfo.other,
+    target: "_blank",
+    rel: "noopener noreferrer"
   }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
     icon: free_solid_svg_icons_1.faLink
   })))));
@@ -16117,7 +16125,7 @@ function BtnSearch_icon() {
   return react_1["default"].createElement("div", {
     className: "a-btn-search_icon"
   }, react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/search_mobile"
+    to: "/search"
   }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
     icon: free_solid_svg_icons_1.faSearch
   }), react_1["default"].createElement("span", null, "\u691C\u7D22")));
@@ -16507,18 +16515,12 @@ var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg
 
 var Btn_homepage = function Btn_homepage(_a) {
   var url = _a.url;
-
-  var handleClick = function handleClick() {
-    if (window.confirm('外部ページに遷移します。よろしいですか？')) {
-      location.href = url;
-    }
-  };
-
   return react_1["default"].createElement("div", {
     className: "a-btn-homepage"
   }, url && react_1["default"].createElement("a", {
-    key: url,
-    onClick: handleClick
+    href: url,
+    target: "_blank",
+    rel: "noopener noreferrer"
   }, react_1["default"].createElement(react_fontawesome_1.FontAwesomeIcon, {
     icon: free_solid_svg_icons_1.faPaperPlane
   }), "\xA0\u30DB\u30FC\u30E0\u30DA\u30FC\u30B8\u3092\u898B\u308B"));
@@ -17681,7 +17683,8 @@ var free_solid_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-solid-svg
 
 var ModalCreateReview = function ModalCreateReview(_a) {
   var store_uuid = _a.store_uuid,
-      update_function = _a.update_function;
+      update_function = _a.update_function,
+      update_score = _a.update_score;
   var state = react_1.useContext(UserAuthContext_1.UserAuthContext).state;
   var history = react_router_dom_1.useHistory();
 
@@ -17710,6 +17713,7 @@ var ModalCreateReview = function ModalCreateReview(_a) {
       setModal(false);
       alert('口コミを投稿しました。');
       update_function();
+      update_score();
     })["catch"](function (err) {
       alert('口コミの投稿に失敗しました。');
     });
@@ -18265,41 +18269,20 @@ var Modal_editSpirit = function Modal_editSpirit(_a) {
         formData.append(el, data[el]);
       }
 
-      switch (funcType) {
-        case 'create':
-          createSpirit(formData, image.image);
-          break;
-
-        case 'edit':
-          updateSpirit(formData, image.image);
-          break;
-      }
+      updates(formData, image.image);
     } else {
       alert('ファイルの上限サイズ3MBを超えています。圧縮するか、別の画像を選択してください。');
     }
-  }; // 新規作成機能
+  };
 
-
-  var createSpirit = function createSpirit(data, file) {
+  var updates = function updates(data, file) {
     data.append('img_spirit', file);
-    axios_1["default"].post("/api/create_spirit", data).then(function (res) {
+    axios_1["default"].post("api/update_spirit_advantage", data).then(function (res) {
       update_function();
       alert('登録しました。');
       setModal(false);
     })["catch"](function (err) {
       return alert('登録に失敗しました。');
-    });
-  }; // 更新機能
-
-
-  var updateSpirit = function updateSpirit(data, file) {
-    data.append('img_spirit', file);
-    axios_1["default"].post("/api/update_spirit", data).then(function (res) {
-      update_function();
-      alert('保存しました。');
-      setModal(false);
-    })["catch"](function (err) {
-      return alert('保存に失敗しました。');
     });
   };
 
@@ -18332,11 +18315,6 @@ var Modal_editSpirit = function Modal_editSpirit(_a) {
     onSubmit: handleSubmit(onSubmit)
   }, react_1["default"].createElement("input", {
     type: "hidden",
-    name: "funcType",
-    value: funcType,
-    ref: register
-  }), react_1["default"].createElement("input", {
-    type: "hidden",
     name: "menu_type",
     value: menuType,
     ref: register
@@ -18353,7 +18331,9 @@ var Modal_editSpirit = function Modal_editSpirit(_a) {
     type: "file",
     accept: "image/*",
     name: "img_spirit",
-    onChange: onChangeImage
+    onChange: function onChange(e) {
+      return onChangeImage(e);
+    }
   }), image.image_size > 3000000 && react_1["default"].createElement("p", null, "\u30D5\u30A1\u30A4\u30EB\u306E\u4E0A\u9650\u30B5\u30A4\u30BA3MB\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002\u5727\u7E2E\u3059\u308B\u304B\u3001\u5225\u306E\u753B\u50CF\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002")), react_1["default"].createElement("div", {
     className: "m-modalEditSpirit__form__item"
   }, react_1["default"].createElement("label", {
@@ -19114,7 +19094,7 @@ var Search_sidebar = function Search_sidebar(_a) {
   }), react_1["default"].createElement("input", {
     onClick: reset,
     className: "m-search-sidebar__btn--reset",
-    value: "\u691C\u7D22\u5185\u5BB9\u3092\u30EA\u30BB\u30C3\u30C8",
+    value: "\u9805\u76EE\u3092\u30EA\u30BB\u30C3\u30C8",
     readOnly: true
   }));
 };
@@ -21027,7 +21007,8 @@ var StoreReview_1 = __importDefault(__webpack_require__(/*! ./StoreReview */ "./
 
 var StoreContents = function StoreContents(_a) {
   var menuInfo = _a.menuInfo,
-      store_uuid = _a.store_uuid;
+      store_uuid = _a.store_uuid,
+      update_score_function = _a.update_score_function;
 
   var _b = react_1.useState('menu'),
       table = _b[0],
@@ -21093,7 +21074,8 @@ var StoreContents = function StoreContents(_a) {
 
       case 'review':
         return react_1["default"].createElement(StoreReview_1["default"], {
-          store_uuid: store_uuid
+          store_uuid: store_uuid,
+          update_score: update_score_function
         });
         break;
     }
@@ -21244,7 +21226,8 @@ var UserAuthContext_1 = __webpack_require__(/*! ../../../contexts/UserAuthContex
 var react_paginate_1 = __importDefault(__webpack_require__(/*! react-paginate */ "./node_modules/react-paginate/dist/react-paginate.js"));
 
 var StoreReview = function StoreReview(_a) {
-  var store_uuid = _a.store_uuid;
+  var store_uuid = _a.store_uuid,
+      update_score = _a.update_score;
 
   var _b = react_1.useState([]),
       review = _b[0],
@@ -21407,7 +21390,8 @@ var StoreReview = function StoreReview(_a) {
     value: "date_from_new"
   }, "\u65B0\u3057\u3044\u9806")))), react_1["default"].createElement(Modal_create_review_1["default"], {
     store_uuid: store_uuid,
-    update_function: getReviewInfo
+    update_function: getReviewInfo,
+    update_score: update_score
   })), message_no_review, review_list.slice(offset, offset + perPage).map(function (el, index) {
     return react_1["default"].createElement("div", {
       className: "m-review__item",
@@ -24412,7 +24396,8 @@ var StorePage = function StorePage() {
     scoreInfo: scoreInfo
   }), react_1["default"].createElement(StoreContents_1["default"], {
     menuInfo: menuInfo,
-    store_uuid: user_uuid
+    store_uuid: user_uuid,
+    update_score_function: getScore
   })), react_1["default"].createElement(StoreSidebar_1["default"], {
     storeInfo: storeInfo,
     scoreInfo: scoreInfo
@@ -24583,6 +24568,8 @@ var UserEdit = function UserEdit() {
       info = _b[0],
       setInfo = _b[1];
 
+  var history = react_router_dom_1.useHistory();
+
   var _c = react_1.useState({
     image: null,
     image_size: 0
@@ -24624,6 +24611,7 @@ var UserEdit = function UserEdit() {
     data.append('image', file);
     axios_1["default"].post("/api/update_user", data).then(function (res) {
       alert('更新しました。');
+      history.push('/user');
     })["catch"](function (err) {
       alert('更新に失敗しました。');
     });

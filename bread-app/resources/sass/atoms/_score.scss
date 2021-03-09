@@ -9,7 +9,7 @@
 
             &__stars {
                 position: relative;
-                width: 110px;
+                width: 107px;
 
                 & span {
                     font-size: 23px;
@@ -30,6 +30,7 @@
             }
 
             & > h3 {
+                margin-right: 3px;
                 color: $black;
                 vertical-align: center;
             }
@@ -67,10 +68,10 @@
                 align-items: center;
 
                 &__stars {
-                    width: 114px;
+                    width: 115px;
 
                     & span {
-                        font-size: 25px;
+                        font-size: 24.5px;
                     }
                 }
                 & > h3 {
@@ -102,10 +103,10 @@
 
                 &__result {
                     &__stars {
-                        width: 125px;
+                        width: 124px;
 
                         & span {
-                            font-size: 27px;
+                            font-size: 26.5px;
                         }
                     }
 

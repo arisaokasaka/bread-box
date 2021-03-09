@@ -9,9 +9,10 @@ import ReactPaginate from 'react-paginate';
 
 type ReviewProps = ({
     store_uuid: string
+    update_score: Function
 })
 
-const StoreReview: React.FC<ReviewProps> = ({store_uuid}) => {
+const StoreReview: React.FC<ReviewProps> = ({store_uuid, update_score}) => {
     const [ review, setReview ] = useState([]);
     const [ offset, setOffset ] = useState(0);
     const [ sort, setSort ] = useState('default');
@@ -143,6 +144,7 @@ const StoreReview: React.FC<ReviewProps> = ({store_uuid}) => {
                 <ModalCreateReview
                     store_uuid={store_uuid}
                     update_function={getReviewInfo}
+                    update_score={update_score}
                 />
             </div>
             {message_no_review}

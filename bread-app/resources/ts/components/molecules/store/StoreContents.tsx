@@ -6,9 +6,10 @@ import StoreReview from './StoreReview';
 type InfoProps = ({
     menuInfo : Array<any>
     store_uuid: string
+    update_score_function: Function
 })
 
-const StoreContents: React.FC<InfoProps> = ({menuInfo, store_uuid}) => {
+const StoreContents: React.FC<InfoProps> = ({menuInfo, store_uuid, update_score_function}) => {
     const [table, setTable] = useState('menu');
     
     const SectionMenu = {
@@ -61,7 +62,7 @@ const StoreContents: React.FC<InfoProps> = ({menuInfo, store_uuid}) => {
             return <StoreSpirit Spirit = {menuInfo}/>
             break;
         case 'review':
-            return <StoreReview store_uuid={store_uuid}/>
+            return <StoreReview store_uuid={store_uuid} update_score={update_score_function}/>
             break;
         }
     }

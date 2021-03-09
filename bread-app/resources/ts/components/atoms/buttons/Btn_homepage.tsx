@@ -7,16 +7,10 @@ type HomepageProps = ({
 })
 
 const Btn_homepage: React.FC<HomepageProps> = ({url}) => {
-    const handleClick = () => {
-        if (window.confirm('外部ページに遷移します。よろしいですか？')) {
-            location.href = url;
-        }
-    }
-
     return(
         <div className = "a-btn-homepage">
             {url && 
-                <a key={url} onClick={handleClick}>
+                <a href={url} target="_blank" rel="noopener noreferrer">
                     <FontAwesomeIcon icon={faPaperPlane}/>
                     &nbsp;ホームページを見る
                 </a>
