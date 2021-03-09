@@ -142,7 +142,7 @@ const Search_sidebar: React.FC<Props> = ({click_function, mobileMenuClose_functi
                 </ul>
             </div>
             <input onClick={search_url} className="m-search-sidebar__btn--search" value="絞り込む" readOnly/>
-            <input onClick={reset} className="m-search-sidebar__btn--reset" value="検索内容をリセット" readOnly/>
+            <input onClick={reset} className="m-search-sidebar__btn--reset" value="項目をリセット" readOnly/>
         </div>
     )
 }
