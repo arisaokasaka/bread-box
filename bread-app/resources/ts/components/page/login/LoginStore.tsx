@@ -101,7 +101,7 @@ const LoginStore: React.FC = () => {
                 <div className = "p-login-store__container__links">
                     <span>新規登録は<Link to="/register_store">こちら</Link></span>
                     <span>パスワードを忘れた方は<Link to="/password_store">こちら</Link></span>
-                    <span>店舗機能を試してみますか？&nbsp;<a onClick={guest_login}>ゲストログイン</a></span>
+                    <span>まずは試してみますか？<a onClick={guest_login}>ゲストログイン</a></span>
                 </div>
             </div>
         </div>

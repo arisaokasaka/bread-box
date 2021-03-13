@@ -3,13 +3,9 @@
         color: $darkGray;
         border-color: $darkGray;
         border-radius: 5px;
-        font-size: 0.7rem;
+        font-size: 0.8rem;
         padding: 0 5px;
         outline: none;
         cursor: pointer;
-
-        @include bp-480up {
-            font-size: 0.8rem;
-        }
     }
 }

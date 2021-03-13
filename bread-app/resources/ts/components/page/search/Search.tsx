@@ -22,7 +22,8 @@ const Search: React.FC = () => {
         axios.get('/api/search_store'+ history['location']['search'])
         .then(res => {
             setStores(res.data)
-        })    
+            return setSort('default')
+        })
     }
 
     // 並び替え

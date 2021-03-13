@@ -35,7 +35,7 @@ const EditBusinessMemo: React.FC<Props> = ({update_function, storeInfo}) => {
                     <div className="m-storeForm__item">
                         <label>お知らせ内容</label>
                         <div className="m-storeForm__item__input">
-                            <span>【記載例】<br/>定休日：第3水曜日<br/>営業時間：月～水 9時～19時 / 木～土 8時～13時</span>
+                            <span>定休日や営業時間備考、その他お知らせを記載してください。</span>
                             <textarea
                                 name="business_memo"
                                 defaultValue={storeInfo.business_memo}

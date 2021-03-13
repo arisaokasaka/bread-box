@@ -52,13 +52,17 @@
 
                 & label,
                 & span {
-                    height: 2.3rem;
+                    height: 1.8rem;
+
+                    @include bp-960up {
+                        height: 2.3rem;
+                    }
                 }
 
                 & > label {
                     @include bg_GradationBrown;
                     display: inline-block;
-                    line-height: 2.3rem;
+                    line-height: 1.8rem;
                     color: $white;
                     font-weight: 500;
                     font-size: 0.8rem;
@@ -67,6 +71,10 @@
 
                     & > svg {
                         margin-right: 5px;
+                    }
+
+                    @include bp-960up {
+                        line-height: 2.3rem;
                     }
                 }
 
@@ -125,6 +133,11 @@
 
         & > ul {
             & > li {
+                & label,
+                & span {
+                    height: 2.3rem;
+                }
+
                 & > span {
                     border-right: 0.1px solid $lightGray;
                     border-left: 0.1px solid $lightGray;
@@ -157,8 +170,8 @@
             & > ul {
                 & > li {
                     &:first-child {
-                        height: 2.3rem;
-                        line-height: 2.3rem;
+                        height: 1.8rem;
+                        line-height: 1.8rem;
                         font-weight: 500;
                         font-size: 0.8rem;
                         padding-left: 8px;
@@ -171,6 +184,11 @@
 
                     &:last-child {
                         padding-left: $mp-xxs;
+                    }
+
+                    & label,
+                    & span {
+                        height: 1.8rem;
                     }
 
                     & > span {

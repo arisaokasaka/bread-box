@@ -47,7 +47,7 @@ const ModalCreateReview: React.FC<StoreInfoProps> = ({store_uuid, update_functio
     if(state.uuid && state.auth==="user"){
         btnReview = (
             <button onClick={()=>setModal(true)} className = "a-btn-modal-review">
-                <FontAwesomeIcon icon={faPen}/>&nbsp;口コミを投稿
+                <FontAwesomeIcon icon={faPen}/>口コミを投稿
             </button>
         )
     }else if(state.uuid && state.auth==="store"){
@@ -55,7 +55,7 @@ const ModalCreateReview: React.FC<StoreInfoProps> = ({store_uuid, update_functio
     }else{
         btnReview = (
             <button onClick={()=>history.push("/login_user")} className = "a-btn-modal-review">
-                <FontAwesomeIcon icon={faPen}/>&nbsp;口コミを投稿
+                <FontAwesomeIcon icon={faPen}/>口コミを投稿
             </button>
         )
     }

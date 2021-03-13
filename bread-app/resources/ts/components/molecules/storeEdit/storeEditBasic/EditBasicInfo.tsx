@@ -19,7 +19,6 @@ const EditBasicInfo: React.FC<Props> = ({update_function, storeInfo}) => {
         data['user_uuid'] = state.uuid;
         updateBasicInfo_storesTable(data);
         updateBasicInfo_usersTable(data);
-        update_function();
         alert('保存しました。');
     }
 
@@ -27,6 +26,7 @@ const EditBasicInfo: React.FC<Props> = ({update_function, storeInfo}) => {
     const updateBasicInfo_storesTable = (data) => {
         axios.post("/api/update_basicInfo_storesTable", data)
         .then(res => {
+            update_function();
         })
         .catch(err => {
         });
@@ -36,6 +36,7 @@ const EditBasicInfo: React.FC<Props> = ({update_function, storeInfo}) => {
     const updateBasicInfo_usersTable = (data) => {
         axios.post("/api/update_basicInfo_usersTable", data)
         .then(res => {
+            update_function();
         })
         .catch(err => {
         });

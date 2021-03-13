@@ -27,13 +27,13 @@
                 & > img {
                     object-fit: cover;
                     width: 100%;
-                    max-width: 255px;
                     height: 120px;
                     margin: $mp-xxs auto;
 
                     @include bp-600up {
                         width: 100%;
                         height: auto;
+                        max-height: 150px;
                         margin: 0;
                     }
                 }
