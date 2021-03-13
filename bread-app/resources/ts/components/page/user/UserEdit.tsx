@@ -34,14 +34,18 @@ const UserEdit: React.FC = () => {
 
     // 送信機能
     const onSubmit = (data) => {
-        if(image.image_size <= 3000000){
-            let formData = new FormData();
-            for( let el in data){
-                formData.append(el, data[el])
+        if(state.uuid==="f71cc1ce-ad29-4c1a-968c-be4f677be4c1") {
+            alert('申し訳ありません。ゲストユーザーは編集できません。');
+        } else {
+            if(image.image_size <= 3000000){
+                let formData = new FormData();
+                for( let el in data){
+                    formData.append(el, data[el])
+                }
+                update_user(formData, image.image);
+            }else{
+                alert('ファイルの上限サイズ3MBを超えています。圧縮するか、別の画像を選択してください。');
             }
-            update_user(formData, image.image);
-        }else{
-            alert('ファイルの上限サイズ3MBを超えています。圧縮するか、別の画像を選択してください。');
         }
     }
 
