@@ -61,7 +61,7 @@ const LoginUser: React.FC = () =>  {
 
         axios.get("/sanctum/csrf-cookie").then(response => {
             axios.post("/api/login", {
-                email: 'guest@user',
+                email: 'guest@user.com',
                 password: 'guestuser'
             })
             .then(res => {
