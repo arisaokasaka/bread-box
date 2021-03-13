@@ -3,10 +3,14 @@
 
     &__container {
         width: 80%;
-        min-width: 230px;
+        min-width: 260px;
         max-width: 450px;
         color: $font-color-brown;
         margin: 0 auto;
+
+        @include bp-600up {
+            min-width: 230px;
+        }
 
         &__form {
             display: grid;
