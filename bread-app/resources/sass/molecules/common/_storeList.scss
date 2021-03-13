@@ -95,7 +95,12 @@
             &__access {
                 font-size: 0.7rem;
                 color: $black;
+                margin-bottom: 3px;
                 cursor: pointer;
+
+                @include bp-960up {
+                    margin-bottom: 0;
+                }
             }
 
             &__explanation {
