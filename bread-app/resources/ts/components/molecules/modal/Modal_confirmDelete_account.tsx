@@ -24,26 +24,30 @@ const Modal_confirmDelete_account: React.FC = () =>{
     
     //削除機能（削除するメニューのuuid送信）
     const delete_account = () => {
-        if(state.auth === "user") {
-            // ユーザーの場合
-            axios.post("/api/delete_user_account", {uuid: state.uuid})
-            .then(res => {
-                delete_success();
-            })
-            .catch(err => {
-                alert(message_fail);
-            });
-        } else if (state.auth === "store") {
-            // 店舗の場合
-            axios.post("/api/delete_store_account", {uuid: state.uuid})
-            .then(res => {
-                delete_success();
-            })
-            .catch(err => {
-                alert(message_fail);
-            });
+        if(state.uuid==="f71cc1ce-ad29-4c1a-968c-be4f677be4c1" || state.uuid==="a1647936-a8c5-43df-92d8-5f91168c5e2a") {
+            alert('申し訳ありません。ゲストアカウントは削除することはできません。')
         } else {
-            alert(message_fail);
+            if(state.auth === "user") {
+                // ユーザーの場合
+                axios.post("/api/delete_user_account", {uuid: state.uuid})
+                .then(res => {
+                    delete_success();
+                })
+                .catch(err => {
+                    alert(message_fail);
+                });
+            } else if (state.auth === "store") {
+                // 店舗の場合
+                axios.post("/api/delete_store_account", {uuid: state.uuid})
+                .then(res => {
+                    delete_success();
+                })
+                .catch(err => {
+                    alert(message_fail);
+                });
+            } else {
+                alert(message_fail);
+            }
         }
     }
 
