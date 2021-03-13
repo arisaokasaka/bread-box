@@ -116,7 +116,7 @@ export default function Register_store() {
                 <p>店舗情報が最新のものであることをご確認のうえ、ご入力ください。</p>
                 <div className = "p-register-store__container__links">
                     <span>既に登録済ですか？<Link to="/login_store">店舗ログイン</Link></span>
-                    <span>店舗機能を試してみますか？&nbsp;<a onClick={guest_login}>ゲストログイン</a></span>
+                    <span>まずは試してみますか？<a onClick={guest_login}>ゲストログイン</a></span>
                 </div>
                 <form className="p-register-store__container__form m-storeForm" name="form_storeRegister" onSubmit={handleSubmit(onSubmit)}>
                     <input type='hidden' name='_token' value={csrf} />

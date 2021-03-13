@@ -90,8 +90,8 @@ const Register_user: React.FC = () => {
                 </form>
 
                 <div className = "p-register-user__container__links">
-                    <span>既にご登録済ですか？&nbsp;<Link to="/login_user">ログイン</Link></span>
-                    <span>ユーザー機能を試してみますか？&nbsp;<a onClick={guest_login}>ゲストログイン</a></span>
+                    <span>既にご登録済ですか？<Link to="/login_user">ログイン</Link></span>
+                    <span>まずは試してみますか？<a onClick={guest_login}>ゲストログイン</a></span>
                 </div>
             </div>
         </div>

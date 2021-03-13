@@ -101,9 +101,9 @@ const LoginUser: React.FC = () =>  {
                 </form>
 
                 <div className = "p-login-user__container__links">
-                    <span>新規登録は&nbsp;<Link to="/register_user">こちら</Link></span>
-                    <span>パスワードを忘れた方は&nbsp;<Link to="/password_reset_request">こちら</Link></span>
-                    <span>ユーザー機能を試してみますか？&nbsp;<a onClick={guest_login}>ゲストログイン</a></span>
+                    <span>新規登録は<Link to="/register_user">こちら</Link></span>
+                    <span>パスワードを忘れた方は<Link to="/password_reset_request">こちら</Link></span>
+                    <span>まずは試してみますか？<a onClick={guest_login}>ゲストログイン</a></span>
                 </div>
             </div>
         </div>
