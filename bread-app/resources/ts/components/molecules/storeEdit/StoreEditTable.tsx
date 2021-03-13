@@ -123,7 +123,7 @@ const StoreEditTable: React.FC = () => {
                             {StoreEditNav_spirit.map((arr)=>Menu(arr))}
                         </li>
                         <li className = "m-store-edit-table__nav--mobile__content__others">
-                            <Link to="/password_store">パスワードの再設定</Link>
+                            <Link to="/password_reset_request">パスワードの再設定</Link>
                             <BtnLogout/>
                             <Modal_confirmDelete_account/>
                         </li>
@@ -145,7 +145,7 @@ const StoreEditTable: React.FC = () => {
                         {StoreEditNav_spirit.map((arr)=>Menu(arr))}
                     </li>
                     <li className = "m-store-edit-table__nav--pc__others">
-                        <Link to="/password_store">パスワードの再設定</Link>
+                        <Link to="/password_reset_request">パスワードの再設定</Link>
                         <BtnLogout/>
                         <Modal_confirmDelete_account/>
                     </li>

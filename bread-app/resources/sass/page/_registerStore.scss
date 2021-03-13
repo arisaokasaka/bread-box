@@ -1,7 +1,11 @@
 .p-register-store {
     margin-top: $header-height;
     padding-top: $mp-sm;
-    padding-bottom: $mp-lg;
+    padding-bottom: $mp-sm;
+
+    @include bp-960up {
+        padding-bottom: $mp-lg;
+    }
 
     &__container {
         position: relative;
