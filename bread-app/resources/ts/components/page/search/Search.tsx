@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faChevronUp, faCrown, faStore, faCommentDots } from "@fortawesome/free-solid-svg-icons";
@@ -9,10 +9,8 @@ import StoreList from '../../molecules/common/StoreList';
 import BtnBack from '../../atoms/buttons/BtnBack';
 
 const Search: React.FC = () => {
-    const location = useLocation();
     const history = useHistory();
     const [ mobileMenu, setMobileMenu ] = useState(false);
-    const keyword = location.search;
     const [ stores, setStores ] = useState([]);
     const [ sort, setSort ] = useState('default')
 

@@ -1,4 +1,3 @@
-import { type } from 'os';
 import React from 'react'
 
 type ScoreInfo = ({
@@ -11,10 +10,7 @@ const ScoreUser: React.FC<ScoreInfo> = ({score}) => {
             <div className ="a-score__container">
                 <div className ="a-score__container__result">
                     <div className="a-score__container__result__stars">
-                        <div className="a-score__container__result__stars__content" style={{width: score*20 + "%"}}>
-                            <span>★★★★★</span>
-                        </div>
-                        <span className="a-score__container__result__stars__frame">☆☆☆☆☆</span>
+                        <div className="a-score__container__result__stars__content" style={{width: score*20 + "%"}}></div>
                     </div>
                     <h3>{score}</h3>
                 </div>

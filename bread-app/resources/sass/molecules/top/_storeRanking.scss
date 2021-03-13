@@ -17,11 +17,14 @@
         &__item {
             cursor: pointer;
             color: $black;
-            font-size: 1rem;
-            font-weight: 550;
+            font-size: 0.9rem;
 
             &:hover {
                 color: $brown;
+            }
+
+            @include bp-600up {
+                font-weight: 550;
             }
 
             & > img {
