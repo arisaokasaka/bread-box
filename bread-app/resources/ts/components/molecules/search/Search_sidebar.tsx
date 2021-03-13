@@ -13,6 +13,8 @@ type Props = ({
 
 const Search_sidebar: React.FC<Props> = ({click_function, mobileMenuClose_function}) => {
     let default_keyword: string = '';
+    let default_district: string = '';
+    let default_bread_kind: string = '';
     let search_params: string = decodeURI(useLocation().search);
     const history = useHistory();
     const [ keyword, setKeyword ] = useState('');
@@ -24,6 +26,8 @@ const Search_sidebar: React.FC<Props> = ({click_function, mobileMenuClose_functi
 
     useEffect(()=>{
         getKeywordFromURL();
+        setDistrictFromURL();
+        setBreadKindFromURL();
     },[])
 
     // キーワード検索された場合、検索バーにそのキーワードを配置
@@ -42,6 +46,34 @@ const Search_sidebar: React.FC<Props> = ({click_function, mobileMenuClose_functi
         }
     }
 
+    // URLから分かるエリアをstateに設定
+    const setDistrictFromURL = () => {
+        if(search_params.match("&di=")){
+            let index_district_end: number;
+            let index_district = search_params.indexOf("&di=") + 4;
+            if(search_params.indexOf("&", index_district) !== -1) {
+                index_district_end = search_params.indexOf("&", index_district);
+                default_district = search_params.substr(index_district, index_district_end - index_district);
+            } else {
+                index_district_end = search_params.length - index_district;
+                default_district = search_params.substr(index_district, index_district_end + index_district);
+            }
+            setCondition({...condition, district: default_district})
+        }
+    }
+
+    // URLから分かるパンの種類をstateに設定
+    const setBreadKindFromURL = () => {
+        if(search_params.match("&bk=")){
+            let index_bread_kind_end: number;
+            let index_bread_kind = search_params.indexOf("&bk=") + 4;
+            index_bread_kind_end = search_params.length - index_bread_kind;
+            default_bread_kind = search_params.substr(index_bread_kind, index_bread_kind_end + index_bread_kind);
+            setCondition({...condition, bread_kind: default_bread_kind})
+        }
+    }
+
+    // 検索機能
     const search_url = () => {
         let url = '/search?id=' + state.uuid + (keyword ? "&key=" + keyword : '') + (condition.district ? "&di=" + condition.district : '') + (condition.bread_kind ? "&bk=" + condition.bread_kind : '');
         history.push(url);
@@ -92,6 +124,13 @@ const Search_sidebar: React.FC<Props> = ({click_function, mobileMenuClose_functi
             checkbox.checked = false;
         })
 
+        setKeyword('');
+        setCondition({
+            ...condition,
+            district: '',
+            bread_kind: '',
+        })
+        
         history.push("/search?id=" + state.uuid);
         click_function();
     }

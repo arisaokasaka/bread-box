@@ -16,8 +16,15 @@ const EditBasicInfo: React.FC<Props> = ({update_function, storeInfo}) => {
 
     //送信時の動作
     const onSubmit = (data) => {
-        if(state.uuid==="a1647936-a8c5-43df-92d8-5f91168c5e2a" && data.email!=="guest@store.com"){
-            alert('ゲストストアは、メールアドレスを変更することが出来ません。')
+        if(state.uuid==="a1647936-a8c5-43df-92d8-5f91168c5e2a"){
+            if(data.email==="guest@store.com" && data.name==="ゲストストア"){
+                data['user_uuid'] = state.uuid;
+                updateBasicInfo_storesTable(data);
+                updateBasicInfo_usersTable(data);
+                alert('保存しました。');
+            } else {
+                alert('ゲストストアは、店舗名とメールアドレスを変更することが出来ません。')
+            }
         } else {
             data['user_uuid'] = state.uuid;
             updateBasicInfo_storesTable(data);

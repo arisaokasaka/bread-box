@@ -53,30 +53,32 @@
                 transform: translate(-50%, -50%);
             }
 
-            &:hover {
-                &::after {
-                    content: "お気に入りに登録する";
-                    position: absolute;
-                    top: 40px;
-                    color: $white;
-                    display: block;
-                    width: 5rem;
-                    padding: 2px 2px;
-                    font-size: 0.5rem;
-                    background-color: $brown;
-                    border-radius: 2px;
-                }
+            @include bp-960up {
+                &:hover {
+                    &::after {
+                        content: "お気に入りに登録する";
+                        position: absolute;
+                        top: 40px;
+                        color: $white;
+                        display: block;
+                        width: 5rem;
+                        padding: 2px 2px;
+                        font-size: 0.5rem;
+                        background-color: $brown;
+                        border-radius: 2px;
+                    }
 
-                &::before {
-                    content: "";
-                    position: absolute;
-                    top: 30px;
-                    right: 10px;
-                    color: $brown;
-                    border: 6px solid transparent;
-                    border-top: 6px solid $brown;
-                    margin-left: -15px;
-                    transform: rotateZ(180deg);
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        top: 30px;
+                        right: 10px;
+                        color: $brown;
+                        border: 6px solid transparent;
+                        border-top: 6px solid $brown;
+                        margin-left: -15px;
+                        transform: rotateZ(180deg);
+                    }
                 }
             }
         }
@@ -85,17 +87,19 @@
             color: $pink;
             border-color: $pink;
 
-            &:hover {
-                color: $pink;
-                &::after {
-                    content: "お気に入りから外す";
-                    background-color: $darkGray;
-                }
+            @include bp-960up {
+                &:hover {
+                    color: $pink;
+                    &::after {
+                        content: "お気に入りから外す";
+                        background-color: $darkGray;
+                    }
 
-                &::before {
-                    content: "";
-                    color: $darkGray;
-                    border-top: 6px solid $darkGray;
+                    &::before {
+                        content: "";
+                        color: $darkGray;
+                        border-top: 6px solid $darkGray;
+                    }
                 }
             }
         }
@@ -126,30 +130,32 @@
                 transform: translate(-50%, -50%);
             }
 
-            &:hover {
-                &::after {
-                    content: "行ってみたいに登録する";
-                    position: absolute;
-                    top: 40px;
-                    color: $white;
-                    display: block;
-                    width: 5rem;
-                    padding: 2px 2px;
-                    font-size: 0.5rem;
-                    background-color: $brown;
-                    border-radius: 2px;
-                }
+            @include bp-960up {
+                &:hover {
+                    &::after {
+                        content: "行ってみたいに登録する";
+                        position: absolute;
+                        top: 40px;
+                        color: $white;
+                        display: block;
+                        width: 5rem;
+                        padding: 2px 2px;
+                        font-size: 0.5rem;
+                        background-color: $brown;
+                        border-radius: 2px;
+                    }
 
-                &::before {
-                    content: "";
-                    position: absolute;
-                    top: 30px;
-                    right: 10px;
-                    color: $brown;
-                    border: 6px solid transparent;
-                    border-top: 6px solid $brown;
-                    margin-left: -15px;
-                    transform: rotateZ(180deg);
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        top: 30px;
+                        right: 10px;
+                        color: $brown;
+                        border: 6px solid transparent;
+                        border-top: 6px solid $brown;
+                        margin-left: -15px;
+                        transform: rotateZ(180deg);
+                    }
                 }
             }
         }
@@ -158,18 +164,20 @@
             color: $green;
             border-color: $green;
 
-            &:hover {
-                color: $green;
+            @include bp-960up {
+                &:hover {
+                    color: $green;
 
-                &::after {
-                    content: "行ってみたいから外す";
-                    background-color: $darkGray;
-                }
+                    &::after {
+                        content: "行ってみたいから外す";
+                        background-color: $darkGray;
+                    }
 
-                &::before {
-                    content: "";
-                    color: $darkGray;
-                    border-top: 6px solid $darkGray;
+                    &::before {
+                        content: "";
+                        color: $darkGray;
+                        border-top: 6px solid $darkGray;
+                    }
                 }
             }
         }
