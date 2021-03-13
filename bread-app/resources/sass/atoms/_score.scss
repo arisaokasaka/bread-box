@@ -9,27 +9,32 @@
 
             &__stars {
                 position: relative;
-                width: 107px;
+                width: 115px;
+                height: 34px;
+                display: inline-block;
+                font-size: 23px;
 
-                & span {
-                    font-size: 23px;
-                    letter-spacing: -2px;
+                &::before {
+                    content: "☆☆☆☆☆";
+                    position: absolute;
+                    color: $brown;
                 }
 
                 &__content {
-                    color: $brown;
-                    overflow: hidden;
-                }
-
-                &__frame {
                     position: absolute;
-                    top: 0;
-                    left: 0;
-                    color: $brown;
+                    overflow: hidden;
+                    height: 100%;
+
+                    &::after {
+                        content: "★★★★★";
+                        position: absolute;
+                        color: $brown;
+                    }
                 }
             }
 
             & > h3 {
+                margin-left: 5px;
                 margin-right: 3px;
                 color: $black;
                 vertical-align: center;
@@ -68,8 +73,6 @@
                 align-items: center;
 
                 &__stars {
-                    width: 115px;
-
                     & span {
                         font-size: 24.5px;
                     }
@@ -103,8 +106,6 @@
 
                 &__result {
                     &__stars {
-                        width: 124px;
-
                         & span {
                             font-size: 26.5px;
                         }
@@ -152,13 +153,10 @@
         &__container {
             &__result {
                 &__stars {
-                    width: 65px;
-
-                    & span {
-                        font-size: 15px;
-                    }
+                    height: 21.5px;
+                    width: 75px;
+                    font-size: 15px;
                 }
-
                 & > h3 {
                     font-size: 14px;
                     margin-left: 4px;
