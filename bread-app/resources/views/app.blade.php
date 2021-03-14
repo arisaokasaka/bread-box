@@ -17,13 +17,14 @@
     <meta property="og:image" content="/images/thumbnail.png">
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="//bread-box.net/js/app.js" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="//bread-box.net/css/app.css" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">

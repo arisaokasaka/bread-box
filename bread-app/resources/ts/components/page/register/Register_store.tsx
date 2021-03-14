@@ -38,7 +38,6 @@ export default function Register_store() {
         axios.post('/api/create_user', data)
         .then(res => {
             login();
-            history.push("/store_edit");
         })
         .catch(errors => {
             if(errors.response.status === 422){
@@ -65,6 +64,7 @@ export default function Register_store() {
                     payload: tmp_store_user_uuid,
                 });
                 createStore(tmp_store_user_uuid);
+                history.push("/store/" + tmp_store_user_uuid);
             })
             .catch(err => {
             });
@@ -100,7 +100,7 @@ export default function Register_store() {
                     type: 'setStore',
                     payload: res.data.user.uuid,
                 });
-                history.push("/store_edit");
+                history.push("/store/a1647936-a8c5-43df-92d8-5f91168c5e2a");
             })
             .catch(err => {
             });
