@@ -47,14 +47,14 @@
                 height: 100%;
                 width: 100%;
                 color: $brown;
-                line-height: 38px;
+                line-height: 37px;
                 text-align: center;
                 font-weight: 550;
                 font-size: 0.95rem;
                 cursor: pointer;
 
                 @include bp-600up {
-                    line-height: 42px;
+                    line-height: 40px;
                 }
             }
 
