@@ -10,6 +10,7 @@ type Props = ({
 })
 
 const EditImage: React.FC<Props> = ({update_function, storeInfo}) => {
+    let time_current = String(Date.now());
     const { handleSubmit } = useForm();
     const { state } = useContext(UserAuthContext);
     const [ images, setImages ] = useState({
@@ -79,7 +80,7 @@ const EditImage: React.FC<Props> = ({update_function, storeInfo}) => {
                             {storeInfo.header &&
                                 <div className="m-storeEdit-image__container__form__item__input__image">
                                     <span>登録画像</span>
-                                    <img src={"/storage/store/" + state.uuid + "/header.jpg"} alt="店舗画像"/> 
+                                    <img src={"/storage/store/" + state.uuid + "/header.jpg?" + time_current} alt="店舗画像"/> 
                                 </div>
                             }
                         </div>
@@ -93,7 +94,7 @@ const EditImage: React.FC<Props> = ({update_function, storeInfo}) => {
                             {storeInfo.thumbnail &&
                                 <div className="m-storeEdit-image__container__form__item__input__image">
                                     <span>登録画像</span>
-                                    <img src={"/storage/store/" + state.uuid + "/thumbnail.jpg"} alt="店舗画像"/> 
+                                    <img src={"/storage/store/" + state.uuid + "/thumbnail.jpg?" + time_current} alt="店舗画像"/> 
                                 </div>
                             }
                         </div>
