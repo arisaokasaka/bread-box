@@ -8,6 +8,7 @@ import { UserAuthContext } from '../../../contexts/UserAuthContext';
 
 const StorePage: React.FC = () => {
     let { user_uuid } = useParams();
+    let time_current = String(Date.now());
     const { state } = useContext(UserAuthContext);
     const [ storeInfo, setStoreInfo ] = useState({});
     const [ menuInfo, setMenuInfo ] = useState([]);
@@ -63,7 +64,7 @@ const StorePage: React.FC = () => {
                 <div className = "p-store__container__img">
                     {storeInfo['header'] ?
                         <img
-                        src={"/storage/store/" + user_uuid + "/header.jpg"}
+                        src={"/storage/store/" + user_uuid + "/header.jpg?" + time_current}
                         alt="トップ画像"
                         />
                         : <img src="/images/no_image_header.png" alt="店舗ヘッダー"/>
