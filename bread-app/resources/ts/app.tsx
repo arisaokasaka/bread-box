@@ -10,10 +10,7 @@ import {UserAuthReducer, initialState } from './reducers/UserAuthReducer';
 import {UserAuthContext} from './contexts/UserAuthContext';
 
 //axios
-import axios, { AxiosStatic } from 'axios';
-
-//bootstrap(axios)
-// import bootstrap from './bootstrap';
+import { AxiosStatic } from 'axios';
 
 //Components
 import NavBar from './components/layout/Navbar';
@@ -81,7 +78,7 @@ const App: React.FC = () => {
     </UserAuthContext.Provider>
   )
 }
- 
+
 if (document.getElementById('app')) {
     ReactDOM.render(<App />, document.getElementById('app'));
 }
