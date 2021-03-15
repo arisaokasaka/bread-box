@@ -15,6 +15,7 @@ const StoreList: React.FC<StoreProps> = ({storeList, sortType}) => {
     const history = useHistory();
     const [ offset, setOffset ] = useState(0);
     const perPage = 10;
+    let time_current = String(Date.now());
     
     const handlePageChange = (data) => {
         let page_number = data['selected'];
@@ -32,7 +33,7 @@ const StoreList: React.FC<StoreProps> = ({storeList, sortType}) => {
                         <div className ="m-store-list__item--pc" onClick={()=>history.push("/store/" + el.user_uuid)}>
                             <div className ="m-store-list__item--pc__images__main">
                                 {el.thumbnail ? 
-                                <img src={"/storage/store/" + el.user_uuid + "/thumbnail.jpg"} alt="パンのメイン画像"/> 
+                                <img src={"/storage/store/" + el.user_uuid + "/thumbnail.jpg?" + time_current} alt="パンのメイン画像"/> 
                                 : <img src="/images/no_image_thumbnail.png" alt="パンのメイン画像"/>}
                             </div>
                             {el.menu1 &&
