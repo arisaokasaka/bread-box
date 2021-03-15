@@ -44,7 +44,13 @@
   - 店舗ログイン時
     - 店舗情報編集：ログイン状態に表示される右上の管理画面ボタンをクリック
     - 口コミ返信：自店舗ページの口コミタブの部分から「返信する」ボタンをクリック
-  
+ 
+ ## 使用言語・技術
+ - フロントエンド：TypeScript, React, HTML, Sass
+ - バックエンド：PHP, Laravel
+ - DB：PostgreSQL
+ - インフラ：AWS(EC2 | Route53 | RDS）
+ - ソースコード管理：GitHub
   
  ## ER図
  https://drive.google.com/file/d/1DA8QrnArBP99oK6qlx2NUP7VZllqBtqW/view?usp=sharing
